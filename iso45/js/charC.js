@@ -79,6 +79,88 @@
     return pool[Math.floor(r * pool.length) % pool.length].id;
   };
 
+
+  // ---------- Outfit catalog (trendy urban, colorful) ----------
+  C.OUTFITS_M = [
+    { id: "fit_hoodie", label: "连帽卫衣", set: "fit_hoodie" },
+    { id: "fit_oversized", label: "oversized 黄 Tee", set: "fit_oversized" },
+    { id: "fit_athletic", label: "运动套装", set: "fit_athletic" },
+    { id: "fit_tee_red", label: "红色短袖", set: "fit_tee_red" },
+    { id: "fit_shirt", label: "白衬衫", set: "fit_shirt" },
+    { id: "fit_knit", label: "针织毛衣", set: "fit_knit" },
+    { id: "fit_jacket", label: "夹克外套", set: "fit_jacket" },
+    { id: "fit_jeans", label: "牛仔裤休闲", set: "fit_jeans" },
+    { id: "fit_cargo", label: "工装裤", set: "fit_cargo" },
+    { id: "fit_work", label: "轻商务", set: "fit_work" },
+    { id: "student_long", label: "长袖校服风", set: "student_long" },
+    { id: "office_short", label: "短袖办公", set: "office_short" }
+  ];
+  C.OUTFITS_F = [
+    { id: "fit_dress", label: "连衣裙", set: "fit_dress" },
+    { id: "fit_skirt_teal", label: "青绿裙装", set: "fit_skirt_teal" },
+    { id: "student_skirt", label: "百褶裙", set: "student_skirt" },
+    { id: "fit_hoodie", label: "连帽卫衣", set: "fit_hoodie" },
+    { id: "fit_oversized", label: "oversized Tee", set: "fit_oversized" },
+    { id: "fit_athletic", label: "运动装", set: "fit_athletic" },
+    { id: "fit_knit", label: "针织衫", set: "fit_knit" },
+    { id: "fit_jeans", label: "牛仔裤", set: "fit_jeans" },
+    { id: "fit_shirt", label: "衬衫", set: "fit_shirt" },
+    { id: "fit_jacket", label: "短外套", set: "fit_jacket" },
+    { id: "office_short", label: "夏日办公", set: "office_short" },
+    { id: "fit_tee_red", label: "红色短袖", set: "fit_tee_red" }
+  ];
+
+  C.pickOutfit = function (rng, gender, job, ageBand) {
+    if (job === "police" || job === "firefighter" || job === "nurse") return null; // civic untouched
+    let pool = gender === "female" ? C.OUTFITS_F : C.OUTFITS_M;
+    if (ageBand === "child") {
+      return "child_cue";
+    }
+    if (ageBand === "elder") {
+      pool = gender === "female"
+        ? C.OUTFITS_F.filter((o) => /knit|shirt|jacket|skirt|work/.test(o.id))
+        : C.OUTFITS_M.filter((o) => /knit|shirt|jacket|work|jeans/.test(o.id));
+      if (!pool.length) pool = gender === "female" ? C.OUTFITS_F : C.OUTFITS_M;
+    }
+    const r = typeof rng === "function" ? rng() : Math.random();
+    return pool[Math.floor(r * pool.length) % pool.length].set;
+  };
+
+  C.patchOutfitResolve = function () {
+    const A = AP();
+    if (!A || A._charCOutfit) return;
+    // register in JOB_ATLAS so resolveAtlas finds them
+    const all = C.OUTFITS_M.concat(C.OUTFITS_F);
+    all.forEach((o) => { A.JOB_ATLAS[o.set] = o.set; });
+    const prevLayer = A.layerAtlas.bind(A);
+    A.layerAtlas = function (ap) {
+      if (ap && ap.outfitSet && window.ACTORS && window.ACTORS[ap.outfitSet]) return ap.outfitSet;
+      return prevLayer(ap);
+    };
+    // wardrobe: add street looks (keep li_mo casual/uniform/winter)
+    const street = (gender) => (gender === "female" ? C.OUTFITS_F : C.OUTFITS_M).slice(0, 8).map((o) => ({
+      id: "street_" + o.id,
+      label: "街头 · " + o.label,
+      set: o.set
+    }));
+    // extend PLAYER_LOOKS once
+    if (!A.PLAYER_LOOKS.some((l) => String(l.id).indexOf("street_") === 0)) {
+      A.PLAYER_LOOKS = A.PLAYER_LOOKS.concat([
+        { id: "street_hoodie", label: "街头 · 连帽卫衣", set: "fit_hoodie" },
+        { id: "street_oversized", label: "街头 · oversized 黄 Tee", set: "fit_oversized" },
+        { id: "street_athletic", label: "街头 · 运动套装", set: "fit_athletic" },
+        { id: "street_knit", label: "街头 · 针织毛衣", set: "fit_knit" },
+        { id: "street_jacket", label: "街头 · 夹克", set: "fit_jacket" },
+        { id: "street_jeans", label: "街头 · 牛仔裤", set: "fit_jeans" },
+        { id: "street_dress", label: "街头 · 连衣裙", set: "fit_dress" },
+        { id: "street_skirt", label: "街头 · 青绿裙", set: "fit_skirt_teal" },
+        { id: "street_cargo", label: "街头 · 工装", set: "fit_cargo" },
+        { id: "street_tee_red", label: "街头 · 红 Tee", set: "fit_tee_red" }
+      ]);
+    }
+    A._charCOutfit = true;
+  };
+
   // ---------- 2) Patch appearance.randomNpc: female weight + gendered hair + clothing ----------
   C.FEMALE_WEIGHT = 0.48; // ~48% when gender not forced
 
@@ -105,27 +187,17 @@
         hints.hairId = C.pickHair(rnd, hints.gender || "male", hints.ageBand);
       }
       const ap = prev(seed, hints);
-      // gender → clothing atlas (visible female cue)
-      if (ap.gender === "female") {
-        if (ap.job === "student" || ap.ageBand === "teen" || ap.ageBand === "child") {
-          ap.layers = ap.layers || {};
-          ap.layers.bottom = "skirt";
-          if (!ap.outfitSet || ap.outfitSet === "student" || ap.outfitSet === "office") {
-            ap.outfitSet = ap.ageBand === "child" ? "child_cue" : "student_skirt";
-          }
-        } else if (ap.job === "office" || ap.job === "civilian" || ap.job === "teacher") {
-          ap.layers = ap.layers || {};
-          if (ap.layers.bottom !== "skirt") ap.layers.bottom = Math.random() < 0.55 ? "skirt" : ap.layers.bottom;
-          if (ap.layers.bottom === "skirt" && (!ap.outfitSet || ap.outfitSet === "office")) {
-            ap.outfitSet = "student_skirt"; // skirt silhouette until office_skirt exists
-          } else if (!ap.outfitSet || ap.outfitSet === "office") {
-            ap.outfitSet = Math.random() < 0.45 ? "office_short" : "office";
-          }
-        }
-      } else if (ap.gender === "male" && (ap.job === "student" || ap.ageBand === "teen")) {
-        if (!ap.outfitSet || ap.outfitSet === "student") {
-          ap.outfitSet = Math.random() < 0.4 ? "student_long" : "student";
-        }
+      // gender → colorful trendy outfit (civic jobs skipped upstream)
+      if (ap.job !== "police" && ap.job !== "firefighter" && ap.job !== "nurse") {
+        let tseed = (typeof seed === "number" ? seed : 11) * 2246822519 >>> 0;
+        const rnd2 = () => { tseed = Math.imul(tseed ^ (tseed >>> 13), 1274126177); return ((tseed >>> 0) / 4294967296); };
+        const picked = C.pickOutfit(rnd2, ap.gender, ap.job, ap.ageBand);
+        if (picked) ap.outfitSet = picked;
+        ap.layers = ap.layers || {};
+        if (ap.gender === "female" && /skirt|dress/.test(ap.outfitSet || "")) ap.layers.bottom = "skirt";
+        if (/hoodie|jacket|knit/.test(ap.outfitSet || "")) ap.layers.outer = /jacket/.test(ap.outfitSet) ? "thin_jacket" : "none";
+        if (/tee|oversized|athletic|short/.test(ap.outfitSet || "")) ap.layers.top = "tee_short";
+        if (/long|knit|hoodie/.test(ap.outfitSet || "")) ap.layers.top = "tee_long";
       }
       if (!ap.hairId) ap.hairId = C.pickHair(() => Math.random(), ap.gender, ap.ageBand);
       else ap.hairId = C.normalize(ap.hairId);
@@ -140,25 +212,27 @@
 
   // ---------- 3) Female-heavy street extras (replace Char-A list + add more) ----------
   C.EXTRA_SPECS = [
-    { id: "extra_kid", seed: 901, hints: { ageBand: "child", job: "student", gender: "female", hairId: "f_twin" }, x: -8.5, y: 4.2, dir: "E" },
-    { id: "extra_office_f", seed: 902, hints: { ageBand: "adult", job: "office", gender: "female", hairId: "f_lob" }, x: 14.5, y: 3.4, dir: "W" },
-    { id: "extra_teen", seed: 903, hints: { ageBand: "teen", job: "student", gender: "female", hairId: "f_pony" }, x: 6.5, y: 8.5, dir: "S" },
-    { id: "extra_elder", seed: 904, hints: { ageBand: "elder", job: "uncle", gender: "male", hairId: "m_grey" }, x: -15.0, y: 3.8, dir: "E" },
-    // Char-C additions — push female visibility to ~50%+
-    { id: "extra_auntie", seed: 905, hints: { ageBand: "adult", job: "vendor", gender: "female", hairId: "f_bun" }, x: -2.0, y: 3.5, dir: "E" },
-    { id: "extra_wave", seed: 906, hints: { ageBand: "adult", job: "office", gender: "female", hairId: "f_wave" }, x: 22.0, y: 3.6, dir: "W" },
-    { id: "extra_longf", seed: 907, hints: { ageBand: "teen", job: "student", gender: "female", hairId: "f_long" }, x: 10.0, y: 5.2, dir: "S" },
-    { id: "extra_bobf", seed: 908, hints: { ageBand: "adult", job: "civilian", gender: "female", hairId: "f_bob" }, x: -18.0, y: 4.0, dir: "E" },
-    { id: "extra_guy1", seed: 910, hints: { ageBand: "adult", job: "office", gender: "male", hairId: "m_sidepart" }, x: 4.0, y: 3.2, dir: "E" },
-    { id: "extra_guy2", seed: 911, hints: { ageBand: "teen", job: "student", gender: "male", hairId: "m_undercut" }, x: -6.0, y: 5.0, dir: "W" },
+    { id: "extra_kid", seed: 901, hints: { ageBand: "child", job: "student", gender: "female", hairId: "f_twin" }, outfitSet: "child_cue", x: -8.5, y: 4.2, dir: "E" },
+    { id: "extra_dress", seed: 902, hints: { ageBand: "adult", job: "office", gender: "female", hairId: "f_lob" }, outfitSet: "fit_dress", x: 14.5, y: 3.4, dir: "W" },
+    { id: "extra_teen", seed: 903, hints: { ageBand: "teen", job: "student", gender: "female", hairId: "f_pony" }, outfitSet: "fit_skirt_teal", x: 6.5, y: 8.5, dir: "S" },
+    { id: "extra_elder", seed: 904, hints: { ageBand: "elder", job: "uncle", gender: "male", hairId: "m_grey" }, outfitSet: "fit_knit", x: -15.0, y: 3.8, dir: "E" },
+    { id: "extra_auntie", seed: 905, hints: { ageBand: "adult", job: "vendor", gender: "female", hairId: "f_bun" }, outfitSet: "fit_knit", x: -2.0, y: 3.5, dir: "E" },
+    { id: "extra_wave", seed: 906, hints: { ageBand: "adult", job: "office", gender: "female", hairId: "f_wave" }, outfitSet: "fit_jacket", x: 22.0, y: 3.6, dir: "W" },
+    { id: "extra_longf", seed: 907, hints: { ageBand: "teen", job: "student", gender: "female", hairId: "f_long" }, outfitSet: "fit_hoodie", x: 10.0, y: 5.2, dir: "S" },
+    { id: "extra_bobf", seed: 908, hints: { ageBand: "adult", job: "civilian", gender: "female", hairId: "f_bob" }, outfitSet: "fit_oversized", x: -18.0, y: 4.0, dir: "E" },
+    { id: "extra_guy1", seed: 910, hints: { ageBand: "adult", job: "office", gender: "male", hairId: "m_sidepart" }, outfitSet: "fit_shirt", x: 4.0, y: 3.2, dir: "E" },
+    { id: "extra_guy2", seed: 911, hints: { ageBand: "teen", job: "student", gender: "male", hairId: "m_undercut" }, outfitSet: "fit_tee_red", x: -6.0, y: 5.0, dir: "W" },
+    { id: "extra_buzz", seed: 912, hints: { ageBand: "adult", job: "office", gender: "male", hairId: "m_buzz" }, outfitSet: "fit_cargo", x: 16.0, y: 8.0, dir: "S" },
+    { id: "extra_ath", seed: 913, hints: { ageBand: "adult", job: "civilian", gender: "male", hairId: "m_spiky" }, outfitSet: "fit_athletic", x: 25.0, y: 4.0, dir: "W" }
   ];
 
   C.LAYER_EXTRAS = [
     { id: "layerx_skirt", seed: 1201, hints: { job: "student", gender: "female", ageBand: "teen", hairId: "f_pony" }, outfitSet: "student_skirt", x: 8.5, y: 3.6, dir: "W" },
-    { id: "layerx_office_f", seed: 1212, hints: { job: "office", gender: "female", ageBand: "adult", hairId: "f_lob" }, outfitSet: "office_short", x: 20.5, y: 3.0, dir: "W" },
-    { id: "layerx_long", seed: 1202, hints: { job: "student", gender: "male", ageBand: "teen", hairId: "m_mid" }, outfitSet: "student_long", x: -4.5, y: 4.0, dir: "E" },
-    { id: "layerx_short", seed: 1203, hints: { job: "office", gender: "male", ageBand: "adult", hairId: "m_sidepart" }, outfitSet: "office_short", x: 18.0, y: 3.2, dir: "W" },
-    { id: "layerx_child", seed: 1204, hints: { job: "student", gender: "female", ageBand: "child", hairId: "f_bob" }, outfitSet: "child_cue", x: -12.0, y: 3.8, dir: "E" },
+    { id: "layerx_dress", seed: 1211, hints: { job: "civilian", gender: "female", ageBand: "adult", hairId: "f_wave" }, outfitSet: "fit_dress", x: 11.5, y: 4.4, dir: "E" },
+    { id: "layerx_office_f", seed: 1212, hints: { job: "office", gender: "female", ageBand: "adult", hairId: "f_lob" }, outfitSet: "fit_skirt_teal", x: 20.5, y: 3.0, dir: "W" },
+    { id: "layerx_long", seed: 1202, hints: { job: "student", gender: "male", ageBand: "teen", hairId: "m_mid" }, outfitSet: "fit_hoodie", x: -4.5, y: 4.0, dir: "E" },
+    { id: "layerx_jeans", seed: 1203, hints: { job: "office", gender: "male", ageBand: "adult", hairId: "m_sidepart" }, outfitSet: "fit_jeans", x: 18.0, y: 3.2, dir: "W" },
+    { id: "layerx_child", seed: 1204, hints: { job: "student", gender: "female", ageBand: "child", hairId: "f_bob" }, outfitSet: "child_cue", x: -12.0, y: 3.8, dir: "E" }
   ];
 
   C.spawnStreetCrowd = function () {
@@ -474,6 +548,7 @@
   };
 
   C.boot = function () {
+    C.patchOutfitResolve();
     C.patchRandomNpc();
     C.patchCivicExtras();
     C.patchHairDraw();

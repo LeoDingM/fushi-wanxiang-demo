@@ -1,3 +1,0 @@
-Midtown-B facade variety lite pack.
-Merge into scene-proto-45: js/midtown_estate.js, estate45*, chunks/estate.js, img/estate/, layouts.
-index.html needs: estate45.js + chunks/estate.js + js/midtown_estate.js (additive).

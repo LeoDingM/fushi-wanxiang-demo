@@ -44,6 +44,31 @@ Parallel `js/midtown_estate.js` (Midtown-B compound) is separate and does not ow
 - Screenshots: `screenshots/mt-a1-seam-east.png` … `mt-a6-cn-skyline.png`.
 - Play zip: `scene-proto-45-midtown-a-play.zip` (does not clobber main `scene-proto-45-play.zip`).
 
+
+
+## Midtown-A2 — livable units + rent
+
+All corridor doors formerly「尚在装修」are now **portal** into 1LDK units (`room_mt_{jx|yj|cn}_{F}0{1|2}`), cloned from 馨园一房一厅 template with Midtown-A2 lease notes. **72 units** (2 per floor × 8+12+16). Exit door returns to that floor’s corridor.
+
+### Featured rent rows (`rent_table.units` + `window.MIDTOWN_RENT`)
+| id | label | rent |
+|----|-------|------|
+| mt-jx-101 | 景秀苑 1-01 | ¥1350 |
+| mt-jx-502 | 景秀苑 5-02 | ¥1450 |
+| mt-yj-601 | 云阶公馆 6-01 | ¥1680 |
+| mt-yj-1201 | 云阶公馆 12-01 | ¥1850 |
+| mt-cn-801 | 城南一号 8-01 | ¥1750 |
+| mt-cn-1601 | 城南一号 16-01 | ¥2100 |
+
+`js/midtown.js` `wireRent()` / `wrapUnits()` merge into `SP.game.rules` + `stageA.units()` without editing estate `A101-yunqi` rows. Facade diversity styles unchanged. Elevator floor list ignores `room_mt_*`.
+
+### A2 verify
+- `tools/midtown_a2_test.py` **8/8**; `midtown_test.py` **10/10**
+- Screenshots `mt-a2-1`…`mt-a2-6`
+- Lite zip `scene-proto-45-midtown-a2-play.zip` (<25MB)
+
+Barber-on-road (`shop_barber` y) left to barber-fix agent — Midtown rebuild does not touch `build_scene.py`.
+
 ## Midtown-B handoff (小区 compound)
 Suggested next (estate track already stubbed):
 1. Gated **compound grounds** behind midtown strip (courtyard, gate mark, property booth).

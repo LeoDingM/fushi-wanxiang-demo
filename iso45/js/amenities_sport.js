@@ -341,13 +341,13 @@
   };
   AM.listMissingProposed = function () {
     return [
-      { id: "canteen", name: "社区食堂", status: "missing" },
-      { id: "kindergarten", name: "幼儿园", status: "missing（CBD 云麓有示意，旧区未建）" },
-      { id: "bank", name: "银行网点", status: "missing" },
-      { id: "toilet", name: "公厕", status: "missing" },
-      { id: "garage", name: "地下车库入口", status: "missing" },
-      { id: "property", name: "物业中心", status: "missing（玩法有物业交互，无独立门脸）" },
-      { id: "laundry_shop", name: "干洗店/洗衣店", status: "missing" },
+      { id: "canteen", name: "社区食堂", status: "owned_by_amenities_civic" },
+      { id: "kindergarten", name: "幼儿园", status: "owned_by_amenities_civic" },
+      { id: "property", name: "物业中心", status: "owned_by_amenities_civic" },
+      { id: "bank", name: "银行网点", status: "owned_by_amenities_infra" },
+      { id: "toilet", name: "公厕", status: "owned_by_amenities_infra" },
+      { id: "garage", name: "地下车库入口", status: "owned_by_amenities_infra" },
+      { id: "laundry_shop", name: "干洗店/洗衣店", status: "owned_by_amenities_infra" },
       { id: "post", name: "邮政/通讯营业厅", status: "missing" },
       { id: "market", name: "菜市场", status: "owned_by_amenities_market" },
       { id: "smkt", name: "小超市", status: "owned_by_amenities_market" },

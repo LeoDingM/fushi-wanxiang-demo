@@ -19,7 +19,8 @@
       .filter((k) => {
         const s = scenes[k];
         if (!s || s.floor == null) return false;
-        if (s.kind === "fire") return false;
+        if (s.kind === "fire" || s.kind === "unit") return false;
+        if (String(k).indexOf("room_mt_") === 0) return false;
         return E.buildingKey(k) === bkey;
       })
       .sort((a, b) => scenes[a].floor - scenes[b].floor);

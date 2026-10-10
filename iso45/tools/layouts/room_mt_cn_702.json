@@ -1,0 +1,13 @@
+{
+  "id": "room_mt_cn_702",
+  "name": "城南一号 7-02 · 一房一厅",
+  "building": "mt_cn",
+  "mt_floor": 7,
+  "mt_slot": 2,
+  "spawn": [
+    6.2,
+    0.85,
+    "W"
+  ],
+  "nobj": 57
+}

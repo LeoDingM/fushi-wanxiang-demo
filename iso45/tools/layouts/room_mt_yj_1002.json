@@ -1,0 +1,13 @@
+{
+  "id": "room_mt_yj_1002",
+  "name": "云阶公馆 10-02 · 一房一厅",
+  "building": "mt_yj",
+  "mt_floor": 10,
+  "mt_slot": 2,
+  "spawn": [
+    6.2,
+    0.85,
+    "W"
+  ],
+  "nobj": 57
+}

@@ -101,7 +101,7 @@
       "y": 3.98,
       "z": 1.15,
       "interact": "notice",
-      "note": "云阶公馆 7F · 电梯 · 按楼层直达（本楼设客梯） · 东侧步梯 · 西侧消防通道 · 请勿堵塞"
+      "note": "云阶公馆 7F · 电梯 · 按楼层直达（本楼设客梯） · 东侧步梯 · 西侧消防通道 · 户门已开放"
     },
     {
       "id": "yj_elev_7",
@@ -126,11 +126,17 @@
       "y": 4.0,
       "z": 0,
       "state": "closed",
-      "interact": "notice",
+      "interact": "portal",
       "name": "7-01",
-      "note": "7-01 尚在装修（Midtown-B 小区交付）",
+      "to": "room_mt_yj_701",
+      "spawn": [
+        6.2,
+        0.85,
+        "W"
+      ],
+      "label": "进 7-01",
       "reach": [
-        1.9,
+        2.2,
         3.55
       ]
     },
@@ -141,9 +147,15 @@
       "y": 4.0,
       "z": 0,
       "state": "closed",
-      "interact": "notice",
+      "interact": "portal",
       "name": "7-02",
-      "note": "7-02 尚在装修（Midtown-B 小区交付）",
+      "to": "room_mt_yj_702",
+      "spawn": [
+        6.2,
+        0.85,
+        "W"
+      ],
+      "label": "进 7-02",
       "reach": [
         5.1,
         3.55

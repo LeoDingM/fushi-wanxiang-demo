@@ -1673,7 +1673,7 @@
     "run_min_energy": 12
   },
   "rent_table": {
-    "_doc": "monthly rent by district for a 小单间 (single room, own bathroom) in this tier-1 city, per Leo: peripheral old blocks ~¥850, closer to the centre ~¥1200, CBD-adjacent far higher. lease.rent of a unit should fall inside its district range (test_rules checks 2F-02). Midtown-B 云栖里: closer-to-center single ~¥1200; 一室一厅精装 ~¥1800–2200 (A-101 ¥1980).",
+    "_doc": "monthly rent by district for a 小单间 (single room, own bathroom) in this tier-1 city, per Leo: peripheral old blocks ~¥850, closer to the centre ~¥1200, CBD-adjacent far higher. lease.rent of a unit should fall inside its district range (test_rules checks 2F-02). Midtown-B 云栖里: closer-to-center single ~¥1200; 一室一厅精装 ~¥1800–2200 (A-101 ¥1980). Midtown-A2: 景秀/云阶/城南 featured units mt-*-* (inner district).",
     "districts": {
       "peripheral": {
         "label": "外环老小区（井槐里一带）",
@@ -1790,6 +1790,66 @@
         "door": "estate_lobby",
         "label": "云栖里 · 单间价位参考 ¥1200",
         "stair": "estate_compound"
+      },
+      "mt-jx-101": {
+        "district": "inner",
+        "rent": 1350,
+        "type": "一房一厅 · 转型楼 ~36㎡",
+        "scene": "room_mt_jx_101",
+        "door": "mt_jx_1f",
+        "stair": "mt_jx_1f",
+        "label": "景秀苑 1-01",
+        "midtown": true
+      },
+      "mt-jx-502": {
+        "district": "inner",
+        "rent": 1450,
+        "type": "一房一厅 · 景秀中层",
+        "scene": "room_mt_jx_502",
+        "door": "mt_jx_1f",
+        "stair": "mt_jx_1f",
+        "label": "景秀苑 5-02",
+        "midtown": true
+      },
+      "mt-yj-601": {
+        "district": "inner",
+        "rent": 1680,
+        "type": "一房一厅精装 · 玻璃幕",
+        "scene": "room_mt_yj_601",
+        "door": "mt_yj_1f",
+        "stair": "mt_yj_1f",
+        "label": "云阶公馆 6-01",
+        "midtown": true
+      },
+      "mt-yj-1201": {
+        "district": "inner",
+        "rent": 1850,
+        "type": "一房一厅景景 · 云阶顶层段",
+        "scene": "room_mt_yj_1201",
+        "door": "mt_yj_1f",
+        "stair": "mt_yj_1f",
+        "label": "云阶公馆 12-01",
+        "midtown": true
+      },
+      "mt-cn-801": {
+        "district": "inner",
+        "rent": 1750,
+        "type": "一房一厅 · 城南中高",
+        "scene": "room_mt_cn_801",
+        "door": "mt_cn_1f",
+        "stair": "mt_cn_1f",
+        "label": "城南一号 8-01",
+        "midtown": true
+      },
+      "mt-cn-1601": {
+        "district": "inner",
+        "rent": 2100,
+        "type": "一房一厅 · 城南高层",
+        "scene": "room_mt_cn_1601",
+        "door": "mt_cn_1f",
+        "stair": "mt_cn_1f",
+        "label": "城南一号 16-01",
+        "midtown": true
       }
     }
   },

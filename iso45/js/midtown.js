@@ -109,12 +109,55 @@
     el.textContent = line;
   };
 
+
+  /** Inject featured Midtown-A2 rent rows into game.rules.rent_table (skip estate ids). */
+  M.wireRent = function () {
+    const cat = window.MIDTOWN_RENT || {};
+    M.RENT = cat;
+    const rules = SP.game && SP.game.rules;
+    const rt = rules && rules.data && rules.data.rent_table;
+    if (!rt) { M._rentPending = cat; return false; }
+    rt.units = rt.units || {};
+    for (const id of Object.keys(cat)) {
+      rt.units[id] = Object.assign({}, cat[id]);
+    }
+    M._rentWired = true;
+    return true;
+  };
+
+  M.enterUnit = function (key, fl, slot) {
+    const id = "room_mt_" + key + "_" + fl + "0" + (slot || 1);
+    if (!SP.scenes[id]) return "missing " + id;
+    const sp = SP.scenes[id].spawn || [6.2, 0.85, "W"];
+    if (SP.game && SP.game.switchScene) SP.game.switchScene(id, sp);
+    else if (SP.actions && SP.actions.go) SP.actions.go(id, sp);
+    return id;
+  };
+
+  M.wrapUnits = function () {
+    if (M._wrapUnits || !SP.stageA || !SP.stageA.units) return;
+    const A = SP.stageA;
+    const _units = A.units.bind(A);
+    A.units = function () {
+      const u = _units();
+      const cat = window.MIDTOWN_RENT || M.RENT || {};
+      for (const id of Object.keys(cat)) {
+        if (!u[id]) u[id] = Object.assign({}, cat[id]);
+      }
+      return u;
+    };
+    M._wrapUnits = true;
+  };
+
   M.install = function () {
     if (M._in) return;
     M._in = true;
     M.registerScenes();
     M.ensureChunkMeta();
+    M.wireRent();
+    M.wrapUnits();
     if (SP.midtownElev && SP.midtownElev.install) SP.midtownElev.install();
+    setTimeout(function () { M.wireRent(); M.wrapUnits(); }, 400);
 
     // tick HUD
     const _raf = SP.main && SP.main.tick;
