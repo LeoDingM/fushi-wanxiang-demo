@@ -119,3 +119,10 @@
 00:15 · [Stage N] 时段条记录可「前往」POI
 00:15 · [Stage N] 门禁长图分享给阿凯/阿姨/房东（演示微信）
 00:15 · [Stage N] 质量：stageN_test 10/10 · smoke 4/4 · stage6 12/12 · 截图 n1–n6 · 未改 appearance/NPC_SPEC
+
+00:25 · [Stage O] 工单 SLA（T+1）逾期催办 + 门岗二次核验菜单 · js/stageO.js，未改 appearance/NPC_SPEC/学校场景
+00:25 · [Stage O] 医院复诊自动重开服药疗程（onHospitalRevisit / 护士路径）
+00:25 · [Stage O] 试穿对比 HUD 徽章（原外观→试穿）
+00:25 · [Stage O] 时段软行程链（公交/便利店/面馆/奶茶/门岗）POI 软链
+00:25 · [Stage O] 门禁长图加水印 + 演示二维码
+00:25 · [Stage O] 质量：stageO_test 9/9 · smoke 4/4 · stage6 12/12 · 截图 o1–o6
