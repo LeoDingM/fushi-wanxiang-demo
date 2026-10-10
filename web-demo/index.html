@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#0e1014" />
+  <meta name="format-detection" content="telephone=no" />
+  <title>《浮世万象》· 井槐里12号 · Web Demo</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="app">
+    <header id="titlebar">
+      <span class="logo">浮世万象</span>
+      <span class="sub">租房生活切片 · 井槐里12号 · HD-2D 网页切片 v2</span>
+    </header>
+
+    <div id="stage-wrap">
+      <canvas id="game" width="1280" height="720"></canvas>
+      <div id="loading">加载美术资源…</div>
+
+      <div id="hud">
+        <div class="hud-row">
+          <span id="loc">井槐里 · 街口</span>
+          <span id="clock">08:15</span>
+          <span id="phase">上午</span>
+          <span id="weather">☀</span>
+        </div>
+        <div class="hud-stats">
+          <span>体力 <b id="stamina">72</b></span>
+          <span>心情 <b id="mood">58</b></span>
+          <span>饱腹 <b id="hunger">45</b></span>
+          <span>金钱 <b id="money">¥1280</b></span>
+        </div>
+      </div>
+
+      <div id="prompt" class="hidden"></div>
+      <div id="toast" class="hidden"></div>
+
+      <div id="lease-panel" class="panel hidden">
+        <h3>房屋租赁合同 · 摘要</h3>
+        <p>地址：井槐里12号 2F-02<br/>
+        承租人：李默<br/>
+        月租：¥1800（含基础网费）<br/>
+        押金：¥1800（已付）<br/>
+        租期：2026.09.01 — 2027.08.31<br/>
+        房东：王姨（同楼 3F）<br/>
+        备注：禁止转租；水电按表分摊；每月5日前付租。</p>
+        <button type="button" id="lease-close">关闭 [Esc]</button>
+      </div>
+
+      <div id="order-panel" class="panel hidden">
+        <div class="order-art"><img src="img/story/order.jpg" alt="点单分镜" /></div>
+        <h3 id="order-title">王阿姨早点摊</h3>
+        <div class="menu-item">
+          <span class="dish">豆浆油条</span><span class="price">¥8</span>
+        </div>
+        <p class="effect">饱腹 +28 · 心情 +3 · 金钱 −¥8 · 约 12 分钟</p>
+        <div class="btns">
+          <button type="button" id="order-ok">来一份 [E]</button>
+          <button type="button" id="order-cancel">算了 [Esc]</button>
+        </div>
+      </div>
+
+      <div id="fade">
+        <img src="img/story/sleep.jpg" alt="" />
+        <div id="fade-caption">睡到明天早上……</div>
+      </div>
+    </div>
+
+    <!-- portrait phones: stats + status/quest dock between the canvas and the touch controls (mobile.js moves .hud-stats here) -->
+    <div id="dock" class="hidden">
+      <div id="dock-stats"></div>
+      <div id="quest">
+        <div class="q-head"><span>今日</span><span id="q-status">精神还行</span></div>
+        <ul id="q-list">
+          <li data-q="eat">在王阿姨的摊上吃早点</li>
+          <li data-q="job">回 2F-02 用电脑看招聘</li>
+          <li data-q="sleep">回床上睡一觉</li>
+        </ul>
+      </div>
+    </div>
+
+    <footer id="help">
+      <kbd>WASD</kbd>/<kbd>↑↓←→</kbd> 移动（8 方向）
+      · <kbd>E</kbd> 交互
+      · <kbd>T</kbd> 切换时段
+      · <kbd>R</kbd> 切换天气（测试）
+      · <kbd>P</kbd> 暂停时钟
+      · <kbd>Esc</kbd> 关闭面板
+    </footer>
+  </div>
+  <!-- classic scripts (no ES modules) so file:// works -->
+  <script src="js/config.js"></script>
+  <script src="js/assets.js"></script>
+  <script src="js/timeofday.js"></script>
+  <script src="js/sprites.js"></script>
+  <script src="js/fx.js"></script>
+  <script src="js/schedule.js"></script>
+  <script src="js/npcbrain.js"></script>
+  <script src="js/npc.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/game.js"></script>
+  <script src="js/mobile.js"></script>
+</body>
+</html>

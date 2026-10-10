@@ -1,0 +1,53 @@
+{
+ "box": [
+  144,
+  204
+ ],
+ "foot": [
+  72,
+  200
+ ],
+ "li_mo": {
+  "idle_E_src": "walk_E frame 0",
+  "idle_W_src": "walk_W frame 0",
+  "idle_N_src": "walk_N frame 0",
+  "real_walk": [
+   "E",
+   "N",
+   "S"
+  ],
+  "mirrored": [
+   "W (flip of E)"
+  ],
+  "synth_walk": [
+   "NE",
+   "SE",
+   "SW",
+   "NW (single pose + bob/sway)"
+  ],
+  "idle_S": "real standing idle (limo-idle-walk-8dir.jpg)"
+ },
+ "npc": {
+  "vendor": {
+   "frames": 4,
+   "box": [
+    230,
+    220
+   ]
+  },
+  "rider": {
+   "frames": 4,
+   "box": [
+    230,
+    220
+   ]
+  },
+  "uncle": {
+   "frames": 4,
+   "box": [
+    144,
+    204
+   ]
+  }
+ }
+}
