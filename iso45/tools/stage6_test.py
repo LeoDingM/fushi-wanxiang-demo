@@ -53,11 +53,26 @@ def run(c, log):
       const a = SP.metroActive, vis = document.getElementById('metro').style.display;
       window.FushiMetro.core.leave('cbd', { exit: 'B' }); return JSON.stringify({ hrs, a, vis }); })()""")
     time.sleep(0.3)
-    m.update(J("""(() => { const card = document.getElementById('cbd-soon'), b = SP.metroActive, o = SP.world.byId.metro_jhl;
+    for _ in range(80):
+        if E("!!(SP.cbd && SP.cbd.active && SP.cbd.ready)"): break
+        time.sleep(0.25)
+    for _ in range(3): E("window.__proto.step(1/60, 10)")
+    q = J("""(() => { const C = SP.cbd, P = SP.player; const e = C.player === P, at = [+P.x.toFixed(1), +P.y.toFixed(1)], spB = (window.CBD_SCENE.exits.find(x => x.id === 'B') || {}).spawn;
+      return JSON.stringify({ active: C.active, metro: !!SP.metroActive, shared: e, at, spB: spB && spB.slice(0, 2), zoom: +C.cam.zoom.toFixed(2), act: SP.actions.skyline ? 1 : 0, fb: document.getElementById('floorbadge').textContent, frames: C.stats.drawn, stub: !!(SP.places.cbd && SP.places.cbd._stub) }); })()""")
+    ok("cbd: metro exit B -> 云汇CBD at exit B spawn (shared 李默, no stub)",
+       q["active"] and not q["metro"] and q["shared"] and not q["stub"] and q["spB"] and abs(q["at"][0] - q["spB"][0]) < 1.5 and abs(q["at"][1] - q["spB"][1]) < 1.5 and q["act"] and "CBD" in q["fb"] and q["frames"], q)
+    t = J("""(() => { const m0 = SP.clock.abs(); window.__proto.step(1/60, 120); return JSON.stringify({ dm: +(SP.clock.abs() - m0).toFixed(2) }); })()""")
+    ok("cbd: core clock keeps running inside the CBD", t["dm"] > 0, t)
+    E("SP.cbd.zoomTo(0.026, null, null, true); window.__proto.step(1/60, 30)")
+    sk = J("JSON.stringify({ z: SP.cbd.cam.zoom, drawn: SP.cbd.stats.drawn })")
+    ok("cbd: skyline zoom-out renders (LOD)", sk["z"] < 0.05 and sk["drawn"] > 0, sk)
+    E("SP.cbd.zoomTo(0.5, null, null, true); window.__proto.step(1/60, 5)")
+    r = J("""(() => { const C = SP.cbd, e = window.CBD_SCENE.exits.find(x => x.id === 'C'); C._.useExit(e); return JSON.stringify({ cbd: C.active, metro: !!SP.metroActive, actsRestored: !SP.actions.skyline }); })()""")
+    ok("cbd: exit C -> metro, core hooks restored", not r["cbd"] and r["metro"] and r["actsRestored"], r)
+    m.update(J("""(() => { const o = SP.world.byId.metro_jhl;
       window.FushiMetro.core.leave('street', {}); SP.actions.idle(0.3); const P = SP.player;
-      return JSON.stringify({ card: card ? card.textContent : '', back_in_metro: b, after: SP.metroActive, d: Math.hypot(P.x - o.reach[0], P.y - o.reach[1]), scene: SP.world.sceneId }); })()"""))
-    ok("metro: CBD exit (stub) -> '中央商务区 · 即将开放' card, player stays in the station to ride back", "即将开放" in m["card"] and m["back_in_metro"], m["card"][:40])
-    ok("metro: leaving to street puts 李默 exactly at the entrance, metro inactive", not m["after"] and m["d"] < 0.05 and m["scene"] == "street", m)
+      return JSON.stringify({ after: SP.metroActive, d: Math.hypot(P.x - o.reach[0], P.y - o.reach[1]), scene: SP.world.sceneId }); })()"""))
+    ok("metro: street return at entrance, metro inactive", not m["after"] and m["d"] < 0.05 and m["scene"] == "street", m)
 
 if __name__ == "__main__":
     p, prof, ws = cdp.start(); c = cdp.CDP(ws); c.call("Runtime.enable")

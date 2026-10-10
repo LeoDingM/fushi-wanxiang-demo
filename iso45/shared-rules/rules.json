@@ -2454,7 +2454,7 @@
   }
  },
  "cbd": {
-  "_doc": "云汇CBD (place 'cbd', scene-proto-45 js/cbd.js · tools/build_cbd.py · cbd_scene.json). towers = the city skyline (ORIGINAL names / designs, fictional tier-1 city): 1 landmark 620-660 m, 2 at 500-600 m, 7 at 400-500 m, 14 at 300-400 m, 18 at 200-300 m, filler 150-200 m. Four stand on the walkable map (天枢塔/鲲鹏/星澜/汇潮), the rest form the skyline ring. metro_exits link to the metro module (place 'metro_cbd', exits A-D).",
+  "_doc": "云汇CBD (place 'cbd'). towers skyline density (Leo): ONLY 1 tower ≥600 m (天枢), 2 at 500–600 m, 5 at 400–500 m, 7 at 300–400 m; ALL other buildings ≤200 m (avg ~150 m), spaced with plazas. Top 15 have unique original silhouettes. Also: 云麓花园 wealthy compound, central lake park, modern atrium mall 云汇天地. metro_exits A–D → place metro_cbd.",
   "district": {
    "name": "云汇CBD",
    "en": "Yunhui CBD",
@@ -2505,9 +2505,9 @@
    {
     "id": "yunfan",
     "name": "云帆中心",
-    "use": "办公",
+    "use": "媒体 · 办公",
     "floors": 92,
-    "height_m": 452,
+    "height_m": 442,
     "cls": "400s"
    },
    {
@@ -2515,30 +2515,14 @@
     "name": "琉璃之塔",
     "use": "酒店 · 服务式公寓",
     "floors": 88,
-    "height_m": 436,
+    "height_m": 418,
     "cls": "400s"
    },
    {
     "id": "hongtu",
     "name": "鸿图国际",
-    "use": "办公",
-    "floors": 86,
-    "height_m": 421,
-    "cls": "400s"
-   },
-   {
-    "id": "tianqiong",
-    "name": "天穹广场1号",
-    "use": "办公 · 商业",
-    "floors": 83,
-    "height_m": 409,
-    "cls": "400s"
-   },
-   {
-    "id": "jinzonglv",
-    "name": "金棕榈大厦",
-    "use": "办公",
-    "floors": 80,
+    "use": "办公 · 交易大厅",
+    "floors": 84,
     "height_m": 402,
     "cls": "400s"
    },
@@ -2547,110 +2531,54 @@
     "name": "澜庭中心",
     "use": "办公",
     "floors": 78,
-    "height_m": 392,
+    "height_m": 386,
     "cls": "300s"
    },
    {
     "id": "lingxiao",
     "name": "凌霄大厦",
     "use": "办公",
-    "floors": 77,
-    "height_m": 384,
+    "floors": 76,
+    "height_m": 364,
     "cls": "300s"
    },
    {
     "id": "yaoshi",
     "name": "曜石塔",
     "use": "办公",
-    "floors": 75,
-    "height_m": 376,
+    "floors": 74,
+    "height_m": 348,
     "cls": "300s"
    },
    {
     "id": "haitang",
     "name": "海棠金融大厦",
     "use": "金融办公",
-    "floors": 73,
-    "height_m": 368,
+    "floors": 72,
+    "height_m": 332,
     "cls": "300s"
    },
    {
     "id": "xinghewan",
     "name": "星河湾国际",
     "use": "办公 · 公寓",
-    "floors": 72,
-    "height_m": 359,
+    "floors": 70,
+    "height_m": 318,
     "cls": "300s"
    },
    {
     "id": "yunjin",
     "name": "云锦大厦",
     "use": "办公",
-    "floors": 70,
-    "height_m": 351,
+    "floors": 68,
+    "height_m": 308,
     "cls": "300s"
    },
    {
     "id": "qinglan",
     "name": "青岚中心",
     "use": "办公",
-    "floors": 68,
-    "height_m": 343,
-    "cls": "300s"
-   },
-   {
-    "id": "langfeng",
-    "name": "朗峰大厦",
-    "use": "办公",
-    "floors": 67,
-    "height_m": 336,
-    "cls": "300s"
-   },
-   {
-    "id": "jingan",
-    "name": "晶岸塔",
-    "use": "酒店",
     "floors": 66,
-    "height_m": 328,
-    "cls": "300s"
-   },
-   {
-    "id": "hanhai",
-    "name": "瀚海国际",
-    "use": "办公",
-    "floors": 64,
-    "height_m": 321,
-    "cls": "300s"
-   },
-   {
-    "id": "fenghua",
-    "name": "枫华中心",
-    "use": "办公",
-    "floors": 63,
-    "height_m": 316,
-    "cls": "300s"
-   },
-   {
-    "id": "runze",
-    "name": "润泽大厦",
-    "use": "办公",
-    "floors": 62,
-    "height_m": 309,
-    "cls": "300s"
-   },
-   {
-    "id": "yuanhang",
-    "name": "远航大厦",
-    "use": "办公",
-    "floors": 61,
-    "height_m": 304,
-    "cls": "300s"
-   },
-   {
-    "id": "yinshan",
-    "name": "银杉塔",
-    "use": "公寓",
-    "floors": 88,
     "height_m": 301,
     "cls": "300s"
    },
@@ -2658,240 +2586,160 @@
     "id": "huijin",
     "name": "汇金大厦",
     "use": "办公",
-    "floors": 60,
-    "height_m": 296,
-    "cls": "200s"
+    "floors": 42,
+    "height_m": 188,
+    "cls": "filler"
    },
    {
     "id": "jingxing",
     "name": "景行中心",
     "use": "办公",
-    "floors": 58,
-    "height_m": 288,
-    "cls": "200s"
+    "floors": 40,
+    "height_m": 176,
+    "cls": "filler"
    },
    {
     "id": "boya",
     "name": "博雅大厦",
     "use": "办公",
-    "floors": 57,
-    "height_m": 281,
-    "cls": "200s"
+    "floors": 38,
+    "height_m": 168,
+    "cls": "filler"
    },
    {
     "id": "zhiyuan",
     "name": "致远国际",
     "use": "办公",
-    "floors": 56,
-    "height_m": 274,
-    "cls": "200s"
+    "floors": 36,
+    "height_m": 162,
+    "cls": "filler"
    },
    {
     "id": "guangqi",
     "name": "光启大厦",
     "use": "办公",
-    "floors": 55,
-    "height_m": 268,
-    "cls": "200s"
+    "floors": 35,
+    "height_m": 158,
+    "cls": "filler"
    },
    {
     "id": "hejing",
     "name": "和璟中心",
     "use": "办公 · 酒店",
-    "floors": 54,
-    "height_m": 262,
-    "cls": "200s"
+    "floors": 40,
+    "height_m": 172,
+    "cls": "filler"
    },
    {
     "id": "dongan",
     "name": "东岸国际",
     "use": "办公",
-    "floors": 52,
-    "height_m": 255,
-    "cls": "200s"
+    "floors": 34,
+    "height_m": 154,
+    "cls": "filler"
    },
    {
     "id": "xinggang",
     "name": "星港大厦",
     "use": "办公",
-    "floors": 51,
-    "height_m": 249,
-    "cls": "200s"
+    "floors": 33,
+    "height_m": 150,
+    "cls": "filler"
    },
    {
     "id": "jiahe",
     "name": "嘉禾中心",
     "use": "办公",
-    "floors": 50,
-    "height_m": 243,
-    "cls": "200s"
-   },
-   {
-    "id": "yunqi",
-    "name": "云栖大厦",
-    "use": "办公",
-    "floors": 49,
-    "height_m": 236,
-    "cls": "200s"
+    "floors": 32,
+    "height_m": 146,
+    "cls": "filler"
    },
    {
     "id": "chenxi",
-    "name": "晨曦大厦",
+    "name": "晨曦公寓",
     "use": "公寓",
-    "floors": 70,
-    "height_m": 231,
-    "cls": "200s"
-   },
-   {
-    "id": "lvzhou",
-    "name": "绿洲中心",
-    "use": "办公",
-    "floors": 47,
-    "height_m": 226,
-    "cls": "200s"
+    "floors": 44,
+    "height_m": 156,
+    "cls": "filler"
    },
    {
     "id": "hengyue",
     "name": "恒岳大厦",
     "use": "办公",
-    "floors": 46,
-    "height_m": 220,
-    "cls": "200s"
+    "floors": 34,
+    "height_m": 152,
+    "cls": "filler"
    },
    {
     "id": "jincheng",
     "name": "锦程中心",
     "use": "办公",
-    "floors": 45,
-    "height_m": 214,
-    "cls": "200s"
-   },
-   {
-    "id": "huacai",
-    "name": "华彩大厦",
-    "use": "办公",
-    "floors": 44,
-    "height_m": 209,
-    "cls": "200s"
-   },
-   {
-    "id": "qihang",
-    "name": "启航大厦",
-    "use": "办公",
-    "floors": 43,
-    "height_m": 205,
-    "cls": "200s"
-   },
-   {
-    "id": "huizhi",
-    "name": "汇智中心",
-    "use": "办公",
-    "floors": 42,
-    "height_m": 203,
-    "cls": "200s"
-   },
-   {
-    "id": "qingquan",
-    "name": "清泉大厦",
-    "use": "办公",
-    "floors": 42,
-    "height_m": 201,
-    "cls": "200s"
+    "floors": 36,
+    "height_m": 160,
+    "cls": "filler"
    },
    {
     "id": "yunhui_a",
     "name": "云汇写字楼A座",
     "use": "办公",
-    "floors": 41,
-    "height_m": 196,
-    "cls": "filler"
-   },
-   {
-    "id": "yunhui_b",
-    "name": "云汇写字楼B座",
-    "use": "办公",
-    "floors": 39,
-    "height_m": 188,
+    "floors": 38,
+    "height_m": 170,
     "cls": "filler"
    },
    {
     "id": "guanlan",
     "name": "观澜公寓",
     "use": "公寓",
-    "floors": 58,
-    "height_m": 182,
+    "floors": 48,
+    "height_m": 168,
     "cls": "filler"
    },
    {
     "id": "qiyun",
     "name": "栖云酒店",
     "use": "酒店",
-    "floors": 46,
-    "height_m": 176,
+    "floors": 42,
+    "height_m": 158,
     "cls": "filler"
    },
    {
     "id": "huifeng",
     "name": "惠风大厦",
     "use": "办公",
-    "floors": 37,
-    "height_m": 170,
-    "cls": "filler"
-   },
-   {
-    "id": "jinye",
-    "name": "金叶大厦",
-    "use": "办公",
-    "floors": 36,
-    "height_m": 166,
-    "cls": "filler"
-   },
-   {
-    "id": "xincheng",
-    "name": "新城大厦",
-    "use": "办公",
-    "floors": 35,
-    "height_m": 162,
+    "floors": 31,
+    "height_m": 140,
     "cls": "filler"
    },
    {
     "id": "ganwan",
     "name": "港湾大厦",
     "use": "办公",
-    "floors": 34,
-    "height_m": 158,
-    "cls": "filler"
-   },
-   {
-    "id": "tonglin",
-    "name": "桐林大厦",
-    "use": "办公",
-    "floors": 33,
-    "height_m": 155,
-    "cls": "filler"
-   },
-   {
-    "id": "songtao",
-    "name": "松涛大厦",
-    "use": "办公",
-    "floors": 33,
-    "height_m": 152,
+    "floors": 32,
+    "height_m": 145,
     "cls": "filler"
    },
    {
     "id": "fenglin",
     "name": "枫林公寓",
     "use": "公寓",
-    "floors": 48,
-    "height_m": 151,
+    "floors": 42,
+    "height_m": 148,
     "cls": "filler"
    },
    {
     "id": "wenhui",
     "name": "文汇大厦",
     "use": "办公",
-    "floors": 32,
-    "height_m": 150,
+    "floors": 27,
+    "height_m": 128,
+    "cls": "filler"
+   },
+   {
+    "id": "songtao",
+    "name": "松涛大厦",
+    "use": "办公",
+    "floors": 28,
+    "height_m": 130,
     "cls": "filler"
    }
   ],
@@ -3142,6 +2990,7 @@
    "street": "臻品街",
    "park": "中央公园",
    "stadium": "云汇体育中心",
+   "compound": "云麓花园",
    "observation_deck": {
     "tower": "tianshu",
     "floor": 118,
