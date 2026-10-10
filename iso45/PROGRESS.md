@@ -97,3 +97,10 @@
 23:50 · [Stage K] 处方有效期（游戏日+3）↔药房状态/过期拒取；出示医院过期拦截
 23:50 · [Stage K] 门禁 App ↔ 日程待办合并（missed_scan / scanlog 待办 + 日程页跳转登记簿）
 23:50 · [Stage K] 质量：stageK_test 12/12 · smoke 4/4 · stage6 12/12 · 截图 k1–k6
+
+23:55 · [Stage L] 门岗核验合并：夜间来电跟进 + 漏扫码盘问为单菜单（双因「一并说明」）；压制 G/K 分拆轮询 · js/stageL.js
+23:55 · [Stage L] 收衣换装建议加天气穿衣提示（雨/雪/雾/晴）
+23:55 · [Stage L] 处方疗程每日服药打卡：药房取药开疗程、手机提醒、阿姨微信、待办
+23:55 · [Stage L] 门禁登记摘要导出到物业微信；登记簿菜单 + 手机门禁按钮
+23:55 · [Stage L] 日程本周视图 + 待办优先级排序（门岗/门禁/服药优先）
+23:55 · [Stage L] 质量：stageL_test 13/13 · smoke 4/4 · stage6 12/12 · 截图 l1–l6 · 未改 appearance/NPC_SPEC/civic atlas
