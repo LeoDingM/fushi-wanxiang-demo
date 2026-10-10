@@ -1,5 +1,5 @@
 {
- "version": 1,
+ "version": 2,
  "_doc": "浮世万象 gameplay rules (engine-agnostic data). Units: game minutes, money in yuan, needs 0..100. Read by rules.js (browser / node / port to GDScript). See README.md.",
  "calendar": {
   "start_weekday": 1,
@@ -138,11 +138,11 @@
  "items": {
   "noodles": {
    "label": "方便面",
-   "price": 5
+   "price": 4
   },
   "egg": {
    "label": "鸡蛋",
-   "price": 1.5
+   "price": 1
   },
   "veg": {
    "label": "青菜",
@@ -155,6 +155,38 @@
   "drink": {
    "label": "冰红茶",
    "price": 3
+  },
+  "bun": {
+   "label": "包子",
+   "price": 2
+  },
+  "bento": {
+   "label": "便当",
+   "price": 15
+  },
+  "milk": {
+   "label": "牛奶",
+   "price": 5
+  },
+  "fruit": {
+   "label": "一袋水果",
+   "price": 12,
+   "gift": true
+  },
+  "tea": {
+   "label": "茶叶",
+   "price": 28,
+   "gift": true
+  },
+  "candy": {
+   "label": "一包糖",
+   "price": 4,
+   "gift": true
+  },
+  "cigs": {
+   "label": "一包烟",
+   "price": 20,
+   "gift": true
   }
  },
  "start_items": {
@@ -372,6 +404,593 @@
    "place": "any",
    "minutes": 1,
    "kind": "pay_rent"
+  },
+  "eat_bento": {
+   "label": "热个便当",
+   "place": "fridge",
+   "minutes": 8,
+   "consume": {
+    "bento": 1
+   },
+   "effects": {
+    "hunger": 60,
+    "mood": 4
+   },
+   "text": "微波炉叮了三分钟"
+  },
+  "drink_milk": {
+   "label": "喝盒牛奶",
+   "place": "fridge",
+   "minutes": 3,
+   "consume": {
+    "milk": 1
+   },
+   "effects": {
+    "hunger": 10,
+    "energy": 3,
+    "mood": 2
+   },
+   "text": "冰牛奶"
+  },
+  "buy_oden": {
+   "label": "来份关东煮（¥8）",
+   "place": "store_hot",
+   "minutes": 6,
+   "cost": 8,
+   "effects": {
+    "hunger": 32,
+    "mood": 5
+   },
+   "text": "萝卜、海带结、鱼丸，汤很鲜"
+  },
+  "buy_coffee": {
+   "label": "买杯咖啡（¥9）",
+   "place": "store_hot",
+   "minutes": 3,
+   "cost": 9,
+   "effects": {
+    "energy": 14,
+    "mood": 3
+   },
+   "text": "热美式，提神"
   }
- }
+ },
+ "shops": {
+  "store": {
+   "label": "邻里便利 24h",
+   "catalog": [
+    "noodles",
+    "egg",
+    "veg",
+    "bread",
+    "bun",
+    "bento",
+    "milk",
+    "drink",
+    "fruit",
+    "tea",
+    "candy",
+    "cigs"
+   ],
+   "bundle": {
+    "egg": 6,
+    "noodles": 2
+   }
+  }
+ },
+ "jobs": {
+  "store_clerk": {
+   "label": "便利店店员",
+   "employer": "manager",
+   "pay_per_h": 28,
+   "perf_bonus": 30,
+   "late_grace_min": 10,
+   "late_cut_per_min": 0.5,
+   "early_leave_mul": 0.5,
+   "checkin_before_min": 30,
+   "checkin_after_min": 60,
+   "shifts": [
+    {
+     "id": "morning",
+     "label": "早班",
+     "from": "07:00",
+     "to": "11:00"
+    },
+    {
+     "id": "evening",
+     "label": "晚班",
+     "from": "17:00",
+     "to": "21:00"
+    },
+    {
+     "id": "night",
+     "label": "夜班",
+     "from": "22:00",
+     "to": "02:00",
+     "pay_mul": 1.25
+    }
+   ],
+   "max_per_day": 1,
+   "per_h": {
+    "energy": -4,
+    "hygiene": -2.5
+   },
+   "staff_meal": {
+    "bento": 1
+   },
+   "tasks": {
+    "every_min": [
+     13,
+     24
+    ],
+    "first_after_min": 5,
+    "stop_before_end_min": 12,
+    "types": {
+     "checkout": {
+      "label": "收银",
+      "weight": 5,
+      "deadline_min": 28,
+      "items": [
+       1,
+       4
+      ]
+     },
+     "restock": {
+      "label": "补货",
+      "weight": 2,
+      "deadline_min": 50,
+      "targets": [
+       "shelf_a",
+       "shelf_b",
+       "cooler"
+      ]
+     },
+     "mop": {
+      "label": "拖地",
+      "weight": 1,
+      "deadline_min": 45
+     },
+     "oden": {
+      "label": "加关东煮",
+      "weight": 1,
+      "deadline_min": 45
+     }
+    }
+   }
+  }
+ },
+ "social": {
+  "greet": 2,
+  "chat": 4,
+  "chat_minutes": 10,
+  "chat_mood": 3,
+  "daily_cap": 10,
+  "gift_like": 9,
+  "gift_ok": 4,
+  "gift_dislike": -3,
+  "witness": -8,
+  "witness_others": -2,
+  "tiers": [
+   [
+    0,
+    "陌生"
+   ],
+   [
+    15,
+    "面熟"
+   ],
+   [
+    35,
+    "熟人"
+   ],
+   [
+    60,
+    "朋友"
+   ]
+  ],
+  "npcs": {
+   "vendor": {
+    "name": "王阿姨",
+    "start": 10,
+    "likes": [
+     "fruit",
+     "egg",
+     "milk"
+    ],
+    "dislikes": [
+     "cigs",
+     "candy"
+    ],
+    "perk": {
+     "at": 40,
+     "id": "vendor_discount",
+     "label": "王阿姨的早点给你半价"
+    },
+    "lines": {
+     "0": [
+      "早点要不要？包子刚出笼。",
+      "小伙子新搬来的？"
+     ],
+     "15": [
+      "今天也这么早啊。",
+      "豆浆给你多打点。"
+     ],
+     "35": [
+      "你那份我先给你留着了。",
+      "别老吃泡面，伤胃。"
+     ],
+     "60": [
+      "跟阿姨还客气啥，拿着。",
+      "有空来家里吃饺子。"
+     ]
+    }
+   },
+   "uncle": {
+    "name": "巡逻大爷",
+    "start": 5,
+    "likes": [
+     "tea",
+     "cigs"
+    ],
+    "dislikes": [
+     "candy"
+    ],
+    "perk": {
+     "at": 35,
+     "id": "uncle_tip",
+     "label": "大爷会替你说情（罚单打五折）"
+    },
+    "lines": {
+     "0": [
+      "你是哪户的？",
+      "院门记得关好。"
+     ],
+     "15": [
+      "下雨了收衣服啊。",
+      "这棵槐树比你岁数大。"
+     ],
+     "35": [
+      "12号楼的事，问我准没错。",
+      "小李，最近忙啥呢？"
+     ],
+     "60": [
+      "走，陪我下盘棋去。",
+      "有人欺负你跟我说。"
+     ]
+    }
+   },
+   "office": {
+    "name": "上班族",
+    "start": 0,
+    "likes": [
+     "milk",
+     "drink"
+    ],
+    "dislikes": [
+     "cigs"
+    ],
+    "lines": {
+     "0": [
+      "……早。",
+      "（低头看手机）"
+     ],
+     "15": [
+      "又要加班了。",
+      "公交又晚点。"
+     ],
+     "35": [
+      "你那边便利店夜班累吗？",
+      "周末一起吃个饭？"
+     ],
+     "60": [
+      "谢了兄弟，回头请你。",
+      "工作的事有消息告诉你。"
+     ]
+    }
+   },
+   "student": {
+    "name": "学生",
+    "start": 0,
+    "likes": [
+     "candy",
+     "drink",
+     "milk"
+    ],
+    "dislikes": [
+     "cigs",
+     "tea"
+    ],
+    "lines": {
+     "0": [
+      "（摘下一只耳机）嗯？",
+      "哥你好。"
+     ],
+     "15": [
+      "作业好多啊。",
+      "今天食堂又是土豆。"
+     ],
+     "35": [
+      "哥，你会做数学题吗？",
+      "放学请你喝饮料！"
+     ],
+     "60": [
+      "我考了全班第五！",
+      "以后我也要搬出去住。"
+     ]
+    }
+   },
+   "rider": {
+    "name": "外卖骑手",
+    "start": 0,
+    "likes": [
+     "drink",
+     "bun",
+     "cigs"
+    ],
+    "dislikes": [
+     "tea"
+    ],
+    "lines": {
+     "0": [
+      "让一让，赶单呢！",
+      "（看了眼手机）"
+     ],
+     "15": [
+      "今天单子多。",
+      "下雨天单价高。"
+     ],
+     "35": [
+      "你那家便利店的关东煮不错。",
+      "这片我闭着眼都能送。"
+     ],
+     "60": [
+      "下回你点外卖，我给你送。",
+      "兄弟，谢了！"
+     ]
+    }
+   },
+   "manager": {
+    "name": "店长老周",
+    "start": 10,
+    "likes": [
+     "tea",
+     "fruit"
+    ],
+    "dislikes": [
+     "candy"
+    ],
+    "perk": {
+     "at": 40,
+     "id": "manager_raise",
+     "label": "老周给你涨了时薪（+¥4）"
+    },
+    "lines": {
+     "0": [
+      "欢迎光临。",
+      "要找工作？我们缺个店员。"
+     ],
+     "15": [
+      "货架记得补满。",
+      "夜班注意安全。"
+     ],
+     "35": [
+      "你干得不错。",
+      "有你在我能歇口气。"
+     ],
+     "60": [
+      "店里的事交给你我放心。",
+      "过年给你包个红包。"
+     ]
+    }
+   }
+  }
+ },
+ "damage": {
+  "_doc": "bill when a witness (NPC in range / CCTV) saw it; unwitnessed breakage is free but costs a little mood",
+  "kinds": {
+   "lamp": {
+    "label": "踢坏路灯",
+    "bill": 80
+   },
+   "vending": {
+    "label": "踹坏售货机",
+    "bill": 150
+   },
+   "window": {
+    "label": "砸坏一楼窗户",
+    "bill": 120
+   },
+   "pot": {
+    "label": "踢碎盆栽",
+    "bill": 25
+   },
+   "trashbin": {
+    "label": "踢翻垃圾桶",
+    "bill": 10
+   },
+   "poster": {
+    "label": "撕海报",
+    "bill": 20
+   },
+   "bike": {
+    "label": "推倒共享单车",
+    "bill": 15
+   },
+   "car": {
+    "label": "踢车引发警报",
+    "bill": 30
+   },
+   "shelf": {
+    "label": "碰翻货架",
+    "bill": 40
+   }
+  },
+  "unwitnessed_mood": -2,
+  "due_days": 3,
+  "late_mood_per_day": -4,
+  "payee": "物业"
+ },
+ "quests": [
+  {
+   "id": "q_breakfast",
+   "title": "早饭要吃好",
+   "start": {
+    "auto": true
+   },
+   "steps": [
+    {
+     "text": "吃顿早饭（早点摊买，或回家煮面）",
+     "on": {
+      "type": "action",
+      "id": [
+       "buy_breakfast",
+       "cook_noodles",
+       "cook_veg",
+       "buy_oden"
+      ]
+     }
+    }
+   ],
+   "reward": {
+    "mood": 5
+   }
+  },
+  {
+   "id": "q_job",
+   "title": "找份工作",
+   "start": {
+    "auto": true
+   },
+   "steps": [
+    {
+     "text": "去街角的邻里便利店看看（沿马路往东）",
+     "on": {
+      "type": "enter",
+      "scene": "store"
+     }
+    },
+    {
+     "text": "跟店长老周聊聊（应聘店员）",
+     "on": {
+      "type": "hired"
+     }
+    },
+    {
+     "text": "上完第一个班（早班 07–11 / 晚班 17–21 / 夜班 22–02）",
+     "on": {
+      "type": "shift_paid"
+     }
+    }
+   ],
+   "reward": {
+    "mood": 8,
+    "affinity": {
+     "manager": 6
+    }
+   }
+  },
+  {
+   "id": "q_rent",
+   "title": "按时交房租",
+   "start": {
+    "auto": true
+   },
+   "steps": [
+    {
+     "text": "周日 20:00 前攒够 ¥450",
+     "on": {
+      "type": "rent_paid",
+      "late": null
+     },
+     "fail_on": {
+      "type": "rent_owed"
+     }
+    }
+   ],
+   "reward": {
+    "mood": 10
+   }
+  },
+  {
+   "id": "q_neighbors",
+   "title": "远亲不如近邻",
+   "start": {
+    "auto": true
+   },
+   "steps": [
+    {
+     "text": "跟 4 位街坊打招呼",
+     "on": {
+      "type": "greet"
+     },
+     "n": 4,
+     "distinct": "npc"
+    },
+    {
+     "text": "和 2 位街坊混成「熟人」",
+     "cond": {
+      "affinity_count": {
+       "gte": 35,
+       "n": 2
+      }
+     }
+    }
+   ],
+   "reward": {
+    "mood": 8
+   }
+  },
+  {
+   "id": "q_eggs",
+   "title": "王阿姨的鸡蛋",
+   "start": {
+    "cond": {
+     "affinity": {
+      "npc": "vendor",
+      "gte": 20
+     }
+    }
+   },
+   "steps": [
+    {
+     "text": "王阿姨的鸡蛋用完了：去便利店买鸡蛋，送 6 个给她",
+     "on": {
+      "type": "gift",
+      "npc": "vendor",
+      "item": "egg"
+     },
+     "n": 6,
+     "sum": "n"
+    }
+   ],
+   "reward": {
+    "money": 30,
+    "affinity": {
+     "vendor": 10
+    }
+   }
+  },
+  {
+   "id": "q_amends",
+   "title": "知错能改",
+   "start": {
+    "on": {
+     "type": "billed"
+    }
+   },
+   "steps": [
+    {
+     "text": "去 1F 楼道公告栏，把物业的赔偿单交了",
+     "on": {
+      "type": "bill_paid"
+     }
+    }
+   ],
+   "reward": {
+    "affinity": {
+     "uncle": 4
+    }
+   }
+  }
+ ]
 }

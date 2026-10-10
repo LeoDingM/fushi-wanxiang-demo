@@ -53,7 +53,7 @@
       case "neighbor_door": return kind === "use" ? { label: "敲门", do: "game" } : null;
       case "mailbox": return kind === "use" ? { label: "看信箱", do: "game" } : null;
       case "notice": return kind === "use" ? { label: "看公告", do: "game" } : null;
-      case "stairs_up": return kind === "use" ? { label: "上楼", do: "game" } : null;
+      case "stairs": return kind === "use" ? { label: (o.go === "up" ? (o.to === "roof" ? "上天台" : "上楼") : "下楼") + " · 选楼层", do: "game" } : null;
       case "table": return kind === "use" ? (o.state === "meal" ? { label: "收拾碗筷", do: "game" } : { label: "看看", do: "game" }) : null;
     }
     return undefined;
@@ -73,10 +73,10 @@
         W.logEvent(on ? "李默开了灯" : "李默关了灯"); return on ? "开灯" : "关灯";
       }
       case "hall_light": o.wake = C.abs(); W.setState(o, "on"); return "咚！声控灯亮了";
-      case "neighbor_door": return "咚咚咚……2F-01 没人应";
+      case "neighbor_door": return o.note ? `咚咚咚……${o.name}：${o.note}` : `咚咚咚……${o.name || "邻居家"} 没人应`;
       case "mailbox": return G.ps.owed > 0 ? `信箱里有张纸条：「2F-02 房租 ¥${G.ps.owed} 请尽快交 —— ${R.data.rent.landlord}」` : "2F-02 的信箱：一张水费单、两张小广告";
-      case "notice": return `楼道公告：每周日 20:00 交房租（¥${R.data.rent.amount}）· 楼道禁止停放电动车`;
-      case "stairs_up": { const p = W.portals.find((q) => q.to === "stair_2f"); if (p) G.go(p); return null; }
+      case "notice": if (o.note) return o.note; return `楼道公告：每周日 20:00 交房租（¥${R.data.rent.amount}）· 楼道禁止停放电动车`;
+      case "stairs": G.openFloorMenu(o); return null;
       case "table": if (o.state === "meal") { W.setState(o, "default"); W.logEvent("李默收拾了碗筷"); return "碗筷洗干净了"; } return "一张折叠小饭桌";
     }
     return null;
@@ -115,7 +115,7 @@
   G.openMenu = function (o, opts) {
     G.menu = { o, opts };
     if (!menuEl) return;
-    const name = (W.defs[o.interact] && W.defs[o.interact].name) || o.name || "";
+    const name = o._name || (W.defs[o.interact] && W.defs[o.interact].name) || o.name || "";
     menuEl.innerHTML = `<div class="t">${name}</div>` + opts.map((a, i) =>
       `<button data-i="${i}" ${a.ok ? "" : "disabled"}><b>${i + 1}</b> ${a.label}${a.ok ? (a.minutes ? ` <i>${a.minutes >= 60 ? (a.minutes / 60).toFixed(a.minutes % 60 ? 1 : 0) + "小时" : a.minutes + "分钟"}</i>` : "") : ` <i>${a.reason}</i>`}</button>`).join("") +
       `<button data-i="x" class="x">取消</button>`;
@@ -123,12 +123,31 @@
     menuEl.querySelectorAll("button").forEach((b) => b.addEventListener("pointerdown", (e) => { e.preventDefault(); e.stopPropagation(); G.pick(b.dataset.i === "x" ? -1 : +b.dataset.i); }));
   };
   G.closeMenu = function () { G.menu = null; if (menuEl) { menuEl.classList.add("hidden"); menuEl.innerHTML = ""; } };
+  /** stair floor-select menu (a shortcut; walking onto a flight is the normal way). First entry = this flight's own way. */
+  G.floors = function () {
+    return Object.keys(SP.scenes).filter((k) => SP.scenes[k].floor != null).sort((a, b) => SP.scenes[a].floor - SP.scenes[b].floor);
+  };
+  G.openFloorMenu = function (o) {
+    const cur = W.data.floor, up = W.portals.find((q) => q.id.startsWith("up_")), dn = W.portals.find((q) => q.id.startsWith("down_"));
+    const label = (id) => { const f = SP.scenes[id].floor; return id === "roof" ? "天台" : `${f}F`; };
+    const opts = G.floors().filter((id) => id !== W.sceneId).map((id) => {
+      const f = SP.scenes[id].floor, above = f > cur, via = above ? up : dn;
+      const spawn = id === "roof" ? (up && up.to === "roof" ? up.spawn : SP.scenes.roof.spawn) : above ? (up && up.spawn) : (dn && dn.spawn);
+      return { id: "go_" + id, ok: !!spawn, reason: "走不过去", label: `${above ? "↑" : "↓"} ${label(id)}${id === "stair_2f" ? "（2F-02 家）" : ""}`, go: { to: id, spawn, door: id === "roof" ? "roof_hut" : null }, f };
+    });
+    // order: the flight's own neighbour floor first, then nearest-first in that direction, then the other way
+    const dir = o.go === "down" ? -1 : 1;
+    opts.sort((a, b) => { const da = (a.f - cur) * dir, db = (b.f - cur) * dir; return (da > 0 ? 0 : 100) + Math.abs(da) - ((db > 0 ? 0 : 100) + Math.abs(db)); });
+    G.openMenu(Object.assign({}, o, { _name: `楼梯 · 现在 ${cur > 6 ? "天台" : cur + "F"}` }), opts);
+    G.menu.o = o;
+  };
   /** choose menu entry i (-1 closes; null = first available) */
   G.pick = function (i) {
     const m = G.menu; if (!m) return;
     if (i === -1) { G.closeMenu(); return; }
     const a = i == null ? m.opts.find((x) => x.ok) : m.opts[i];
     if (!a || !a.ok) return;
+    if (a.go) { G.closeMenu(); G.go(a.go); return; }
     const msg = G.start(a.id, m.o); if (msg) SP.toast(msg);
   };
 
@@ -140,7 +159,7 @@
     G.trans = { t: 0, to: p.to, spawn: p.spawn, door: p.door, done: false };
     G.armed = false;
     const d = p.door && W.byId[p.door];
-    if (d && d.type === "i_door") { W.setState(d, "open"); }
+    if (d && (d.type === "i_door" || d.type === "i_roofhut")) { W.setState(d, "open"); }
     if (d && d.id === "unit_door") W.pulseDoor();
   };
   G.switchScene = function (to, spawn, door) {
@@ -148,10 +167,10 @@
     W.enter(to);
     SP.traffic.reset(); SP.fx.reset && SP.fx.reset();
     P.x = P.px = spawn[0]; P.y = P.py = spawn[1]; if (spawn[2]) P.setDir(spawn[2]);
-    SP.render.build(); SP.actors.init(W.data); SP.cam.ready = false; G.armed = false; G.spawnAt = [P.x, P.y];
-    for (const o of W.objects) if (o.type === "i_door" && o.state === "open") W.setState(o, "closed");
+    SP.render.build(); SP.actors.init(W.data); SP.cam.ready = false; G.armed = false; G.spawnAt = [P.x, P.y]; G.trans && (G.trans.done = true);
+    for (const o of W.objects) if ((o.type === "i_door" || o.type === "i_roofhut") && o.state === "open") W.setState(o, "closed");
     const d = door && W.byId[door];
-    if (d && d.type === "i_door") { W.setState(d, "open"); d.closeAt = SP.now + 0.9; }
+    if (d && (d.type === "i_door" || d.type === "i_roofhut")) { W.setState(d, "open"); d.closeAt = SP.now + 0.9; }
     if (d && d.id === "unit_door") W.pulseDoor();
     G.updateLights(true);
   };
@@ -182,11 +201,21 @@
         if (!inRect(p.rect, P.x, P.y)) continue;
         inside = true;
         const want = p.dir === "N" ? G.vy > 0 : p.dir === "S" ? G.vy < 0 : true;
-        if (G.armed && want) { G.go(p); break; }
+        // dwell: still pushing into the stair mouth with the stick held over from the last flight for a full second
+        // is a deliberate "take this flight" -> fires anyway (never stuck pressing into a dead trigger), while a
+        // stick merely carried through the fade can't bounce 李默 straight back (needs >= 1 s of pushing)
+        G.dwell = want ? (G.dwell || 0) + dt : 0;
+        if (want && (G.armed || G.dwell > 1.0)) { G.dwell = 0; G.go(p); break; }
       }
-      // re-arm only after stepping out AND (letting go of the stick or walking ~1 m from the arrival spot):
-      // holding "up" through a staircase must not ping-pong between floors
-      if (!inside && (!G.moving || Math.hypot(P.x - G.spawnAt[0], P.y - G.spawnAt[1]) > 0.9)) G.armed = true;
+      // arrival latch: spawns are always outside the trigger rects, so only a stick still held from the previous
+      // flight can carry 李默 back in. Re-arm as soon as the stick is released (anywhere — also while standing in a
+      // rect), or it stops pushing north / outward, or he has walked 0.6 m from the arrival spot.
+      // (The old rule needed "outside every rect" too: stopping inside a rect then locked the trigger for good.)
+      if (!inside) G.dwell = 0;
+      if (!G.armed) {
+        const away = Math.hypot(P.x - G.spawnAt[0], P.y - G.spawnAt[1]) > 0.6;
+        if (!G.moving || (!inside && (away || G.vy <= 0))) G.armed = true;
+      }
     }
     if (G.menu && SP.state.near !== G.menu.o) G.closeMenu();
     G.updateLights(false);

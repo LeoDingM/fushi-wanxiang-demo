@@ -55,7 +55,9 @@
     const st = W.stash[id];
     if (st) {
       for (const k of STASH) W[k] = st[k];
-      W.sceneId = id; BG_Y = W.data.bg_y != null ? W.data.bg_y : 17.9; snowBlobs = decor = flatSorted = null;
+      // portals belong to the scene: a stashed scene must bring its own back (they used to stay those of the
+      // last freshly-loaded scene -> walk-in triggers / stair E silently pointed at the wrong floor or nowhere)
+      W.sceneId = id; W.portals = W.data.portals || []; BG_Y = W.data.bg_y != null ? W.data.bg_y : 17.9; snowBlobs = decor = flatSorted = null;
       for (const o of W.objects) { o.alpha = {}; o._dr = null; }
       W.applySeason(true); W.updateRules();
     } else W.load(S, true);
@@ -124,14 +126,14 @@
     const R = SP.rng(777), G = W.data.ground, x0 = G.origin[0], y0 = G.origin[1], x1 = x0 + G.cols * 2, y1 = y0 + G.rows * 2;
     snowBlobs = [];
     for (let i = 0; i < 4200; i++) {
-      const x = x0 + R() * (x1 - x0), y = y0 + R() * (y1 - y0), road = y > 0 && y < 8;
+      const x = x0 + R() * (x1 - x0), y = y0 + R() * (y1 - y0), road = !!W.data.traffic && y > 0 && y < 8;
       const lane = road && (Math.abs(Math.abs(y - 2) - 0.74) < 0.3 || Math.abs(Math.abs(y - 6) - 0.74) < 0.3);
       const thr = R() * 0.8 + (road ? 0.12 : 0) + (lane ? 0.5 : 0);
       snowBlobs.push({ x, y, rx: 0.12 + R() * 0.42, ry: 0.06 + R() * 0.2, thr, c: R() < 0.3 ? 1 : 0 });
     }
     decor = { autumn: [], spring: [] };
-    const okSpot = (x, y) => (y < 0 || y > 8.3) && y < 17.6;
-    for (let i = 0; i < 70; i++) { const x = 0.5 + R() * 31, y = -3.4 + R() * 21; if (okSpot(x, y)) decor.autumn.push({ x, y, k: `fx/leaves/${i % 3}` }); }
+    const okSpot = W.data.traffic ? (x, y) => (y < 0 || y > 8.3) && y < 17.6 : (x, y) => x > x0 + 0.4 && x < x1 - 0.4 && y > y0 + 0.4 && y < y1 - 0.5;
+    for (let i = 0; i < 70; i++) { const x = W.data.traffic ? 0.5 + R() * 31 : x0 + R() * (x1 - x0), y = W.data.traffic ? -3.4 + R() * 21 : y0 + R() * (y1 - y0); if (okSpot(x, y)) decor.autumn.push({ x, y, k: `fx/leaves/${i % 3}` }); }
     for (const o of W.objects) if (o.type === "p_tree") for (let i = 0; i < 9; i++) {
       const x = o.x + (R() - 0.5) * 5, y = o.y + (R() - 0.5) * 3.2; if (okSpot(x, y)) { decor.spring.push({ x, y, k: `fx/petals/${i % 2}` }); decor.autumn.push({ x, y, k: `fx/leaves/${i % 3}` }); }
     }
@@ -178,8 +180,11 @@
       const [gx, gy, gw, gh] = W.groundRect(), roadTop = SP.sy(8), roadBot = SP.sy(0);
       if (sl > 0.45) {                                  // continuous cover once it's deep
         s.globalAlpha = Math.min(1, (sl - 0.45) * 2.4); s.fillStyle = "#e4eaf3";
-        s.fillRect(gx, gy, gw, SP.sy(8.2) - gy); s.fillRect(gx, roadBot, gw, gy + gh - roadBot);
-        s.globalAlpha = Math.min(0.9, (sl - 0.45) * 1.9); s.fillStyle = "#d7dde8"; s.fillRect(gx, roadTop, gw, roadBot - roadTop);
+        if (!W.data.traffic) s.fillRect(gx, gy, gw, gh);
+        else {
+          s.fillRect(gx, gy, gw, SP.sy(8.2) - gy); s.fillRect(gx, roadBot, gw, gy + gh - roadBot);
+          s.globalAlpha = Math.min(0.9, (sl - 0.45) * 1.9); s.fillStyle = "#d7dde8"; s.fillRect(gx, roadTop, gw, roadBot - roadTop);
+        }
         s.globalAlpha = 1;
       }
       for (let i = 0; i < 2; i++) {
@@ -191,7 +196,7 @@
         }
         s.fill();
       }
-      if (sl > 0.2) {                                   // traffic keeps grey slush tyre tracks in both lanes
+      if (sl > 0.2 && W.data.traffic) {                 // traffic keeps grey slush tyre tracks in both lanes
         s.fillStyle = `rgba(128,134,148,${Math.min(0.85, (sl - 0.2) * 1.6)})`;
         for (const ly of [2, 6]) for (const o of [-0.74, 0.74]) { const y = SP.sy(ly + o); s.fillRect(gx, Math.round(y - 3), gw, 6); }
       }

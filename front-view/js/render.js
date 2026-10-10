@@ -151,6 +151,7 @@
         case "p_locker": L(o.x, o.y - 0.4, 1.3, 1.4, 120, 200, 255, 0.45 * nk, false, false, false); break;
         case "p_stall": { const v = SP.actors.byId("vendor"); if (v && !v.hidden && v.act === "cook") { L(o.x, o.y - 0.4, 1.95, 2.4, 255, 200, 120, 0.8 * nk, false, true, false); L(o.x, o.y - 0.6, 0, 2.6, 255, 196, 120, 0.6 * nk, true, false, true); } break; }
         case "i_pendant": break;
+        case "i_roofhut": L(o.x + 0.4, o.y - 1.3, 0, 3.0, 255, 214, 150, 0.85 * nk, true, false, true); L(o.x + 0.4, o.y - 1.0, 2.15, 0.9, 255, 226, 170, 0.8 * nk, false, true, false); break;
         case "p_car": if (o.alarmUntil > SP.now && Math.floor(SP.now * 3) % 2 === 0) { L(o.x - 2.1, o.y, 0.65, 1.4, 255, 170, 40, 0.8, false, true, false); L(o.x + 2.1, o.y, 0.65, 1.4, 255, 170, 40, 0.8, false, true, false); } break;
       }
     }
@@ -199,6 +200,7 @@
     const sh = SP.fx.shake > 0 ? Math.round(Math.sin(SP.now * 90) * 2) : 0;
     ctx.setTransform(z, 0, 0, z, (-cx + sh) * z, -cy * z);
     if (w.interior) for (const o of w.objects) if (o.view) R.drawView(ctx, o);       // live outside view, behind the cached wall
+    if (w.data.backdrop) R.drawBackdrop(ctx, cx, cy, vw, vh);
     let nch = 0;
     for (const ch of chunks) if (!(ch.x + CH <= cx || ch.x >= cx + vw || ch.y + CH <= cy || ch.y >= cy + vh)) { if (ch.cv) ctx.drawImage(ch.cv, ch.x, ch.y); nch++; }
     R.stats.chunks = nch;
@@ -376,6 +378,54 @@
     if (SP.game) SP.game.drawOverlay(ctx, cw, chh);
   };
   const ambIn = [0, 0, 0];
+  // ---------- rooftop backdrop: sky + the city skyline beyond the north parapet, the street far below the south one ----------
+  R.drawBackdrop = function (x, cx, cy, vw, vh) {
+    const c = C(), wd = W().data, b = wd.bounds, X0 = Math.floor(cx) - 1, W_ = Math.ceil(vw) + 2;
+    const H = Math.round(SP.sy(b.y1, 0)), night = SP.clamp((c.dark - 0.35) / 0.4, 0, 1), wt = c.intensity > 0.2 ? c.weather : "clear";
+    const sky = SKY[wt] || SKY.clear, a = [255, 255, 255], top = night > 0.5 ? [30, 36, 70] : sky[0], bot = night > 0.5 ? [62, 66, 104] : sky[1];
+    const Y0 = Math.floor(cy) - 1, hh = H - Y0;
+    if (hh > 0) {
+      for (let i = 0; i < 12; i++) { const f = i / 11; x.fillStyle = mul([SP.lerp(top[0], bot[0], f), SP.lerp(top[1], bot[1], f), SP.lerp(top[2], bot[2], f)], a, 1); x.fillRect(X0, Y0 + (hh * i / 12 | 0), W_, Math.ceil(hh / 12) + 1); }
+      if (night > 0.6 && wt === "clear") { x.fillStyle = "#e8e8f8"; for (let i = 0; i < 26; i++) x.fillRect(X0 + (SP.hash(i, 5) * W_ | 0), Y0 + (SP.hash(i, 9) * hh * 0.5 | 0), 1, 1); }
+      // far CBD towers (tier-1 city skyline, hazy), then the nearer old 6-storey blocks with window grids
+      const haze = c.fog > 0.05 ? 0.5 : 0.25;
+      for (let i = 0; i < 9; i++) {
+        const bx = X0 + ((i * 0.113 + SP.hash(i, 21) * 0.08) * W_ | 0), bw = 14 + (SP.hash(i, 22) * 22 | 0), bh = 40 + (SP.hash(i, 23) * 70 | 0);
+        x.fillStyle = mul(night > 0.5 ? [44, 50, 74] : [128, 140, 160], a, 1); x.globalAlpha = 1 - haze; x.fillRect(bx, H - 36 - bh, bw, bh + 36);
+        if (night > 0.3) { x.fillStyle = "#cfe0ff"; for (let k = 0; k < bh; k += 6) if (SP.hash(i * 50 + k, c.day) > 0.35) x.fillRect(bx + 2, H - 36 - bh + k, bw - 4, 1); x.fillStyle = "#ff4040"; if ((SP.now * 1.3 + i) % 2 < 1) x.fillRect(bx + (bw >> 1), H - 38 - bh, 1, 1); }
+      }
+      x.globalAlpha = 1;
+      for (let i = 0; i < 7; i++) {
+        const bx = X0 + (i * W_ / 6.3 | 0) - 8, bw = 60 + (SP.hash(i, 31) * 40 | 0), bh = 24 + (SP.hash(i, 32) * 22 | 0), col = [[150, 96, 76], [168, 160, 146], [132, 120, 108]][i % 3];
+        x.fillStyle = mul(col, a, 1); x.fillRect(bx, H - bh, bw, bh);
+        x.fillStyle = mul([96, 92, 90], a, 1); x.fillRect(bx, H - bh - 2, bw, 2);
+        for (let r = 0; r < 3; r++) for (let k = 0; k * 10 + 10 < bw; k++) { const lit = night > 0.2 && SP.hash(i * 40 + r * 9 + k, c.day) > 0.5; x.fillStyle = lit ? "#ffd48c" : mul([70, 92, 104], a, 1); x.fillRect(bx + 5 + k * 10, H - bh + 4 + r * 8, 5, 4); }
+        // rooftop clutter on neighbours: tanks, a solar heater, an antenna
+        x.fillStyle = mul([110, 112, 118], a, 1); x.fillRect(bx + 10, H - bh - 8, 7, 6); x.fillRect(bx + bw - 18, H - bh - 12, 1, 10); x.fillRect(bx + bw - 22, H - bh - 10, 9, 1);
+        if (c.snow > 0.2) { x.fillStyle = "#eef2f8"; x.fillRect(bx, H - bh - 3, bw, 2); }
+      }
+    }
+    // neighbouring rooftops left / right of ours (a step lower, tar + tiles, a tank silhouette)
+    const RX0 = Math.round(SP.sx(b.x0)), RX1 = Math.round(SP.sx(b.x1)), S0_ = Math.round(SP.sy(b.y0 < 0 ? 0 : b.y0, 0));
+    x.fillStyle = mul([112, 104, 100], a, 1); x.fillRect(X0, H + 6, RX0 - X0, S0_ - H - 6); x.fillRect(RX1, H + 6, X0 + W_ - RX1, S0_ - H - 6);
+    x.fillStyle = mul([138, 128, 120], a, 1); x.fillRect(X0, H + 2, RX0 - X0, 4); x.fillRect(RX1, H + 2, X0 + W_ - RX1, 4);
+    x.fillStyle = mul([90, 84, 82], a, 1); for (let k = 0; k < 6; k++) { x.fillRect(RX0 - 40 - k * 70, H + 14, 22, 18); x.fillRect(RX1 + 28 + k * 70, H + 20, 26, 14); }
+    if (c.snow > 0.2) { x.fillStyle = "#e4eaf3"; x.globalAlpha = Math.min(1, c.snow * 1.4); x.fillRect(X0, H + 6, RX0 - X0, S0_ - H - 6); x.fillRect(RX1, H + 6, X0 + W_ - RX1, S0_ - H - 6); x.globalAlpha = 1; }
+    // the street below the south parapet: tree crowns of the 国槐 along the pavement, lamp glows at night, a passing car
+    const S0 = Math.round(SP.sy(b.y0 < 0 ? 0 : b.y0, 0)), S1 = Math.floor(cy + vh) + 1;
+    if (S1 > S0) {
+      x.fillStyle = mul([54, 56, 62], a, 1); x.fillRect(X0, S0, W_, S1 - S0);
+      x.fillStyle = mul([84, 86, 92], a, 1); x.fillRect(X0, S0 + 14, W_, 3);
+      const t = SP.now, carX = X0 + ((t * 60) % (W_ + 80)) - 40; x.fillStyle = mul([190, 60, 50], a, 1); x.fillRect(carX | 0, S0 + 20, 22, 7);
+      if (night > 0.3) { x.fillStyle = "#ffe6a8"; x.fillRect((carX | 0) + 22, S0 + 22, 2, 3); }
+      for (let i = 0; i < 6; i++) {
+        const tx = X0 + (i * W_ / 5 | 0) + 20, col = c.season === "winter" ? ["#5a4a3e", "#4f3e33"] : CANOPY[c.season];
+        x.fillStyle = col[0]; x.beginPath(); x.ellipse(tx, S0 + 6, 26, 10, 0, 0, 6.283); x.fill(); x.fillStyle = col[1]; x.beginPath(); x.ellipse(tx - 6, S0 + 3, 12, 6, 0, 0, 6.283); x.fill();
+        if (c.snow > 0.3) { x.fillStyle = "#f2f5fa"; x.fillRect(tx - 18, S0 - 3, 30, 2); }
+        if (night > 0.3) { x.globalAlpha = 0.5; x.fillStyle = "#ffd890"; x.beginPath(); x.ellipse(tx + 36, S0 + 16, 10, 5, 0, 0, 6.283); x.fill(); x.globalAlpha = 1; }
+      }
+    }
+  };
   // ---------- window view: what you see through an interior window (sky / weather / season / neighbour block) ----------
   // Pixel-art, procedural, ~50x60 px: drawn every frame into the transparent opening of the cached wall bay.
   function mul(c, a, f) { return `rgb(${Math.min(255, c[0] * a[0] / 255 * f) | 0},${Math.min(255, c[1] * a[1] / 255 * f) | 0},${Math.min(255, c[2] * a[2] / 255 * f) | 0})`; }

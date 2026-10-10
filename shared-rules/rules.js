@@ -27,13 +27,22 @@
     };
     /** fresh player state (plain JSON) */
     R.newState = function (abs, over) {
-      const s = { v: 1, needs: {}, money: D.money.start, items: Object.assign({}, D.start_items), owed: 0,
-                  rentDue: R.nextRentDue(abs || 0), rentPaid: 0, flags: {}, log: [], stats: { actions: {}, spent: 0, earned: 0 } };
+      const s = { v: 2, needs: {}, money: D.money.start, items: Object.assign({}, D.start_items), owed: 0,
+                  rentDue: R.nextRentDue(abs || 0), rentPaid: 0, flags: {}, log: [], stats: { actions: {}, spent: 0, earned: 0, shifts: 0, fines: 0 },
+                  aff: {}, met: {}, job: null, shift: null, bills: [], quests: null, perks: {} };
       for (const n of NEEDS) s.needs[n] = D.needs[n].start;
-      return Object.assign(s, over || {});
+      for (const [id, n] of Object.entries((D.social && D.social.npcs) || {})) s.aff[id] = n.start || 0;
+      Object.assign(s, over || {});
+      if (D.quests) { s.quests = {}; questStarts(s, null, abs || 0); }
+      return s;
     };
     function add(s, need, v) { s.needs[need] = clamp(s.needs[need] + v, 0, 100); }
-    function note(s, ev, abs) { ev.t = abs; s.log.push(ev); if (s.log.length > 60) s.log.shift(); return ev; }
+    function note(s, ev, abs) {
+      ev.t = abs; s.log.push(ev); if (s.log.length > 60) s.log.shift();
+      if (s.quests && ev.type.slice(0, 6) !== "quest_") questEvent(s, ev, abs);
+      return ev;
+    }
+    R._note = note;
     /** active conditions for ctx {outdoors, weather, umbrella} */
     R.conditions = function (s, ctx) {
       ctx = ctx || {};
@@ -60,6 +69,7 @@
         if (before[n] >= L.warn && s.needs[n] < L.warn) evs.push(note(s, { type: "need_low", need: n, level: "warn" }, ctx.abs));
         if (before[n] >= L.critical && s.needs[n] < L.critical) evs.push(note(s, { type: "need_low", need: n, level: "critical" }, ctx.abs));
       }
+      if (s.shift && D.jobs) { const J = D.jobs[s.shift.job]; for (const [n, v] of Object.entries(J.per_h || {})) add(s, n, v * h); }
       // rent: due every N days at due_min; pay automatically if the money is there, otherwise it is owed
       const abs = ctx.abs == null ? 0 : ctx.abs;
       while (abs >= s.rentDue) {
@@ -68,6 +78,13 @@
         else { s.owed += r.amount; add(s, "mood", r.late_mood); evs.push(note(s, { type: "rent_owed", amount: r.amount, owed: s.owed }, s.rentDue)); }
         s.rentDue = R.nextRentDue(s.rentDue);
       }
+      if (s.shift) evs.push(...R.job.tick(s, abs));
+      // unpaid bills past due: mood penalty once per day
+      if (s.bills && s.bills.length && D.damage) {
+        const day = Math.floor(abs / DAY);
+        for (const b of s.bills) if (abs > b.due && b.pen !== day) { b.pen = day; add(s, "mood", D.damage.late_mood_per_day); evs.push(note(s, { type: "bill_overdue", id: b.id, amount: b.amount }, abs)); }
+      }
+      if (s.quests) evs.push(...questConds(s, abs));
       return evs;
     };
     function inWindow(m, from, to) { return from <= to ? m >= from && m < to : m >= from || m < to; }
@@ -88,7 +105,8 @@
       const q = a.requires || {};
       if (q.energy_below != null && !(s.needs.energy < q.energy_below)) return fail("现在不困");
       if (q.flag && !(ctx.flags && ctx.flags[q.flag])) return fail("现在没开");
-      if (a.cost && s.money < a.cost) return fail("钱不够");
+      out.cost = R.costOf(s, id);
+      if (out.cost && s.money < out.cost) return fail("钱不够");
       for (const [it, n] of Object.entries(a.consume || {})) if ((s.items[it] || 0) < n) return fail(`没有${D.items[it].label}了`);
       if (a.kind === "pay_rent" && !(s.owed > 0)) return fail("不欠房租");
       if (a.kind === "pay_rent" && s.money < s.owed) return fail("钱不够");
@@ -104,13 +122,20 @@
       const c = R.check(s, id, ctx); if (!c.ok) return c;
       const a = D.actions[id], abs = (ctx && ctx.abs) || 0, evs = [];
       if (a.kind === "pay_rent") { const amt = s.owed; s.money -= amt; s.stats.spent += amt; s.owed = 0; s.rentPaid++; evs.push(note(s, { type: "rent_paid", amount: amt, late: true }, abs)); }
-      if (a.cost) { s.money -= a.cost; s.stats.spent += a.cost; }
+      const cost = R.costOf(s, id);
+      if (cost) { s.money -= cost; s.stats.spent += cost; }
       for (const [it, n] of Object.entries(a.consume || {})) s.items[it] -= n;
       for (const [n, v] of Object.entries(a.set || {})) s.needs[n] = clamp(v, 0, 100);
       for (const [n, v] of Object.entries(a.effects || {})) add(s, n, v);
       s.stats.actions[id] = (s.stats.actions[id] || 0) + 1;
       evs.push(note(s, { type: "action", id }, abs));
       return { ok: true, id, label: a.label, minutes: c.minutes, activity: a.kind === "sleep" ? id : null, text: a.text || a.label, events: evs };
+    };
+    /** price of an action for this player (perks: 王阿姨 half-price breakfast) */
+    R.costOf = function (s, id) {
+      const a = D.actions[id]; if (!a || !a.cost) return 0;
+      if (a.place === "stall" && s.perks && s.perks.vendor_discount) return Math.ceil(a.cost / 2);
+      return a.cost;
     };
     R.addItem = (s, it, n) => { s.items[it] = (s.items[it] || 0) + (n == null ? 1 : n); };
     R.earn = (s, amt, why, abs) => { s.money += amt; s.stats.earned += amt; return note(s, { type: "earn", amount: amt, why }, abs || 0); };
@@ -122,11 +147,254 @@
       let speed = 1; for (const c of conds) if (c.speed_mul) speed = Math.min(speed, c.speed_mul);
       const m = s.needs.mood;
       return { needs, money: s.money, owed: s.owed, rentDue: s.rentDue, conditions: conds.map((c) => c.label), speedMul: speed,
+               bills: (s.bills || []).reduce((t, b) => t + b.amount, 0), shift: s.shift ? { id: s.shift.id, end: s.shift.end, open: s.shift.tasks.filter((t) => !t.done && !t.failed).length } : null,
                moodLabel: m > 80 ? "心情很好" : m > 55 ? "还行" : m > 30 ? "有点低落" : "很沮丧" };
     };
+    // =====================================================================================================
+    // shops: buy catalog items into the inventory
+    R.buy = function (s, shop, item, n, abs) {
+      const S = D.shops && D.shops[shop], it = D.items[item]; n = n || 1;
+      if (!S || !it || !S.catalog.includes(item)) return { ok: false, reason: "这里不卖" };
+      const cost = Math.round(it.price * n * 100) / 100;
+      if (s.money < cost) return { ok: false, reason: "钱不够", cost };
+      s.money -= cost; s.stats.spent += cost; R.addItem(s, item, n);
+      return { ok: true, cost, events: [note(s, { type: "buy", shop, item, n, cost }, abs || 0)] };
+    };
+    R.catalog = (shop) => ((D.shops && D.shops[shop] && D.shops[shop].catalog) || []).map((id) => ({ id, label: D.items[id].label, price: D.items[id].price, n: (D.shops[shop].bundle || {})[id] || 1 }));
+
+    // =====================================================================================================
+    // job: hire -> check in to a shift window -> task loop (seeded, deterministic) -> pay
+    const rng = (seed) => () => { seed |= 0; seed = (seed + 0x6d2b79f5) | 0; let t = Math.imul(seed ^ (seed >>> 15), 1 | seed); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
+    const hm = (t) => { const [h, m] = t.split(":").map(Number); return h * 60 + m; };
+    const JOB = { id: "store_clerk" };
+    R.job = {
+      def: () => D.jobs && D.jobs[JOB.id],
+      hire: function (s, abs) { if (s.job) return { ok: false, reason: "已经是店员了" }; s.job = { id: JOB.id, hired: abs, shifts: 0, last: {}, raise: 0 }; return { ok: true, events: [note(s, { type: "hired", job: JOB.id }, abs)] }; },
+      /** the shift window you could check in to at abs: {shift, start, end, late} or null */
+      windowAt: function (abs) {
+        const J = R.job.def(); if (!J) return null;
+        const day = Math.floor(abs / DAY);
+        for (const dd of [0, -1]) for (const sh of J.shifts) {
+          const st = (day + dd) * DAY + hm(sh.from); let en = (day + dd) * DAY + hm(sh.to); if (en <= st) en += DAY;
+          if (abs >= st - J.checkin_before_min && abs <= st + J.checkin_after_min) return { shift: sh, start: st, end: en, late: Math.max(0, abs - st) };
+        }
+        return null;
+      },
+      /** next shift start after abs (for "come back at ..." hints) */
+      next: function (abs) {
+        const J = R.job.def(), day = Math.floor(abs / DAY); let best = null;
+        for (const dd of [0, 1]) for (const sh of J.shifts) { const st = (day + dd) * DAY + hm(sh.from); if (st - J.checkin_before_min > abs && (!best || st < best.start)) best = { shift: sh, start: st }; }
+        return best;
+      },
+      canStart: function (s, abs) {
+        const J = R.job.def();
+        if (!J) return { ok: false, reason: "没有工作" };
+        if (!s.job) return { ok: false, reason: "还没被录用" };
+        if (s.shift) return { ok: false, reason: "正在上班" };
+        const w = R.job.windowAt(abs);
+        if (!w) { const n = R.job.next(abs); return { ok: false, reason: `现在不是上班时间（下个班 ${n.shift.label} ${n.shift.from}）` }; }
+        if (s.job.last[w.shift.id + "@" + w.start]) return { ok: false, reason: "这个班已经上过了" };
+        const today = Math.floor(abs / DAY), n = Object.values(s.job.last).filter((d) => d === today).length;
+        if (n >= J.max_per_day) return { ok: false, reason: "今天已经上过班了，歇歇吧" };
+        return Object.assign({ ok: true }, w);
+      },
+      start: function (s, abs) {
+        const c = R.job.canStart(s, abs); if (!c.ok) return c;
+        const J = R.job.def(), T = J.tasks, r = rng(Math.floor(c.start / 7) + 9173 * (s.job.shifts + 1));
+        s.job.last[c.shift.id + "@" + c.start] = Math.floor(abs / DAY);
+        s.shift = { job: JOB.id, id: c.shift.id, label: c.shift.label, start: c.start, end: c.end, checkin: abs, late: c.late, mul: c.shift.pay_mul || 1,
+                    tasks: [], seq: 0, next: abs + T.first_after_min, done: 0, failed: 0, q: 0, seed: Math.floor(r() * 1e9) };
+        return { ok: true, shift: s.shift, events: [note(s, { type: "shift_start", id: c.shift.id, late: c.late }, abs)] };
+      },
+      /** spawn tasks on schedule, expire missed ones, end the shift at its end time */
+      tick: function (s, abs) {
+        const sh = s.shift, J = R.job.def(), T = J.tasks, evs = [];
+        if (!sh) return evs;
+        const r = rng(sh.seed + sh.seq * 7919);
+        while (sh.next <= abs && sh.next < sh.end - T.stop_before_end_min) {
+          const types = Object.entries(T.types), tot = types.reduce((a, [, v]) => a + v.weight, 0);
+          let x = r() * tot, kind = types[0][0];
+          for (const [k, v] of types) { if (x < v.weight) { kind = k; break; } x -= v.weight; }
+          const def = T.types[kind], open = sh.tasks.filter((t) => !t.done && !t.failed);
+          if (kind !== "checkout" && open.some((t) => t.kind === kind)) kind = "checkout";        // one of each chore at a time
+          const td = T.types[kind], task = { id: "t" + ++sh.seq, kind, label: td.label, at: sh.next, deadline: sh.next + td.deadline_min, done: false, failed: false };
+          if (kind === "checkout") task.items = td.items[0] + Math.floor(r() * (td.items[1] - td.items[0] + 1));
+          if (kind === "restock") task.target = td.targets[Math.floor(r() * td.targets.length)];
+          if (kind === "restock" && open.some((t) => t.kind === "restock" && t.target === task.target)) task.target = td.targets.find((g) => !open.some((t) => t.target === g)) || task.target;
+          sh.tasks.push(task); evs.push(note(s, { type: "task_new", task: task.id, kind, label: task.label }, sh.next));
+          sh.next += T.every_min[0] + r() * (T.every_min[1] - T.every_min[0]);
+          void def;
+        }
+        for (const t of sh.tasks) if (!t.done && !t.failed && abs >= t.deadline) { t.failed = true; sh.failed++; evs.push(note(s, { type: "task_failed", task: t.id, kind: t.kind, label: t.label }, abs)); }
+        if (abs >= sh.end) evs.push(...R.job.finish(s, sh.end, "done").events);
+        return evs;
+      },
+      open: (s) => (s.shift ? s.shift.tasks.filter((t) => !t.done && !t.failed) : []),
+      complete: function (s, taskId, quality, abs) {
+        const sh = s.shift; if (!sh) return { ok: false, reason: "没在上班" };
+        const t = sh.tasks.find((x) => x.id === taskId); if (!t || t.done || t.failed) return { ok: false, reason: "没有这个活" };
+        t.done = true; t.quality = clamp(quality == null ? 1 : quality, 0, 1); sh.done++; sh.q += t.quality;
+        return { ok: true, events: [note(s, { type: "task_done", task: t.id, kind: t.kind, quality: t.quality }, abs)] };
+      },
+      /** pay: worked hours x rate (x night bonus), late cut, early-leave cut, performance bonus; staff meal */
+      finish: function (s, abs, why) {
+        const sh = s.shift, J = R.job.def(); if (!sh) return { ok: false, events: [] };
+        const t1 = Math.min(abs, sh.end), t0 = Math.max(sh.checkin, sh.start), hours = Math.max(0, (t1 - t0) / 60);
+        let base = hours * (J.pay_per_h + (s.job.raise || 0)) * sh.mul;
+        const lateMin = Math.max(0, sh.late - J.late_grace_min), cut = lateMin * J.late_cut_per_min;
+        if (why === "left") base *= J.early_leave_mul;
+        const total = sh.done + sh.failed, perf = total ? clamp((sh.q - sh.failed * 0.6) / total, 0, 1) : 0.5;
+        const bonus = why === "left" ? 0 : Math.round(perf * J.perf_bonus);
+        const pay = Math.max(0, Math.round(base - cut + bonus));
+        s.money += pay; s.stats.earned += pay; s.stats.shifts++; s.job.shifts++;
+        if (why !== "left") for (const [it, n] of Object.entries(J.staff_meal || {})) R.addItem(s, it, n);
+        const ev = note(s, { type: "shift_paid", id: sh.id, pay, base: Math.round(base), cut: Math.round(cut), bonus, perf: Math.round(perf * 100) / 100, done: sh.done, failed: sh.failed, hours: Math.round(hours * 10) / 10, why }, abs);
+        s.shift = null;
+        return { ok: true, pay, events: [ev] };
+      },
+    };
+
+    // =====================================================================================================
+    // social: affinity 0..100 per NPC; greet once a day, chat (capped per day), gifts by taste, witnesses
+    const SO = () => D.social;
+    R.social = {
+      aff: (s, id) => (s.aff[id] || 0),
+      tier: function (s, id) { let t = SO().tiers[0]; for (const x of SO().tiers) if (R.social.aff(s, id) >= x[0]) t = x; return { at: t[0], label: t[1] }; },
+      name: (id) => (SO().npcs[id] ? SO().npcs[id].name : id),
+      raise: function (s, id, v, abs, why) {
+        const before = R.social.aff(s, id); s.aff[id] = clamp(before + v, 0, 100);
+        const evs = [], np = SO().npcs[id];
+        if (np && np.perk && before < np.perk.at && s.aff[id] >= np.perk.at && !s.perks[np.perk.id]) {
+          s.perks[np.perk.id] = true; if (np.perk.id === "manager_raise" && s.job) s.job.raise = 4;
+          evs.push(note(s, { type: "perk", npc: id, perk: np.perk.id, label: np.perk.label }, abs));
+        }
+        return evs;
+      },
+      day: (abs) => Math.floor(abs / DAY),
+      met: function (s, id, abs) { const k = id + "@" + R.social.day(abs); s.met[k] = s.met[k] || { greet: false, gain: 0 }; return s.met[k]; },
+      line: function (s, id, abs) {
+        const np = SO().npcs[id]; if (!np) return "……";
+        const keys = Object.keys(np.lines).map(Number).sort((a, b) => a - b); let k = keys[0];
+        for (const x of keys) if (R.social.aff(s, id) >= x) k = x;
+        const L = np.lines[k]; return L[(R.social.day(abs) + Math.floor(abs / 37)) % L.length];
+      },
+      greet: function (s, id, abs) {
+        const m = R.social.met(s, id, abs);
+        if (m.greet) return { ok: false, reason: "今天打过招呼了" };
+        m.greet = true; m.gain += SO().greet; add(s, "mood", 1);
+        const evs = [note(s, { type: "greet", npc: id }, abs), ...R.social.raise(s, id, SO().greet, abs)];
+        return { ok: true, line: R.social.line(s, id, abs), events: evs };
+      },
+      chat: function (s, id, abs) {
+        const m = R.social.met(s, id, abs), room = Math.max(0, SO().daily_cap - m.gain), g = Math.min(room, SO().chat);
+        m.gain += g; add(s, "mood", SO().chat_mood);
+        const evs = [note(s, { type: "chat", npc: id, gain: g }, abs), ...R.social.raise(s, id, g, abs)];
+        return { ok: true, minutes: SO().chat_minutes, gain: g, line: R.social.line(s, id, abs), capped: g < SO().chat, events: evs };
+      },
+      giftValue: function (id, item) { const np = SO().npcs[id]; return !np ? 0 : np.likes.includes(item) ? SO().gift_like : np.dislikes.includes(item) ? SO().gift_dislike : SO().gift_ok; },
+      gifts: (s) => Object.keys(s.items).filter((it) => s.items[it] > 0 && (D.items[it].gift || ["egg", "drink", "milk", "bun", "bread"].includes(it))),
+      gift: function (s, id, item, abs, n) {
+        n = n || 1; if ((s.items[item] || 0) < n) return { ok: false, reason: `没有${D.items[item].label}` };
+        s.items[item] -= n; const v = R.social.giftValue(id, item);
+        const evs = [note(s, { type: "gift", npc: id, item, n, value: v }, abs), ...R.social.raise(s, id, v, abs)];
+        return { ok: true, value: v, reaction: v >= SO().gift_like ? "like" : v < 0 ? "dislike" : "ok", events: evs };
+      },
+    };
+
+    // =====================================================================================================
+    // damage: a bill when somebody saw it (witness NPCs lose affinity); bills are paid at the property notice board
+    R.damage = function (s, kind, witnesses, abs) {
+      const K = D.damage && D.damage.kinds[kind]; if (!K) return { ok: false, events: [] };
+      const evs = []; witnesses = witnesses || [];
+      if (!witnesses.length) { add(s, "mood", D.damage.unwitnessed_mood); evs.push(note(s, { type: "damage", kind, billed: false }, abs)); return { ok: true, billed: false, events: evs }; }
+      let amount = K.bill; if (s.perks.uncle_tip) amount = Math.ceil(amount / 2);
+      const b = { id: "b" + (s.stats.fines + 1), kind, label: K.label, amount, t: abs, due: abs + D.damage.due_days * DAY, by: witnesses.slice() };
+      s.stats.fines++;
+      if (amount > 0) s.bills.push(b);
+      for (const w of witnesses) if (SO().npcs[w]) evs.push(...R.social.raise(s, w, SO().witness, abs));
+      evs.push(note(s, { type: "damage", kind, billed: amount > 0, amount, witnesses }, abs));
+      if (amount > 0) evs.push(note(s, { type: "billed", id: b.id, amount, label: K.label }, abs));
+      return { ok: true, billed: amount > 0, bill: b, events: evs };
+    };
+    R.billsTotal = (s) => s.bills.reduce((t, b) => t + b.amount, 0);
+    R.payBills = function (s, abs) {
+      const evs = []; let paid = 0;
+      for (const b of s.bills.slice()) { if (s.money < b.amount) break; s.money -= b.amount; s.stats.spent += b.amount; paid += b.amount; s.bills.splice(s.bills.indexOf(b), 1); evs.push(note(s, { type: "bill_paid", id: b.id, amount: b.amount }, abs)); }
+      return { ok: paid > 0, paid, left: R.billsTotal(s), reason: paid ? null : s.bills.length ? "钱不够" : "没有欠款", events: evs };
+    };
+
+    // =====================================================================================================
+    // quests: data-driven steps advanced by events (every note()) or state conditions (every tick)
+    function match(on, ev) {
+      if (on.type !== ev.type) return false;
+      for (const [k, v] of Object.entries(on)) {
+        if (k === "type") continue;
+        if (v === null) { if (ev[k]) return false; continue; }
+        if (Array.isArray(v) ? !v.includes(ev[k]) : ev[k] !== v) return false;
+      }
+      return true;
+    }
+    function condOk(s, c) {
+      if (c.affinity) return R.social.aff(s, c.affinity.npc) >= c.affinity.gte;
+      if (c.affinity_count) return Object.keys(s.aff).filter((k) => s.aff[k] >= c.affinity_count.gte).length >= c.affinity_count.n;
+      if (c.money_gte != null) return s.money >= c.money_gte;
+      return false;
+    }
+    function questStarts(s, ev, abs) {
+      const evs = [];
+      for (const q of D.quests) {
+        if (s.quests[q.id]) continue;
+        const st = q.start || {};
+        const go = st.auto || (st.after && s.quests[st.after] && s.quests[st.after].state === "done") || (st.cond && condOk(s, st.cond)) || (st.on && ev && match(st.on, ev));
+        if (go) { s.quests[q.id] = { state: "active", step: 0, n: 0, seen: {} }; evs.push(note(s, { type: "quest_started", quest: q.id, title: q.title }, abs)); }
+      }
+      return evs;
+    }
+    function advance(s, q, Q, abs) {
+      const evs = []; Q.step++; Q.n = 0; Q.seen = {};
+      if (Q.step >= q.steps.length) {
+        Q.state = "done"; const rw = q.reward || {};
+        if (rw.money) { s.money += rw.money; s.stats.earned += rw.money; }
+        if (rw.mood) add(s, "mood", rw.mood);
+        for (const [id, v] of Object.entries(rw.affinity || {})) evs.push(...R.social.raise(s, id, v, abs));
+        evs.push(note(s, { type: "quest_done", quest: q.id, title: q.title, reward: rw }, abs));
+      } else evs.push(note(s, { type: "quest_step", quest: q.id, step: Q.step, text: q.steps[Q.step].text }, abs));
+      return evs;
+    }
+    function questEvent(s, ev, abs) {
+      questStarts(s, ev, abs);
+      for (const q of D.quests) {
+        const Q = s.quests[q.id]; if (!Q || Q.state !== "active") continue;
+        const step = q.steps[Q.step];
+        if (step.fail_on && match(step.fail_on, ev)) { Q.state = "failed"; note(s, { type: "quest_failed", quest: q.id, title: q.title }, abs); continue; }
+        if (!step.on || !match(step.on, ev)) continue;
+        if (step.distinct) { Q.seen[ev[step.distinct]] = 1; Q.n = Object.keys(Q.seen).length; }
+        else Q.n += step.sum ? ev[step.sum] || 1 : 1;
+        if (Q.n >= (step.n || 1)) advance(s, q, Q, abs);
+      }
+    }
+    function questConds(s, abs) {
+      const evs = questStarts(s, null, abs);
+      for (const q of D.quests) {
+        const Q = s.quests[q.id]; if (!Q || Q.state !== "active") continue;
+        const step = q.steps[Q.step];
+        if (step.cond && condOk(s, step.cond)) evs.push(...advance(s, q, Q, abs));
+      }
+      return evs;
+    }
+    /** engine-reported events (enter a scene, talk to someone ...) */
+    R.notify = (s, ev, abs) => note(s, ev, abs || 0);
+    /** quest list for a journal UI: [{id, title, state, step text, progress}] */
+    R.questLog = function (s) {
+      return (D.quests || []).filter((q) => s.quests[q.id]).map((q) => {
+        const Q = s.quests[q.id], st = q.steps[Math.min(Q.step, q.steps.length - 1)];
+        return { id: q.id, title: q.title, state: Q.state, step: Q.step, steps: q.steps.length, text: Q.state === "done" ? "完成" : st.text, progress: st.n ? `${Q.n}/${st.n}` : "" };
+      });
+    };
+
     R.serialize = (s) => JSON.stringify(s);
     R.load = (str) => JSON.parse(str);
     return R;
   }
-  return { create, version: 1 };
+  return { create, version: 2 };
 });

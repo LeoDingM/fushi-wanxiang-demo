@@ -85,8 +85,8 @@
     const T = SP.touchInput;
     if (!dx && !dy && T && T.m > 0) { dx = T.x; dy = T.y; mag = Math.min(1, 0.35 + T.m * 0.65); }
     SP.game.moving = !!(dx || dy);              // raw stick intent (portal re-arming), even while frozen
+    SP.game.vy = -dy;                           // raw too: the arrival latch must see the stick still held during the fade
     if (SP.game.busy()) { dx = dy = 0; }
-    SP.game.vy = -dy;
     const moving = !!(dx || dy), r = player.r;
     let dist = 0;
     if (moving) {
