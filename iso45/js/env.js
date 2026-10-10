@@ -270,7 +270,7 @@
       lx.globalAlpha = Math.min(1, L.a);
       if (L.flat || (L.z || 0) < 0.1) lx.drawImage(sp, X - r, Y - r / 2, 2 * r, r); else lx.drawImage(sp, X - r, Y - r, 2 * r, 2 * r);
     }
-    roofLayer(vis, amb, S);
+    roofLayer(vis, amb, S, z, cx, cy);
     ctx.imageSmoothingEnabled = true; ctx.drawImage(lm, 0, 0, tgt.width, tgt.height); ctx.imageSmoothingEnabled = false;
     ctx.restore(); E.lightCount = vis.length;
   };
@@ -286,20 +286,29 @@
   E.roofPoly = function () {
     const R = !W.interior && W.data.roof; if (!R) return null;
     if (R._poly) return R._poly;
-    const [x0, y0, x1, y1] = R.rect, z0 = R.z - 0.05, pts = [];
-    for (const [x, y] of [[x0 - 0.3, y0 - 0.3], [x1 + 0.3, y0 - 0.3], [x1 + 0.3, y1 + 0.3], [x0 - 0.3, y1 + 0.3]]) for (const z of [z0, R.z + 2.4]) pts.push([SP.sx(x, y), SP.sy(x, y, z)]);
+    // pad past parapets / sort overhangs so street light pools cannot peek onto the deck
+    const [x0, y0, x1, y1] = R.rect, pad = 1.2, z0 = R.z - 0.05, pts = [];
+    for (const [x, y] of [[x0 - pad, y0 - pad], [x1 + pad, y0 - pad], [x1 + pad, y1 + pad], [x0 - pad, y1 + pad]]) for (const z of [z0, R.z + 2.8]) pts.push([SP.sx(x, y), SP.sy(x, y, z)]);
     return (R._poly = convex(pts));
   };
-  function roofLayer(vis, amb, S) {
+  /** re-light the 12号 roof island: wipe street spill in device space (clip+huge fill under a transform was unreliable), then add roof-level lights only */
+  function roofLayer(vis, amb, S, z, cx, cy) {
     const poly = E.roofPoly(); if (!poly) return;
-    const zr = W.data.roof.z - 0.5;
-    lx.save(); lx.beginPath(); poly.forEach((p, i) => (i ? lx.lineTo(p[0], p[1]) : lx.moveTo(p[0], p[1]))); lx.closePath(); lx.clip();
-    lx.globalCompositeOperation = "source-over"; lx.globalAlpha = 1; lx.fillStyle = `rgb(${amb[0]},${amb[1]},${amb[2]})`; lx.fillRect(-1e5, -1e5, 2e5, 2e5);
+    const zr = W.data.roof.z - 0.5, sc = z * LS;
+    lx.save();
+    lx.setTransform(1, 0, 0, 1, 0, 0);
+    lx.beginPath();
+    poly.forEach((p, i) => { const X = p[0] * sc - cx * sc, Y = p[1] * sc - cy * sc; i ? lx.lineTo(X, Y) : lx.moveTo(X, Y); });
+    lx.closePath(); lx.clip();
+    lx.globalCompositeOperation = "source-over"; lx.globalAlpha = 1;
+    lx.fillStyle = `rgb(${amb[0]},${amb[1]},${amb[2]})`; lx.fillRect(0, 0, lm.width, lm.height);
+    lx.setTransform(sc, 0, 0, sc, -cx * sc, -cy * sc);
     lx.globalCompositeOperation = "lighter";
     for (const L of vis) {
       const up = (L.z || 0) >= zr; if (!up && !L.glowUp) continue;
       const X = SP.sx(L.x, L.y), Y = SP.sy(L.x, L.y, L.z || 0), r = L.r * S, sp = SP.lightSprite(L.c[0], L.c[1], L.c[2]);
-      lx.globalAlpha = Math.min(1, L.a); if (L.flat || (L.z || 0) < 0.1) lx.drawImage(sp, X - r, Y - r / 2, 2 * r, r); else lx.drawImage(sp, X - r, Y - r, 2 * r, 2 * r);
+      lx.globalAlpha = Math.min(1, L.a * (L.glowUp && !up ? 0.22 : 1));
+      if (L.flat || (L.z || 0) < 0.1) lx.drawImage(sp, X - r, Y - r / 2, 2 * r, r); else lx.drawImage(sp, X - r, Y - r, 2 * r, 2 * r);
     }
     lx.restore(); E.roofMasked = (E.roofMasked || 0) + 1;
   }
@@ -311,7 +320,10 @@
     for (const L of lights) {
       if (L.flat || (L.z || 0) < 0.1 || L.a < 0.05) continue;
       const X = SP.sx(L.x, L.y), Y = SP.sy(L.x, L.y, L.z);
-      if (poly && L.z < zr && inside(X, Y)) continue;          // a street lamp behind / below the 12号 block: hidden by it, no halo over the roof
+      if (poly && L.z < zr) {          // street lights never halo onto the 12号 roof deck
+        const rr = Math.max(6, L.r * S * 0.32);
+        if (inside(X, Y) || inside(X + rr * 0.6, Y) || inside(X - rr * 0.6, Y) || inside(X, Y + rr * 0.6) || inside(X, Y - rr * 0.6)) continue;
+      }
       const r = Math.max(6, L.r * S * 0.32), sp = SP.lightSprite(L.c[0], L.c[1], L.c[2]);
       ctx.globalAlpha = Math.min(0.8, L.a * 0.5 * (0.4 + 0.6 * n)); ctx.drawImage(sp, X - r, Y - r, 2 * r, 2 * r);
     }

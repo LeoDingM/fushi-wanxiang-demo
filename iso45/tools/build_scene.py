@@ -38,8 +38,8 @@ def ground_at(x, y):
     if -12 <= x < 16 and 4 <= y < 34: return "C"                       # the 12号 courtyard
     if -16 <= x < -12 and 4 <= y < 34: return "S"                      # alley west of the courtyard wall
     if x < -12 and 4 <= y < 6: return "S"
-    if 39.5 <= x < 44.5 and -14.5 <= y < -10.0: return "A"           # dark asphalt pit under the metro stair mouth (reads as hole)
-    if 36 <= x < 48 and -16 <= y < -8: return "S"                     # plaza around 井槐里站 entrance (stairs, not lawn)
+    if 39.0 <= x < 44.0 and -10.5 <= y < -6.0: return "A"              # dark asphalt pit under the metro stair mouth
+    if 36 <= x < 48 and -14 <= y < -5: return "S"                      # plaza around 井槐里站 glass pavilion
     if -16 <= y < -10: return "G" if grng.random() < 0.8 else "K"      # green belt south of the main road
     return "G" if grng.random() < 0.18 else "K"                        # back yards / concrete lots
 rows = ["".join(ground_at(X0 + 2 * c, Y0 + 2 * r) for c in range(COLS)) for r in range(ROWS)]
@@ -103,10 +103,17 @@ def facade(face, bx, fl, bay_i):
     add("f_wall", x, y, z, rot=rot, state="ground" if fl == 0 else "upper", id_=f"wall_{tag}", fade_group="b12", variant=pick(["base", "w1", "w1", "w2"]))
     if face == "S" and fl == 0 and bx == DOOR_BAY:
         add("f_door", x, y, z, state="closed", id_="unit_door", fade_group="b12", interact="door", plate="井槐里 12号"); return
-    # 2F-02 (fl 1, S bay 3) shows its south window: its enclosed balcony moved to the north (courtyard) side, hidden from this camera
-    balcony = fl > 0 and not (face == "S" and fl == 1 and bay_i == 3) and ((face == "S" and (bay_i in (1, 3)) and fl != 3) or (face == "S" and fl == 3 and bay_i in (0, 4)) or (face == "W" and bay_i == 2 and fl in (2, 4)))
+    # 2F-02 (fl 1, S bay 3): protruding enclosed glass balcony on the south facade (variant b2) so the street camera
+    # matches neighbours; interior walkable balcony stays on the north (courtyard) side — facade is the street-visible twin.
+    balcony = fl > 0 and ((face == "S" and (bay_i in (1, 3)) and fl != 3) or (face == "S" and fl == 3 and bay_i in (0, 4)) or (face == "W" and bay_i == 2 and fl in (2, 4)))
     if balcony:
-        add("f_balcony", x, y, z, rot=rot, state="laundry" if (fl + bay_i) % 2 else "default", id_=f"balc_{tag}", fade_group="b12", variant=pick(["base", "b1", "b2"]))
+        st = "laundry" if (fl + bay_i) % 2 else "default"
+        var = "b2" if tag == "S2F_3" else pick(["base", "b1", "b2"])   # 2F-02: enclosed glass protrusion
+        if tag == "S2F_3": st = "default"                             # laundry toggled live from the room rack
+        o = add("f_balcony", x, y, z, rot=rot, state=st, id_=f"balc_{tag}", fade_group="b12", variant=var)
+        if tag == "S2F_3": o["player_balcony"] = True
+        if tag == "S2F_3" and not any(q["id"] == "ac_S2F_3" for q in objs):
+            q = add("f_ac", x + 1.15, y - 0.02, z + 0.22, rot=rot, id_="ac_S2F_3", fade_group="b12", variant="base"); q["player_ac"] = True
     else:
         o = add("f_window", x, y, z, rot=rot, state="intact", id_=f"win_{tag}", fade_group="b12",
                 variant="base" if tag in ("S2F_4", "S1F_3") else pick(["base", "w1", "w2"]))
@@ -219,7 +226,7 @@ for i, x in enumerate((-40.0, -31.0, -22.0, -13.0, -4.0, 5.0, 23.0, 35.0, 55.0))
     add("p_tree", x, -14.0 + (i % 2) * 1.2, id_=f"tree_belt{i}", variant="base" if i % 3 else "t2")
 add("p_pole", -3.0, 0.5, id_="pole_w"); add("p_pole", 17.5, 0.5, id_="pole_e"); add("p_pole", 21.5, 12.0, rot=2, id_="pole_n")
 add("p_tree", 61.0, 13.0, id_="tree_alley", variant="t2"); add("p_tree", 78.0, 1.0, id_="tree_e4"); add("p_pole", 62.5, 0.5, id_="pole_e4")
-add("p_metro_entry", 41.2, -12.2, rot=6, state="open", id_="metro_jhl", interact="metro", to="metro_jhl", name="井槐里站", hours=["06:00", "23:00"], reach=[37.6, -11.2])   # (inside the walkable bounds y0 -11.5) Stage 5: metro entrance (mouth faces west)
+add("p_metro_entry", 41.2, -8.2, rot=0, state="open", id_="metro_jhl", interact="metro", to="metro_jhl", name="井槐里站", hours=["06:00", "23:00"], reach=[41.2, -10.6])  # glass pavilion mouth faces N (sidewalk); READY 20:42   # (inside the walkable bounds y0 -11.5) Stage 5: metro entrance (mouth faces west)
 add("p_bins", 60.4, 9.6, id_="bins_alley"); add("p_ebike", 72.5, 2.6, rot=2, id_="ebike_tea")
 add("p_pole", -27.0, 0.5, id_="pole_w2"); add("p_pole", -41.0, 0.5, id_="pole_w3"); add("p_pole", 36.5, 0.5, id_="pole_e2"); add("p_pole", 54.0, 0.5, id_="pole_e3")
 add("p_stall", 0.5, 2.2, id_="stall", interact="stall")

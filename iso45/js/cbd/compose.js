@@ -62,7 +62,7 @@
     const Xs = Math.round(SX(g.x, g.y)), Ys = Math.round(SY(g.x, g.y, 0));
     return { kind: "dog", key, X: Xs, Y: Ys, a, rect: { x0: Xs - f[4], y0: Ys - f[5], x1: Xs - f[4] + f[2], y1: Ys - f[5] + f[3] }, sh: [{ p: [[g.x - 0.3, g.y - 0.15], [g.x + 0.3, g.y - 0.15], [g.x + 0.3, g.y + 0.15], [g.x - 0.3, g.y + 0.15]] }], z0: 0, z1: 0.6, depth: g.x + g.y, alpha: 1 };
   }
-  /** occluder fade: statics painted after 李默 that cover his body ease to ~30 % (towers same as residential walls) */
+  /** occluder hide: towers that cover 李默 go fully invisible (alpha≈0); other statics ease to ~20 % */
   function fade(list) {
     const P = C.player, br = P.bodyRect(), cx = (br.x0 + br.x1) / 2, pts = [[cx, br.y0 + 8], [cx, (br.y0 + br.y1) / 2], [cx, br.y1 - 6]];
     let after = false;
@@ -75,7 +75,9 @@
         else if (d.tree) cover = pts.some(([x, y]) => y < d.Y - 70 && x > d.rect.x0 + 24 && x < d.rect.x1 - 24);
         else cover = d.z1 > 1.9;
       }
-      const tgt = cover ? (d.tower ? 0.28 : 0.32) : 1; d.alpha += (tgt - d.alpha) * Math.min(1, (C.dt || 0.016) * 8); if (Math.abs(d.alpha - tgt) < 0.01) d.alpha = tgt;
+      const tgt = cover ? (d.tower ? 0 : 0.2) : 1;
+      const k = d.tower && cover ? 14 : 8;   // towers snap away faster
+      d.alpha += (tgt - d.alpha) * Math.min(1, (C.dt || 0.016) * k); if (Math.abs(d.alpha - tgt) < 0.01) d.alpha = tgt;
     }
   }
   function leash(ctx, a) { const g = a.dog, [Xs, Ys] = a.screen(); ctx.strokeStyle = "rgba(40,40,40,0.8)"; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(Xs + 6, Ys - 38); ctx.lineTo(Math.round(SX(g.x, g.y)) + 4, Math.round(SY(g.x, g.y, 0.45))); ctx.stroke(); }
@@ -93,7 +95,7 @@
     ctx.setTransform(z, 0, 0, z, ox, oy);
     X.drawGround(ctx, view, z);
     if (ck && ck.wet > 0.02) { ctx.fillStyle = `rgba(10,20,40,${ck.wet * 0.2})`; ctx.fillRect(view.x0, view.y0, view.x1 - view.x0, view.y1 - view.y0); }
-    if (z >= 0.2) X.waterFx(ctx);
+    if (z >= 0.16) X.waterFx(ctx);
     // LOD: near keep podium/low detail; full tower impostors only beyond distance threshold (拉远才显示楼)
     const far = z < 0.125, useImp = z < 0.048, pad = 120 / z;
     const L0 = X.gquery({ x0: view.x0 - pad, y0: view.y0 - pad, x1: view.x1 + pad, y1: view.y1 + pad }, []);
@@ -123,6 +125,7 @@
     const ER = [], core = SP.tinted || (SP.img && SP.img.atlas) || IMG.coreRaw, snowK = ck && ck.snow > 0.05 && IMG.snow ? Math.min(1, ck.snow * 1.3) : 0;
     const cut = (src, f, Xs, Ys, k) => { ex.globalCompositeOperation = "destination-out"; ex.globalAlpha = k == null ? 1 : k; ex.drawImage(src, f[0], f[1], f[2], f[3], Xs - f[4], Ys - f[5], f[2], f[3]); ex.globalAlpha = 1; ex.globalCompositeOperation = "source-over"; };
     for (const d of list) {
+      if ((d.alpha || 1) < 0.02) continue;
       const hit = ex && ER.length && ER.some((r) => overlap(r, d.rect));
       if (d.kind === "prop" || d.kind === "dog") {
         const f = F[d.key]; if (d.alpha < 0.999) ctx.globalAlpha = d.alpha;

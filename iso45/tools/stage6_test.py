@@ -24,9 +24,9 @@ def run(c, log):
     p = J("""(() => { const G = SP.game; SP.clock.min = 20 * 60; G.go({ to: 'room_2f02', spawn: SP.scenes.room_2f02.spawn }); SP.actions.idle(0.8);
       const W = SP.world, L = W.byId.room_light; W.setState(L, 'on'); W.setState(W.byId.desk, 'off'); W.setState(W.byId.nightstand, 'off'); G.syncPower();
       G.switchScene('street'); SP.actions.idle(0.5); SP.households.invalidate();
-      const facade = W.shownState(W.byId.win_S2F_3), k0 = (G.ps.power.kwh.ceiling_light || 0), on = Object.keys(G.ps.power.on);
+      const facade = W.shownState(W.byId.win_S2F_2), k0 = (G.ps.power.kwh.ceiling_light || 0), on = Object.keys(G.ps.power.on);
       return JSON.stringify({ facade, k0, on, scene: W.sceneId }); })()""")
-    ok("2F-02: ceiling light left on -> street facade window win_S2F_3 lit, meter still running", p["facade"] == "lit" and "ceiling_light" in p["on"], p)
+    ok("2F-02: ceiling light left on -> street facade window win_S2F_2 lit (2F-02 bay3 is balcony), meter still running", p["facade"] == "lit" and "ceiling_light" in p["on"], p)
     E("SP.clock.skipTo((SP.clock.min + 480) % 1440, 1.5)"); E("SP.actions.idle(2.2)")
     k = J("JSON.stringify({ k: SP.game.ps.power.kwh.ceiling_light, ff: !!SP.clock.ff })")
     ok("power: light left on 8 h adds ~0.12 kWh (15 W)", abs(k["k"] - p["k0"] - 0.12) < 0.012 and not k["ff"], {"dk": k["k"] - p["k0"]})
@@ -36,7 +36,7 @@ def run(c, log):
     ok("bill: power line from metered kWh (incl. the light), meter card shows it", b["by"] >= 0.12 and b["amt"] > 0 and "度" in b["card"], b)
     s = J("""(() => { SP.game.go({ to: 'room_2f02', spawn: SP.scenes.room_2f02.spawn }); SP.actions.idle(0.8); const W = SP.world;
       const kept = W.byId.room_light.state; W.setState(W.byId.room_light, 'off'); SP.game.syncPower(); SP.game.switchScene('street'); SP.actions.idle(0.3); SP.households.invalidate();
-      SP.clock.min = 21 * 60; SP.clock.computeAmbient(); return JSON.stringify({ kept, facade: W.shownState(W.byId.win_S2F_3), on: Object.keys(SP.game.ps.power.on) }); })()""")
+      SP.clock.min = 21 * 60; SP.clock.computeAmbient(); return JSON.stringify({ kept, facade: W.shownState(W.byId.win_S2F_2), on: Object.keys(SP.game.ps.power.on) }); })()""")
     ok("2F-02: switch state kept across visits; light off -> facade dark, meter stops", s["kept"] == "on" and s["facade"] != "lit" and "ceiling_light" not in s["on"], s)
     # knock answers follow the unit's state
     kn = J("""(() => { const G = SP.game, H = SP.households, real = H.state, out = {};

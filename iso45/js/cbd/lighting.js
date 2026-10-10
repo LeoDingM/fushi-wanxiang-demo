@@ -87,10 +87,47 @@
     ctx.globalAlpha = 1; ctx.textAlign = "left";
   }
   X.waterFx = function (ctx) {
-    const c = D.lake.c, r = D.lake.r, t = FX.t;
-    ctx.save(); X.polyPath(ctx, partPoly({ shape: "ell", cx: c[0], cy: c[1], rx: r[0], ry: r[1], n: 28 }), 0); ctx.clip();
-    ctx.fillStyle = "rgba(255,255,255,0.25)";
-    for (let i = 0; i < 70; i++) { const x = c[0] - r[0] + ((i * 37.3 + t * 0.6) % (2 * r[0])), y = c[1] - r[1] + ((i * 17.9) % (2 * r[1])); ctx.fillRect(Math.round(SX(x, y)), Math.round(SY(x, y, 0)), 10 + (i % 3) * 6, 2); }
+    const c = D.lake.c, r = D.lake.r, t = FX.t, nk = X.night();
+    const poly = partPoly({ shape: "ell", cx: c[0], cy: c[1], rx: r[0], ry: r[1], n: 32 });
+    ctx.save(); X.polyPath(ctx, poly, 0); ctx.clip();
+    // depth tint + sky reflection wash
+    const g = ctx.createLinearGradient(SX(c[0], c[1] - r[1]), SY(c[0], c[1] - r[1], 0), SX(c[0], c[1] + r[1]), SY(c[0], c[1] + r[1], 0));
+    if (nk > 0.4) { g.addColorStop(0, "rgba(20,40,80,0.35)"); g.addColorStop(0.55, "rgba(10,30,60,0.15)"); g.addColorStop(1, "rgba(0,20,50,0.4)"); }
+    else { g.addColorStop(0, "rgba(180,220,255,0.35)"); g.addColorStop(0.45, "rgba(120,190,230,0.12)"); g.addColorStop(1, "rgba(40,110,160,0.28)"); }
+    ctx.fillStyle = g; X.polyPath(ctx, poly, 0); ctx.fill();
+    // expanding ripple rings (2–3 wave trains)
+    for (let w = 0; w < 3; w++) {
+      const ph = (t * (0.35 + w * 0.08) + w * 0.33) % 1, rr = 4 + ph * Math.max(r[0], r[1]) * 0.95;
+      const a = (1 - ph) * (nk > 0.4 ? 0.22 : 0.35);
+      ctx.strokeStyle = nk > 0.4 ? `rgba(160,200,255,${a})` : `rgba(255,255,255,${a})`;
+      ctx.lineWidth = 1.2 + (1 - ph) * 1.5;
+      X.polyPath(ctx, partPoly({ shape: "ell", cx: c[0] + Math.sin(t * 0.2 + w) * 2, cy: c[1] + Math.cos(t * 0.17 + w) * 1.5, rx: rr * (r[0] / Math.max(r[0], r[1])), ry: rr * (r[1] / Math.max(r[0], r[1])), n: 28 }), 0);
+      ctx.stroke();
+    }
+    // secondary ripples from islands / shore puffs
+    const isls = D.lake.islands || [];
+    for (let i = 0; i < isls.length; i++) {
+      const isl = isls[i], ph = (t * 0.55 + i * 0.4) % 1, rr = 2 + ph * 10;
+      ctx.strokeStyle = `rgba(255,255,255,${(1 - ph) * 0.28})`; ctx.lineWidth = 1;
+      X.polyPath(ctx, partPoly({ shape: "ell", cx: isl[0], cy: isl[1], rx: rr, ry: rr * 0.75, n: 16 }), 0); ctx.stroke();
+    }
+    // specular glitter streaks (wind-aligned)
+    ctx.fillStyle = nk > 0.4 ? "rgba(180,210,255,0.2)" : "rgba(255,255,255,0.38)";
+    for (let i = 0; i < 90; i++) {
+      const u = (i * 0.618 + t * 0.08) % 1, v = (i * 0.37 + Math.sin(t * 0.9 + i) * 0.04) % 1;
+      const x = c[0] - r[0] + u * 2 * r[0], y = c[1] - r[1] + v * 2 * r[1];
+      if (((x - c[0]) / r[0]) ** 2 + ((y - c[1]) / r[1]) ** 2 > 0.92) continue;
+      const Xs = Math.round(SX(x, y)), Ys = Math.round(SY(x, y, 0.02 + Math.sin(t * 2.2 + i) * 0.03));
+      ctx.fillRect(Xs, Ys, 8 + (i % 4) * 5, 1 + (i % 2));
+    }
+    // soft shore caustic bands
+    ctx.strokeStyle = nk > 0.4 ? "rgba(100,160,220,0.15)" : "rgba(255,255,255,0.2)";
+    ctx.lineWidth = 2;
+    for (let k = 0; k < 5; k++) {
+      const off = Math.sin(t * 0.7 + k) * 1.2;
+      X.polyPath(ctx, partPoly({ shape: "ell", cx: c[0], cy: c[1], rx: r[0] - 3 - k * 2.5 + off, ry: r[1] - 2.5 - k * 2 + off * 0.7, n: 28 }), 0);
+      ctx.stroke();
+    }
     ctx.restore();
   };
   X.weather = function (ctx, Wd, Hd, z) {

@@ -155,7 +155,11 @@
       const out = { ok: true, label: a.label, minutes: R.minutes(id, ctx.abs || 0), cost: a.cost || 0 };
       const fail = (r) => Object.assign(out, { ok: false, reason: r });
       if (a.place !== "any" && ctx.place && ctx.place !== a.place) return fail("not here");
-      if (a.allowed_from != null && !inWindow((ctx.abs || 0) % DAY, a.allowed_from, a.allowed_to)) return fail("还不到睡觉的时候");
+      if (a.allowed_from != null && !inWindow((ctx.abs || 0) % DAY, a.allowed_from, a.allowed_to)) {
+        // night-shift / exhausted: full sleep any time when energy is in the "tired" band (keep nap as the short option)
+        const bypass = a.kind === "sleep" && a.wake_min != null && s.needs.energy < (a.tired_below != null ? a.tired_below : 30);
+        if (!bypass) return fail("还不到睡觉的时候");
+      }
       const q = a.requires || {};
       if (q.energy_below != null && !(s.needs.energy < q.energy_below)) return fail("现在不困");
       if (q.flag && !(ctx.flags && ctx.flags[q.flag])) return fail(q.reason || "现在没开");

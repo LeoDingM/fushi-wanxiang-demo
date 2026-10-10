@@ -91,8 +91,9 @@
         L.items = n > 0 ? rackItems(L, r, n, byId) : [];
       }
     }
-    // 2F-02's enclosed balcony is on the north (courtyard) side of 12号 now, which this camera never sees; its south
-    // window (win_S2F_3) instead shows the flat's lights (households.js)
+    // street facade twin of 2F-02's balcony (balc_S2F_3, enclosed glass b2): laundry when the room rack has clothes
+    const sb = W.interior ? st0 && st0.byId : W.byId, bo = sb && sb.balc_S2F_3;
+    if (bo) { const st = cl.rack.balcony ? "laundry" : "default"; if (bo.state !== st) { if (W.interior) bo.state = st; else W.setState(bo, st); } }
   };
 
   // ---------- interactions offered by the gameplay layer (world.actionFor asks here first) ----------

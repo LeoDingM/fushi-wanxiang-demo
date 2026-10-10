@@ -423,7 +423,9 @@
    "effects": {
     "mood": 4
    },
-   "text": "一觉睡到天亮"
+   "text": "一觉睡到天亮",
+   "tired_below": 30,
+   "_doc": "Full sleep to wake_min. Night window 21:00–06:00; when energy < tired_below (night-shift / exhausted) allowed any time. Nap stays the short daytime option."
   },
   "nap": {
    "label": "小睡一会",
@@ -2454,7 +2456,7 @@
   }
  },
  "cbd": {
-  "_doc": "云汇CBD (place 'cbd'). towers skyline density (Leo): ONLY 1 tower ≥600 m (天枢), 2 at 500–600 m, 5 at 400–500 m, 7 at 300–400 m; ALL other buildings ≤200 m (avg ~150 m), spaced with plazas. Top 15 have unique original silhouettes. Also: 云麓花园 gated compound (gatehouse/villas/clubhouse), Central-Park-style lake park with 云汇之环 landmark, modern atrium mall 云汇天地. metro_exits A–D → place metro_cbd.",
+  "_doc": "云汇CBD (place 'cbd'). towers skyline density (Leo): ONLY 1 tower ≥600 m (天枢), 2 at 500–600 m, 5 at 400–500 m, 7 at 300–400 m; ALL other buildings ≤200 m (avg ~150 m), spaced with plazas. Top 15 have unique original silhouettes. Also: 云麓花园 concentric gated compound (outer 四代住宅 high-rises, mid ring, luxury villas, resort pool, kindergarten, park), Central-Park-style lake, atrium mall 云汇天地. metro_exits A–D → place metro_cbd.",
   "district": {
    "name": "云汇CBD",
    "en": "Yunhui CBD",

@@ -1,3 +1,5 @@
+20:53 · [主线] CBD Leo最新（全透明遮挡/湖涟漪/云麓同心+户灯）已接入；天台车灯不再照屋顶（像素A/B）；疲倦白天可整觉（夜班）；2F-02南立面凸出玻璃阳台；smoke+stage6+CBD capture过；双zip已打 · screenshots/C7-wealthy-compound.png
+20:50 · [CBD] 云麓花园同心圆改造（外圈四代住宅/泳池幼儿园公园/安防）、近景挡人塔楼全透明、湖面涟漪反射、住户灯光接 household；重拍 C1/C6/C7 · screenshots/C7-wealthy-compound.png
 20:35 · [CBD] 深化改造：云麓花园门禁别墅会所、中央公园湖心岛/云汇之环、近景塔楼底座淡出+远景才出 impostor、周末/假日楼光变少；重拍 C1/C5/C6/C7 · screenshots/C7-wealthy-compound.png
 16:31 · Stage 3A: layers/LOD/free-zoom done (perf 48->8ms z0.5); building run + winter sprites; next interiors · shot: /tmp/s45/far.png
 16:46 · 冬装+跑步已完成（跑步动画/冬装NPC），正在做室内：楼梯间1F-6F折返楼梯、楼层菜单、天台、2F-02房间+阳台 · screenshots/96-run-winter.png
@@ -46,3 +48,4 @@
 20:41 · [主线] 接入 CBD Leo 深改版（门禁别墅云麓花园 / 湖心云汇之环 / 近景基座LOD+遮挡淡出 / 远景 impostor / 办公窗灯周末变暗）；C1/C6/C7 已在 screenshots/ · —
 20:41 · [主线] 修 12号铁门 NPC 抽搐：开扇 footprint_states 改为内开，不再用关闭态挡路口；playtest 增 30s 抽搐检测；闸口测 flips=0 · —
 20:41 · [主线] 街面地铁口改玻璃亭（铝框玻璃墙+灯箱红标+可见楼梯+图腾柱），进站仍直达 B1 · screenshots/u13-metro-glass-pavilion.png
+20:42 · [地铁] 街面入口已换成玻璃亭（雨棚+灯箱+可见楼梯/扶梯+铺装树池）；一进直达B1；入/出闸机分行+加宽站厅站台；flow PASS；截图 M1–M5+M1b 已重拍；METRO_READY 已更新 · -

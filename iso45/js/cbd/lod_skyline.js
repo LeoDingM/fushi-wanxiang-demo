@@ -80,6 +80,39 @@
     }
     const S = K.facades[style]; if (!S || !S.emit || !TEX.facE[style]) return false;
     const M = ex.getTransform(), mip = X.mipFor(z), shop = style.startsWith("shop") || style === "mall_stone" || style === "lobby";
+    const home = d.b && (d.b.home || d.b.kind === "compound") && !shop && (style === "apt" || style.startsWith("glass_") || style === "mall_glass");
+    // 云麓花园 / residential: same household random logic as the old block (per-unit schedule, day seed, weekends/holidays)
+    if (home && !d.tower) {
+      let GR = null;
+      try { GR = (SP.game && SP.game.rules) || (typeof FushiRules !== "undefined" && window.FUSHI_RULES_DATA && (C._rules || (C._rules = FushiRules.create(window.FUSHI_RULES_DATA)))); } catch (e) {}
+      const E = mip ? mipE(style, mip) : TEX.facE[style]; if (!E) return false;
+      const FH = 3.2, bays = 6, abs = SP.clock ? Math.floor(SP.clock.abs()) : 720, sc = 1 << mip;
+      const ctx = SP.clock ? { weather: SP.clock.weather, intensity: SP.clock.intensity } : {};
+      const pat = X.pattern(ex, E, "eH:" + style + ":" + mip);
+      let any = false;
+      for (const f of d.faces) {
+        ex.setTransform(M.multiply(new DOMMatrix([(f.ex - f.ey) * KX, -(f.ex + f.ey) * KY, 0, -PZ, SX(f.a[0], f.a[1]), SY(f.a[0], f.a[1], 0)])));
+        pat.setTransform(new DOMMatrix([sc / 32, 0, 0, -sc / PZ, (d.uoff || 0) % (S.w * 4), 0]));
+        ex.fillStyle = pat;
+        const f0 = Math.max(1, Math.floor(d.z0 / FH)), f1 = Math.ceil(d.z1 / FH);
+        for (let fi = f0; fi < f1; fi++) {
+          const z0 = Math.max(d.z0, fi * FH), z1 = Math.min(d.z1, (fi + 1) * FH); if (z1 <= z0) continue;
+          const bayW = f.L / bays;
+          for (let bi = 0; bi < bays; bi++) {
+            const uid = d.b.id + "_" + fi + "F-0" + ((bi % 2) + 1);
+            let lit = false, dim = false;
+            if (GR && GR.households) { const r = GR.households.lit(uid, abs, ctx); lit = !!r.lit; dim = !!r.dim; }
+            else { const h = ((SP.clock ? SP.clock.min : 720) / 60) % 24; lit = hash(shash(uid), abs % 1440) < (h < 6 ? 0.12 : h < 17 ? 0.18 : h < 23 ? 0.7 : 0.3); }
+            if (!lit) continue;
+            // per-window room-dark chance (same idea as households.js p_room_dark)
+            if (hash(shash(uid + "|w" + bi), Math.floor(abs / 120)) < 0.14) continue;
+            ex.globalAlpha = nk * (dim ? 0.35 : f.shade < 0.8 ? 0.8 : 1);
+            ex.fillRect(bi * bayW + 0.12, z0, bayW - 0.24, z1 - z0); any = true;
+          }
+        }
+      }
+      ex.globalAlpha = 1; ex.setTransform(M); return any;
+    }
     if (shop || !d.tower) {
       const dens = shop ? 1 : 0.55, src = shop ? (mip ? mipE(style, mip) : TEX.facE[style]) : litTile(style, dens > 0.55 ? 0.65 : 0.4, mip);
       if (!src) return false;

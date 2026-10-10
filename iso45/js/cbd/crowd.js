@@ -24,7 +24,7 @@
   }
   C.astar = astar;
   const pick = (arr) => arr[Math.floor(rnd() * arr.length)];
-  const SETS = { office: ["office", "office", "office", "student"], leisure: ["student", "office", "uncle", "vendor"], jog: ["student", "office"], dog: ["uncle", "vendor"] };
+  const SETS = { office: ["office", "office", "office", "student"], leisure: ["student", "office", "uncle", "vendor"], jog: ["student", "office"], dog: ["uncle", "vendor"], guard: ["office", "uncle", "office"] };
   const DOGV = ["base", "w", "b"].filter((v) => F[`dog/${v}/w0/-/0`]);
   function route(a, to) { const p = astar(a.node, to); if (!p || p.length < 2) return false; a.path = p; a.pi = 1; a.goal = to; return true; }
   function mkNPC(kind, from, to, opt) {
@@ -44,7 +44,7 @@
   }
   X.npcSpawnStep = function (dt) {
     const S = X.schedule;
-    const want = { commute_in: 46 * S("office_in"), commute_out: 46 * S("office_out"), lunch: 34 * S("lunch"), leisure: 10 + 34 * S("leisure"), jog: 9 * S("jog"), dog: 5 * S("dog") };
+    const want = { commute_in: 46 * S("office_in"), commute_out: 46 * S("office_out"), lunch: 34 * S("lunch"), leisure: 10 + 34 * S("leisure"), jog: 9 * S("jog"), dog: 5 * S("dog"), patrol: 2 };
     const has = {}; for (const a of NPC.list) if (!a.gone) has[a.sub] = (has[a.sub] || 0) + 1;
     const transit = () => pick([PO.metro.A, PO.metro.B, PO.metro.C, PO.metro.D, PO.metro.C, PO.metro.B, PO.brt[0], PO.brt[1], PO.bus[0], pick(PO.edge)]);
     const benches = D.benches.map((b) => b.node), busk = D.buskers.map((b) => b.node);
@@ -58,6 +58,11 @@
       else if (go("leisure", 1.5)) a = mkNPC("leisure", transit(), pick(dests().concat(PO.stadium, PO.compound || [])), { home: transit(), sub: "leisure" });
       else if (go("jog", 0.6)) { const i = Math.floor(rnd() * PO.park_loop.length); a = mkNPC("jog", PO.park_loop[i], PO.park_loop[(i + 9) % PO.park_loop.length], { laps: 2 + Math.floor(rnd() * 3), sub: "jog" }); if (a) a.runK = 1; }
       else if (go("dog", 0.4)) { const i = Math.floor(rnd() * PO.park_loop.length); a = mkNPC("dog", PO.park_loop[i], PO.park_loop[(i + 7) % PO.park_loop.length], { laps: 1, sub: "dog" }); }
+      else if (go("patrol", 0.25) && (PO.compound || []).length > 1) {
+        const L = PO.compound, i = Math.floor(rnd() * L.length);
+        a = mkNPC("guard", L[i], L[(i + 1) % L.length], { laps: 4 + Math.floor(rnd() * 4), sub: "patrol", home: L[i] });
+        if (a) a.speed = 1.15;
+      }
       else break;
       if (a) { has[a.sub] = (has[a.sub] || 0) + 1; warmPlace(a); }
     }
