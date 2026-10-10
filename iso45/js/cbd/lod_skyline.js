@@ -80,7 +80,7 @@
     }
     const S = K.facades[style]; if (!S || !S.emit || !TEX.facE[style]) return false;
     const M = ex.getTransform(), mip = X.mipFor(z), shop = style.startsWith("shop") || style === "mall_stone" || style === "lobby";
-    const home = d.b && (d.b.home || d.b.kind === "compound") && !shop && (style === "apt" || style.startsWith("glass_") || style === "mall_glass");
+    const home = d.b && (d.b.home || d.b.kind === "compound") && !shop && (style === "apt" || style.startsWith("res_") || style.startsWith("glass_") || style === "mall_glass" || style === "stone_grid");
     // 云麓花园 / residential: same household random logic as the old block (per-unit schedule, day seed, weekends/holidays)
     if (home && !d.tower) {
       let GR = null;

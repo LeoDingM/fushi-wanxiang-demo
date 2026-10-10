@@ -1,3 +1,5 @@
+21:07 · [主线] CBD 建筑改造 READY 已接入：云麓暖色住宅（cream/sand/terra）+ 深圳灵感异形塔（无重复圆柱）；smoke+stage6+cbd_capture 过；双 zip 已打 · screenshots/C7-wealthy-compound.png
+21:05 · [CBD] 云麓花园改暖色住宅立面（阳台绿化/飘窗/四代平面），天际线去掉重复圆柱、重做原创轮廓；重拍 C5/C6/C7 · screenshots/C7-wealthy-compound.png
 20:53 · [主线] CBD Leo最新（全透明遮挡/湖涟漪/云麓同心+户灯）已接入；天台车灯不再照屋顶（像素A/B）；疲倦白天可整觉（夜班）；2F-02南立面凸出玻璃阳台；smoke+stage6+CBD capture过；双zip已打 · screenshots/C7-wealthy-compound.png
 20:50 · [CBD] 云麓花园同心圆改造（外圈四代住宅/泳池幼儿园公园/安防）、近景挡人塔楼全透明、湖面涟漪反射、住户灯光接 household；重拍 C1/C6/C7 · screenshots/C7-wealthy-compound.png
 20:35 · [CBD] 深化改造：云麓花园门禁别墅会所、中央公园湖心岛/云汇之环、近景塔楼底座淡出+远景才出 impostor、周末/假日楼光变少；重拍 C1/C5/C6/C7 · screenshots/C7-wealthy-compound.png

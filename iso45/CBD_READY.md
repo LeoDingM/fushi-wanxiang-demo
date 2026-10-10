@@ -1,6 +1,6 @@
 # 云汇CBD (place `cbd`) — ready for integration
 
-> Leo pass (2026-10-10): height caps kept; 云麓花园 concentric luxury compound (outer 四代住宅 high-rises → mid ring → luxury villas + resort pool / kindergarten / park); near-zoom towers **fully hide** when occluding 李默; lake ripples+reflections; compound household window lights via shared-rules. Re-capture C1/C6/C7.
+> Leo pass (2026-10-10): height caps kept; 云麓花园 warm residential (cream/sand/terra, balconies+greenery+bay windows, 四代住宅 plans) — not office glass; top CBD towers distinct Shenzhen-inspired originals (no clone cylinders). Occlusion / lake / household lights as before. Re-capture C5/C6/C7.
 
 Standalone preview: `cbd_preview.html` (desktop + phone; `?touch=1`). Smoke + captures: `python3 tools/cbd_capture.py all` (0 JS errors).
 
@@ -65,7 +65,7 @@ Each exit: `{to:"metro_cbd", link:"A".."D"}`. Metro → CBD: `SP.places.cbd.ente
 | ≤200 m | **~20** | avg ≈ 150–160 m; sparse outer grid + plaza buffer around the walkable map |
 | fabric | few | unnamed 90–140 m, far corners only |
 
-Top **15** each have an **original** silhouette (not copies of real landmarks): twist / sail / twin blades / atrium slot / stacked cylinders / blade lean / twin linked by skybridge / petal oct / deep terraces / diagrid / etc., with distinct facade palettes (`diagrid`, `glass_*`, `dark_glass`, `apt`, …).
+Top **15** each have an **original** silhouette (not copies of real landmarks; **no repeated cylinder stacks**): chamfered cascade, sail+fins, folded-plate diamond, helical twist, twin-wing atrium, lean blade, crystal oct, twin+skybridges, fan/petal slab, razor triangle, dark cantilevers, petal oct, residential terraces, diagrid weave, slim twin blades — varied plans, crowns, setbacks, curtain walls (`diagrid`, `glass_*`, `dark_glass`, `res_*`, …).
 
 Walkable-map anchors (lobbies): 天枢塔 (310,360) · 鲲鹏 · 星澜 (430,260) · 汇潮 — spaced clear of enlarged 云麓花园. Other tall towers sit on a **sparse ring** with wide gaps so the skyline is not a packed wall. Max zoom-out frames the full landmark including crown; labels are decluttered (tallest first, no overlap; 天枢 bold gold).
 
@@ -74,7 +74,7 @@ Walkable-map anchors (lobbies): 天枢塔 (310,360) · 鲲鹏 · 星澜 (430,260
 - **臻品街**: boutiques / cafés, planters, evening buskers.
 - **云汇天地**: modern atrium mall — curved glass curtain + stone podium, glazed roof lantern, west atrium hall, LED canopy, outdoor plaza + LED screens.
 - **云汇体育中心**: arena exterior (bowl + roof ring).
-- **云麓花园**: concentric gated community — outer-ring 四代住宅 high-rises (sky gardens / stepped terraces), mid-ring mid/high, innermost modern Chinese luxury villas (glass+stone courtyards); resort pool deck, private 云麓幼儿园, central garden park, promenade green belts, dense vegetation; street-front facade + anti-climb perimeter + gatehouse/CCTV/patrol; residential night lights use shared-rules household schedules (weekends/holidays).
+- **云麓花园**: concentric gated community — outer/mid **warm residential** towers (res_cream/sand/terra/sage/ivory; balconies with greenery, bay windows, sky gardens, slab/L/U plans — Shenzhen 四代住宅 inspired, original), innermost luxury villas (warm stone+cream courtyards); resort pool deck, private 云麓幼儿园, central garden park, promenade green belts, dense vegetation; street-front facade + anti-climb perimeter + gatehouse/CCTV/patrol; residential night lights use shared-rules household schedules (weekends/holidays).
 - Roads / BRT / taxis / rush-hour crowds as before.
 
 ## LOD / occlusion / night lights

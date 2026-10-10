@@ -283,7 +283,13 @@ FAC = {
  "shop_c": dict(w=6.0, h=5.0, shop=((214, 196, 176), (120, 60, 50), (255, 220, 170))),
  "shop_d": dict(w=6.0, h=5.0, shop=((242, 242, 244), (40, 90, 140), (200, 230, 255))),
  "shop_e": dict(w=6.0, h=5.0, shop=((196, 170, 132), (40, 40, 40), (255, 200, 140))),
- "apt":    dict(w=3.0, h=3.2, g0=(176, 206, 222), g1=(110, 140, 160), fr=(238, 236, 230), sp=(0.3, (238, 236, 230)), mul=3.0, pier=0.8, balc=1),
+ "apt":    dict(w=3.0, h=3.2, g0=(210, 198, 178), g1=(150, 140, 120), fr=(236, 228, 214), sp=(0.32, (228, 218, 200)), mul=3.0, pier=0.75, balc=1, green=1),
+ # 云麓 / 深圳现代住宅 warm residential families (NOT office glass slabs)
+ "res_cream": dict(w=3.2, h=3.15, g0=(236, 228, 210), g1=(190, 178, 155), fr=(245, 240, 228), sp=(0.38, (232, 222, 200)), mul=3.2, pier=0.85, balc=1, green=1, bay=1),
+ "res_sand":  dict(w=3.2, h=3.15, g0=(220, 200, 170), g1=(168, 148, 118), fr=(238, 226, 200), sp=(0.36, (214, 198, 168)), mul=3.2, pier=0.8, balc=1, green=1),
+ "res_terra": dict(w=3.2, h=3.15, g0=(214, 184, 158), g1=(160, 128, 102), fr=(236, 220, 200), sp=(0.4, (206, 178, 150)), mul=3.2, pier=0.9, balc=1, green=1, bay=1),
+ "res_sage":  dict(w=3.2, h=3.15, g0=(198, 210, 196), g1=(140, 158, 140), fr=(228, 234, 224), sp=(0.34, (186, 200, 182)), mul=3.2, pier=0.75, balc=1, green=1),
+ "res_ivory": dict(w=3.0, h=3.15, g0=(242, 236, 224), g1=(200, 192, 176), fr=(250, 246, 236), sp=(0.3, (236, 228, 214)), mul=3.0, pier=0.7, balc=1, green=1, bay=1),
 }
 def facade(name, S):
     W = int(round(S["w"] * 32)); H = int(round(S["h"] * R.PZ)); img = np.zeros((H, W, 4)); em = np.zeros((H, W, 4))
@@ -326,7 +332,19 @@ def facade(name, S):
         door = (v < 3.0) & ((u % 3.0) > 0.7) & ((u % 3.0) < 2.3); img[door, :3] = img[door, :3] * 0.85
         tr = (v > 3.3) & (v < 3.45); img[tr, :3] = fr; winmask &= ~tr
     if S.get("balc"):
-        b = (v > 0.0) & (v < 1.0) & ((u % 3.0) > 0.9); img[b, :3] = img[b, :3] * 0.6 + np.array((230, 236, 240.)) * 0.4
+        bw = S.get("mul", 3.0)
+        b = (v > 0.05) & (v < 0.95) & ((u % bw) > 0.55) & ((u % bw) < bw - 0.25)
+        img[b, :3] = img[b, :3] * 0.45 + np.array((236, 232, 220.)) * 0.55
+        rail = b & (v > 0.85) & (v < 0.95); img[rail, :3] = fr * 0.95
+        if S.get("green"):
+            leaf = b & (v > 0.15) & (v < 0.55) & (((u * 4.0) % 1.0) < 0.45)
+            img[leaf, :3] = np.array((96, 148, 86.), float) * (0.85 + 0.15 * ((u[leaf] * 7) % 1))[..., None]
+    if S.get("bay"):
+        # bay-window frame accents (vertical paired mullions)
+        bay = ((u % S["mul"]) > 0.35) & ((u % S["mul"]) < 0.55) & (~spand)
+        img[bay, :3] = fr * 1.02
+        bay2 = ((u % S["mul"]) > S["mul"] - 0.55) & ((u % S["mul"]) < S["mul"] - 0.35) & (~spand)
+        img[bay2, :3] = fr * 1.02
     em[winmask, :3] = (255, 226, 160); em[winmask, 3] = 255
     return img.astype(np.uint8), em.astype(np.uint8), None
 
@@ -372,80 +390,95 @@ def tower_geom(t, rnd):
     if lob: add(t.get("shape", "rect"), (s / 2 - 1.0, s * asp / 2 - 1.0), 0, lob, "lobby", lobby=True)
     kind = t["id"]
     # ---- landmark + 14 unique skyline towers ----
-    if kind == "tianshu":                       # 天枢: chamfered square, 5 setbacks, colour lantern, needle spire 648 m
-        for z0, z1, k in ((lob, 180, 1.0), (180, 320, 0.86), (320, 440, 0.72), (440, 540, 0.58), (540, 590, 0.44)):
-            add("oct", s / 2 * k, z0, z1, st, c=s / 2 * k * 0.32)
-        add("oct", s / 2 * 0.36, 590, 612, "glass_teal", c=4, crown="lantern")
-        add("circ", 1.6, 612, 648, "glass_silver", n=8, spire=True)
-    elif kind == "kunpeng":                     # 鲲鹏: asymmetric stepped sail + twin crown fins
+    if kind == "tianshu":                       # 天枢: chamfered square cascade + lantern + needle (landmark)
+        for z0, z1, k in ((lob, 160, 1.0), (160, 290, 0.88), (290, 400, 0.74), (400, 500, 0.6), (500, 575, 0.46)):
+            add("oct", s / 2 * k, z0, z1, st, c=s / 2 * k * 0.34)
+        add("oct", s / 2 * 0.34, 575, 605, "glass_teal", c=4, crown="lantern")
+        add("circ", 1.5, 605, 648, "glass_silver", n=8, spire=True)
+    elif kind == "kunpeng":                     # 鲲鹏: sail slab with asymmetric wing + twin fins
         a = s / 2
-        add("rect", (a, a), lob, 210, st); add("rect", (a, a * 0.55), 210, 360, st, cy=y - a * 0.2)
-        add("rect", (a * 0.75, a * 0.4), 360, 470, st, cy=y - a * 0.35); add("rect", (a * 0.5, a * 0.28), 470, 530, "glass_silver", cy=y - a * 0.45, crown="lantern")
-        add("rect", (a * 0.08, a * 0.28), 530, 568, "glass_silver", cx=x - a * 0.35, cy=y - a * 0.45, crown="fin")
-        add("rect", (a * 0.08, a * 0.28), 530, 556, "glass_silver", cx=x + a * 0.18, cy=y - a * 0.45, crown="fin")
-    elif kind == "xinglan":                     # 星澜: stacked cylinders, flared ring, mast
-        for z0, z1, k in ((lob, 180, 1.0), (180, 320, 0.86), (320, 430, 0.7), (430, 500, 0.55)):
-            add("circ", s / 2 * k, z0, z1, st, n=22)
-        add("circ", s / 2 * 0.7, 500, 510, "glass_teal", n=22, crown="ring"); add("circ", 1.2, 510, 532, "glass_silver", n=8, spire=True)
-    elif kind == "yuheng":                      # 玉衡: twisted stack (centre drifts each tier) + diamond crown
-        for i, (z0, z1, k) in enumerate(((lob, 160, 1.0), (160, 280, 0.9), (280, 380, 0.78), (380, 450, 0.64))):
-            dx = (i - 1.5) * s * 0.06; dy = (i - 1.5) * s * 0.04
-            add("rect", (s / 2 * k, s / 2 * k * 0.72), z0, z1, st, cx=x + dx, cy=y + dy)
-        add("oct", s / 2 * 0.42, 450, 488, "glass_gold", c=5, crown="lantern")
-    elif kind == "huichao":                     # 汇潮: deep setbacks + glowing atrium slot through the core
+        add("rect", (a * 1.05, a * 0.7), lob, 180, st)
+        add("rect", (a * 0.9, a * 0.45), 180, 340, st, cy=y - a * 0.22)
+        add("rect", (a * 0.65, a * 0.32), 340, 460, "glass_silver", cy=y - a * 0.38)
+        add("rect", (a * 0.4, a * 0.22), 460, 530, "glass_silver", cy=y - a * 0.48, crown="lantern")
+        add("rect", (a * 0.07, a * 0.25), 530, 568, "glass_gold", cx=x - a * 0.3, cy=y - a * 0.48, crown="fin")
+        add("rect", (a * 0.07, a * 0.22), 530, 552, "glass_gold", cx=x + a * 0.2, cy=y - a * 0.48, crown="fin")
+    elif kind == "xinglan":                     # 星澜: folded-plate diamond (NO cylinder) — Shenzhen bay-front original
         a = s / 2
-        add("rect", (a, a * 0.9), lob, 140, st)
-        add("rect", (a * 0.35, a * 0.9), 140, 320, st, cx=x - a * 0.55)   # west wing
-        add("rect", (a * 0.35, a * 0.9), 140, 320, st, cx=x + a * 0.55)   # east wing (slot between)
-        add("rect", (a * 0.85, a * 0.75), 320, 420, st)
-        add("rect", (a * 0.55, a * 0.5), 420, 466, "glass_teal", crown="lantern")
-    elif kind == "yunfan":                      # 云帆: leaning blade (offset taper) + knife-edge crown
-        for i, (z0, z1, k) in enumerate(((lob, 150, 1.0), (150, 280, 0.82), (280, 380, 0.62), (380, 420, 0.4))):
-            add("rect", (s / 2 * k * 0.55, s / 2 * k), z0, z1, st, cx=x + i * s * 0.05)
-        add("rect", (s / 2 * 0.18, s / 2 * 0.28), 420, 442, "dark_glass", cx=x + s * 0.2, crown="fin")
-    elif kind == "liuli":                       # 琉璃: crystal octagon taper + prism apex
-        for z0, z1, k in ((lob, 140, 1.0), (140, 260, 0.85), (260, 360, 0.68), (360, 400, 0.5)):
-            add("oct", s / 2 * k, z0, z1, "glass_gold", c=s / 2 * k * 0.35)
-        add("oct", s / 2 * 0.32, 400, 418, "glass_gold", c=3, crown="lantern")
-    elif kind == "hongtu":                      # 鸿图: wide podium + twin towers linked by skybridge
+        add("oct", (a * 1.05, a * 0.75), lob, 140, st, c=a * 0.45)
+        add("oct", (a * 0.92, a * 0.62), 140, 280, st, c=a * 0.38)
+        add("rect", (a * 0.55, a * 0.7), 280, 400, "glass_teal", cx=x - a * 0.15)  # offset plate
+        add("rect", (a * 0.4, a * 0.55), 400, 480, "glass_teal", cx=x + a * 0.12)
+        add("oct", (a * 0.32, a * 0.28), 480, 510, "glass_gold", c=3, crown="lantern")
+        add("circ", 1.1, 510, 532, "glass_silver", n=6, spire=True)
+    elif kind == "yuheng":                      # 玉衡: helical twist stack + faceted crown
+        for i, (z0, z1, k) in enumerate(((lob, 140, 1.0), (140, 250, 0.88), (250, 350, 0.74), (350, 430, 0.58))):
+            ang = (i - 1.5) * 0.18
+            dx, dy = math.sin(ang) * s * 0.1, math.cos(ang) * s * 0.06
+            add("rect", (s / 2 * k * 0.85, s / 2 * k * 0.65), z0, z1, st, cx=x + dx, cy=y + dy)
+        add("oct", s / 2 * 0.4, 430, 488, "glass_gold", c=5, crown="lantern")
+    elif kind == "huichao":                     # 汇潮: twin wings + glowing atrium notch
         a = s / 2
-        add("rect", (a * 1.15, a * 0.7), lob, 40, "lobby")
-        add("rect", (a * 0.4, a * 0.55), 40, 280, st, cx=x - a * 0.55)
-        add("rect", (a * 0.4, a * 0.55), 40, 280, st, cx=x + a * 0.55)
-        add("rect", (a * 1.05, a * 0.2), 210, 225, "glass_silver")       # skybridge
-        add("rect", (a * 0.32, a * 0.4), 280, 402, "glass_teal", cx=x - a * 0.55, crown="lantern")
-        add("rect", (a * 0.32, a * 0.4), 280, 380, st, cx=x + a * 0.55)
-    elif kind == "lanting":                     # 澜庭: soft cylinder with mid-belly flare + ring crown
-        for z0, z1, k in ((lob, 120, 0.85), (120, 220, 1.0), (220, 320, 0.8), (320, 370, 0.55)):
-            add("circ", s / 2 * k, z0, z1, st, n=20)
-        add("circ", s / 2 * 0.62, 370, 386, "glass_teal", n=18, crown="ring")
-    elif kind == "lingxiao":                    # 凌霄: sharp triangular feel (narrow asp) + spire
-        for z0, z1, k in ((lob, 140, 1.0), (140, 250, 0.78), (250, 330, 0.55)):
-            add("rect", (s / 2 * k * 0.55, s / 2 * k), z0, z1, "dark_glass")
-        add("circ", 1.0, 330, 364, "glass_silver", n=6, spire=True)
-    elif kind == "yaoshi":                      # 曜石: dark stacked cubes with cantilevered upper block
+        add("rect", (a * 1.05, a * 0.85), lob, 90, st)
+        add("rect", (a * 0.38, a * 0.85), 90, 280, st, cx=x - a * 0.58)
+        add("rect", (a * 0.38, a * 0.85), 90, 300, st, cx=x + a * 0.58)
+        add("rect", (a * 0.2, a * 0.7), 200, 260, "glass_teal", cx=x)  # atrium glass bridge
+        add("rect", (a * 0.8, a * 0.7), 300, 400, st)
+        add("rect", (a * 0.5, a * 0.45), 400, 466, "glass_teal", crown="lantern")
+    elif kind == "yunfan":                      # 云帆: knife-edge lean blade
+        for i, (z0, z1, k) in enumerate(((lob, 140, 1.0), (140, 260, 0.8), (260, 360, 0.58), (360, 410, 0.38))):
+            add("rect", (s / 2 * k * 0.48, s / 2 * k), z0, z1, "dark_glass", cx=x + i * s * 0.055)
+        add("rect", (s / 2 * 0.14, s / 2 * 0.3), 410, 442, "glass_silver", cx=x + s * 0.22, crown="fin")
+    elif kind == "liuli":                       # 琉璃: crystal oct cascade
+        for z0, z1, k in ((lob, 130, 1.0), (130, 240, 0.84), (240, 340, 0.66), (340, 390, 0.48)):
+            add("oct", s / 2 * k, z0, z1, "glass_gold", c=s / 2 * k * 0.4)
+        add("oct", s / 2 * 0.3, 390, 418, "glass_gold", c=2.5, crown="lantern")
+    elif kind == "hongtu":                      # 鸿图: twin linked by two skybridges
         a = s / 2
-        add("rect", (a, a), lob, 160, "dark_glass")
-        add("rect", (a * 0.85, a * 0.85), 160, 260, "dark_glass", cx=x + a * 0.12)
-        add("rect", (a * 0.7, a * 0.55), 260, 330, "dark_glass", cx=x - a * 0.15)
-        add("rect", (a * 0.45, a * 0.4), 330, 348, "glass_gold", crown="lantern")
-    elif kind == "haitang":                     # 海棠: petal plan (elongated oct) + petal crown
-        for z0, z1, k in ((lob, 150, 1.0), (150, 260, 0.82), (260, 310, 0.62)):
-            add("oct", (s / 2 * k, s / 2 * k * 0.7), z0, z1, "glass_green", c=s / 2 * k * 0.4)
-        add("oct", (s / 2 * 0.4, s / 2 * 0.28), 310, 332, "glass_green", c=3, crown="lantern")
-    elif kind == "xinghewan":                   # 星河湾: residential-like terraces (deep setbacks) + garden crown
-        for z0, z1, k in ((lob, 80, 1.0), (80, 160, 0.9), (160, 230, 0.78), (230, 280, 0.64), (280, 310, 0.5)):
-            add("rect", (s / 2 * k, s / 2 * k * 0.85), z0, z1, "apt")
-        add("rect", (s / 2 * 0.35, s / 2 * 0.3), 310, 318, "stone_grid", roofbox=True, crown="mech")
-    elif kind == "yunjin":                      # 云锦: woven diagrid-ish oct + lattice crown
-        for z0, z1, k in ((lob, 140, 1.0), (140, 240, 0.88), (240, 290, 0.7)):
-            add("oct", s / 2 * k, z0, z1, "diagrid", c=s / 2 * k * 0.25)
-        add("oct", s / 2 * 0.45, 290, 308, "glass_silver", c=4, crown="lantern")
-    elif kind == "qinglan":                     # 青岚: slim twin blades sharing a podium
+        add("rect", (a * 1.2, a * 0.65), lob, 36, "lobby")
+        add("rect", (a * 0.38, a * 0.55), 36, 260, st, cx=x - a * 0.58)
+        add("rect", (a * 0.38, a * 0.55), 36, 260, st, cx=x + a * 0.58)
+        add("rect", (a * 1.1, a * 0.16), 150, 162, "glass_silver")
+        add("rect", (a * 1.0, a * 0.14), 220, 230, "glass_silver")
+        add("rect", (a * 0.3, a * 0.4), 260, 402, "glass_blue", cx=x - a * 0.58, crown="lantern")
+        add("rect", (a * 0.3, a * 0.4), 260, 375, st, cx=x + a * 0.58)
+    elif kind == "lanting":                     # 澜庭: fan / petal slab stack (NO cylinder) — waterfront original
         a = s / 2
-        add("rect", (a * 1.05, a * 0.55), lob, 28, "lobby")
-        add("rect", (a * 0.28, a * 0.5), 28, 260, "glass_teal", cx=x - a * 0.4)
-        add("rect", (a * 0.28, a * 0.5), 28, 301, "glass_teal", cx=x + a * 0.4, crown="lantern")
+        add("oct", (a * 1.1, a * 0.55), lob, 100, st, c=a * 0.35)
+        add("rect", (a * 0.95, a * 0.42), 100, 220, st, cy=y - a * 0.08)
+        add("oct", (a * 0.75, a * 0.48), 220, 310, "glass_teal", c=a * 0.3)
+        add("rect", (a * 0.55, a * 0.32), 310, 360, "glass_teal", cy=y + a * 0.1)
+        add("oct", (a * 0.35, a * 0.28), 360, 386, "glass_gold", c=3, crown="lantern")
+    elif kind == "lingxiao":                    # 凌霄: razor triangle (narrow blade) + mast
+        for z0, z1, k in ((lob, 120, 1.0), (120, 220, 0.78), (220, 300, 0.55), (300, 340, 0.38)):
+            add("rect", (s / 2 * k * 0.42, s / 2 * k), z0, z1, "dark_glass")
+        add("circ", 0.9, 340, 364, "glass_silver", n=6, spire=True)
+    elif kind == "yaoshi":                      # 曜石: dark cantilevered cubes
+        a = s / 2
+        add("rect", (a, a * 0.95), lob, 140, "dark_glass")
+        add("rect", (a * 0.8, a * 0.8), 140, 240, "dark_glass", cx=x + a * 0.15)
+        add("rect", (a * 0.65, a * 0.5), 240, 310, "dark_glass", cx=x - a * 0.18)
+        add("rect", (a * 0.42, a * 0.38), 310, 348, "glass_gold", crown="lantern")
+    elif kind == "haitang":                     # 海棠: elongated petal oct
+        for z0, z1, k in ((lob, 130, 1.0), (130, 230, 0.82), (230, 290, 0.62)):
+            add("oct", (s / 2 * k, s / 2 * k * 0.62), z0, z1, "glass_green", c=s / 2 * k * 0.42)
+        add("oct", (s / 2 * 0.38, s / 2 * 0.26), 290, 332, "glass_green", c=3, crown="lantern")
+    elif kind == "xinghewan":                   # 星河湾: deep residential terraces
+        for z0, z1, k in ((lob, 70, 1.0), (70, 140, 0.9), (140, 200, 0.78), (200, 250, 0.64), (250, 290, 0.5)):
+            add("rect", (s / 2 * k, s / 2 * k * 0.82), z0, z1, "res_cream")
+            if z0 > 70:
+                add("rect", (s / 2 * k * 1.08, s / 2 * 0.2), z1 - 0.4, z1 + 0.5, "res_sage", cy=y - s / 2 * k * 0.7)
+        add("rect", (s / 2 * 0.32, s / 2 * 0.28), 290, 318, "stone_grid", roofbox=True, crown="mech")
+    elif kind == "yunjin":                      # 云锦: diagrid oct weave
+        for z0, z1, k in ((lob, 130, 1.0), (130, 220, 0.86), (220, 280, 0.68)):
+            add("oct", s / 2 * k, z0, z1, "diagrid", c=s / 2 * k * 0.22)
+        add("oct", s / 2 * 0.42, 280, 308, "glass_silver", c=4, crown="lantern")
+    elif kind == "qinglan":                     # 青岚: slim twin blades + shared podium
+        a = s / 2
+        add("rect", (a * 1.1, a * 0.5), lob, 26, "lobby")
+        add("rect", (a * 0.26, a * 0.48), 26, 240, "glass_teal", cx=x - a * 0.42)
+        add("rect", (a * 0.26, a * 0.48), 26, 301, "glass_teal", cx=x + a * 0.42, crown="lantern")
+        add("rect", (a * 0.9, a * 0.14), 160, 170, "glass_silver")  # mid link
     else:
         # mid/low ≤200 m — varied simple silhouettes
         shape = t.get("shape", "rect"); zc = lob
@@ -481,7 +514,7 @@ def place_towers(table, rnd):
     inmap = {
         "tianshu": (310, 360, 56, "oct", "diagrid"),
         "kunpeng": (216, 330, 48, "rect", "glass_silver"),
-        "xinglan": (430, 260, 46, "circ", "glass_teal"),
+        "xinglan": (430, 260, 46, "oct", "glass_teal"),
         "huichao": (200, 250, 38, "rect", "glass_blue"),
     }
     out = []
@@ -494,7 +527,7 @@ def place_towers(table, rnd):
         "yunfan": (-80, 480, 44, "rect", "dark_glass", 0.7),
         "liuli": (580, 80, 46, "oct", "glass_gold", 1.0),
         "hongtu": (80, 580, 50, "rect", "glass_blue", 0.85),
-        "lanting": (580, 320, 44, "circ", "glass_teal", 1.0),
+        "lanting": (580, 320, 48, "oct", "glass_teal", 0.7),
         "lingxiao": (320, 580, 40, "rect", "dark_glass", 0.55),
         "yaoshi": (560, 540, 42, "rect", "dark_glass", 1.0),
         "haitang": (-80, 200, 42, "oct", "glass_green", 0.75),
@@ -515,12 +548,12 @@ def place_towers(table, rnd):
             sites.append((cx + rnd.uniform(-18, 18), cy + rnd.uniform(-18, 18)))
     sites.sort(key=lambda p: (p[0] + p[1]) + rnd.uniform(0, 40))
     rest = sorted(by.values(), key=lambda t: -t["height_m"])
-    sils = ["box", "taper", "L", "cyl", "steps", "box", "taper"]
-    styles = ["glass_blue", "glass_teal", "glass_silver", "glass_gold", "glass_green", "stone_grid", "dark_glass", "apt"]
+    sils = ["box", "taper", "L", "steps", "steps", "taper", "L"]
+    styles = ["glass_blue", "glass_teal", "glass_silver", "glass_gold", "dark_glass", "diagrid", "stone_grid"]
     for i, t in enumerate(rest):
         if i >= len(sites): break
         x, y = sites[i]; h = t["height_m"]; sz = 28 + (h - 120) * 0.08
-        shape = rnd.choice(["rect", "rect", "oct", "circ"])
+        shape = rnd.choice(["rect", "rect", "oct", "rect"])
         st = "apt" if "公寓" in t["use"] else rnd.choice(styles)
         t.update(x=round(x, 1), y=round(y, 1), size=round(sz, 1), shape=shape, style=st, h=h,
                  asp=round(rnd.uniform(0.65, 1.0), 2), sil=sils[i % len(sils)],
@@ -659,11 +692,11 @@ def layout(rules_cbd):
     # south street facade frontage (continuous luxury frontage either side of gate)
     bld("res_front_w", "云麓花园 · 临街立面", "compound", [
         dict(shape="rect", x0=240, y0=193, x1=282, y1=199, z0=0, z1=5, style="stone_grid"),
-        dict(shape="rect", x0=241, y0=193.5, x1=281, y1=198.5, z0=5, z1=11, style="glass_silver")],
+        dict(shape="rect", x0=241, y0=193.5, x1=281, y1=198.5, z0=5, z1=11, style="res_cream")],
         foot=[[240, 193, 282, 199]])
     bld("res_front_e", "云麓花园 · 临街立面", "compound", [
         dict(shape="rect", x0=322, y0=193, x1=368, y1=199, z0=0, z1=5, style="stone_grid"),
-        dict(shape="rect", x0=323, y0=193.5, x1=367, y1=198.5, z0=5, z1=11, style="glass_gold")],
+        dict(shape="rect", x0=323, y0=193.5, x1=367, y1=198.5, z0=5, z1=11, style="res_sand")],
         foot=[[322, 193, 368, 199]])
     # grand gatehouse + guard + access control + cameras
     bld("res_gate_s", "云麓花园 · 南门", "compound", [
@@ -679,61 +712,87 @@ def layout(rules_cbd):
     bld("res_stone", "云麓花园 · 门牌石", "compound", [
         dict(shape="rect", x0=272, y0=193.5, x1=280, y1=197.5, z0=0, z1=1.8, style="stone_grid")],
         sign=dict(x=276, y=194, z=2.2, text="云麓花园"), foot=[[272, 193.5, 280, 197.5]])
-    def gen4th(bid, name, x0, y0, w, d, h, st):
-        """中式现代化 / 第四代住宅 inspired: stone podium, stepped terraces, sky-garden greenery bands (original)."""
-        parts = [dict(shape="rect", x0=x0, y0=y0, x1=x0 + w, y1=y0 + d, z0=0, z1=4.2, style="stone_grid")]
-        z, step, i = 4.2, 11.5, 0
-        while z < h - 2:
-            inset = min(2.4, 0.4 + i * 0.35)
-            z1 = min(h, z + step)
-            parts.append(dict(shape="rect", x0=x0 + inset, y0=y0 + inset, x1=x0 + w - inset, y1=y0 + d - inset,
-                              z0=z, z1=z1, style=st))
-            # sky garden terrace slab + green edge
-            if i % 2 == 0 and z > 8:
-                parts.append(dict(shape="rect", x0=x0 + inset - 1.2, y0=y0 + inset - 0.6,
-                                  x1=x0 + w - inset + 1.2, y1=y0 + inset + 1.8, z0=z1 - 0.35, z1=z1 + 0.55, style="glass_green"))
-                parts.append(dict(shape="rect", x0=x0 + inset - 0.4, y0=y0 + d - inset - 1.6,
-                                  x1=x0 + w - inset + 0.4, y1=y0 + d - inset + 0.8, z0=z1 - 0.35, z1=z1 + 0.55, style="glass_green"))
+    def gen4th(bid, name, x0, y0, w, d, h, st, plan="slab"):
+        """深圳现代住宅 / 第四代住宅 inspired (original): warm materials, balconies, bay windows, sky gardens, human scale."""
+        parts = [dict(shape="rect", x0=x0, y0=y0, x1=x0 + w, y1=y0 + d, z0=0, z1=3.8, style="stone_grid")]
+        # plan variants: slab | wing (L) | U-court
+        FH, z, i = 3.15, 3.8, 0
+        while z < h - 1.5:
+            z1 = min(h, z + FH * (2 if i % 3 == 2 else 1))  # occasional double-height sky-garden floor
+            inset = 0.15 * (i % 3)
+            if plan == "wing":
+                # L-wing body
+                parts.append(dict(shape="rect", x0=x0 + inset, y0=y0 + inset, x1=x0 + w * 0.62, y1=y0 + d - inset, z0=z, z1=z1, style=st))
+                parts.append(dict(shape="rect", x0=x0 + w * 0.45, y0=y0 + inset, x1=x0 + w - inset, y1=y0 + d * 0.55, z0=z, z1=z1, style=st))
+            elif plan == "U":
+                parts.append(dict(shape="rect", x0=x0 + inset, y0=y0 + inset, x1=x0 + w - inset, y1=y0 + d * 0.42, z0=z, z1=z1, style=st))
+                parts.append(dict(shape="rect", x0=x0 + inset, y0=y0 + d * 0.38, x1=x0 + w * 0.38, y1=y0 + d - inset, z0=z, z1=z1, style=st))
+                parts.append(dict(shape="rect", x0=x0 + w * 0.62, y0=y0 + d * 0.38, x1=x0 + w - inset, y1=y0 + d - inset, z0=z, z1=z1, style=st))
+            else:
+                parts.append(dict(shape="rect", x0=x0 + inset, y0=y0 + inset, x1=x0 + w - inset, y1=y0 + d - inset, z0=z, z1=z1, style=st))
+            # balcony shelf (south) every floor
+            parts.append(dict(shape="rect", x0=x0 + 0.8, y0=y0 - 0.85, x1=x0 + w - 0.8, y1=y0 + 0.15,
+                              z0=z1 - 0.25, z1=z1 + 0.35, style="res_sage" if i % 2 == 0 else "res_cream"))
+            # bay-window bumps on long face
+            if i % 2 == 0:
+                for bx in (x0 + w * 0.22, x0 + w * 0.55):
+                    parts.append(dict(shape="rect", x0=bx, y0=y0 - 0.55, x1=bx + w * 0.18, y1=y0 + 0.05,
+                                      z0=z + 0.4, z1=z1 - 0.3, style=st))
+            # sky garden terrace every 3 floors
+            if i % 3 == 2 and z > 10:
+                parts.append(dict(shape="rect", x0=x0 - 0.8, y0=y0 + d * 0.15, x1=x0 + 1.2, y1=y0 + d * 0.85,
+                                  z0=z1 - 0.2, z1=z1 + 0.7, style="res_sage"))
+                parts.append(dict(shape="rect", x0=x0 + w - 1.2, y0=y0 + d * 0.15, x1=x0 + w + 0.8, y1=y0 + d * 0.85,
+                                  z0=z1 - 0.2, z1=z1 + 0.7, style="res_sage"))
             z, i = z1, i + 1
-        parts.append(dict(shape="rect", x0=x0 + w * 0.28, y0=y0 + d * 0.28, x1=x0 + w * 0.72, y1=y0 + d * 0.72,
-                          z0=h - 1.5, z1=h + 2.5, style="stone_grid", roofbox=True))
+        # warm stone crown / roof garden box
+        parts.append(dict(shape="rect", x0=x0 + w * 0.2, y0=y0 + d * 0.2, x1=x0 + w * 0.8, y1=y0 + d * 0.8,
+                          z0=h - 0.8, z1=h + 2.2, style="stone_grid", roofbox=True))
+        parts.append(dict(shape="rect", x0=x0 + w * 0.25, y0=y0 + d * 0.25, x1=x0 + w * 0.75, y1=y0 + d * 0.75,
+                          z0=h + 2.0, z1=h + 2.6, style="res_sage"))
         bld(bid, name, "compound", parts, door=[x0 + w / 2, y0 - 0.5], foot=[[x0, y0, x0 + w, y0 + d]], home=True)
 
     # OUTER RING — high-rises (≈70–95 m) along perimeter inside walls
     outer = [
-        (242, 204, 18, 16, 72, "glass_teal", "云麓 · 云阙苑"),
-        (262, 200, 16, 14, 68, "glass_silver", "云麓 · 天青苑"),
-        (348, 200, 18, 16, 74, "glass_gold", "云麓 · 鎏金苑"),
-        (242, 268, 16, 18, 70, "glass_blue", "云麓 · 望川苑"),
-        (350, 268, 18, 16, 72, "glass_teal", "云麓 · 叠翠苑"),
-        (300, 278, 20, 14, 66, "glass_silver", "云麓 · 听澜苑"),
+        (242, 204, 18, 16, 72, "res_cream", "slab", "云麓 · 云阙苑"),
+        (262, 200, 16, 14, 68, "res_sand", "wing", "云麓 · 天青苑"),
+        (348, 200, 18, 16, 74, "res_terra", "slab", "云麓 · 鎏金苑"),
+        (242, 268, 16, 18, 70, "res_ivory", "U", "云麓 · 望川苑"),
+        (350, 268, 18, 16, 72, "res_sage", "wing", "云麓 · 叠翠苑"),
+        (300, 278, 20, 14, 66, "res_cream", "slab", "云麓 · 听澜苑"),
     ]
-    for i, (x0, y0, w, d, h, st, name) in enumerate(outer):
-        gen4th(f"res_o{i}", name, x0, y0, w, d, h, st)
+    for i, (x0, y0, w, d, h, st, plan, name) in enumerate(outer):
+        gen4th(f"res_o{i}", name, x0, y0, w, d, h, st, plan)
 
     # MID RING — mid/high 四代住宅 (≈48–62 m)
     mid = [
-        (256, 214, 14, 14, 52, "glass_green", "云麓 · 栖云阁"),
-        (340, 214, 14, 14, 50, "apt", "云麓 · 清晖阁"),
-        (256, 258, 14, 14, 48, "glass_silver", "云麓 · 碧梧阁"),
-        (340, 258, 14, 14, 54, "glass_gold", "云麓 · 映月阁"),
+        (256, 214, 14, 14, 52, "res_sage", "wing", "云麓 · 栖云阁"),
+        (340, 214, 14, 14, 50, "res_cream", "slab", "云麓 · 清晖阁"),
+        (256, 258, 14, 14, 48, "res_sand", "U", "云麓 · 碧梧阁"),
+        (340, 258, 14, 14, 54, "res_terra", "wing", "云麓 · 映月阁"),
     ]
-    for i, (x0, y0, w, d, h, st, name) in enumerate(mid):
-        gen4th(f"res_m{i}", name, x0, y0, w, d, h, st)
+    for i, (x0, y0, w, d, h, st, plan, name) in enumerate(mid):
+        gen4th(f"res_m{i}", name, x0, y0, w, d, h, st, plan)
 
     def luxury_villa(bid, name, x0, y0, rot=0):
-        """Modern Chinese luxury villa: stone podium, glass curtain, flat overhang, private courtyard."""
-        # L / courtyard footprint ~16x14
+        """Modern Chinese luxury villa: warm stone + cream, bay windows, courtyard garden (not office glass)."""
+        st = "res_ivory" if sum(ord(c) for c in bid) % 2 == 0 else "res_cream"
         parts = [
-            dict(shape="rect", x0=x0, y0=y0, x1=x0 + 16, y1=y0 + 4.5, z0=0, z1=3.4, style="stone_grid"),       # street wing
-            dict(shape="rect", x0=x0, y0=y0 + 4.5, x1=x0 + 5, y1=y0 + 13, z0=0, z1=3.4, style="stone_grid"), # side wing
-            dict(shape="rect", x0=x0 + 11, y0=y0 + 4.5, x1=x0 + 16, y1=y0 + 13, z0=0, z1=3.4, style="stone_grid"),
-            dict(shape="rect", x0=x0 + 0.5, y0=y0 + 0.5, x1=x0 + 15.5, y1=y0 + 4, z0=3.4, z1=8.8, style="mall_glass"),
-            dict(shape="rect", x0=x0 + 0.5, y0=y0 + 5, x1=x0 + 4.5, y1=y0 + 12.5, z0=3.4, z1=8.2, style="glass_gold"),
-            dict(shape="rect", x0=x0 + 11.5, y0=y0 + 5, x1=x0 + 15.5, y1=y0 + 12.5, z0=3.4, z1=8.2, style="glass_silver"),
-            # flat roof overhang / canopy blade
-            dict(shape="rect", x0=x0 - 0.6, y0=y0 - 0.4, x1=x0 + 16.6, y1=y0 + 5.2, z0=8.8, z1=9.4, style="stone_grid"),
-            dict(shape="rect", x0=x0 + 5.5, y0=y0 + 8, x1=x0 + 10.5, y1=y0 + 12, z0=0, z1=0.4, style="glass_green"),  # courtyard garden pad
+            dict(shape="rect", x0=x0, y0=y0, x1=x0 + 16, y1=y0 + 4.5, z0=0, z1=3.2, style="stone_grid"),
+            dict(shape="rect", x0=x0, y0=y0 + 4.5, x1=x0 + 5, y1=y0 + 13, z0=0, z1=3.2, style="stone_grid"),
+            dict(shape="rect", x0=x0 + 11, y0=y0 + 4.5, x1=x0 + 16, y1=y0 + 13, z0=0, z1=3.2, style="stone_grid"),
+            dict(shape="rect", x0=x0 + 0.4, y0=y0 + 0.4, x1=x0 + 15.6, y1=y0 + 4.1, z0=3.2, z1=7.6, style=st),
+            dict(shape="rect", x0=x0 + 0.4, y0=y0 + 4.8, x1=x0 + 4.6, y1=y0 + 12.6, z0=3.2, z1=7.2, style="res_sand"),
+            dict(shape="rect", x0=x0 + 11.4, y0=y0 + 4.8, x1=x0 + 15.6, y1=y0 + 12.6, z0=3.2, z1=7.2, style="res_terra"),
+            # bay window bumps
+            dict(shape="rect", x0=x0 + 3, y0=y0 - 0.7, x1=x0 + 6.5, y1=y0 + 0.2, z0=3.6, z1=6.8, style=st),
+            dict(shape="rect", x0=x0 + 9.5, y0=y0 - 0.7, x1=x0 + 13, y1=y0 + 0.2, z0=3.6, z1=6.8, style=st),
+            # balcony + planter
+            dict(shape="rect", x0=x0 + 1, y0=y0 - 1.0, x1=x0 + 15, y1=y0 - 0.15, z0=7.2, z1=7.7, style="res_sage"),
+            # flat overhang + roof garden
+            dict(shape="rect", x0=x0 - 0.5, y0=y0 - 0.5, x1=x0 + 16.5, y1=y0 + 5, z0=7.6, z1=8.2, style="stone_grid"),
+            dict(shape="rect", x0=x0 + 5.5, y0=y0 + 8, x1=x0 + 10.5, y1=y0 + 12, z0=0, z1=0.35, style="res_sage"),
+            dict(shape="rect", x0=x0 + 6, y0=y0 + 6, x1=x0 + 10, y1=y0 + 9, z0=8.0, z1=8.5, style="res_sage"),
         ]
         zone("lawn", rect(x0 + 5.2, y0 + 5, x0 + 10.8, y0 + 12.5))
         bld(bid, name, "compound", parts, door=[x0 + 8, y0 - 0.4], foot=[[x0, y0, x0 + 16, y0 + 13]], home=True)
