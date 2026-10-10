@@ -12,6 +12,7 @@ Parallel track for nicer 小区 grounds + larger modern unit interiors. **CBD pa
 | `tools/layouts/room_midtown_a101.json` | 一室一厅 ~48㎡ |
 | `tools/build_estate.py` | roomlayout validate → estate45 |
 | `tools/capture_estate.py` | screenshots mt-b1…mt-b6 |
+| `chunks/estate.js` | outer facades chunk (SCENE_CHUNKS.estate) |
 | `img/estate/*` | gate sign / lobby mat / unit card / compound map / rent table card |
 | `shared-rules/rules.json` → `rent_table` | A101-yunqi ¥1980 · single-midtown-ref ¥1200 · inner.1ldk [1800,2200] |
 
@@ -56,3 +57,25 @@ bash tools/sync_rules.sh               # after editing canonical rent_table
 ## Next (suggested)
 1. **Community clinic interior** (社区卫生站厅：挂号/输液椅，接 civic hospital 轻量版)  
 2. **Sports** (小区健身区 / 球场 — `amenities_sport.js` already parallel; wire into compound)
+
+
+## Facade variety (2026-10-10 · Leo: not identical)
+
+Outer block **east of Midtown-A** (`chunks/estate.js`, x≈152–210). Four looks, each differs on ≥3 axes (height / wall / roof / balcony). Direction: modern Chinese high-end compound (cream–glass, clean AC), **not** cloned old-block brick boxes.
+
+| key | name | floors | wall | roof | balcony | note |
+|---|---|---|---|---|---|---|
+| `yq_club` | 云栖会所 | **4** | glass_podium (shop+glass G, p1 upper) | `b_roof_deck` | sparse (top only) | clubhouse / lobby feel |
+| `yq_cream` | 云栖暖石 | **11** | plaster **p1** ivory | `b_roof_a` | mid every-2F | CBD/云麓 cream rhythm |
+| `yq_mason` | 云栖砖影 | **14** | warm **w2** masonry strip | `b_roof_b` | laundry_alt | lived-in but refined |
+| `yq_glass` | 云栖璃湾 | **18** | glass_strip (window-dominant w1) | `b_roof_deck` | dense every-F | tall glass bar, no AC clutter |
+
+**Rules (also `img/estate/VARIETY_RULES.json`):**
+1. Neighbours within ~30 m must not share the same (floors band × wall mode × roof × balcony rhythm).
+2. High-end prefers fewer pipes; AC sparse/none except masonry look.
+3. Ground floor of club/glass may use `f_shop` for glass strip / lobby read.
+4. Runtime: `midtown_estate.js` pads street ground east of x≈150 and registers chunk `estate` (does not edit Midtown-A sources).
+
+**Screenshots:** `mt-b-var1`…`mt-b-var4`. Rebuild: `python3 tools/build_estate.py && python3 tools/capture_estate_var.py`.
+
+**API:** `SP.estate.warpOuter(x,y)` · `SP.estate.variety()` → rules + building meta.

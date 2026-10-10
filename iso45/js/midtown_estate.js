@@ -48,6 +48,30 @@
     }
   }
 
+  /** Midtown-A ground stops ~x150; pad asphalt/sidewalk east so outer facades have a floor (runtime only). */
+  function ensureGroundEast() {
+    const scene = window.SCENE || (SP.world && SP.world.data);
+    const g = scene && scene.ground;
+    if (!g || !g.data_south_to_north) return false;
+    const ox = g.origin[0], ch = g.chunk || 2, oy = g.origin[1];
+    const need = Math.ceil((212 - ox) / ch);
+    const add = need - g.cols;
+    if (add <= 0) return false;
+    g.cols = need;
+    g.data_south_to_north = g.data_south_to_north.map((row, j) => {
+      const y = oy + j * ch;
+      let pad;
+      if (y >= -7 && y <= -1) pad = "A".repeat(add);
+      else if (y > -1 && y <= 3) pad = "S".repeat(add);
+      else pad = "G".repeat(add); // grass court for high-end compound fringe
+      return row + pad;
+    });
+    if (SP.world && SP.world.data) SP.world.data.ground = g;
+    if (SP.world && SP.world.bakeGround) SP.world.bakeGround();
+    if (SP.layers && SP.layers.reset) SP.layers.reset();
+    return true;
+  }
+
   function ensureStreetMark() {
     const scene = window.SCENE || (SP.world && SP.world.data);
     if (!scene || !scene.objects) return;
@@ -116,6 +140,7 @@
     if (SP.actions && SP.actions.go) SP.actions.go("street", [x, y, dir]);
     else if (SP.game && SP.game.switchScene) SP.game.switchScene("street", [x, y, dir]);
     if (SP.player) { SP.player.x = x; SP.player.y = y; if (SP.player.setDir) SP.player.setDir(dir); }
+    ensureGroundEast();
     loadEstateChunk();
   };
 
@@ -136,6 +161,7 @@
     SP.places.room_midtown_a101 = { enter: function () { ES.enter({ to: "room_midtown_a101" }); } };
 
     ensureChunkMeta();
+    ensureGroundEast();
     ensureStreetMark();
     loadEstateChunk();
 
@@ -144,7 +170,7 @@
       G.switchScene = function (to, spawn, door) {
         const r = prev(to, spawn, door);
         if (to === "street" || (!W.interior && W.sceneId === "street")) {
-          ensureChunkMeta(); ensureStreetMark(); loadEstateChunk();
+          ensureChunkMeta(); ensureGroundEast(); ensureStreetMark(); loadEstateChunk();
         }
         return r;
       };
