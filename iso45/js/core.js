@@ -1,4 +1,4 @@
-/* 浮世万象 · scene-proto-45 · core: 2:1 dimetric projection, kit atlas (manifest + tinted copy + emit), masks, geometry.
+/* 浮世万象 · scene-proto-45 · core: 2:1 dimetric projection, kit atlas (manifest + emit + snow atlas), light sprites, masks, geometry.
    World = metres (x east, y north, z up). Camera: orthographic, yaw 45 (looks north-east), pitch 30 -> screen px (y down):
      sx = (x - y) * 32        sy = -((x + y) * 16 + z * 39.19)
    0.5 m grid cell = 16 x 8 px diamond, 2 m ground chunk = 128 x 64 px diamond. World east = screen up-right,
@@ -49,7 +49,10 @@
     if (!P) return null;
     const st = P.states.includes(state) ? state : P.states[0];
     const r = P.rots.includes(rot) ? rot : P.rots[0];
-    let k = `${piece}/${variant || "base"}/${part}/${st}/${r}`;
+    // variant fallback: "t2.autumn" -> "t2" -> "base" (weathering / shape variants exist only for some states)
+    const v = variant || "base";
+    let k = `${piece}/${v}/${part}/${st}/${r}`;
+    if (!F[k] && v.includes(".")) k = `${piece}/${v.split(".")[0]}/${part}/${st}/${r}`;
     if (!F[k]) k = `${piece}/base/${part}/${st}/${r}`;
     return F[k] ? k : null;
   };
@@ -88,24 +91,106 @@
     x.globalAlpha = 1; x.globalCompositeOperation = "source-over";
     return c;
   }
-  const tintCanvas = document.createElement("canvas");
-  SP.tintedActors = {};
-  SP.updateTint = function (force) {
-    const t = SP.tint, key = [t.r, t.g, t.b, t.night].map((v) => Math.round(v * (v <= 1 ? 40 : 0.25))).join(",");
-    if (!force && key === SP.tintKey && SP.tinted) return false;
-    SP.tintKey = key;
-    const A = SP.img.atlas;
-    SP.tinted = multiplyCopy(tintCanvas, A, A.naturalWidth, A.naturalHeight, t.r, t.g, t.b, SP.img.emit, t.night);
-    for (const name in window.ACTORS) {      // actor atlases: tinted copies (no per-draw compositing)
-      const im = SP.img["actor_" + name]; if (!im) continue;
-      const c = SP.tintedActors[name] || (SP.tintedActors[name] = document.createElement("canvas"));
-      multiplyCopy(c, im, im.naturalWidth, im.naturalHeight, t.r, t.g, t.b, null, 0);
+  /* texture slots: AI-painted (or hand-painted) replacements for any kit frame. kit/overrides/index.js sets
+     window.KIT_OVERRIDES = { "<piece>/<variant>/<part>/<state>/<rot>": "kit/overrides/<same path>.png", ... };
+     each PNG must have exactly the frame's size (kit/texture_slots.json) and is pasted over that frame's atlas rect
+     before tinting, so it sorts / fades / lights exactly like the generated sprite. */
+  SP.baseAtlas = null;
+  SP.applyOverrides = function () {
+    const A = SP.img.atlas, c = document.createElement("canvas"); c.width = A.naturalWidth; c.height = A.naturalHeight;
+    const x = c.getContext("2d"); x.drawImage(A, 0, 0); SP.overridden = [];
+    for (const [key, src] of Object.entries(window.KIT_OVERRIDES || {})) {
+      const f = F[key], im = SP.img["ovr:" + key];
+      const iw = im && (im.naturalWidth || im.width), ih = im && (im.naturalHeight || im.height);
+      if (!f || !iw) continue;
+      if (iw !== f[2] || ih !== f[3]) { console.warn("override size mismatch", key, iw, ih, "expected", f[2], f[3]); continue; }
+      x.clearRect(f[0], f[1], f[2], f[3]); x.drawImage(im, f[0], f[1]); SP.overridden.push(key);
     }
-    return true;
+    SP.baseAtlas = c;
   };
+  SP.overrideAssets = () => Object.entries(window.KIT_OVERRIDES || {}).map(([k, src]) => ["ovr:" + k, src]);
+  /* lighting (ported from the front-view line): the atlas is drawn UNTINTED; the time-of-day / weather ambient colour
+     and every light source are applied once per frame by the lightmap (js/env.js: multiply), emissive pixels are
+     composited after it. So there is no per-time-of-day atlas copy any more (less memory on phones, continuous clock). */
+  SP.updateTint = function () {
+    if (!SP.baseAtlas) SP.applyOverrides();
+    SP.tinted = SP.baseAtlas; SP.tintKey = "lit";
+    for (const name in window.ACTORS) SP.tintedActors[name] = SP.img["actor_" + name];
+    return false;
+  };
+  SP.tintedActors = {};
+  // ---------- emit + snow frames ----------
+  const EMITSET = new Set(K.emit || []), SNOW = K.snow || {};
+  SP.hasEmit = (key) => EMITSET.has(key);
+  /** snow frame of a kit frame (recolour variants share the geometry variant's snow: "t2.autumn" -> "t2") */
+  const snowKeyCache = new Map();
+  SP.snowKey = function (key) {
+    let k = snowKeyCache.get(key); if (k !== undefined) return k;
+    k = null;
+    const same = (q) => SNOW[q] && F[q] && F[key] && F[q][2] === F[key][2] && F[q][3] === F[key][3] && F[q][4] === F[key][4] && F[q][5] === F[key][5];
+    if (SNOW[key]) k = key;
+    else {                                   // piece/variant/part/state/rot: try base geometry variant, then the default state
+      const p = key.split("/"), piece = K.pieces[p[0]], vs = [p[1]];
+      if (p[1].includes(".")) vs.push(p[1].split(".")[0]);
+      if (!vs.includes("base")) vs.push("base");
+      const sts = [p[3]]; if (piece && piece.states && !sts.includes(piece.states[0])) sts.push(piece.states[0]);
+      outer: for (const st of sts) for (const v of vs) { const q = [p[0], v, p[2], st, p[4]].join("/"); if (same(q)) { k = q; break outer; } }
+    }
+    snowKeyCache.set(key, k); return k;
+  };
+  /** snow cover over a frame: amount 0..1 crossfades the 3 cumulative levels of kit_snow.png (loaded on first snow) */
+  SP.drawSnow = function (ctx, key, x, y, amount, alpha) {
+    if (amount <= 0.01) return;
+    const L = SP.img.snow;
+    if (!L) { if (!SP._snowLoading) { SP._snowLoading = true; const im = new Image(); im.onload = () => (SP.img.snow = im); im.src = "kit/" + (K.snow_atlas || "kit_snow.png"); } return; }
+    const sk = SP.snowKey(key); if (!sk) return;
+    const f = F[key], s = SNOW[sk], [sx, sy, ox, oy, w, h, vert] = s;
+    const a3 = Math.min(3, amount * 3), k = Math.floor(a3), fr = a3 - k, A = alpha == null ? 1 : alpha;
+    const X = Math.round(x) - f[4] + ox, Y = Math.round(y) - f[5] + oy;
+    const lv = (i) => (vert ? [sx, sy + i * (h + 1)] : [sx + i * (w + 1), sy]);
+    if (k >= 1) { const [u, v] = lv(k - 1); ctx.globalAlpha = A; ctx.drawImage(L, u, v, w, h, X, Y, w, h); }
+    if (k < 3 && fr > 0.02) { const [u, v] = lv(k); ctx.globalAlpha = A * fr; ctx.drawImage(L, u, v, w, h, X, Y, w, h); }
+    ctx.globalAlpha = 1;
+  };
+  SP.drawEmit = function (ctx, key, x, y, alpha) {
+    const f = F[key]; if (!f || !EMITSET.has(key)) return;
+    ctx.globalAlpha = alpha == null ? 1 : alpha;
+    ctx.drawImage(SP.img.emit, f[0], f[1], f[2], f[3], Math.round(x) - f[4], Math.round(y) - f[5], f[2], f[3]);
+    ctx.globalAlpha = 1;
+  };
+  /** erase a frame's silhouette from a layer (emissive pixels hidden behind something drawn later) */
+  SP.eraseFrame = function (ctx, key, x, y) {
+    const f = F[key]; if (!f) return;
+    ctx.drawImage(SP.tinted || SP.img.atlas, f[0], f[1], f[2], f[3], Math.round(x) - f[4], Math.round(y) - f[5], f[2], f[3]);
+  };
+  // ---------- light sprites (pre-rendered once per colour; drawn with 'lighter' into the lightmap) ----------
+  const lightCache = new Map();
+  SP.lightSprite = function (r, g, b, kind) {
+    r |= 0; g |= 0; b |= 0;
+    const key = (r << 16) | (g << 8) | b | (kind === "streak" ? 1 << 24 : 0);
+    let c = lightCache.get(key);
+    if (c) return c;
+    c = document.createElement("canvas");
+    if (kind === "streak") {                              // vertical reflection streak on wet ground
+      c.width = 16; c.height = 64; const x = c.getContext("2d");
+      const gr = x.createLinearGradient(0, 0, 0, 64);
+      gr.addColorStop(0, `rgba(${r},${g},${b},0.9)`); gr.addColorStop(0.35, `rgba(${r},${g},${b},0.45)`); gr.addColorStop(1, `rgba(${r},${g},${b},0)`);
+      x.fillStyle = gr; x.beginPath(); x.ellipse(8, 22, 5, 42, 0, 0, Math.PI * 2); x.fill();
+    } else {
+      c.width = c.height = 64; const x = c.getContext("2d");
+      const gr = x.createRadialGradient(32, 32, 0, 32, 32, 32);
+      gr.addColorStop(0, `rgba(${r},${g},${b},1)`); gr.addColorStop(0.4, `rgba(${r},${g},${b},0.42)`); gr.addColorStop(1, `rgba(${r},${g},${b},0)`);
+      x.fillStyle = gr; x.fillRect(0, 0, 64, 64);
+    }
+    lightCache.set(key, c);
+    return c;
+  };
+  /** integer hash -> 0..1 (deterministic per id/day: lit windows, flicker, weather roll) */
+  SP.hash = function (a, b) { let h = Math.imul((a | 0) ^ 0x9e3779b9, 0x85ebca6b) ^ Math.imul(((b | 0) + 0x27d4eb2f) | 0, 0xc2b2ae35); h ^= h >>> 15; h = Math.imul(h, 0x2c1b3c6d); h ^= h >>> 12; return (h >>> 0) / 4294967296; };
+  SP.strHash = function (s) { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; };
   SP.drawFrame = function (ctx, key, x, y, alpha, raw) {
     const f = F[key]; if (!f) return;
-    const src = raw ? SP.img.atlas : SP.tinted;
+    const src = raw ? (SP.baseAtlas || SP.img.atlas) : SP.tinted;
     if (alpha != null && alpha < 0.999) ctx.globalAlpha = alpha;
     ctx.drawImage(src, f[0], f[1], f[2], f[3], Math.round(x) - f[4], Math.round(y) - f[5], f[2], f[3]);
     if (alpha != null && alpha < 0.999) ctx.globalAlpha = 1;

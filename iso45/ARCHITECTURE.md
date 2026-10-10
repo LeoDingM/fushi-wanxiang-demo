@@ -147,6 +147,26 @@ Same as scene-proto, plus:
 * `scene.json → npcs[] = {id, sprite, speed, radius, mode: loop|pingpong, route: [[x,y,("cw_main")]…], clearance_m}`.
 * `traffic = {lanes[], crosswalks[], intersection}`.
 
+## 9b. Time, weather, light, interactions (Stage 2, shared with the front-view line)
+* `clock.js` is the front-view module unchanged except named times: game minutes, calendar from `scene.json.calendar`,
+  weather state machine from `scene.json.weather` (chances per season, wet / snow rise and melt rates), ambient colour
+  keyframes. Both lines read the same data, so they show the same day.
+* Lighting is no longer a per-time-of-day tinted atlas copy: the frame is drawn untinted, then `env.applyLight`
+  multiplies a half-resolution lightmap (ambient + additive light sprites; 2:1 ellipses for ground pools). Emissive
+  atlas pixels are painted into a separate layer during the painter pass; a drawable that overlaps an emissive rect
+  erases its silhouette from that layer (`destination-out`), so lit windows never shine through a nearer wall or tree.
+  The layer is added after the multiply, then small halos.
+* Snow: Blender renders an extra world-normal-Z pass; `pixelate_kit.py` turns up-facing pixels into 3 cumulative
+  levels (cropped, default state only; other states / recolours reuse it when the frame size matches). Ground snow is a
+  periodic-noise pattern filled into the cached ground tiles (asphalt gets less, greyer slush) — the tile key includes
+  the snow step, so a step change re-bakes lazily. Footprints / tyre tracks: a 1500-stamp ring buffer.
+* Falling leaves / petals are depth-sorted particles released just below the canopy band and outside the trunk box
+  (keeps the topological sort acyclic). The laundry line is its own sorted drawable.
+* `interact.js` = the front-view rules table (`scene.json.interactions`): use / kick by state, fx, decals, hazards,
+  repair / grow after N game hours. 45°-specific: a state change that grows a footprint is refused while someone
+  stands there; the pushed shared bike adds its foot circles to 李默 and is excluded from colliders while carried;
+  sheltering NPCs (`hidden`) have no shape at all.
+
 ## 10. Mapping to Godot 4
 
 | this prototype | Godot 4 |

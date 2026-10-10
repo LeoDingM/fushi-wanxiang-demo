@@ -18,8 +18,18 @@
   const FADE_ALPHA = 0.35, FADE_RATE = 7, EPS = 1e-3;
   function piece(o) { return K.pieces[o.type]; }
   W.piece = piece;
+  /** atlas variant of an object: its geometry variant (weathering / shape), + the season recolour for trees */
+  W.variant = function (o) {
+    const P = piece(o), se = SP.season || "summer";
+    if (P.seasons && se !== "summer" && se !== "winter") return o.variant === "base" ? se : o.variant + "." + se;
+    return o.variant;
+  };
   W.shownState = function (o) {
-    if (o.type === "f_window" && o.state === "intact" && o.night_lit && SP.tint.night > 0.35) return "lit";
+    if (o.type === "f_window" && o.state === "intact" && o.night_lit && SP.tint.night > 0.35) {
+      const c = SP.clock, m = c ? c.min : 1200;                  // most lights go out after ~23:00 (per-window, per-day hash)
+      if (c && (m > 1380 || m < 330) && SP.hash(SP.strHash(o.id), c.day) < 0.7) return o.state;
+      return "lit";
+    }
     return o.state;
   };
   W.load = function (data) {
@@ -33,8 +43,11 @@
       W.objects.push(o); W.byId[o.id] = o;
     }
     W.rebuildColliders();
+    if (W.initRules) W.initRules(data);
     W.bakeGround();
   };
+  /** season change (clock.js): recoloured trees + seasonal ground (fallen leaves / petals) */
+  W.applySeason = function () { if (SP.clock) SP.season = SP.clock.season; W.bakeGround(); W.logEvent && W.logEvent(`换季：${SP.clock ? SP.clock.seasonName() : SP.season}`); };
 
   // ---------- footprints / colliders (world space) ----------
   W.footprints = function (o) {
@@ -46,7 +59,7 @@
     const C = [];
     for (const o of W.objects) o._box = null;          // sort boxes depend on state (gate leaves, crashed car)
     for (const o of W.objects) {
-      if (piece(o).layer !== "sorted") continue;
+      if (piece(o).layer !== "sorted" || o.carried) continue;     // a pushed bike collides as part of 李默
       for (const poly of W.footprints(o)) C.push({ poly, box: SP.polyBox(poly), id: o.id });
     }
     for (const c of W.data.colliders || []) {
@@ -88,29 +101,70 @@
     return null;
   };
 
-  // ---------- ground: 2 m diamond chunks + decals + low pieces baked into one canvas ----------
-  W.bakeGround = function () {
+  // ---------- ground: 2 m diamond chunks + decals + low pieces, baked lazily into 1024 x 512 px screen tiles ----------
+  // (one canvas for a 100 m map would be 6000+ px wide: too big for phones; tiles are baked on first view per tint and
+  //  evicted when far away, so the map can keep growing)
+  const TW = 1024, TH = 512, TILE_CAP = 36;
+  W.bakeGround = function () {           // (re)index; tiles re-bake lazily on the next draw
     const G = W.data.ground, [X0, Y0] = G.origin, ch = G.chunk, X1 = X0 + G.cols * ch, Y1 = Y0 + G.rows * ch;
-    const xs = [SP.sx(X0, Y1), SP.sx(X1, Y0)], ys = [SP.sy(X1, Y1, 0), SP.sy(X0, Y0, 0)];
-    const ox = Math.floor(xs[0]) - 2, oy = Math.floor(ys[0]) - 2, w = Math.ceil(xs[1] - xs[0]) + 4, h = Math.ceil(ys[1] - ys[0]) + 40;
-    const c = (W.groundCanvas = W.groundCanvas || document.createElement("canvas"));
-    if (c.width !== w || c.height !== h) { c.width = w; c.height = h; }
-    const x = c.getContext("2d");
-    x.setTransform(1, 0, 0, 1, 0, 0); x.imageSmoothingEnabled = false; x.clearRect(0, 0, w, h);
-    W.groundOrigin = [ox, oy];
-    x.translate(-ox, -oy);
+    W.groundRect = [X0, Y0, X1, Y1];
+    const items = [];
     G.data_south_to_north.forEach((row, r) => {
       for (let col = 0; col < row.length; col++) {
-        const [pc, st] = G.legend[row[col]].split(":");
-        const key = SP.frameKey(pc, "base", "main", st || "default", 0);
-        const gx = X0 + col * ch, gy = Y0 + r * ch;
-        SP.drawFrame(x, key, SP.sx(gx, gy), SP.sy(gx, gy, 0));
+        const [pc, st] = G.legend[row[col]].split(":"), key = SP.frameKey(pc, "base", "main", st || "default", 0);
+        const gx = X0 + col * ch, gy = Y0 + r * ch, X = SP.sx(gx, gy), Y = SP.sy(gx, gy, 0);
+        if (key) items.push({ key, X, Y, rect: SP.frameRect(key, X, Y), o: 0, road: pc === "g_asphalt", g: [gx, gy, ch] });
       }
     });
+    // seasonal ground: fallen leaves (autumn) / blossom petals (spring) under every tree
+    const se = SP.season;
+    if (se === "autumn" || se === "spring") for (const o of W.objects) {
+      if (o.type !== "p_tree") continue;
+      for (let i = 0; i < 2; i++) {
+        const hh = SP.strHash(o.id) + i * 7, k = `fx/${se === "autumn" ? "leaves" : "petals"}/${hh % 3}`; if (!SP.frame(k)) continue;
+        const x = o.x + (SP.hash(hh, 1) - 0.5) * 1.6, y = o.y + (SP.hash(hh, 2) - 0.5) * 1.6, X = SP.sx(x, y), Y = SP.sy(x, y, 0);
+        items.push({ key: k, X, Y, rect: SP.frameRect(k, X, Y), o: 0.5 });
+      }
+    }
     const flat = W.objects.filter((o) => { const L = piece(o).layer; return L === "decal" || L === "low"; });
     flat.sort((a, b) => (piece(a).layer === "low") - (piece(b).layer === "low") || (b.x + b.y) - (a.x + a.y));
-    for (const o of flat) SP.drawFrame(x, SP.frameKey(o.type, o.variant, "main", o.state, o.rot), SP.sx(o.x, o.y), SP.sy(o.x, o.y, o.z));
-    W.groundTintKey = SP.tintKey;
+    flat.forEach((o, i) => { const key = SP.frameKey(o.type, o.variant, "main", o.state, o.rot); if (!key) return; const X = SP.sx(o.x, o.y), Y = SP.sy(o.x, o.y, o.z);
+                             items.push({ key, X, Y, rect: SP.frameRect(key, X, Y), o: 1 + i }); });
+    const idx = new Map();
+    for (const it of items) {
+      for (let tx = Math.floor(it.rect.x0 / TW); tx <= Math.floor((it.rect.x1 - 1) / TW); tx++)
+        for (let ty = Math.floor(it.rect.y0 / TH); ty <= Math.floor((it.rect.y1 - 1) / TH); ty++) {
+          const k = tx + "," + ty; if (!idx.has(k)) idx.set(k, []); idx.get(k).push(it);
+        }
+    }
+    W.groundIdx = idx; W.groundTiles = W.groundTiles || new Map(); W.groundTiles.forEach((t) => (t.tint = null));
+    W.groundTintKey = gkey();
+  };
+  const gkey = () => SP.tintKey + "|" + (SP.env ? SP.env.snowLevel() : 0) + "|" + SP.season;
+  function groundTile(tx, ty) {
+    const k = tx + "," + ty; let t = W.groundTiles.get(k);
+    if (t && t.tint === W.groundTintKey) { t.used = SP.frameNo || 0; return t; }
+    const list = W.groundIdx.get(k); if (!list) return null;
+    if (!t) { t = { c: document.createElement("canvas") }; t.c.width = TW; t.c.height = TH; W.groundTiles.set(k, t); }
+    const x = t.c.getContext("2d"); x.setTransform(1, 0, 0, 1, 0, 0); x.imageSmoothingEnabled = false; x.clearRect(0, 0, TW, TH);
+    x.translate(-tx * TW, -ty * TH);
+    for (const it of list) SP.drawFrame(x, it.key, it.X, it.Y);
+    const sl = SP.env ? SP.env.snowLevel() : 0;
+    if (sl) SP.env.snowFill(x, list, sl, [tx * TW, ty * TH, TW, TH]);
+    t.tint = W.groundTintKey; t.used = SP.frameNo || 0; W.groundBakes = (W.groundBakes || 0) + 1;
+    if (W.groundTiles.size > TILE_CAP) {                      // evict least recently used
+      const old = [...W.groundTiles.entries()].sort((a, b) => a[1].used - b[1].used).slice(0, W.groundTiles.size - TILE_CAP);
+      for (const [kk, tt] of old) if (tt !== t) { tt.c.width = tt.c.height = 0; W.groundTiles.delete(kk); }
+    }
+    return t;
+  }
+  /** draw the ground under the screen-space view rect */
+  W.drawGround = function (ctx, view) {
+    const gk = gkey(); if (W.groundTintKey !== gk) W.groundTintKey = gk;          // tiles re-bake lazily (key mismatch)
+    for (let tx = Math.floor(view.x0 / TW); tx <= Math.floor(view.x1 / TW); tx++)
+      for (let ty = Math.floor(view.y0 / TH); ty <= Math.floor(view.y1 / TH); ty++) {
+        const t = groundTile(tx, ty); if (t) ctx.drawImage(t.c, tx * TW, ty * TH);
+      }
   };
 
   // ---------- sort boxes ----------
@@ -118,10 +172,14 @@
   /** world sort box of an object part: {x0,y0,x1,y1,z0,z1} + optional ground polygon (for rotated pieces) */
   W.sortBox = function (o, part) {
     const P = piece(o);
-    const g = P.geo && P.geo[W.shownState(o)] && P.geo[W.shownState(o)][part] || P.geo && P.geo[o.state] && P.geo[o.state][part];
+    const gv = o.variant !== "base" && P.geo_var && P.geo_var[o.variant], ss = W.shownState(o);
+    const g = (gv && gv[ss] && gv[ss][part]) || (P.geo && P.geo[ss] && P.geo[ss][part]) || (P.geo && P.geo[o.state] && P.geo[o.state][part]);
     if (g) {          // real geometry extent exported by gen_kit45.py, rotated with the object; footprints refine
       const b = rotRectBox([g[0], g[1], g[3], g[4]], o), fps = W.footprints(o);
-      return { x0: b[0], y0: b[1], x1: b[2], y1: b[3], z0: (o.z || 0) + g[2], z1: (o.z || 0) + g[5], polys: fps.length ? fps : (o.rot % 2 ? [SP.footPoly([g[0], g[1], g[3], g[4]], o.rot, o.x, o.y)] : null) };
+      // tree canopies overhang lanes: their sort band starts above the tallest vehicle (bus 3.22 m), so a canopy is
+      // always "above" buses / cars / characters passing under it (no canopy-bus-pole cycles)
+      const z0 = g[2];
+      return { x0: b[0], y0: b[1], x1: b[2], y1: b[3], z0: (o.z || 0) + z0, z1: (o.z || 0) + g[5], polys: fps.length ? fps : (o.rot % 2 ? [SP.footPoly([g[0], g[1], g[3], g[4]], o.rot, o.x, o.y)] : null) };
     }
     let rect = null, z = P.sort_z || [0, 1.0], polys = null;
     if (P.part_sort && P.part_sort[part]) { rect = P.part_sort[part].box; z = P.part_sort[part].z; }
@@ -210,10 +268,12 @@
   W.drawables = function (out, view) {
     for (const o of W.objects) {
       const P = piece(o);
-      if (P.layer !== "sorted") continue;
+      if (P.layer !== "sorted" || o.carried) continue;
       const st = W.shownState(o), X = SP.sx(o.x, o.y), Y = SP.sy(o.x, o.y, o.z);
+      const vr = W.variant(o), bare = P.seasons && SP.season === "winter";
       P.parts.forEach((part, pi) => {
-        const key = SP.frameKey(o.type, o.variant, part, st, o.rot);
+        if (bare && part === "canopy") return;                 // winter: bare branches
+        const key = SP.frameKey(o.type, vr, part, st, o.rot);
         if (!key) return;
         const rect = SP.frameRect(key, X, Y);
         if (view && !SP.rectsOverlap(rect, view)) return;

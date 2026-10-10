@@ -22,16 +22,65 @@
     FX.parts.push({ kind: "smoke", x: x + (R() - 0.5) * 0.6, y, z, vx: 0.2 + R() * 0.25, vy: 0.2 + R() * 0.2, vz: 0.7 + R() * 0.5, t: 0, life: 3.5 + R() * 1.5,
                     dark: dark, size: size == null ? 0 : size });
   };
+  // ---- ported from scene-proto/js/fx.js: splashes, water, debris, pickups, leaves / petals, breath, hydrant spray
+  const WATER = [[196, 222, 240], [150, 190, 220], [230, 242, 250]];
+  const LEAF = [[226, 178, 60], [214, 140, 46], [190, 96, 40], [236, 204, 96]], PETAL = [[246, 200, 214], [252, 228, 236], [232, 170, 192]], GREEN = [[96, 140, 60], [120, 166, 74]];
+  const push = (p) => { if (FX.parts.length < 700) FX.parts.push(p); return p; };
+  FX.debris = function (x, y, z, n, cols) { for (let i = 0; i < n; i++) push({ kind: "pix", x: x + (R() - 0.5) * 0.4, y: y - 0.1, z, vx: (R() - 0.5) * 2.6, vy: -R() * 1.4, vz: 0.5 + R() * 2, col: cols[i % cols.length], size: 2, life: 25 }); };
+  FX.splash = function (x, y, n) { for (let i = 0; i < n; i++) { const a = R() * 6.28, sp = 0.6 + R() * 1.4; push({ kind: "pix", x: x + (R() - 0.5) * 0.3, y, z: 0.02, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, vz: 1.2 + R() * 1.8, col: WATER[i % 3], size: 1, life: 0.6, water: true }); } };
+  FX.water = function (x, y, z) { for (let i = 0; i < 14; i++) push({ kind: "pix", x: x + (R() - 0.5) * 0.2, y, z: z + 0.3, vx: (R() - 0.5) * 0.4, vy: 0, vz: -0.5 - R(), col: WATER[i % 3], size: 1, life: 0.6, water: true }); };
+  FX.pickup = function (x, y, z) { push({ kind: "can", x, y, z, vz: 0.9, t: 0, life: 1.4, key: "fx/can" }); };
+  FX.leafBurst = function (x, y, n) { for (let i = 0; i < n; i++) push({ kind: "pix", x: x + (R() - 0.5) * 0.6, y: y + (R() - 0.5) * 0.3, z: 0.05, vx: (R() - 0.5) * 2.4, vy: (R() - 0.5) * 2.4, vz: 1 + R() * 1.6, col: LEAF[i % 4], size: 2, life: 8, leafy: true }); };
+  FX.breath = function (x, y, z) { push({ kind: "breath", x, y, z, vx: (R() - 0.5) * 0.1, vy: 0, vz: 0.12, t: 0, life: 1.1 }); };
   FX.update = function (dt) {
+    const C = SP.clock;
     for (const p of FX.parts) {
-      if (p.kind === "smoke") { p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.z += p.vz * dt; p.vz *= 1 - 0.15 * dt; continue; }
+      if (p.kind === "smoke" || p.kind === "breath") { p.t += dt; p.x += p.vx * dt; p.y += p.vy * dt; p.z += p.vz * dt; p.vz *= 1 - 0.15 * dt; continue; }
+      if (p.kind === "can") { p.t += dt; p.z += p.vz * dt; p.vz *= 1 - 1.5 * dt; p.life -= dt; continue; }
+      if (p.kind === "air") {          // falling petal / leaf: flutters down, then rests and fades
+        p.t += dt;
+        if (p.z > 0) { p.z += p.vz * dt; p.x += (C.wind * 0.6 + Math.sin(p.t * 2.3 + p.ph) * 0.4) * dt; p.y += (C.wind * 0.6 + Math.cos(p.t * 1.7 + p.ph) * 0.3) * dt; if (p.z <= 0) { p.z = 0; p.rest = true; p.life = 5; } }
+        else p.life -= dt;
+        continue;
+      }
       if (p.rest) { p.life -= dt; continue; }
-      p.vz -= 9.8 * dt; p.x += p.vx * dt; p.y += p.vy * dt; p.z += p.vz * dt;
-      if (p.z <= 0) { p.z = 0; if (Math.abs(p.vz) > 1.5) { p.vz *= -0.25; p.vx *= 0.4; p.vy *= 0.4; } else p.rest = true; }
+      if (p.leafy && p.z > 0.05) { p.vz = Math.max(p.vz - 9.8 * dt, -0.7); p.vx *= 1 - dt; p.vy *= 1 - dt; } else p.vz -= 9.8 * dt;
+      p.x += p.vx * dt; p.y += p.vy * dt; p.z += p.vz * dt;
+      if (p.z <= 0) {
+        p.z = 0;
+        if (p.water) { p.life = 0; continue; }
+        if (Math.abs(p.vz) > 1.5 && !p.leafy) { p.vz *= -0.25; p.vx *= 0.4; p.vy *= 0.4; } else { p.rest = true; if (p.leafy) p.life = Math.min(p.life, 6); }
+      }
     }
-    FX.parts = FX.parts.filter((p) => (p.kind === "smoke" ? p.t < p.life : p.life > 0));
+    FX.parts = FX.parts.filter((p) => (p.kind === "smoke" || p.kind === "breath" ? p.t < p.life : p.life > 0));
+    // seasonal air: blossom petals (spring) / leaves (autumn) drifting down from canopies near the camera
+    const se = C.season, rate = se === "autumn" ? 3.2 : se === "spring" ? 2.2 : se === "summer" ? 0.15 : 0;
+    FX.leafAcc = (FX.leafAcc || 0) + rate * dt;
+    if (FX.leafAcc > 1) {
+      const P0 = SP.player, trees = (FX._trees = FX._trees || SP.world.objects.filter((o) => o.type === "p_tree")).filter((o) => Math.abs(o.x - P0.x) + Math.abs(o.y - P0.y) < 26);
+      let nAir = 0; for (const p of FX.parts) if (p.kind === "air" && p.z > 0) nAir++;
+      while (FX.leafAcc > 1) {
+        FX.leafAcc -= 1;
+        const o = trees[Math.floor(R() * trees.length)]; if (!o || nAir > 60) { FX.leafAcc = 0; break; }
+        nAir++;
+        // released just under the canopy rim (below the canopy box, outside the trunk/branch box): the depth sort stays acyclic
+        const ang = R() * 6.28, rr = 1.75 + R() * 0.6;
+        push({ kind: "air", x: o.x + Math.cos(ang) * rr, y: o.y + Math.sin(ang) * rr, z: 2.0 + R() * 0.25, vz: -0.4 - R() * 0.3, ph: R() * 6.28, t: 0, life: 99,
+               col: se === "spring" ? PETAL[Math.floor(R() * 3)] : se === "summer" ? GREEN[Math.floor(R() * 2)] : LEAF[Math.floor(R() * 4)], size: se === "spring" ? 1 : 2 });
+      }
+    }
     FX.glows = [];
     const night = SP.tint.night, W = SP.world;
+    for (const o of W.objects) {      // hydrant water: a fountain when broken, a gush along the kerb when the valve is open
+      if (o.type !== "p_hydrant") continue;
+      if (o.spray && C.abs() >= o.spray) o.spray = 0;
+      if (!(o.state === "broken" || o.spray)) continue;
+      const broken = o.state === "broken";
+      o.sprayAcc = (o.sprayAcc || 0) + dt * (broken ? 60 : 26);
+      while (o.sprayAcc > 1) { o.sprayAcc -= 1;
+        const p = push({ kind: "pix", x: o.x + (R() - 0.5) * 0.08, y: o.y - 0.1, z: broken ? 0.75 : 0.42, col: WATER[Math.floor(R() * 3)], life: 2, water: true, size: R() < 0.3 ? 2 : 1 });
+        if (broken) { p.vx = (R() - 0.5) * 0.9 + C.wind * 0.4; p.vy = (R() - 0.5) * 0.9; p.vz = 6.5 + R() * 2; } else { p.vx = 0.4 + R() * 0.4; p.vy = -1.2 - R() * 0.6; p.vz = 0.8 + R() * 0.6; } }
+    }
     for (const o of W.objects) for (const ov of o.overlays) {
       if (!ov.active) continue;
       if (ov.type === "smoke") {
@@ -45,15 +94,6 @@
         const p = W.local(o, 1.5, -0.5, 1.4), q = W.local(o, 1.5, -1.2, 0);
         FX.glows.push({ x: p[0], y: p[1], z: p[2], r: 4.6 * k, c: [255, 140, 60], a: 0.6 * k * fl * (0.7 + 0.3 * night) });
         FX.glows.push({ x: q[0], y: q[1], z: 0.05, r: 3.0 * k, c: [255, 120, 50], a: 0.35 * k * fl, flat: true });
-      }
-    }
-    if (night > 0.05) {
-      for (const o of W.objects) {
-        if (o.type === "p_pole") { const p = SP.rotPt([0, -1.45, 6.8], o.rot); FX.glows.push({ x: o.x + p[0], y: o.y + p[1], z: p[2], r: 3.2, c: [255, 225, 160], a: 0.4 * night });
-                                   FX.glows.push({ x: o.x + p[0], y: o.y + p[1], z: 0, r: 3.6, c: [255, 210, 140], a: 0.28 * night, flat: true }); }
-        if (o.type === "p_stall") { const p = SP.rotPt([0, -0.6, 1.86], o.rot); FX.glows.push({ x: o.x + p[0], y: o.y + p[1], z: p[2], r: 2.2, c: [255, 200, 120], a: 0.45 * night }); }
-        if (o.type === "p_locker") { const p = SP.rotPt([0, -0.35, 1.3], o.rot); FX.glows.push({ x: o.x + p[0], y: o.y + p[1], z: p[2], r: 1.3, c: [120, 200, 255], a: 0.35 * night }); }
-        if (o.type === "f_window" && W.shownState(o) === "lit") { const p = W.local(o, 1.5, -0.2, 1.65); FX.glows.push({ x: p[0], y: p[1], z: p[2], r: 1.7, c: [255, 200, 120], a: 0.2 * night }); }
       }
     }
   };
@@ -78,6 +118,15 @@
       const u = p.t / p.life, sz = Math.min(2, Math.floor(u * 3 + p.size)), a = (1 - u) * (u < 0.1 ? u / 0.1 : 1) * 0.75;
       SP.drawFrame(ctx, `fx/smoke/${sz}`, X, Y, a * (p.dark ? 1.15 : 0.6)); return;
     }
+    if (p.kind === "pix" || p.kind === "air") {
+      const a = p.kind === "air" ? (p.z > 0 ? 1 : Math.max(0, p.life / 5)) : p.rest ? Math.min(1, p.life / 2) : 1;
+      if (a < 0.999) ctx.globalAlpha = a;
+      ctx.fillStyle = `rgb(${p.col[0]},${p.col[1]},${p.col[2]})`;
+      ctx.fillRect(Math.round(X), Math.round(Y), p.size, p.kind === "air" && p.size > 1 && Math.sin(p.t * 6 + p.ph) > 0 ? 1 : (p.size > 1 ? p.size - 1 : 1));
+      ctx.globalAlpha = 1; return;
+    }
+    if (p.kind === "breath") { const u = p.t / p.life; ctx.globalAlpha = 0.5 * (1 - u); ctx.fillStyle = "#eef2f8"; const sz = 2 + Math.floor(u * 4); ctx.fillRect(Math.round(X) - (sz >> 1), Math.round(Y) - (sz >> 1), sz, sz - 1); ctx.globalAlpha = 1; return; }
+    if (p.kind === "can") { SP.drawFrame(ctx, p.key, X, Y, Math.min(1, p.life * 2)); return; }
     SP.drawFrame(ctx, p.key, X, Y, p.rest ? Math.min(1, p.life / 3) : 1, true);
   };
   FX.drawFire = function (ctx, o, ov) {

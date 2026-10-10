@@ -48,13 +48,23 @@
     .tbtn.on { background: rgba(110,200,196,0.3); }
     #btn-time { right: calc(130px + env(safe-area-inset-right, 0px)); bottom: calc(28px + env(safe-area-inset-bottom, 0px)); }
     #btn-umb { right: calc(40px + env(safe-area-inset-right, 0px)); bottom: calc(146px + env(safe-area-inset-bottom, 0px)); }
-    #evbar { position: absolute; right: calc(8px + env(safe-area-inset-right, 0px)); top: calc(48px + env(safe-area-inset-top, 0px)); display: flex; flex-direction: column; gap: 7px; pointer-events: none; }
+    #btn-kick { right: calc(128px + env(safe-area-inset-right, 0px)); bottom: calc(96px + env(safe-area-inset-bottom, 0px)); width: 62px; height: 62px; font-size: 17px; font-weight: 600; color: #ffb3a0; border-color: rgba(230,120,100,0.6); }
+    #btn-kick.ready { border-color: #ff9070; box-shadow: 0 0 0 3px rgba(255,140,110,0.22), 0 4px 16px rgba(0,0,0,0.45); }
+    body.landscape #btn-kick { right: calc(104px + env(safe-area-inset-right, 0px)); bottom: 72px; width: 54px; height: 54px; }
+    #log { position: absolute; left: 10px; bottom: 10px; margin: 0; max-width: 46%; padding: 6px 9px; background: rgba(12,14,20,0.72); color: #dfe6f2; font: 12px/1.45 monospace; white-space: pre-wrap; display: none; pointer-events: none; border-radius: 4px; }
+    body.mobile #log { bottom: auto; top: calc(96px + env(safe-area-inset-top, 0px)); left: 60px; max-width: 70vw; font-size: 11px; }
+    #evbar { position: absolute; right: calc(8px + env(safe-area-inset-right, 0px)); top: calc(48px + env(safe-area-inset-top, 0px)); display: flex; flex-direction: column; flex-wrap: wrap-reverse; max-height: calc(100% - 240px); align-content: flex-start; gap: 7px; pointer-events: none; }
     .ebtn { pointer-events: auto; touch-action: none; min-width: 52px; height: 34px; border-radius: 17px; background: rgba(18,22,30,0.62); color: #e6e8ee; border: 1px solid rgba(201,166,107,0.5);
       font: 13px/1 inherit; font-family: inherit; box-shadow: 0 2px 10px rgba(0,0,0,0.4); padding: 0 10px; }
     body.landscape #joy-base { width: 116px; height: 116px; left: calc(16px + env(safe-area-inset-left, 0px)); bottom: 16px; }
     body.landscape #btn-act { width: 80px; height: 80px; right: calc(16px + env(safe-area-inset-right, 0px)); bottom: 20px; font-size: 19px; }
     body.landscape #btn-time { right: calc(106px + env(safe-area-inset-right, 0px)); bottom: 12px; width: 48px; height: 48px; }
     body.landscape #btn-umb { right: calc(28px + env(safe-area-inset-right, 0px)); bottom: 110px; width: 48px; height: 48px; }
+    #zoombar { position: absolute; left: calc(10px + env(safe-area-inset-left, 0px)); top: calc(48px + env(safe-area-inset-top, 0px)); display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
+    .zbtn { pointer-events: auto; width: 44px; height: 44px; border-radius: 22px; background: rgba(18,22,30,0.62); color: #f0dcae; border: 2px solid rgba(201,166,107,0.5);
+      font: 22px/1 inherit; font-family: inherit; padding: 0; box-shadow: 0 2px 10px rgba(0,0,0,0.4); }
+    .zbtn.down { background: rgba(201,166,107,0.45); }
+    body.landscape #zoombar { top: calc(10px + env(safe-area-inset-top, 0px)); flex-direction: row; }
     body.landscape #evbar { top: calc(8px + env(safe-area-inset-top, 0px)); left: calc(50% - 150px); right: auto; flex-direction: row; }
   </style>
 </head>
@@ -71,24 +81,34 @@
       <button data-ev="reset">0 重置</button>
       <button data-ev="time">T 昼夜</button>
       <button data-ev="debug">G 调试</button>
+      <button data-ev="zoomin">= 放大</button>
+      <button data-ev="zoomout">- 缩小</button>
+      <button data-ev="season">Y 季节</button>
+      <button data-ev="weather">R 天气</button>
+      <button data-ev="kick">F 踢</button>
       <span id="status"></span>
     </div>
     <div id="wrap">
       <canvas id="game" width="1280" height="720"></canvas>
       <div id="toast"></div>
       <div id="prompt"></div>
+      <pre id="log"></pre>
     </div>
   </div>
   <!-- classic scripts so file:// works (no fetch / modules): kit manifest + scene data are .js wrappers of the JSON files -->
   <script src="kit/kit_manifest.js"></script>
+  <script src="kit/overrides/index.js"></script>
   <script src="scene.js"></script>
   <script src="js/actors_data.js"></script>
   <script src="js/core.js"></script>
+  <script src="js/clock.js"></script>
   <script src="js/world.js"></script>
+  <script src="js/interact.js"></script>
   <script src="js/actors.js"></script>
   <script src="js/npc.js"></script>
   <script src="js/fx.js"></script>
   <script src="js/traffic.js"></script>
+  <script src="js/env.js"></script>
   <script src="js/audit.js"></script>
   <script src="js/main.js"></script>
   <script src="js/mobile.js"></script>

@@ -15,15 +15,28 @@
                           radius: 0.22, height: 1.85, speed: 1.7, vehicle: false, umbrella: false, clip: null, isPlayer: false }, opt);
     this.target = this.dir;
   });
-  A.prototype.data = function () { return window.ACTORS[this.umbrella ? "li_mo_umb" : this.set]; };
+  A.prototype.data = function () { return window.ACTORS[this.umbrella && this.isPlayer ? "li_mo_umb" : this.set]; };
   A.prototype.setDir = function (d) { this.dir = this.target = d; this.turnT = 0; };
   A.prototype.r = function () { return this.umbrella ? 0.55 : this.radius; };
   /** foot circles [x, y, r] (optionally for another position / facing) */
   A.prototype.circles = function (x, y, dir) {
+    if (this.hidden) return [];                 // indoors (sheltering from the weather): no shape anywhere
     x = x == null ? this.x : x; y = y == null ? this.y : y;
+    if (this.carry) {               // pushing a shared bike: its 3 wheel / frame circles beside him (js/interact.js)
+      const g = this.bikePose(x, y, dir || this.dir), out = [[x, y, this.r()]];
+      for (const d of [-0.6, 0, 0.6]) out.push([g.x + g.f[0] * d, g.y + g.f[1] * d, 0.25]);
+      return out;
+    }
     if (!this.vehicle) return [[x, y, this.r()]];
     const h = SP.dirVec[dir || this.dir];
     return [-0.55, 0, 0.55].map((d) => [x + h[0] * d, y + h[1] * d, this.radius]);
+  };
+  /** where the pushed bike is for a position / facing: axis-aligned (rot 0/2/4/6 frames), 0.47 m to his right */
+  const BIKE_F = { 0: [0, -1], 2: [1, 0], 4: [0, 1], 6: [-1, 0] };
+  A.prototype.bikePose = function (x, y, dir) {
+    const h = SP.dirVec[dir || this.dir]; let best = 0, bd = -9;
+    for (const r of [0, 2, 4, 6]) { const f = BIKE_F[r], d = f[0] * h[0] + f[1] * h[1] + (r === (this._bikeRot || 0) ? 0.05 : 0); if (d > bd) { bd = d; best = r; } }
+    const f = BIKE_F[best]; return { x: x + f[1] * 0.47, y: y - f[0] * 0.47, rot: best, f };
   };
   // ---------- animation ----------
   function turnToward(from, to) {
@@ -43,7 +56,7 @@
       this.turnT -= dt; this.pendT = (this.pendT || 0) + dt;
       if (this.turnT <= 0 && (this.pendT >= 0.06 || !moving || true)) {
         const nd = turnToward(this.dir, this.target);
-        if (!this.vehicle || SP.actors.shapeClear(this, this.x, this.y, nd)) { this.dir = nd; this.turnT = this.target === this.dir ? 0 : TURN_STEP; }
+        if (!(this.vehicle || this.carry) || SP.actors.shapeClear(this, this.x, this.y, nd)) { this.dir = nd; this.turnT = this.target === this.dir ? 0 : TURN_STEP; if (this.carry) this._bikeRot = this.bikePose(this.x, this.y, nd).rot; }
       }
     } else this.turnT = 0;
     const D = this.data(), walkN = this.walkClip() ? D.clips[this.walkClip()] : 1;
@@ -62,8 +75,8 @@
       if (i >= S.steps.length) { this.settle = null; this.t = 0; this.frame = 0; } else { Object.assign(S, S.steps[i]); this.frame = 0; }
     } else { this.t += dt; this.frame = Math.floor(this.t * IDLE_FPS) % (D.clips[this.idleClip()] || 1); }
   };
-  A.prototype.walkClip = function () { return this.vehicle ? "ride" : this.umbrella ? "uwalk" : "walk"; };
-  A.prototype.idleClip = function () { return this.vehicle ? "stop" : this.umbrella ? "uidle" : "idle"; };
+  A.prototype.walkClip = function () { return this.vehicle ? "ride" : this.umbrella && this.isPlayer ? "uwalk" : "walk"; };
+  A.prototype.idleClip = function () { return this.vehicle ? "stop" : this.umbrella && this.isPlayer ? "uidle" : "idle"; };
   A.planSettle = function (f, N) {
     const half = N / 2, back = f % half, steps = [];
     let c;
@@ -77,6 +90,7 @@
   A.prototype.frameKeys = function () {
     const d = this.dir, S = !this.moving && this.settle;
     if (this.clip) return [[`${this.clip}_${d}_${this.frame}`, 1]];
+    if (this.kickT > 0) return [[`${this.walkClip()}_${d}_3`, 1]];          // kick: hold the widest stride for a beat
     if (this.moving) return [[`${this.walkClip()}_${d}_${this.frame}`, 1]];
     if (S) return S.blend > 0 ? [[`${this.idleClip()}_${d}_0`, 1], [`${this.walkClip()}_${d}_${S.walk}`, 1 - S.blend]] : [[`${this.walkClip()}_${d}_${S.walk}`, 1]];
     return [[`${this.idleClip()}_${d}_${this.frame}`, 1]];
@@ -91,28 +105,49 @@
       const x0 = X - Math.round(f[4]), y0 = Y - Math.round(f[5]), q = { x0, y0, x1: x0 + f[2], y1: y0 + f[3] };
       r = r ? { x0: Math.min(r.x0, q.x0), y0: Math.min(r.y0, q.y0), x1: Math.max(r.x1, q.x1), y1: Math.max(r.y1, q.y1) } : q;
     }
-    return r || { x0: X - 12, y0: Y - 80, x1: X + 12, y1: Y };
+    r = r || { x0: X - 12, y0: Y - 80, x1: X + 12, y1: Y };
+    if (this.umbrella && !this.isPlayer) { const f = SP.frame(this.umbKey()); if (f) { const ux = X + this.umbDX() - f[4], uy = Y - 36 - f[5]; r = { x0: Math.min(r.x0, ux), y0: Math.min(r.y0, uy), x1: Math.max(r.x1, ux + f[2]), y1: r.y1 }; } }
+    if (this.carry) { const k = this.bikeKey(), g = this.bikePose(this.x, this.y, this.dir), q = SP.frameRect(k, SP.sx(g.x, g.y), SP.sy(g.x, g.y, 0)); if (q) r = { x0: Math.min(r.x0, q.x0), y0: Math.min(r.y0, q.y0), x1: Math.max(r.x1, q.x1), y1: Math.max(r.y1, q.y1) }; }
+    if (this.bubble) r = { x0: Math.min(r.x0, X - 8), y0: Math.min(r.y0, Y - 100), x1: Math.max(r.x1, X + 8), y1: r.y1 };
+    return r;
   };
+  A.prototype.umbKey = function () { return `fx/umbrella/${(this.umbIdx || 0) % 4}`; };
+  A.prototype.umbDX = function () { return this.dir.includes("W") || this.dir === "S" ? -3 : 3; };
+  A.prototype.bikeKey = function () { const g = this.bikePose(this.x, this.y, this.dir); return SP.frameKey("p_bike", "base", "main", "parked", g.rot); };
   A.prototype.bodyRect = function () { const [X, Y] = this.screen(); return { x0: X - 12, x1: X + 12, y0: Y - 76, y1: Y - 4 }; };
-  A.prototype.draw = function (ctx, raw) {
-    const [X, Y] = this.screen(), D = this.data(), src = raw ? SP.img["actor_" + this.atlasName()] : (SP.tintedActors[this.atlasName()] || SP.img["actor_" + this.atlasName()]);
+  A.prototype.draw = function (ctx, raw, erase) {
+    const [X0, Y] = this.screen(), D = this.data(), src = raw ? SP.img["actor_" + this.atlasName()] : (SP.tintedActors[this.atlasName()] || SP.img["actor_" + this.atlasName()]);
+    let X = X0;
+    if (this.kickT > 0) { const v = SP.dirVec[this.dir]; X += Math.round((v[0] - v[1]) * 2); }
+    let bikeAfter = false, g = null;
+    if (this.carry) { g = this.bikePose(this.x, this.y, this.dir); bikeAfter = g.x + g.y < this.x + this.y; if (!bikeAfter) drawBike(ctx, this, g); }
     for (const [k, a] of this.frameKeys()) {
       const f = D.frames[k]; if (!f) continue;
       if (a < 0.999) ctx.globalAlpha = a;
       ctx.drawImage(src, f[0], f[1], f[2], f[3], X - Math.round(f[4]), Y - Math.round(f[5]), f[2], f[3]);
       ctx.globalAlpha = 1;
     }
+    if (this.umbrella && !this.isPlayer) SP.drawFrame(ctx, this.umbKey(), X + this.umbDX(), Y - 36);
+    if (bikeAfter) drawBike(ctx, this, g);
+    if (this.bubble && !erase) {
+      const top = Y - (this.umbrella ? 84 : 76);
+      ctx.fillStyle = "rgba(250,248,240,0.95)"; ctx.fillRect(X - 6, top - 12, 12, 13); ctx.fillRect(X - 2, top + 1, 4, 3);
+      ctx.fillStyle = "#c0392b"; ctx.font = "bold 11px monospace"; ctx.textAlign = "center"; ctx.fillText(this.bubble.text, X, top - 2); ctx.textAlign = "left";
+    }
   };
+  function drawBike(ctx, a, g) { const k = SP.frameKey("p_bike", "base", "main", "parked", g.rot); SP.drawFrame(ctx, k, SP.sx(g.x, g.y), SP.sy(g.x, g.y, 0)); if (SP.snowAmt > 0.01) SP.drawSnow(ctx, k, SP.sx(g.x, g.y), SP.sy(g.x, g.y, 0), SP.snowAmt); }
 
   // ---------- collision between characters, footprints and cars ----------
   const AC = (SP.actors = { list: [] });
   const GAP = 0.004;                            // tiny skin so float noise never reads as contact
   /** true if actor a with circles at (x, y, dir) touches nothing (static footprints, bounds, cars, other actors) */
   AC.shapeClear = function (a, x, y, dir, ignoreCars) {
+    const W = SP.world, haz = !a.isPlayer && W.hazards && W.hazards.length;
     for (const [cx, cy, r] of a.circles(x, y, dir)) {
-      if (SP.world.blocked(cx, cy, r + GAP, ignoreCars)) return false;
+      if (W.blocked(cx, cy, r + GAP, ignoreCars)) return false;
+      if (haz && W.hazardBlocks(a.x, a.y, cx, cy, r)) return false;     // NPCs keep out of broken glass
       for (const b of AC.list) {
-        if (b === a) continue;
+        if (b === a || b.hidden) continue;
         for (const [bx, by, br] of b.circles()) if (Math.hypot(cx - bx, cy - by) < r + br + GAP) return false;
       }
     }
@@ -121,7 +156,7 @@
   AC.whoBlocks = function (a, x, y, dir) {
     for (const [cx, cy, r] of a.circles(x, y, dir)) {
       const s = SP.world.blocked(cx, cy, r + GAP); if (s) return s;
-      for (const b of AC.list) if (b !== a) for (const [bx, by, br] of b.circles()) if (Math.hypot(cx - bx, cy - by) < r + br + GAP) return b.id;
+      for (const b of AC.list) if (b !== a && !b.hidden) for (const [bx, by, br] of b.circles()) if (Math.hypot(cx - bx, cy - by) < r + br + GAP) return b.id;
     }
     return null;
   };
@@ -145,6 +180,7 @@
       let any = false;
       for (let i = 0; i < AC.list.length; i++) for (let j = i + 1; j < AC.list.length; j++) {
         const a = AC.list[i], b = AC.list[j];
+        if (a.hidden || b.hidden) continue;
         for (const [ax, ay, ar] of a.circles()) for (const [bx, by, br] of b.circles()) {
           let dx = ax - bx, dy = ay - by, d = Math.hypot(dx, dy); const need = ar + br + GAP * 2;
           if (d >= need) continue;
@@ -157,6 +193,7 @@
         }
       }
       for (const a of AC.list) {
+        if (a.hidden) continue;
         for (let k = 0; k < 3; k++) {
           let fixed = false;
           for (const [cx, cy, r] of a.circles()) {
@@ -179,4 +216,12 @@
     }
     return moved;
   };
+  /** something broke / honked / splashed at (x, y): NPCs within r stop, turn to look, '!' bubble */
+  AC.alarm = function (x, y, r) {
+    for (const a of AC.list) {
+      if (a.isPlayer || a.hidden || a.vehicle) continue;
+      if (Math.hypot(a.x - x, a.y - y) < r) { a.bubble = { t: 1.6, text: "!" }; if (a.brain) a.brain.alert = 1.2; const d = SP.dirFromWorld(x - a.x, y - a.y); a.target = d; }
+    }
+  };
+  AC.visible = () => AC.list.filter((a) => !a.hidden);
 })(window.SP);

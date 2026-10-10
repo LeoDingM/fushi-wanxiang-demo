@@ -24,7 +24,7 @@
     if (!mobile) {
       body.classList.remove("portrait", "landscape"); wrap.style.cssText = ""; canvas.style.cssText = "";
       if (canvas.width !== DESK[0] || canvas.height !== DESK[1]) { canvas.width = DESK[0]; canvas.height = DESK[1]; }
-      SP.camOffsetY = 0; if (SP.cam) SP.cam.zoom = +(Q.get("zoom") || 1);
+      SP.camOffsetY = 0; if (SP.cam) SP.cam.zoom = SP.userZoom || +(Q.get("zoom") || SP.defaultZoom || 0.5);
       return;
     }
     const portrait = vh > vw * 1.1;
@@ -33,7 +33,7 @@
     Object.assign(canvas.style, { width: vw + "px", height: vh + "px" });
     if (canvas.width !== vw || canvas.height !== vh) { canvas.width = vw; canvas.height = vh; }
     // world scale: ~1 logical px per CSS px; very small landscape heights zoom out a little to keep the street readable
-    if (SP.cam) SP.cam.zoom = +(Q.get("zoom") || (portrait ? 1 : vh < 360 ? 0.85 : 1));
+    if (SP.cam) SP.cam.zoom = SP.userZoom || +(Q.get("zoom") || (portrait ? 1 : vh < 360 ? 0.67 : 1));
     SP.camOffsetY = portrait && touch ? Math.round(vh * 0.12) : 0;
     window.scrollTo(0, 0);
   }
@@ -62,10 +62,13 @@
     '<button type="button" id="btn-act" class="tbtn">互动</button>' +
     '<button type="button" id="btn-time" class="tbtn small" aria-label="切换时段">◐<i>时间</i></button>' +
     '<button type="button" id="btn-umb" class="tbtn small" aria-label="撑伞">☂<i>伞</i></button>' +
+    '<button type="button" id="btn-kick" class="tbtn">踢</button>' +
+    '<div id="zoombar"><button type="button" id="btn-zin" class="zbtn" aria-label="放大">＋</button><button type="button" id="btn-zout" class="zbtn" aria-label="缩小">－</button></div>' +
     '<div id="evbar">' +
     '<button type="button" class="ebtn" data-tev="broken_window">破窗</button><button type="button" class="ebtn" data-tev="fire">起火</button>' +
     '<button type="button" class="ebtn" data-tev="crash">撞车</button><button type="button" class="ebtn" data-tev="reset">重置</button>' +
-    '<button type="button" class="ebtn" data-tev="debug">调试</button></div>';
+    '<button type="button" class="ebtn" data-tev="weather">天气</button><button type="button" class="ebtn" data-tev="season">季节</button>' +
+    '<button type="button" class="ebtn" data-tev="log">日志</button><button type="button" class="ebtn" data-tev="debug">调试</button></div>';
   body.appendChild(root);
   const zone = $("joy-zone"), base = $("joy-base"), knob = $("joy-knob");
   const R = 52, DEAD = 0.18;
@@ -102,11 +105,14 @@
   tap($("btn-act"), () => SP.actions.interact());
   tap($("btn-time"), () => SP.actions.time());
   tap($("btn-umb"), () => SP.actions.umbrella());
-  root.querySelectorAll("[data-tev]").forEach((b) => tap(b, () => { const v = b.dataset.tev; if (v === "reset") SP.actions.reset(); else if (v === "debug") SP.actions.debug(); else SP.actions.event(v); }));
+  tap($("btn-kick"), () => SP.actions.kick());
+  tap($("btn-zin"), () => SP.actions.zoom(1));               // pinch-free zoom (pinch is disabled page-wide)
+  tap($("btn-zout"), () => SP.actions.zoom(-1));
+  root.querySelectorAll("[data-tev]").forEach((b) => tap(b, () => { const v = b.dataset.tev; if (v === "reset") SP.actions.reset(); else if (v === "debug") SP.actions.debug(); else if (v === "weather") SP.actions.weather(); else if (v === "season") SP.actions.season(); else if (v === "nextday") SP.actions.nextDay(); else if (v === "log") SP.actions.log(); else SP.actions.event(v); }));
   if (force !== "1") window.addEventListener("keydown", () => body.classList.add("kbd"), { once: true });
-  const act = $("btn-act"), umb = $("btn-umb");
+  const act = $("btn-act"), umb = $("btn-umb"), kickB = $("btn-kick");
   (function tick() {
-    if (SP.actions) { act.classList.toggle("ready", !!SP.actions.near()); umb.classList.toggle("on", !!(SP.player && SP.player.umbrella)); }
+    if (SP.actions) { act.classList.toggle("ready", !!(SP.promptActions && SP.promptActions.use)); kickB.classList.toggle("ready", !!(SP.promptActions && SP.promptActions.kick)); umb.classList.toggle("on", !!(SP.player && SP.player.umbrella)); }
     requestAnimationFrame(tick);
   })();
 })(window.SP);

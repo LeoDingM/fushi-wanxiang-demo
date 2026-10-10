@@ -8,25 +8,35 @@
   const canvas = document.getElementById("game");
   if (Q.get("w")) canvas.width = +Q.get("w");
   if (Q.get("h")) canvas.height = +Q.get("h");
-  const ctx = canvas.getContext("2d");
+  const mainCtx = canvas.getContext("2d");
+  let ctx = mainCtx;                                   // current render target (offscreen when zoomed out)
+  const ssCanvas = document.createElement("canvas");   // zoom < 1: world drawn 1:1 here, then smoothly downscaled
+  SP.season = Q.get("season") || "summer";
   const shadowCanvas = document.createElement("canvas"), sctx = shadowCanvas.getContext("2d");
   const W = SP.world, keys = Object.create(null);
   const st = (SP.state = { debug: Q.get("debug") === "1", time: "day", timeAnim: null, toast: null, manual: Q.get("manual") === "1", fps: 60, near: null,
-                           npcs: Q.get("npcs") !== "0", autoWalk: null });
+                           npcs: Q.get("npcs") !== "0", autoWalk: null, grade: Q.get("grade") !== "0" });
   SP.now = 0;
   const player = (SP.player = new SP.Actor({ id: "limo", set: "li_mo", isPlayer: true, radius: 0.22, speed: 1.7, height: 1.85 }));
-  const cam = (SP.cam = { x: 0, y: 0, zoom: +(Q.get("zoom") || 1), ready: false, lock: null });
+  // framing: desktop default 0.5 (≈ the concept art: the 6-storey building is ~1/2 screen high); phone default 1
+  // (characters ~69 px); +/- buttons or = / - keys step through ZOOMS. zoom < 1 is rendered 1:1 offscreen and
+  // downscaled with smoothing (no dropped pixel rows), zoom >= 1 is nearest-neighbour.
+  const ZOOMS = (SP.ZOOMS = [0.5, 0.67, 1, 1.5, 2]);
+  SP.defaultZoom = 0.5;
+  const cam = (SP.cam = { x: 0, y: 0, zoom: +(Q.get("zoom") || SP.defaultZoom), ready: false, lock: null });
+  SP.zoomStep = function (d) {
+    let i = ZOOMS.findIndex((z) => z >= cam.zoom - 1e-3); if (i < 0) i = ZOOMS.length - 1;
+    i = SP.clamp(i + d, 0, ZOOMS.length - 1); SP.userZoom = cam.zoom = ZOOMS[i]; cam.ready = false; return cam.zoom;
+  };
 
-  // ---------- time of day ----------
-  const TOD = { day: [255, 255, 255, 0], dusk: [255, 196, 160, 0.35], night: [100, 112, 172, 1] };
-  const TOD_ORDER = ["day", "dusk", "night"];
-  function setTime(name, instant) {
-    const to = TOD[name]; if (!to) return;
-    const t = SP.tint, from = [t.r, t.g, t.b, t.night];
-    st.time = name;
-    st.timeAnim = instant ? null : { from, to, t: 0, dur: 1.2 };
-    if (instant) Object.assign(SP.tint, { r: to[0], g: to[1], b: to[2], night: to[3] });
-  }
+  // ---------- time of day / calendar / weather: js/clock.js (shared with the front-view line) ----------
+  // continuous clock (1 real s = 1 game min), T = fast-forward to the next of morning / day / afternoon / dusk / night,
+  // N = next day, Y = next season, R = next weather. The lightmap (js/env.js) does all the lighting.
+  const CK = SP.clock;
+  SP.tint = SP.tint || {}; SP.tint.night = 0;
+  function setTime(name, instant) { if (name === "next") CK.cycleTime(); else CK.setTimeName(name, instant); syncLight(); }
+  function syncLight() { SP.tint.night = SP.env.night = SP.clamp((CK.dark - 0.2) / 0.4, 0, 1); }
+  Object.defineProperty(st, "time", { get: () => CK.timeName(), configurable: true });
 
   // ---------- input ----------
   const down = (...k) => k.some((x) => keys[x] || (SP.input && SP.input[x]));
@@ -37,13 +47,22 @@
     if (e.repeat) return;
     for (const [name, ev] of Object.entries(W.data.events)) if (ev.key === k) fireEvent(name);
     if (k === "0") resetScene();
-    if (k === "t") setTime(TOD_ORDER[(TOD_ORDER.indexOf(st.time) + 1) % 3]);
+    if (k === "t") { CK.cycleTime(); toast("时间快进"); }
+    if (k === "n") { CK.nextDay(); toast("快进到第二天早上"); }
+    if (k === "r") { CK.cycleWeather(); toast("天气：" + CK.weatherName(CK.target)); }
+    if (k === "f") kick();
     if (k === "g") st.debug = !st.debug;
     if (k === "e") interact();
     if (k === "u") toggleUmbrella();
+    if (k === "=" || k === "+") SP.zoomStep(1);
+    if (k === "-" || k === "_") SP.zoomStep(-1);
+    if (k === "y") setSeason(SEASONS[(SEASONS.indexOf(SP.season) + 1) % SEASONS.length]);
+    if (k === "l") st.showLog = !st.showLog;
   });
   window.addEventListener("keyup", (e) => (keys[e.key.toLowerCase()] = false));
   window.addEventListener("blur", () => { for (const k in keys) keys[k] = false; });
+  const SEASONS = ["summer", "autumn", "winter", "spring"];
+  function setSeason(se) { CK.setSeason(se); SP.season = CK.season; W.bakeGround(); toast(`${CK.seasonName()} · ${CK.dateLabel()} · 今日${CK.weatherName(CK.target)}`); }
   function fireEvent(name) { if (W.trigger(name)) toast(`事件：${W.data.events[name].label}`); }
   function toast(msg, ms) { st.toast = { msg, t: (ms || 1800) / 1000 }; }
   function toggleUmbrella() {
@@ -58,21 +77,19 @@
     SP.actors.list = [player].concat(st.npcs ? SP.npcs.init(W.data.npcs) : []);
     SP.actors.resolve(12);                       // never start interpenetrating
   }
-  function resetScene() { W.load(window.SCENE_DATA); SP.fx.reset(); SP.traffic.reset(); spawnActors(); toast("场景已重置"); }
-  function nearest() {
-    let best = null, bd = 1.6;
-    for (const o of W.objects) {
-      if (!o.interact) continue;
-      let cx = o.x, cy = o.y;
-      if (o.type === "f_door") { const p = W.local(o, 1.5, -0.9, 0); cx = p[0]; cy = p[1]; }
-      else if (o.interact === "gate") { const p = W.local(o, o.type === "w_gate_l" ? 0.85 : -0.85, 0, 0); cx = p[0]; cy = p[1]; }
-      else { const fp = W.footprints(o); if (fp.length) { const b = SP.polyBox(fp[0]); cx = (b[0] + b[2]) / 2; cy = (b[1] + b[3]) / 2; } }
-      const d = Math.hypot(player.x - cx, player.y - cy) - (o.interact === "gate" ? 0.3 : 0.8);
-      if (d < bd) { bd = d; best = o; }
-    }
-    return best;
+  function resetScene() { player.carry = null; W.load(window.SCENE_DATA); SP.fx.reset(); SP.traffic.reset(); SP.env.clearStamps(); spawnActors(); toast("场景已重置"); }
+  function nearest() { return player.carry ? null : W.nearest(player.x, player.y); }
+  /** F / 踢: a short kick pose; kicks the nearest kickable thing (lamp, bin, bike, vending machine, pot, poster, window,
+      parked car, laundry line, puddle, leaf pile) */
+  function kick() {
+    if (player.kickT > 0 || player.carry) return;
+    player.kickT = 0.38;
+    const o = W.nearest(player.x, player.y), a = o && W.actionFor(o, "kick");
+    if (!a) { toast("踢了一脚空气"); return; }
+    const r = W.act(o, "kick", player); if (r) toast(r);
   }
   function interact() {
+    if (player.carry) { if (W.parkBike(player)) toast("停好车、锁上"); else toast("这里停不下（会挡路或压到东西）"); return; }
     const o = st.near; if (!o) return;
     if (o.interact === "gate") {
       const open = o.state !== "open", gates = W.objects.filter((g) => g.interact === "gate");
@@ -84,6 +101,7 @@
       o.state = o.state === "open" ? "closed" : "open"; W.rebuildColliders(); toast(o.state === "open" ? "单元门开了（原型不做室内）" : "单元门关上");
     } else if (o.interact === "stall") toast("王阿姨早点摊 · 豆浆油条 ¥8");
     else if (o.interact === "locker") toast("快递柜：没有你的件");
+    else { const r = W.act(o, "use", player); if (r) toast(r); }
   }
 
   // ---------- simulation ----------
@@ -105,6 +123,7 @@
     if (v) {
       const [wx, wy] = SP.screenToWorldDir(v[0], v[1]), step = player.speed * dt * (v[2] === "touch" ? Math.max(0.35, Math.min(1, Math.hypot(v[0], v[1]))) : 1);
       dist = SP.actors.move(player, wx * step, wy * step);
+      if (dist > 0) SP.env.stepFx(player, dist);
       dir = SP.dirFromWorld(wx, wy);
       st.blockedBy = player.blockedBy || st.blockedBy;
       // keep a diagonal facing for a moment when one of two keys is released first (no 1-frame snap)
@@ -116,33 +135,45 @@
   }
   function update(dt) {
     SP.now += dt; st.dtNow = dt;
-    if (st.timeAnim) {
-      const a = st.timeAnim; a.t += dt; const k = SP.smooth(Math.min(1, a.t / a.dur));
-      Object.assign(SP.tint, { r: SP.lerp(a.from[0], a.to[0], k), g: SP.lerp(a.from[1], a.to[1], k), b: SP.lerp(a.from[2], a.to[2], k), night: SP.lerp(a.from[3], a.to[3], k) });
-      if (a.t >= a.dur) st.timeAnim = null;
-    }
+    CK.update(dt); syncLight();
+    if (SP.season !== CK.season) W.applySeason();
+    const gmin = Math.floor(CK.abs());
+    if (gmin !== W.lastRuleMin) { W.lastRuleMin = gmin; W.updateRules(); }
+    if (player.kickT > 0) player.kickT = Math.max(0, player.kickT - dt);
     movePlayer(dt);
     SP.npcs.update(dt);
     W.updateEvents(dt);
     SP.traffic.update(dt);
     SP.actors.resolve(4);
     SP.fx.update(dt);
+    SP.env.update(dt);
     st.near = nearest();
     if (st.toast) { st.toast.t -= dt; if (st.toast.t <= 0) st.toast = null; }
   }
 
   // ---------- camera ----------
-  function camBounds() {
-    const B = W.data.bounds, xs = [SP.sx(B.x0, B.y1), SP.sx(B.x1, B.y0)];
-    return { x0: xs[0] - 40, x1: xs[1] + 40, y0: SP.sy(B.x1, B.y1, 0) - 360, y1: SP.sy(B.x0, B.y0, 0) + 40 };
+  /* camera clamp: every corner of the view must lie over the ground rectangle (no void at any edge). For the 2:1
+     projection the four corner constraints are two independent intervals in p = u - v and q = u + v
+     (u = cam.x / 64, v = cam.y / 32), i.e. a rotated box: clamp p and q, convert back. */
+  function clampCam(tx, ty, vw, vh) {
+    const [X0, Y0, X1, Y1] = W.groundRect, m = 0.6;
+    let p = tx / 64 - ty / 32, q = tx / 64 + ty / 32;
+    const p0 = X0 + m + vh / 32, p1 = X1 - m - vw / 64, q0 = -(Y1 - m), q1 = -(Y0 + m + vh / 32 + vw / 64);
+    p = p0 <= p1 ? SP.clamp(p, p0, p1) : (p0 + p1) / 2; q = q0 <= q1 ? SP.clamp(q, q0, q1) : (q0 + q1) / 2;
+    return [(p + q) / 2 * 64, (q - p) / 2 * 32];
   }
+  SP.clampCam = clampCam;
   function updateCam(dt) {
-    const z = cam.zoom, vw = canvas.width / z, vh = canvas.height / z, C = camBounds();
+    // big screens: never zoom out further than the map can fill (else void at the corners) -> next zoom step up
+    if (W.groundRect && !cam.free) {
+      const [X0, Y0, X1, Y1] = W.groundRect, zmin = (canvas.height / 32 + canvas.width / 64) / (Math.min(X1 - X0, Y1 - Y0) - 1.2);
+      if (cam.zoom < zmin - 1e-6) { cam.zoom = ZOOMS.find((q) => q >= zmin) || ZOOMS[ZOOMS.length - 1]; cam.ready = false; }
+    }
+    const z = cam.zoom, vw = canvas.width / z, vh = canvas.height / z;
     let tx, ty;
     if (cam.lock) { [tx, ty] = [SP.sx(cam.lock[0], cam.lock[1]) - vw / 2, SP.sy(cam.lock[0], cam.lock[1], 0) - vh / 2]; }
     else { const [X, Y] = player.screen(); tx = X - vw / 2; ty = Y - 40 - vh / 2 + (SP.camOffsetY || 0) / z; }
-    tx = vw >= C.x1 - C.x0 ? (C.x0 + C.x1 - vw) / 2 : SP.clamp(tx, C.x0, C.x1 - vw);
-    ty = vh >= C.y1 - C.y0 ? (C.y0 + C.y1 - vh) / 2 : SP.clamp(ty, C.y0, C.y1 - vh);
+    if (!cam.free) [tx, ty] = clampCam(tx, ty, vw, vh);
     const k = cam.ready ? Math.min(1, dt * 4) : 1;
     cam.x += (tx - cam.x) * k; cam.y += (ty - cam.y) * k; cam.ready = true;
   }
@@ -155,8 +186,8 @@
   /** all drawables overlapping `view` (a rect, an array of rects, or null = everything), in painter order */
   function buildList(view) {
     const all = [];
-    W.drawables(all); SP.traffic.drawables(all); SP.fx.drawables(all);
-    for (const a of SP.actors.list) all.push(actorDrawable(a));
+    W.drawables(all); SP.traffic.drawables(all); SP.fx.drawables(all); SP.env.drawables(all);
+    for (const a of SP.actors.list) if (!a.hidden) all.push(actorDrawable(a));
     const vs = view == null ? null : Array.isArray(view) ? view : [view];
     const list = vs ? all.filter((d) => vs.some((v) => SP.rectsOverlap(d.rect, v))) : all;
     return W.sortDrawables(list);
@@ -165,56 +196,89 @@
   // ---------- render ----------
   let lastList = [];
   function render() {
-    if (SP.updateTint() || W.groundTintKey !== SP.tintKey) W.bakeGround();
-    const z = cam.zoom, cx = Math.round(cam.x * z) / z, cy = Math.round(cam.y * z) / z;
-    const view = { x0: cx - 8, y0: cy - 8, x1: cx + canvas.width / z + 8, y1: cy + canvas.height / z + 8 };
+    SP.updateTint(); SP.frameNo = (SP.frameNo || 0) + 1;
+    const ss = cam.zoom < 0.999, tgt = ss ? ssCanvas : canvas;
+    if (ss) { const w = Math.round(canvas.width / cam.zoom), h = Math.round(canvas.height / cam.zoom); if (ssCanvas.width !== w || ssCanvas.height !== h) { ssCanvas.width = w; ssCanvas.height = h; } }
+    ctx = ss ? ssCanvas.getContext("2d") : mainCtx;
+    const z = ss ? 1 : cam.zoom, cx = Math.round(cam.x * z) / z, cy = Math.round(cam.y * z) / z;
+    const view = { x0: cx - 8, y0: cy - 8, x1: cx + tgt.width / z + 8, y1: cy + tgt.height / z + 8 };
+    st.view = view;
     ctx.setTransform(1, 0, 0, 1, 0, 0);
     ctx.imageSmoothingEnabled = false;
-    ctx.fillStyle = "#17181d"; ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = "#17181d"; ctx.fillRect(0, 0, tgt.width, tgt.height);
     ctx.setTransform(z, 0, 0, z, -cx * z, -cy * z);
-    ctx.drawImage(W.groundCanvas, W.groundOrigin[0], W.groundOrigin[1]);
+    W.drawGround(ctx, view);
     for (const d of W.decals) SP.drawFrame(ctx, d.key, SP.sx(d.x, d.y), SP.sy(d.x, d.y, 0));
+    SP.env.drawGround(ctx, view);
     // shadow layer: union of opaque shadow frames, composited once (no double-darkening)
-    if (shadowCanvas.width !== canvas.width || shadowCanvas.height !== canvas.height) { shadowCanvas.width = canvas.width; shadowCanvas.height = canvas.height; }
+    if (shadowCanvas.width !== tgt.width || shadowCanvas.height !== tgt.height) { shadowCanvas.width = tgt.width; shadowCanvas.height = tgt.height; }
     sctx.setTransform(1, 0, 0, 1, 0, 0); sctx.clearRect(0, 0, shadowCanvas.width, shadowCanvas.height);
     sctx.imageSmoothingEnabled = false;
     sctx.setTransform(z, 0, 0, z, -cx * z, -cy * z);
     for (const o of W.objects) {
-      const P = W.piece(o); if (P.catcher !== "ground") continue;
-      SP.drawFrame(sctx, SP.frameKey(o.type, "base", P.parts[0], o.state, o.rot) + "#shadow", SP.sx(o.x, o.y), SP.sy(o.x, o.y, o.z), 1, true);
+      const P = W.piece(o); if (P.catcher !== "ground" || o.carried) continue;
+      const X = SP.sx(o.x, o.y), Y = SP.sy(o.x, o.y, o.z);
+      if (X < view.x0 - 500 || X > view.x1 + 500 || Y < view.y0 - 300 || Y > view.y1 + 400) continue;
+      SP.drawFrame(sctx, SP.frameKey(o.type, o.variant, P.parts[0], o.state, o.rot) + "#shadow", X, Y, 1, true);
     }
     for (const [k, X, Y] of SP.traffic.shadowKeys()) SP.drawFrame(sctx, k, X, Y, 1, true);
     sctx.fillStyle = "#1a1828";
     for (const a of SP.actors.list) {
+      if (a.hidden) continue;
       if (a.vehicle) { for (const [x, y] of a.circles()) { sctx.beginPath(); sctx.ellipse(SP.sx(x, y) - 2, SP.sy(x, y, 0), 15, 7.5, 0, 0, Math.PI * 2); sctx.fill(); } continue; }
       const [X, Y] = a.screen(), r = a.umbrella ? 22 : 12; sctx.beginPath(); sctx.ellipse(X - 2, Y, r, r / 2, 0, 0, Math.PI * 2); sctx.fill();
     }
-    ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 0.36 * (1 - 0.55 * SP.tint.night); ctx.drawImage(shadowCanvas, 0, 0); ctx.restore();
+    ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = CK.shadow * (1 - 0.6 * SP.tint.night); ctx.drawImage(shadowCanvas, 0, 0); ctx.restore();
     // iso-sorted: object parts + cars + particles/fire + characters
     const list = buildList(view);
     const pi = list.findIndex((d) => d.kind === "actor" && d.actor === player);
     W.updateFade(list, pi, player.bodyRect(), st.lastDt || 1 / 60);
+    const E = SP.env, snow = CK.snow, lights = E.lights(view);
+    E.drawReflections(ctx, lights, view);
+    E.emitBegin(tgt, z, cx, cy);
     for (const d of list) {
-      if (d.kind === "obj") SP.drawFrame(ctx, d.key, d.X, d.Y, d.o.alpha[d.part] == null ? 1 : d.o.alpha[d.part]);
+      if (d.kind === "obj") { const a = d.o.alpha[d.part] == null ? 1 : d.o.alpha[d.part]; SP.drawFrame(ctx, d.key, d.X, d.Y, a); if (snow > 0.01) SP.drawSnow(ctx, d.key, d.X, d.Y, snow, a); }
       else if (d.kind === "overlay") SP.drawFrame(ctx, d.key, d.X, d.Y, d.alpha);
-      else if (d.kind === "car") SP.drawFrame(ctx, d.key, d.X, d.Y);
+      else if (d.kind === "car") { SP.drawFrame(ctx, d.key, d.X, d.Y); if (snow > 0.01) SP.drawSnow(ctx, d.key, d.X, d.Y, snow * (d.car && d.car.v > 0.5 ? 0.5 : 1)); }
       else if (d.kind === "part") SP.fx.drawPart(ctx, d.p);
       else if (d.kind === "fire") SP.fx.drawFire(ctx, d.o, d.ov);
+      else if (d.kind === "laundry") E.drawLaundry(ctx, d);
       else if (d.kind === "actor") d.actor.draw(ctx);
+      E.emitAfter(d);
     }
     lastList = list; st.playerIndex = pi;
     drawWires();
-    SP.fx.glows.push(...SP.traffic.glows());
-    SP.fx.drawGlows(ctx);
+    E.applyLight(ctx, tgt, z, cx, cy, lights);
+    E.emitComposite(ctx);
+    E.drawHalos(ctx, lights);
+    E.drawCarFx(ctx);
+    if (st.debug) drawDebug(list, pi);
     ctx.setTransform(1, 0, 0, 1, 0, 0);
-    const n = SP.tint.night;
-    if (n > 0.02) {
-      const g = ctx.createRadialGradient(canvas.width / 2, canvas.height / 2, canvas.height * 0.35, canvas.width / 2, canvas.height / 2, canvas.height * 0.95);
-      g.addColorStop(0, "rgba(10,12,30,0)"); g.addColorStop(1, `rgba(10,12,30,${0.45 * n})`);
-      ctx.fillStyle = g; ctx.fillRect(0, 0, canvas.width, canvas.height);
-    }
-    if (st.debug) { ctx.setTransform(z, 0, 0, z, -cx * z, -cy * z); drawDebug(list, pi); ctx.setTransform(1, 0, 0, 1, 0, 0); drawDebugText(list, pi); }
+    if (ss) { ctx = mainCtx; ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.imageSmoothingEnabled = true; ctx.imageSmoothingQuality = "high"; ctx.drawImage(ssCanvas, 0, 0, canvas.width, canvas.height); ctx.imageSmoothingEnabled = false; }
+    grade();
+    SP.env.drawFog(ctx, canvas.width, canvas.height);
+    SP.env.drawWeather(ctx, canvas.width, canvas.height, cam.x, cam.y, cam.zoom, st.lastDt || 1 / 60);
+    if (st.debug) drawDebugText(list, pi);
     hud();
+  }
+  /* colour grade (screen space): late-afternoon / dusk sun from the upper right (warm soft-light wash), cooler shade
+     towards the lower left; night = blue vignette. Cheap: two gradient fills per frame. */
+  function grade() {
+    // (the clock's ambient colour already tints the frame; this only adds the directional sun wash, clear days only)
+    const w = canvas.width, h = canvas.height, t = SP.tint, n = t.night, tn = st.time, clear = CK.weather === "clear" ? 1 : 1 - CK.intensity;
+    const warm = (tn === "afternoon" ? 0.55 : tn === "dusk" ? 0.45 : 0) * clear;
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    if (st.grade && warm > 0) {
+      ctx.save(); ctx.globalCompositeOperation = "soft-light";
+      const g = ctx.createLinearGradient(w, 0, w * 0.25, h);
+      g.addColorStop(0, `rgba(255,196,120,${0.55 * warm})`); g.addColorStop(0.55, `rgba(255,214,160,${0.18 * warm})`); g.addColorStop(1, `rgba(70,80,130,${0.35 * warm})`);
+      ctx.fillStyle = g; ctx.fillRect(0, 0, w, h); ctx.restore();
+    }
+    if (n > 0.02) {
+      const g = ctx.createRadialGradient(w / 2, h / 2, h * 0.35, w / 2, h / 2, h * 0.95);
+      g.addColorStop(0, "rgba(10,12,30,0)"); g.addColorStop(1, `rgba(10,12,30,${0.45 * n})`);
+      ctx.fillStyle = g; ctx.fillRect(0, 0, w, h);
+    }
   }
   function anchorPt(spec) {
     if (typeof spec[0] === "number") return SP.scr(spec[0], spec[1], spec[2]);
@@ -223,11 +287,16 @@
   }
   function drawWires() {
     ctx.save(); ctx.strokeStyle = SP.tint.night > 0.5 ? "rgba(20,20,30,0.9)" : "rgba(34,32,36,0.85)"; ctx.lineWidth = 1;
+    const V = st.view;
     for (const w of W.data.wires || []) {
       const a = anchorPt(w.from), b = anchorPt(w.to);
-      ctx.beginPath(); ctx.moveTo(a[0], a[1]);
-      const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2 + Math.hypot(b[0] - a[0], b[1] - a[1]) * 0.06;
-      ctx.quadraticCurveTo(mx, my, b[0], b[1]); ctx.stroke();
+      if (V && (Math.max(a[0], b[0]) < V.x0 || Math.min(a[0], b[0]) > V.x1 || Math.min(a[1], b[1]) > V.y1 + 200 || Math.max(a[1], b[1]) < V.y0)) continue;
+      const n = w.n || 1, sag = w.sag || 0.06;              // bundles: n wires, each a little lower / slacker
+      for (let i = 0; i < n; i++) {
+        ctx.beginPath(); ctx.moveTo(a[0], a[1] + i * 2);
+        const mx = (a[0] + b[0]) / 2, my = (a[1] + b[1]) / 2 + i * 2 + Math.hypot(b[0] - a[0], b[1] - a[1]) * (sag + i * 0.012);
+        ctx.quadraticCurveTo(mx, my, b[0], b[1] + i * 2); ctx.stroke();
+      }
     }
     ctx.restore();
   }
@@ -298,13 +367,20 @@
     ctx.fillStyle = "#e8f0ff"; lines.forEach((t, i) => ctx.fillText(t, 16, 25 + i * 16)); ctx.restore();
     st.blockedBy = null;
   }
-  const hudEl = document.getElementById("status"), toastEl = document.getElementById("toast"), promptEl = document.getElementById("prompt");
+  const hudEl = document.getElementById("status"), toastEl = document.getElementById("toast"), promptEl = document.getElementById("prompt"), logEl = document.getElementById("log");
   function hud() {
-    const names = { day: "白天", dusk: "黄昏", night: "夜晚" };
     const fade = (W.fadeHit || []).length ? " · 遮挡淡出：" + W.fadeHit.join(",") : "";
-    hudEl.textContent = `${names[st.time]} · 李默 (${player.x.toFixed(1)}, ${player.y.toFixed(1)}) m${fade}`;
-    toastEl.textContent = st.toast ? st.toast.msg : ""; toastEl.style.opacity = st.toast ? 1 : 0;
-    promptEl.textContent = st.near ? { gate: "E 开/关铁门", door: "E 开/关单元门", stall: "E 早点摊", locker: "E 快递柜" }[st.near.interact] : "";
+    const wx = CK.weather !== "clear" && CK.intensity > 0.05 ? CK.weatherName() : CK.target !== "clear" ? CK.weatherName(CK.target) : "晴";
+    const extra = (CK.snow > 0.12 ? ` · 积雪${["", "薄", "中", "厚"][SP.env.snowLevel()]}` : "") + (CK.wet > 0.3 && CK.snow < 0.12 ? " · 路面湿" : "");
+    const txt = `${CK.dateLabel()} ${CK.clockLabel()} · ${CK.seasonName()} · ${wx}${extra} · ×${cam.zoom}${st.debug ? ` · (${player.x.toFixed(1)}, ${player.y.toFixed(1)})` + fade : ""}`;
+    if (hudEl.textContent !== txt) hudEl.textContent = txt;
+    const tm = st.toast ? st.toast.msg : ""; if (toastEl.textContent !== tm) { toastEl.textContent = tm; toastEl.style.opacity = st.toast ? 1 : 0; }
+    let pr = "";
+    if (player.carry) pr = "E 停车锁车";
+    else if (st.near) { const u = W.actionFor(st.near, "use"), k = W.actionFor(st.near, "kick"); pr = [u && "E " + u.label, k && "F " + k.label].filter(Boolean).join("  ·  "); }
+    if (promptEl.textContent !== pr) promptEl.textContent = pr;
+    SP.promptActions = { use: !!(player.carry || (st.near && W.actionFor(st.near, "use"))), kick: !!(st.near && W.actionFor(st.near, "kick")) };
+    if (logEl) { const on = !!st.showLog; logEl.style.display = on ? "block" : "none"; if (on) { const L = W.log.slice(-8).map((e) => `${e.clock || ""} ${e.text}`).join("\n"); if (logEl.textContent !== L) logEl.textContent = L; } }
   }
 
   // ---------- loop ----------
@@ -348,24 +424,28 @@
   }
 
   // ---------- boot ----------
-  const assets = [["atlas", "kit/kit_atlas.png"], ["emit", "kit/kit_emit.png"]].concat(Object.entries(window.ACTORS).map(([k, v]) => ["actor_" + k, v.img]));
+  const assets = [["atlas", "kit/kit_atlas.png"], ["emit", "kit/kit_emit.png"]].concat(Object.entries(window.ACTORS).map(([k, v]) => ["actor_" + k, v.img]), SP.overrideAssets());
   SP.load(assets).then(() => {
-    setTime(Q.get("time") || "day", true);
+    SP.applyOverrides();
+    CK.init(window.SCENE_DATA, Q); SP.season = CK.season; syncLight();
     SP.updateTint(true);
     W.load(window.SCENE_DATA);
     SP.traffic.reset();
     spawnActors();
     SP.updateTint(true); W.bakeGround();
-    SP.actions = { interact: () => { st.near = nearest(); interact(); }, time: () => setTime(TOD_ORDER[(TOD_ORDER.indexOf(st.time) + 1) % 3]),
+    SP.actions = { interact: () => { st.near = nearest(); interact(); }, kick, time: () => { CK.cycleTime(); toast("时间快进"); }, weather: () => { CK.cycleWeather(); toast("天气：" + CK.weatherName(CK.target)); },
+                   nextDay: () => CK.nextDay(), log: () => (st.showLog = !st.showLog), zoom: (d) => SP.zoomStep(d), season: (se) => setSeason(se || SEASONS[(SEASONS.indexOf(SP.season) + 1) % SEASONS.length]),
                    event: fireEvent, umbrella: toggleUmbrella, reset: resetScene, debug: () => (st.debug = !st.debug), near: () => st.near };
-    document.querySelectorAll("[data-ev]").forEach((b) => b.addEventListener("click", () => { const e = b.dataset.ev; if (e === "reset") resetScene(); else if (e === "time") setTime(TOD_ORDER[(TOD_ORDER.indexOf(st.time) + 1) % 3]); else if (e === "debug") st.debug = !st.debug; else if (e === "umbrella") toggleUmbrella(); else fireEvent(e); b.blur(); }));
+    document.querySelectorAll("[data-ev]").forEach((b) => b.addEventListener("click", () => { const e = b.dataset.ev; if (e === "reset") resetScene(); else if (e === "time") CK.cycleTime(); else if (e === "weather") CK.cycleWeather(); else if (e === "kick") kick(); else if (e === "debug") st.debug = !st.debug; else if (e === "umbrella") toggleUmbrella(); else if (e === "zoomin") SP.zoomStep(1); else if (e === "zoomout") SP.zoomStep(-1);
+      else if (e === "season") setSeason(SEASONS[(SEASONS.indexOf(SP.season) + 1) % SEASONS.length]); else fireEvent(e); b.blur(); }));
     window.__proto = {
       SP, player, world: W, traffic: SP.traffic, state: st, cam,
       step: (dt, n) => { for (let i = 0; i < (n || 1); i++) step(dt); return true; },
       sim: (seconds, dt) => { dt = dt || 1 / 30; for (let t = 0; t < seconds; t += dt) update(dt); return true; },
       skip: (seconds) => { for (let t = 0; t < seconds; t += 1 / 30) update(1 / 30); SP.actors.resolve(12); return true; },
       render: () => { updateCam(1); render(); return true; },
-      trigger: fireEvent, setTime, reset: resetScene, umbrella: toggleUmbrella, interact: () => { st.near = nearest(); interact(); return st.near && st.near.id; },
+      trigger: fireEvent, setTime: (n, inst) => setTime(n, inst !== false), setSeason, clock: CK, env: SP.env, kick, act: (id, kind) => { const o = W.byId[id]; return o ? W.act(o, kind || "use", player) : null; },
+      setWeather: (w, i) => { CK.setWeather(w, i == null ? 0.8 : i, true, true); syncLight(); return true; }, zoom: (z) => { if (z) { cam.zoom = z; cam.ready = false; } return cam.zoom; }, reset: resetScene, umbrella: toggleUmbrella, interact: () => { st.near = nearest(); interact(); return st.near && st.near.id; },
       order: () => lastList.map((d) => (d.kind === "obj" ? d.o.id + "/" + d.part : d.kind === "actor" ? (d.actor === player ? "PLAYER" : "NPC:" + d.actor.id) : d.kind === "car" ? d.car.id : d.kind)),
       buildList: (view) => buildList(view),
       alpha: (id, part) => { const o = W.byId[id]; return o ? (o.alpha[part || W.piece(o).parts[0]] ?? 1) : null; },

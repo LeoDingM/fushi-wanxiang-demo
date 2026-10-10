@@ -6,14 +6,39 @@ Converted from `scene-proto/` (which is untouched, as is `web-demo/`). Plain JS,
 | desktop key | phone | action |
 |---|---|---|
 | WASD / arrows (**screen** directions) | floating joystick (left half) | walk 李默 |
-| E | 互动 | open / close the courtyard gate |
+| E | 互动 | use the nearest thing (gate, door, bin, shared bike: scan + push / park, vending machine, pot, hydrant valve, parked car horn, laundry, puddle, leaf pile …) |
+| F | 踢 | kick it (lamp, bin, bike, vending machine, pot, poster, ground-floor window, parked car alarm, laundry line …); things auto-repair after N in-game hours |
 | U | 伞 | umbrella (0.55 m collision radius) |
-| T | 时间 | day → dusk → night |
+| T | 时间 | fast-forward to the next of morning / day / afternoon / dusk / night (continuous clock, 1 s = 1 game min) |
+| R · Y · N | 天气 · 季节 · — | next weather (clear / rain / snow / fog) · next season · next day |
+| = / - | ＋ / － | zoom (0.5 · 0.67 · 1 · 1.5 · 2; desktop default 0.5, phone 1) |
+| L | 日志 | event log (damage, repairs, weather, NPCs) |
 | 1 / 2 / 3 | 破窗 / 起火 / 撞车 | events: broken window · fire on a 1F window · car crash at the curb |
 | 0 · G | 重置 · 调试 | reset · debug view (sort boxes, footprints, foot circles, routes) |
 
-URL params: `debug=1`, `time=day|dusk|night`, `px=&py=&dir=` spawn, `zoom=`, `npcs=0`, `touch=1|0`, `manual=1`
+URL params: `debug=1`, `time=morning|day|afternoon|dusk|night|HH:MM`, `season=spring|summer|autumn|winter`, `day=`,
+`weather=clear|rain|snow|fog` (+ `wi=` intensity, `snow=` / `wet=` cover), `scale=` clock speed, `px=&py=&dir=` spawn, `zoom=`, `npcs=0`, `touch=1|0`, `manual=1`
 (test stepping), `shot=1`, `w=&h=` canvas size.
+
+## Stage 2 (2026-10-10)
+* **Map fill**: 104 × 104 m ground, 1942 objects: the 12号 block plus procedural residential blocks around it,
+  the 24便利店 corner shop (+ a street pharmacy with opening hours and a roll-down shutter), bus stop + a bus line
+  (stops, dwells ~6 s), green belt, grass / concrete, kerb trees, poles + wire bundles, bikes, planters, bins.
+  Camera clamped to the map (diamond clamp, no void at any edge).
+* **Art**: seeded weathering variants per facade module (grime streaks, patches, flyers, rusty AC, cluttered
+  balconies / roofs), layered faceted tree canopies (2 shapes, 4 seasons), shop signs with text, warm afternoon key.
+  Kit: 49 pieces; `kit_snow.png` holds 3 cumulative snow levels for 74 frames (cropped to the snowy pixels, loaded
+  only once it snows). Texture slots for AI-painted replacements: `kit/TEXTURE_SLOTS.md`, `kit/overrides/`.
+* **Ported from the front-view line (`scene-proto/`, same `scene.json` calendar / weather / interactions data)**:
+  `js/clock.js` calendar (5 days / season, daily weather roll) + continuous clock + ambient colour; `js/env.js`
+  lightmap with real light sources (street lamps, pole lamps, lit windows that go out after 23:00, shops, sign,
+  vending machine, bus stop, stall, car head/tail lights, fire) + an emissive layer that is erased where nearer things
+  cover it + bloom halos; rain (screen streaks, wet ground, puddles with rings, light reflections, splashes),
+  3-step snow (ground tiles re-baked per step, snow on objects, footprints + tyre tracks), fog; seasonal trees,
+  falling petals / leaves (depth-sorted particles), fallen leaves, leaf piles; `js/interact.js` interactive /
+  destructible objects with auto-repair, hazards NPCs avoid; NPCs open umbrellas in rain, 王阿姨 goes home in bad
+  weather and comes back, NPCs stop and look at noises (kicks, car alarm), breath puffs in the cold; kick button.
+* Fixed 60 Hz simulation substeps; ground cached in 1024 × 512 tiles.
 
 ## Contents
 * `ARCHITECTURE.md`: projection choice (yaw 45°, pitch 30°, 2:1), diamond ground, iso depth sort (box + prism
@@ -28,14 +53,19 @@ URL params: `debug=1`, `time=day|dusk|night`, `px=&py=&dir=` spawn, `zoom=`, `np
   `art-pack/scene3d/build_kit45.sh`.
 * `img/actors/`: 李默 (+ umbrella set), 王阿姨 vendor, 大爷, office worker, student, delivery rider, from
   `art-pack/sprites3d/out45/` (`tools/pack_actors.py`).
-* `js/`: `core.js` projection/atlas/tint/geometry · `world.js` objects/states/footprints/ground/sort/fade/events ·
+* `js/`: `clock.js` calendar/clock/weather state · `env.js` lightmap, emissive layer, rain/snow/fog, puddles,
+  footprints, laundry · `interact.js` interaction rules, damage, repair, hazards, event log · `core.js` projection/atlas/snow/geometry · `world.js` objects/states/footprints/ground/sort/fade/events ·
   `actors.js` characters, collision, sliding, separation · `npc.js` waypoint brains · `traffic.js` 4 lanes, zebra,
   intersection, crash · `fx.js` · `audit.js` clipping audit · `main.js` loop/input/camera/render/debug ·
   `mobile.js` phone layout and touch controls.
-* `tools/playtest.py`: 72 checks, including the 3-hour clipping audit and the phone tests. Last run: **72/72 PASS**.
-  `tools/mobile_test.py`: 390×844 / 844×390 with emulated touch. `tools/capture.py`: screenshots 60–68.
+* `tools/playtest.py`: 103 checks (last run **103/103 PASS**, 3-hour audit: 0 overlaps · 0 intrusions · 0 sort · 0 pixel violations), including the clipping audit (normal + 5 min in rain with umbrellas), the Stage 2
+  checks (map, bus, seasons, calendar, weather, snow steps, lights, every interaction + repair) and the phone tests.
+  `tools/mobile_test.py`: 390×844 / 844×390 with emulated touch. `tools/capture.py`: screenshots 60–68,
+  `tools/capture_s2.py`: 70–81.
 
 ## Screenshots
 `60-overview` · `61-fade-behind-wall` · `62-traffic-cross` · `63-fire` · `64-crash` · `65-debug` · `66-walk.gif`
 (+ mp4) · `67-compare` (concept art vs prototype) · `68-clip-audit.gif` (+ mp4, contact sheet) ·
 `69-mobile-portrait` / `69-mobile-landscape` · `clip-audit.json` (full audit result).
+Stage 2: `70-overview-v2` · `71-compare-v2` · `72-dusk` · `73-night` · `74-mobile` · `75-walk.mp4` (30 fps, dusk rain,
+umbrella) · `76-rain-night` · `77-snow-steps` · `78-seasons` · `79-fog` · `80-interactions` · `81-weather-mobile`.
