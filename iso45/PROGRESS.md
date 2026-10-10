@@ -127,3 +127,10 @@
 00:25 · [Stage O] 时段软行程链（公交/便利店/面馆/奶茶/门岗）POI 软链
 00:25 · [Stage O] 门禁长图加水印 + 演示二维码
 00:25 · [Stage O] 质量：stageO_test 9/9 · smoke 4/4 · stage6 12/12 · 截图 o1–o6
+
+00:35 · [Stage P] SLA 逾期→物业上门对话（结案/续期/改约），纯菜单无 atlas · js/stageP.js
+00:35 · [Stage P] 复诊+药房统一 careSM（revisit→挂号→问诊→取药→疗程）
+00:35 · [Stage P] 试穿徽章一键还原上一套（setOutfitId）
+00:35 · [Stage P] 软行程写入 dayLog itin_replay + 今日路线回放
+00:35 · [Stage P] 长图 QR 深链 fushi://app/scanlog → 门禁 App
+00:35 · [Stage P] 质量：stageP_test 8/8 · smoke 4/4 · stage6 12/12 · 截图 p1–p6 · 未改外观/学校
