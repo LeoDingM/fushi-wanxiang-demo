@@ -1,0 +1,3443 @@
+{
+ "format": "fushi-scene",
+ "version": 3,
+ "name": "井槐里12号 · 楼前切片（模块化原型 · 正视 v3）",
+ "units": "m",
+ "grid_m": 0.5,
+ "kit": "kit/kit_manifest.json",
+ "bounds": {
+  "x0": 0,
+  "y0": -3.6,
+  "x1": 32,
+  "y1": 22
+ },
+ "camera": {
+  "top_z_at_facade": 11.5,
+  "facade_y": 18.0
+ },
+ "ground": {
+  "origin": [
+   0,
+   -4
+  ],
+  "chunk": 2,
+  "cols": 17,
+  "rows": 14,
+  "legend": {
+   "A": "g_asphalt:a",
+   "B": "g_asphalt:b",
+   "S": "g_sidewalk",
+   "C": "g_court",
+   "T": "g_treepit"
+  },
+  "data_south_to_north": [
+   "SSSSSSSSSSSSSSSSS",
+   "SSSSSSSSSSSSSSSSS",
+   "BAAABAABABAAABAAA",
+   "AAAAABAAAAABBABAA",
+   "AAAABBBBBAAAAAABA",
+   "AAAAAAAABBAAABABA",
+   "SSTSSSSSSSSSSSTSS",
+   "SSSSSSSSSSSSSSSSS",
+   "CCCCCCCCCCCCCCCCC",
+   "CCCCCCCCCCCCCCCCC",
+   "CCCCCCCCCCCCCCCCC",
+   "CCCCCCCCCCCCCCCCC",
+   "CCCCCCCCCCCCCCCCC",
+   "CCCCCCCCCCCCCCCCC"
+  ]
+ },
+ "objects": [
+  {
+   "id": "curb_n0",
+   "type": "p_curb",
+   "x": 1,
+   "y": 8.1
+  },
+  {
+   "id": "curb_s0",
+   "type": "p_curb",
+   "x": 1,
+   "y": -0.1,
+   "rot": 4
+  },
+  {
+   "id": "curb_n1",
+   "type": "p_curb",
+   "x": 3,
+   "y": 8.1
+  },
+  {
+   "id": "curb_s1",
+   "type": "p_curb",
+   "x": 3,
+   "y": -0.1,
+   "rot": 4
+  },
+  {
+   "id": "curb_n2",
+   "type": "p_curb",
+   "x": 5,
+   "y": 8.1
+  },
+  {
+   "id": "curb_s2",
+   "type": "p_curb",
+   "x": 5,
+   "y": -0.1,
+   "rot": 4
+  },
+  {
+   "id": "curb_n3",
+   "type": "p_curb",
+   "x": 7,
+   "y": 8.1
+  },
+  {
+   "id": "curb_s3",
+   "type": "p_curb",
+   "x": 7,
+   "y": -0.1,
+   "rot": 4
+  },
+  {
+   "id": "curb_n4",
+   "type": "p_curb",
+   "x": 9,
+   "y": 8.1
+  },
+  {
+   "id": "curb_s4",
+   "type": "p_curb",
+   "x": 9,
+   "y": -0.1,
+   "rot": 4
+  },
+  {
+   "id": "curb_n5",
+   "type": "p_curb",
+   "x": 11,
+   "y": 8.1
+  },
+  {
+   "id": "curb_s5",
+   "type": "p_curb",
+   "x": 11,
+   "y": -0.1,
+   "rot": 4
+  },
+  {
+   "id": "curb_n6",
+   "type": "p_curb",
+   "x": 13,
+   "y": 8.1
+  },
+  {
+   "id": "curb_s6",
+   "type": "p_curb",
+   "x": 13,
+   "y": -0.1,
+   "rot": 4
+  },
+  {
+   "id": "curb_n7",
+   "type": "p_curb",
+   "x": 15,
+   "y": 8.1
+  },
+  {
+   "id": "curb_s7",
+   "type": "p_curb",
+   "x": 15,
+   "y": -0.1,
+   "rot": 4
+  },
+  {
+   "id": "curb_n8",
+   "type": "p_curb",
+   "x": 17,
+   "y": 8.1
+  },
+  {
+   "id": "curb_s8",
+   "type": "p_curb",
+   "x": 17,
+   "y": -0.1,
+   "rot": 4
+  },
+  {
+   "id": "curb_n9",
+   "type": "p_curb",
+   "x": 19,
+   "y": 8.1
+  },
+  {
+   "id": "curb_s9",
+   "type": "p_curb",
+   "x": 19,
+   "y": -0.1,
+   "rot": 4
+  },
+  {
+   "id": "curb_n10",
+   "type": "p_curb",
+   "x": 21,
+   "y": 8.1
+  },
+  {
+   "id": "curb_s10",
+   "type": "p_curb",
+   "x": 21,
+   "y": -0.1,
+   "rot": 4
+  },
+  {
+   "id": "curb_n11",
+   "type": "p_curb",
+   "x": 23,
+   "y": 8.1
+  },
+  {
+   "id": "curb_s11",
+   "type": "p_curb",
+   "x": 23,
+   "y": -0.1,
+   "rot": 4
+  },
+  {
+   "id": "curb_n12",
+   "type": "p_curb",
+   "x": 25,
+   "y": 8.1
+  },
+  {
+   "id": "curb_s12",
+   "type": "p_curb",
+   "x": 25,
+   "y": -0.1,
+   "rot": 4
+  },
+  {
+   "id": "curb_n13",
+   "type": "p_curb",
+   "x": 27,
+   "y": 8.1
+  },
+  {
+   "id": "curb_s13",
+   "type": "p_curb",
+   "x": 27,
+   "y": -0.1,
+   "rot": 4
+  },
+  {
+   "id": "curb_n14",
+   "type": "p_curb",
+   "x": 29,
+   "y": 8.1
+  },
+  {
+   "id": "curb_s14",
+   "type": "p_curb",
+   "x": 29,
+   "y": -0.1,
+   "rot": 4
+  },
+  {
+   "id": "curb_n15",
+   "type": "p_curb",
+   "x": 31,
+   "y": 8.1
+  },
+  {
+   "id": "curb_s15",
+   "type": "p_curb",
+   "x": 31,
+   "y": -0.1,
+   "rot": 4
+  },
+  {
+   "id": "curb_n16",
+   "type": "p_curb",
+   "x": 33,
+   "y": 8.1
+  },
+  {
+   "id": "curb_s16",
+   "type": "p_curb",
+   "x": 33,
+   "y": -0.1,
+   "rot": 4
+  },
+  {
+   "id": "dash0",
+   "type": "d_center_dash",
+   "x": 1.5,
+   "y": 4.0
+  },
+  {
+   "id": "dash1",
+   "type": "d_center_dash",
+   "x": 4.5,
+   "y": 4.0
+  },
+  {
+   "id": "dash2",
+   "type": "d_center_dash",
+   "x": 7.5,
+   "y": 4.0
+  },
+  {
+   "id": "dash3",
+   "type": "d_center_dash",
+   "x": 10.5,
+   "y": 4.0
+  },
+  {
+   "id": "dash6",
+   "type": "d_center_dash",
+   "x": 19.5,
+   "y": 4.0
+  },
+  {
+   "id": "dash7",
+   "type": "d_center_dash",
+   "x": 22.5,
+   "y": 4.0
+  },
+  {
+   "id": "dash8",
+   "type": "d_center_dash",
+   "x": 25.5,
+   "y": 4.0
+  },
+  {
+   "id": "dash9",
+   "type": "d_center_dash",
+   "x": 28.5,
+   "y": 4.0
+  },
+  {
+   "id": "dash10",
+   "type": "d_center_dash",
+   "x": 31.5,
+   "y": 4.0
+  },
+  {
+   "id": "dash11",
+   "type": "d_center_dash",
+   "x": 34.5,
+   "y": 4.0
+  },
+  {
+   "id": "edge_s0",
+   "type": "d_edge_line",
+   "x": 1,
+   "y": 0.35
+  },
+  {
+   "id": "edge_n0",
+   "type": "d_edge_line",
+   "x": 1,
+   "y": 7.65
+  },
+  {
+   "id": "edge_s1",
+   "type": "d_edge_line",
+   "x": 3,
+   "y": 0.35
+  },
+  {
+   "id": "edge_n1",
+   "type": "d_edge_line",
+   "x": 3,
+   "y": 7.65
+  },
+  {
+   "id": "edge_s2",
+   "type": "d_edge_line",
+   "x": 5,
+   "y": 0.35
+  },
+  {
+   "id": "edge_n2",
+   "type": "d_edge_line",
+   "x": 5,
+   "y": 7.65
+  },
+  {
+   "id": "edge_s3",
+   "type": "d_edge_line",
+   "x": 7,
+   "y": 0.35
+  },
+  {
+   "id": "edge_n3",
+   "type": "d_edge_line",
+   "x": 7,
+   "y": 7.65
+  },
+  {
+   "id": "edge_s4",
+   "type": "d_edge_line",
+   "x": 9,
+   "y": 0.35
+  },
+  {
+   "id": "edge_n4",
+   "type": "d_edge_line",
+   "x": 9,
+   "y": 7.65
+  },
+  {
+   "id": "edge_s5",
+   "type": "d_edge_line",
+   "x": 11,
+   "y": 0.35
+  },
+  {
+   "id": "edge_n5",
+   "type": "d_edge_line",
+   "x": 11,
+   "y": 7.65
+  },
+  {
+   "id": "edge_s9",
+   "type": "d_edge_line",
+   "x": 19,
+   "y": 0.35
+  },
+  {
+   "id": "edge_n9",
+   "type": "d_edge_line",
+   "x": 19,
+   "y": 7.65
+  },
+  {
+   "id": "edge_s10",
+   "type": "d_edge_line",
+   "x": 21,
+   "y": 0.35
+  },
+  {
+   "id": "edge_n10",
+   "type": "d_edge_line",
+   "x": 21,
+   "y": 7.65
+  },
+  {
+   "id": "edge_s11",
+   "type": "d_edge_line",
+   "x": 23,
+   "y": 0.35
+  },
+  {
+   "id": "edge_n11",
+   "type": "d_edge_line",
+   "x": 23,
+   "y": 7.65
+  },
+  {
+   "id": "edge_s12",
+   "type": "d_edge_line",
+   "x": 25,
+   "y": 0.35
+  },
+  {
+   "id": "edge_n12",
+   "type": "d_edge_line",
+   "x": 25,
+   "y": 7.65
+  },
+  {
+   "id": "edge_s13",
+   "type": "d_edge_line",
+   "x": 27,
+   "y": 0.35
+  },
+  {
+   "id": "edge_n13",
+   "type": "d_edge_line",
+   "x": 27,
+   "y": 7.65
+  },
+  {
+   "id": "edge_s14",
+   "type": "d_edge_line",
+   "x": 29,
+   "y": 0.35
+  },
+  {
+   "id": "edge_n14",
+   "type": "d_edge_line",
+   "x": 29,
+   "y": 7.65
+  },
+  {
+   "id": "edge_s15",
+   "type": "d_edge_line",
+   "x": 31,
+   "y": 0.35
+  },
+  {
+   "id": "edge_n15",
+   "type": "d_edge_line",
+   "x": 31,
+   "y": 7.65
+  },
+  {
+   "id": "edge_s16",
+   "type": "d_edge_line",
+   "x": 33,
+   "y": 0.35
+  },
+  {
+   "id": "edge_n16",
+   "type": "d_edge_line",
+   "x": 33,
+   "y": 7.65
+  },
+  {
+   "id": "zebra0a",
+   "type": "d_stripe",
+   "x": 12.45,
+   "y": 2.05
+  },
+  {
+   "id": "zebra0b",
+   "type": "d_stripe",
+   "x": 12.45,
+   "y": 5.95
+  },
+  {
+   "id": "zebra1a",
+   "type": "d_stripe",
+   "x": 13.35,
+   "y": 2.05
+  },
+  {
+   "id": "zebra1b",
+   "type": "d_stripe",
+   "x": 13.35,
+   "y": 5.95
+  },
+  {
+   "id": "zebra2a",
+   "type": "d_stripe",
+   "x": 14.25,
+   "y": 2.05
+  },
+  {
+   "id": "zebra2b",
+   "type": "d_stripe",
+   "x": 14.25,
+   "y": 5.95
+  },
+  {
+   "id": "zebra3a",
+   "type": "d_stripe",
+   "x": 15.15,
+   "y": 2.05
+  },
+  {
+   "id": "zebra3b",
+   "type": "d_stripe",
+   "x": 15.15,
+   "y": 5.95
+  },
+  {
+   "id": "zebra4a",
+   "type": "d_stripe",
+   "x": 16.05,
+   "y": 2.05
+  },
+  {
+   "id": "zebra4b",
+   "type": "d_stripe",
+   "x": 16.05,
+   "y": 5.95
+  },
+  {
+   "id": "stop_eb",
+   "type": "d_stopline",
+   "x": 10.9,
+   "y": 2.0
+  },
+  {
+   "id": "stop_wb",
+   "type": "d_stopline",
+   "x": 17.6,
+   "y": 6.0
+  },
+  {
+   "id": "manhole1",
+   "type": "d_manhole",
+   "x": 7.5,
+   "y": 2.6
+  },
+  {
+   "id": "manhole2",
+   "type": "d_manhole",
+   "x": 23.0,
+   "y": 5.6
+  },
+  {
+   "id": "manhole3",
+   "type": "d_manhole",
+   "x": 21.0,
+   "y": 15.0
+  },
+  {
+   "id": "wall_w0",
+   "type": "w_wall",
+   "x": 1,
+   "y": 12.15,
+   "state": "plain",
+   "fade_group": "front_wall"
+  },
+  {
+   "id": "wall_w1",
+   "type": "w_wall",
+   "x": 3,
+   "y": 12.15,
+   "state": "plain",
+   "fade_group": "front_wall"
+  },
+  {
+   "id": "wall_w2",
+   "type": "w_wall",
+   "x": 5,
+   "y": 12.15,
+   "state": "plain",
+   "fade_group": "front_wall"
+  },
+  {
+   "id": "wall_w3",
+   "type": "w_wall",
+   "x": 7,
+   "y": 12.15,
+   "state": "poster",
+   "fade_group": "front_wall",
+   "interact": "poster"
+  },
+  {
+   "id": "wall_w4",
+   "type": "w_wall",
+   "x": 9,
+   "y": 12.15,
+   "state": "plain",
+   "fade_group": "front_wall"
+  },
+  {
+   "id": "wall_w5",
+   "type": "w_wall",
+   "x": 11,
+   "y": 12.15,
+   "state": "plain",
+   "fade_group": "front_wall"
+  },
+  {
+   "id": "pillar_l",
+   "type": "w_pillar",
+   "x": 12.27,
+   "y": 12.15,
+   "fade_group": "front_wall"
+  },
+  {
+   "id": "pillar_r",
+   "type": "w_pillar",
+   "x": 16.23,
+   "y": 12.15,
+   "fade_group": "front_wall"
+  },
+  {
+   "id": "gate_l",
+   "type": "w_gate_l",
+   "x": 12.54,
+   "y": 12.15,
+   "state": "open",
+   "fade_group": "front_wall",
+   "interact": "gate"
+  },
+  {
+   "id": "gate_r",
+   "type": "w_gate_r",
+   "x": 15.96,
+   "y": 12.15,
+   "state": "open",
+   "fade_group": "front_wall",
+   "interact": "gate"
+  },
+  {
+   "id": "wall_e0",
+   "type": "w_wall",
+   "x": 17.5,
+   "y": 12.15,
+   "state": "plain",
+   "fade_group": "front_wall"
+  },
+  {
+   "id": "wall_e1",
+   "type": "w_wall",
+   "x": 19.5,
+   "y": 12.15,
+   "state": "plain",
+   "fade_group": "front_wall"
+  },
+  {
+   "id": "wall_e2",
+   "type": "w_wall",
+   "x": 21.5,
+   "y": 12.15,
+   "state": "plain",
+   "fade_group": "front_wall"
+  },
+  {
+   "id": "wall_e3",
+   "type": "w_wall",
+   "x": 23.5,
+   "y": 12.15,
+   "state": "plain",
+   "fade_group": "front_wall"
+  },
+  {
+   "id": "wall_e4",
+   "type": "w_wall",
+   "x": 25.5,
+   "y": 12.15,
+   "state": "plain",
+   "fade_group": "front_wall"
+  },
+  {
+   "id": "wall_e5",
+   "type": "w_wall",
+   "x": 27.5,
+   "y": 12.15,
+   "state": "poster",
+   "fade_group": "front_wall",
+   "interact": "poster"
+  },
+  {
+   "id": "wall_e6",
+   "type": "w_wall",
+   "x": 29.5,
+   "y": 12.15,
+   "state": "plain",
+   "fade_group": "front_wall"
+  },
+  {
+   "id": "wall_e7",
+   "type": "w_wall",
+   "x": 31.5,
+   "y": 12.15,
+   "state": "plain",
+   "fade_group": "front_wall"
+  },
+  {
+   "id": "wall_sidew0",
+   "type": "w_wall",
+   "x": 0.15,
+   "y": 13.3,
+   "rot": 2
+  },
+  {
+   "id": "wall_sidee0",
+   "type": "w_wall",
+   "x": 31.85,
+   "y": 13.3,
+   "rot": 2
+  },
+  {
+   "id": "wall_sidew1",
+   "type": "w_wall",
+   "x": 0.15,
+   "y": 15.3,
+   "rot": 2
+  },
+  {
+   "id": "wall_sidee1",
+   "type": "w_wall",
+   "x": 31.85,
+   "y": 15.3,
+   "rot": 2
+  },
+  {
+   "id": "wall_sidew2",
+   "type": "w_wall",
+   "x": 0.15,
+   "y": 17.3,
+   "rot": 2
+  },
+  {
+   "id": "wall_sidee2",
+   "type": "w_wall",
+   "x": 31.85,
+   "y": 17.3,
+   "rot": 2
+  },
+  {
+   "id": "wall_sidew3",
+   "type": "w_wall",
+   "x": 0.15,
+   "y": 19.3,
+   "rot": 2
+  },
+  {
+   "id": "wall_sidee3",
+   "type": "w_wall",
+   "x": 31.85,
+   "y": 19.3,
+   "rot": 2
+  },
+  {
+   "id": "wall_sidew4",
+   "type": "w_wall",
+   "x": 0.15,
+   "y": 21.3,
+   "rot": 2
+  },
+  {
+   "id": "wall_sidee4",
+   "type": "w_wall",
+   "x": 31.85,
+   "y": 21.3,
+   "rot": 2
+  },
+  {
+   "id": "wall_1F_4",
+   "type": "f_wall",
+   "x": 4,
+   "y": 18.0,
+   "state": "ground"
+  },
+  {
+   "id": "win_1F_4",
+   "type": "f_window",
+   "x": 4,
+   "y": 18.0,
+   "state": "intact",
+   "interact": "window"
+  },
+  {
+   "id": "wall_1F_7",
+   "type": "f_wall",
+   "x": 7,
+   "y": 18.0,
+   "state": "ground"
+  },
+  {
+   "id": "win_1F_7",
+   "type": "f_window",
+   "x": 7,
+   "y": 18.0,
+   "state": "intact",
+   "interact": "window",
+   "night_lit": true
+  },
+  {
+   "id": "wall_1F_10",
+   "type": "f_wall",
+   "x": 10,
+   "y": 18.0,
+   "state": "ground"
+  },
+  {
+   "id": "win_1F_10",
+   "type": "f_window",
+   "x": 10,
+   "y": 18.0,
+   "state": "intact",
+   "interact": "window",
+   "night_lit": true
+  },
+  {
+   "id": "wall_1F_13",
+   "type": "f_wall",
+   "x": 13,
+   "y": 18.0,
+   "state": "ground"
+  },
+  {
+   "id": "unit_door",
+   "type": "f_door",
+   "x": 13,
+   "y": 18.0,
+   "state": "closed",
+   "fade_group": "building",
+   "interact": "door"
+  },
+  {
+   "id": "wall_1F_16",
+   "type": "f_wall",
+   "x": 16,
+   "y": 18.0,
+   "state": "ground"
+  },
+  {
+   "id": "win_1F_16",
+   "type": "f_window",
+   "x": 16,
+   "y": 18.0,
+   "state": "intact",
+   "interact": "window",
+   "night_lit": true
+  },
+  {
+   "id": "wall_1F_19",
+   "type": "f_wall",
+   "x": 19,
+   "y": 18.0,
+   "state": "ground"
+  },
+  {
+   "id": "win_1F_19",
+   "type": "f_window",
+   "x": 19,
+   "y": 18.0,
+   "state": "intact",
+   "interact": "window"
+  },
+  {
+   "id": "wall_1F_22",
+   "type": "f_wall",
+   "x": 22,
+   "y": 18.0,
+   "state": "ground"
+  },
+  {
+   "id": "shop",
+   "type": "f_shop",
+   "x": 22,
+   "y": 18.0,
+   "state": "open",
+   "interact": "shop",
+   "hours": [
+    "07:00",
+    "22:00"
+   ]
+  },
+  {
+   "id": "wall_1F_25",
+   "type": "f_wall",
+   "x": 25,
+   "y": 18.0,
+   "state": "ground"
+  },
+  {
+   "id": "pipe_0_4.1",
+   "type": "f_pipe",
+   "x": 4.1,
+   "y": 18.0
+  },
+  {
+   "id": "pipe_0_27.9",
+   "type": "f_pipe",
+   "x": 27.9,
+   "y": 18.0
+  },
+  {
+   "id": "wall_2F_4",
+   "type": "f_wall",
+   "x": 4,
+   "y": 18.0,
+   "z": 3.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_2F_4",
+   "type": "f_window",
+   "x": 4,
+   "y": 18.0,
+   "z": 3.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "ac_2F_4",
+   "type": "f_ac",
+   "x": 5.5,
+   "y": 18.0,
+   "z": 3.2
+  },
+  {
+   "id": "wall_2F_7",
+   "type": "f_wall",
+   "x": 7,
+   "y": 18.0,
+   "z": 3.0,
+   "state": "upper"
+  },
+  {
+   "id": "balc_2F_7",
+   "type": "f_balcony",
+   "x": 7,
+   "y": 18.0,
+   "z": 3.0,
+   "state": "default"
+  },
+  {
+   "id": "wall_2F_10",
+   "type": "f_wall",
+   "x": 10,
+   "y": 18.0,
+   "z": 3.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_2F_10",
+   "type": "f_window",
+   "x": 10,
+   "y": 18.0,
+   "z": 3.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "wall_2F_13",
+   "type": "f_wall",
+   "x": 13,
+   "y": 18.0,
+   "z": 3.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_2F_13",
+   "type": "f_window",
+   "x": 13,
+   "y": 18.0,
+   "z": 3.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "wall_2F_16",
+   "type": "f_wall",
+   "x": 16,
+   "y": 18.0,
+   "z": 3.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_2F_16",
+   "type": "f_window",
+   "x": 16,
+   "y": 18.0,
+   "z": 3.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "ac_2F_16",
+   "type": "f_ac",
+   "x": 17.5,
+   "y": 18.0,
+   "z": 3.2
+  },
+  {
+   "id": "wall_2F_19",
+   "type": "f_wall",
+   "x": 19,
+   "y": 18.0,
+   "z": 3.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_2F_19",
+   "type": "f_window",
+   "x": 19,
+   "y": 18.0,
+   "z": 3.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "wall_2F_22",
+   "type": "f_wall",
+   "x": 22,
+   "y": 18.0,
+   "z": 3.0,
+   "state": "upper"
+  },
+  {
+   "id": "balc_2F_22",
+   "type": "f_balcony",
+   "x": 22,
+   "y": 18.0,
+   "z": 3.0,
+   "state": "laundry"
+  },
+  {
+   "id": "wall_2F_25",
+   "type": "f_wall",
+   "x": 25,
+   "y": 18.0,
+   "z": 3.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_2F_25",
+   "type": "f_window",
+   "x": 25,
+   "y": 18.0,
+   "z": 3.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "pipe_1_4.1",
+   "type": "f_pipe",
+   "x": 4.1,
+   "y": 18.0,
+   "z": 3.0
+  },
+  {
+   "id": "pipe_1_27.9",
+   "type": "f_pipe",
+   "x": 27.9,
+   "y": 18.0,
+   "z": 3.0
+  },
+  {
+   "id": "wall_3F_4",
+   "type": "f_wall",
+   "x": 4,
+   "y": 18.0,
+   "z": 6.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_3F_4",
+   "type": "f_window",
+   "x": 4,
+   "y": 18.0,
+   "z": 6.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "wall_3F_7",
+   "type": "f_wall",
+   "x": 7,
+   "y": 18.0,
+   "z": 6.0,
+   "state": "upper"
+  },
+  {
+   "id": "balc_3F_7",
+   "type": "f_balcony",
+   "x": 7,
+   "y": 18.0,
+   "z": 6.0,
+   "state": "laundry"
+  },
+  {
+   "id": "wall_3F_10",
+   "type": "f_wall",
+   "x": 10,
+   "y": 18.0,
+   "z": 6.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_3F_10",
+   "type": "f_window",
+   "x": 10,
+   "y": 18.0,
+   "z": 6.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "ac_3F_10",
+   "type": "f_ac",
+   "x": 11.5,
+   "y": 18.0,
+   "z": 6.2
+  },
+  {
+   "id": "wall_3F_13",
+   "type": "f_wall",
+   "x": 13,
+   "y": 18.0,
+   "z": 6.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_3F_13",
+   "type": "f_window",
+   "x": 13,
+   "y": 18.0,
+   "z": 6.0,
+   "state": "intact"
+  },
+  {
+   "id": "wall_3F_16",
+   "type": "f_wall",
+   "x": 16,
+   "y": 18.0,
+   "z": 6.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_3F_16",
+   "type": "f_window",
+   "x": 16,
+   "y": 18.0,
+   "z": 6.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "ac_3F_16",
+   "type": "f_ac",
+   "x": 17.5,
+   "y": 18.0,
+   "z": 6.2
+  },
+  {
+   "id": "wall_3F_19",
+   "type": "f_wall",
+   "x": 19,
+   "y": 18.0,
+   "z": 6.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_3F_19",
+   "type": "f_window",
+   "x": 19,
+   "y": 18.0,
+   "z": 6.0,
+   "state": "intact"
+  },
+  {
+   "id": "ac_3F_19",
+   "type": "f_ac",
+   "x": 20.5,
+   "y": 18.0,
+   "z": 6.2
+  },
+  {
+   "id": "wall_3F_22",
+   "type": "f_wall",
+   "x": 22,
+   "y": 18.0,
+   "z": 6.0,
+   "state": "upper"
+  },
+  {
+   "id": "balc_3F_22",
+   "type": "f_balcony",
+   "x": 22,
+   "y": 18.0,
+   "z": 6.0,
+   "state": "default"
+  },
+  {
+   "id": "wall_3F_25",
+   "type": "f_wall",
+   "x": 25,
+   "y": 18.0,
+   "z": 6.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_3F_25",
+   "type": "f_window",
+   "x": 25,
+   "y": 18.0,
+   "z": 6.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "ac_3F_25",
+   "type": "f_ac",
+   "x": 26.5,
+   "y": 18.0,
+   "z": 6.2
+  },
+  {
+   "id": "pipe_2_4.1",
+   "type": "f_pipe",
+   "x": 4.1,
+   "y": 18.0,
+   "z": 6.0
+  },
+  {
+   "id": "pipe_2_27.9",
+   "type": "f_pipe",
+   "x": 27.9,
+   "y": 18.0,
+   "z": 6.0
+  },
+  {
+   "id": "wall_4F_4",
+   "type": "f_wall",
+   "x": 4,
+   "y": 18.0,
+   "z": 9.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_4F_4",
+   "type": "f_window",
+   "x": 4,
+   "y": 18.0,
+   "z": 9.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "wall_4F_7",
+   "type": "f_wall",
+   "x": 7,
+   "y": 18.0,
+   "z": 9.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_4F_7",
+   "type": "f_window",
+   "x": 7,
+   "y": 18.0,
+   "z": 9.0,
+   "state": "intact"
+  },
+  {
+   "id": "wall_4F_10",
+   "type": "f_wall",
+   "x": 10,
+   "y": 18.0,
+   "z": 9.0,
+   "state": "upper"
+  },
+  {
+   "id": "balc_4F_10",
+   "type": "f_balcony",
+   "x": 10,
+   "y": 18.0,
+   "z": 9.0,
+   "state": "laundry"
+  },
+  {
+   "id": "wall_4F_13",
+   "type": "f_wall",
+   "x": 13,
+   "y": 18.0,
+   "z": 9.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_4F_13",
+   "type": "f_window",
+   "x": 13,
+   "y": 18.0,
+   "z": 9.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "ac_4F_13",
+   "type": "f_ac",
+   "x": 14.5,
+   "y": 18.0,
+   "z": 9.2
+  },
+  {
+   "id": "wall_4F_16",
+   "type": "f_wall",
+   "x": 16,
+   "y": 18.0,
+   "z": 9.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_4F_16",
+   "type": "f_window",
+   "x": 16,
+   "y": 18.0,
+   "z": 9.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "wall_4F_19",
+   "type": "f_wall",
+   "x": 19,
+   "y": 18.0,
+   "z": 9.0,
+   "state": "upper"
+  },
+  {
+   "id": "balc_4F_19",
+   "type": "f_balcony",
+   "x": 19,
+   "y": 18.0,
+   "z": 9.0,
+   "state": "default"
+  },
+  {
+   "id": "wall_4F_22",
+   "type": "f_wall",
+   "x": 22,
+   "y": 18.0,
+   "z": 9.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_4F_22",
+   "type": "f_window",
+   "x": 22,
+   "y": 18.0,
+   "z": 9.0,
+   "state": "intact"
+  },
+  {
+   "id": "wall_4F_25",
+   "type": "f_wall",
+   "x": 25,
+   "y": 18.0,
+   "z": 9.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_4F_25",
+   "type": "f_window",
+   "x": 25,
+   "y": 18.0,
+   "z": 9.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "pipe_3_4.1",
+   "type": "f_pipe",
+   "x": 4.1,
+   "y": 18.0,
+   "z": 9.0
+  },
+  {
+   "id": "pipe_3_27.9",
+   "type": "f_pipe",
+   "x": 27.9,
+   "y": 18.0,
+   "z": 9.0
+  },
+  {
+   "id": "wall_5F_4",
+   "type": "f_wall",
+   "x": 4,
+   "y": 18.0,
+   "z": 12.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_5F_4",
+   "type": "f_window",
+   "x": 4,
+   "y": 18.0,
+   "z": 12.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "wall_5F_7",
+   "type": "f_wall",
+   "x": 7,
+   "y": 18.0,
+   "z": 12.0,
+   "state": "upper"
+  },
+  {
+   "id": "balc_5F_7",
+   "type": "f_balcony",
+   "x": 7,
+   "y": 18.0,
+   "z": 12.0,
+   "state": "laundry"
+  },
+  {
+   "id": "wall_5F_10",
+   "type": "f_wall",
+   "x": 10,
+   "y": 18.0,
+   "z": 12.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_5F_10",
+   "type": "f_window",
+   "x": 10,
+   "y": 18.0,
+   "z": 12.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "wall_5F_13",
+   "type": "f_wall",
+   "x": 13,
+   "y": 18.0,
+   "z": 12.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_5F_13",
+   "type": "f_window",
+   "x": 13,
+   "y": 18.0,
+   "z": 12.0,
+   "state": "intact"
+  },
+  {
+   "id": "ac_5F_13",
+   "type": "f_ac",
+   "x": 14.5,
+   "y": 18.0,
+   "z": 12.2
+  },
+  {
+   "id": "wall_5F_16",
+   "type": "f_wall",
+   "x": 16,
+   "y": 18.0,
+   "z": 12.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_5F_16",
+   "type": "f_window",
+   "x": 16,
+   "y": 18.0,
+   "z": 12.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "wall_5F_19",
+   "type": "f_wall",
+   "x": 19,
+   "y": 18.0,
+   "z": 12.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_5F_19",
+   "type": "f_window",
+   "x": 19,
+   "y": 18.0,
+   "z": 12.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "wall_5F_22",
+   "type": "f_wall",
+   "x": 22,
+   "y": 18.0,
+   "z": 12.0,
+   "state": "upper"
+  },
+  {
+   "id": "balc_5F_22",
+   "type": "f_balcony",
+   "x": 22,
+   "y": 18.0,
+   "z": 12.0,
+   "state": "default"
+  },
+  {
+   "id": "wall_5F_25",
+   "type": "f_wall",
+   "x": 25,
+   "y": 18.0,
+   "z": 12.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_5F_25",
+   "type": "f_window",
+   "x": 25,
+   "y": 18.0,
+   "z": 12.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "pipe_4_4.1",
+   "type": "f_pipe",
+   "x": 4.1,
+   "y": 18.0,
+   "z": 12.0
+  },
+  {
+   "id": "pipe_4_27.9",
+   "type": "f_pipe",
+   "x": 27.9,
+   "y": 18.0,
+   "z": 12.0
+  },
+  {
+   "id": "wall_6F_4",
+   "type": "f_wall",
+   "x": 4,
+   "y": 18.0,
+   "z": 15.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_6F_4",
+   "type": "f_window",
+   "x": 4,
+   "y": 18.0,
+   "z": 15.0,
+   "state": "intact"
+  },
+  {
+   "id": "ac_6F_4",
+   "type": "f_ac",
+   "x": 5.5,
+   "y": 18.0,
+   "z": 15.2
+  },
+  {
+   "id": "wall_6F_7",
+   "type": "f_wall",
+   "x": 7,
+   "y": 18.0,
+   "z": 15.0,
+   "state": "upper"
+  },
+  {
+   "id": "balc_6F_7",
+   "type": "f_balcony",
+   "x": 7,
+   "y": 18.0,
+   "z": 15.0,
+   "state": "default"
+  },
+  {
+   "id": "wall_6F_10",
+   "type": "f_wall",
+   "x": 10,
+   "y": 18.0,
+   "z": 15.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_6F_10",
+   "type": "f_window",
+   "x": 10,
+   "y": 18.0,
+   "z": 15.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "ac_6F_10",
+   "type": "f_ac",
+   "x": 11.5,
+   "y": 18.0,
+   "z": 15.2
+  },
+  {
+   "id": "wall_6F_13",
+   "type": "f_wall",
+   "x": 13,
+   "y": 18.0,
+   "z": 15.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_6F_13",
+   "type": "f_window",
+   "x": 13,
+   "y": 18.0,
+   "z": 15.0,
+   "state": "intact"
+  },
+  {
+   "id": "wall_6F_16",
+   "type": "f_wall",
+   "x": 16,
+   "y": 18.0,
+   "z": 15.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_6F_16",
+   "type": "f_window",
+   "x": 16,
+   "y": 18.0,
+   "z": 15.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "wall_6F_19",
+   "type": "f_wall",
+   "x": 19,
+   "y": 18.0,
+   "z": 15.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_6F_19",
+   "type": "f_window",
+   "x": 19,
+   "y": 18.0,
+   "z": 15.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "ac_6F_19",
+   "type": "f_ac",
+   "x": 20.5,
+   "y": 18.0,
+   "z": 15.2
+  },
+  {
+   "id": "wall_6F_22",
+   "type": "f_wall",
+   "x": 22,
+   "y": 18.0,
+   "z": 15.0,
+   "state": "upper"
+  },
+  {
+   "id": "balc_6F_22",
+   "type": "f_balcony",
+   "x": 22,
+   "y": 18.0,
+   "z": 15.0,
+   "state": "laundry"
+  },
+  {
+   "id": "wall_6F_25",
+   "type": "f_wall",
+   "x": 25,
+   "y": 18.0,
+   "z": 15.0,
+   "state": "upper"
+  },
+  {
+   "id": "win_6F_25",
+   "type": "f_window",
+   "x": 25,
+   "y": 18.0,
+   "z": 15.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "pipe_5_4.1",
+   "type": "f_pipe",
+   "x": 4.1,
+   "y": 18.0,
+   "z": 15.0
+  },
+  {
+   "id": "pipe_5_27.9",
+   "type": "f_pipe",
+   "x": 27.9,
+   "y": 18.0,
+   "z": 15.0
+  },
+  {
+   "id": "steps",
+   "type": "f_steps",
+   "x": 14.5,
+   "y": 18.0
+  },
+  {
+   "id": "sign_12",
+   "type": "f_sign",
+   "x": 14.5,
+   "y": 18.0,
+   "z": 3.04
+  },
+  {
+   "id": "nb_wall_-2_0",
+   "type": "f_wall",
+   "x": -2,
+   "y": 22.0,
+   "state": "ground"
+  },
+  {
+   "id": "nb_win_-2_0",
+   "type": "f_window",
+   "x": -2,
+   "y": 22.0,
+   "state": "intact",
+   "night_lit": false
+  },
+  {
+   "id": "nb_wall_-2_1",
+   "type": "f_wall",
+   "x": -2,
+   "y": 22.0,
+   "z": 3.0,
+   "state": "upper"
+  },
+  {
+   "id": "nb_win_-2_1",
+   "type": "f_window",
+   "x": -2,
+   "y": 22.0,
+   "z": 3.0,
+   "state": "intact",
+   "night_lit": false
+  },
+  {
+   "id": "nb_wall_-2_2",
+   "type": "f_wall",
+   "x": -2,
+   "y": 22.0,
+   "z": 6.0,
+   "state": "upper"
+  },
+  {
+   "id": "nb_win_-2_2",
+   "type": "f_window",
+   "x": -2,
+   "y": 22.0,
+   "z": 6.0,
+   "state": "intact",
+   "night_lit": false
+  },
+  {
+   "id": "nb_wall_-2_3",
+   "type": "f_wall",
+   "x": -2,
+   "y": 22.0,
+   "z": 9.0,
+   "state": "upper"
+  },
+  {
+   "id": "nb_win_-2_3",
+   "type": "f_window",
+   "x": -2,
+   "y": 22.0,
+   "z": 9.0,
+   "state": "intact",
+   "night_lit": false
+  },
+  {
+   "id": "nb_wall_-2_4",
+   "type": "f_wall",
+   "x": -2,
+   "y": 22.0,
+   "z": 12.0,
+   "state": "upper"
+  },
+  {
+   "id": "nb_win_-2_4",
+   "type": "f_window",
+   "x": -2,
+   "y": 22.0,
+   "z": 12.0,
+   "state": "intact",
+   "night_lit": false
+  },
+  {
+   "id": "nb_wall_-2_5",
+   "type": "f_wall",
+   "x": -2,
+   "y": 22.0,
+   "z": 15.0,
+   "state": "upper"
+  },
+  {
+   "id": "nb_win_-2_5",
+   "type": "f_window",
+   "x": -2,
+   "y": 22.0,
+   "z": 15.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "nb_wall_1_0",
+   "type": "f_wall",
+   "x": 1,
+   "y": 22.0,
+   "state": "ground"
+  },
+  {
+   "id": "nb_win_1_0",
+   "type": "f_window",
+   "x": 1,
+   "y": 22.0,
+   "state": "intact",
+   "night_lit": false
+  },
+  {
+   "id": "nb_wall_1_1",
+   "type": "f_wall",
+   "x": 1,
+   "y": 22.0,
+   "z": 3.0,
+   "state": "upper"
+  },
+  {
+   "id": "nb_win_1_1",
+   "type": "f_window",
+   "x": 1,
+   "y": 22.0,
+   "z": 3.0,
+   "state": "intact",
+   "night_lit": false
+  },
+  {
+   "id": "nb_wall_1_2",
+   "type": "f_wall",
+   "x": 1,
+   "y": 22.0,
+   "z": 6.0,
+   "state": "upper"
+  },
+  {
+   "id": "nb_win_1_2",
+   "type": "f_window",
+   "x": 1,
+   "y": 22.0,
+   "z": 6.0,
+   "state": "intact",
+   "night_lit": false
+  },
+  {
+   "id": "nb_wall_1_3",
+   "type": "f_wall",
+   "x": 1,
+   "y": 22.0,
+   "z": 9.0,
+   "state": "upper"
+  },
+  {
+   "id": "nb_win_1_3",
+   "type": "f_window",
+   "x": 1,
+   "y": 22.0,
+   "z": 9.0,
+   "state": "intact",
+   "night_lit": false
+  },
+  {
+   "id": "nb_wall_1_4",
+   "type": "f_wall",
+   "x": 1,
+   "y": 22.0,
+   "z": 12.0,
+   "state": "upper"
+  },
+  {
+   "id": "nb_win_1_4",
+   "type": "f_window",
+   "x": 1,
+   "y": 22.0,
+   "z": 12.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "nb_wall_1_5",
+   "type": "f_wall",
+   "x": 1,
+   "y": 22.0,
+   "z": 15.0,
+   "state": "upper"
+  },
+  {
+   "id": "nb_win_1_5",
+   "type": "f_window",
+   "x": 1,
+   "y": 22.0,
+   "z": 15.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "nb_wall_28_0",
+   "type": "f_wall",
+   "x": 28,
+   "y": 22.0,
+   "state": "ground"
+  },
+  {
+   "id": "nb_win_28_0",
+   "type": "f_window",
+   "x": 28,
+   "y": 22.0,
+   "state": "intact",
+   "night_lit": false
+  },
+  {
+   "id": "nb_wall_28_1",
+   "type": "f_wall",
+   "x": 28,
+   "y": 22.0,
+   "z": 3.0,
+   "state": "upper"
+  },
+  {
+   "id": "nb_win_28_1",
+   "type": "f_window",
+   "x": 28,
+   "y": 22.0,
+   "z": 3.0,
+   "state": "intact",
+   "night_lit": false
+  },
+  {
+   "id": "nb_wall_28_2",
+   "type": "f_wall",
+   "x": 28,
+   "y": 22.0,
+   "z": 6.0,
+   "state": "upper"
+  },
+  {
+   "id": "nb_win_28_2",
+   "type": "f_window",
+   "x": 28,
+   "y": 22.0,
+   "z": 6.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "nb_wall_28_3",
+   "type": "f_wall",
+   "x": 28,
+   "y": 22.0,
+   "z": 9.0,
+   "state": "upper"
+  },
+  {
+   "id": "nb_win_28_3",
+   "type": "f_window",
+   "x": 28,
+   "y": 22.0,
+   "z": 9.0,
+   "state": "intact",
+   "night_lit": false
+  },
+  {
+   "id": "nb_wall_28_4",
+   "type": "f_wall",
+   "x": 28,
+   "y": 22.0,
+   "z": 12.0,
+   "state": "upper"
+  },
+  {
+   "id": "nb_win_28_4",
+   "type": "f_window",
+   "x": 28,
+   "y": 22.0,
+   "z": 12.0,
+   "state": "intact",
+   "night_lit": false
+  },
+  {
+   "id": "nb_wall_28_5",
+   "type": "f_wall",
+   "x": 28,
+   "y": 22.0,
+   "z": 15.0,
+   "state": "upper"
+  },
+  {
+   "id": "nb_win_28_5",
+   "type": "f_window",
+   "x": 28,
+   "y": 22.0,
+   "z": 15.0,
+   "state": "intact",
+   "night_lit": false
+  },
+  {
+   "id": "nb_wall_31_0",
+   "type": "f_wall",
+   "x": 31,
+   "y": 22.0,
+   "state": "ground"
+  },
+  {
+   "id": "nb_win_31_0",
+   "type": "f_window",
+   "x": 31,
+   "y": 22.0,
+   "state": "intact",
+   "night_lit": false
+  },
+  {
+   "id": "nb_wall_31_1",
+   "type": "f_wall",
+   "x": 31,
+   "y": 22.0,
+   "z": 3.0,
+   "state": "upper"
+  },
+  {
+   "id": "nb_win_31_1",
+   "type": "f_window",
+   "x": 31,
+   "y": 22.0,
+   "z": 3.0,
+   "state": "intact",
+   "night_lit": false
+  },
+  {
+   "id": "nb_wall_31_2",
+   "type": "f_wall",
+   "x": 31,
+   "y": 22.0,
+   "z": 6.0,
+   "state": "upper"
+  },
+  {
+   "id": "nb_win_31_2",
+   "type": "f_window",
+   "x": 31,
+   "y": 22.0,
+   "z": 6.0,
+   "state": "intact",
+   "night_lit": false
+  },
+  {
+   "id": "nb_wall_31_3",
+   "type": "f_wall",
+   "x": 31,
+   "y": 22.0,
+   "z": 9.0,
+   "state": "upper"
+  },
+  {
+   "id": "nb_win_31_3",
+   "type": "f_window",
+   "x": 31,
+   "y": 22.0,
+   "z": 9.0,
+   "state": "intact",
+   "night_lit": false
+  },
+  {
+   "id": "nb_wall_31_4",
+   "type": "f_wall",
+   "x": 31,
+   "y": 22.0,
+   "z": 12.0,
+   "state": "upper"
+  },
+  {
+   "id": "nb_win_31_4",
+   "type": "f_window",
+   "x": 31,
+   "y": 22.0,
+   "z": 12.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "nb_wall_31_5",
+   "type": "f_wall",
+   "x": 31,
+   "y": 22.0,
+   "z": 15.0,
+   "state": "upper"
+  },
+  {
+   "id": "nb_win_31_5",
+   "type": "f_window",
+   "x": 31,
+   "y": 22.0,
+   "z": 15.0,
+   "state": "intact",
+   "night_lit": true
+  },
+  {
+   "id": "tree_sidewalk_w",
+   "type": "p_tree",
+   "x": 5.0,
+   "y": 9.0
+  },
+  {
+   "id": "tree_sidewalk_e",
+   "type": "p_tree",
+   "x": 29.0,
+   "y": 9.0
+  },
+  {
+   "id": "tree_court",
+   "type": "p_tree",
+   "x": 2.4,
+   "y": 15.6
+  },
+  {
+   "id": "pole_n",
+   "type": "p_pole",
+   "x": 24.5,
+   "y": 8.55
+  },
+  {
+   "id": "pole_s",
+   "type": "p_pole",
+   "x": 6.0,
+   "y": -1.0,
+   "rot": 4
+  },
+  {
+   "id": "stall",
+   "type": "p_stall",
+   "x": 8.6,
+   "y": 9.7,
+   "interact": "stall"
+  },
+  {
+   "id": "locker",
+   "type": "p_locker",
+   "x": 20.5,
+   "y": 13.6,
+   "interact": "locker"
+  },
+  {
+   "id": "parked_car",
+   "type": "p_car",
+   "x": 26.0,
+   "y": 14.6,
+   "rot": 2,
+   "state": "normal",
+   "variant": "base",
+   "interact": "car"
+  },
+  {
+   "id": "bins",
+   "type": "p_bins",
+   "x": 6.2,
+   "y": 17.3
+  },
+  {
+   "id": "lamp_1",
+   "type": "p_lamp",
+   "x": 11.0,
+   "y": 8.45,
+   "interact": "lamp",
+   "name": "人行道路灯"
+  },
+  {
+   "id": "lamp_2",
+   "type": "p_lamp",
+   "x": 19.0,
+   "y": 8.45,
+   "interact": "lamp",
+   "name": "路口路灯"
+  },
+  {
+   "id": "lamp_court",
+   "type": "p_lamp",
+   "x": 4.6,
+   "y": 16.9,
+   "interact": "lamp",
+   "name": "院内路灯"
+  },
+  {
+   "id": "trashbin_1",
+   "type": "p_trashbin",
+   "x": 17.4,
+   "y": 8.75,
+   "interact": "trashbin"
+  },
+  {
+   "id": "trashbin_2",
+   "type": "p_trashbin",
+   "x": 24.0,
+   "y": -0.75,
+   "interact": "trashbin"
+  },
+  {
+   "id": "bike_1",
+   "type": "p_bike",
+   "x": 20.7,
+   "y": 8.85,
+   "rot": 2,
+   "interact": "bike"
+  },
+  {
+   "id": "bike_2",
+   "type": "p_bike",
+   "x": 22.5,
+   "y": 8.85,
+   "rot": 2,
+   "interact": "bike"
+  },
+  {
+   "id": "bike_3",
+   "type": "p_bike",
+   "x": 2.4,
+   "y": -0.75,
+   "rot": 6,
+   "interact": "bike"
+  },
+  {
+   "id": "hydrant",
+   "type": "p_hydrant",
+   "x": 26.4,
+   "y": 8.6,
+   "interact": "hydrant"
+  },
+  {
+   "id": "vending",
+   "type": "p_vending",
+   "x": 26.5,
+   "y": 17.45,
+   "interact": "vending"
+  },
+  {
+   "id": "pot_1",
+   "type": "p_pot",
+   "x": 12.7,
+   "y": 17.35,
+   "state": "small",
+   "interact": "pot"
+  },
+  {
+   "id": "pot_2",
+   "type": "p_pot",
+   "x": 16.3,
+   "y": 17.35,
+   "state": "grown",
+   "interact": "pot"
+  },
+  {
+   "id": "post_1",
+   "type": "p_post",
+   "x": 4.4,
+   "y": 14.4
+  },
+  {
+   "id": "post_2",
+   "type": "p_post",
+   "x": 9.4,
+   "y": 14.4
+  }
+ ],
+ "colliders": [
+  {
+   "id": "building",
+   "rect": [
+    4,
+    18,
+    28,
+    30
+   ]
+  },
+  {
+   "id": "nb_w",
+   "rect": [
+    -4,
+    22,
+    4,
+    30
+   ]
+  },
+  {
+   "id": "nb_e",
+   "rect": [
+    28,
+    22,
+    36,
+    30
+   ]
+  }
+ ],
+ "wires": [
+  {
+   "from": [
+    "pole_s",
+    0
+   ],
+   "to": [
+    "pole_n",
+    0
+   ]
+  },
+  {
+   "from": [
+    "pole_s",
+    1
+   ],
+   "to": [
+    "pole_n",
+    1
+   ]
+  },
+  {
+   "from": [
+    "pole_n",
+    0
+   ],
+   "to": [
+    36,
+    9.2,
+    8.4
+   ]
+  },
+  {
+   "from": [
+    "pole_n",
+    1
+   ],
+   "to": [
+    36,
+    8.0,
+    8.4
+   ]
+  },
+  {
+   "from": [
+    "pole_s",
+    0
+   ],
+   "to": [
+    -4,
+    -1.4,
+    8.4
+   ]
+  }
+ ],
+ "traffic": {
+  "lanes": [
+   {
+    "id": "eb",
+    "y": 2.0,
+    "dir": 1,
+    "rot": 2,
+    "stop_x": 10.7
+   },
+   {
+    "id": "wb",
+    "y": 6.0,
+    "dir": -1,
+    "rot": 6,
+    "stop_x": 17.8
+   }
+  ],
+  "crosswalk": {
+   "x0": 12.2,
+   "x1": 16.3,
+   "y0": -0.3,
+   "y1": 8.3
+  },
+  "spawn_every": [
+   2.5,
+   6.0
+  ],
+  "speed": [
+   4.5,
+   6.5
+  ],
+  "variants": [
+   "base",
+   "taxi",
+   "red"
+  ],
+  "x_range": [
+   -4,
+   36
+  ]
+ },
+ "spawn": {
+  "x": 14.25,
+  "y": -2.4,
+  "dir": "N"
+ },
+ "calendar": {
+  "start": [
+   2026,
+   3,
+   21
+  ],
+  "days_per_season": 5,
+  "season_order": [
+   "spring",
+   "summer",
+   "autumn",
+   "winter"
+  ],
+  "season_start": {
+   "spring": [
+    3,
+    21
+   ],
+   "summer": [
+    6,
+    21
+   ],
+   "autumn": [
+    9,
+    23
+   ],
+   "winter": [
+    12,
+    21
+   ]
+  },
+  "start_clock": "07:45"
+ },
+ "weather": {
+  "chances": {
+   "spring": {
+    "clear": 0.55,
+    "rain": 0.3,
+    "fog": 0.15
+   },
+   "summer": {
+    "clear": 0.55,
+    "rain": 0.4,
+    "fog": 0.05
+   },
+   "autumn": {
+    "clear": 0.6,
+    "rain": 0.25,
+    "fog": 0.15
+   },
+   "winter": {
+    "clear": 0.35,
+    "snow": 0.5,
+    "fog": 0.15
+   }
+  },
+  "wet_rise_min": 12,
+  "dry_min": 180,
+  "snow_full_min": 45,
+  "melt_min": {
+   "spring": 60,
+   "summer": 20,
+   "autumn": 90,
+   "winter": 900
+  }
+ },
+ "puddles": [
+  {
+   "id": "pud_road_w",
+   "x": 9.4,
+   "y": 0.9,
+   "rx": 0.95,
+   "ry": 0.36
+  },
+  {
+   "id": "pud_curb",
+   "x": 21.4,
+   "y": 7.25,
+   "rx": 1.15,
+   "ry": 0.4
+  },
+  {
+   "id": "pud_side",
+   "x": 3.0,
+   "y": 10.25,
+   "rx": 0.7,
+   "ry": 0.3
+  },
+  {
+   "id": "pud_court",
+   "x": 18.6,
+   "y": 14.4,
+   "rx": 0.95,
+   "ry": 0.36
+  },
+  {
+   "id": "pud_far",
+   "x": 27.5,
+   "y": -2.7,
+   "rx": 0.8,
+   "ry": 0.3
+  }
+ ],
+ "leaf_piles": [
+  {
+   "id": "leaves_1",
+   "x": 2.8,
+   "y": 9.55
+  },
+  {
+   "id": "leaves_2",
+   "x": 27.4,
+   "y": 10.1
+  },
+  {
+   "id": "leaves_3",
+   "x": 10.6,
+   "y": 13.1
+  },
+  {
+   "id": "leaves_4",
+   "x": 22.6,
+   "y": -2.9
+  }
+ ],
+ "laundry": [
+  {
+   "id": "laundry_1",
+   "from": "post_1",
+   "to": "post_2",
+   "z": 1.86,
+   "items": [
+    [
+     0.6,
+     0.38,
+     0.55,
+     "#d47878"
+    ],
+    [
+     1.15,
+     0.3,
+     0.7,
+     "#7a9ed6"
+    ],
+    [
+     1.6,
+     0.45,
+     0.42,
+     "#e6e0cf"
+    ],
+    [
+     2.3,
+     0.34,
+     0.62,
+     "#e2b630"
+    ],
+    [
+     2.85,
+     0.5,
+     0.5,
+     "#e6e0cf"
+    ],
+    [
+     3.55,
+     0.3,
+     0.72,
+     "#6fae7d"
+    ],
+    [
+     4.1,
+     0.4,
+     0.46,
+     "#d47878"
+    ]
+   ]
+  }
+ ],
+ "repair_hours_scale": 1.0,
+ "interactions": {
+  "_doc": "per interact kind: use (E / 互动) and kick (F / 踢) actions by current state; repair = state -> state after N in-game hours",
+  "lamp": {
+   "name": "路灯",
+   "use": {
+    "ok": {
+     "label": "拍拍灯杆",
+     "toast": "路灯：天黑自动亮"
+    },
+    "broken": {
+     "label": "拍拍灯杆",
+     "toast": "灯泡一闪一闪的……"
+    }
+   },
+   "kick": {
+    "ok": {
+     "label": "踢灯杆",
+     "to": "broken",
+     "fx": "glass",
+     "hazard": 0.8,
+     "log": "{name}被踢坏，灯头歪了，一闪一闪"
+    }
+   },
+   "repair": {
+    "broken": {
+     "to": "ok",
+     "after_h": 6,
+     "log": "电工修好了{name}"
+    }
+   }
+  },
+  "trashbin": {
+   "name": "垃圾桶",
+   "use": {
+    "knocked": {
+     "label": "扶起并收拾",
+     "to": "upright",
+     "clear_decals": true,
+     "log": "李默扶起垃圾桶、把垃圾收拾干净"
+    },
+    "upright": {
+     "label": "看看",
+     "toast": "可回收 / 其他垃圾"
+    }
+   },
+   "kick": {
+    "upright": {
+     "label": "踢翻",
+     "to": "knocked",
+     "decal": "fx/litter",
+     "decal_dy": -0.55,
+     "log": "垃圾桶被踢翻，垃圾撒了一地"
+    }
+   },
+   "repair": {
+    "knocked": {
+     "to": "upright",
+     "after_h": 2,
+     "clear_decals": true,
+     "log": "环卫工把翻倒的垃圾桶收拾好了"
+    }
+   }
+  },
+  "bike": {
+   "name": "共享单车",
+   "use": {
+    "parked": {
+     "label": "扫码推车",
+     "do": "push_bike"
+    },
+    "knocked": {
+     "label": "扶起来",
+     "to": "parked",
+     "log": "李默把倒地的单车扶了起来"
+    }
+   },
+   "kick": {
+    "parked": {
+     "label": "推倒",
+     "to": "knocked",
+     "log": "一辆共享单车被推倒在人行道上"
+    }
+   },
+   "repair": {
+    "knocked": {
+     "to": "parked",
+     "after_h": 3,
+     "log": "单车调度员把倒地的单车扶正了"
+    }
+   }
+  },
+  "vending": {
+   "name": "自动售货机",
+   "use": {
+    "ok": {
+     "label": "买饮料 ¥3",
+     "do": "buy_drink",
+     "toast": "咣当——买了一瓶冰红茶（¥3）"
+    },
+    "broken": {
+     "label": "看看",
+     "toast": "暂停服务 · 维修中"
+    }
+   },
+   "kick": {
+    "ok": {
+     "label": "踹一脚",
+     "to": "broken",
+     "fx": "glass",
+     "hazard": 0.9,
+     "log": "售货机被踹坏，玻璃碎了，显示「暂停服务」"
+    }
+   },
+   "repair": {
+    "broken": {
+     "to": "ok",
+     "after_h": 8,
+     "log": "售货机维修完毕，恢复营业"
+    }
+   }
+  },
+  "shop": {
+   "name": "井槐便利店",
+   "use": {
+    "open": {
+     "label": "逛便利店",
+     "toast": "便利店：关东煮 · 包子 · 热饮（营业 07:00–22:00）"
+    },
+    "closed": {
+     "label": "看看",
+     "toast": "已打烊，明早 07:00 开门"
+    }
+   }
+  },
+  "poster": {
+   "name": "墙上海报",
+   "use": {
+    "poster": {
+     "label": "看海报",
+     "toast": "寻猫启事：橘猫「大黄」，酬谢"
+    },
+    "torn": {
+     "label": "看看",
+     "toast": "只剩几片纸屑和胶痕"
+    }
+   },
+   "kick": {
+    "poster": {
+     "label": "撕海报",
+     "to": "torn",
+     "fx": "paper",
+     "log": "围墙上的海报被撕掉了"
+    }
+   },
+   "repair": {
+    "torn": {
+     "to": "poster",
+     "after_h": 24,
+     "log": "有人在围墙上贴了新海报"
+    }
+   }
+  },
+  "window": {
+   "name": "一楼窗户",
+   "use": {
+    "intact": {
+     "label": "敲敲窗",
+     "toast": "屋里没人应"
+    },
+    "boarded": {
+     "label": "看看",
+     "toast": "木板临时钉住了"
+    }
+   },
+   "kick": {
+    "intact": {
+     "label": "砸窗",
+     "to": "broken",
+     "fx": "glass_window",
+     "hazard_at": [
+      1.5,
+      -0.9
+     ],
+     "hazard": 1.0,
+     "log": "一楼窗户被砸碎，碎玻璃落了一地"
+    }
+   },
+   "repair": {
+    "broken": {
+     "to": "boarded",
+     "after_h": 2,
+     "clear_hazard": true,
+     "log": "物业用木板把破窗钉上了"
+    },
+    "boarded": {
+     "to": "intact",
+     "after_h": 10,
+     "log": "玻璃师傅换好了新窗玻璃"
+    }
+   }
+  },
+  "pot": {
+   "name": "盆栽",
+   "use": {
+    "small": {
+     "label": "浇水",
+     "do": "water",
+     "toast": "浇了水，过一会儿会长大"
+    },
+    "grown": {
+     "label": "浇水",
+     "do": "water",
+     "toast": "长得很茂盛"
+    },
+    "broken": {
+     "label": "看看",
+     "toast": "花盆碎了，土撒了一地"
+    }
+   },
+   "kick": {
+    "small": {
+     "label": "踢翻",
+     "to": "broken",
+     "fx": "pot",
+     "log": "盆栽被踢碎了"
+    },
+    "grown": {
+     "label": "踢翻",
+     "to": "broken",
+     "fx": "pot",
+     "log": "盆栽被踢碎了"
+    }
+   },
+   "grow": {
+    "small": {
+     "to": "grown",
+     "after_h": 1
+    }
+   },
+   "repair": {
+    "broken": {
+     "to": "small",
+     "after_h": 12,
+     "log": "邻居换了新花盆，重新种上小苗"
+    }
+   }
+  },
+  "hydrant": {
+   "name": "消防栓",
+   "use": {
+    "ok": {
+     "label": "拧开 / 关上阀门",
+     "do": "toggle_spray"
+    },
+    "broken": {
+     "label": "看看",
+     "toast": "消防栓被撞断，水柱冲天！"
+    }
+   },
+   "repair": {
+    "broken": {
+     "to": "ok",
+     "after_h": 3,
+     "log": "市政抢修，消防栓修好了"
+    }
+   }
+  },
+  "car": {
+   "name": "停着的车",
+   "use": {
+    "normal": {
+     "label": "按喇叭",
+     "do": "honk"
+    }
+   },
+   "kick": {
+    "normal": {
+     "label": "踢轮胎",
+     "do": "alarm",
+     "log": "停着的车被踢了一脚，警报大作"
+    }
+   }
+  },
+  "gate": {
+   "name": "铁门"
+  },
+  "door": {
+   "name": "单元门"
+  },
+  "stall": {
+   "name": "早点摊"
+  },
+  "locker": {
+   "name": "快递柜"
+  }
+ },
+ "npcs": {
+  "_doc": "schedule-driven agents (logic copied from web-demo js/schedule.js + npcbrain.js, re-authored in metres). blocks: from/to clock, act, at node | route, unless weather",
+  "graph": {
+   "nodes": {
+    "door_in": [
+     14.5,
+     17.45
+    ],
+    "door": [
+     14.5,
+     16.4
+    ],
+    "court": [
+     14.3,
+     14.6
+    ],
+    "gate_in": [
+     14.25,
+     13.0
+    ],
+    "gate_out": [
+     14.25,
+     11.3
+    ],
+    "seat": [
+     11.0,
+     13.3
+    ],
+    "court_w": [
+     11.0,
+     14.45
+    ],
+    "court_e2": [
+     17.2,
+     14.45
+    ],
+    "court_e": [
+     18.2,
+     12.95
+    ],
+    "locker": [
+     20.5,
+     12.75
+    ],
+    "walk_w": [
+     6.0,
+     11.3
+    ],
+    "exit_w": [
+     0.45,
+     11.3
+    ],
+    "walk_e": [
+     22.0,
+     11.3
+    ],
+    "exit_e": [
+     31.55,
+     11.3
+    ],
+    "stall_cook": [
+     8.6,
+     10.62
+    ],
+    "stall_side": [
+     8.6,
+     11.3
+    ],
+    "cw_n": [
+     14.25,
+     8.55
+    ],
+    "cw_s": [
+     14.25,
+     -0.55
+    ],
+    "far": [
+     14.25,
+     -2.15
+    ],
+    "far_w": [
+     7.5,
+     -2.15
+    ],
+    "exit_sw": [
+     0.45,
+     -2.15
+    ],
+    "far_e": [
+     21.0,
+     -2.15
+    ],
+    "exit_se": [
+     31.55,
+     -2.15
+    ],
+    "r_in": [
+     31.55,
+     9.7
+    ],
+    "r_mid": [
+     24.0,
+     9.75
+    ],
+    "drop": [
+     17.6,
+     9.7
+    ]
+   },
+   "edges": [
+    [
+     "door_in",
+     "door"
+    ],
+    [
+     "door",
+     "court"
+    ],
+    [
+     "court",
+     "gate_in"
+    ],
+    [
+     "gate_in",
+     "gate_out"
+    ],
+    [
+     "court",
+     "court_w"
+    ],
+    [
+     "court_w",
+     "seat"
+    ],
+    [
+     "court",
+     "court_e2"
+    ],
+    [
+     "court_e2",
+     "court_e"
+    ],
+    [
+     "court_e",
+     "locker"
+    ],
+    [
+     "gate_out",
+     "walk_w"
+    ],
+    [
+     "walk_w",
+     "exit_w"
+    ],
+    [
+     "gate_out",
+     "walk_e"
+    ],
+    [
+     "walk_e",
+     "exit_e"
+    ],
+    [
+     "walk_w",
+     "stall_side"
+    ],
+    [
+     "stall_side",
+     "stall_cook"
+    ],
+    [
+     "gate_out",
+     "cw_n"
+    ],
+    [
+     "cw_n",
+     "cw_s"
+    ],
+    [
+     "cw_s",
+     "far"
+    ],
+    [
+     "far",
+     "far_w"
+    ],
+    [
+     "far_w",
+     "exit_sw"
+    ],
+    [
+     "far",
+     "far_e"
+    ],
+    [
+     "far_e",
+     "exit_se"
+    ],
+    [
+     "r_in",
+     "r_mid"
+    ],
+    [
+     "r_mid",
+     "drop"
+    ]
+   ],
+   "hidden": [
+    "door_in",
+    "exit_w",
+    "exit_e",
+    "exit_sw",
+    "exit_se",
+    "r_in"
+   ],
+   "road_nodes": [
+    "cw_n",
+    "cw_s"
+   ]
+  },
+  "agents": {
+   "vendor": {
+    "name": "王阿姨",
+    "sprite": "vendor",
+    "speed": 1.1,
+    "r": 0.24,
+    "start": "exit_w",
+    "umbrella": 0,
+    "blocks": [
+     {
+      "from": "05:30",
+      "to": "10:30",
+      "act": "cook",
+      "at": "stall_cook",
+      "face": "S"
+     },
+     {
+      "from": "10:30",
+      "to": "05:30",
+      "act": "inside",
+      "at": "exit_w"
+     }
+    ]
+   },
+   "uncle": {
+    "name": "巡逻大爷",
+    "sprite": "uncle",
+    "speed": 0.8,
+    "r": 0.24,
+    "start": "door_in",
+    "umbrella": 2,
+    "blocks": [
+     {
+      "from": "07:00",
+      "to": "08:30",
+      "act": "route",
+      "route": [
+       "court",
+       "gate_in",
+       "gate_out",
+       "walk_e",
+       "gate_out",
+       "walk_w",
+       "gate_out",
+       "gate_in",
+       "court",
+       "court_e",
+       "locker",
+       "court_e",
+       "court"
+      ],
+      "wait": 1.5,
+      "unless": [
+       "rain",
+       "snow"
+      ]
+     },
+     {
+      "from": "08:30",
+      "to": "14:00",
+      "act": "inside",
+      "at": "door_in"
+     },
+     {
+      "from": "14:00",
+      "to": "18:00",
+      "act": "chat",
+      "at": "seat",
+      "face": "SE",
+      "unless": [
+       "rain",
+       "snow"
+      ]
+     },
+     {
+      "from": "18:00",
+      "to": "07:00",
+      "act": "inside",
+      "at": "door_in"
+     }
+    ]
+   },
+   "office": {
+    "name": "上班族",
+    "sprite": "office",
+    "speed": 1.35,
+    "r": 0.24,
+    "start": "door_in",
+    "umbrella": 1,
+    "blocks": [
+     {
+      "from": "07:55",
+      "to": "19:00",
+      "act": "inside",
+      "at": "exit_se"
+     },
+     {
+      "from": "19:00",
+      "to": "07:55",
+      "act": "inside",
+      "at": "door_in"
+     }
+    ]
+   },
+   "student": {
+    "name": "学生",
+    "sprite": "student",
+    "speed": 1.25,
+    "r": 0.24,
+    "start": "door_in",
+    "umbrella": 3,
+    "blocks": [
+     {
+      "from": "07:20",
+      "to": "17:10",
+      "act": "inside",
+      "at": "exit_e",
+      "unless": [
+       "snow"
+      ]
+     },
+     {
+      "from": "17:10",
+      "to": "07:20",
+      "act": "inside",
+      "at": "door_in"
+     }
+    ]
+   },
+   "rider": {
+    "name": "外卖骑手",
+    "sprite": "rider",
+    "speed": 3.2,
+    "r": 0.34,
+    "start": "r_in",
+    "rider": true,
+    "trips": {
+     "path": [
+      "r_in",
+      "r_mid",
+      "drop",
+      "r_mid",
+      "r_in"
+     ],
+     "stop_at": "drop",
+     "stop_min": 2,
+     "face": "W",
+     "windows": [
+      [
+       "07:00",
+       "11:00",
+       40
+      ],
+      [
+       "11:00",
+       "13:00",
+       12
+      ],
+      [
+       "13:00",
+       "17:00",
+       35
+      ],
+      [
+       "17:00",
+       "20:00",
+       12
+      ],
+      [
+       "20:00",
+       "22:00",
+       30
+      ]
+     ],
+     "unless": [
+      "snow"
+     ]
+    }
+   }
+  }
+ },
+ "events": {
+  "broken_window": {
+   "label": "破窗",
+   "key": "1",
+   "actions": [
+    {
+     "do": "set_state",
+     "target": "win_2F_10",
+     "state": "broken"
+    },
+    {
+     "do": "fx",
+     "fx": "glass_burst",
+     "target": "win_2F_10",
+     "n": 50
+    },
+    {
+     "do": "decal",
+     "frame": "fx/glass_decal",
+     "x": 11.5,
+     "y": 17.15,
+     "after": 1.1
+    }
+   ]
+  },
+  "fire": {
+   "label": "起火",
+   "key": "2",
+   "actions": [
+    {
+     "do": "overlay",
+     "target": "win_1F_19",
+     "overlay": "fire",
+     "duration": 14
+    },
+    {
+     "do": "overlay",
+     "target": "win_1F_19",
+     "overlay": "smoke",
+     "duration": 24
+    },
+    {
+     "do": "set_state",
+     "target": "win_1F_19",
+     "state": "broken",
+     "after": 2.5
+    },
+    {
+     "do": "fx",
+     "fx": "glass_burst",
+     "target": "win_1F_19",
+     "n": 18,
+     "after": 2.5
+    },
+    {
+     "do": "overlay",
+     "target": "win_1F_19",
+     "overlay": "soot",
+     "after": 6
+    },
+    {
+     "do": "set_state",
+     "target": "win_1F_19",
+     "state": "scorched",
+     "after": 12
+    },
+    {
+     "do": "decal",
+     "frame": "fx/scorch",
+     "x": 20.5,
+     "y": 17.4,
+     "after": 12
+    }
+   ]
+  },
+  "crash": {
+   "label": "撞车",
+   "key": "3",
+   "actions": [
+    {
+     "do": "traffic_crash",
+     "lane": "wb",
+     "veer_x": 27.6,
+     "rot": 5,
+     "stop_y": 7.3
+    }
+   ]
+  },
+  "storm": {
+   "label": "暴雨",
+   "key": "4",
+   "actions": [
+    {
+     "do": "weather",
+     "weather": "rain",
+     "intensity": 1.0
+    }
+   ]
+  },
+  "blizzard": {
+   "label": "大雪",
+   "key": "5",
+   "actions": [
+    {
+     "do": "weather",
+     "weather": "snow",
+     "intensity": 1.0
+    }
+   ]
+  }
+ }
+}

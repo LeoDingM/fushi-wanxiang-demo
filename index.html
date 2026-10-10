@@ -94,6 +94,7 @@
     }
     .badge {
       flex: none;
+      align-self: center;
       font-size: 0.8rem;
       letter-spacing: 0.04em;
       padding: 0.35rem 0.55rem;
@@ -101,6 +102,17 @@
       background: var(--accent);
       color: var(--accent-ink);
       font-weight: 700;
+      white-space: nowrap;
+    }
+    a.entry.legacy {
+      background: #12151b;
+      border-color: #2a3140;
+      color: #9aa2b1;
+    }
+    a.entry.legacy .path { color: #6d7482; }
+    a.entry.legacy .badge {
+      background: #222833;
+      color: #8b93a3;
     }
     span.entry {
       color: #6d7482;
@@ -126,23 +138,17 @@
   <main>
     <header>
       <h1>浮世万象 Demo 验收</h1>
-      <p class="lead">手机可直接点开试玩。网页切片与斜 45° 版都已可玩。</p>
+      <p class="lead">手机可直接点开试玩。正面俯视版与斜 45° 版是当前版本。</p>
     </header>
     <nav aria-label="版本入口">
-      <a class="entry" href="web-demo/">
-        <span>
-          <span class="label">当前版 Demo</span>
-          <span class="path">web-demo/</span>
-        </span>
-        <span class="badge">可玩</span>
-      </a>
-      <span class="entry" aria-disabled="true">
+      <a class="entry" href="front-view/">
         <span>
           <span class="label">正面俯视版</span>
           <span class="path">front-view/</span>
+          <span class="blurb">60帧｜雨雪雾光影｜四季｜可交互可破坏｜NPC作息</span>
         </span>
-        <span class="soon">即将上线</span>
-      </span>
+        <span class="badge">可玩</span>
+      </a>
       <a class="entry" href="iso45/">
         <span>
           <span class="label">斜45°版</span>
@@ -151,8 +157,15 @@
         </span>
         <span class="badge">可玩</span>
       </a>
+      <a class="entry legacy" href="web-demo/">
+        <span>
+          <span class="label">当前版 Demo</span>
+          <span class="path">web-demo/</span>
+        </span>
+        <span class="badge">旧版（已停更）</span>
+      </a>
     </nav>
-    <footer>最近更新：2026-10-10 14:26</footer>
+    <footer>最近更新：2026-10-10 14:57</footer>
   </main>
 </body>
 </html>

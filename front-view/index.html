@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#0e0f13" />
+  <title>《浮世万象》· 正视模块化场景原型 · 井槐里12号</title>
+  <style>
+    html, body { margin: 0; background: #0e0f13; color: #d8dbe4; font: 13px/1.5 "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; }
+    #app { display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+    #bar { width: min(100vw, 177.7vh); display: flex; gap: 6px; align-items: center; padding: 6px 10px; box-sizing: border-box; flex-wrap: wrap; }
+    #bar b { color: #e8c88a; }
+    button { background: #23262f; color: #e6e8ee; border: 1px solid #3a3f4c; border-radius: 4px; padding: 3px 8px; font: inherit; cursor: pointer; }
+    button:hover { background: #2e3240; }
+    #wrap { position: relative; }
+    canvas { display: block; image-rendering: pixelated; width: min(100vw, calc((100vh - 70px) * 16 / 9)); height: auto; background: #17181d; }
+    #toast { position: absolute; left: 50%; top: 12px; transform: translateX(-50%); background: rgba(14,16,22,.82); padding: 4px 14px; border-radius: 4px; transition: opacity .3s; pointer-events: none; white-space: nowrap; max-width: 92%; overflow: hidden; text-overflow: ellipsis; }
+    #prompt { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); color: #ffe6a8; text-shadow: 0 1px 2px #000, 0 0 4px #000; pointer-events: none; white-space: nowrap; }
+    #log { position: absolute; left: 10px; bottom: 40px; font-size: 12px; line-height: 1.45; color: #e9ecf4; text-shadow: 0 1px 2px #000; pointer-events: none; max-width: 46%; }
+    #log div { background: rgba(10,12,18,.55); padding: 0 6px; border-radius: 3px; margin-top: 2px; width: fit-content; }
+    #log i { color: #9fb4d8; font-style: normal; margin-right: 4px; }
+    #status { opacity: .85; margin-left: auto; }
+    body.shot #bar { display: none; } body.shot canvas { width: auto; } body.shot #app { align-items: flex-start; }
+    /* ---------- mobile ---------- */
+    body.mobile { overflow: hidden; position: fixed; inset: 0; touch-action: none; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; -webkit-tap-highlight-color: transparent; }
+    body.mobile #bar { display: none; }
+    body.mobile #app { min-height: 0; }
+    body.mobile #wrap { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+    body.mobile canvas { max-width: none; }
+    body.mobile #toast { top: calc(env(safe-area-inset-top, 0px) + 76px); font-size: 13px; }
+    body.mobile #prompt { bottom: calc(env(safe-area-inset-bottom, 0px) + 168px); font-size: 14px; }
+    body.mobile.landscape #prompt { bottom: calc(env(safe-area-inset-bottom, 0px) + 16px); }
+    body.mobile #log { left: 8px; top: calc(env(safe-area-inset-top, 0px) + 78px); bottom: auto; font-size: 11px; max-width: 70%; }
+    body.mobile.landscape #log { top: 54px; max-width: 42%; }
+    body.mobile.touch #log div:nth-last-child(n+4) { display: none; }
+    #touch { position: fixed; inset: 0; pointer-events: none; z-index: 5; }
+    #touch.hidden, body.kbd #touch { display: none; }
+    #mtop { position: absolute; left: 0; right: 0; top: 0; padding: calc(env(safe-area-inset-top, 0px) + 4px) 8px 4px; background: linear-gradient(rgba(8,10,14,.78), rgba(8,10,14,0)); pointer-events: none; }
+    #mstatus { font-size: 13px; color: #f1e3c2; text-shadow: 0 1px 2px #000; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    #mstatus small { color: #aab4c8; font-size: 11px; }
+    #mbtns { display: flex; gap: 6px; margin-top: 4px; pointer-events: auto; }
+    .tb { flex: 1; max-width: 92px; background: rgba(30,34,44,.82); border: 1px solid rgba(255,255,255,.18); color: #fff; border-radius: 10px; padding: 5px 0 3px; font-size: 16px; line-height: 1.1; }
+    .tb i { display: block; font-style: normal; font-size: 11px; color: #d6dbe6; }
+    body.landscape #mtop { display: flex; align-items: center; gap: 10px; padding-top: 4px; }
+    body.landscape #mbtns { margin: 0 0 0 auto; }
+    body.landscape .tb { width: 64px; flex: none; padding: 3px 0 2px; font-size: 14px; }
+    #msheet { position: absolute; left: 50%; top: calc(env(safe-area-inset-top, 0px) + 96px); transform: translateX(-50%); background: rgba(16,18,26,.94); border: 1px solid rgba(255,255,255,.15); border-radius: 12px; padding: 10px; pointer-events: auto; }
+    body.landscape #msheet { top: 50px; }
+    #msheet.hidden { display: none; }
+    #msheet .grid { display: grid; grid-template-columns: repeat(3, 92px); gap: 8px; }
+    #msheet button { padding: 10px 0; border-radius: 8px; font-size: 14px; }
+    #joy-zone { position: absolute; left: 0; bottom: 0; width: 55%; height: 44%; pointer-events: auto; touch-action: none; }
+    body.landscape #joy-zone { width: 45%; height: 70%; }
+    #joy-base { position: absolute; left: calc(env(safe-area-inset-left, 0px) + 34px); bottom: calc(env(safe-area-inset-bottom, 0px) + 34px); width: 120px; height: 120px; border-radius: 50%; background: rgba(255,255,255,.08); border: 2px solid rgba(255,255,255,.22); transition: opacity .2s; opacity: .7; }
+    #joy-base.on { opacity: 1; transition: none; }
+    #joy-knob { position: absolute; left: 34px; top: 34px; width: 52px; height: 52px; border-radius: 50%; background: rgba(240,230,210,.55); border: 2px solid rgba(255,255,255,.6); }
+    .tbtn { position: absolute; pointer-events: auto; touch-action: none; border-radius: 50%; color: #fff; font-weight: bold; border: 2px solid rgba(255,255,255,.35); background: rgba(40,46,60,.72); }
+    #btn-act { right: calc(env(safe-area-inset-right, 0px) + 26px); bottom: calc(env(safe-area-inset-bottom, 0px) + 40px); width: 92px; height: 92px; font-size: 20px; }
+    #btn-kick { right: calc(env(safe-area-inset-right, 0px) + 128px); bottom: calc(env(safe-area-inset-bottom, 0px) + 22px); width: 62px; height: 62px; font-size: 16px; }
+    body.landscape #btn-act { bottom: calc(env(safe-area-inset-bottom, 0px) + 26px); width: 80px; height: 80px; }
+    body.landscape #btn-kick { right: calc(env(safe-area-inset-right, 0px) + 20px); bottom: calc(env(safe-area-inset-bottom, 0px) + 118px); width: 56px; height: 56px; }
+    .tbtn.ready { background: rgba(214,150,60,.85); border-color: #ffe0a0; }
+    #btn-kick.ready { background: rgba(180,64,52,.85); border-color: #ffb0a0; }
+    .tbtn.down, .tb.down { filter: brightness(1.4); transform: scale(.95); }
+  </style>
+</head>
+<body>
+  <script>if (/[?&]shot=1/.test(location.search)) document.body.classList.add("shot");</script>
+  <div id="app">
+    <div id="bar">
+      <b>浮世万象 · 正视场景原型</b>
+      <span>WASD 移动 · E 互动 · F 踢/破坏</span>
+      <button data-ev="broken_window">1 破窗</button>
+      <button data-ev="fire">2 起火</button>
+      <button data-ev="crash">3 撞车</button>
+      <button data-ev="storm">4 暴雨</button>
+      <button data-ev="blizzard">5 大雪</button>
+      <button data-ev="reset">0 重置</button>
+      <button data-ev="time">T 时间</button>
+      <button data-ev="weather">R 天气</button>
+      <button data-ev="season">Y 季节</button>
+      <button data-ev="day">N 下一天</button>
+      <button data-ev="log">L 日志</button>
+      <button data-ev="debug">G 调试</button>
+      <span id="status"></span>
+    </div>
+    <div id="wrap">
+      <canvas id="game" width="1280" height="720"></canvas>
+      <div id="toast"></div>
+      <div id="prompt"></div>
+      <div id="log"></div>
+    </div>
+  </div>
+  <!-- classic scripts so file:// works (no fetch / modules): kit manifest + scene data are .js wrappers of the JSON files -->
+  <script src="kit/kit_manifest.js"></script>
+  <script src="scene.js"></script>
+  <script src="js/sprites_manifest.js"></script>
+  <script src="js/core.js"></script>
+  <script src="js/clock.js"></script>
+  <script src="js/world.js"></script>
+  <script src="js/actors.js"></script>
+  <script src="js/fx.js"></script>
+  <script src="js/traffic.js"></script>
+  <script src="js/render.js"></script>
+  <script src="js/mobile.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
