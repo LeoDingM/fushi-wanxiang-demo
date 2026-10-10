@@ -5811,7 +5811,7 @@
    "z": 3.0,
    "state": "intact",
    "fade_group": "nb_n1",
-   "night_lit": false,
+   "night_lit": true,
    "variant": "w2"
   },
   {
@@ -7375,8 +7375,8 @@
    "z": 3.0,
    "state": "intact",
    "fade_group": "nb_c1",
-   "night_lit": false,
-   "variant": "w1"
+   "night_lit": true,
+   "variant": "base"
   },
   {
    "id": "nb_c1_S2F_1_wall",
@@ -9525,7 +9525,7 @@
    "state": "intact",
    "fade_group": "nb_w1",
    "night_lit": true,
-   "variant": "base"
+   "variant": "w1"
   },
   {
    "id": "nb_w1_S2F_3_wall",
@@ -9545,8 +9545,8 @@
    "z": 3.0,
    "state": "intact",
    "fade_group": "nb_w1",
-   "night_lit": false,
-   "variant": "base"
+   "night_lit": true,
+   "variant": "w2"
   },
   {
    "id": "nb_w1_S2F_3_ac",
@@ -10505,7 +10505,7 @@
    "state": "intact",
    "fade_group": "nb_w3",
    "night_lit": true,
-   "variant": "w1"
+   "variant": "base"
   },
   {
    "id": "nb_w3_S2F_0_ac",
@@ -10585,7 +10585,7 @@
    "z": 3.0,
    "state": "intact",
    "fade_group": "nb_w3",
-   "night_lit": false,
+   "night_lit": true,
    "variant": "w2"
   },
   {
@@ -11648,8 +11648,8 @@
    "z": 3.0,
    "state": "intact",
    "fade_group": "nb_w4",
-   "night_lit": true,
-   "variant": "w2"
+   "night_lit": false,
+   "variant": "w1"
   },
   {
    "id": "nb_w4_W2F_0_wall",
@@ -13520,7 +13520,7 @@
    "state": "intact",
    "fade_group": "nb_s2",
    "night_lit": true,
-   "variant": "base"
+   "variant": "w2"
   },
   {
    "id": "nb_s2_S2F_2_ac",
@@ -14186,7 +14186,7 @@
    "state": "intact",
    "fade_group": "nb_s4",
    "night_lit": true,
-   "variant": "base"
+   "variant": "w2"
   },
   {
    "id": "nb_s4_S2F_3_wall",
@@ -14394,7 +14394,7 @@
    "state": "intact",
    "fade_group": "nb_s5",
    "night_lit": true,
-   "variant": "w2"
+   "variant": "base"
   },
   {
    "id": "nb_s5_W2F_0_wall",
@@ -14794,14 +14794,6 @@
    "z": 6.0,
    "fade_group": "civic_police",
    "variant": "c"
-  },
-  {
-   "id": "civic_police_sign_s",
-   "type": "f_shopsign",
-   "x": -37.0,
-   "y": -10.0,
-   "z": 2.55,
-   "fade_group": "civic_police"
   },
   {
    "id": "civic_hospital_S1F_0_shop",
@@ -15252,14 +15244,6 @@
    "z": 9.0,
    "fade_group": "civic_hospital",
    "variant": "c"
-  },
-  {
-   "id": "civic_hospital_sign_s",
-   "type": "f_shopsign",
-   "x": 22.0,
-   "y": -10.0,
-   "z": 2.55,
-   "fade_group": "civic_hospital"
   },
   {
    "id": "tree_sw",

@@ -145,6 +145,9 @@
   AP.setOutfitId = function (id) {
     const look = AP.PLAYER_LOOKS.find((l) => l.id === id);
     if (!look) return false;
+    if (look.set === "li_mo_uniform" && !(window.ACTORS && window.ACTORS.li_mo_uniform) && !document.querySelector('script[src="js/actors_store.js"]')) {
+      const sc = document.createElement("script"); sc.src = "js/actors_store.js"; document.head.appendChild(sc);
+    }
     const ps = SP.game && SP.game.ps;
     if (ps) {
       ps.flags = ps.flags || {};

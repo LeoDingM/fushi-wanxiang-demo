@@ -1,0 +1,536 @@
+{
+ "id": "store_24",
+ "name": "邻里便利 24h · 井槐里店",
+ "_doc": "24便利店 interior (room-layout data, tools/roomlayout.py + tools/build_store.py). 7.85 x 5.85 m sales floor: drinks fridge wall + self-service coffee / microwave on the back (north) wall, two gondolas in the middle, checkout counter (+ 关东煮 at its south end, cigarette back shelf, staff lane) on the east side, staff-room door in the east wall, window bar + 3 stools along the street glazing (south, camera side), trash / recycling by the west aisle. Entrance = gap in the south front. Furniture uses kit_store (st_*) + kit_int (walls, door, floor).",
+ "bounds": [
+  0.15,
+  0.15,
+  8.0,
+  6.0
+ ],
+ "ground": {
+  "origin": [
+   0,
+   0
+  ],
+  "chunk": 2,
+  "cols": 4,
+  "rows": 3,
+  "legend": {
+   "T": "g_tile"
+  },
+  "data_south_to_north": [
+   "TTTT",
+   "TTTT",
+   "TTTT"
+  ]
+ },
+ "walls": [
+  {
+   "side": "N",
+   "line": 6.0,
+   "from": 0.0,
+   "to": 8.0,
+   "finish": "tile"
+  },
+  {
+   "side": "E",
+   "line": 8.0,
+   "from": 0.0,
+   "to": 6.0,
+   "finish": "tile",
+   "openings": [
+    {
+     "kind": "door",
+     "at": 4.8,
+     "id": "staff_door",
+     "interact": "store_staff",
+     "name": "员工室",
+     "block": true,
+     "reach": [
+      7.5,
+      5.4
+     ]
+    }
+   ]
+  },
+  {
+   "side": "S",
+   "line": 0.0,
+   "from": 0.0,
+   "to": 8.0,
+   "finish": "tile",
+   "openings": [
+    {
+     "kind": "gap",
+     "at": 3.9,
+     "w": 1.2
+    }
+   ]
+  },
+  {
+   "side": "W",
+   "line": 0.0,
+   "from": 0.0,
+   "to": 6.0,
+   "finish": "tile"
+  }
+ ],
+ "furniture": [
+  {
+   "type": "st_fridge",
+   "x": 3.1,
+   "y": 5.62,
+   "state": "full",
+   "interact": "store_fridge",
+   "id": "cooler",
+   "name": "饮料冷柜",
+   "reach": [
+    3.1,
+    4.95
+   ]
+  },
+  {
+   "type": "st_fridge",
+   "x": 4.9,
+   "y": 5.62,
+   "state": "full",
+   "interact": "store_fridge",
+   "id": "cooler_b",
+   "name": "饮料冷柜",
+   "reach": [
+    4.9,
+    4.95
+   ]
+  },
+  {
+   "type": "st_coffee",
+   "x": 0.6,
+   "y": 5.7,
+   "state": "idle",
+   "interact": "store_coffee",
+   "id": "coffee",
+   "name": "自助咖啡机",
+   "reach": [
+    0.6,
+    5.12
+   ]
+  },
+  {
+   "type": "st_micro",
+   "x": 1.35,
+   "y": 5.7,
+   "state": "off",
+   "interact": "store_micro",
+   "id": "micro",
+   "name": "微波炉",
+   "reach": [
+    1.35,
+    5.12
+   ]
+  },
+  {
+   "type": "st_shelf",
+   "x": 2.8,
+   "y": 2.5,
+   "state": "full",
+   "interact": "store_shelf",
+   "id": "shelf_a",
+   "name": "货架 · 零食日用",
+   "reach": [
+    2.8,
+    1.92
+   ]
+  },
+  {
+   "type": "st_shelf",
+   "x": 2.8,
+   "y": 4.0,
+   "state": "full",
+   "interact": "store_shelf",
+   "id": "shelf_b",
+   "name": "货架 · 面包泡面",
+   "reach": [
+    2.8,
+    3.42
+   ]
+  },
+  {
+   "type": "st_counter",
+   "x": 6.4,
+   "y": 2.3,
+   "rot": 6,
+   "state": "default",
+   "interact": "store_counter",
+   "id": "counter",
+   "name": "收银台",
+   "reach": [
+    5.78,
+    2.3
+   ],
+   "reach_staff": [
+    7.12,
+    2.3
+   ]
+  },
+  {
+   "type": "st_backshelf",
+   "x": 7.78,
+   "y": 2.3,
+   "rot": 6,
+   "id": "backshelf"
+  },
+  {
+   "type": "st_oden",
+   "x": 6.4,
+   "y": 0.85,
+   "rot": 6,
+   "state": "full",
+   "interact": "store_oden",
+   "id": "oden",
+   "name": "关东煮",
+   "reach": [
+    5.78,
+    0.95
+   ]
+  },
+  {
+   "type": "st_bar",
+   "x": 1.6,
+   "y": 0.42,
+   "state": "default",
+   "interact": "store_bar",
+   "id": "bar",
+   "name": "窗边吧台",
+   "reach": [
+    1.6,
+    1.3
+   ]
+  },
+  {
+   "type": "st_stool",
+   "x": 0.9,
+   "y": 0.86,
+   "id": "stool_1"
+  },
+  {
+   "type": "st_stool",
+   "x": 1.6,
+   "y": 0.86,
+   "id": "stool_2"
+  },
+  {
+   "type": "st_stool",
+   "x": 2.3,
+   "y": 0.86,
+   "id": "stool_3"
+  },
+  {
+   "type": "st_bins",
+   "x": 0.62,
+   "y": 3.6,
+   "state": "clean",
+   "interact": "store_bins",
+   "id": "bins",
+   "name": "垃圾分类 · 拖把",
+   "reach": [
+    0.62,
+    3.05
+   ]
+  },
+  {
+   "type": "d_mat",
+   "x": 4.5,
+   "y": 0.9,
+   "id": "door_mat"
+  }
+ ],
+ "portals": [
+  {
+   "id": "exit_street",
+   "rect": [
+    3.95,
+    0.15,
+    5.05,
+    0.5
+   ],
+   "dir": "S",
+   "to": "street",
+   "spawn": null,
+   "label": "出门（回到街上）"
+  }
+ ],
+ "spawn": [
+  4.5,
+  1.0,
+  "N"
+ ],
+ "staff_spot": [
+  7.12,
+  2.3,
+  "W"
+ ],
+ "npcs": {
+  "_doc": "store NPC schedule data for js/store.js: staff shifts (who is behind the counter when) + shopper loops (waypoints validated against every footprint by tools/build_store.py, clearance >= 0.27 m)",
+  "staff": [
+   {
+    "id": "manager",
+    "name": "赵姐（店长）",
+    "sprite": "clerk_zhao",
+    "home": [
+     7.12,
+     2.3,
+     "W"
+    ],
+    "via": [
+     7.2,
+     3.85
+    ],
+    "back": [
+     6.3,
+     4.35,
+     "S"
+    ],
+    "hours": [
+     [
+      7,
+      23
+     ]
+    ],
+    "lines": [
+     "欢迎光临～",
+     "关东煮刚加的，热乎着呢。",
+     "要袋子吗？一毛一个。"
+    ],
+    "sprite_fallback": "vendor"
+   },
+   {
+    "id": "night_clerk",
+    "name": "小周（夜班）",
+    "sprite": "clerk_zhou",
+    "home": [
+     7.12,
+     2.3,
+     "W"
+    ],
+    "via": [
+     7.2,
+     3.85
+    ],
+    "back": [
+     6.3,
+     4.35,
+     "S"
+    ],
+    "hours": [
+     [
+      23,
+      24
+     ],
+     [
+      0,
+      7
+     ]
+    ],
+    "lines": [
+     "欢迎光临……（打了个哈欠）",
+     "微波炉自己用就行。"
+    ],
+    "sprite_fallback": "student"
+   }
+  ],
+  "shoppers": [
+   {
+    "id": "shopper_office",
+    "name": "上班族",
+    "sprite": "office",
+    "hours": [
+     [
+      7,
+      10
+     ],
+     [
+      17,
+      23
+     ]
+    ],
+    "every_min": [
+     25,
+     45
+    ],
+    "route": [
+     [
+      4.5,
+      1.05
+     ],
+     [
+      4.5,
+      4.85
+     ],
+     [
+      3.1,
+      4.85
+     ],
+     [
+      4.5,
+      4.85
+     ],
+     [
+      5.0,
+      3.25
+     ],
+     [
+      5.55,
+      2.3
+     ],
+     [
+      4.5,
+      1.05
+     ]
+    ],
+    "dwell": {
+     "2": 3,
+     "5": 4
+    },
+    "buys": [
+     "bento",
+     "drink"
+    ]
+   },
+   {
+    "id": "shopper_student",
+    "name": "学生",
+    "sprite": "student",
+    "hours": [
+     [
+      12,
+      13
+     ],
+     [
+      16,
+      21
+     ]
+    ],
+    "every_min": [
+     35,
+     60
+    ],
+    "route": [
+     [
+      4.5,
+      1.05
+     ],
+     [
+      1.48,
+      1.6
+     ],
+     [
+      1.48,
+      3.25
+     ],
+     [
+      2.8,
+      3.25
+     ],
+     [
+      4.5,
+      3.25
+     ],
+     [
+      5.55,
+      2.3
+     ],
+     [
+      4.5,
+      1.05
+     ]
+    ],
+    "dwell": {
+     "3": 3,
+     "5": 4
+    },
+    "buys": [
+     "buy_oden",
+     "drink"
+    ]
+   },
+   {
+    "id": "shopper_uncle",
+    "name": "遛弯大爷",
+    "sprite": "uncle",
+    "hours": [
+     [
+      6,
+      9
+     ],
+     [
+      19,
+      22
+     ]
+    ],
+    "every_min": [
+     40,
+     70
+    ],
+    "route": [
+     [
+      4.5,
+      1.05
+     ],
+     [
+      4.5,
+      1.6
+     ],
+     [
+      5.55,
+      1.75
+     ],
+     [
+      5.55,
+      2.3
+     ],
+     [
+      4.5,
+      1.05
+     ]
+    ],
+    "dwell": {
+     "3": 5
+    },
+    "buys": [
+     "cigs"
+    ]
+   }
+  ]
+ },
+ "storefront": {
+  "_doc": "tools/build_store.py swaps the S-side cut stubs for the glass storefront (kit_store st_front13 / st_front145 bays + st_frontdoor automatic door in the entrance gap); one fade_group so the whole front fades when it hides the player. The wall colliders stay.",
+  "line": 0.0,
+  "bays": [
+   [
+    0.0,
+    "st_front13"
+   ],
+   [
+    1.3,
+    "st_front13"
+   ],
+   [
+    2.6,
+    "st_front13"
+   ],
+   [
+    5.1,
+    "st_front145"
+   ],
+   [
+    6.55,
+    "st_front145"
+   ]
+  ],
+  "door": [
+   3.9,
+   "st_frontdoor"
+  ]
+ }
+}

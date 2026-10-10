@@ -1,4 +1,4 @@
-23:40 · [外观] Stage Char-A / Civic-look：警察/消防/医护重着色图集+NPC_SPEC；市政一楼玻璃门脸+招牌；appearance schema/衣柜/child×0.72；街面 extras；docs/APPEARANCE.md+CHAR_READY；appearance_test；smoke；双 zip · screenshots/char-a1-police-npc.png
+23:25 · [外观] Stage Char-A/Civic-look：police/firefighter/nurse 重着色图集+NPC_SPEC；civic 一楼 f_shop 玻璃门脸+文字招牌；appearance schema/衣柜/child×0.72；街面 extras×4；docs/APPEARANCE.md+CHAR_READY；appearance_test 12/12；smoke 4/4；双 zip · screenshots/char-a1…a8
 23:12 · [主线] Stage E：背包（报案回执/处方/药品/消防卡片）+微信物业房东联动；公交车程动画+可跳过；馨园1-02南向飘窗阳台 validate 0；夜间派出所来电/急诊迷你事件可跳过；stageE 15/15；smoke 4/4；stage6 PASS；双 zip · screenshots/e1-bag-receipt.png
 23:07 · [主线] Stage D：civic 玩法环（派出所报案/盖章/罚款、医院挂号→就诊→取药回血、消防参观/灭火器知识）；手机地图点选标记+前往；公交跳过车程/等班；馨园走廊信报箱+楼层索引；civic NPC 日夜值班；layout validate 0；stageD 18/18；smoke 4/4；stage6 PASS；双 zip · screenshots/d1-police-report.png
 22:58 · [主线] Stage C：civic 深厅（派出所询问室/医院诊室/消防执勤装备）validate 0；馨园增 1-01/2-02/4-01+4F 走廊；银行转账流水+微信同步；NPC 对话池扩物业/赵姐/快递；docs/PHONE_AI.md；smoke+stage6；双 zip · screenshots/c1-police-interview.png
@@ -79,3 +79,8 @@
 23:30 · [Stage H] 脏衣 HUD 芯片（衣臭/脏n/在洗/可收衣）+ 穿脏 toast 引导去馨园洗衣
 23:30 · [Stage H] 日程待办：门岗跟进 / 未收衣 / 脏衣 / 门禁续期 / 未用押金券，可前往
 23:30 · [Stage H] 质量：stageH_test 14/14 · smoke 4/4 · stage6 12/12 · 截图 h1–h6（h6 民政警察立绘回归，Char-A sets ready）
+
+23:35 · [Stage I] 馨园入口扫码反馈：进 stair_xin_* 弹出扫码卡片（通过/访客），不改外立面 · js/stageI.js
+23:35 · [Stage I] 待办完成自动清除检测 + 心情+3；穿衣磨损分级 toast + HUD「穿n%」
+23:35 · [Stage I] 缴物业费续期入手「物业费缴纳凭证」可出示；出示给物业再续期
+23:35 · [Stage I] 质量：stageI_test 12/12 · smoke 4/4 · stage6 12/12 · 截图 i1–i6（i6 消防立绘回归）· 未改 NPC_SPEC/appearance

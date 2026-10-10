@@ -78,21 +78,7 @@
         o.variant = "p1";
       }
     }
-    // add sign props if missing (reuse f_shopsign modular kit)
-    for (const s of CL.SIGNS) {
-      const id = s.group + "_signboard";
-      if (data.objects.some((o) => o.id === id)) continue;
-      data.objects.push({
-        id,
-        type: "f_shopsign",
-        x: s.x,
-        y: s.y,
-        z: s.z,
-        fade_group: s.group,
-        civic_sign: true,
-        name: s.label
-      });
-    }
+    // Do NOT inject f_shopsign (atlas is 24便利店 green box). Labels drawn by CL.drawSignLabels.
     data._charACivic = true;
     // east chunk holds civic_fire (x>=46.5)
     const chunks = window.SCENE_CHUNKS || {};

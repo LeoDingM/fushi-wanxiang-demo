@@ -1,0 +1,366 @@
+{
+ "id": "room_xin_201",
+ "name": "馨园2-01 · 一房一厅 · 月租¥1100",
+ "_doc": "Stage B hotfix: 一房一厅 living+kitchen(S) / bedroom(NW) / bath(NE). S/W cut-away. validate 0.",
+ "bounds": [
+  0.15,
+  0.15,
+  6.85,
+  5.35
+ ],
+ "ground": {
+  "origin": [
+   0,
+   0
+  ],
+  "chunk": 2,
+  "cols": 4,
+  "rows": 3,
+  "legend": {
+   "W": "g_wood:a",
+   "T": "g_tile"
+  },
+  "data_south_to_north": [
+   "WWWT",
+   "WWWT",
+   "WTTT"
+  ]
+ },
+ "walls": [
+  {
+   "side": "N",
+   "line": 5.5,
+   "from": 0.0,
+   "to": 4.0,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "window",
+     "at": 1.0,
+     "interact": "window_in",
+     "id": "bed_win",
+     "reach": [
+      1.75,
+      4.2
+     ]
+    }
+   ]
+  },
+  {
+   "side": "N",
+   "line": 5.5,
+   "from": 4.0,
+   "to": 7.0,
+   "finish": "tile"
+  },
+  {
+   "side": "E",
+   "line": 7.0,
+   "from": 0.0,
+   "to": 3.0,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "door",
+     "at": 0.2,
+     "id": "room_door",
+     "interact": "portal",
+     "to": "stair_xin_2f",
+     "spawn": [
+      3.5,
+      1.2,
+      "N"
+     ],
+     "label": "出门",
+     "block": false
+    }
+   ]
+  },
+  {
+   "side": "E",
+   "line": 7.0,
+   "from": 3.0,
+   "to": 5.5,
+   "finish": "tile"
+  },
+  {
+   "side": "S",
+   "line": 0.0,
+   "from": 0.0,
+   "to": 7.0,
+   "finish": "plain"
+  },
+  {
+   "side": "W",
+   "line": 0.0,
+   "from": 0.0,
+   "to": 5.5,
+   "finish": "plain"
+  },
+  {
+   "side": "P",
+   "axis": "x",
+   "line": 3.0,
+   "from": 0.0,
+   "to": 4.0,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "door",
+     "at": 1.5,
+     "id": "bed_door",
+     "interact": "idoor",
+     "name": "卧室门",
+     "state": "open"
+    }
+   ]
+  },
+  {
+   "side": "P",
+   "axis": "x",
+   "line": 3.0,
+   "from": 4.0,
+   "to": 7.0,
+   "finish": "tile"
+  },
+  {
+   "side": "P",
+   "axis": "y",
+   "line": 4.0,
+   "from": 3.0,
+   "to": 5.5,
+   "finish": "tile",
+   "openings": [
+    {
+     "kind": "door",
+     "at": 3.15,
+     "id": "bath_door",
+     "interact": "idoor",
+     "name": "卫生间门",
+     "state": "closed"
+    }
+   ]
+  }
+ ],
+ "furniture": [
+  {
+   "type": "f_kitchen",
+   "x": 0.47,
+   "y": 1.2,
+   "rot": 2,
+   "state": "off",
+   "interact": "stove",
+   "id": "stove",
+   "reach": [
+    1.05,
+    1.2
+   ]
+  },
+  {
+   "type": "f_fridge",
+   "x": 0.47,
+   "y": 2.45,
+   "state": "closed",
+   "interact": "fridge",
+   "id": "fridge",
+   "reach": [
+    1.05,
+    2.45
+   ]
+  },
+  {
+   "type": "f_table",
+   "x": 2.3,
+   "y": 1.35,
+   "id": "coffee",
+   "state": "meal",
+   "interact": "table"
+  },
+  {
+   "type": "f_stool",
+   "x": 2.3,
+   "y": 0.65,
+   "id": "pouf",
+   "interact": "sit",
+   "reach": [
+    1.85,
+    0.65
+   ]
+  },
+  {
+   "type": "f_chair",
+   "x": 3.4,
+   "y": 1.35,
+   "rot": 6,
+   "id": "sofa",
+   "interact": "sit",
+   "reach": [
+    3.0,
+    1.35
+   ]
+  },
+  {
+   "type": "f_shelf",
+   "x": 3.5,
+   "y": 2.6,
+   "id": "tv_stand",
+   "interact": "notice",
+   "note": "客厅电视柜",
+   "reach": [
+    3.5,
+    2.2
+   ]
+  },
+  {
+   "type": "i_pendant",
+   "x": 2.4,
+   "y": 1.95,
+   "state": "off",
+   "interact": "light",
+   "id": "room_light",
+   "reach": [
+    2.4,
+    1.95
+   ]
+  },
+  {
+   "type": "f_table",
+   "x": 5.3,
+   "y": 1.3,
+   "id": "dining"
+  },
+  {
+   "type": "f_stool",
+   "x": 5.3,
+   "y": 0.75,
+   "id": "dstool"
+  },
+  {
+   "type": "f_bed",
+   "x": 1.85,
+   "y": 4.8,
+   "state": "made",
+   "interact": "bed",
+   "id": "bed",
+   "reach": [
+    [
+     1.4,
+     4.15
+    ],
+    [
+     2.3,
+     4.15
+    ]
+   ]
+  },
+  {
+   "type": "f_nightstand",
+   "x": 0.5,
+   "y": 4.8,
+   "state": "off",
+   "interact": "bedlamp",
+   "id": "nightstand",
+   "reach": [
+    0.9,
+    4.25
+   ]
+  },
+  {
+   "type": "f_wardrobe",
+   "x": 3.35,
+   "y": 4.85,
+   "rot": 6,
+   "state": "closed",
+   "interact": "wardrobe",
+   "id": "wardrobe",
+   "reach": [
+    3.35,
+    4.4
+   ]
+  },
+  {
+   "type": "f_desk",
+   "x": 0.85,
+   "y": 3.5,
+   "rot": 4,
+   "state": "off",
+   "interact": "pc",
+   "id": "desk",
+   "reach": [
+    2.05,
+    3.5
+   ]
+  },
+  {
+   "type": "f_chair",
+   "x": 1.7,
+   "y": 3.5,
+   "id": "desk_chair"
+  },
+  {
+   "type": "i_ac",
+   "x": 0.4,
+   "y": 4.0,
+   "z": 2.2,
+   "rot": 6,
+   "state": "off",
+   "interact": "ac",
+   "id": "ac",
+   "reach": [
+    1.0,
+    4.0
+   ]
+  },
+  {
+   "type": "f_toilet",
+   "x": 4.65,
+   "y": 4.9,
+   "id": "toilet",
+   "interact": "toilet",
+   "reach": [
+    4.65,
+    4.4
+   ]
+  },
+  {
+   "type": "f_washer",
+   "x": 5.5,
+   "y": 3.55,
+   "state": "idle",
+   "interact": "washer",
+   "id": "washer",
+   "reach": [
+    5.5,
+    4.05
+   ]
+  },
+  {
+   "type": "f_basin",
+   "x": 6.3,
+   "y": 3.5,
+   "id": "basin",
+   "interact": "basin",
+   "reach": [
+    5.9,
+    4.0
+   ]
+  },
+  {
+   "type": "f_shower",
+   "x": 6.3,
+   "y": 4.85,
+   "state": "dry",
+   "interact": "shower",
+   "id": "shower",
+   "reach": [
+    5.85,
+    4.5
+   ]
+  }
+ ],
+ "spawn": [
+  6.2,
+  0.85,
+  "W"
+ ]
+}
