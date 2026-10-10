@@ -202,9 +202,10 @@
   SP.outfitHooks = SP.outfitHooks || [];
   SP.outfitHooks.push(function (actor) {
     if (!actor || !actor.isPlayer) return null;
-    const ps = SP.game && SP.game.ps;
-    // while store uniform flag active inside store, leave to store's set mutation
-    if (ps && ps.job && ps.job.uniform) return null;
+    // store / home / bar poses set actor.set directly — do not override
+    if (actor.set === "li_mo_uniform" || actor.set === "li_mo_bar" || actor.set === "li_mo_home") return null;
+    const sid = SP.world && SP.world.sceneId;
+    if (sid && (sid.indexOf("store_") === 0)) return null;
     const id = AP.getOutfitId();
     const look = AP.PLAYER_LOOKS.find((l) => l.id === id);
     if (!look) return null;

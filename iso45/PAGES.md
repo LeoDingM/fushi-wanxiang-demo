@@ -1,53 +1,50 @@
-# 浮世万象 · scene-proto-45 · Stage G 交接
+# 浮世万象 · scene-proto-45 · Stage H 交接
 
-旧街区玩法；**CBD 扩建暂停**。Stage G 在 F 的出示/报站/日志之上兑现回执收益、洗衣闭环 UI、日程日历与门岗跟进。
+旧街区；**CBD 暂停**。Stage H 补齐门禁续期、房东优惠微信、脏衣 HUD、日程待办。外观仍由 Char-A 并行轨负责——本阶段未改 `NPC_SPEC` / `appearance.js` / actors / civic exteriors。
 
-**并行轨（Char-A）**：民政 NPC 立绘 / `appearance.js` / 市政外立面由对方负责。本阶段**未改** `stageD.js` `NPC_SPEC`、actors、civic exteriors。
-
-## 本阶段交付
+## 交付
 
 | 目标 | 落地 |
 |------|------|
-| 回执→门禁/押金 | 物业收 `police_receipt` → `xin_access_until`（24 游戏时）；房东收回执/章 → `deposit_discount` ¥100，`rentUnit` 减免 |
-| 馨园1-02 洗衣 UI | 洗衣机/晾衣杆打开统一菜单：进度、洗、晾、收、演示快进晾干 |
-| 日程日历 | 按日折叠；带 `place` 的条目可「前往」 |
-| 门岗跟进 | 忽略夜间派出所来电 → 次日 `gate_followup_pending` → 白天盘问 |
-| 外观 | 不碰 NPC_SPEC（Char-A 可能已改为专用 set） |
+| 门禁到期+续期 | `<2h` 提醒、过期通知；续期=出示 `police_stamp` 或缴物业费（rules 固定费 ¥45）+24 游戏时 |
+| 房东微信优惠 | 押金券生效后推送微信；回复「押金优惠还作数吗」 |
+| 脏衣 HUD | `#needs` 上 👕 芯片；穿脏 toast → 洗衣循环 |
+| 日程待办 | 门岗 / 晾衣 / 脏衣 / 门禁 / 押金券 |
+| 民政回归截图 | h6 派出所（Char-A `police`/`firefighter`/`nurse` 已在树内） |
 
 ## 关键文件
 
-- `js/stageG.js` — 本阶段全部逻辑（包裹 stageF present/morning/daylog、stageA rentUnit）
-- `js/stageF.js` — 出示/日志基础（G 只包裹，不重写）
-- `index.html` — 挂载 stageG.js
-- `tools/stageG_test.py` · `tools/capture_stageG.py`
+- `js/stageH.js` — 本阶段全部（包裹 stageG / stageF / stageA / game.hud）
+- `index.html` — stageH.js
+- `tools/stageH_test.py` · `tools/capture_stageH.py`
 
-未修改（留给 Char-A）：`js/stageD.js` NPC_SPEC、`js/appearance.js`（若有）、`tools/build_scene.py` civic blocks、`js/actors*.js`。
+未修改：`js/stageD.js` NPC_SPEC、`js/appearance.js`、`js/actors*.js`、`tools/build_scene.py` civic。
 
 ## 截图
 
-- `g1-access-discount.png` — 出示后租房页门禁/优惠提示  
-- `g2-laundry-menu.png` — 1-02 洗衣菜单  
-- `g3-laundry-hang.png` — 阳台杆晾衣  
-- `g4-daylog-calendar.png` — 日程折叠日历  
-- `g5-gate-followup.png` — 门岗夜间来电跟进  
-- `g6-deposit-rent.png` — 押金优惠提示  
+- `h1-access-renew.png` — 门禁续期菜单  
+- `h2-landlord-coupon.png` — 房东微信优惠  
+- `h3-dirty-hud.png` — 脏衣 HUD  
+- `h4-daylog-todos.png` — 日程待办  
+- `h5-laundry-from-dirty.png` — 脏衣→洗衣菜单  
+- `h6-civic-or-housing.png` — 派出所立绘回归（sets ready）  
 
 ## 玩法速查
 
-1. 派出所拿回执 → 出示物业 → 馨园临时门禁；出示房东 → 租房押金 −¥100  
-2. 馨园 1-02：脏衣→洗衣机→晾阳台杆→（时间/演示快进）→收衣  
-3. 手机「日程」按日展开，可跳转公交站/馨园/门岗等  
-4. 夜里忽略派出所电话 → 第二天门岗会拦你问话  
+1. 门禁快到期：物业公告/手机租房页 → 出示章或交 ¥45 续期  
+2. 出示回执给房东后微信有优惠说明；租房页仍显示 −¥100  
+3. 穿太久 → HUD「衣臭」→ 馨园 1-02 洗衣  
+4. 手机日程顶部「待办」可一键前往  
 
-## 建议 Stage H
+## 建议 Stage I
 
-1. 门禁到期提醒 + 续期（再出示章/交物业费）  
-2. 押金优惠与微信房东会话脚本分支  
-3. 洗衣脏衣来源（换衣服/打工）提示 HUD  
-4. 日程「待办」：未处理门岗/未收衣服  
-5. 合并 Char-A 立绘后做一轮民政场景回归截图（不改玩法）  
+1. 门禁与馨园门禁扫码动画（轻表现，不改外立面）  
+2. 待办完成后自动勾掉 + 轻微心情 buff  
+3. 打工/睡觉加速 `worn_h` 的可读提示  
+4. 物业费收据进背包并可出示  
+5. Char-A 消防/医院回归截图组进相册  
 
 ## 压缩包
 
-- 轻量：`/workspace/fushi-wanxiang/scene-proto-45-play.zip`
-- 完整：`/workspace/fushi-wanxiang/scene-proto-45.zip`
+- `/workspace/fushi-wanxiang/scene-proto-45-play.zip`
+- `/workspace/fushi-wanxiang/scene-proto-45.zip`
