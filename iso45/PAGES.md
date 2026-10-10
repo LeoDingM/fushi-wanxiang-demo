@@ -1,14 +1,24 @@
 # Pages handoff
 
-更新时间：2026-10-10 22:58（Asia/Shanghai）
+更新时间：2026-10-10 23:07（Asia/Shanghai）
 
-## Stage C（老街区；CBD 仍暂停）
-1. **Civic 深厅**：派出所（报案台+询问室+档案）、卫生中心（候诊+分诊+药房+诊室）、消防站（车库+执勤室+装备柜）；layout validate 0
-2. **馨园**：新增可租 `1-01` / `2-02` / `4-01`，走廊扩至 4F
-3. **银行/微信房租**：确认转账、流水、成功后同步房东微信；微信也可付租
-4. **NPC 对话**：扩写 + 新增物业小吴 / 赵姐 / 快递小刘
-5. **LLM 钩子文档**：`docs/PHONE_AI.md`（`SP.phone.aiChat` 本地 Ollama / 云端示例；默认不外呼）
+## Stage D（老街区玩法加深；CBD 仍暂停）
+1. **Civic 玩法环**（非空房间）
+   - 派出所：报案登记 → 印章柜盖章；求助飞线；可缴乱扔垃圾罚款 ¥50；日间民警小张值班
+   - 社区医院：分诊挂号 ¥8 → 诊室问诊 ¥25 → 药房凭处方/自购药（感冒药/创可贴/维C）并回填需求
+   - 消防站：参观登记、灭火器讲解/演练解锁 knowledge_extinguisher 安全知识；日间消防员小陈值班
+2. **手机**：地图 App 点选 POI 标记（馨园/12号/便利店/地铁/公交/派出所/医院/消防）+ 前往/清除；银行保留流水并显示市民档案小记
+3. **街道/住房**：馨园 1F 信报箱改为 mailbox 件 + 楼层索引公告；各层楼梯提示（无电梯）；公交菜单含「跳过车程」与等下一班
+4. **NPC 日程**：警察/护士/消防员白天在岗、夜间提示改日再来（js/stageD.js）
+5. **质量**：layout civic/xin validate 0；tools/stageD_test.py 18/18；smoke 4/4；stage6 PASS
 
 ## 产物
-- `scene-proto-45.zip` / `scene-proto-45-play.zip`
-- 截图：`c1-police-interview.png` `c2-hospital-consult.png` `c3-fire-duty.png` `c4-xin-101.png` `c5-phone-bank.png` `c6-phone-wechat-pool.png`
+- scene-proto-45.zip / scene-proto-45-play.zip
+- 截图：d1-police-report.png d2-hospital-loop.png d3-fire-drill.png d4-phone-map.png d5-bus-board.png d6-xin-corridor.png
+
+## 建议 Stage E
+- 把 civic 回执/处方做成可随身物品 + 房东/物业微信联动
+- 公交真实到站动画（非纯跳过）与更多线路
+- 馨园再增一户差异化户型（阳台/朝向）
+- 夜间急诊/接警电话迷你事件
+- CBD 仍暂停直至 READY

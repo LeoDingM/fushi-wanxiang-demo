@@ -1,41 +1,31 @@
-/* 浮世万象 · scene-proto-45 · 云汇CBD — entry / streaming loader for place 'cbd'.
-   The only script tag a host page needs. SP.cbd.load() fetches the scene data, the kit manifest and the module files
-   (js/cbd/*.js, in order), then the atlases; nothing CBD-related is downloaded before that (streamable place).
-   Modules (all extend SP.cbd, share internals through SP.cbd._):
-     core.js       constants, helpers, assets, textures, world build, collision, schedule
-     world.js      world build (props, buildings, tower parts, lights, walk graph), seasons, collision
-     traffic.js    signals, lanes, cars / taxis / BRT
-     crowd.js      office workers, lunch crowd, joggers, dog walkers, buskers (walk graph + A*)
-     controls.js   camera + free zoom, keyboard / mouse / touch, player, interactions
-     render.js     ground tiles (LOD), building / tower part drawing
-     lod_skyline.js tower impostors, lit windows, crown light, aviation lights, labels
-     lighting.js   sky, lightmap, car lights, fountain / water fx, weather
-     compose.js    painter list, prism-order topological sort, occluder fade, frame compositor
-     lifecycle.js  update / frame / enter / leave / actions; registers SP.places.cbd for the metro glue
-   Already-loaded globals (CBD_SCENE, KIT_CBD_MANIFEST, modules) are not fetched twice. */
-(function (SP) {
-  "use strict";
-  const C = (SP.cbd = SP.cbd || {});
-  const me = document.currentScript && document.currentScript.src;
-  C.base = C.base || (me ? me.replace(/js\/cbd\.js.*$/, "") : "");
-  C.MODULES = ["core", "world", "traffic", "crowd", "controls", "render", "lod_skyline", "lighting", "compose", "lifecycle"];
-  function script(src) {
-    return new Promise((res, rej) => { const s = document.createElement("script"); s.src = C.base + src; s.async = false; s.onload = res; s.onerror = () => rej(new Error("cbd: failed to load " + src)); document.head.appendChild(s); });
-  }
-  /** place registry (js/game.js G.use -> SP.places[o.to].enter(o); js/metro.js toCbd -> SP.places.cbd.enter({exit, from})).
-      The host (core) owns the screen switch: set SP.cbd.host = { enter(o) } to hide the street, attach the canvas and drive
-      SP.cbd.frame(dt); without a host the CBD just loads and enters (preview page drives its own loop). */
+/* scene-proto-45 · CBD placeholder (core). Until the CBD module registers SP.places.cbd for real, arriving at a 中央商务区站
+   exit shows a graceful 「中央商务区 · 即将开放」 card above the metro canvas and puts 李默 back at that exit inside the metro
+   (cbd_street), so he can walk down and ride home. The CBD module simply replaces SP.places.cbd (this stub is flagged _stub). */
+(function () {
+  if (!window.SP) return;
   SP.places = SP.places || {};
-  SP.places.cbd = SP.places.cbd || { _cbd: true, enter: (o) => { if (C.host && C.host.enter) return C.host.enter(o) || null; C.load().then(() => C.enter(o)); return null; } };
-  C.load = function () {
-    if (C._loadP) return C._loadP;
-    const v = C.version ? "?v=" + C.version : "";
-    const jobs = [];
-    if (!window.CBD_SCENE) jobs.push(script("cbd_scene.js" + v));
-    if (!window.KIT_CBD_MANIFEST) jobs.push(script("kit_cbd/kit_manifest.js" + v));
-    C._loadP = Promise.all(jobs)
-      .then(() => C.MODULES.reduce((p, m) => p.then(() => (C._mods && C._mods[m] ? null : script("js/cbd/" + m + ".js" + v))), Promise.resolve()))
-      .then(() => C._loadAssets());
-    return C._loadP;
+  if (SP.places.cbd && !SP.places.cbd._stub) return;
+  function card(exit) {
+    let el = document.getElementById("cbd-soon");
+    if (!el) {
+      el = document.createElement("div"); el.id = "cbd-soon";
+      el.style.cssText = "position:fixed;left:50%;top:38%;transform:translate(-50%,-50%);z-index:60;background:rgba(14,18,28,.92);color:#eef2f8;" +
+        "padding:16px 22px;border-radius:12px;border:1px solid #e07f2d;text-align:center;font:15px/1.6 sans-serif;box-shadow:0 6px 24px rgba(0,0,0,.5);pointer-events:none;transition:opacity .4s";
+      document.body.appendChild(el);
+    }
+    el.innerHTML = `<div style="font-size:19px;font-weight:bold;letter-spacing:2px">中央商务区 · 即将开放</div>` +
+      `<div style="color:#c8d0e0;font-size:13px">${exit} 出口外的街区还在施工，可原路返回站内乘车回井槐里</div>`;
+    el.style.opacity = "1"; clearTimeout(card.t); card.t = setTimeout(() => (el.style.opacity = "0"), 3600);
+  }
+  if (SP.places.cbd && !SP.places.cbd._stub) return;
+  SP.places.cbd = {
+    _stub: true,
+    enter(o) {
+      const L = (o && o.exit) || "A";
+      card(L);
+      if (SP.world && SP.world.logEvent) SP.world.logEvent("中央商务区 · 即将开放（" + L + " 出口）");
+      if (SP.places.metro_cbd) setTimeout(() => SP.places.metro_cbd.enter({ link: L }), 0);   // back at that exit, inside the station area
+      return null;
+    },
   };
-})(window.SP = window.SP || {});
+})();

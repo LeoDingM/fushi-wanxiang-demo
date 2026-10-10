@@ -151,10 +151,15 @@ def stair_xin(f):
         4: [("room_xin_401", "4-01", "进 4-01")],
     }[f]
     if f == 1:
-        add(S, "i_door", 0.4, 4.0, state="closed", interact="notice", name="信报箱",
-            note="馨园公寓信报箱 · 快递柜在一层门外", id="xin_mail", reach=[1.0, 3.55])
+        add(S, "i_mailbox", 0.55, 3.98, z=0.95, interact="notice", name="信报箱",
+            note="馨园公寓信报箱 · 快递柜在一层门外 · 本楼无电梯请走楼梯", id="xin_mail", reach=[1.05, 3.55])
         add(S, "i_notice", 5.2, 3.98, z=1.2, interact="notice", id="xin_notice",
-            note="馨园公寓：1–4F 一房一厅在租 · 链居中介 · 看房请预约")
+            note="馨园公寓目录：1F 1-01 · 2F 2-01/2-02 · 3F 3-01/3-02 · 4F 4-01 · 无电梯，东侧楼梯上下 · 链居中介看房请预约")
+        add(S, "i_notice", 2.4, 3.98, z=1.15, interact="notice", id="xin_dir",
+            note="楼层索引：↑ 楼梯在走廊东侧（无电梯）· 外卖请放门岗 · 勿堵消防通道")
+    else:
+        add(S, "i_notice", 0.75, 3.98, z=1.15, interact="notice", id=f"xin_fl_{f}",
+            note=f"馨园 {f}F：东侧楼梯可上/下楼（无电梯）· 请勿在楼道堆物")
     xdoor = 1.6
     for sid, label, lab in units:
         add(S, "i_door", xdoor, 4.0, state="closed", interact="portal", name=label, to=sid,

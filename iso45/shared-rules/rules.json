@@ -339,7 +339,16 @@
    "st_tea_egg": 2
   },
   "bus_fare": 2,
-  "bus_ride_min": 6
+  "bus_ride_min": 6,
+  "clinic_register": 8,
+  "clinic_consult": 25,
+  "medicine_cold": 18,
+  "medicine_band": 6,
+  "medicine_vitamins": 22,
+  "police_fine_litter": 50,
+  "police_cert_fee": 0,
+  "fire_tour_tip": 0,
+  "civic · 派出所/卫生中心/消防": "挂号¥8 · 诊金¥25 · 感冒药¥18 · 创可贴¥6 · 维生素¥22 · 乱扔垃圾罚款¥50"
  },
  "items": {
   "noodles": {
