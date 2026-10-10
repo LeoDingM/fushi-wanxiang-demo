@@ -435,9 +435,9 @@
 
   // ---------- civic NPC actors inside interiors (day/night) ----------
   D.NPC_SPEC = {
-    civic_police: { id: "civic_cop", set: "uncle", x: 1.4, y: 2.8, dir: "E", kind: "police", name: "民警小张" },
-    civic_hospital: { id: "civic_nurse", set: "student", x: 6.0, y: 3.0, dir: "W", kind: "hospital", name: "护士小周" },
-    civic_fire: { id: "civic_firefighter", set: "office", x: 2.4, y: 5.3, dir: "S", kind: "fire", name: "消防员小陈" }
+    civic_police: { id: "civic_cop", set: "police", x: 1.4, y: 2.8, dir: "E", kind: "police", name: "民警小张" },
+    civic_hospital: { id: "civic_nurse", set: "nurse", x: 6.0, y: 3.0, dir: "W", kind: "hospital", name: "护士小周" },
+    civic_fire: { id: "civic_firefighter", set: "firefighter", x: 2.4, y: 5.3, dir: "S", kind: "fire", name: "消防员小陈" }
   };
   D.syncCivicNpcs = function () {
     if (!SP.world || !SP.world.interior) return;

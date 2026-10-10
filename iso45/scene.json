@@ -11648,8 +11648,8 @@
    "z": 3.0,
    "state": "intact",
    "fade_group": "nb_w4",
-   "night_lit": false,
-   "variant": "w1"
+   "night_lit": true,
+   "variant": "w2"
   },
   {
    "id": "nb_w4_W2F_0_wall",
@@ -12266,7 +12266,7 @@
    "state": "intact",
    "fade_group": "nb_w5",
    "night_lit": true,
-   "variant": "w1"
+   "variant": "w2"
   },
   {
    "id": "nb_w5_S2F_0_ac",
@@ -12815,7 +12815,7 @@
    "state": "intact",
    "fade_group": "nb_s0",
    "night_lit": true,
-   "variant": "w2"
+   "variant": "w1"
   },
   {
    "id": "nb_s0_S2F_1_wall",
@@ -13520,7 +13520,7 @@
    "state": "intact",
    "fade_group": "nb_s2",
    "night_lit": true,
-   "variant": "w2"
+   "variant": "base"
   },
   {
    "id": "nb_s2_S2F_2_ac",
@@ -14165,7 +14165,7 @@
    "state": "intact",
    "fade_group": "nb_s4",
    "night_lit": true,
-   "variant": "base"
+   "variant": "w1"
   },
   {
    "id": "nb_s4_S2F_2_wall",
@@ -14185,8 +14185,8 @@
    "z": 3.0,
    "state": "intact",
    "fade_group": "nb_s4",
-   "night_lit": false,
-   "variant": "w1"
+   "night_lit": true,
+   "variant": "base"
   },
   {
    "id": "nb_s4_S2F_3_wall",
@@ -14495,41 +14495,20 @@
    "variant": "c"
   },
   {
-   "id": "civic_police_S1F_0_wall",
-   "type": "f_wall",
+   "id": "civic_police_S1F_0_shop",
+   "type": "f_shop",
    "x": -40.0,
    "y": -10.0,
-   "state": "ground",
-   "fade_group": "civic_police",
-   "variant": "p1"
+   "state": "window",
+   "fade_group": "civic_police"
   },
   {
-   "id": "civic_police_S1F_0_win",
-   "type": "f_window",
-   "x": -40.0,
-   "y": -10.0,
-   "state": "intact",
-   "fade_group": "civic_police",
-   "night_lit": false,
-   "variant": "base"
-  },
-  {
-   "id": "civic_police_S1F_1_wall",
-   "type": "f_wall",
+   "id": "civic_police_S1F_1_shop",
+   "type": "f_shop",
    "x": -37.0,
    "y": -10.0,
-   "state": "ground",
+   "state": "door",
    "fade_group": "civic_police",
-   "variant": "p1"
-  },
-  {
-   "id": "civic_police_S1F_1_door",
-   "type": "f_door",
-   "x": -37.0,
-   "y": -10.0,
-   "state": "closed",
-   "fade_group": "civic_police",
-   "plate": "井槐里 48号",
    "interact": "civic",
    "to": "civic_police",
    "spawn": [
@@ -14544,42 +14523,20 @@
    ]
   },
   {
-   "id": "civic_police_S1F_2_wall",
-   "type": "f_wall",
+   "id": "civic_police_S1F_2_shop",
+   "type": "f_shop",
    "x": -34.0,
    "y": -10.0,
-   "state": "ground",
-   "fade_group": "civic_police",
-   "variant": "p1"
+   "state": "window",
+   "fade_group": "civic_police"
   },
   {
-   "id": "civic_police_S1F_2_win",
-   "type": "f_window",
-   "x": -34.0,
-   "y": -10.0,
-   "state": "intact",
-   "fade_group": "civic_police",
-   "night_lit": false,
-   "variant": "w1"
-  },
-  {
-   "id": "civic_police_S1F_3_wall",
-   "type": "f_wall",
+   "id": "civic_police_S1F_3_shop",
+   "type": "f_shop",
    "x": -31.0,
    "y": -10.0,
-   "state": "ground",
-   "fade_group": "civic_police",
-   "variant": "p1"
-  },
-  {
-   "id": "civic_police_S1F_3_win",
-   "type": "f_window",
-   "x": -31.0,
-   "y": -10.0,
-   "state": "intact",
-   "fade_group": "civic_police",
-   "night_lit": true,
-   "variant": "base"
+   "state": "window",
+   "fade_group": "civic_police"
   },
   {
    "id": "civic_police_W1F_0_wall",
@@ -14600,7 +14557,7 @@
    "state": "intact",
    "fade_group": "civic_police",
    "night_lit": false,
-   "variant": "w2"
+   "variant": "base"
   },
   {
    "id": "civic_police_W1F_1_wall",
@@ -14621,7 +14578,7 @@
    "state": "intact",
    "fade_group": "civic_police",
    "night_lit": false,
-   "variant": "w2"
+   "variant": "w1"
   },
   {
    "id": "civic_police_W1F_2_wall",
@@ -14669,17 +14626,8 @@
    "z": 3.0,
    "state": "intact",
    "fade_group": "civic_police",
-   "night_lit": true,
-   "variant": "w1"
-  },
-  {
-   "id": "civic_police_S2F_0_ac",
-   "type": "f_ac",
-   "x": -37.6,
-   "y": -10.0,
-   "z": 3.15,
-   "fade_group": "civic_police",
-   "variant": "a1"
+   "night_lit": false,
+   "variant": "w2"
   },
   {
    "id": "civic_police_S2F_1_wall",
@@ -14699,8 +14647,17 @@
    "z": 3.0,
    "state": "intact",
    "fade_group": "civic_police",
-   "night_lit": false,
+   "night_lit": true,
    "variant": "w1"
+  },
+  {
+   "id": "civic_police_S2F_1_ac",
+   "type": "f_ac",
+   "x": -36.4,
+   "y": -10.0,
+   "z": 3.15,
+   "fade_group": "civic_police",
+   "variant": "a1"
   },
   {
    "id": "civic_police_S2F_2_wall",
@@ -14720,17 +14677,8 @@
    "z": 3.0,
    "state": "intact",
    "fade_group": "civic_police",
-   "night_lit": false,
-   "variant": "w2"
-  },
-  {
-   "id": "civic_police_S2F_2_ac",
-   "type": "f_ac",
-   "x": -33.4,
-   "y": -10.0,
-   "z": 3.15,
-   "fade_group": "civic_police",
-   "variant": "a1"
+   "night_lit": true,
+   "variant": "w1"
   },
   {
    "id": "civic_police_S2F_3_wall",
@@ -14743,14 +14691,15 @@
    "variant": "p1"
   },
   {
-   "id": "civic_police_S2F_3_balc",
-   "type": "f_balcony",
+   "id": "civic_police_S2F_3_win",
+   "type": "f_window",
    "x": -31.0,
    "y": -10.0,
    "z": 3.0,
-   "state": "laundry",
+   "state": "intact",
    "fade_group": "civic_police",
-   "variant": "base"
+   "night_lit": false,
+   "variant": "w1"
   },
   {
    "id": "civic_police_W2F_0_wall",
@@ -14764,15 +14713,26 @@
    "variant": "p1"
   },
   {
-   "id": "civic_police_W2F_0_balc",
-   "type": "f_balcony",
+   "id": "civic_police_W2F_0_win",
+   "type": "f_window",
    "x": -40.0,
    "y": -7.0,
    "z": 3.0,
    "rot": 6,
-   "state": "laundry",
+   "state": "intact",
    "fade_group": "civic_police",
-   "variant": "b1"
+   "night_lit": false,
+   "variant": "w2"
+  },
+  {
+   "id": "civic_police_W2F_0_ac",
+   "type": "f_ac",
+   "x": -40.0,
+   "y": -9.4,
+   "z": 3.15,
+   "rot": 6,
+   "fade_group": "civic_police",
+   "variant": "a1"
   },
   {
    "id": "civic_police_W2F_1_wall",
@@ -14786,24 +14746,13 @@
    "variant": "p1"
   },
   {
-   "id": "civic_police_W2F_1_win",
-   "type": "f_window",
+   "id": "civic_police_W2F_1_balc",
+   "type": "f_balcony",
    "x": -40.0,
    "y": -4.0,
    "z": 3.0,
    "rot": 6,
-   "state": "intact",
-   "fade_group": "civic_police",
-   "night_lit": false,
-   "variant": "w2"
-  },
-  {
-   "id": "civic_police_W2F_1_ac",
-   "type": "f_ac",
-   "x": -40.0,
-   "y": -6.4,
-   "z": 3.15,
-   "rot": 6,
+   "state": "laundry",
    "fade_group": "civic_police",
    "variant": "base"
   },
@@ -14819,16 +14768,15 @@
    "variant": "p1"
   },
   {
-   "id": "civic_police_W2F_2_win",
-   "type": "f_window",
+   "id": "civic_police_W2F_2_balc",
+   "type": "f_balcony",
    "x": -40.0,
    "y": -1.0,
    "z": 3.0,
    "rot": 6,
-   "state": "intact",
+   "state": "laundry",
    "fade_group": "civic_police",
-   "night_lit": true,
-   "variant": "w1"
+   "variant": "b1"
   },
   {
    "id": "civic_police_pipe_s1",
@@ -14848,41 +14796,28 @@
    "variant": "c"
   },
   {
-   "id": "civic_hospital_S1F_0_wall",
-   "type": "f_wall",
+   "id": "civic_police_sign_s",
+   "type": "f_shopsign",
+   "x": -37.0,
+   "y": -10.0,
+   "z": 2.55,
+   "fade_group": "civic_police"
+  },
+  {
+   "id": "civic_hospital_S1F_0_shop",
+   "type": "f_shop",
    "x": 16.0,
    "y": -10.0,
-   "state": "ground",
-   "fade_group": "civic_hospital",
-   "variant": "p1"
+   "state": "window",
+   "fade_group": "civic_hospital"
   },
   {
-   "id": "civic_hospital_S1F_0_win",
-   "type": "f_window",
-   "x": 16.0,
-   "y": -10.0,
-   "state": "intact",
-   "fade_group": "civic_hospital",
-   "night_lit": false,
-   "variant": "w1"
-  },
-  {
-   "id": "civic_hospital_S1F_1_wall",
-   "type": "f_wall",
+   "id": "civic_hospital_S1F_1_shop",
+   "type": "f_shop",
    "x": 19.0,
    "y": -10.0,
-   "state": "ground",
+   "state": "door",
    "fade_group": "civic_hospital",
-   "variant": "p1"
-  },
-  {
-   "id": "civic_hospital_S1F_1_door",
-   "type": "f_door",
-   "x": 19.0,
-   "y": -10.0,
-   "state": "closed",
-   "fade_group": "civic_hospital",
-   "plate": "井槐里 50号",
    "interact": "civic",
    "to": "civic_hospital",
    "spawn": [
@@ -14897,42 +14832,20 @@
    ]
   },
   {
-   "id": "civic_hospital_S1F_2_wall",
-   "type": "f_wall",
+   "id": "civic_hospital_S1F_2_shop",
+   "type": "f_shop",
    "x": 22.0,
    "y": -10.0,
-   "state": "ground",
-   "fade_group": "civic_hospital",
-   "variant": "p1"
+   "state": "window",
+   "fade_group": "civic_hospital"
   },
   {
-   "id": "civic_hospital_S1F_2_win",
-   "type": "f_window",
-   "x": 22.0,
-   "y": -10.0,
-   "state": "intact",
-   "fade_group": "civic_hospital",
-   "night_lit": true,
-   "variant": "w1"
-  },
-  {
-   "id": "civic_hospital_S1F_3_wall",
-   "type": "f_wall",
+   "id": "civic_hospital_S1F_3_shop",
+   "type": "f_shop",
    "x": 25.0,
    "y": -10.0,
-   "state": "ground",
-   "fade_group": "civic_hospital",
-   "variant": "p1"
-  },
-  {
-   "id": "civic_hospital_S1F_3_win",
-   "type": "f_window",
-   "x": 25.0,
-   "y": -10.0,
-   "state": "intact",
-   "fade_group": "civic_hospital",
-   "night_lit": true,
-   "variant": "w1"
+   "state": "window",
+   "fade_group": "civic_hospital"
   },
   {
    "id": "civic_hospital_W1F_0_wall",
@@ -14974,7 +14887,7 @@
    "state": "intact",
    "fade_group": "civic_hospital",
    "night_lit": false,
-   "variant": "w1"
+   "variant": "w2"
   },
   {
    "id": "civic_hospital_W1F_2_wall",
@@ -14995,7 +14908,7 @@
    "state": "intact",
    "fade_group": "civic_hospital",
    "night_lit": false,
-   "variant": "base"
+   "variant": "w1"
   },
   {
    "id": "civic_hospital_pipe_s0",
@@ -15022,16 +14935,7 @@
    "z": 3.0,
    "state": "intact",
    "fade_group": "civic_hospital",
-   "night_lit": false,
-   "variant": "w2"
-  },
-  {
-   "id": "civic_hospital_S2F_0_ac",
-   "type": "f_ac",
-   "x": 18.4,
-   "y": -10.0,
-   "z": 3.15,
-   "fade_group": "civic_hospital",
+   "night_lit": true,
    "variant": "base"
   },
   {
@@ -15052,8 +14956,8 @@
    "z": 3.0,
    "state": "intact",
    "fade_group": "civic_hospital",
-   "night_lit": false,
-   "variant": "w2"
+   "night_lit": true,
+   "variant": "base"
   },
   {
    "id": "civic_hospital_S2F_2_wall",
@@ -15073,17 +14977,8 @@
    "z": 3.0,
    "state": "intact",
    "fade_group": "civic_hospital",
-   "night_lit": true,
-   "variant": "w2"
-  },
-  {
-   "id": "civic_hospital_S2F_2_ac",
-   "type": "f_ac",
-   "x": 22.6,
-   "y": -10.0,
-   "z": 3.15,
-   "fade_group": "civic_hospital",
-   "variant": "base"
+   "night_lit": false,
+   "variant": "w1"
   },
   {
    "id": "civic_hospital_S2F_3_wall",
@@ -15104,7 +14999,7 @@
    "state": "intact",
    "fade_group": "civic_hospital",
    "night_lit": true,
-   "variant": "base"
+   "variant": "w1"
   },
   {
    "id": "civic_hospital_W2F_0_wall",
@@ -15127,17 +15022,7 @@
    "state": "intact",
    "fade_group": "civic_hospital",
    "night_lit": false,
-   "variant": "w1"
-  },
-  {
-   "id": "civic_hospital_W2F_0_ac",
-   "type": "f_ac",
-   "x": 16.0,
-   "y": -7.6,
-   "z": 3.15,
-   "rot": 6,
-   "fade_group": "civic_hospital",
-   "variant": "a2"
+   "variant": "w2"
   },
   {
    "id": "civic_hospital_W2F_1_wall",
@@ -15151,16 +15036,15 @@
    "variant": "p1"
   },
   {
-   "id": "civic_hospital_W2F_1_win",
-   "type": "f_window",
+   "id": "civic_hospital_W2F_1_balc",
+   "type": "f_balcony",
    "x": 16.0,
    "y": -4.0,
    "z": 3.0,
    "rot": 6,
-   "state": "intact",
+   "state": "default",
    "fade_group": "civic_hospital",
-   "night_lit": false,
-   "variant": "w1"
+   "variant": "base"
   },
   {
    "id": "civic_hospital_W2F_2_wall",
@@ -15174,26 +15058,15 @@
    "variant": "p1"
   },
   {
-   "id": "civic_hospital_W2F_2_win",
-   "type": "f_window",
+   "id": "civic_hospital_W2F_2_balc",
+   "type": "f_balcony",
    "x": 16.0,
    "y": -1.0,
    "z": 3.0,
    "rot": 6,
-   "state": "intact",
+   "state": "laundry",
    "fade_group": "civic_hospital",
-   "night_lit": true,
-   "variant": "w1"
-  },
-  {
-   "id": "civic_hospital_W2F_2_ac",
-   "type": "f_ac",
-   "x": 16.0,
-   "y": -1.6,
-   "z": 3.15,
-   "rot": 6,
-   "fade_group": "civic_hospital",
-   "variant": "a2"
+   "variant": "b1"
   },
   {
    "id": "civic_hospital_pipe_s1",
@@ -15222,7 +15095,7 @@
    "state": "intact",
    "fade_group": "civic_hospital",
    "night_lit": true,
-   "variant": "w1"
+   "variant": "base"
   },
   {
    "id": "civic_hospital_S3F_1_wall",
@@ -15235,15 +15108,14 @@
    "variant": "p1"
   },
   {
-   "id": "civic_hospital_S3F_1_win",
-   "type": "f_window",
+   "id": "civic_hospital_S3F_1_balc",
+   "type": "f_balcony",
    "x": 19.0,
    "y": -10.0,
    "z": 6.0,
-   "state": "intact",
+   "state": "default",
    "fade_group": "civic_hospital",
-   "night_lit": false,
-   "variant": "base"
+   "variant": "b1"
   },
   {
    "id": "civic_hospital_S3F_2_wall",
@@ -15256,14 +15128,15 @@
    "variant": "p1"
   },
   {
-   "id": "civic_hospital_S3F_2_balc",
-   "type": "f_balcony",
+   "id": "civic_hospital_S3F_2_win",
+   "type": "f_window",
    "x": 22.0,
    "y": -10.0,
    "z": 6.0,
-   "state": "laundry",
+   "state": "intact",
    "fade_group": "civic_hospital",
-   "variant": "b2"
+   "night_lit": false,
+   "variant": "w1"
   },
   {
    "id": "civic_hospital_S3F_3_wall",
@@ -15283,7 +15156,7 @@
    "z": 6.0,
    "state": "intact",
    "fade_group": "civic_hospital",
-   "night_lit": false,
+   "night_lit": true,
    "variant": "w1"
   },
   {
@@ -15293,7 +15166,7 @@
    "y": -10.0,
    "z": 6.15,
    "fade_group": "civic_hospital",
-   "variant": "base"
+   "variant": "a2"
   },
   {
    "id": "civic_hospital_W3F_0_wall",
@@ -15315,8 +15188,8 @@
    "rot": 6,
    "state": "intact",
    "fade_group": "civic_hospital",
-   "night_lit": false,
-   "variant": "base"
+   "night_lit": true,
+   "variant": "w1"
   },
   {
    "id": "civic_hospital_W3F_1_wall",
@@ -15338,7 +15211,7 @@
    "rot": 6,
    "state": "intact",
    "fade_group": "civic_hospital",
-   "night_lit": true,
+   "night_lit": false,
    "variant": "base"
   },
   {
@@ -15353,16 +15226,15 @@
    "variant": "p1"
   },
   {
-   "id": "civic_hospital_W3F_2_win",
-   "type": "f_window",
+   "id": "civic_hospital_W3F_2_balc",
+   "type": "f_balcony",
    "x": 16.0,
    "y": -1.0,
    "z": 6.0,
    "rot": 6,
-   "state": "intact",
+   "state": "laundry",
    "fade_group": "civic_hospital",
-   "night_lit": true,
-   "variant": "w1"
+   "variant": "b2"
   },
   {
    "id": "civic_hospital_pipe_s2",
@@ -15380,6 +15252,14 @@
    "z": 9.0,
    "fade_group": "civic_hospital",
    "variant": "c"
+  },
+  {
+   "id": "civic_hospital_sign_s",
+   "type": "f_shopsign",
+   "x": 22.0,
+   "y": -10.0,
+   "z": 2.55,
+   "fade_group": "civic_hospital"
   },
   {
    "id": "tree_sw",
