@@ -84,6 +84,14 @@
       font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
     }
     a.entry .path { color: #c4ae86; }
+    .blurb {
+      display: block;
+      margin-top: 0.35rem;
+      font-size: 0.92rem;
+      font-weight: 400;
+      color: #d7c7a4;
+      line-height: 1.4;
+    }
     .badge {
       flex: none;
       font-size: 0.8rem;
@@ -118,7 +126,7 @@
   <main>
     <header>
       <h1>浮世万象 Demo 验收</h1>
-      <p class="lead">手机可直接点开试玩。当前只有网页切片这一版。</p>
+      <p class="lead">手机可直接点开试玩。网页切片与斜 45° 版都已可玩。</p>
     </header>
     <nav aria-label="版本入口">
       <a class="entry" href="web-demo/">
@@ -135,15 +143,16 @@
         </span>
         <span class="soon">即将上线</span>
       </span>
-      <span class="entry" aria-disabled="true">
+      <a class="entry" href="iso45/">
         <span>
           <span class="label">斜45°版</span>
           <span class="path">iso45/</span>
+          <span class="blurb">组件式场景｜围墙虚化｜车流｜起火/车祸事件</span>
         </span>
-        <span class="soon">即将上线</span>
-      </span>
+        <span class="badge">可玩</span>
+      </a>
     </nav>
-    <footer>最近更新：2026-10-10</footer>
+    <footer>最近更新：2026-10-10 14:26</footer>
   </main>
 </body>
 </html>
