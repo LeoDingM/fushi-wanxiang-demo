@@ -348,7 +348,8 @@
   "police_fine_litter": 50,
   "police_cert_fee": 0,
   "fire_tour_tip": 0,
-  "civic · 派出所/卫生中心/消防": "挂号¥8 · 诊金¥25 · 感冒药¥18 · 创可贴¥6 · 维生素¥22 · 乱扔垃圾罚款¥50"
+  "civic · 派出所/卫生中心/消防": "挂号¥8 · 诊金¥25 · 感冒药¥18 · 创可贴¥6 · 维生素¥22 · 乱扔垃圾罚款¥50",
+  "bus_ride_anim_sec": 2.8
  },
  "items": {
   "noodles": {
@@ -406,6 +407,46 @@
   "detergent": {
    "label": "洗衣液",
    "price": 25
+  },
+  "police_receipt": {
+   "label": "派出所报案回执",
+   "price": 0,
+   "kind": "doc"
+  },
+  "police_stamp": {
+   "label": "派出所业务章证明",
+   "price": 0,
+   "kind": "doc"
+  },
+  "fine_receipt": {
+   "label": "罚款缴纳凭证",
+   "price": 0,
+   "kind": "doc"
+  },
+  "rx_slip": {
+   "label": "门诊处方笺",
+   "price": 0,
+   "kind": "doc"
+  },
+  "med_cold": {
+   "label": "感冒药",
+   "price": 18,
+   "kind": "med"
+  },
+  "med_band": {
+   "label": "创可贴",
+   "price": 6,
+   "kind": "med"
+  },
+  "med_vitamins": {
+   "label": "维生素C",
+   "price": 22,
+   "kind": "med"
+  },
+  "fire_card": {
+   "label": "灭火器四字诀卡片",
+   "price": 0,
+   "kind": "doc"
   }
  },
  "start_items": {
@@ -1717,6 +1758,15 @@
     "scene": "room_xin_401",
     "door": "stair_xin_4f",
     "label": "馨园公寓 4-01",
+    "stair": "stair_xin_1f"
+   },
+   "1F-xin-b": {
+    "district": "inner",
+    "rent": 1180,
+    "type": "一房一厅带阳台 ~38㎡",
+    "scene": "room_xin_102",
+    "door": "stair_xin_1f",
+    "label": "馨园公寓 1-02（带阳台）",
     "stair": "stair_xin_1f"
    }
   }

@@ -24,6 +24,7 @@
     const defaults = {
       "2F-02": { district: "peripheral", rent: 850, type: "小单间 ~14㎡", scene: "room_2f02", door: "stair_2f", label: "井槐里12号 2F-02" },
       "1F-xin": { district: "inner", rent: 1050, type: "一房一厅 ~35㎡", scene: "room_xin_101", door: "stair_xin_1f", label: "馨园公寓 1-01", stair: "stair_xin_1f" },
+      "1F-xin-b": { district: "inner", rent: 1180, type: "一房一厅带阳台 ~38㎡", scene: "room_xin_102", door: "stair_xin_1f", label: "馨园公寓 1-02（南厅北卧阳台）", stair: "stair_xin_1f" },
       "2F-xin": { district: "inner", rent: 1100, type: "一房一厅 ~35㎡", scene: "room_xin_201", door: "stair_xin_2f", label: "馨园公寓 2-01", stair: "stair_xin_1f" },
       "2F-xin-b": { district: "inner", rent: 1150, type: "一房一厅 ~35㎡", scene: "room_xin_202", door: "stair_xin_2f", label: "馨园公寓 2-02", stair: "stair_xin_1f" },
       "3F-xin": { district: "inner", rent: 1200, type: "一房一厅精装 ~35㎡", scene: "room_xin_301", door: "stair_xin_3f", label: "馨园公寓 3-01", stair: "stair_xin_1f" },

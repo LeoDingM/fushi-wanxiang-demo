@@ -145,7 +145,7 @@ def stair_xin(f):
     ground(S, {"T": "g_terrazzo"}, ["TTTT", "TTTT"])
     add(S, "i_wall", 1.2, 4.0, state="dado")
     units = {
-        1: [("room_xin_101", "1-01", "进 1-01")],
+        1: [("room_xin_101", "1-01", "进 1-01"), ("room_xin_102", "1-02", "进 1-02")],
         2: [("room_xin_201", "2-01", "进 2-01"), ("room_xin_202", "2-02", "进 2-02")],
         3: [("room_xin_301", "3-01", "进 3-01"), ("room_xin_302", "3-02", "进 3-02")],
         4: [("room_xin_401", "4-01", "进 4-01")],
@@ -154,7 +154,7 @@ def stair_xin(f):
         add(S, "i_mailbox", 0.55, 3.98, z=0.95, interact="notice", name="信报箱",
             note="馨园公寓信报箱 · 快递柜在一层门外 · 本楼无电梯请走楼梯", id="xin_mail", reach=[1.05, 3.55])
         add(S, "i_notice", 5.2, 3.98, z=1.2, interact="notice", id="xin_notice",
-            note="馨园公寓目录：1F 1-01 · 2F 2-01/2-02 · 3F 3-01/3-02 · 4F 4-01 · 无电梯，东侧楼梯上下 · 链居中介看房请预约")
+            note="馨园公寓目录：1F 1-01/1-02(带阳台) · 2F 2-01/2-02 · 3F 3-01/3-02 · 4F 4-01 · 无电梯，东侧楼梯 · 链居中介看房请预约")
         add(S, "i_notice", 2.4, 3.98, z=1.15, interact="notice", id="xin_dir",
             note="楼层索引：↑ 楼梯在走廊东侧（无电梯）· 外卖请放门岗 · 勿堵消防通道")
     else:
@@ -193,7 +193,7 @@ def stair_xin(f):
 
 for f in (1, 2, 3, 4):
     out[f"stair_xin_{f}f"] = stair_xin(f)
-for fname in ("room_xin_101.json", "room_xin_201.json", "room_xin_202.json",
+for fname in ("room_xin_101.json", "room_xin_102.json", "room_xin_201.json", "room_xin_202.json",
               "room_xin_301.json", "room_xin_302.json", "room_xin_401.json"):
     out[fname.replace('.json','')] = from_layout(fname)
 out["civic_police"] = from_layout("civic_police.json", street_spawn=[-36.0, -6.5, "N"])
