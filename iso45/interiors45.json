@@ -21256,7 +21256,7 @@
   "format": "fushi-scene",
   "version": 2,
   "id": "school_pri",
-  "name": "井槐小学 · 传达室",
+  "name": "井槐社区小学 · 传达室",
   "interior": true,
   "units": "m",
   "grid_m": 0.5,
@@ -21353,7 +21353,7 @@
     "interact": "portal",
     "to": "street",
     "spawn": [
-     -19.0,
+     68.0,
      -6.5,
      "N"
     ],
@@ -22058,7 +22058,7 @@
    "start_weather": "clear"
   },
   "repair_hours_scale": 1.0,
-  "_doc": "Char-B: primary school lobby stub",
+  "_doc": "Char-B: east-edge 社区学校 lobby stub (toward midtown)",
   "bounds": {
    "x0": 0.15,
    "y0": 0.15,
@@ -22094,7 +22094,7 @@
   "format": "fushi-scene",
   "version": 2,
   "id": "school_mid",
-  "name": "井槐中学 · 初中部门厅",
+  "name": "井槐社区初中 · 传达室",
   "interior": true,
   "units": "m",
   "grid_m": 0.5,
@@ -22191,7 +22191,7 @@
     "interact": "portal",
     "to": "street",
     "spawn": [
-     -7.0,
+     80.0,
      -6.5,
      "N"
     ],
@@ -22896,7 +22896,7 @@
    "start_weather": "clear"
   },
   "repair_hours_scale": 1.0,
-  "_doc": "Char-B: middle school lobby stub",
+  "_doc": "Char-B: east-edge 社区学校 lobby stub (toward midtown)",
   "bounds": {
    "x0": 0.15,
    "y0": 0.15,
@@ -22932,7 +22932,7 @@
   "format": "fushi-scene",
   "version": 2,
   "id": "school_high",
-  "name": "井槐中学 · 高中部门厅",
+  "name": "井槐社区高中 · 传达室",
   "interior": true,
   "units": "m",
   "grid_m": 0.5,
@@ -23029,7 +23029,7 @@
     "interact": "portal",
     "to": "street",
     "spawn": [
-     31.0,
+     92.0,
      -6.5,
      "N"
     ],
@@ -23734,7 +23734,7 @@
    "start_weather": "clear"
   },
   "repair_hours_scale": 1.0,
-  "_doc": "Char-B: high school lobby stub",
+  "_doc": "Char-B: east-edge 社区学校 lobby stub (toward midtown)",
   "bounds": {
    "x0": 0.15,
    "y0": 0.15,

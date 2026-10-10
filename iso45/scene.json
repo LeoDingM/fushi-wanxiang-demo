@@ -38,7 +38,7 @@
  "bounds": {
   "x0": -48.0,
   "y0": -11.5,
-  "x1": 92.0,
+  "x1": 104.0,
   "y1": 34.0
  },
  "ground": {
@@ -47,7 +47,7 @@
    -40
   ],
   "chunk": 2,
-  "cols": 70,
+  "cols": 74,
   "rows": 52,
   "legend": {
    "A": "g_asphalt:a",
@@ -59,58 +59,58 @@
    "K": "g_concrete"
   },
   "data_south_to_north": [
-   "KGKGKKGKGKGGKKGKKKKKKGKKGGKKKKSSSABBSSKKKGGKKKKKKKKKKKKKKKKGKKGKGKKKKK",
-   "KKKKKKKKGKKKKKKKGKGGGKGKKKGKKKSSSAAASSKKKKKKKGGKKKKKGKKKKKKKKGKKKKKKGK",
-   "GGKGKGGGGKGKKGKKKGKKKKGGKKKGGKSSSAAASSKGKGKKKKKKGKKKKKKKKKKKKKKGGKKKKK",
-   "KKKKKKKKKKKKKKGKKKKKGKKKKKKKKGSSSBAASSGGKKGKKKKKGGKKKKKKKKKKKKKKGKKKKK",
-   "KKKKKGKKGKGKKKKKKKGKKKKKKKKKKKSSSAAASSKKKKKKKKKKKKKGGKGKGKKKGKKGKKKKKK",
-   "KKGKKKKKKGKKGKKKGKKKGKGKKGKKKKSSSAAASSGKKKGGKKGKKKGKGKKKKKKGKKGGGKKKKK",
-   "KGKGKGKKKKKGKKKKKKKKKKKKKKGGGKSSSAAASSKGGKKKKKKKGKKKKKKKKKGKKKKKGKGKGG",
-   "KKKKKKKKKKKGKKGKKKKKGKKKKKKKKKSSSBABSSKGGKGKKKKKKGKKKKKGKKGKKKKKKKKKKK",
-   "KGGKKKKGGKKKKKKKKGKKKKGKKKKKKKSSSAAASSKKGKKGKKKKKKKGGKKKGKKKGKKGKKKKKK",
-   "KKKKKGGKKKKKKKKKKKKKKKKGKKKKKGSSSAAASSKGKKKKKKKKKKGGKKKKKKKGKGKGKKKKKK",
-   "KKKKGKKGKKKKKKKKKKKGGKKKKGKKKKSSSAAASSKKGGKKKKKKKKGKKKKKGKKKGGKKKKKGKK",
-   "KKKKKKKKKGKKKKKKKGKKKKKKKKKKKKSSSBAASSKKKKKKKKKKGKKKGGGKKKKKKKKKKGKKKK",
-   "GGGGKGKGGKKGGGGKGGKGGKGGGGKGGKSSSAABSSGGKGGGGGGGKGKGGGKKGGGGKGKGKGGGGG",
-   "GGGGGTGGGGKKKTGGGGGGGTGGGGKGGTSSSAABSSKGSSSTSSGTGGGGGGKGGGKGGKGKGGKKKG",
-   "GGGKGKGKGGGKGGGGGGGGGGGGGGGGGGSSSAAASSGGSSSSSSGGGGGGGGGGKGGGGKKGGGGGKG",
-   "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAAASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-   "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSBBASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-   "ABBBABABAAAAAAAAAABAAAABBAAAAABAAAABAAAAAAABAABBABBBAAAABAAABABABABAAA",
-   "AAAAAAABBABBBABABAAAAAABAAABAAABAAAAAAAAAABABAAAAAABABAABAAAABAABAAAAB",
-   "BAABAAAABABABABAAAAAAABBAAAAAAAAAAABAAABAAAABBAAAABAABBBBABAAAAAAAAAAA",
-   "SSSTSSSTSSSSSSSSSSTSSSSSSSSSTSSSSAAASSSSSSTSSSSSTSSSSSSSSSSSSSSSSSSSSS",
-   "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAABSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
-   "SSSSSSSSSSSSSSSSCCCCCCCCCCCCCCSSSABBSSKKKKGGKKKGKKKGKSKKGKKKKGKKKGKKKK",
-   "KGKKKKKKKKKKGKSSCCCCCCCCCCCCCCSSSAAASSKKGKKGKGKKKKKKKSKKKGKKKKKKGKGGKG",
-   "KKGKGKKKGKKKGKSSCCCCCCCCCCCCCCSSSBAASSKKKKKKKKGKKGKKGSKKKGKKKKKKGKGKKK",
-   "GKGKKKKKKKGKKKSSCCCCCCCCCCCCCCSSSABBSTKKKKKKKGKGKKKKKSKKGGGKKKKGKKGGKG",
-   "KKKKKKKGKKGGKKSSCCCCCCCCCCCCCCSSSBAASSKKKGKKKKKKKKKGKSKKGKGKKGKKKKKGKK",
-   "GKKKGKKKKKKGKGSSCCCCCCCCCCCCCCSTSBAASSKKKKKKKKKKKKKKKSGKKKKKKKKKKKKKKK",
-   "KKKKKKKKKGKGGGSSCCCCCCCCCCCCCCSSSAAASSKKGGGKKKKGKKKKKSGKKKGKGGKKKKKKGG",
-   "KKKKGKKKKKKKKKSSCCCCCCCCCCCCCCSSSBAASSGKKKKKKKKGKGGKKSKGKKKKKKKKKKKKKG",
-   "KGKKKKKKKKGKGKSSCCCCCCCCCCCCCCSSSAAASSKKKKKKKKKKKKKGKSKKGKKKGKKKKKKKGG",
-   "KKKGKKKKGKGKKKSSCCCCCCCCCCCCCCSSSAABSSKKKKGKKGKKKKKKGSKKKKKKKKKKKKKKKK",
-   "KKKGKKKKKKKKKKSSCCCCCCCCCCCCCCSSSABASTKKKKKKKGKGKKKGKSKKKKKKKKKKKKGKKG",
-   "KKGKKKKKKKKKKKSSCCCCCCCCCCCCCCSTSAAASSKKGKKKKKKKKKKKKSKKGKKKKKKKKGKKKK",
-   "KKKKKKKGKKKGKKSSCCCCCCCCCCCCCCSSSAAASSGGKKKGGKKKGKKGKSKKKKKKKKKKKKKKKG",
-   "KGKGKKKKGKKKKKSSCCCCCCCCCCCCCCSSSBAASSKKKGKKGKKKKKKKKSGKKKKKKKKKKKKKKK",
-   "KKKKKKKKKKKKKGSSCCCCCCCCCCCCCCSSSABASSKKKGKGKKKKKKKKKKKKKKKKGKGKKKKKKK",
-   "KKKKKKKGKGGKKKKGKKKKKKGKKGGGKGSSSBAASSKGKGGKKKKGKKKKGKKKKKKKGGKKGKKGKK",
-   "GKKKKGKKKKKKKKKKKGKKKKKKKKKKKKSSSAAASSKKKKKGKKKKKGKKKKKKKKKKGKKKKKKKKK",
-   "KKKKKGKKKKKKKKKKKKKKKKKGGKKGKKSSSAABSSGKKKGGKKKKKKKKKKKKGKKGGKKKKKGKKG",
-   "KKKKKKKKGKKKGKKKKKGKKKKGGKKKKKSSSAABSSKGKKGKGKGKGKKGKKKKKGKGKKKKKKKKGK",
-   "GKKGKKKGKKKGKKKGKGKKKKKKKKKKKGSSSAAASSKKGKKKGKKGGKKKKKKKGKKKKGGKKKKKKK",
-   "KKGKKKGKKKKKGKKKKKKKGKKGKKKGKKSSSAAASSKKKKKGKKKKKKGKKKGKKGGKKGKKKKGKKG",
-   "GKKKGKGKKGKKGKKKKKKKKKKKKKKKKKSSSABASSKGKKKKKKKKGKKGGKKKKKKKGKKKKKKKKK",
-   "KKKKKGKKKKKKGGGKKKKGKKKKKKKKKKSSSBAASSKKKKKKKGKKKKKKKKKGGKKGKKKGKKKGKK",
-   "KKKKKKKKKKKKGKGKKKKKKKKKKKKKKKSSSAAASSKKKKKKKKKGKKGKKKKKKKKGGKKKKKKKKK",
-   "KKKKKKKGKKKKKKKKKKKKKGKKKKGKKKSSSABASSKKKGKKKKKKKKKKGKKKKGKKKKKKKKKKKK",
-   "KGGKGGGKKKKGGKKKKGKGKKKKKGKKKKSSSAABSSKKGKKKKKKKKKKKKKKKKKKKGKKKKKGKKK",
-   "GGKKKKKKGKKGKGKKGKKKGKKKKKKKKKSSSBBBSSGKKKKKKKKKGKKKKKKKKKGGKKKGKKKKGK",
-   "KGKKKKKKKGKGKKKKKKKKKKKGKKKGGGSSSABBSSKKKGKKGKKKKKKKGKKKGKKGKGKKKKGKKK",
-   "KKGKKKKKKKKGKKKKGKGKKKKKKKKGKKSSSABASSKKGKKKKKKKKKKGKKKKKGKKKKKGKKKGKK",
-   "KKGKKKGGGKKGKKKGKKKKGKKKKKKKGGSSSABBSSKKKKKKKGKKKKKKKKKKKKGKKKKKKKKGKK"
+   "KGKGKKGKGKGGKKGKKKKKKGKKGGKKKKSSSABBSSKKKGGKKKKKKKKKKKKKKKKGKKGKGKKKKKKKKK",
+   "KKKKGKKKKKKKGKGGGKGKKKGKKKKKKKSSSAAASSKKKGGKKKKKGKKKKKKKKGKKKKKKGKGGKGKGGG",
+   "GKGKKGKKKGKKKKGGKKKGGKKGKGKKKKSSSAAASSKKGKKKKKKKKKKKKKKGGKKKKKKKKKKKKKKKKK",
+   "KKGKKKKKGKKKKKKKKGGGKKGKKKKKGGSSSBAASSKKKKKKKKKKKKKKGKKKKKKKKKKGKKGKGKKKKK",
+   "KKGKKKKKKKKKKKKKKKKKKKKKKKKGGKSSSAAASSGKGKKKGKKGKKKKKKKKGKKKKKKGKKGKKKGKKK",
+   "GKGKKGKKKKGKKKGGKKGKKKGKGKKKKKSSSAAASSKGKKGGGKKKKKKGKGKGKKKKKGKKKKKKKKKKKK",
+   "KKGGGKKGGKKKKKKKGKKKKKKKKKGKKKSSSAAASSKKGKGKGGKKKKKKKKKKKGKKGKKKKKGKKKKKKK",
+   "KKKGGKGKKKKKKGKKKKKGKKGKKKKKKKSSSBABSSKKKKKGGKKKKGGKKKKKKKKGKKKKGKKKKKKKKK",
+   "GKKGKKKKKKKGGKKKGKKKGKKGKKKKKKSSSAAASSKKKKKGGKKKKKKKKKKKKKKKKGKKKKKGKGKKKK",
+   "KKKKKKGGKKKKKKKGKGKGKKKKKKKKKKSSSAAASSGKKGKKKKKKKKKKKGGKKKKGKKKKKKGGKKKKKK",
+   "KKGKKKKKGKKKGGKKKKKGKKKKKKKKKKSSSAAASSKGKKKKKKKGKKKKKKKKKKKKKKKKKKKKKKGKKK",
+   "GGGKKKKKKKKKKGKKKKGGKKKGKKKKKKSSSBAASSGKKKKKKGKKKGGGKKKKKKKKKKKKGKKKKGKKKK",
+   "GGGGKGKGKGGGGGGGGGGGGGGKKKGGGGSSSAABSSGGGGGGGKGGKGGGGGGGGKGGGKGGKGKGGKKKGG",
+   "GGKGKTGKGGGKGTGGGGGGGTGGGGGGGTSSSAABSSGGSSSTSSGTGGGGGGGGGGGGKGGGGKKGGGGGKG",
+   "KGKGGGGGKGGGGGGGKGGKKGGKKGGKGKSSSAAASSGKSSSSSSGGGGKKGGGGGGGGKGGGGKGGGGGGGG",
+   "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSAAASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
+   "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSBBASSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
+   "ABBBABABAAAAAAAAAABAAAABBAAAAABAAAABAAAAAAABAABBABBBAAAABAAABABABABAAAAAAA",
+   "AAABBABBBABABAAAAAABAAABAAABAAAAAAAAAABABAAAAAABABAABAAAABAABAAAABBAABAAAA",
+   "BABABABAAAAAAABBAAAAAAAAAAABAAABAAAABBAAAABAABBBBABAAAAAAAAAAAAAAAABABBAAA",
+   "SSSTSSSTSSSSSSSSSSTSSSSSSSSSTSSSSBAASSSSSSTSSSSSTSSSSSSSSSSSSSSSSSSSSSSSSS",
+   "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSABBSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS",
+   "SSSSSSSSSSSSSSSSCCCCCCCCCCCCCCSSSBAASSKKKGKKKKKKGKGGKSGKKGKGKKKGKKKGKKKKKK",
+   "KKKGKKGKKGKKKGSSCCCCCCCCCCCCCCSSSBAASSKKKKKKGKGKKKGKGSKKKKKKKGKKKKKKKKKKGK",
+   "GKKKKKKKGGGKKKSSCCCCCCCCCCCCCCSSSAAASSKGKKGGKGKKKKKKKSGKKGGKKKKKGKKKKKKKKK",
+   "GKKKGKGKKGKKKKSSCCCCCCCCCCCCCCSSSBAASTKGKKGKKKGKKKKKKSGKGKKKKKKKKKKKKKKKGK",
+   "KKKKKKKKKKKKKKSSCCCCCCCCCCCCCCSSSAAASSKKKKKKKKKGKGGGKSKGGGKKKKGKKKKKGKKKGK",
+   "GGKKKKKKGGKKKKSSCCCCCCCCCCCCCCSTSAABSSGKKKKKKKKKGKKKKSKKKKGKGGKKKGKKKKKKKK",
+   "KKKKKGKGKKKKKKSSCCCCCCCCCCCCCCSSSABASSKKGKGKKKKKKKKKKSKKKKGKKKGKKKGKKKKKKK",
+   "GGKKKGKKKKGKGKSSCCCCCCCCCCCCCCSSSAAASSKKKKKKGKKGKKKKKSKGKKKKKKKKKKKKKKKKKK",
+   "KGKKKKKKKKKKKKSSCCCCCCCCCCCCCCSSSAAASSKKKKKGKGKKKGKKKSKKKKKKKKKKGKKGKKGKKK",
+   "KKKKKKKKKKGKKKSSCCCCCCCCCCCCCCSSSBAASSKKKKKKKKKKKGKKKSKKKKKGKKKKKKKKKKKGKK",
+   "KGKKGGKKKGGKKKSSCCCCCCCCCCCCCCSSSABASTGKKGKKKKKKKKKKKSKKKKKGKGKGKKKKGKKKKK",
+   "KKKGKKGKKKKKKKSSCCCCCCCCCCCCCCSTSBAASSKGKKKKKKKKKKKKKSKKKKKKKKKKKKKKKGKKKG",
+   "KGKKKKKKKKKKKKSSCCCCCCCCCCCCCCSSSAAASSKKKKGKGKKKKKKKKSKKKKKKGKGGKKKKGKKKKK",
+   "KGKKGGGKGKGKGGSSCCCCCCCCCCCCCCSSSAABSSKKKKGKKKKGKKKKKSKKGGKKGKKGKKGKKKKGKK",
+   "KKKKKKKKKGKKKKSSCCCCCCCCCCCCCCSSSAABSSKKKKKKKKKKKKKGKKKKKGKKKKKKKKKKGKKKKK",
+   "KKKKKKKKKGKKKKKKKKKKKKKKKKKGGKSSSAAASSKGKKGKKKGGKKKKKKKKKKKKGKKGGKKKKKGKKG",
+   "KKKKKKKKGKKKGKKKKKGKKKKGGKKKKKSSSAAASSKGKKGKGKGKGKKGKKKKKGKGKKKKKKKKGKGKKG",
+   "KKKGKKKGKKKGKGKKKKKKKKKKKGKKGKSSSABASSKKGKKGGKKKKKKKGKKKKGGKKKKKKKKKGKKKGK",
+   "KKKKGKKKKKKKGKKGKKKGKKKKKKKGKKSSSBAASSKKKKGKKKGKKGGKKGKKKKGKKGGKKKGKGKKGKK",
+   "GKKKKKKKKKKKKKKKKKKGKKKKKKKKGKSSSAAASSKGGKKKKKKKGKKKKKKKKKKKKKKGKKKKKKGGGK",
+   "KKKGKKKKKKKKKKKKKKKKKGKKKKKKKKSSSABASSKGGKKGKKKGKKKGKKKKKKKKKKKKKKGKGKKKKK",
+   "KKKKKKKKKKKKKKKKKKKGKKGKKKKKKKSSSAABSSKGGKKKKKKKKKKKKKKKKGKKKKKKKKKKKKKGKK",
+   "KKGKKKKKKGKKKKKKKKKKGKKKKGKKKKSSSBBBSSKKKKKKKKKGGKGGGKKKKGGKKKKGKGKKKKKGKK",
+   "KKKKGKKKKKKKKKKKKKKKKKKKGKKKKKSSSABBSSGKKKGGKKKKKKGKKGKGKKGKKKGKKKKKKKKKGK",
+   "KKKKKKKKGKKKKKKKKKGGKKKGKKKKGKSSSABASSKGKKKKKKKGKGKKKKKKKKKKKGKKKGGGKKKGKK",
+   "GKKKKKKKGKKKGKKGKGKKKKGKKKKKGKSSSABBSSKKKKKKKGKKKKGKGKKKKKKKKGKKKKGKKKKKKK",
+   "KKKGKKKKKGKKKKKGKKKGKKKKGKKKGGSSSABASSGKKGKKKGKKKKGKKKKKKKGGKKKKKKKGKKKKKK",
+   "KKKKKKGKKKKKKKKGKKGKGKKGGKKKGKSSSABBSSKKKKKKKKKKKKGKKKKKGKKKKKKKKKGKKKKKKK",
+   "KKKGKKKGKKKKKKKGKKKGKKGKKKKKKGSSSAABSSKKGKGKKKKKGKKGKKGKKKGKGKKGKKKKKKKKKK",
+   "KGKKKKKGKKKKGKGKKGKKKKKKKGGGKKSSSAAASSKKKKGKKKKKGKGKKKGKKKKKGKKKKGKKKKGGKK"
   ]
  },
  "objects": [
@@ -3300,6 +3300,7 @@
    "state": "intact",
    "fade_group": "b12",
    "variant": "w1",
+   "night_lit": true,
    "interact": "window"
   },
   {
@@ -3319,6 +3320,7 @@
    "state": "intact",
    "fade_group": "b12",
    "variant": "base",
+   "night_lit": true,
    "interact": "window"
   },
   {
@@ -3357,7 +3359,6 @@
    "state": "intact",
    "fade_group": "b12",
    "variant": "base",
-   "night_lit": true,
    "interact": "window"
   },
   {
@@ -3377,6 +3378,7 @@
    "state": "intact",
    "fade_group": "b12",
    "variant": "w1",
+   "night_lit": true,
    "interact": "window"
   },
   {
@@ -3437,7 +3439,8 @@
    "rot": 6,
    "state": "intact",
    "fade_group": "b12",
-   "variant": "w1"
+   "variant": "w1",
+   "night_lit": true
   },
   {
    "id": "wall_W1F_3",
@@ -3536,15 +3539,6 @@
    "variant": "w1"
   },
   {
-   "id": "ac_S2F_2",
-   "type": "f_ac",
-   "x": 2.4,
-   "y": 13.0,
-   "z": 3.15,
-   "fade_group": "b12",
-   "variant": "base"
-  },
-  {
    "id": "wall_S2F_3",
    "type": "f_wall",
    "x": 3.0,
@@ -3552,7 +3546,7 @@
    "z": 3.0,
    "state": "upper",
    "fade_group": "b12",
-   "variant": "base"
+   "variant": "w1"
   },
   {
    "id": "balc_S2F_3",
@@ -3596,6 +3590,15 @@
    "variant": "base"
   },
   {
+   "id": "ac_S2F_4",
+   "type": "f_ac",
+   "x": 8.4,
+   "y": 13.0,
+   "z": 3.15,
+   "fade_group": "b12",
+   "variant": "base"
+  },
+  {
    "id": "wall_W2F_0",
    "type": "f_wall",
    "x": -6.0,
@@ -3615,7 +3618,8 @@
    "rot": 6,
    "state": "intact",
    "fade_group": "b12",
-   "variant": "w1"
+   "variant": "w1",
+   "night_lit": true
   },
   {
    "id": "wall_W2F_1",
@@ -3641,16 +3645,6 @@
    "night_lit": true
   },
   {
-   "id": "ac_W2F_1",
-   "type": "f_ac",
-   "x": -6.0,
-   "y": 16.6,
-   "z": 3.15,
-   "rot": 6,
-   "fade_group": "b12",
-   "variant": "a1"
-  },
-  {
    "id": "wall_W2F_2",
    "type": "f_wall",
    "x": -6.0,
@@ -3659,7 +3653,7 @@
    "rot": 6,
    "state": "upper",
    "fade_group": "b12",
-   "variant": "base"
+   "variant": "w2"
   },
   {
    "id": "win_W2F_2",
@@ -3670,7 +3664,7 @@
    "rot": 6,
    "state": "intact",
    "fade_group": "b12",
-   "variant": "base"
+   "variant": "w2"
   },
   {
    "id": "wall_W2F_3",
@@ -3681,7 +3675,7 @@
    "rot": 6,
    "state": "upper",
    "fade_group": "b12",
-   "variant": "w2"
+   "variant": "base"
   },
   {
    "id": "win_W2F_3",
@@ -3692,7 +3686,8 @@
    "rot": 6,
    "state": "intact",
    "fade_group": "b12",
-   "variant": "w1"
+   "variant": "base",
+   "night_lit": true
   },
   {
    "id": "ac_W2F_3",
@@ -3729,7 +3724,7 @@
    "z": 6.0,
    "state": "upper",
    "fade_group": "b12",
-   "variant": "base"
+   "variant": "w2"
   },
   {
    "id": "win_S3F_0",
@@ -3739,7 +3734,7 @@
    "z": 6.0,
    "state": "intact",
    "fade_group": "b12",
-   "variant": "base",
+   "variant": "w1",
    "night_lit": true
   },
   {
@@ -3750,7 +3745,7 @@
    "z": 6.0,
    "state": "upper",
    "fade_group": "b12",
-   "variant": "w1"
+   "variant": "base"
   },
   {
    "id": "balc_S3F_1",
@@ -3770,7 +3765,7 @@
    "z": 6.0,
    "state": "upper",
    "fade_group": "b12",
-   "variant": "w2"
+   "variant": "w1"
   },
   {
    "id": "win_S3F_2",
@@ -3780,17 +3775,17 @@
    "z": 6.0,
    "state": "intact",
    "fade_group": "b12",
-   "variant": "w2",
+   "variant": "base",
    "night_lit": true
   },
   {
    "id": "ac_S3F_2",
    "type": "f_ac",
-   "x": 2.4,
+   "x": 0.6,
    "y": 13.0,
    "z": 6.15,
    "fade_group": "b12",
-   "variant": "a1"
+   "variant": "a2"
   },
   {
    "id": "wall_S3F_3",
@@ -3800,7 +3795,7 @@
    "z": 6.0,
    "state": "upper",
    "fade_group": "b12",
-   "variant": "w1"
+   "variant": "w2"
   },
   {
    "id": "balc_S3F_3",
@@ -3833,6 +3828,15 @@
    "variant": "base"
   },
   {
+   "id": "ac_S3F_4",
+   "type": "f_ac",
+   "x": 6.6,
+   "y": 13.0,
+   "z": 6.15,
+   "fade_group": "b12",
+   "variant": "a2"
+  },
+  {
    "id": "wall_W3F_0",
    "type": "f_wall",
    "x": -6.0,
@@ -3852,7 +3856,7 @@
    "rot": 6,
    "state": "intact",
    "fade_group": "b12",
-   "variant": "w1",
+   "variant": "base",
    "night_lit": true
   },
   {
@@ -3864,7 +3868,7 @@
    "rot": 6,
    "state": "upper",
    "fade_group": "b12",
-   "variant": "base"
+   "variant": "w1"
   },
   {
    "id": "win_W3F_1",
@@ -3875,8 +3879,7 @@
    "rot": 6,
    "state": "intact",
    "fade_group": "b12",
-   "variant": "base",
-   "night_lit": true
+   "variant": "w1"
   },
   {
    "id": "wall_W3F_2",
@@ -3887,7 +3890,7 @@
    "rot": 6,
    "state": "upper",
    "fade_group": "b12",
-   "variant": "w1"
+   "variant": "base"
   },
   {
    "id": "balc_W3F_2",
@@ -3898,7 +3901,7 @@
    "rot": 6,
    "state": "default",
    "fade_group": "b12",
-   "variant": "b1"
+   "variant": "base"
   },
   {
    "id": "wall_W3F_3",
@@ -3920,7 +3923,8 @@
    "rot": 6,
    "state": "intact",
    "fade_group": "b12",
-   "variant": "w2"
+   "variant": "w1",
+   "night_lit": true
   },
   {
    "id": "pipe_s2",
@@ -3957,7 +3961,7 @@
    "z": 9.0,
    "state": "laundry",
    "fade_group": "b12",
-   "variant": "b1"
+   "variant": "b2"
   },
   {
    "id": "wall_S4F_1",
@@ -3967,7 +3971,7 @@
    "z": 9.0,
    "state": "upper",
    "fade_group": "b12",
-   "variant": "base"
+   "variant": "w1"
   },
   {
    "id": "win_S4F_1",
@@ -3977,17 +3981,16 @@
    "z": 9.0,
    "state": "intact",
    "fade_group": "b12",
-   "variant": "w2",
-   "night_lit": true
+   "variant": "w1"
   },
   {
    "id": "ac_S4F_1",
    "type": "f_ac",
-   "x": -0.6,
+   "x": -2.4,
    "y": 13.0,
    "z": 9.15,
    "fade_group": "b12",
-   "variant": "a1"
+   "variant": "base"
   },
   {
    "id": "wall_S4F_2",
@@ -3997,7 +4000,7 @@
    "z": 9.0,
    "state": "upper",
    "fade_group": "b12",
-   "variant": "base"
+   "variant": "w1"
   },
   {
    "id": "win_S4F_2",
@@ -4009,6 +4012,15 @@
    "fade_group": "b12",
    "variant": "w2",
    "night_lit": true
+  },
+  {
+   "id": "ac_S4F_2",
+   "type": "f_ac",
+   "x": 0.6,
+   "y": 13.0,
+   "z": 9.15,
+   "fade_group": "b12",
+   "variant": "base"
   },
   {
    "id": "wall_S4F_3",
@@ -4028,8 +4040,7 @@
    "z": 9.0,
    "state": "intact",
    "fade_group": "b12",
-   "variant": "w1",
-   "night_lit": true
+   "variant": "w1"
   },
   {
    "id": "ac_S4F_3",
@@ -4086,7 +4097,7 @@
    "id": "ac_W4F_0",
    "type": "f_ac",
    "x": -6.0,
-   "y": 13.6,
+   "y": 15.4,
    "z": 9.15,
    "rot": 6,
    "fade_group": "b12",
@@ -4114,6 +4125,16 @@
    "fade_group": "b12",
    "variant": "base",
    "night_lit": true
+  },
+  {
+   "id": "ac_W4F_1",
+   "type": "f_ac",
+   "x": -6.0,
+   "y": 18.4,
+   "z": 9.15,
+   "rot": 6,
+   "fade_group": "b12",
+   "variant": "a2"
   },
   {
    "id": "wall_W4F_2",
@@ -4157,8 +4178,17 @@
    "rot": 6,
    "state": "intact",
    "fade_group": "b12",
-   "variant": "w1",
-   "night_lit": true
+   "variant": "w1"
+  },
+  {
+   "id": "ac_W4F_3",
+   "type": "f_ac",
+   "x": -6.0,
+   "y": 24.4,
+   "z": 9.15,
+   "rot": 6,
+   "fade_group": "b12",
+   "variant": "a2"
   },
   {
    "id": "pipe_s3",
@@ -4200,7 +4230,7 @@
   {
    "id": "ac_S5F_0",
    "type": "f_ac",
-   "x": -5.4,
+   "x": -3.6,
    "y": 13.0,
    "z": 12.15,
    "fade_group": "b12",
@@ -4244,17 +4274,7 @@
    "z": 12.0,
    "state": "intact",
    "fade_group": "b12",
-   "variant": "base",
-   "night_lit": true
-  },
-  {
-   "id": "ac_S5F_2",
-   "type": "f_ac",
-   "x": 0.6,
-   "y": 13.0,
-   "z": 12.15,
-   "fade_group": "b12",
-   "variant": "a2"
+   "variant": "base"
   },
   {
    "id": "wall_S5F_3",
@@ -4297,15 +4317,6 @@
    "variant": "base"
   },
   {
-   "id": "ac_S5F_4",
-   "type": "f_ac",
-   "x": 6.6,
-   "y": 13.0,
-   "z": 12.15,
-   "fade_group": "b12",
-   "variant": "a1"
-  },
-  {
    "id": "wall_W5F_0",
    "type": "f_wall",
    "x": -6.0,
@@ -4314,7 +4325,7 @@
    "rot": 6,
    "state": "upper",
    "fade_group": "b12",
-   "variant": "base"
+   "variant": "w2"
   },
   {
    "id": "win_W5F_0",
@@ -4325,17 +4336,8 @@
    "rot": 6,
    "state": "intact",
    "fade_group": "b12",
-   "variant": "base"
-  },
-  {
-   "id": "ac_W5F_0",
-   "type": "f_ac",
-   "x": -6.0,
-   "y": 15.4,
-   "z": 12.15,
-   "rot": 6,
-   "fade_group": "b12",
-   "variant": "a2"
+   "variant": "base",
+   "night_lit": true
   },
   {
    "id": "wall_W5F_1",
@@ -4346,7 +4348,7 @@
    "rot": 6,
    "state": "upper",
    "fade_group": "b12",
-   "variant": "w2"
+   "variant": "w1"
   },
   {
    "id": "win_W5F_1",
@@ -4357,18 +4359,7 @@
    "rot": 6,
    "state": "intact",
    "fade_group": "b12",
-   "variant": "w1",
-   "night_lit": true
-  },
-  {
-   "id": "ac_W5F_1",
-   "type": "f_ac",
-   "x": -6.0,
-   "y": 18.4,
-   "z": 12.15,
-   "rot": 6,
-   "fade_group": "b12",
-   "variant": "base"
+   "variant": "w2"
   },
   {
    "id": "wall_W5F_2",
@@ -4379,7 +4370,7 @@
    "rot": 6,
    "state": "upper",
    "fade_group": "b12",
-   "variant": "base"
+   "variant": "w2"
   },
   {
    "id": "balc_W5F_2",
@@ -4390,7 +4381,7 @@
    "rot": 6,
    "state": "default",
    "fade_group": "b12",
-   "variant": "b2"
+   "variant": "b1"
   },
   {
    "id": "wall_W5F_3",
@@ -4401,7 +4392,7 @@
    "rot": 6,
    "state": "upper",
    "fade_group": "b12",
-   "variant": "w2"
+   "variant": "base"
   },
   {
    "id": "win_W5F_3",
@@ -4412,7 +4403,8 @@
    "rot": 6,
    "state": "intact",
    "fade_group": "b12",
-   "variant": "base"
+   "variant": "base",
+   "night_lit": true
   },
   {
    "id": "pipe_s4",
@@ -4439,7 +4431,7 @@
    "z": 15.0,
    "state": "upper",
    "fade_group": "b12",
-   "variant": "w1"
+   "variant": "w2"
   },
   {
    "id": "win_S6F_0",
@@ -4449,7 +4441,8 @@
    "z": 15.0,
    "state": "intact",
    "fade_group": "b12",
-   "variant": "base"
+   "variant": "base",
+   "night_lit": true
   },
   {
    "id": "ac_S6F_0",
@@ -4458,7 +4451,7 @@
    "y": 13.0,
    "z": 15.15,
    "fade_group": "b12",
-   "variant": "a1"
+   "variant": "base"
   },
   {
    "id": "wall_S6F_1",
@@ -4478,7 +4471,7 @@
    "z": 15.0,
    "state": "default",
    "fade_group": "b12",
-   "variant": "base"
+   "variant": "b1"
   },
   {
    "id": "wall_S6F_2",
@@ -4488,7 +4481,7 @@
    "z": 15.0,
    "state": "upper",
    "fade_group": "b12",
-   "variant": "base"
+   "variant": "w1"
   },
   {
    "id": "win_S6F_2",
@@ -4498,16 +4491,16 @@
    "z": 15.0,
    "state": "intact",
    "fade_group": "b12",
-   "variant": "w2"
+   "variant": "base"
   },
   {
    "id": "ac_S6F_2",
    "type": "f_ac",
-   "x": 2.4,
+   "x": 0.6,
    "y": 13.0,
    "z": 15.15,
    "fade_group": "b12",
-   "variant": "a2"
+   "variant": "base"
   },
   {
    "id": "wall_S6F_3",
@@ -4569,7 +4562,8 @@
    "rot": 6,
    "state": "intact",
    "fade_group": "b12",
-   "variant": "w1"
+   "variant": "w1",
+   "night_lit": true
   },
   {
    "id": "wall_W6F_1",
@@ -4591,8 +4585,7 @@
    "rot": 6,
    "state": "intact",
    "fade_group": "b12",
-   "variant": "base",
-   "night_lit": true
+   "variant": "base"
   },
   {
    "id": "wall_W6F_2",
@@ -4614,7 +4607,18 @@
    "rot": 6,
    "state": "intact",
    "fade_group": "b12",
-   "variant": "w1"
+   "variant": "w1",
+   "night_lit": true
+  },
+  {
+   "id": "ac_W6F_2",
+   "type": "f_ac",
+   "x": -6.0,
+   "y": 21.4,
+   "z": 15.15,
+   "rot": 6,
+   "fade_group": "b12",
+   "variant": "a1"
   },
   {
    "id": "wall_W6F_3",
@@ -4625,7 +4629,7 @@
    "rot": 6,
    "state": "upper",
    "fade_group": "b12",
-   "variant": "w1"
+   "variant": "base"
   },
   {
    "id": "win_W6F_3",
@@ -4636,8 +4640,17 @@
    "rot": 6,
    "state": "intact",
    "fade_group": "b12",
-   "variant": "w2",
-   "night_lit": true
+   "variant": "w1"
+  },
+  {
+   "id": "ac_W6F_3",
+   "type": "f_ac",
+   "x": -6.0,
+   "y": 24.4,
+   "z": 15.15,
+   "rot": 6,
+   "fade_group": "b12",
+   "variant": "a2"
   },
   {
    "id": "pipe_s5",
@@ -7375,8 +7388,8 @@
    "z": 3.0,
    "state": "intact",
    "fade_group": "nb_c1",
-   "night_lit": false,
-   "variant": "w1"
+   "night_lit": true,
+   "variant": "w2"
   },
   {
    "id": "nb_c1_S2F_1_wall",
@@ -8669,8 +8682,8 @@
    "z": 3.0,
    "state": "intact",
    "fade_group": "nb_c2",
-   "night_lit": true,
-   "variant": "w2"
+   "night_lit": false,
+   "variant": "w1"
   },
   {
    "id": "nb_c2_S2F_3_wall",
@@ -9545,8 +9558,8 @@
    "z": 3.0,
    "state": "intact",
    "fade_group": "nb_w1",
-   "night_lit": false,
-   "variant": "base"
+   "night_lit": true,
+   "variant": "w2"
   },
   {
    "id": "nb_w1_S2F_3_ac",
@@ -10585,7 +10598,7 @@
    "z": 3.0,
    "state": "intact",
    "fade_group": "nb_w3",
-   "night_lit": true,
+   "night_lit": false,
    "variant": "w2"
   },
   {
@@ -11599,7 +11612,7 @@
    "state": "intact",
    "fade_group": "nb_w4",
    "night_lit": true,
-   "variant": "w1"
+   "variant": "base"
   },
   {
    "id": "nb_w4_S2F_1_ac",
@@ -12266,7 +12279,7 @@
    "state": "intact",
    "fade_group": "nb_w5",
    "night_lit": true,
-   "variant": "base"
+   "variant": "w2"
   },
   {
    "id": "nb_w5_S2F_0_ac",
@@ -12316,7 +12329,7 @@
    "state": "intact",
    "fade_group": "nb_w5",
    "night_lit": true,
-   "variant": "base"
+   "variant": "w1"
   },
   {
    "id": "nb_w5_S2F_2_ac",
@@ -13520,7 +13533,7 @@
    "state": "intact",
    "fade_group": "nb_s2",
    "night_lit": true,
-   "variant": "w2"
+   "variant": "w1"
   },
   {
    "id": "nb_s2_S2F_2_ac",
@@ -14185,8 +14198,8 @@
    "z": 3.0,
    "state": "intact",
    "fade_group": "nb_s4",
-   "night_lit": true,
-   "variant": "w2"
+   "night_lit": false,
+   "variant": "w1"
   },
   {
    "id": "nb_s4_S2F_3_wall",
@@ -15246,908 +15259,6 @@
    "variant": "c"
   },
   {
-   "id": "school_pri_S1F_0_shop",
-   "type": "f_shop",
-   "x": -22.0,
-   "y": -10.0,
-   "state": "window",
-   "fade_group": "school_pri"
-  },
-  {
-   "id": "school_pri_S1F_1_shop",
-   "type": "f_shop",
-   "x": -19.0,
-   "y": -10.0,
-   "state": "door",
-   "fade_group": "school_pri",
-   "interact": "civic",
-   "to": "school_pri",
-   "spawn": [
-    -19.0,
-    -6.5,
-    "N"
-   ],
-   "name": "井槐小学",
-   "hours": [
-    "07:30",
-    "17:30"
-   ]
-  },
-  {
-   "id": "school_pri_S1F_2_shop",
-   "type": "f_shop",
-   "x": -16.0,
-   "y": -10.0,
-   "state": "window",
-   "fade_group": "school_pri"
-  },
-  {
-   "id": "school_pri_S1F_3_shop",
-   "type": "f_shop",
-   "x": -13.0,
-   "y": -10.0,
-   "state": "window",
-   "fade_group": "school_pri"
-  },
-  {
-   "id": "school_pri_W1F_0_wall",
-   "type": "f_wall",
-   "x": -22.0,
-   "y": -7.0,
-   "rot": 6,
-   "state": "ground",
-   "fade_group": "school_pri",
-   "variant": "p1"
-  },
-  {
-   "id": "school_pri_W1F_0_win",
-   "type": "f_window",
-   "x": -22.0,
-   "y": -7.0,
-   "rot": 6,
-   "state": "intact",
-   "fade_group": "school_pri",
-   "night_lit": true,
-   "variant": "w1"
-  },
-  {
-   "id": "school_pri_W1F_1_wall",
-   "type": "f_wall",
-   "x": -22.0,
-   "y": -4.0,
-   "rot": 6,
-   "state": "ground",
-   "fade_group": "school_pri",
-   "variant": "p1"
-  },
-  {
-   "id": "school_pri_W1F_1_win",
-   "type": "f_window",
-   "x": -22.0,
-   "y": -4.0,
-   "rot": 6,
-   "state": "intact",
-   "fade_group": "school_pri",
-   "night_lit": false,
-   "variant": "w1"
-  },
-  {
-   "id": "school_pri_W1F_2_wall",
-   "type": "f_wall",
-   "x": -22.0,
-   "y": -1.0,
-   "rot": 6,
-   "state": "ground",
-   "fade_group": "school_pri",
-   "variant": "p1"
-  },
-  {
-   "id": "school_pri_W1F_2_win",
-   "type": "f_window",
-   "x": -22.0,
-   "y": -1.0,
-   "rot": 6,
-   "state": "intact",
-   "fade_group": "school_pri",
-   "night_lit": true,
-   "variant": "base"
-  },
-  {
-   "id": "school_pri_pipe_s0",
-   "type": "f_pipe",
-   "x": -10.15,
-   "y": -10.0,
-   "fade_group": "school_pri"
-  },
-  {
-   "id": "school_pri_S2F_0_wall",
-   "type": "f_wall",
-   "x": -22.0,
-   "y": -10.0,
-   "z": 3.0,
-   "state": "upper",
-   "fade_group": "school_pri",
-   "variant": "p1"
-  },
-  {
-   "id": "school_pri_S2F_0_win",
-   "type": "f_window",
-   "x": -22.0,
-   "y": -10.0,
-   "z": 3.0,
-   "state": "intact",
-   "fade_group": "school_pri",
-   "night_lit": true,
-   "variant": "w2"
-  },
-  {
-   "id": "school_pri_S2F_1_wall",
-   "type": "f_wall",
-   "x": -19.0,
-   "y": -10.0,
-   "z": 3.0,
-   "state": "upper",
-   "fade_group": "school_pri",
-   "variant": "p1"
-  },
-  {
-   "id": "school_pri_S2F_1_balc",
-   "type": "f_balcony",
-   "x": -19.0,
-   "y": -10.0,
-   "z": 3.0,
-   "state": "default",
-   "fade_group": "school_pri",
-   "variant": "b2"
-  },
-  {
-   "id": "school_pri_S2F_2_wall",
-   "type": "f_wall",
-   "x": -16.0,
-   "y": -10.0,
-   "z": 3.0,
-   "state": "upper",
-   "fade_group": "school_pri",
-   "variant": "p1"
-  },
-  {
-   "id": "school_pri_S2F_2_win",
-   "type": "f_window",
-   "x": -16.0,
-   "y": -10.0,
-   "z": 3.0,
-   "state": "intact",
-   "fade_group": "school_pri",
-   "night_lit": false,
-   "variant": "w2"
-  },
-  {
-   "id": "school_pri_S2F_2_ac",
-   "type": "f_ac",
-   "x": -15.4,
-   "y": -10.0,
-   "z": 3.15,
-   "fade_group": "school_pri",
-   "variant": "a2"
-  },
-  {
-   "id": "school_pri_S2F_3_wall",
-   "type": "f_wall",
-   "x": -13.0,
-   "y": -10.0,
-   "z": 3.0,
-   "state": "upper",
-   "fade_group": "school_pri",
-   "variant": "p1"
-  },
-  {
-   "id": "school_pri_S2F_3_win",
-   "type": "f_window",
-   "x": -13.0,
-   "y": -10.0,
-   "z": 3.0,
-   "state": "intact",
-   "fade_group": "school_pri",
-   "night_lit": true,
-   "variant": "w1"
-  },
-  {
-   "id": "school_pri_S2F_3_ac",
-   "type": "f_ac",
-   "x": -10.6,
-   "y": -10.0,
-   "z": 3.15,
-   "fade_group": "school_pri",
-   "variant": "a2"
-  },
-  {
-   "id": "school_pri_W2F_0_wall",
-   "type": "f_wall",
-   "x": -22.0,
-   "y": -7.0,
-   "z": 3.0,
-   "rot": 6,
-   "state": "upper",
-   "fade_group": "school_pri",
-   "variant": "p1"
-  },
-  {
-   "id": "school_pri_W2F_0_win",
-   "type": "f_window",
-   "x": -22.0,
-   "y": -7.0,
-   "z": 3.0,
-   "rot": 6,
-   "state": "intact",
-   "fade_group": "school_pri",
-   "night_lit": false,
-   "variant": "base"
-  },
-  {
-   "id": "school_pri_W2F_0_ac",
-   "type": "f_ac",
-   "x": -22.0,
-   "y": -7.6,
-   "z": 3.15,
-   "rot": 6,
-   "fade_group": "school_pri",
-   "variant": "a2"
-  },
-  {
-   "id": "school_pri_W2F_1_wall",
-   "type": "f_wall",
-   "x": -22.0,
-   "y": -4.0,
-   "z": 3.0,
-   "rot": 6,
-   "state": "upper",
-   "fade_group": "school_pri",
-   "variant": "p1"
-  },
-  {
-   "id": "school_pri_W2F_1_win",
-   "type": "f_window",
-   "x": -22.0,
-   "y": -4.0,
-   "z": 3.0,
-   "rot": 6,
-   "state": "intact",
-   "fade_group": "school_pri",
-   "night_lit": false,
-   "variant": "w1"
-  },
-  {
-   "id": "school_pri_W2F_2_wall",
-   "type": "f_wall",
-   "x": -22.0,
-   "y": -1.0,
-   "z": 3.0,
-   "rot": 6,
-   "state": "upper",
-   "fade_group": "school_pri",
-   "variant": "p1"
-  },
-  {
-   "id": "school_pri_W2F_2_win",
-   "type": "f_window",
-   "x": -22.0,
-   "y": -1.0,
-   "z": 3.0,
-   "rot": 6,
-   "state": "intact",
-   "fade_group": "school_pri",
-   "night_lit": true,
-   "variant": "base"
-  },
-  {
-   "id": "school_pri_W2F_2_ac",
-   "type": "f_ac",
-   "x": -22.0,
-   "y": -1.6,
-   "z": 3.15,
-   "rot": 6,
-   "fade_group": "school_pri",
-   "variant": "a1"
-  },
-  {
-   "id": "school_pri_pipe_s1",
-   "type": "f_pipe",
-   "x": -10.15,
-   "y": -10.0,
-   "z": 3.0,
-   "fade_group": "school_pri"
-  },
-  {
-   "id": "school_pri_roof",
-   "type": "b_roof_b",
-   "x": -22.0,
-   "y": -10.0,
-   "z": 6.0,
-   "fade_group": "school_pri",
-   "variant": "c"
-  },
-  {
-   "id": "school_mid_S1F_0_shop",
-   "type": "f_shop",
-   "x": -10.0,
-   "y": -10.0,
-   "state": "window",
-   "fade_group": "school_mid"
-  },
-  {
-   "id": "school_mid_S1F_1_shop",
-   "type": "f_shop",
-   "x": -7.0,
-   "y": -10.0,
-   "state": "door",
-   "fade_group": "school_mid",
-   "interact": "civic",
-   "to": "school_mid",
-   "spawn": [
-    -7.0,
-    -6.5,
-    "N"
-   ],
-   "name": "井槐中学·初中部",
-   "hours": [
-    "07:30",
-    "17:30"
-   ]
-  },
-  {
-   "id": "school_mid_S1F_2_shop",
-   "type": "f_shop",
-   "x": -4.0,
-   "y": -10.0,
-   "state": "window",
-   "fade_group": "school_mid"
-  },
-  {
-   "id": "school_mid_S1F_3_shop",
-   "type": "f_shop",
-   "x": -1.0,
-   "y": -10.0,
-   "state": "window",
-   "fade_group": "school_mid"
-  },
-  {
-   "id": "school_mid_W1F_0_wall",
-   "type": "f_wall",
-   "x": -10.0,
-   "y": -7.0,
-   "rot": 6,
-   "state": "ground",
-   "fade_group": "school_mid",
-   "variant": "p1"
-  },
-  {
-   "id": "school_mid_W1F_0_win",
-   "type": "f_window",
-   "x": -10.0,
-   "y": -7.0,
-   "rot": 6,
-   "state": "intact",
-   "fade_group": "school_mid",
-   "night_lit": false,
-   "variant": "w2"
-  },
-  {
-   "id": "school_mid_W1F_1_wall",
-   "type": "f_wall",
-   "x": -10.0,
-   "y": -4.0,
-   "rot": 6,
-   "state": "ground",
-   "fade_group": "school_mid",
-   "variant": "p1"
-  },
-  {
-   "id": "school_mid_W1F_1_win",
-   "type": "f_window",
-   "x": -10.0,
-   "y": -4.0,
-   "rot": 6,
-   "state": "intact",
-   "fade_group": "school_mid",
-   "night_lit": false,
-   "variant": "w2"
-  },
-  {
-   "id": "school_mid_W1F_2_wall",
-   "type": "f_wall",
-   "x": -10.0,
-   "y": -1.0,
-   "rot": 6,
-   "state": "ground",
-   "fade_group": "school_mid",
-   "variant": "p1"
-  },
-  {
-   "id": "school_mid_W1F_2_win",
-   "type": "f_window",
-   "x": -10.0,
-   "y": -1.0,
-   "rot": 6,
-   "state": "intact",
-   "fade_group": "school_mid",
-   "night_lit": false,
-   "variant": "base"
-  },
-  {
-   "id": "school_mid_pipe_s0",
-   "type": "f_pipe",
-   "x": 1.85,
-   "y": -10.0,
-   "fade_group": "school_mid"
-  },
-  {
-   "id": "school_mid_S2F_0_wall",
-   "type": "f_wall",
-   "x": -10.0,
-   "y": -10.0,
-   "z": 3.0,
-   "state": "upper",
-   "fade_group": "school_mid",
-   "variant": "p1"
-  },
-  {
-   "id": "school_mid_S2F_0_win",
-   "type": "f_window",
-   "x": -10.0,
-   "y": -10.0,
-   "z": 3.0,
-   "state": "intact",
-   "fade_group": "school_mid",
-   "night_lit": false,
-   "variant": "w1"
-  },
-  {
-   "id": "school_mid_S2F_0_ac",
-   "type": "f_ac",
-   "x": -9.4,
-   "y": -10.0,
-   "z": 3.15,
-   "fade_group": "school_mid",
-   "variant": "base"
-  },
-  {
-   "id": "school_mid_S2F_1_wall",
-   "type": "f_wall",
-   "x": -7.0,
-   "y": -10.0,
-   "z": 3.0,
-   "state": "upper",
-   "fade_group": "school_mid",
-   "variant": "p1"
-  },
-  {
-   "id": "school_mid_S2F_1_balc",
-   "type": "f_balcony",
-   "x": -7.0,
-   "y": -10.0,
-   "z": 3.0,
-   "state": "laundry",
-   "fade_group": "school_mid",
-   "variant": "b1"
-  },
-  {
-   "id": "school_mid_S2F_2_wall",
-   "type": "f_wall",
-   "x": -4.0,
-   "y": -10.0,
-   "z": 3.0,
-   "state": "upper",
-   "fade_group": "school_mid",
-   "variant": "p1"
-  },
-  {
-   "id": "school_mid_S2F_2_balc",
-   "type": "f_balcony",
-   "x": -4.0,
-   "y": -10.0,
-   "z": 3.0,
-   "state": "default",
-   "fade_group": "school_mid",
-   "variant": "base"
-  },
-  {
-   "id": "school_mid_S2F_3_wall",
-   "type": "f_wall",
-   "x": -1.0,
-   "y": -10.0,
-   "z": 3.0,
-   "state": "upper",
-   "fade_group": "school_mid",
-   "variant": "p1"
-  },
-  {
-   "id": "school_mid_S2F_3_win",
-   "type": "f_window",
-   "x": -1.0,
-   "y": -10.0,
-   "z": 3.0,
-   "state": "intact",
-   "fade_group": "school_mid",
-   "night_lit": true,
-   "variant": "w2"
-  },
-  {
-   "id": "school_mid_W2F_0_wall",
-   "type": "f_wall",
-   "x": -10.0,
-   "y": -7.0,
-   "z": 3.0,
-   "rot": 6,
-   "state": "upper",
-   "fade_group": "school_mid",
-   "variant": "p1"
-  },
-  {
-   "id": "school_mid_W2F_0_win",
-   "type": "f_window",
-   "x": -10.0,
-   "y": -7.0,
-   "z": 3.0,
-   "rot": 6,
-   "state": "intact",
-   "fade_group": "school_mid",
-   "night_lit": true,
-   "variant": "w1"
-  },
-  {
-   "id": "school_mid_W2F_1_wall",
-   "type": "f_wall",
-   "x": -10.0,
-   "y": -4.0,
-   "z": 3.0,
-   "rot": 6,
-   "state": "upper",
-   "fade_group": "school_mid",
-   "variant": "p1"
-  },
-  {
-   "id": "school_mid_W2F_1_balc",
-   "type": "f_balcony",
-   "x": -10.0,
-   "y": -4.0,
-   "z": 3.0,
-   "rot": 6,
-   "state": "laundry",
-   "fade_group": "school_mid",
-   "variant": "b2"
-  },
-  {
-   "id": "school_mid_W2F_2_wall",
-   "type": "f_wall",
-   "x": -10.0,
-   "y": -1.0,
-   "z": 3.0,
-   "rot": 6,
-   "state": "upper",
-   "fade_group": "school_mid",
-   "variant": "p1"
-  },
-  {
-   "id": "school_mid_W2F_2_win",
-   "type": "f_window",
-   "x": -10.0,
-   "y": -1.0,
-   "z": 3.0,
-   "rot": 6,
-   "state": "intact",
-   "fade_group": "school_mid",
-   "night_lit": true,
-   "variant": "base"
-  },
-  {
-   "id": "school_mid_W2F_2_ac",
-   "type": "f_ac",
-   "x": -10.0,
-   "y": -3.4,
-   "z": 3.15,
-   "rot": 6,
-   "fade_group": "school_mid",
-   "variant": "a2"
-  },
-  {
-   "id": "school_mid_pipe_s1",
-   "type": "f_pipe",
-   "x": 1.85,
-   "y": -10.0,
-   "z": 3.0,
-   "fade_group": "school_mid"
-  },
-  {
-   "id": "school_mid_roof",
-   "type": "b_roof_b",
-   "x": -10.0,
-   "y": -10.0,
-   "z": 6.0,
-   "fade_group": "school_mid",
-   "variant": "c"
-  },
-  {
-   "id": "school_high_S1F_0_shop",
-   "type": "f_shop",
-   "x": 28.0,
-   "y": -10.0,
-   "state": "window",
-   "fade_group": "school_high"
-  },
-  {
-   "id": "school_high_S1F_1_shop",
-   "type": "f_shop",
-   "x": 31.0,
-   "y": -10.0,
-   "state": "door",
-   "fade_group": "school_high",
-   "interact": "civic",
-   "to": "school_high",
-   "spawn": [
-    31.0,
-    -6.5,
-    "N"
-   ],
-   "name": "井槐中学·高中部",
-   "hours": [
-    "07:30",
-    "17:30"
-   ]
-  },
-  {
-   "id": "school_high_S1F_2_shop",
-   "type": "f_shop",
-   "x": 34.0,
-   "y": -10.0,
-   "state": "window",
-   "fade_group": "school_high"
-  },
-  {
-   "id": "school_high_S1F_3_shop",
-   "type": "f_shop",
-   "x": 37.0,
-   "y": -10.0,
-   "state": "window",
-   "fade_group": "school_high"
-  },
-  {
-   "id": "school_high_W1F_0_wall",
-   "type": "f_wall",
-   "x": 28.0,
-   "y": -7.0,
-   "rot": 6,
-   "state": "ground",
-   "fade_group": "school_high",
-   "variant": "p1"
-  },
-  {
-   "id": "school_high_W1F_0_win",
-   "type": "f_window",
-   "x": 28.0,
-   "y": -7.0,
-   "rot": 6,
-   "state": "intact",
-   "fade_group": "school_high",
-   "night_lit": false,
-   "variant": "w1"
-  },
-  {
-   "id": "school_high_W1F_1_wall",
-   "type": "f_wall",
-   "x": 28.0,
-   "y": -4.0,
-   "rot": 6,
-   "state": "ground",
-   "fade_group": "school_high",
-   "variant": "p1"
-  },
-  {
-   "id": "school_high_W1F_1_win",
-   "type": "f_window",
-   "x": 28.0,
-   "y": -4.0,
-   "rot": 6,
-   "state": "intact",
-   "fade_group": "school_high",
-   "night_lit": true,
-   "variant": "base"
-  },
-  {
-   "id": "school_high_W1F_2_wall",
-   "type": "f_wall",
-   "x": 28.0,
-   "y": -1.0,
-   "rot": 6,
-   "state": "ground",
-   "fade_group": "school_high",
-   "variant": "p1"
-  },
-  {
-   "id": "school_high_W1F_2_win",
-   "type": "f_window",
-   "x": 28.0,
-   "y": -1.0,
-   "rot": 6,
-   "state": "intact",
-   "fade_group": "school_high",
-   "night_lit": false,
-   "variant": "w1"
-  },
-  {
-   "id": "school_high_pipe_s0",
-   "type": "f_pipe",
-   "x": 39.85,
-   "y": -10.0,
-   "fade_group": "school_high"
-  },
-  {
-   "id": "school_high_S2F_0_wall",
-   "type": "f_wall",
-   "x": 28.0,
-   "y": -10.0,
-   "z": 3.0,
-   "state": "upper",
-   "fade_group": "school_high",
-   "variant": "p1"
-  },
-  {
-   "id": "school_high_S2F_0_balc",
-   "type": "f_balcony",
-   "x": 28.0,
-   "y": -10.0,
-   "z": 3.0,
-   "state": "laundry",
-   "fade_group": "school_high",
-   "variant": "base"
-  },
-  {
-   "id": "school_high_S2F_1_wall",
-   "type": "f_wall",
-   "x": 31.0,
-   "y": -10.0,
-   "z": 3.0,
-   "state": "upper",
-   "fade_group": "school_high",
-   "variant": "p1"
-  },
-  {
-   "id": "school_high_S2F_1_balc",
-   "type": "f_balcony",
-   "x": 31.0,
-   "y": -10.0,
-   "z": 3.0,
-   "state": "laundry",
-   "fade_group": "school_high",
-   "variant": "base"
-  },
-  {
-   "id": "school_high_S2F_2_wall",
-   "type": "f_wall",
-   "x": 34.0,
-   "y": -10.0,
-   "z": 3.0,
-   "state": "upper",
-   "fade_group": "school_high",
-   "variant": "p1"
-  },
-  {
-   "id": "school_high_S2F_2_win",
-   "type": "f_window",
-   "x": 34.0,
-   "y": -10.0,
-   "z": 3.0,
-   "state": "intact",
-   "fade_group": "school_high",
-   "night_lit": false,
-   "variant": "w1"
-  },
-  {
-   "id": "school_high_S2F_3_wall",
-   "type": "f_wall",
-   "x": 37.0,
-   "y": -10.0,
-   "z": 3.0,
-   "state": "upper",
-   "fade_group": "school_high",
-   "variant": "p1"
-  },
-  {
-   "id": "school_high_S2F_3_balc",
-   "type": "f_balcony",
-   "x": 37.0,
-   "y": -10.0,
-   "z": 3.0,
-   "state": "laundry",
-   "fade_group": "school_high",
-   "variant": "b1"
-  },
-  {
-   "id": "school_high_W2F_0_wall",
-   "type": "f_wall",
-   "x": 28.0,
-   "y": -7.0,
-   "z": 3.0,
-   "rot": 6,
-   "state": "upper",
-   "fade_group": "school_high",
-   "variant": "p1"
-  },
-  {
-   "id": "school_high_W2F_0_win",
-   "type": "f_window",
-   "x": 28.0,
-   "y": -7.0,
-   "z": 3.0,
-   "rot": 6,
-   "state": "intact",
-   "fade_group": "school_high",
-   "night_lit": false,
-   "variant": "w2"
-  },
-  {
-   "id": "school_high_W2F_1_wall",
-   "type": "f_wall",
-   "x": 28.0,
-   "y": -4.0,
-   "z": 3.0,
-   "rot": 6,
-   "state": "upper",
-   "fade_group": "school_high",
-   "variant": "p1"
-  },
-  {
-   "id": "school_high_W2F_1_win",
-   "type": "f_window",
-   "x": 28.0,
-   "y": -4.0,
-   "z": 3.0,
-   "rot": 6,
-   "state": "intact",
-   "fade_group": "school_high",
-   "night_lit": true,
-   "variant": "w1"
-  },
-  {
-   "id": "school_high_W2F_2_wall",
-   "type": "f_wall",
-   "x": 28.0,
-   "y": -1.0,
-   "z": 3.0,
-   "rot": 6,
-   "state": "upper",
-   "fade_group": "school_high",
-   "variant": "p1"
-  },
-  {
-   "id": "school_high_W2F_2_win",
-   "type": "f_window",
-   "x": 28.0,
-   "y": -1.0,
-   "z": 3.0,
-   "rot": 6,
-   "state": "intact",
-   "fade_group": "school_high",
-   "night_lit": true,
-   "variant": "w2"
-  },
-  {
-   "id": "school_high_pipe_s1",
-   "type": "f_pipe",
-   "x": 39.85,
-   "y": -10.0,
-   "z": 3.0,
-   "fade_group": "school_high"
-  },
-  {
-   "id": "school_high_roof",
-   "type": "b_roof_b",
-   "x": 28.0,
-   "y": -10.0,
-   "z": 6.0,
-   "fade_group": "school_high",
-   "variant": "c"
-  },
-  {
    "id": "tree_sw",
    "type": "p_tree",
    "x": -7.0,
@@ -16843,33 +15954,6 @@
    ]
   },
   {
-   "id": "school_pri",
-   "rect": [
-    -22.3,
-    -10.3,
-    -10.0,
-    -1.0
-   ]
-  },
-  {
-   "id": "school_mid",
-   "rect": [
-    -10.3,
-    -10.3,
-    2.0,
-    -1.0
-   ]
-  },
-  {
-   "id": "school_high",
-   "rect": [
-    27.7,
-    -10.3,
-    40.0,
-    -1.0
-   ]
-  },
-  {
    "id": "laundry_1",
    "rect": [
     -7.5,
@@ -17085,7 +16169,7 @@
     "rot": 2,
     "range": [
      -44,
-     96
+     104
     ],
     "stops": [
      {
@@ -17106,7 +16190,7 @@
     "rot": 6,
     "range": [
      -44,
-     96
+     104
     ],
     "stops": [
      {
@@ -17279,8 +16363,12 @@
      -6.6
     ],
     [
-     13.5,
-     -7.5
+     12.0,
+     -8.0
+    ],
+    [
+     0.0,
+     -8.0
     ]
    ],
    "clearance_m": 0.487
@@ -17479,7 +16567,7 @@
    "rect": [
     46.5,
     -40.0,
-    96.0,
+    108.0,
     64.0
    ],
    "src": "chunks/east.js",

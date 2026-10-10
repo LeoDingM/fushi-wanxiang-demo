@@ -49,3 +49,16 @@ __proto.npcSched()
 ## 打包
 
 `scene-proto-45-npc-sch-play.zip`（避免覆盖其它轨的 play.zip）。
+
+## Near-downtown / midtown edge (2026-10-10 pivot)
+
+Work & school waypoints lean **east / midtown**, not local alley loops:
+
+| helper | coords | meaning |
+|--------|--------|---------|
+| `midtownEdge()` | `[46, 2.2]` | sidewalk just before `chunks/east` (future midtown) |
+| `metroEdge()` | `[41.2, -6.8]` | 井槐里站口 — office morning commute hop |
+| `schoolWaypoint()` | Char-B `school_high` else `[37,-6.5]` | east school street |
+| `workWaypoint()` | = `midtownEdge()` | office + `walker_e` day target |
+
+`walker_e`（东街白领）also on schedule: home east curb → commute → midtown edge → night home.

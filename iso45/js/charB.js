@@ -9,21 +9,21 @@
 
   B.SCHOOLS = {
     school_pri: {
-      label: "井槐小学",
+      label: "井槐社区小学",
       studentHints: { job: "student", ageBand: "child", gender: "male" },
       teacherHints: { job: "teacher", ageBand: "adult", gender: "female" },
       studentPos: [2.4, 2.8, "E"],
       teacherPos: [4.6, 2.6, "W"]
     },
     school_mid: {
-      label: "井槐中学·初中部",
+      label: "井槐社区初中",
       studentHints: { job: "student", ageBand: "teen", gender: "female" },
       teacherHints: { job: "teacher", ageBand: "adult", gender: "male" },
       studentPos: [2.2, 2.8, "E"],
       teacherPos: [4.8, 2.6, "W"]
     },
     school_high: {
-      label: "井槐中学·高中部",
+      label: "井槐社区高中",
       studentHints: { job: "student", ageBand: "teen", gender: "male" },
       teacherHints: { job: "teacher", ageBand: "adult", gender: "female" },
       studentPos: [2.3, 2.8, "E"],
@@ -36,9 +36,9 @@
     { id: "police", x: -36.0, y: -10.0, z: 2.6, img: "img/signs/police.png" },
     { id: "hospital", x: 22.0, y: -10.0, z: 2.6, img: "img/signs/hospital.png" },
     { id: "fire", x: 58.0, y: -10.0, z: 2.6, img: "img/signs/fire.png" },
-    { id: "school_pri", x: -19.0, y: -10.0, z: 2.6, img: "img/signs/school_pri.png" },
-    { id: "school_mid", x: -7.0, y: -10.0, z: 2.6, img: "img/signs/school_mid.png" },
-    { id: "school_high", x: 31.0, y: -10.0, z: 2.6, img: "img/signs/school_high.png" },
+    { id: "school_pri", x: 68.0, y: -10.0, z: 2.6, img: "img/signs/school_pri.png" },
+    { id: "school_mid", x: 80.0, y: -10.0, z: 2.6, img: "img/signs/school_mid.png" },
+    { id: "school_high", x: 92.0, y: -10.0, z: 2.6, img: "img/signs/school_high.png" },
     { id: "barber", x: 48.5, y: 4.2, z: 2.4, img: "img/signs/barber.png" }
   ];
   B._signImgs = {};
@@ -156,16 +156,16 @@
 
   // Street layer-variant extras (visible clothing diversity)
   B.LAYER_EXTRAS = [
-    { id: "extra_skirt", seed: 1201, hints: { job: "student", gender: "female", ageBand: "teen" }, outfitSet: "student_skirt", x: 8.5, y: 3.6, dir: "W" },
-    { id: "extra_long", seed: 1202, hints: { job: "student", gender: "male", ageBand: "teen" }, outfitSet: "student_long", x: -4.5, y: 4.0, dir: "E" },
-    { id: "extra_short", seed: 1203, hints: { job: "office", gender: "male", ageBand: "adult" }, outfitSet: "office_short", x: 18.0, y: 3.2, dir: "W" },
-    { id: "extra_child", seed: 1204, hints: { job: "student", gender: "female", ageBand: "child" }, outfitSet: "child_cue", x: -12.0, y: 3.8, dir: "E" }
+    { id: "layerx_skirt", seed: 1201, hints: { job: "student", gender: "female", ageBand: "teen" }, outfitSet: "student_skirt", x: 8.5, y: 3.6, dir: "W" },
+    { id: "layerx_long", seed: 1202, hints: { job: "student", gender: "male", ageBand: "teen" }, outfitSet: "student_long", x: -4.5, y: 4.0, dir: "E" },
+    { id: "layerx_short", seed: 1203, hints: { job: "office", gender: "male", ageBand: "adult" }, outfitSet: "office_short", x: 18.0, y: 3.2, dir: "W" },
+    { id: "layerx_child", seed: 1204, hints: { job: "student", gender: "female", ageBand: "child" }, outfitSet: "child_cue", x: -12.0, y: 3.8, dir: "E" }
   ];
 
   B.spawnLayerExtras = function () {
     if (!SP.Actor || !SP.actors || !AP()) return;
     if (!SP.world || SP.world.interior) return;
-    SP.actors.list = SP.actors.list.filter((a) => !(a && a.id && String(a.id).indexOf("extra_") === 0 && a.layerExtra));
+    SP.actors.list = SP.actors.list.filter((a) => !(a && a.layerExtra));
     for (const s of B.LAYER_EXTRAS) {
       if (SP.actors.list.some((a) => a.id === s.id)) continue;
       const ap = AP().randomNpc(s.seed, s.hints);
@@ -174,7 +174,6 @@
       if (!window.ACTORS || !window.ACTORS[set]) continue;
       const a = new SP.Actor({ id: s.id, set, x: s.x, y: s.y, radius: 0.18, speed: 0, height: 1.6 });
       a.setDir(s.dir);
-      a.extraNpc = true;
       a.layerExtra = true;
       AP().applyToActor(a, ap);
       SP.actors.list.push(a);
@@ -328,14 +327,15 @@
     const prev = A.spawnAt.bind(A);
     A.spawnAt = function (key) {
       const map = {
-        school_pri: { to: "school_pri", street: [-19, -6.5, "N"] },
-        school_mid: { to: "school_mid", street: [-7, -6.5, "N"] },
-        school_high: { to: "school_high", street: [31, -6.5, "N"] },
+        school_pri: { to: "school_pri", street: [68, -6.5, "N"] },
+        school_mid: { to: "school_mid", street: [80, -6.5, "N"] },
+        school_high: { to: "school_high", street: [92, -6.5, "N"] },
         barber: { to: "shop_barber", street: [48.5, 3.2, "N"] }
       };
       if (map[key]) {
         const m = map[key];
         if (document.getElementById("phonepanel")) document.getElementById("phonepanel").classList.add("hidden");
+        if ((key === "barber" || String(key).indexOf("school_") === 0) && SP.chunks && SP.chunks.loadAll) SP.chunks.loadAll();
         if (SP.game && SP.game.switchScene) SP.game.switchScene(m.to, SP.scenes[m.to] && SP.scenes[m.to].spawn);
         else if (SP.place) SP.place.enter(m.to, SP.scenes[m.to] && SP.scenes[m.to].spawn);
         return;
@@ -345,6 +345,31 @@
     A._charBSpawn = true;
   };
 
+
+  B.patchGodAndMap = function () {
+    const A = SP.stageA;
+    if (!A || A._charBGod) return;
+    const prevGod = A.openGod;
+    if (typeof prevGod === "function") {
+      A.openGod = function () {
+        prevGod.apply(this, arguments);
+        const el = document.getElementById("godpanel");
+        if (!el || el.querySelector("[data-sp=school_pri]")) return;
+        const row = el.querySelector(".row");
+        if (!row) return;
+        const more = document.createElement("div");
+        more.className = "row";
+        more.innerHTML = '<button data-sp="school_pri">小学</button><button data-sp="school_mid">初中</button>'
+          + '<button data-sp="school_high">高中</button><button data-sp="barber">理发店</button>';
+        row.parentNode.insertBefore(more, row.nextSibling);
+        more.querySelectorAll("[data-sp]").forEach((b) => {
+          b.onclick = () => { el.classList.add("hidden"); A.spawnAt(b.dataset.sp); };
+        });
+      };
+    }
+    A._charBGod = true;
+  };
+
   B.boot = function () {
     B.wrapRender();
     B.suppressTextSigns();
@@ -352,6 +377,7 @@
     B.patchHairDraw();
     B.wrapPlace();
     B.patchSpawnAt();
+    B.patchGodAndMap();
     // restore hair
     const hid = B.getHairId();
     if (hid) B.setHairId(hid);

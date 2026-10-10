@@ -39,7 +39,7 @@ SP.appearance.setOutfitId('casual'|'uniform'|'winter')  // 写入 ps.flags.outfi
 
 ### 发型
 
-`hairId` 已进 schema；**理发店玩法未做**——菜单里有「理发店换发型（未开放）」占位。
+`hairId` 已进 schema；**Char-B 理发店已接通**（`SP.charB.openBarber` / `setHairId` → `ps.flags.hairId`；立绘发型美术后续）。
 
 ## Civic 制服（本阶段已交付）
 
@@ -62,8 +62,8 @@ SP.appearance.setOutfitId('casual'|'uniform'|'winter')  // 写入 ps.flags.outfi
 ## 分层服装美术管线（路线图）
 
 1. **Char-A / Char-A2**：schema + 衣柜桩；civic 制服改为 Blender 45° 正渲（非重着色）  
-2. **Char-B**：学校占位（小学/初中/高中楼 + 学生/教师 NPC 类）；更多 top/bottom 换色层；试做 1 套 true child mesh  
-3. **Char-C**：理发店改 `hairId`；外套/裙装独立图层合成；男女体型骨架差  
+2. **Char-B（已交付）**：东缘社区小学/初中/高中 + 学生/教师 NPC + 理发店 `hairId` + 服装层变体  
+3. **Char-C**：发型立绘层；外套/裙装独立图层合成；真·儿童 mesh；社区诊所（可选）  
 4. **Char-D**：职业套装库（保安/快递员/厨师…）与天气 outer 自动层
 
 ## 相关文件

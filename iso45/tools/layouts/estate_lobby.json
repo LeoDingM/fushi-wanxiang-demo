@@ -1,0 +1,240 @@
+{
+ "id": "estate_lobby",
+ "name": "云栖里 · 现代大堂",
+ "_doc": "Midtown-B bright lobby. S gap = courtyard entry; E = unit A-101; elev stub notice (Midtown-A). N windows.",
+ "bounds": [
+  0.15,
+  0.15,
+  7.85,
+  5.35
+ ],
+ "ground": {
+  "origin": [
+   0,
+   0
+  ],
+  "chunk": 2,
+  "cols": 4,
+  "rows": 3,
+  "legend": {
+   "T": "g_terrazzo",
+   "K": "g_tile"
+  },
+  "data_south_to_north": [
+   "TTTT",
+   "TTTT",
+   "TTKK"
+  ]
+ },
+ "walls": [
+  {
+   "side": "N",
+   "line": 5.5,
+   "from": 0.0,
+   "to": 8.0,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "window",
+     "at": 1.0,
+     "interact": "window_in",
+     "id": "lobby_win",
+     "reach": [
+      1.75,
+      4.2
+     ]
+    },
+    {
+     "kind": "window",
+     "at": 4.5,
+     "interact": "window_in",
+     "id": "lobby_win2",
+     "reach": [
+      5.25,
+      4.2
+     ]
+    }
+   ]
+  },
+  {
+   "side": "E",
+   "line": 8.0,
+   "from": 0.0,
+   "to": 5.5,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "door",
+     "at": 1.0,
+     "id": "unit_a101",
+     "interact": "portal",
+     "to": "room_midtown_a101",
+     "spawn": [
+      7.4,
+      2.4,
+      "W"
+     ],
+     "label": "A-101",
+     "block": false
+    },
+    {
+     "kind": "gap",
+     "at": 3.5,
+     "w": 2.0
+    }
+   ]
+  },
+  {
+   "side": "S",
+   "line": 0.0,
+   "from": 0.0,
+   "to": 8.0,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "gap",
+     "at": 2.5,
+     "w": 3.0
+    }
+   ]
+  },
+  {
+   "side": "W",
+   "line": 0.0,
+   "from": 0.0,
+   "to": 5.5,
+   "finish": "plain"
+  }
+ ],
+ "furniture": [
+  {
+   "type": "f_table",
+   "x": 3.5,
+   "y": 3.8,
+   "id": "reception",
+   "interact": "notice",
+   "note": "前台 · 云栖里物业（演示）",
+   "reach": [
+    2.7,
+    3.8
+   ]
+  },
+  {
+   "type": "f_stool",
+   "x": 2.9,
+   "y": 3.8,
+   "id": "recv_stool"
+  },
+  {
+   "type": "f_shelf",
+   "x": 6.4,
+   "y": 4.7,
+   "id": "mail_shelf",
+   "interact": "notice",
+   "note": "信报柜 · 扫码取件",
+   "reach": [
+    6.4,
+    4.15
+   ]
+  },
+  {
+   "type": "f_chair",
+   "x": 1.5,
+   "y": 1.6,
+   "rot": 2,
+   "id": "wait1",
+   "interact": "sit",
+   "reach": [
+    2.05,
+    1.6
+   ]
+  },
+  {
+   "type": "f_chair",
+   "x": 2.6,
+   "y": 1.6,
+   "rot": 2,
+   "id": "wait2",
+   "interact": "sit",
+   "reach": [
+    3.15,
+    1.6
+   ]
+  },
+  {
+   "type": "i_pendant",
+   "x": 3.8,
+   "y": 2.5,
+   "state": "off",
+   "interact": "light",
+   "id": "lobby_light",
+   "reach": [
+    3.8,
+    2.5
+   ]
+  },
+  {
+   "type": "i_notice",
+   "x": 2.2,
+   "y": 5.35,
+   "z": 1.2,
+   "interact": "notice",
+   "id": "lobby_board",
+   "note": "云栖里公告：门禁 24h · 访客登记 · 租金见表 rent_table",
+   "reach": [
+    2.2,
+    4.6
+   ]
+  },
+  {
+   "type": "i_notice",
+   "x": 7.55,
+   "y": 4.2,
+   "z": 1.3,
+   "interact": "notice",
+   "id": "elev_stub",
+   "note": "电梯厅 · 7F以上由 Midtown-A 负责（本轨：庭院/大堂/户型）",
+   "reach": [
+    6.9,
+    4.2
+   ]
+  },
+  {
+   "type": "p_planter",
+   "x": 6.5,
+   "y": 1.3,
+   "id": "plant1"
+  },
+  {
+   "type": "p_planter",
+   "x": 0.9,
+   "y": 3.6,
+   "rot": 6,
+   "id": "plant2"
+  }
+ ],
+ "portals": [
+  {
+   "id": "to_compound",
+   "rect": [
+    2.6,
+    0.2,
+    5.4,
+    0.85
+   ],
+   "to": "estate_compound",
+   "spawn": [
+    10.0,
+    13.5,
+    "S"
+   ],
+   "dir": "S",
+   "label": "出门 · 庭院"
+  }
+ ],
+ "spawn": [
+  4.0,
+  1.3,
+  "N"
+ ]
+}

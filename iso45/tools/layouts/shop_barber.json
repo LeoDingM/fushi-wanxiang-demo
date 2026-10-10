@@ -1,0 +1,140 @@
+{
+ "id": "shop_barber",
+ "name": "剪艺理发 · 店内",
+ "_doc": "Char-B: barbershop stub — hairId UI persists; sprite hair later",
+ "bounds": [
+  0.15,
+  0.15,
+  5.85,
+  4.85
+ ],
+ "ground": {
+  "origin": [
+   0,
+   0
+  ],
+  "chunk": 2,
+  "cols": 3,
+  "rows": 3,
+  "legend": {
+   "T": "g_tile",
+   "W": "g_wood:a"
+  },
+  "data_south_to_north": [
+   "TTT",
+   "TWW",
+   "TWW"
+  ]
+ },
+ "walls": [
+  {
+   "side": "N",
+   "line": 5.0,
+   "from": 0,
+   "to": 6,
+   "finish": "tile",
+   "openings": [
+    {
+     "kind": "window",
+     "at": 2.5,
+     "interact": "window_in",
+     "id": "bw1",
+     "reach": [
+      3.0,
+      4.2
+     ]
+    }
+   ]
+  },
+  {
+   "side": "E",
+   "line": 6,
+   "from": 0,
+   "to": 5,
+   "finish": "tile",
+   "openings": [
+    {
+     "kind": "door",
+     "at": 0.2,
+     "id": "exit",
+     "interact": "portal",
+     "to": "street",
+     "spawn": [
+      48.5,
+      3.2,
+      "N"
+     ],
+     "label": "出门",
+     "block": false,
+     "reach": [
+      5.2,
+      0.9
+     ]
+    }
+   ]
+  },
+  {
+   "side": "W",
+   "line": 0,
+   "from": 0,
+   "to": 5,
+   "finish": "tile",
+   "openings": []
+  },
+  {
+   "side": "S",
+   "line": 0,
+   "from": 0,
+   "to": 6,
+   "finish": "tile",
+   "openings": []
+  }
+ ],
+ "furniture": [
+  {
+   "type": "f_chair",
+   "x": 2.0,
+   "y": 2.4,
+   "id": "cut_chair",
+   "interact": "barber",
+   "name": "理发椅",
+   "note": "坐下来选发型（hairId）",
+   "reach": [
+    2.8,
+    2.4
+   ]
+  },
+  {
+   "type": "f_table",
+   "x": 3.5,
+   "y": 2.4,
+   "id": "mirror_desk",
+   "interact": "barber",
+   "name": "镜台",
+   "note": "剪艺理发：改发型会写入存档",
+   "reach": [
+    3.5,
+    1.8
+   ]
+  },
+  {
+   "type": "i_notice",
+   "x": 1.2,
+   "y": 4.7,
+   "z": 1.15,
+   "id": "price",
+   "interact": "notice",
+   "note": "价目：剪发 ¥25 · 洗剪吹 ¥40 · 染发（占位）¥128",
+   "reach": [
+    1.6,
+    4.2
+   ]
+  }
+ ],
+ "spawn": [
+  3.0,
+  1.0,
+  "N"
+ ],
+ "portals": []
+}

@@ -1,3 +1,5 @@
+23:55 · [外观] Stage Char-B：东缘社区小学/初中/高中外立面+招牌+校内学生/教师NPC（小学child）；剪艺理发 hairId UI；layerx 服装变体；community clinic stub 跳过（挡校）；charB_test 14/14 · appearance 12/12 · smoke 4/4；screenshots/char-b1…b6；zip scene-proto-45-charb-play.zip + 常规 play/full
+23:55 · [并行·NPC日程] midtown/east 路点：office+walker_e→[46,2.2]；学校偏 school_high；好感+HUD；npc_schedule 测试；zip scene-proto-45-npc-sch-play.zip
 23:55 · [并行·NPC日程] 街坊≥4人日夜日程(home→通勤/上班|学校→晚归) + 打招呼好感 toast/HUD；js/npc_schedule.js（wrap npc.update/interact，未改 stageR/charB/appearance）；NPC_SCHEDULE.md；screenshots/npc-sch1…4；zip scene-proto-45-npc-sch-play.zip
 23:45 · [外观] Stage Char-A2c：police 扁平大盖帽+短前檐（露眼）、firefighter 圆顶+长后檐、nurse 现代发髻无纸帽；Blender 重渲+actors_civic；screenshots/char-a2c-*；play zip
 23:35 · [外观] Stage Char-A2 hotfix：Blender 正渲 police/firefighter/nurse（police_cap/fire_helmet/nurse_cap）；弃用重着色矩形帽；actors_civic 重打包；Char-B 学校暂停；screenshots/char-a2b-*；play zip

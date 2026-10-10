@@ -1,22 +1,30 @@
-# CHAR_READY · Stage Char-A / Char-A2 Civic-look
+# CHAR_READY · Stage Char-A / Char-A2 / Char-B
 
-外观并行轨第一包。CBD 仍暂停。
+外观并行轨。CBD 仍暂停。近市中心扩张：学校落在东缘社区带（朝 midtown，非 CBD）。
 
 ## 已交付
 
-1. **Appearance schema** — `js/appearance.js`（gender/ageBand/height/bodyType/hairId/job/layers/outfitSet；`randomNpc` / `resolveAtlas` / 衣柜）
-2. **Civic NPC 制服（Char-A2）** — `police` / `firefighter` / `nurse` 经 Blender 45° 正渲（`police_cap`/`fire_helmet`/`nurse_cap`），同 office/student 品质；重着色已弃用
-3. **市政外立面现代化** — 一楼玻璃 `f_shop` + plaster 上层 + 招牌；大厅 tile + 补光
-4. **街面 extras** — 2–4 个随机外观路人（含 child scale 0.72）
-5. **文档/测试** — `docs/APPEARANCE.md`、`tools/appearance_test.py`
+### Char-A / A2
+1. **Appearance schema** — `js/appearance.js`
+2. **Civic NPC 制服** — police / firefighter / nurse Blender 正渲
+3. **市政外立面** — 玻璃门脸 + 招牌
+4. **街面 extras** — 随机外观路人（child scale）
 
-## 接入
+### Char-B（本包）
+1. **社区学校外立面** — `school_pri` / `school_mid` / `school_high` 在东缘南带（x≈65–101，消防站以东），招牌 `img/signs/school_*.png`
+2. **学生/教师 NPC** — 进入校内大厅 spawn；小学 child_cue + 缩小比例；初/高中 student(_skirt/_long) + teacher→office
+3. **剪艺理发** — 东街 `shop_barber` 外立面 + 店内 `interact:barber` 改 `hairId`（写入 `ps.flags.hairId`）
+4. **服装层变体路人** — `layerx_*`（student_skirt / student_long / office_short / child_cue），不占用 Char-A `extra_*` 计数
+5. **接入** — `index.html` → `charB.js`；上帝模式传送：小学/初中/高中/理发店
 
-`index.html` 已挂：`actors_civic.js` →（actors）… → `appearance.js` + `civic_look.js`（在 stageF 之后）。
+未做：社区诊所 stub（东缘已被三校占满，跳过以免挡学校）；真·儿童 mesh。
 
-## 建议 Char-B
+## 测试 / 截图 / 包
+- `tools/charB_test.py` · `tools/capture_charB.py`
+- screenshots/char-b1…char-b6
+- zip: `scene-proto-45-charb-play.zip`（及常规 play/full）
 
-- 学校占位建筑 + 学生/教师 job
-- 更多服装层换色（短袖/长袖、裙装）
-- 真·儿童 mesh（替换 0.72 缩放）
-- 理发店 UI 改 hairId
+## 建议 Char-C
+- 发型立绘层 / 真 hair mesh；外套·裙装独立图层合成
+- 社区诊所轻量厅（若 midtown 东缘腾空）
+- 真·儿童 mesh 替换 0.62 缩放

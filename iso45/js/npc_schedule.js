@@ -10,18 +10,29 @@
   const log = (t) => SP.world && SP.world.logEvent && SP.world.logEvent(t);
 
   // School street waypoints (Char-B signs / spawnAt); fallback generic sidewalk
+  /** Future midtown / near-downtown approach: east sidewalk just before chunks/east (rect x≥46.5). */
+  NS.midtownEdge = function () {
+    return [46.0, 2.2];
+  };
+  /** Metro 井槐里站 street mouth — commute hop toward midtown. */
+  NS.metroEdge = function () {
+    return [41.2, -6.8];
+  };
   NS.schoolWaypoint = function () {
     try {
       if (SP.charB && SP.charB.SIGNS) {
-        const s = SP.charB.SIGNS.find((x) => x.id === "school_mid") || SP.charB.SIGNS.find((x) => String(x.id).indexOf("school") === 0);
+        // prefer high school (east) then mid — path leans midtown/east
+        const high = SP.charB.SIGNS.find((x) => x.id === "school_high");
+        const mid = SP.charB.SIGNS.find((x) => x.id === "school_mid");
+        const s = high || mid || SP.charB.SIGNS.find((x) => String(x.id).indexOf("school") === 0);
         if (s) return [s.x, -6.5];
       }
     } catch (e) {}
-    return [5.0, -6.5];
+    return [37.0, -6.5]; // school_high street fallback (east of courtyard)
   };
   NS.workWaypoint = function () {
-    // generic "office / metro commute" sidewalk near east block
-    return [18.5, 3.4];
+    // Near-downtown pivot: office workers head to midtown/east edge (not local alley)
+    return NS.midtownEdge();
   };
 
   /** Schedule profiles for ≥4 neighborhood NPCs (minutes-of-day slots). */
@@ -77,10 +88,23 @@
         { until: 1260, at: "home" },
         { until: 1440, at: "home", hidden: true }
       ]
+    },
+    // East-bound white-collar: days path toward midtown/east edge (future downtown)
+    walker_e: {
+      name: "东街白领",
+      home: [44.6, 2.0],
+      role: "work",
+      slots: [
+        { until: 420, at: "home", hidden: true },
+        { until: 540, at: "commute" },
+        { until: 1080, at: "work" },
+        { until: 1260, at: "commute" },
+        { until: 1440, at: "home", hidden: true }
+      ]
     }
   };
 
-  NS.NAMES = { office: "上班族小陈", student: "学生小林", vendor: "王阿姨", uncle: "张大爷" };
+  NS.NAMES = { office: "上班族小陈", student: "学生小林", vendor: "王阿姨", uncle: "张大爷", walker_e: "东街白领" };
 
   NS.affinity = Object.create(null);
   NS._lastSlot = Object.create(null);
@@ -118,8 +142,13 @@
     if (at === "work") return NS.workWaypoint();
     if (at === "school") return NS.schoolWaypoint();
     if (at === "commute") {
-      // midway between home and work/school
-      const dest = P.role === "school" ? NS.schoolWaypoint() : P.role === "stall" ? (P.stall || NS.workWaypoint()) : NS.workWaypoint();
+      // lean toward midtown/east: office via metro mouth; student toward east school; others mid-home
+      if (P.role === "work") return NS.metroEdge();
+      if (P.role === "school") {
+        const dest = NS.schoolWaypoint();
+        return [(P.home[0] + dest[0]) * 0.55, (P.home[1] + dest[1]) * 0.55];
+      }
+      const dest = P.role === "stall" ? (P.stall || NS.workWaypoint()) : NS.workWaypoint();
       return [(P.home[0] + dest[0]) * 0.5, (P.home[1] + dest[1]) * 0.5];
     }
     if (at === "park") return [14.5, 8.5];
@@ -235,7 +264,7 @@
     const night = SP.clock && (SP.clock.min >= 1320 || SP.clock.min < 420);
     for (const a of SP.npcs.list) {
       if (NS.PROFILES[a.id]) continue;
-      if (a.id === "walker_e" || a.id === "rider") {
+      if (a.id === "rider") {
         if (night) {
           if (!a._schNight) { a._schNight = true; a._schWasHidden = !!a.hidden; }
           a.hidden = true;

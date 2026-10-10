@@ -76,3 +76,32 @@ The st_* pieces **supersede the older kit_int s_gondola / s_cooler / s_counter /
 * There is no glazing on the south front: the cut-away stubs stand in for the shop window. The staff room is a closed door with no interior.
 * Shoppers are simple waypoint walkers (no steering / backoff). If you block a route they wait, and after 4 s they skip a waypoint.
 * `R.job` has a single job id (`store_clerk`), so this store and any other job share one employment.
+
+## Store-D deepen (shift loop · props · night light · wage slip) — 2026-10-10
+
+Self-contained deepen of the clerk job. **Only store-owned files touched** (`js/store.js`, tests/capture under `tools/`, this doc, `screenshots/store-d*`). No stage*/charB/env.js/index.html edits.
+
+### What shipped
+1. **Clearer shift loop (HUD phases)**  
+   `F.phase(ps, abs)` drives Chinese steps: ①应聘/排班/打卡 → ②当班任务（补货/收银/拖地） → ③下班打卡领工资条. `#storehud` shows the current step + next hint while on shift.
+2. **Wage slip in bag / bank**  
+   `F.clockOut` / auto `shift_paid` → `F.makeWageSlip` → `ps.store.slips[]` + `ps.store.bag.wage_slip` + `ps.store.bank[]` ledger. Toast「📄 工资条 · 实发 ¥N（已入账）」. Idempotent on `(at, pay)` so clockOut + log replay never doubles.
+3. **≥2 interactive props with visible state**  
+   - Shelf / cooler: open `restock` → piece state `low`（空货架）→ complete → `full`.  
+   - Floor / bins: open `mop` → bins `messy` + 4× `fx/litter` ground decals (`storeDirty`) → mop → `clean` + litter cleared.  
+   `F.propWant` / `ST.propState` / `ST.devInjectTasks` for tests & capture.
+4. **Night vs day store lighting (store-local overlay)**  
+   Still wraps `SP.env.lights` / `ambient` only while in `store_24` / staff room — no `env.js` rewrite. Day: bright cool LED ambient `[236,242,250]`. Night: dim cooler `[72,86,110]`, dimmer overhead panels, stronger fridge glow, green 24h sign spill. `ST.lightSnap()`.
+5. **Screenshots** `screenshots/store-d1-empty-shelf.png` · `store-d2-dirty-floor.png` · `store-d3-night-light.png` · `store-d4-wage-slip.png` (`python3 tools/capture_store_d.py`).
+6. **Tests** `node tools/test_store.js` → **16/16 PASS** (3 new Store-D). Smoke: `node tools/smoke_store_d.js`.
+7. **Zip** prefer `/workspace/fushi-wanxiang/scene-proto-45-store-d-play.zip` (avoids racing concurrent Stage R / Char-B writers of `scene-proto-45-play.zip`).
+
+### Dev helpers (preview / capture)
+- `SP.store.devShift()` — hire + book + clock-in (unchanged).  
+- `SP.store.devInjectTasks(['restock','mop'])` — force open tasks + sync props.  
+- `SP.store.propState()` / `SP.store.lightSnap()` — snapshots.  
+- Preview bar: ⏱上班 / 下班 / +¥100 (store_preview.html).
+
+### Suggested next store step
+- **Store-E:** customer dialogue lines while scanning; restock *walk-to* the named shelf (guided arrow); night-shift NPC 小周 takes over the counter more clearly; optional PC `store_preview` day/night toggle button; put 工资条 readable detail panel (tap bag).
+

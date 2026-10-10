@@ -1,0 +1,945 @@
+{
+ "id": "cbd_concourse",
+ "station": "cbd",
+ "skin": "cbd",
+ "kind": "concourse",
+ "name": "中央商务区站 · 站厅 (B1)",
+ "_doc": "Grand CBD concourse: polished stone, wide unpaid plaza, roomy security, counter on east wall, parallel IN/OUT gate banks, spacious paid hall, A–D exits to CBD module (exit:cbd, no intermediate street place).",
+ "bounds": [
+  0.25,
+  0.25,
+  36.0,
+  22.0
+ ],
+ "ground": {
+  "origin": [
+   0,
+   0
+  ],
+  "legend": {
+   "C": "mg_floor:cbd"
+  },
+  "rows_south_to_north": [
+   "CCCCCCCCCCCCCCCCCC",
+   "CCCCCCCCCCCCCCCCCC",
+   "CCCCCCCCCCCCCCCCCC",
+   "CCCCCCCCCCCCCCCCCC",
+   "CCCCCCCCCCCCCCCCCC",
+   "CCCCCCCCCCCCCCCCCC",
+   "CCCCCCCCCCCCCCCCCC",
+   "CCCCCCCCCCCCCCCCCC",
+   "CCCCCCCCCCCCCCCCCC",
+   "CCCCCCCCCCCCCCCCCC",
+   "CCCCCCCCCCCCCCCCCC"
+  ]
+ },
+ "walls": [
+  {
+   "side": "N",
+   "line": 21.5,
+   "from": 0.25,
+   "to": 36.0,
+   "state": "cbd"
+  },
+  {
+   "side": "S",
+   "line": 0.55,
+   "from": 0.25,
+   "to": 36.0,
+   "state": "cbd"
+  },
+  {
+   "side": "W",
+   "line": 0.55,
+   "from": 0.25,
+   "to": 22.0,
+   "state": "cbd_ad",
+   "bays": {
+    "4": "cbd_ad",
+    "10": "cbd",
+    "16": "cbd_ad"
+   }
+  },
+  {
+   "side": "E",
+   "line": 35.4,
+   "from": 0.25,
+   "to": 22.0,
+   "state": "cbd",
+   "bays": {
+    "3": "cbd_map",
+    "9": "cbd_ad",
+    "15": "cbd"
+   }
+  }
+ ],
+ "objects": [
+  {
+   "type": "mt_up",
+   "x": 5.0,
+   "y": 0.55,
+   "rot": 4,
+   "state": "cbd",
+   "id": "exit_a",
+   "nocol": true
+  },
+  {
+   "type": "mt_up",
+   "x": 31.0,
+   "y": 0.55,
+   "rot": 4,
+   "state": "cbd",
+   "id": "exit_b",
+   "nocol": true
+  },
+  {
+   "type": "mt_up",
+   "x": 31.0,
+   "y": 18.5,
+   "rot": 0,
+   "state": "cbd",
+   "id": "exit_c",
+   "nocol": true
+  },
+  {
+   "type": "mt_up",
+   "x": 5.0,
+   "y": 18.5,
+   "rot": 0,
+   "state": "cbd",
+   "id": "exit_d",
+   "nocol": true
+  },
+  {
+   "type": "mt_pillar",
+   "x": 16.5,
+   "y": 8.5,
+   "state": "cbd"
+  },
+  {
+   "type": "mt_pillar",
+   "x": 22,
+   "y": 3.0,
+   "state": "cbd"
+  },
+  {
+   "type": "mt_pillar",
+   "x": 28.0,
+   "y": 5.0,
+   "state": "cbd"
+  },
+  {
+   "type": "mt_pillar",
+   "x": 8.0,
+   "y": 16.0,
+   "state": "cbd"
+  },
+  {
+   "type": "mt_pillar",
+   "x": 24.0,
+   "y": 16.0,
+   "state": "cbd"
+  },
+  {
+   "type": "mt_adwall",
+   "x": 1.0,
+   "y": 8.0,
+   "rot": 6,
+   "state": "default",
+   "id": "ad_w"
+  },
+  {
+   "type": "mt_adwall",
+   "x": 34.8,
+   "y": 8.0,
+   "rot": 6,
+   "state": "default",
+   "id": "ad_e"
+  },
+  {
+   "type": "mt_xray",
+   "x": 6.0,
+   "y": 6.5,
+   "id": "xray",
+   "interact": "xray",
+   "reach": [
+    6.0,
+    5.6
+   ],
+   "label": "放包过安检"
+  },
+  {
+   "type": "mt_arch",
+   "x": 9.2,
+   "y": 6.5,
+   "id": "arch"
+  },
+  {
+   "run": "mt_rail",
+   "axis": "x",
+   "line": 5.55,
+   "from": 3.5,
+   "to": 8.8,
+   "step": 2
+  },
+  {
+   "run": "mt_rail",
+   "axis": "x",
+   "line": 7.45,
+   "from": 3.5,
+   "to": 8.8,
+   "step": 2
+  },
+  {
+   "type": "mt_tvm",
+   "x": 30.0,
+   "y": 5.5,
+   "rot": 6,
+   "state": "cbd",
+   "id": "tvm0",
+   "interact": "tvm",
+   "reach": [
+    29.1,
+    5.5
+   ],
+   "label": "买单程票"
+  },
+  {
+   "type": "mt_tvm",
+   "x": 30.0,
+   "y": 6.7,
+   "rot": 6,
+   "state": "cbd",
+   "id": "tvm1",
+   "interact": "tvm",
+   "reach": [
+    29.1,
+    6.7
+   ],
+   "label": "买单程票"
+  },
+  {
+   "type": "mt_tvm",
+   "x": 30.0,
+   "y": 7.9,
+   "rot": 6,
+   "state": "cbd",
+   "id": "tvm2",
+   "interact": "tvm",
+   "reach": [
+    29.1,
+    7.9
+   ],
+   "label": "买单程票"
+  },
+  {
+   "type": "mt_tvm",
+   "x": 30.0,
+   "y": 9.1,
+   "rot": 6,
+   "state": "cbd",
+   "id": "tvm3",
+   "interact": "tvm",
+   "reach": [
+    29.1,
+    9.1
+   ],
+   "label": "买单程票"
+  },
+  {
+   "type": "mt_counter",
+   "x": 32.5,
+   "y": 3.5,
+   "state": "cbd",
+   "id": "counter",
+   "interact": "counter",
+   "reach": [
+    31.1,
+    3.5
+   ],
+   "label": "客服中心 · 充值"
+  },
+  {
+   "type": "mt_mapboard",
+   "x": 24.0,
+   "y": 1.2,
+   "state": "cbd",
+   "id": "map",
+   "interact": "map",
+   "reach": [
+    24.0,
+    2.0
+   ],
+   "label": "线路图"
+  },
+  {
+   "type": "mt_bin",
+   "x": 22,
+   "y": 8.5,
+   "state": "cbd"
+  },
+  {
+   "type": "mt_bin",
+   "x": 28,
+   "y": 10.5,
+   "state": "cbd"
+  },
+  {
+   "gates": {
+    "id": "gin",
+    "kind": "in",
+    "x0": 6.0,
+    "y": 11.5,
+    "n": 7,
+    "skin": "cbd"
+   }
+  },
+  {
+   "gates": {
+    "id": "gout",
+    "kind": "out",
+    "x0": 20.0,
+    "y": 11.5,
+    "n": 7,
+    "skin": "cbd"
+   }
+  },
+  {
+   "type": "mt_down",
+   "x": 18.0,
+   "y": 16.0,
+   "rot": 0,
+   "state": "cbd",
+   "id": "plat_stairs",
+   "nocol": true
+  },
+  {
+   "type": "mt_hangsign",
+   "x": 9.0,
+   "y": 12.1,
+   "state": "cbd",
+   "id": "hs_in"
+  },
+  {
+   "type": "mt_hangsign",
+   "x": 23.0,
+   "y": 12.1,
+   "state": "cbd",
+   "id": "hs_out"
+  },
+  {
+   "type": "mt_hangsign",
+   "x": 5.0,
+   "y": 2.2,
+   "state": "cbd",
+   "id": "hs_a"
+  },
+  {
+   "type": "mt_hangsign",
+   "x": 31.0,
+   "y": 2.2,
+   "state": "cbd",
+   "id": "hs_b"
+  },
+  {
+   "type": "mt_hangsign",
+   "x": 31.0,
+   "y": 19.5,
+   "state": "cbd",
+   "id": "hs_c"
+  },
+  {
+   "type": "mt_hangsign",
+   "x": 5.0,
+   "y": 19.5,
+   "state": "cbd",
+   "id": "hs_d"
+  },
+  {
+   "type": "mt_board",
+   "x": 16.0,
+   "y": 21.0,
+   "state": "cbd",
+   "id": "board_n"
+  },
+  {
+   "type": "mt_bench",
+   "x": 14.0,
+   "y": 16.5,
+   "state": "cbd"
+  },
+  {
+   "type": "mt_bench",
+   "x": 18.0,
+   "y": 16.5,
+   "state": "cbd"
+  },
+  {
+   "run": "mt_fence",
+   "axis": "y",
+   "line": 5.5,
+   "from": 11.8,
+   "to": 21.2,
+   "state": "cbd"
+  },
+  {
+   "run": "mt_fence",
+   "axis": "y",
+   "line": 27.0,
+   "from": 11.8,
+   "to": 21.2,
+   "state": "cbd"
+  },
+  {
+   "run": "mt_fence",
+   "axis": "x",
+   "line": 11.65,
+   "from": 12.4,
+   "to": 19.9,
+   "state": "cbd"
+  },
+  {
+   "run": "mt_fence",
+   "axis": "y",
+   "line": 16.4,
+   "from": 11.8,
+   "to": 14.0,
+   "state": "cbd"
+  },
+  {
+   "run": "mt_fence",
+   "axis": "y",
+   "line": 17.6,
+   "from": 11.8,
+   "to": 14.0,
+   "state": "cbd"
+  }
+ ],
+ "colliders": [],
+ "signs": [
+  {
+   "obj": "counter",
+   "at": [
+    31.0,
+    2.745,
+    2.39
+   ],
+   "axis": "x",
+   "w": 3.0,
+   "h": 0.3,
+   "lines": [
+    "客服中心 · 充值 · 补票"
+   ],
+   "ink": "#eef6ff"
+  },
+  {
+   "obj": "hs_in",
+   "at": [
+    8.25,
+    11.785,
+    2.54
+   ],
+   "axis": "x",
+   "w": 1.5,
+   "h": 0.3,
+   "lines": [
+    "入站闸机 ↑"
+   ],
+   "ink": "#ffffff"
+  },
+  {
+   "obj": "hs_out",
+   "at": [
+    22.25,
+    11.785,
+    2.54
+   ],
+   "axis": "x",
+   "w": 1.5,
+   "h": 0.3,
+   "lines": [
+    "出站闸机 ↓"
+   ],
+   "ink": "#ffffff"
+  },
+  {
+   "obj": "hs_a",
+   "at": [
+    4.25,
+    1.885,
+    2.54
+   ],
+   "axis": "x",
+   "w": 1.5,
+   "h": 0.3,
+   "lines": [
+    "A 中央公园 ↑"
+   ],
+   "ink": "#ffffff"
+  },
+  {
+   "obj": "hs_b",
+   "at": [
+    30.25,
+    1.885,
+    2.54
+   ],
+   "axis": "x",
+   "w": 1.5,
+   "h": 0.3,
+   "lines": [
+    "B 云汇天地 ↑"
+   ],
+   "ink": "#ffffff"
+  },
+  {
+   "obj": "hs_c",
+   "at": [
+    30.25,
+    19.185,
+    2.54
+   ],
+   "axis": "x",
+   "w": 1.5,
+   "h": 0.3,
+   "lines": [
+    "C 天枢塔 ↑"
+   ],
+   "ink": "#ffffff"
+  },
+  {
+   "obj": "hs_d",
+   "at": [
+    4.25,
+    19.185,
+    2.54
+   ],
+   "axis": "x",
+   "w": 1.5,
+   "h": 0.3,
+   "lines": [
+    "D 云汇体育 ↑"
+   ],
+   "ink": "#ffffff"
+  },
+  {
+   "obj": "board_n",
+   "at": [
+    14.5,
+    20.9,
+    2.2
+   ],
+   "axis": "x",
+   "w": 3.0,
+   "h": 0.35,
+   "lines": [
+    "付费区 · 往站台"
+   ],
+   "ink": "#ffe8c0"
+  },
+  {
+   "obj": "ad_w",
+   "at": [
+    0.85,
+    6.0,
+    1.2
+   ],
+   "axis": "y",
+   "w": 4.0,
+   "h": 1.8,
+   "lines": [
+    "云汇天地",
+    "秋季焕新"
+   ],
+   "ink": "#ffffff"
+  },
+  {
+   "obj": "ad_e",
+   "at": [
+    34.65,
+    6.0,
+    1.2
+   ],
+   "axis": "y",
+   "w": 4.0,
+   "h": 1.8,
+   "lines": [
+    "天枢塔 · 金融城",
+    "招聘季"
+   ],
+   "ink": "#ffffff"
+  }
+ ],
+ "portals": [
+  {
+   "id": "A",
+   "rect": [
+    3.2,
+    0.4,
+    6.8,
+    1.45
+   ],
+   "to": "exit:cbd",
+   "exit": "A",
+   "label": "A 出口 · 中央公园",
+   "auto": true
+  },
+  {
+   "id": "B",
+   "rect": [
+    29.2,
+    0.4,
+    32.8,
+    1.45
+   ],
+   "to": "exit:cbd",
+   "exit": "B",
+   "label": "B 出口 · 云汇天地",
+   "auto": true
+  },
+  {
+   "id": "C",
+   "rect": [
+    29.2,
+    20.3,
+    32.8,
+    21.4
+   ],
+   "to": "exit:cbd",
+   "exit": "C",
+   "label": "C 出口 · 天枢塔",
+   "auto": true
+  },
+  {
+   "id": "D",
+   "rect": [
+    3.2,
+    20.3,
+    6.8,
+    21.4
+   ],
+   "to": "exit:cbd",
+   "exit": "D",
+   "label": "D 出口 · 云汇体育中心",
+   "auto": true
+  },
+  {
+   "id": "down",
+   "rect": [
+    16.2,
+    18.0,
+    19.8,
+    19.2
+   ],
+   "to": "cbd_platform",
+   "spawn": [
+    14.0,
+    6.5,
+    "N"
+   ],
+   "label": "下楼往站台",
+   "auto": true,
+   "hours": true
+  }
+ ],
+ "exit_spawns": {
+  "A": [
+   5.0,
+   2.6,
+   "N"
+  ],
+  "B": [
+   31.0,
+   2.6,
+   "N"
+  ],
+  "C": [
+   31.0,
+   19.2,
+   "S"
+  ],
+  "D": [
+   5.0,
+   19.2,
+   "S"
+  ]
+ },
+ "zones": [
+  {
+   "id": "arch",
+   "kind": "arch",
+   "rect": [
+    8.8,
+    6.0,
+    9.6,
+    7.0
+   ]
+  },
+  {
+   "id": "paid",
+   "kind": "paid",
+   "rect": [
+    5.8,
+    11.85,
+    26.7,
+    21.2
+   ]
+  }
+ ],
+ "staff": [
+  {
+   "id": "guard",
+   "sprite": "office",
+   "at": [
+    10.2,
+    7.8
+   ],
+   "dir": "SW",
+   "name": "安检员"
+  },
+  {
+   "id": "op",
+   "sprite": "uncle",
+   "at": [
+    4.8,
+    5.2
+   ],
+   "dir": "N",
+   "name": "安检机操作员"
+  },
+  {
+   "id": "clerk",
+   "sprite": "student",
+   "at": [
+    32.5,
+    4.5
+   ],
+   "dir": "S",
+   "name": "客服"
+  },
+  {
+   "id": "gatestaff",
+   "sprite": "office",
+   "at": [
+    17.0,
+    10.7
+   ],
+   "dir": "S",
+   "name": "站务员"
+  }
+ ],
+ "spawn": [
+  5.0,
+  2.6,
+  "N"
+ ],
+ "gate_approach": 1.35,
+ "lights": [
+  {
+   "x": 8,
+   "y": 6,
+   "r": 7,
+   "c": [
+    230,
+    240,
+    255
+   ]
+  },
+  {
+   "x": 18,
+   "y": 6,
+   "r": 7,
+   "c": [
+    230,
+    240,
+    255
+   ]
+  },
+  {
+   "x": 28,
+   "y": 5,
+   "r": 6,
+   "c": [
+    230,
+    240,
+    255
+   ]
+  },
+  {
+   "x": 16,
+   "y": 15,
+   "r": 8,
+   "c": [
+    235,
+    245,
+    255
+   ]
+  },
+  {
+   "x": 8,
+   "y": 18,
+   "r": 5,
+   "c": [
+    230,
+    240,
+    255
+   ]
+  },
+  {
+   "x": 28,
+   "y": 18,
+   "r": 5,
+   "c": [
+    230,
+    240,
+    255
+   ]
+  }
+ ],
+ "routes": {
+  "in": [
+   [
+    5.0,
+    2.8
+   ],
+   [
+    8.0,
+    3.2
+   ],
+   [
+    10.0,
+    4.0
+   ],
+   [
+    12.0,
+    5.5
+   ],
+   [
+    12.0,
+    10.0
+   ],
+   "gate_in",
+   [
+    8.5,
+    14.5
+   ],
+   [
+    10.0,
+    18.5
+   ],
+   [
+    20.0,
+    18.5
+   ]
+  ],
+  "out": [
+   [
+    20.0,
+    18.5
+   ],
+   [
+    23.5,
+    15.5
+   ],
+   "gate_out",
+   [
+    27.0,
+    9.0
+   ],
+   [
+    27.0,
+    5.5
+   ],
+   [
+    24.0,
+    4.0
+   ],
+   [
+    16.0,
+    3.2
+   ],
+   [
+    8.0,
+    3.0
+   ],
+   [
+    5.0,
+    2.8
+   ]
+  ],
+  "tvm": [
+   [
+    18.0,
+    5.5
+   ],
+   [
+    24.0,
+    6.5
+   ],
+   [
+    28.8,
+    6.5
+   ],
+   [
+    24.0,
+    6.5
+   ],
+   [
+    18.0,
+    5.5
+   ]
+  ]
+ },
+ "exit_joins": {
+  "A": [
+   [
+    5.0,
+    2.8
+   ]
+  ],
+  "B": [
+   [
+    31.0,
+    2.8
+   ]
+  ],
+  "C": [
+   [
+    31.0,
+    19.0
+   ]
+  ],
+  "D": [
+   [
+    5.0,
+    19.0
+   ]
+  ]
+ },
+ "exit_routes": {
+  "A": [
+   [
+    5.0,
+    2.8
+   ]
+  ],
+  "B": [
+   [
+    31.0,
+    2.8
+   ]
+  ],
+  "C": [
+   [
+    31.0,
+    19.0
+   ]
+  ],
+  "D": [
+   [
+    5.0,
+    19.0
+   ]
+  ]
+ }
+}

@@ -63,9 +63,9 @@
       civic_hospital_S1F_1_door: ["civic_hospital", "井槐社区卫生中心", [22.0, -6.5, "N"], ["08:00", "20:00"]],
       civic_fire_S1F_1_shop: ["civic_fire", "井槐消防站", [58.0, -6.5, "N"], ["00:00", "24:00"]],
       civic_fire_S1F_1_door: ["civic_fire", "井槐消防站", [58.0, -6.5, "N"], ["00:00", "24:00"]],
-      school_pri_S1F_1_shop: ["school_pri", "井槐小学", [-19.0, -6.5, "N"], ["07:30", "17:30"]],
-      school_mid_S1F_1_shop: ["school_mid", "井槐中学·初中部", [-7.0, -6.5, "N"], ["07:30", "17:30"]],
-      school_high_S1F_1_shop: ["school_high", "井槐中学·高中部", [31.0, -6.5, "N"], ["07:30", "17:30"]],
+      school_pri_S1F_1_shop: ["school_pri", "井槐社区小学", [68.0, -6.5, "N"], ["07:30", "17:30"]],
+      school_mid_S1F_1_shop: ["school_mid", "井槐社区初中", [80.0, -6.5, "N"], ["07:30", "17:30"]],
+      school_high_S1F_1_shop: ["school_high", "井槐社区高中", [92.0, -6.5, "N"], ["07:30", "17:30"]],
       shop_barber_S1F_0_shop: ["shop_barber", "剪艺理发", [48.5, 3.2, "N"], ["10:00", "21:00"]]
     };
     for (const o of data.objects) {
