@@ -1,11 +1,12 @@
 {
  "id": "civic_hospital",
- "name": "井槐社区卫生中心 · 大厅",
+ "name": "井槐社区卫生中心 · 候诊／药房",
+ "_doc": "Stage B: waiting + pharmacy",
  "bounds": [
   0.15,
   0.15,
-  6.85,
-  4.85
+  11.85,
+  6.85
  ],
  "ground": {
   "origin": [
@@ -13,52 +14,54 @@
    0
   ],
   "chunk": 2,
-  "cols": 4,
-  "rows": 3,
+  "cols": 6,
+  "rows": 4,
   "legend": {
-   "T": "g_tile"
+   "T": "g_tile",
+   "W": "g_wood:a"
   },
   "data_south_to_north": [
-   "TTTT",
-   "TTTT",
-   "TT.."
+   "TTTTTT",
+   "TTTTTT",
+   "TTTTTT",
+   "TTTTTT"
   ]
  },
  "walls": [
   {
    "side": "N",
-   "line": 5.0,
-   "from": 0.0,
-   "to": 7.0,
+   "line": 7,
+   "from": 0,
+   "to": 12,
    "finish": "plain",
    "openings": [
     {
      "kind": "window",
-     "at": 1.0,
+     "at": 2,
      "interact": "window_in",
-     "id": "w1",
+     "id": "hw1",
      "reach": [
-      1.75,
-      3.8
+      2.75,
+      5.5
      ]
     },
     {
      "kind": "window",
-     "at": 4.0,
+     "at": 7,
      "interact": "window_in",
-     "id": "w2",
+     "id": "hw2",
      "reach": [
-      4.75,
-      3.8
+      7.75,
+      5.5
      ]
     }
    ]
   },
   {
    "side": "E",
-   "line": 7.0,
-   "from": 0.0,
-   "to": 5.0,
+   "line": 12,
+   "from": 0,
+   "to": 7,
    "finish": "plain",
    "openings": [
     {
@@ -74,7 +77,7 @@
      ],
      "label": "出门",
      "reach": [
-      6.4,
+      11.3,
       0.9
      ]
     }
@@ -82,61 +85,148 @@
   },
   {
    "side": "S",
-   "line": 0.0,
-   "from": 0.0,
-   "to": 7.0,
+   "line": 0,
+   "from": 0,
+   "to": 12,
    "finish": "plain"
   },
   {
    "side": "W",
-   "line": 0.0,
-   "from": 0.0,
-   "to": 5.0,
+   "line": 0,
+   "from": 0,
+   "to": 7,
    "finish": "plain"
+  },
+  {
+   "side": "P",
+   "axis": "y",
+   "line": 7.5,
+   "from": 0,
+   "to": 7,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "gap",
+     "at": 1.2,
+     "w": 1.5
+    }
+   ]
   }
  ],
  "furniture": [
   {
    "type": "f_table",
    "x": 2.2,
-   "y": 2.8,
-   "id": "desk"
+   "y": 3.0,
+   "id": "wait_table",
+   "interact": "notice",
+   "note": "候诊区：请按叫号就诊。今日普通诊 ¥25（prices 参考）。"
+  },
+  {
+   "type": "f_stool",
+   "x": 1.4,
+   "y": 2.4,
+   "id": "w1"
+  },
+  {
+   "type": "f_stool",
+   "x": 2.8,
+   "y": 2.4,
+   "id": "w2"
+  },
+  {
+   "type": "f_stool",
+   "x": 1.4,
+   "y": 3.6,
+   "id": "w3"
+  },
+  {
+   "type": "f_stool",
+   "x": 2.8,
+   "y": 3.6,
+   "id": "w4"
+  },
+  {
+   "type": "f_table",
+   "x": 5.0,
+   "y": 5.5,
+   "id": "nurse",
+   "interact": "notice",
+   "note": "分诊台：量血压／测体温。护士站。"
   },
   {
    "type": "f_chair",
-   "x": 2.2,
-   "y": 2.1,
-   "id": "chair"
+   "x": 5.0,
+   "y": 4.8,
+   "id": "nurse_c"
   },
   {
    "type": "f_shelf",
-   "x": 1.2,
-   "y": 4.3,
-   "id": "shelf",
+   "x": 8.5,
+   "y": 5.8,
+   "id": "pharm1",
    "interact": "notice",
-   "note": "社区医院：挂号输液 · 08:00–20:00"
+   "note": "药房窗口：凭处方取药 · 常备感冒药／创可贴。"
+  },
+  {
+   "type": "f_shelf",
+   "x": 10.2,
+   "y": 5.8,
+   "id": "pharm2",
+   "interact": "notice",
+   "note": "冷藏柜：胰岛素／疫苗（工作人员）。"
+  },
+  {
+   "type": "f_table",
+   "x": 9.2,
+   "y": 3.5,
+   "id": "pharm_c",
+   "interact": "notice",
+   "note": "药剂师小陈：请把医保卡／处方放在窗口。"
+  },
+  {
+   "type": "f_chair",
+   "x": 9.2,
+   "y": 2.8,
+   "id": "pharm_ch"
+  },
+  {
+   "type": "i_notice",
+   "x": 4.0,
+   "y": 6.85,
+   "z": 1.2,
+   "interact": "notice",
+   "id": "hboard",
+   "note": "社区卫生中心：挂号 08:00–11:30 / 14:00–17:30 · 急诊联络 120"
   },
   {
    "type": "i_pendant",
-   "x": 3.2,
-   "y": 2.5,
+   "x": 3.5,
+   "y": 3.5,
    "state": "on",
-   "id": "light"
+   "id": "hl1"
+  },
+  {
+   "type": "i_pendant",
+   "x": 9.0,
+   "y": 3.5,
+   "state": "on",
+   "id": "hl2"
   }
  ],
  "spawn": [
-  5.8,
-  1.1,
+  10.8,
+  1.2,
   "W"
  ],
  "portals": [
   {
    "id": "to_street",
    "rect": [
-    6.3,
+    11.2,
     0.2,
-    6.9,
-    1.5
+    11.9,
+    1.6
    ],
    "dir": "E",
    "to": "street",

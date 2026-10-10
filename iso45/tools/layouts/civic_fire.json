@@ -1,11 +1,12 @@
 {
  "id": "civic_fire",
- "name": "井槐消防站 · 执勤室",
+ "name": "井槐消防站 · 车库／执勤",
+ "_doc": "Stage B: garage + truck",
  "bounds": [
   0.15,
   0.15,
-  6.85,
-  4.85
+  11.85,
+  7.85
  ],
  "ground": {
   "origin": [
@@ -13,52 +14,58 @@
    0
   ],
   "chunk": 2,
-  "cols": 4,
-  "rows": 3,
+  "cols": 6,
+  "rows": 4,
   "legend": {
    "T": "g_tile"
   },
   "data_south_to_north": [
-   "TTTT",
-   "TTTT",
-   "TT.."
+   "TTTTTT",
+   "TTTTTT",
+   "TTTTTT",
+   "TTTTTT"
   ]
  },
  "walls": [
   {
    "side": "N",
-   "line": 5.0,
-   "from": 0.0,
-   "to": 7.0,
+   "line": 8,
+   "from": 0,
+   "to": 12,
    "finish": "plain",
    "openings": [
     {
      "kind": "window",
-     "at": 1.0,
+     "at": 1.5,
      "interact": "window_in",
-     "id": "w1",
+     "id": "fw1",
      "reach": [
-      1.75,
-      3.8
+      2.25,
+      6.2
      ]
     },
     {
+     "kind": "gap",
+     "at": 4.5,
+     "w": 4.0
+    },
+    {
      "kind": "window",
-     "at": 4.0,
+     "at": 9.0,
      "interact": "window_in",
-     "id": "w2",
+     "id": "fw2",
      "reach": [
-      4.75,
-      3.8
+      9.75,
+      6.2
      ]
     }
    ]
   },
   {
    "side": "E",
-   "line": 7.0,
-   "from": 0.0,
-   "to": 5.0,
+   "line": 12,
+   "from": 0,
+   "to": 8,
    "finish": "plain",
    "openings": [
     {
@@ -74,7 +81,7 @@
      ],
      "label": "出门",
      "reach": [
-      6.4,
+      11.3,
       0.9
      ]
     }
@@ -82,61 +89,103 @@
   },
   {
    "side": "S",
-   "line": 0.0,
-   "from": 0.0,
-   "to": 7.0,
-   "finish": "plain"
+   "line": 0,
+   "from": 0,
+   "to": 12,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "gap",
+     "at": 3.5,
+     "w": 5.0
+    }
+   ]
   },
   {
    "side": "W",
-   "line": 0.0,
-   "from": 0.0,
-   "to": 5.0,
+   "line": 0,
+   "from": 0,
+   "to": 8,
    "finish": "plain"
   }
  ],
  "furniture": [
   {
+   "type": "p_car",
+   "x": 6.0,
+   "y": 4.0,
+   "rot": 0,
+   "state": "normal",
+   "variant": "red",
+   "id": "fire_truck",
+   "interact": "notice",
+   "note": "执勤消防车（演示用轿车模型占位）· 非紧急请勿攀爬。"
+  },
+  {
    "type": "f_table",
-   "x": 2.2,
-   "y": 2.8,
-   "id": "desk"
+   "x": 1.8,
+   "y": 6.5,
+   "id": "duty",
+   "interact": "notice",
+   "note": "执勤室：接警电话 · 出勤登记本。今日值班班组：一班。"
   },
   {
    "type": "f_chair",
-   "x": 2.2,
-   "y": 2.1,
-   "id": "chair"
+   "x": 1.8,
+   "y": 5.8,
+   "id": "duty_c"
   },
   {
    "type": "f_shelf",
-   "x": 1.2,
-   "y": 4.3,
-   "id": "shelf",
+   "x": 0.6,
+   "y": 7.3,
+   "id": "gear",
    "interact": "notice",
-   "note": "消防站执勤室 · 非紧急请勿打扰"
+   "note": "装备架：水带／接口／消防斧（示意）。"
+  },
+  {
+   "type": "f_stool",
+   "x": 10.0,
+   "y": 2.5,
+   "id": "bench"
+  },
+  {
+   "type": "i_notice",
+   "x": 2.5,
+   "y": 7.85,
+   "z": 1.2,
+   "interact": "notice",
+   "id": "fboard",
+   "note": "消防救援站：参观请登记 · 火警请拨 119"
   },
   {
    "type": "i_pendant",
-   "x": 3.2,
-   "y": 2.5,
+   "x": 3.0,
+   "y": 3.0,
    "state": "on",
-   "id": "light"
+   "id": "fl1"
+  },
+  {
+   "type": "i_pendant",
+   "x": 9.0,
+   "y": 3.0,
+   "state": "on",
+   "id": "fl2"
   }
  ],
  "spawn": [
-  5.8,
-  1.1,
+  10.8,
+  1.2,
   "W"
  ],
  "portals": [
   {
    "id": "to_street",
    "rect": [
-    6.3,
+    11.2,
     0.2,
-    6.9,
-    1.5
+    11.9,
+    1.6
    ],
    "dir": "E",
    "to": "street",

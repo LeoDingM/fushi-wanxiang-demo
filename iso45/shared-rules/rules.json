@@ -339,7 +339,7 @@
    "st_tea_egg": 2
   },
   "bus_fare": 2,
-  "bus_ride_min": 8
+  "bus_ride_min": 6
  },
  "items": {
   "noodles": {
@@ -1651,7 +1651,7 @@
    "2F-02": {
     "district": "peripheral",
     "rent": 850,
-    "type": "小单间 ~14㎡ + 独立卫生间 + 封闭玻璃阳台",
+    "type": "小单间 ~14㎡",
     "scene": "room_2f02",
     "door": "stair_2f",
     "label": "井槐里12号 2F-02"
@@ -1659,10 +1659,29 @@
    "3F-xin": {
     "district": "inner",
     "rent": 1200,
-    "type": "一房一厅 ~35㎡（馨园）",
+    "type": "一房一厅精装 ~35㎡",
     "scene": "room_xin_301",
-    "door": "stair_xin_1f",
-    "label": "馨园公寓 3-01"
+    "door": "stair_xin_3f",
+    "label": "馨园公寓 3-01",
+    "stair": "stair_xin_1f"
+   },
+   "2F-xin": {
+    "district": "inner",
+    "rent": 1100,
+    "type": "一房一厅 ~35㎡",
+    "scene": "room_xin_201",
+    "door": "stair_xin_2f",
+    "label": "馨园公寓 2-01",
+    "stair": "stair_xin_1f"
+   },
+   "3F-xin-b": {
+    "district": "inner",
+    "rent": 1250,
+    "type": "一房一厅 ~35㎡",
+    "scene": "room_xin_302",
+    "door": "stair_xin_3f",
+    "label": "馨园公寓 3-02",
+    "stair": "stair_xin_1f"
    }
   }
  },

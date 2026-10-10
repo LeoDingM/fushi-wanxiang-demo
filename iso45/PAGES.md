@@ -1,14 +1,13 @@
 # Pages handoff
 
-更新时间：2026-10-10 22:39（Asia/Shanghai）
+更新时间：2026-10-10 22:51（Asia/Shanghai）
 
-## Stage A（老街区扩展；CBD 暂停不动）
-1. **街道**：派出所 / 社区医院 / 消防站外立面+可进大厅；馨园公寓（稍新）一房一厅 `room_xin_301`；立面窗变体更多
-2. **上帝模式**：中文面板（P 旁「上帝」/ F1）— 金钱、四维需求、时刻、解锁全部、传送回家
-3. **住房**：可租馨园一房一厅（押一付一），切换住所 / 退租；可保留 2F-02
-4. **公交**：井槐里 ↔ 东街，站牌互动上车，跳过车程+扣费（prices.bus_fare=¥2）
-5. **手机**（P）：微信消息、银行余额/转账、地图步行/公交耗时、租房页；外卖/打车等占位
+## Stage B hotfix（在 Stage A 之上；CBD 仍暂停）
+1. **馨园一房一厅** `room_xin_301`（及 201/302）：客厅+卧室+厨房+卫生间；门墙不裁家具；S/W 半墙淡出；walkable；`roomlayout.validate` **0 problems**
+2. **手机 UX**：iPhone 造型主屏幕（App 图标网格+Dock）；点图标进各 App；底条回主屏
+3. **微信**：会话列表 → 气泡聊天（绿泡己方）；NPC 回复多句随机；脚本文案可接 `SP.phone.aiChat`（默认 stub 不调外部 API）
+4. **其余 Stage B**：civic 深厅、招聘/公交时刻、上帝租约/传送等保持
 
 ## 产物
 - `scene-proto-45.zip` / `scene-proto-45-play.zip`
-- 截图：`screenshots/a1-hospital-street.png` `a2-phone-wechat.png` `a3-god-mode.png` `a4-1ldk-xin.png` `a5-police-lobby.png`
+- 截图：`screenshots/a4-1ldk-xin.png` `a2-phone-wechat.png` `b4-xin-living.png` `b5-phone-wechat.png`

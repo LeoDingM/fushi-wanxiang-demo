@@ -138,30 +138,54 @@ def from_layout(fname, street_spawn=None):
     for k in ("swing", "_short"): S.pop(k, None)
     return S
 
-def stair_xin():
-    """馨园公寓 1F lobby — single floor corridor to 3-01 (一房一厅 demo unit)."""
-    S = common("stair_xin_1f", "馨园公寓 · 1F 门厅", 1)
+def stair_xin(f):
+    """馨园公寓 corridor floors 1–3 (Stage B): more rentable 一房一厅 units."""
+    S = common(f"stair_xin_{f}f", f"馨园公寓 · {f}F 走廊", f)
     S["bounds"] = {"x0": 0.15, "y0": 0.15, "x1": 6.9, "y1": 3.85}
     ground(S, {"T": "g_terrazzo"}, ["TTTT", "TTTT"])
-    add(S, "i_wall", 1.5, 4.0, state="dado"); add(S, "i_wall", 2.5, 4.0, state="dado")
-    add(S, "i_door", 3.5, 4.0, state="closed", interact="portal", name="3-01", to="room_xin_301",
-        spawn=[7.8, 1.2, "W"], label="进 3-01（一房一厅）", id="door_xin_301", reach=[4.1, 3.55])
-    add(S, "i_wall", 5.0, 4.0, state="dado"); add(S, "i_wall", 6.0, 4.0, state="dado")
-    add(S, "i_notice", 2.0, 3.98, z=1.2, interact="notice", id="xin_notice",
-        note="馨园公寓：一房一厅起租 · 中介链居 · 看房请预约")
-    add(S, "i_pendant", 3.0, 2.0, state="on", id="xin_light")
+    add(S, "i_wall", 1.2, 4.0, state="dado")
+    # unit doors per floor
+    units = {1: [], 2: [("room_xin_201", "2-01", "进 2-01")], 3: [("room_xin_301", "3-01", "进 3-01"), ("room_xin_302", "3-02", "进 3-02")]}[f]
+    if f == 1:
+        add(S, "i_door", 2.5, 4.0, state="closed", interact="notice", name="信报箱", note="馨园公寓信报箱 · 快递柜在一层门外", id="xin_mail", reach=[3.1, 3.55])
+        add(S, "i_notice", 4.2, 3.98, z=1.2, interact="notice", id="xin_notice",
+            note="馨园公寓：2F/3F 一房一厅在租 · 链居中介 · 看房请预约")
+    xdoor = 2.2
+    for sid, label, lab in units:
+        add(S, "i_door", xdoor, 4.0, state="closed", interact="portal", name=label, to=sid,
+            spawn=[7.8, 1.2, "W"], label=lab + "（一房一厅）", id=f"door_{sid}", reach=[xdoor + 0.6, 3.55])
+        xdoor += 2.2
+    add(S, "i_pendant", 3.0, 2.0, state="on", id=f"xin_light_{f}")
+    # stairs between floors (simple portals)
+    if f < 3:
+        add(S, "i_flight", 5.5, 1.0, state="up", id=f"xin_up_{f}", interact="portal", to=f"stair_xin_{f+1}f",
+            spawn=[5.9, 0.5, "S"], label="上楼", reach=[5.9, 0.7])
+    if f > 1:
+        add(S, "i_flight", 5.5, 1.0, state="down", id=f"xin_dn_{f}", interact="portal", to=f"stair_xin_{f-1}f",
+            spawn=[5.9, 0.5, "S"], label="下楼", reach=[5.9, 0.7])
     east_wall(S, 0.0, 4.5, "dado")
-    cut_s(S, 0.0, 7.0, "dado", gaps=[(2.8, 4.2)])
+    cut_s(S, 0.0, 7.0, "dado", gaps=[(2.8, 4.2)] if f == 1 else ())
     cut_w(S, 0.0, 4.0, "dado")
     col(S, "north", -1, 3.95, 8, 5); col(S, "east", 6.85, -1, 9, 5); col(S, "west", -1, -1, 0.15, 5)
-    col(S, "south_a", -1, -1, 2.8, 0.15); col(S, "south_b", 4.2, -1, 9, 0.15)
-    S["portals"].append({"id": "exit_street", "rect": [2.8, 0.15, 4.2, 0.5], "dir": "S", "to": "street",
-                         "spawn": [82.0, 15.5, "S"], "label": "出门", "door": "apt_xin_door"})
+    if f == 1:
+        col(S, "south_a", -1, -1, 2.8, 0.15); col(S, "south_b", 4.2, -1, 9, 0.15)
+        S["portals"].append({"id": "exit_street", "rect": [2.8, 0.15, 4.2, 0.5], "dir": "S", "to": "street",
+                             "spawn": [82.0, 15.5, "S"], "label": "出门", "door": "apt_xin_S1F_1_door"})
+    else:
+        col(S, "south", -1, -1, 9, 0.15)
+    if f < 3:
+        S["portals"].append({"id": f"up_{f+1}", "rect": [5.2, 0.5, 6.5, 1.0], "dir": "N", "to": f"stair_xin_{f+1}f",
+                             "spawn": [5.9, 0.4, "S"], "label": "上楼"})
+    if f > 1:
+        S["portals"].append({"id": f"down_{f-1}", "rect": [5.2, 0.5, 6.5, 1.0], "dir": "N", "to": f"stair_xin_{f-1}f",
+                             "spawn": [5.9, 0.4, "S"], "label": "下楼"})
     S["spawn"] = [3.5, 1.0, "N"]
     return S
 
-out["stair_xin_1f"] = stair_xin()
-out["room_xin_301"] = from_layout("room_xin_301.json")
+for f in (1, 2, 3):
+    out[f"stair_xin_{f}f"] = stair_xin(f)
+for fname in ("room_xin_201.json", "room_xin_301.json", "room_xin_302.json"):
+    out[fname.replace('.json','')] = from_layout(fname)
 out["civic_police"] = from_layout("civic_police.json", street_spawn=[-36.0, -6.5, "N"])
 out["civic_hospital"] = from_layout("civic_hospital.json", street_spawn=[22.0, -6.5, "N"])
 out["civic_fire"] = from_layout("civic_fire.json", street_spawn=[58.0, -6.5, "N"])
