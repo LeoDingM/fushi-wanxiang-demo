@@ -1,2 +1,3 @@
 - Hotfix 1 (19:02): rooftop light layers, interior culling after reset, interaction target cycling + bed sleep, 2F-02 declutter, night lighting (door lamps, doorplates, colour temperatures, season/weather grade).
 - 19:58 Stage 6a: 地铁接入（CBD 占位）+ 住户作息窗灯/敲门 + 电器计量电费账单 + 2F-02 开关状态保留
+- 20:10 polish: evening lit 55-65%, 2F-02 AC indoor+facade, metro exit placement; CBD hold pending redesign READY

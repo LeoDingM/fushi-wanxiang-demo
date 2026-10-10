@@ -341,6 +341,19 @@
     const msg = `本月 ${L}<br>用电构成：${by || "—"}<br>当前功率 ${now} W · 下次扣费 ${nx.m}月${nx.d}日（含物业/宽带等固定费，预计合计 ¥${pv.total}）`;
     G.payCard({ msg, from: "国网电力 · 电费账单", ms: 7000 }); W.logEvent(`查看电表：本月用电 ${P ? P.qty : 0} 度，预计 ¥${P ? P.amount.toFixed(2) : 0}`);
   };
+  /** shared-rules tick events -> toasts / log / pay cards (also used by the CBD host loop in main.js) */
+  G.onRuleEvents = function (evs) {
+    for (const e of evs) {
+      if (e.type === "need_low") { const t = NEED_TXT[e.need][e.level === "critical" ? 1 : 0]; SP.toast(t, 2600); W.logEvent(t); }
+      else if (e.type === "rent_paid") { W.logEvent(`${e.late ? "补交" : "自动交了"}房租 ¥${e.amount}`); SP.toast(`交房租 ¥${e.amount}`, 2600); }
+      else if (e.type === "rent_owed") { W.logEvent(`房租没交上！欠 ¥${e.owed}`); SP.toast(`钱不够交房租，欠 ¥${e.owed}`, 3200); }
+      else if (e.type === "landlord_msg") { G.payCard({ msg: e.text, from: R.data.lease.landlord }); W.logEvent(EVT.landlord_msg(e)); }
+      else if (EVT[e.type]) { const t = EVT[e.type](e); if (t) { SP.toast(t, 3000); W.logEvent(t); } }
+      if (e.type === "rent_paid") G.payCard({ amount: e.amount, method: R.data.payment.transfer || "微信转账", to: R.data.lease.landlord, what: "房租" });
+      if (e.type === "util_paid") G.payCard({ amount: e.amount, method: R.payLabel(G.ps) + "代扣", to: "物业 / 水电燃气", what: e.label });
+      if (e.type === "shift_paid") G.payCard({ amount: e.pay, income: true, from: "邻里便利 · 工资" });
+    }
+  };
   G.switchScene = function (to, spawn, door) {
     const P = SP.player;
     if (W.sceneId === "room_2f02" && to !== "room_2f02") {     // leaving the flat: a low-key reminder if things stay on
@@ -376,17 +389,7 @@
     SP.state.slowZone = !!(W.interior && W.sceneId.startsWith("stair") && P.x > 4.9 && P.y > 0.2);
     if (G.activity) ctx.activity = G.activity.sleep ? G.activity.id : null;
     G.syncPower();
-    const evs = R.tick(G.ps, gm, ctx);
-    for (const e of evs) {
-      if (e.type === "need_low") { const t = NEED_TXT[e.need][e.level === "critical" ? 1 : 0]; SP.toast(t, 2600); W.logEvent(t); }
-      else if (e.type === "rent_paid") { W.logEvent(`${e.late ? "补交" : "自动交了"}房租 ¥${e.amount}`); SP.toast(`交房租 ¥${e.amount}`, 2600); }
-      else if (e.type === "rent_owed") { W.logEvent(`房租没交上！欠 ¥${e.owed}`); SP.toast(`钱不够交房租，欠 ¥${e.owed}`, 3200); }
-      else if (e.type === "landlord_msg") { G.payCard({ msg: e.text, from: R.data.lease.landlord }); W.logEvent(EVT.landlord_msg(e)); }
-      else if (EVT[e.type]) { const t = EVT[e.type](e); if (t) { SP.toast(t, 3000); W.logEvent(t); } }
-      if (e.type === "rent_paid") G.payCard({ amount: e.amount, method: R.data.payment.transfer || "微信转账", to: R.data.lease.landlord, what: "房租" });
-      if (e.type === "util_paid") G.payCard({ amount: e.amount, method: R.payLabel(G.ps) + "代扣", to: "物业 / 水电燃气", what: e.label });
-      if (e.type === "shift_paid") G.payCard({ amount: e.pay, income: true, from: "邻里便利 · 工资" });
-    }
+    G.onRuleEvents(R.tick(G.ps, gm, ctx));
     G.speedMul = R.status(G.ps, ctx).speedMul;
     G.syncLaundry();
     if (G.activity) { G.activity.t += dt; if (!C.ff) finish(G.activity); }

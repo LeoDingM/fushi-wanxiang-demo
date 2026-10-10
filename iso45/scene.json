@@ -3565,6 +3565,16 @@
    "variant": "base"
   },
   {
+   "id": "ac_S2F_3",
+   "type": "f_ac",
+   "x": 4.15,
+   "y": 12.98,
+   "z": 3.22,
+   "fade_group": "b12",
+   "variant": "base",
+   "player_ac": true
+  },
+  {
    "id": "wall_S2F_4",
    "type": "f_wall",
    "x": 6.0,
@@ -14702,7 +14712,7 @@
    ],
    "reach": [
     38.3,
-    -12.2
+    -11.25
    ]
   },
   {

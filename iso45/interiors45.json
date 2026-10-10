@@ -5669,17 +5669,18 @@
    {
     "id": "ac",
     "type": "i_ac",
-    "x": 1.75,
-    "y": 3.98,
+    "x": 0.08,
+    "y": 2.95,
     "z": 0,
     "state": "off",
     "interact": "ac",
     "name": "空调",
     "reach": [
-     2.3,
-     2.62
+     0.85,
+     2.55
     ],
-    "_doc": "wall-mounted split AC over the window (1 kW while on)"
+    "_doc": "wall-mounted on the west (camera) wall, rot 6 so the face reads; outdoor unit on facade tracks its on state",
+    "rot": 6
    }
   ],
   "colliders": [

@@ -113,6 +113,8 @@ def facade(face, bx, fl, bay_i):
         if fl > 0 and rnd.random() < 0.5:
             ax, ay = (x + 1.5 + rnd.choice((-0.9, 0.9)), y) if face == "S" else (x, y - 1.5 + rnd.choice((-0.9, 0.9)))
             add("f_ac", ax, ay, z + 0.15, rot=rot, id_=f"ac_{tag}", fade_group="b12", variant=pick(["base", "a1", "a2"]))
+        if tag == "S2F_3" and not any(q["id"] == "ac_S2F_3" for q in objs):   # 2F-02's own outdoor unit (fan spins while 李默's AC runs)
+            q = add("f_ac", x + 1.15, y - 0.02, z + 0.22, rot=rot, id_="ac_S2F_3", fade_group="b12", variant="base"); q["player_ac"] = True
 for fl in range(FLOORS):
     for i, bx in enumerate(S_BAYS): facade("S", bx, fl, i)
     for i, by in enumerate(W_BAYS): facade("W", by, fl, i)
@@ -215,7 +217,7 @@ for i, x in enumerate((-40.0, -31.0, -22.0, -13.0, -4.0, 5.0, 23.0, 35.0, 44.0, 
     add("p_tree", x, -14.0 + (i % 2) * 1.2, id_=f"tree_belt{i}", variant="base" if i % 3 else "t2")
 add("p_pole", -3.0, 0.5, id_="pole_w"); add("p_pole", 17.5, 0.5, id_="pole_e"); add("p_pole", 21.5, 12.0, rot=2, id_="pole_n")
 add("p_tree", 61.0, 13.0, id_="tree_alley", variant="t2"); add("p_tree", 78.0, 1.0, id_="tree_e4"); add("p_pole", 62.5, 0.5, id_="pole_e4")
-add("p_metro_entry", 41.2, -12.2, rot=6, state="open", id_="metro_jhl", interact="metro", to="metro_jhl", name="井槐里站", hours=["06:00", "23:00"], reach=[38.3, -12.2])   # Stage 5: metro entrance (mouth faces west)
+add("p_metro_entry", 41.2, -12.2, rot=6, state="open", id_="metro_jhl", interact="metro", to="metro_jhl", name="井槐里站", hours=["06:00", "23:00"], reach=[38.3, -11.25])   # (inside the walkable bounds y0 -11.5) Stage 5: metro entrance (mouth faces west)
 add("p_bins", 60.4, 9.6, id_="bins_alley"); add("p_ebike", 72.5, 2.6, rot=2, id_="ebike_tea")
 add("p_pole", -27.0, 0.5, id_="pole_w2"); add("p_pole", -41.0, 0.5, id_="pole_w3"); add("p_pole", 36.5, 0.5, id_="pole_e2"); add("p_pole", 54.0, 0.5, id_="pole_e3")
 add("p_stall", 0.5, 2.2, id_="stall", interact="stall")

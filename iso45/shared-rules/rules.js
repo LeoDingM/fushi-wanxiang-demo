@@ -602,7 +602,13 @@
       /** window light: home -> lit; a few leave a light on when out, a few sleep with a night light */
       lit: function (id, abs, ctx) {
         const H = D.households, r = R.households.state(id, abs, ctx), day = Math.floor(abs / DAY);
-        if (r.st === "home") return { lit: true, tv: r.tv, st: r.st };
+        if (r.st === "home") {
+          // not every home shows a lit facade room: base chance + per-building / per-floor character (some blocks are mostly elderly / early sleepers)
+          const m = /^(.*)_(\d+)F-/.exec(id), b = m ? m[1] : id, f = m ? m[2] : "0";
+          const pd = (H.p_home_dark || 0) + ((fnv(b + "|bd") - 0.5) * (H.var_building || 0)) + ((fnv(b + f + "|fd") - 0.5) * (H.var_floor || 0));
+          if (fnv(id + "|hd" + day + "|" + Math.floor((abs - day * DAY) / 90)) < pd) return { lit: false, tv: false, st: r.st, dark: true };
+          return { lit: true, tv: r.tv, st: r.st };
+        }
         if (r.st === "out") return { lit: fnv(id + "|on" + day) < (H.p_left_on || 0), tv: false, st: r.st };
         if (r.st === "asleep") return { lit: fnv(id + "|nl" + day) < (H.p_nightlight || 0), dim: true, tv: false, st: r.st };
         return { lit: false, tv: false, st: r.st };

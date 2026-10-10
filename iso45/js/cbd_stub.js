@@ -17,6 +17,7 @@
       `<div style="color:#c8d0e0;font-size:13px">${exit} 出口外的街区还在施工，可原路返回站内乘车回井槐里</div>`;
     el.style.opacity = "1"; clearTimeout(card.t); card.t = setTimeout(() => (el.style.opacity = "0"), 3600);
   }
+  if (SP.places.cbd && !SP.places.cbd._stub) return;
   SP.places.cbd = {
     _stub: true,
     enter(o) {

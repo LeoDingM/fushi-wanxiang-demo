@@ -65,7 +65,7 @@
     const k = e.key.toLowerCase();
     if (["arrowup", "arrowdown", "arrowleft", "arrowright", " "].includes(k)) e.preventDefault();
     keys[k] = true;
-    if (e.repeat) return;
+    if (e.repeat || (SP.cbd && SP.cbd.active)) return;        // the CBD place handles its own keys (js/cbd/controls.js)
     const G = SP.game;
     if (G && G.menu) {                                      // action / floor menu: 1-9 pick, Esc / Q close
       if (/^[1-9]$/.test(k)) { G.pick(+k - 1); return; }
@@ -90,6 +90,7 @@
     if (k === "tab" || k === "q") { e.preventDefault && e.preventDefault(); SP.cycleTarget(); }
   });
   canvas.addEventListener("wheel", (e) => {
+    if (SP.cbd && SP.cbd.active) return;
     e.preventDefault(); const r = canvas.getBoundingClientRect(), sx = canvas.width / r.width;
     const f = Math.exp(-SP.clamp(e.deltaY * (e.deltaMode === 1 ? 33 : 1), -240, 240) * 0.0022);
     SP.zoomBy(f, (e.clientX - r.left) * sx, (e.clientY - r.top) * sy(r));
@@ -97,7 +98,7 @@
   }, { passive: false });
   const sy = (r) => canvas.height / r.height;
   let drag = null;
-  canvas.addEventListener("mousedown", (e) => { if (e.button === 0 || e.button === 1) drag = [e.clientX, e.clientY]; });
+  canvas.addEventListener("mousedown", (e) => { if (SP.cbd && SP.cbd.active) return; if (e.button === 0 || e.button === 1) drag = [e.clientX, e.clientY]; });
   window.addEventListener("mousemove", (e) => { if (!drag) return; const r = canvas.getBoundingClientRect(); SP.panBy(-(e.clientX - drag[0]) * canvas.width / r.width, -(e.clientY - drag[1]) * sy(r)); drag = [e.clientX, e.clientY]; });
   window.addEventListener("mouseup", () => (drag = null));
   window.addEventListener("keyup", (e) => (keys[e.key.toLowerCase()] = false));
@@ -151,6 +152,30 @@
   }
   /** lit blue doorplates (门牌) over building entrances: crisp, glow at night, within 14 m (12号 always a bit larger) */
   const PLATE_NO = { unit_door: "井槐里 12号", nb_n1: "井槐里 14号", nb_e1: "井槐里 16号", nb_w1: "井槐里 8号", nb_e4: "井槐里 20号" };
+  /** 2F-02's AC: outdoor unit fan spins on the street facade while it runs; indoors a faint cool-air flow under the flap */
+  function drawAcFx(z, cx, cy) {
+    const G = SP.game, on = G && G.ps && G.ps.power && G.ps.power.on.ac; if (!on || z < 0.3) return;
+    const scr = (q) => [(SP.sx(q[0], q[1]) - cx) * z, (SP.sy(q[0], q[1], q[2]) - cy) * z];
+    if (!W.interior) {
+      const o = W.byId.ac_S2F_3; if (!o || player.level === "roof") return;
+      ctx.save(); ctx.strokeStyle = "rgba(40,44,50,0.85)"; ctx.lineWidth = Math.max(1, 1.6 * z);
+      const a0 = SP.now * 14;
+      for (let i = 0; i < 3; i++) { const a = a0 + i * 2.094, c = W.local(o, -0.12, -0.44, 0.28), e = W.local(o, -0.12 + 0.17 * Math.cos(a), -0.44, 0.28 + 0.17 * Math.sin(a));
+        const [x0, y0] = scr(c), [x1, y1] = scr(e); ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.stroke(); }
+      ctx.restore(); return;
+    }
+    const o = W.sceneId === "room_2f02" && W.byId.ac; if (!o) return;
+    ctx.save(); ctx.strokeStyle = "rgba(200,230,255,0.45)"; ctx.lineWidth = Math.max(1, 1.4 * z);
+    // rot 6: face points +x into the room; rot 0: face points -y (south). Soft cool-air streaks leave the flap.
+    const east = (o.rot || 0) === 6;
+    for (let i = 0; i < 5; i++) {
+      const t = (SP.now * 0.7 + i / 5) % 1, u = -0.35 + i * 0.175;
+      const a = east ? scr([o.x + 0.35 + t * 0.7, o.y + u, 2.15 - t * 0.4]) : scr([o.x + u, o.y - 0.35 - t * 0.7, 2.15 - t * 0.4]);
+      const b = east ? scr([o.x + 0.5 + t * 0.7, o.y + u, 2.05 - t * 0.4]) : scr([o.x + u, o.y - 0.5 - t * 0.7, 2.05 - t * 0.4]);
+      ctx.globalAlpha = Math.sin(t * Math.PI) * 0.9; ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.stroke();
+    }
+    ctx.restore();
+  }
   function drawDoorPlates(z, cx, cy) {
     if (W.interior || z < 0.35 || player.level === "roof") return;
     const n = SP.tint.night || 0, kk = canvas.width / Math.max(1, canvas.getBoundingClientRect().width || canvas.width);
@@ -359,7 +384,7 @@
     SP.env.drawFog(ctx, canvas.width, canvas.height);
     SP.env.drawWeather(ctx, canvas.width, canvas.height, cam.x, cam.y, cam.zoom, st.lastDt || 1 / 60);
     if (st.debug) drawDebugText(list, pi);
-    drawStopSign(z, cx, cy); drawDoorPlates(z, cx, cy);
+    drawStopSign(z, cx, cy); drawDoorPlates(z, cx, cy); drawAcFx(z, cx, cy);
     if (SP.game) { SP.game.drawOverlay(ctx, canvas.width, canvas.height); SP.game.hud(); }
     hud();
   }
@@ -514,7 +539,53 @@
     requestAnimationFrame(frame);
   }
   function simulate(dt) { const n = Math.max(1, Math.ceil(dt / (1 / 60) - 1e-6)); for (let i = 0; i < n; i++) update(dt / n); }
-  function step(dt) { simulate(dt); st.lastDt = dt; updateCam(dt); render(); }
+  function step(dt) { if (SP.cbd && SP.cbd.active) return cbdStep(dt); simulate(dt); st.lastDt = dt; updateCam(dt); render(); }
+
+  // ---------- CBD place host (js/cbd.js, CBD_READY.md): the core #game canvas + loop are handed to SP.cbd while it is active ----------
+  // metro exit A-D -> SP.places.cbd.enter({exit}) -> here; going down a CBD metro exit -> back into the metro (SP.places.metro_cbd).
+  // The core clock keeps running (externalClock) and shared-rules keep ticking (needs, rent, 2F-02's meter).
+  const CBDH = { saved: null };
+  function cbdStep(dt) {
+    const C = SP.cbd, G = SP.game, n = Math.max(1, Math.ceil(dt / (1 / 60) - 1e-6));
+    let gm = 0; for (let i = 0; i < n; i++) { SP.now += dt / n; gm += CK.update(dt / n) || 0; }
+    if (G && G.ps) G.onRuleEvents(G.rules.tick(G.ps, gm, G.ctx()));
+    if (st.toast) { st.toast.t -= dt; if (st.toast.t <= 0) st.toast = null; }
+    st.lastDt = dt; C.frame(dt); st.near = null; hud();
+    const pr = C.near ? (SP.isTouch ? "" : "E ") + C.near.label : ""; if (promptEl.textContent !== pr) promptEl.textContent = pr;
+    if (fbEl) { const fb = "云汇CBD · 中央商务区" + (C.cam.zoom < 0.04 ? " · 天际线" : ""); if (fbEl.textContent !== fb) fbEl.textContent = fb; }
+    hudEl.textContent = `${CK.dateLabel()} ${CK.clockLabel()} · ${CK.seasonName()} · ${CK.weatherName()} · ×${C.cam.zoom < 0.1 ? C.cam.zoom.toFixed(3) : C.cam.zoom.toFixed(2)}`;
+    SP.promptActions = { use: !!C.near, kick: false };
+  }
+  function cbdEnter(o) {
+    const C = SP.cbd; toast("云汇CBD 加载中…");
+    C.load().then(() => {
+      if (!CBDH.saved) CBDH.saved = { actions: SP.actions, zoomBy: SP.zoomBy, zoomEnd: SP.zoomEnd, panBy: SP.panBy, zoomStep: SP.zoomStep, recenter: SP.recenter, cam: SP.cam,
+                                      pos: [player.x, player.y, player.dir, player.level, player.hidden] };
+      C.player = player; player.level = null; player.hidden = false; player.carry = null;
+      C.attach(canvas); C.externalClock = true; C.onToast = (m) => toast(m); C.onExit = cbdLeave;
+      Object.assign(SP, { actions: Object.assign({}, CBDH.saved.actions, C.actions), zoomBy: C.zoomBy, zoomEnd: C.zoomEnd, panBy: C.panBy, cam: C.cam,
+                          zoomStep: C.zoomStep || CBDH.saved.zoomStep, recenter: () => C.actions.recenter() });
+      C.enter(o && typeof o === "object" ? { exit: o.exit || o.link || "A", from: o.from } : o);
+      if (C.zoomTo) C.zoomTo(SP.clamp(cam.zoom, 0.25, 3), null, null, true);     // same framing as the street on arrival (core zoom presets)
+      W.logEvent("到达 云汇CBD（" + ((o && (o.exit || o.link)) || "A") + " 出口）");
+    }).catch((e) => { console.error(e); toast("云汇CBD 加载失败"); if (SP.places.metro_cbd) SP.places.metro_cbd.enter({ link: (o && o.exit) || "A" }); });
+    return null;
+  }
+  function cbdLeave(e) {
+    const C = SP.cbd; C.leave();
+    const s = CBDH.saved; CBDH.saved = null;
+    if (s) { Object.assign(SP, { actions: s.actions, zoomBy: s.zoomBy, zoomEnd: s.zoomEnd, panBy: s.panBy, zoomStep: s.zoomStep, recenter: s.recenter, cam: s.cam });
+             [player.x, player.y] = s.pos; player.setDir(s.pos[2]); player.level = s.pos[3]; player.hidden = s.pos[4]; }
+    cam.ready = false; promptEl.textContent = "";
+    if (SP.places.metro_cbd) SP.places.metro_cbd.enter({ link: (e && (e.link || e.id)) || "A" });
+  }
+  SP.cbdHost = { enter: cbdEnter, leave: cbdLeave, active: () => !!(SP.cbd && SP.cbd.active) };
+  if (SP.cbd) {
+    SP.cbd.host = { enter: cbdEnter };
+    // overwrite the stub once the real module is on the page (cbd.js uses `SP.places.cbd = SP.places.cbd || …`)
+    SP.places = SP.places || {};
+    SP.places.cbd = { _cbd: true, enter: (o) => cbdEnter(o) };
+  }
 
   // ---------- audit runner (no rendering; chunked so CDP calls stay short) ----------
   const AUD = { C: null, walker: null, i: 0 };

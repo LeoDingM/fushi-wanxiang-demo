@@ -32,6 +32,12 @@
   H.invalidate = () => { memoMin = -1; };
   H.state = (u) => (u === H.PLAYER ? { st: "player" } : R().households.state(u, SP.clock.abs(), ctx()));
   /** null = no household (keep the old behaviour), else whether this window shows lit */
-  H.windowLit = function (o) { const u = H.unitOf(o); if (!u) return null; return !!H.unit(u).lit; };
+  H.windowLit = function (o) {
+    const u = H.unitOf(o); if (!u) return null;
+    const r = H.unit(u); if (!r.lit) return false; if (u === H.PLAYER) return true;
+    // a lit unit has 2–3 facade windows: the room nobody is in stays dark (stable per window + 2-hour slot)
+    const D = R().data.households, slot = Math.floor(SP.clock.abs() / 120);
+    return SP.hash(slot, SP.strHash(o.id)) >= (D.p_room_dark || 0);
+  };
   H.windowTV = function (o) { const u = H.unitOf(o); return !!(u && H.unit(u).tv); };
 })();

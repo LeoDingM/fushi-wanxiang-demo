@@ -80,13 +80,13 @@
   function pinchState(T) { const a = T[0], b = T[1]; return [Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY), (a.clientX + b.clientX) / 2, (a.clientY + b.clientY) / 2]; }
   const cs = () => canvas.width / Math.max(1, canvas.getBoundingClientRect().width);
   document.addEventListener("touchstart", (e) => {
-    if (SP.metroActive) return;
+    if (SP.metroActive || (SP.cbd && SP.cbd.active)) return;
     const T = pts(e); if (T.length < 2) return;
     if (SP.touchRelease) SP.touchRelease();
     const [d, mx, my] = pinchState(T); Object.assign(PZ, { on: true, d, mx, my });
   }, { passive: true });
   document.addEventListener("touchmove", (e) => {
-    if (!PZ.on || SP.metroActive) return; const T = pts(e); if (T.length < 2) return;
+    if (!PZ.on || SP.metroActive || (SP.cbd && SP.cbd.active)) return; const T = pts(e); if (T.length < 2) return;
     const [d, mx, my] = pinchState(T), k = cs(), r = canvas.getBoundingClientRect();
     if (SP.panBy) SP.panBy(-(mx - PZ.mx) * k, -(my - PZ.my) * k);            // two-finger drag pans
     if (PZ.d > 4 && SP.zoomBy) SP.zoomBy(d / PZ.d, (mx - r.left) * k, (my - r.top) * k, true);
@@ -110,7 +110,7 @@
   function release() { TI.active = false; TI.id = null; TI.m = 0; TI.x = TI.y = 0; setKnob(0, 0); base.style.transform = ""; base.classList.remove("on"); }
   SP.touchRelease = release;
   zone.addEventListener("pointerdown", (e) => {
-    if (TI.active || PZ.on || SP.metroActive) return;
+    if (TI.active || PZ.on || SP.metroActive || (SP.cbd && SP.cbd.active)) return;
     e.preventDefault();
     try { zone.setPointerCapture(e.pointerId); } catch (_) {}
     TI.active = true; TI.id = e.pointerId;

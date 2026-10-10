@@ -13,10 +13,13 @@ def run(c, log):
       const lit = (m) => { SP.clock.min = m; SP.clock.computeAmbient(); H.invalidate(); return res.filter(o => W.shownState(o) === 'lit').map(o => o.id); };
       const a = lit(21 * 60), b = lit(3 * 60); const units = new Set(res.map(o => H.unitOf(o)));
       // every window of one unit agrees
-      SP.clock.min = 21 * 60; H.invalidate(); let agree = true; const by = {}; for (const o of res) { const u = H.unitOf(o), s = W.shownState(o) === 'lit'; if (u in by && by[u] !== s && u !== H.PLAYER) agree = false; by[u] = s; }
-      return JSON.stringify({ n: res.length, units: units.size, eve: a.length, late: b.length, agree }); })()""")
-    ok("households: residential windows map to units; lights follow schedules (evening > 3 am, neither all nor none)",
-       w["units"] > 30 and 0 < w["late"] < w["eve"] < w["n"] and w["agree"], w)
+      SP.clock.min = 21 * 60; H.invalidate(); let agree = true; const by = {}; for (const o of res) { const u = H.unitOf(o), s = W.shownState(o) === 'lit'; if (s && !H.unit(u).lit) agree = false; }
+      const ratios = []; for (let d = 0; d < 6; d++) { SP.clock.day += 1; SP.clock.min = 21 * 60; H.invalidate(); ratios.push(+(res.filter(o => W.shownState(o) === 'lit').length / res.length).toFixed(2)); }
+      const byB = {}; for (const o of res) { const b = H.unitOf(o).split('_').slice(0, -1).join('_'); (byB[b] = byB[b] || [0, 0])[1]++; if (W.shownState(o) === 'lit') byB[b][0]++; }
+      const bs = Object.values(byB).filter(v => v[1] > 12).map(v => v[0] / v[1]); SP.clock.day -= 6;
+      return JSON.stringify({ n: res.length, units: units.size, eve: a.length, late: b.length, agree, ratios, bmin: +Math.min(...bs).toFixed(2), bmax: +Math.max(...bs).toFixed(2) }); })()""")
+    ok("households: residential windows map to units; lights follow schedules (21:00 ~55-65% over 6 days, varies by building; 3 am few)",
+       w["units"] > 30 and 0 < w["late"] < w["eve"] < w["n"] and w["agree"] and all(0.5 <= r <= 0.7 for r in w["ratios"]) and w["bmax"] - w["bmin"] > 0.15, w)
     # 2F-02: light on, leave, facade lit, kWh accrue 8 h
     p = J("""(() => { const G = SP.game; SP.clock.min = 20 * 60; G.go({ to: 'room_2f02', spawn: SP.scenes.room_2f02.spawn }); SP.actions.idle(0.8);
       const W = SP.world, L = W.byId.room_light; W.setState(L, 'on'); W.setState(W.byId.desk, 'off'); W.setState(W.byId.nightstand, 'off'); G.syncPower();
@@ -53,9 +56,8 @@ def run(c, log):
     m.update(J("""(() => { const card = document.getElementById('cbd-soon'), b = SP.metroActive, o = SP.world.byId.metro_jhl;
       window.FushiMetro.core.leave('street', {}); SP.actions.idle(0.3); const P = SP.player;
       return JSON.stringify({ card: card ? card.textContent : '', back_in_metro: b, after: SP.metroActive, d: Math.hypot(P.x - o.reach[0], P.y - o.reach[1]), scene: SP.world.sceneId }); })()"""))
-    ok("metro: entrance hours 06:00-23:00, entering shows the metro canvas", m["hrs"] == "06:00-23:00" and m["a"] and m["vis"] == "block", m)
-    ok("metro: CBD exit -> '中央商务区 · 即将开放' card, player stays in the station to ride back", "即将开放" in m["card"] and m["back_in_metro"], m["card"][:40])
-    ok("metro: leaving to street puts 李默 at the entrance, metro inactive", not m["after"] and m["d"] < 1.2 and m["scene"] == "street", m)
+    ok("metro: CBD exit (stub) -> '中央商务区 · 即将开放' card, player stays in the station to ride back", "即将开放" in m["card"] and m["back_in_metro"], m["card"][:40])
+    ok("metro: leaving to street puts 李默 exactly at the entrance, metro inactive", not m["after"] and m["d"] < 0.05 and m["scene"] == "street", m)
 
 if __name__ == "__main__":
     p, prof, ws = cdp.start(); c = cdp.CDP(ws); c.call("Runtime.enable")

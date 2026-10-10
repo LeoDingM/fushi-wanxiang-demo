@@ -2159,6 +2159,11 @@
   "jitter_min": 40,
   "p_weather_home": 0.6,
   "p_left_on": 0.04,
+  "p_home_dark": 0.08,
+  "var_building": 0.24,
+  "var_floor": 0.12,
+  "p_room_dark": 0.14,
+  "_lit_doc": "home but this facade room dark (they sit in the back room / bed early): p_home_dark, shifted per building (± var_building/2) and per floor (± var_floor/2); p_room_dark = per-window chance a lit unit's other room is dark (core households.js)",
   "p_nightlight": 0.05,
   "weights": {
    "office": 0.3,
