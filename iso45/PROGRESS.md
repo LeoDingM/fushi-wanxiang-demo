@@ -141,3 +141,10 @@
 00:45 · [Stage Q] 今日路线回放分享微信小结（阿凯/阿姨）
 00:45 · [Stage Q] 深链扩展 daylog / ticket / scanlog
 00:45 · [Stage Q] 质量：stageQ_test 8/8 · smoke 4/4 · stage6 12/12 · 截图 q1–q6 · 未改外观/学校
+
+00:55 · [Stage R] 物业预约改期/爽约 + 租户评分 · js/stageR.js
+00:55 · [Stage R] 健康页服药周报（依从性进度条，可发阿姨）
+00:55 · [Stage R] 试穿栈 + 衣柜收藏夹（HUD ★ / 健康页穿上）
+00:55 · [Stage R] 路线→周常通勤模板（保存/套用）
+00:55 · [Stage R] 统一深链路由 + 顶部通知栏捷径
+00:55 · [Stage R] 质量：stageR_test 8/8 · smoke 4/4 · stage6 12/12 · 截图 r1–r6 · 未改外观/学校
