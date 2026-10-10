@@ -69,6 +69,25 @@ All corridor doors formerly「尚在装修」are now **portal** into 1LDK units 
 
 Barber-on-road (`shop_barber` y) left to barber-fix agent — Midtown rebuild does not touch `build_scene.py`.
 
+
+
+## Midtown-A3 — style flavor + grouped rent UI
+
+Units flavored by tower style (kit states only; no new atlases; estate courtyard untouched):
+
+| style | tower | walls / window / bed / ground | extras |
+|-------|-------|-------------------------------|--------|
+| transitional | 景秀苑 | `dado_ads` / `dado` / messy / wood:a | i_clutter 纸箱 |
+| glass | 云阶公馆 | `plain` / plain / made / terrazzo | drop pouf+tv；绿植架 |
+| tower | 城南一号 | `tile` / tile / made / wood:b | drop coffee；i_meter |
+
+Housing phone: `wrapHousing` →「近市中心 Midtown · 精选在租」block shows **6 featured** rows + copy「三塔共 72 户门可入样板」; other districts listed separately — no 72-row flood.
+
+### A3 verify
+- `tools/midtown_a3_test.py` **6/6**
+- Screenshots `mt-a3-1`…`mt-a3-6`
+- Lite zip `scene-proto-45-midtown-a3-play.zip`
+
 ## Midtown-B handoff (小区 compound)
 Suggested next (estate track already stubbed):
 1. Gated **compound grounds** behind midtown strip (courtyard, gate mark, property booth).

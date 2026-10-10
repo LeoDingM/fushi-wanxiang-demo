@@ -21,8 +21,8 @@
   AI.POIS = {
     bank:     { x: -10.0, y: -10.0, label: "井槐银行网点" },
     toilet:   { x: 10.0,  y: -10.0, label: "公共卫生间" },
-    garage:   { x: 18.5,  y: 14.2,  label: "地下车库入口" },
-    dryclean: { x: 38.5,  y: 4.5,   label: "净衣坊·干洗" }
+    garage:   { x: 20.0,  y: 12.2,  label: "地下车库入口" },
+    dryclean: { x: 48.0,  y: -10.0, label: "净衣坊·干洗" }
   };
 
   // ---------- art ----------
@@ -126,7 +126,7 @@
 
     // === DRY CLEAN: single awning shop bay (different state / props than bank|toilet|clinic) ===
     const dx = P.dryclean.x - 1.5, dy = P.dryclean.y, dfg = "infra_dry";
-    objs.push({ id: "infra_dry_S1F_0", type: "f_eatery", x: dx, y: dy, state: "tea", fade_group: dfg }); // reuse eatery bay look ≠ bank
+    objs.push({ id: "infra_dry_S1F_0", type: "f_shop", x: dx, y: dy, state: "shut", fade_group: dfg }); // shut bay + laundry balcony ≠ bank/clinic
     objs.push({
       id: "infra_dry_door", type: "f_shop", x: dx + 3, y: dy, state: "door", fade_group: dfg,
       interact: "amenity_dryclean", name: "净衣坊·干洗", hours: ["09:00", "20:00"]
@@ -147,7 +147,7 @@
     return [
       { id: "infra_bank", rect: [-13.3, -10.3, -4.0, -1.0], _amenity: true, _infra: true },
       { id: "infra_toilet", rect: [8.2, -10.3, 14.5, -4.0], _amenity: true, _infra: true },
-      { id: "infra_dry", rect: [36.7, 4.2, 45.0, 7.5], _amenity: true, _infra: true }
+      { id: "infra_dry", rect: [46.2, -10.3, 54.5, -4.0], _amenity: true, _infra: true }
       // garage intentionally open (walkable ramp stub)
     ];
   };
@@ -302,8 +302,8 @@
       bank_in: null,
       toilet: [12.5, -6.6, "S"],
       toilet_in: null,
-      garage: [18.5, 12.8, "N"],
-      dryclean: [38.5, 2.8, "N"]
+      garage: [20.0, 10.8, "N"],
+      dryclean: [48.0, -6.6, "S"]
     };
     if (key === "bank_in" && SP.scenes.amenity_bank) {
       return SP.game.switchScene("amenity_bank", SP.scenes.amenity_bank.spawn);
@@ -325,8 +325,8 @@
     return [
       { id: "bank", name: "银行网点（外立面+ATM取款）", where: "南街西段 ≈(−10,−10)", status: "enterable+atm" },
       { id: "toilet", name: "公厕（可进厕位）", where: "南街中段 ≈(10,−10)", status: "enterable" },
-      { id: "garage", name: "地下车库入口坡道", where: "12号院东侧 ≈(18.5,14)", status: "ramp_stub" },
-      { id: "dryclean", name: "干洗店外立面", where: "东街便利店西侧 ≈(38.5,4.5)", status: "exterior" }
+      { id: "garage", name: "地下车库入口坡道", where: "12号院东侧巷口 ≈(20,12)", status: "ramp_stub" },
+      { id: "dryclean", name: "干洗店外立面", where: "东街南侧 ≈(48,−10)", status: "exterior" }
     ];
   };
 

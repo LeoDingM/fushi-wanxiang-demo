@@ -134,6 +134,85 @@
     return id;
   };
 
+
+  M.isMidtownRentId = function (id) {
+    return !!id && /^mt-(jx|yj|cn)-/.test(String(id));
+  };
+
+  M.doorUnitCount = function () {
+    return Object.keys(SP.scenes || {}).filter((k) => k.indexOf("room_mt_") === 0).length;
+  };
+
+  M.housingRow = function (id, U, H) {
+    const u = U[id], own = H.owned.includes(id), home = H.home === id;
+    return `<div class="prow"><b>${u.label || id}</b><span>${u.type || ""} · ¥${u.rent}/月</span>
+      <div class="row">${own ? "" : `<button data-rent="${id}">租下</button>`}
+      ${own && !home ? `<button data-home="${id}">设为住所</button>` : ""}
+      ${own && id !== "2F-02" ? `<button data-leave="${id}">退租</button>` : ""}
+      ${home ? "<i>当前</i>" : ""}</div></div>`;
+  };
+
+  /** Group midtown featured rows + door count so 72样板 don't flood the list. */
+  M.renderHousingGrouped = function () {
+    const A = SP.stageA;
+    const H = A.ensureHousing(), U = A.units();
+    const mt = Object.keys(U).filter(M.isMidtownRentId);
+    const other = Object.keys(U).filter((id) => !M.isMidtownRentId(id));
+    const doors = M.doorUnitCount();
+    const styleHint = "景秀转型 / 云阶玻璃幕 / 城南塔配";
+    let html = `<div class="phouse"><p>当前住所：<b>${(U[H.home] && U[H.home].label) || H.home}</b></p>`;
+    html += `<div class="mt-rent-block" style="border:1px solid #3a4a62;border-radius:8px;padding:8px;margin:8px 0;background:rgba(30,40,55,.55)">`;
+    html += `<p style="margin:0 0 4px"><b>近市中心 Midtown · 精选在租</b></p>`;
+    html += `<p class="hint" style="margin:0 0 8px;opacity:.85">三塔共 <b>${doors}</b> 户门可入样板（${styleHint}）；列表只展示 <b>${mt.length}</b> 套精选，避免 72 套刷屏</p>`;
+    html += mt.map((id) => M.housingRow(id, U, H)).join("") || `<p class="hint">暂无 Midtown 精选</p>`;
+    html += `</div>`;
+    html += `<p style="margin:8px 0 4px"><b>其他房源</b></p>`;
+    html += other.map((id) => M.housingRow(id, U, H)).join("");
+    html += `<button data-gohome>传送回住所</button></div>`;
+    return html;
+  };
+
+  M.bindHousingButtons = function (el) {
+    if (!el || !SP.stageA) return;
+    const A = SP.stageA;
+    el.querySelectorAll("[data-rent]").forEach((b) => {
+      b.onclick = () => { A.rentUnit(b.dataset.rent); A.openPhone("housing"); };
+    });
+    el.querySelectorAll("[data-home]").forEach((b) => {
+      b.onclick = () => { A.setHome(b.dataset.home); A.openPhone("housing"); };
+    });
+    el.querySelectorAll("[data-leave]").forEach((b) => {
+      b.onclick = () => { A.leaveUnit(b.dataset.leave); A.openPhone("housing"); };
+    });
+    const go = el.querySelector("[data-gohome]");
+    if (go) go.onclick = () => A.goHome();
+  };
+
+  M.applyHousingGroup = function () {
+    const el = document.getElementById("phonepanel") || document.querySelector("#phone .panel, .phone-panel, #phonepanel");
+    // stageA phone root varies — find .phouse
+    const ph = document.querySelector(".phouse");
+    if (!ph) return false;
+    const wrap = ph.parentElement;
+    ph.outerHTML = M.renderHousingGrouped();
+    M.bindHousingButtons(wrap || document.getElementById("phonepanel") || document.body);
+    return true;
+  };
+
+  M.wrapHousing = function () {
+    if (M._wrapHousing || !SP.stageA || !SP.stageA.openPhone) return;
+    const A = SP.stageA;
+    const _open = A.openPhone.bind(A);
+    A.openPhone = function (tab, threadId) {
+      const r = _open(tab, threadId);
+      if (tab === "housing") {
+        try { M.applyHousingGroup(); } catch (e) { console.warn("midtown housing group", e); }
+      }
+      return r;
+    };
+    M._wrapHousing = true;
+  };
+
   M.wrapUnits = function () {
     if (M._wrapUnits || !SP.stageA || !SP.stageA.units) return;
     const A = SP.stageA;
@@ -156,8 +235,9 @@
     M.ensureChunkMeta();
     M.wireRent();
     M.wrapUnits();
+    M.wrapHousing();
     if (SP.midtownElev && SP.midtownElev.install) SP.midtownElev.install();
-    setTimeout(function () { M.wireRent(); M.wrapUnits(); }, 400);
+    setTimeout(function () { M.wireRent(); M.wrapUnits(); M.wrapHousing(); }, 400);
 
     // tick HUD
     const _raf = SP.main && SP.main.tick;

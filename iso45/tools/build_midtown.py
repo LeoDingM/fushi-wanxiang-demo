@@ -43,12 +43,12 @@ STYLES = {
 # Featured rent rows (housing UI). All units still enterable.
 RENT_FEATURED = [
     # id, key, fl, slot, rent, type
-    ("mt-jx-101", "jx", 1, 1, 1350, "一房一厅 · 转型楼 ~36㎡"),
-    ("mt-jx-502", "jx", 5, 2, 1450, "一房一厅 · 景秀中层"),
-    ("mt-yj-601", "yj", 6, 1, 1680, "一房一厅精装 · 玻璃幕"),
-    ("mt-yj-1201", "yj", 12, 1, 1850, "一房一厅景景 · 云阶顶层段"),
-    ("mt-cn-801", "cn", 8, 1, 1750, "一房一厅 · 城南中高"),
-    ("mt-cn-1601", "cn", 16, 1, 2100, "一房一厅 · 城南高层"),
+    ("mt-jx-101", "jx", 1, 1, 1350, "转型简装一房一厅 ~36㎡"),
+    ("mt-jx-502", "jx", 5, 2, 1450, "转型简装 · 景秀中层"),
+    ("mt-yj-601", "yj", 6, 1, 1680, "玻璃幕精装一房一厅"),
+    ("mt-yj-1201", "yj", 12, 1, 1850, "玻璃幕精装 · 高层段"),
+    ("mt-cn-801", "cn", 8, 1, 1750, "高层塔配一房一厅"),
+    ("mt-cn-1601", "cn", 16, 1, 2100, "高层塔配 · 城南顶段"),
 ]
 
 
@@ -185,42 +185,118 @@ def unit_scene_id(key: str, fl: int, slot: int) -> str:
     return f"room_mt_{key}_{fl}0{slot}"
 
 
+# Interior flavor by tower style (kit states only — no new atlases / no estate courtyard)
+UNIT_FLAVOR = {
+    "transitional": {
+        "suffix": "转型简装",
+        "blurb": "转型装修 · 墙贴小广告 · 木地板旧纹 · 适合过渡落脚",
+        "wall": "dado_ads",
+        "window": "dado",
+        "bed": "messy",
+        "ground": {
+            "origin": [0, 0], "chunk": 2, "cols": 4, "rows": 3,
+            "legend": {"W": "g_wood:a", "T": "g_tile"},
+            "data_south_to_north": ["WWWT", "WWWT", "WTTT"],
+        },
+        "drop_ids": [],  # keep lived-in clutter
+        "extra": "clutter",
+    },
+    "glass": {
+        "suffix": "玻璃幕精装",
+        "blurb": "玻璃幕精装 · 素墙水磨石 · 隔音较好 · 物业费略高",
+        "wall": "plain",
+        "window": "plain",
+        "bed": "made",
+        "ground": {
+            "origin": [0, 0], "chunk": 2, "cols": 4, "rows": 3,
+            "legend": {"T": "g_terrazzo", "W": "g_wood:b"},
+            "data_south_to_north": ["TTTT", "TWWW", "TWWW"],
+        },
+        "drop_ids": ["pouf", "tv_stand"],  # lean modern
+        "extra": "plant",
+    },
+    "tower": {
+        "suffix": "高层塔配",
+        "blurb": "高层塔配 · 瓷砖墙裙 · 楼风略大 · 电梯直达",
+        "wall": "tile",
+        "window": "tile",
+        "bed": "made",
+        "ground": {
+            "origin": [0, 0], "chunk": 2, "cols": 4, "rows": 3,
+            "legend": {"W": "g_wood:b", "T": "g_tile"},
+            "data_south_to_north": ["WWWW", "WWWT", "WTTT"],
+        },
+        "drop_ids": ["coffee"],  # slightly sparser living room
+        "extra": "meter",
+    },
+}
+
+
 def make_unit(tmpl: dict, b: dict, fl: int, slot: int) -> dict:
-    """Clone 馨园一房一厅; exit back to midtown corridor. Slight style flavor via name/note."""
-    key, name = b["key"], b["name"]
+    """Clone 馨园一房一厅; flavor furniture/palette by tower style (Midtown-A3)."""
+    key, name, style = b["key"], b["name"], b["style"]
+    flav = UNIT_FLAVOR[style]
     sid = unit_scene_id(key, fl, slot)
     hall = f"mt_{key}_{fl}f"
     room = copy.deepcopy(tmpl)
     room["id"] = sid
-    room["name"] = f"{name} {fl}-0{slot} · 一房一厅"
+    room["name"] = f"{name} {fl}-0{slot} · {flav['suffix']}"
     room["midtown"] = True
     room["building"] = f"mt_{key}"
-    room["floor"] = fl  # careful: G.floors filters kind!=fire; rooms with floor may pollute — set kind
-    room["kind"] = "unit"  # elev floorsFor skips non-hall via buildingKey; floorsFor checks kind==fire only
-    # Actually G.floors / floorsFor: floorsFor filters kind==fire out but includes units with floor!
-    # Remove floor from units so elev menu stays clean; keep mt_floor meta.
-    del room["floor"]
+    room["kind"] = "unit"
+    room["mt_style"] = style
     room["mt_floor"] = fl
     room["mt_slot"] = slot
-    # retarget exit door
+    if "floor" in room:
+        del room["floor"]
+    room["ground"] = copy.deepcopy(flav["ground"])
+
+    drop = set(flav.get("drop_ids") or [])
+    kept = []
     for o in room["objects"]:
-        if o.get("id") == "room_door" or (o.get("interact") == "portal" and o.get("label") == "出门"):
+        oid = o.get("id") or ""
+        if oid in drop:
+            continue
+        # palette
+        if o.get("type") == "i_wall" and o.get("state"):
+            o["state"] = flav["wall"]
+        if o.get("type") == "i_window":
+            o["state"] = flav["window"]
+        if o.get("type") == "f_bed":
+            o["state"] = flav["bed"]
+        # exit portal
+        if oid == "room_door" or (o.get("interact") == "portal" and o.get("label") == "出门"):
             o["to"] = hall
             o["spawn"] = [1.9 if slot == 1 else 5.1, 3.55, "S"]
             o["label"] = "回走廊"
-        # unique ids prefix to avoid state bleed across units sharing same object ids in saves
         if "id" in o:
             o["id"] = f"{key}{fl}0{slot}_" + o["id"]
-    # style flavor notice
-    flavor = {
-        "transitional": "转型装修 · 飘窗朝街 · 适合过渡落脚",
-        "glass": "玻璃幕精装 · 隔音较好 · 物业费略高",
-        "tower": "高层视野 · 楼风略大 · 电梯直达",
-    }[b["style"]]
+        kept.append(o)
+    room["objects"] = kept
+
+    # style-specific extras (kit pieces only)
+    pref = f"{key}{fl}0{slot}_"
+    if flav["extra"] == "clutter":
+        room["objects"].append({
+            "id": pref + "box", "type": "i_clutter", "x": 5.6, "y": 2.4, "z": 0,
+            "state": "default", "interact": "notice",
+            "note": "纸箱还没拆完 · 转型入住常见", "reach": [5.6, 2.0],
+        })
+    elif flav["extra"] == "plant":
+        room["objects"].append({
+            "id": pref + "vase", "type": "f_shelf", "x": 3.5, "y": 2.55, "z": 0,
+            "interact": "notice", "note": "云阶公馆交付绿植 · 请自行浇水", "reach": [3.5, 2.15],
+        })
+    elif flav["extra"] == "meter":
+        room["objects"].append({
+            "id": pref + "meter", "type": "i_meter", "x": 6.5, "y": 1.2, "z": 1.4,
+            "interact": "meter", "reach": [6.1, 1.2],
+        })
+
     room["objects"].append({
-        "id": f"{key}{fl}0{slot}_lease_note", "type": "i_notice",
+        "id": pref + "lease_note", "type": "i_notice",
         "x": 6.2, "y": 2.8, "z": 1.2, "interact": "notice",
-        "note": f"{name} {fl}-0{slot} · {flavor} · Midtown-A2 可租样板",
+        "note": f"{name} {fl}-0{slot} · {flav['blurb']} · Midtown-A3 风格样板",
         "reach": [5.8, 2.5],
     })
     room["spawn"] = [6.2, 0.85, "W"]
@@ -467,7 +543,7 @@ def patch_rules_rent(cat: dict) -> None:
 def main() -> None:
     chunk = build_chunk()
     CHUNK_OUT.write_text(
-        "/* generated by tools/build_midtown.py — Midtown-A/A2 east strip */\n"
+        "/* generated by tools/build_midtown.py — Midtown-A/A2/A3 east strip */\n"
         "(window.SCENE_CHUNKS=window.SCENE_CHUNKS||{}).midtown="
         + json.dumps(chunk, ensure_ascii=False) + ";\n", encoding="utf-8")
     scenes = build_scenes()
@@ -480,7 +556,7 @@ def main() -> None:
     extend_scene_json(chunk)
     patch_rules_rent(rent)
     (LAYOUT_DIR / "midtown_meta.json").write_text(json.dumps({
-        "axis": "east", "phase": "A2",
+        "axis": "east", "phase": "A3",
         "buildings": [{"key": b["key"], "name": b["name"], "floors": b["floors"], "style": b["style"]} for b in BUILDINGS],
         "chunk_objects": len(chunk["objects"]),
         "scenes": len(scenes),
