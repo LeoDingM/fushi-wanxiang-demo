@@ -1,0 +1,2 @@
+Midtown-B: outdoor courtyard (street chunk) + modern lobby + club + facade variety.
+index.html: estate45.js + chunks/estate.js + js/midtown_estate.js

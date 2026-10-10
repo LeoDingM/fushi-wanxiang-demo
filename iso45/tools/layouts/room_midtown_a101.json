@@ -1,0 +1,373 @@
+{
+ "id": "room_midtown_a101",
+ "name": "云栖里 A-101 · 一室一厅精装 · 月租¥1980",
+ "_doc": "Midtown-B: larger modern 一室一厅 (~48㎡ walkable) — bright clean colours, uncluttered, bed by N window corner, enclosed bath with door. Living+kitchen S open. Partitions (P) fade via world.js occluder hooks. Bigger than old 12–15㎡ 单间 and xin ~35㎡.",
+ "bounds": [
+  0.15,
+  0.15,
+  8.35,
+  6.35
+ ],
+ "ground": {
+  "origin": [
+   0,
+   0
+  ],
+  "chunk": 2,
+  "cols": 5,
+  "rows": 4,
+  "legend": {
+   "W": "g_wood:a",
+   "T": "g_tile"
+  },
+  "data_south_to_north": [
+   "WWWW.",
+   "WWWW.",
+   "WWWTT",
+   "WWWTT"
+  ]
+ },
+ "walls": [
+  {
+   "side": "N",
+   "line": 6.5,
+   "from": 0.0,
+   "to": 5.0,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "window",
+     "at": 1.5,
+     "interact": "window_in",
+     "id": "bed_win",
+     "reach": [
+      2.25,
+      5.2
+     ]
+    }
+   ]
+  },
+  {
+   "side": "N",
+   "line": 6.5,
+   "from": 5.0,
+   "to": 8.5,
+   "finish": "tile"
+  },
+  {
+   "side": "E",
+   "line": 8.5,
+   "from": 0.0,
+   "to": 3.2,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "door",
+     "at": 1.0,
+     "id": "room_door",
+     "interact": "portal",
+     "to": "estate_lobby",
+     "spawn": [
+      6.5,
+      2.8,
+      "W"
+     ],
+     "label": "出门 · 大堂",
+     "block": false
+    }
+   ]
+  },
+  {
+   "side": "E",
+   "line": 8.5,
+   "from": 3.2,
+   "to": 6.5,
+   "finish": "tile"
+  },
+  {
+   "side": "S",
+   "line": 0.0,
+   "from": 0.0,
+   "to": 8.5,
+   "finish": "plain"
+  },
+  {
+   "side": "W",
+   "line": 0.0,
+   "from": 0.0,
+   "to": 6.5,
+   "finish": "plain"
+  },
+  {
+   "side": "P",
+   "axis": "x",
+   "line": 3.6,
+   "from": 0.0,
+   "to": 5.0,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "door",
+     "at": 1.6,
+     "id": "bed_door",
+     "interact": "idoor",
+     "name": "卧室门",
+     "state": "open"
+    }
+   ]
+  },
+  {
+   "side": "P",
+   "axis": "x",
+   "line": 3.6,
+   "from": 5.0,
+   "to": 8.5,
+   "finish": "tile"
+  },
+  {
+   "side": "P",
+   "axis": "y",
+   "line": 5.0,
+   "from": 3.6,
+   "to": 6.5,
+   "finish": "tile",
+   "openings": [
+    {
+     "kind": "door",
+     "at": 3.6,
+     "id": "bath_door",
+     "interact": "idoor",
+     "name": "卫生间门",
+     "state": "closed"
+    }
+   ]
+  }
+ ],
+ "furniture": [
+  {
+   "type": "f_kitchen",
+   "x": 0.55,
+   "y": 1.15,
+   "rot": 2,
+   "state": "off",
+   "interact": "stove",
+   "id": "stove",
+   "reach": [
+    1.15,
+    1.15
+   ]
+  },
+  {
+   "type": "f_fridge",
+   "x": 0.55,
+   "y": 2.5,
+   "state": "closed",
+   "interact": "fridge",
+   "id": "fridge",
+   "reach": [
+    1.15,
+    2.5
+   ]
+  },
+  {
+   "type": "f_table",
+   "x": 2.5,
+   "y": 1.4,
+   "id": "coffee",
+   "state": "meal",
+   "interact": "table"
+  },
+  {
+   "type": "f_stool",
+   "x": 2.5,
+   "y": 0.7,
+   "id": "pouf",
+   "interact": "sit",
+   "reach": [
+    2.0,
+    0.7
+   ]
+  },
+  {
+   "type": "f_chair",
+   "x": 3.7,
+   "y": 1.4,
+   "rot": 6,
+   "id": "sofa",
+   "interact": "sit",
+   "reach": [
+    3.2,
+    1.4
+   ]
+  },
+  {
+   "type": "f_shelf",
+   "x": 4.4,
+   "y": 2.7,
+   "id": "tv_stand",
+   "interact": "notice",
+   "note": "客厅电视柜 · 简洁白橡",
+   "reach": [
+    4.4,
+    2.2
+   ]
+  },
+  {
+   "type": "i_pendant",
+   "x": 2.8,
+   "y": 2.0,
+   "state": "off",
+   "interact": "light",
+   "id": "room_light",
+   "reach": [
+    2.8,
+    2.0
+   ]
+  },
+  {
+   "type": "f_table",
+   "x": 6.6,
+   "y": 1.35,
+   "id": "dining"
+  },
+  {
+   "type": "f_stool",
+   "x": 6.6,
+   "y": 0.75,
+   "id": "dstool"
+  },
+  {
+   "type": "f_stool",
+   "x": 7.2,
+   "y": 1.35,
+   "id": "dstool2"
+  },
+  {
+   "type": "f_bed",
+   "x": 1.9,
+   "y": 5.7,
+   "state": "made",
+   "interact": "bed",
+   "id": "bed",
+   "reach": [
+    [
+     1.4,
+     5.0
+    ],
+    [
+     2.4,
+     5.0
+    ]
+   ]
+  },
+  {
+   "type": "f_nightstand",
+   "x": 0.55,
+   "y": 5.7,
+   "state": "off",
+   "interact": "bedlamp",
+   "id": "nightstand",
+   "reach": [
+    1.0,
+    5.15
+   ]
+  },
+  {
+   "type": "f_wardrobe",
+   "x": 4.2,
+   "y": 5.75,
+   "rot": 6,
+   "state": "closed",
+   "interact": "wardrobe",
+   "id": "wardrobe",
+   "reach": [
+    4.2,
+    5.25
+   ]
+  },
+  {
+   "type": "f_desk",
+   "x": 0.9,
+   "y": 4.15,
+   "rot": 4,
+   "state": "off",
+   "interact": "pc",
+   "id": "desk",
+   "reach": [
+    2.1,
+    4.15
+   ]
+  },
+  {
+   "type": "f_chair",
+   "x": 1.75,
+   "y": 4.15,
+   "id": "desk_chair"
+  },
+  {
+   "type": "i_ac",
+   "x": 0.45,
+   "y": 4.7,
+   "z": 2.2,
+   "rot": 6,
+   "state": "off",
+   "interact": "ac",
+   "id": "ac",
+   "reach": [
+    1.05,
+    4.7
+   ]
+  },
+  {
+   "type": "f_toilet",
+   "x": 5.7,
+   "y": 5.85,
+   "id": "toilet",
+   "interact": "toilet",
+   "reach": [
+    5.7,
+    5.3
+   ]
+  },
+  {
+   "type": "f_washer",
+   "x": 6.7,
+   "y": 4.15,
+   "state": "idle",
+   "interact": "washer",
+   "id": "washer",
+   "reach": [
+    6.7,
+    4.7
+   ]
+  },
+  {
+   "type": "f_basin",
+   "x": 7.6,
+   "y": 4.15,
+   "id": "basin",
+   "interact": "basin",
+   "reach": [
+    7.15,
+    4.65
+   ]
+  },
+  {
+   "type": "f_shower",
+   "x": 7.6,
+   "y": 5.85,
+   "state": "dry",
+   "interact": "shower",
+   "id": "shower",
+   "reach": [
+    7.1,
+    5.4
+   ]
+  }
+ ],
+ "spawn": [
+  7.4,
+  2.4,
+  "W"
+ ]
+}

@@ -269,10 +269,12 @@
         const a = prevAmb();
         if (!ES.inEstate()) return a;
         // bright modern interiors
+        const id = W.sceneId;
+        const boost = id === "estate_lobby" ? 0.10 : 0.06;
         return {
-          r: Math.min(1, a.r * 1.1 + 0.05),
-          g: Math.min(1, a.g * 1.1 + 0.05),
-          b: Math.min(1, a.b * 1.08 + 0.04),
+          r: Math.min(1, a.r * 1.14 + boost),
+          g: Math.min(1, a.g * 1.14 + boost),
+          b: Math.min(1, a.b * 1.12 + boost * 0.8),
         };
       };
     }

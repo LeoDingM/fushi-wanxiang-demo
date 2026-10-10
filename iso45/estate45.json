@@ -1,383 +1,120 @@
 {
- "estate_compound": {
+ "estate_lobby": {
   "format": "fushi-scene",
   "version": 2,
-  "id": "estate_compound",
-  "name": "云栖里 · 门禁小区庭院",
+  "id": "estate_lobby",
+  "name": "云栖里 · 现代大堂",
   "interior": true,
   "units": "m",
   "grid_m": 0.5,
   "objects": [
    {
-    "id": "facade_w1",
+    "id": "lob_w1",
     "type": "i_window",
-    "x": 3.0,
-    "y": 16.0,
+    "x": 1.5,
+    "y": 7.0,
     "z": 0,
     "rot": 0,
     "interact": "window_in",
     "reach": [
-     3.75,
-     14.5
+     2.25,
+     5.9
     ],
-    "state": "plain",
-    "fade_group": "lobby_facade"
+    "state": "plain"
    },
    {
-    "id": "lobby_door",
-    "type": "i_door",
-    "x": 9.0,
-    "y": 16.0,
-    "z": 0,
-    "rot": 0,
-    "interact": "portal",
-    "to": "estate_lobby",
-    "spawn": [
-     4.0,
-     1.3,
-     "N"
-    ],
-    "label": "进大堂",
-    "block": false,
-    "state": "closed",
-    "reach": [
-     9.6,
-     15.55
-    ],
-    "fade_group": "lobby_facade"
-   },
-   {
-    "id": "facade_w2",
+    "id": "lob_w2",
     "type": "i_window",
-    "x": 14.5,
-    "y": 16.0,
+    "x": 4.5,
+    "y": 7.0,
     "z": 0,
     "rot": 0,
     "interact": "window_in",
     "reach": [
-     15.25,
-     14.5
+     5.25,
+     5.9
     ],
-    "state": "plain",
-    "fade_group": "lobby_facade"
+    "state": "plain"
+   },
+   {
+    "id": "lob_w3",
+    "type": "i_window",
+    "x": 7.5,
+    "y": 7.0,
+    "z": 0,
+    "rot": 0,
+    "interact": "window_in",
+    "reach": [
+     8.25,
+     5.9
+    ],
+    "state": "plain"
    },
    {
     "id": "i_wall_003",
     "type": "i_wall",
     "x": 0.0,
-    "y": 16.0,
+    "y": 7.0,
     "z": 0,
     "rot": 0,
-    "state": "plain",
-    "fade_group": "lobby_facade"
+    "state": "plain"
    },
    {
     "id": "i_wall_004",
     "type": "i_wall",
-    "x": 1.0,
-    "y": 16.0,
+    "x": 0.5,
+    "y": 7.0,
     "z": 0,
     "rot": 0,
-    "state": "plain",
-    "fade_group": "lobby_facade"
+    "state": "plain"
    },
    {
     "id": "i_wall_005",
     "type": "i_wall",
-    "x": 2.0,
-    "y": 16.0,
+    "x": 3.0,
+    "y": 7.0,
     "z": 0,
     "rot": 0,
-    "state": "plain",
-    "fade_group": "lobby_facade"
+    "state": "plain"
    },
    {
     "id": "i_wall_006",
     "type": "i_wall",
-    "x": 4.5,
-    "y": 16.0,
+    "x": 3.5,
+    "y": 7.0,
     "z": 0,
     "rot": 0,
-    "state": "plain",
-    "fade_group": "lobby_facade"
+    "state": "plain"
    },
    {
     "id": "i_wall_007",
     "type": "i_wall",
-    "x": 5.5,
-    "y": 16.0,
+    "x": 6.0,
+    "y": 7.0,
     "z": 0,
     "rot": 0,
-    "state": "plain",
-    "fade_group": "lobby_facade"
+    "state": "plain"
    },
    {
     "id": "i_wall_008",
     "type": "i_wall",
     "x": 6.5,
-    "y": 16.0,
+    "y": 7.0,
     "z": 0,
     "rot": 0,
-    "state": "plain",
-    "fade_group": "lobby_facade"
+    "state": "plain"
    },
    {
     "id": "i_wall_009",
     "type": "i_wall",
-    "x": 7.5,
-    "y": 16.0,
-    "z": 0,
-    "rot": 0,
-    "state": "plain",
-    "fade_group": "lobby_facade"
-   },
-   {
-    "id": "i_wall_010",
-    "type": "i_wall",
-    "x": 8.0,
-    "y": 16.0,
-    "z": 0,
-    "rot": 0,
-    "state": "plain",
-    "fade_group": "lobby_facade"
-   },
-   {
-    "id": "i_wall_011",
-    "type": "i_wall",
-    "x": 10.2,
-    "y": 16.0,
-    "z": 0,
-    "rot": 0,
-    "state": "plain",
-    "fade_group": "lobby_facade"
-   },
-   {
-    "id": "i_wall_012",
-    "type": "i_wall",
-    "x": 11.2,
-    "y": 16.0,
-    "z": 0,
-    "rot": 0,
-    "state": "plain",
-    "fade_group": "lobby_facade"
-   },
-   {
-    "id": "i_wall_013",
-    "type": "i_wall",
-    "x": 12.2,
-    "y": 16.0,
-    "z": 0,
-    "rot": 0,
-    "state": "plain",
-    "fade_group": "lobby_facade"
-   },
-   {
-    "id": "i_wall_014",
-    "type": "i_wall",
-    "x": 13.2,
-    "y": 16.0,
-    "z": 0,
-    "rot": 0,
-    "state": "plain",
-    "fade_group": "lobby_facade"
-   },
-   {
-    "id": "i_wall_015",
-    "type": "i_wall",
-    "x": 13.5,
-    "y": 16.0,
-    "z": 0,
-    "rot": 0,
-    "state": "plain",
-    "fade_group": "lobby_facade"
-   },
-   {
-    "id": "i_wall_016",
-    "type": "i_wall",
-    "x": 16.0,
-    "y": 16.0,
-    "z": 0,
-    "rot": 0,
-    "state": "plain",
-    "fade_group": "lobby_facade"
-   },
-   {
-    "id": "i_wall_017",
-    "type": "i_wall",
-    "x": 17.0,
-    "y": 16.0,
-    "z": 0,
-    "rot": 0,
-    "state": "plain",
-    "fade_group": "lobby_facade"
-   },
-   {
-    "id": "i_wall_018",
-    "type": "i_wall",
-    "x": 18.0,
-    "y": 16.0,
-    "z": 0,
-    "rot": 0,
-    "state": "plain",
-    "fade_group": "lobby_facade"
-   },
-   {
-    "id": "i_wall_019",
-    "type": "i_wall",
-    "x": 19.0,
-    "y": 16.0,
-    "z": 0,
-    "rot": 0,
-    "state": "plain",
-    "fade_group": "lobby_facade"
-   },
-   {
-    "id": "i_wall_020",
-    "type": "i_wall",
-    "x": 20.0,
-    "y": 1.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_wall_021",
-    "type": "i_wall",
-    "x": 20.0,
-    "y": 2.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_wall_022",
-    "type": "i_wall",
-    "x": 20.0,
-    "y": 3.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_wall_023",
-    "type": "i_wall",
-    "x": 20.0,
-    "y": 4.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_wall_024",
-    "type": "i_wall",
-    "x": 20.0,
-    "y": 5.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_wall_025",
-    "type": "i_wall",
-    "x": 20.0,
-    "y": 6.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_wall_026",
-    "type": "i_wall",
-    "x": 20.0,
+    "x": 9.0,
     "y": 7.0,
     "z": 0,
-    "rot": 6,
+    "rot": 0,
     "state": "plain"
    },
    {
-    "id": "i_wall_027",
-    "type": "i_wall",
-    "x": 20.0,
-    "y": 8.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_wall_028",
-    "type": "i_wall",
-    "x": 20.0,
-    "y": 9.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_wall_029",
-    "type": "i_wall",
-    "x": 20.0,
-    "y": 10.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_wall_030",
-    "type": "i_wall",
-    "x": 20.0,
-    "y": 11.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_wall_031",
-    "type": "i_wall",
-    "x": 20.0,
-    "y": 12.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_wall_032",
-    "type": "i_wall",
-    "x": 20.0,
-    "y": 13.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_wall_033",
-    "type": "i_wall",
-    "x": 20.0,
-    "y": 14.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_wall_034",
-    "type": "i_wall",
-    "x": 20.0,
-    "y": 15.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_wall_035",
-    "type": "i_wall",
-    "x": 20.0,
-    "y": 16.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain",
-    "fade_group": "lobby_facade"
-   },
-   {
-    "id": "i_cut_036",
+    "id": "i_cut_010",
     "type": "i_cut",
     "x": 0.0,
     "y": 0.0,
@@ -386,7 +123,7 @@
     "state": "plain"
    },
    {
-    "id": "i_cut_037",
+    "id": "i_cut_011",
     "type": "i_cut",
     "x": 1.0,
     "y": 0.0,
@@ -395,7 +132,7 @@
     "state": "plain"
    },
    {
-    "id": "i_cut_038",
+    "id": "i_cut_012",
     "type": "i_cut",
     "x": 2.0,
     "y": 0.0,
@@ -404,43 +141,7 @@
     "state": "plain"
    },
    {
-    "id": "i_cut_039",
-    "type": "i_cut",
-    "x": 3.0,
-    "y": 0.0,
-    "z": 0,
-    "rot": 0,
-    "state": "plain"
-   },
-   {
-    "id": "i_cut_040",
-    "type": "i_cut",
-    "x": 4.0,
-    "y": 0.0,
-    "z": 0,
-    "rot": 0,
-    "state": "plain"
-   },
-   {
-    "id": "i_cut_041",
-    "type": "i_cut",
-    "x": 5.0,
-    "y": 0.0,
-    "z": 0,
-    "rot": 0,
-    "state": "plain"
-   },
-   {
-    "id": "i_cut_042",
-    "type": "i_cut",
-    "x": 6.0,
-    "y": 0.0,
-    "z": 0,
-    "rot": 0,
-    "state": "plain"
-   },
-   {
-    "id": "i_cut_043",
+    "id": "i_cut_013",
     "type": "i_cut",
     "x": 7.0,
     "y": 0.0,
@@ -449,97 +150,39 @@
     "state": "plain"
    },
    {
-    "id": "i_cut_044",
+    "id": "i_cut_014",
     "type": "i_cut",
-    "x": 7.5,
+    "x": 8.0,
     "y": 0.0,
     "z": 0,
     "rot": 0,
     "state": "plain"
    },
    {
-    "id": "i_cut_045",
+    "id": "i_cut_015",
     "type": "i_cut",
-    "x": 11.5,
+    "x": 9.0,
     "y": 0.0,
     "z": 0,
     "rot": 0,
     "state": "plain"
    },
    {
-    "id": "i_cut_046",
-    "type": "i_cut",
-    "x": 12.5,
-    "y": 0.0,
+    "id": "lob_ww1",
+    "type": "i_window",
+    "x": 0.0,
+    "y": 3.5,
     "z": 0,
-    "rot": 0,
+    "rot": 6,
+    "interact": "window_in",
+    "reach": [
+     0.95,
+     2.75
+    ],
     "state": "plain"
    },
    {
-    "id": "i_cut_047",
-    "type": "i_cut",
-    "x": 13.5,
-    "y": 0.0,
-    "z": 0,
-    "rot": 0,
-    "state": "plain"
-   },
-   {
-    "id": "i_cut_048",
-    "type": "i_cut",
-    "x": 14.5,
-    "y": 0.0,
-    "z": 0,
-    "rot": 0,
-    "state": "plain"
-   },
-   {
-    "id": "i_cut_049",
-    "type": "i_cut",
-    "x": 15.5,
-    "y": 0.0,
-    "z": 0,
-    "rot": 0,
-    "state": "plain"
-   },
-   {
-    "id": "i_cut_050",
-    "type": "i_cut",
-    "x": 16.5,
-    "y": 0.0,
-    "z": 0,
-    "rot": 0,
-    "state": "plain"
-   },
-   {
-    "id": "i_cut_051",
-    "type": "i_cut",
-    "x": 17.5,
-    "y": 0.0,
-    "z": 0,
-    "rot": 0,
-    "state": "plain"
-   },
-   {
-    "id": "i_cut_052",
-    "type": "i_cut",
-    "x": 18.5,
-    "y": 0.0,
-    "z": 0,
-    "rot": 0,
-    "state": "plain"
-   },
-   {
-    "id": "i_cut_053",
-    "type": "i_cut",
-    "x": 19.0,
-    "y": 0.0,
-    "z": 0,
-    "rot": 0,
-    "state": "plain"
-   },
-   {
-    "id": "i_cut_054",
+    "id": "i_cut_017",
     "type": "i_cut",
     "x": 0.0,
     "y": 1.0,
@@ -548,7 +191,7 @@
     "state": "plain"
    },
    {
-    "id": "i_cut_055",
+    "id": "i_cut_018",
     "type": "i_cut",
     "x": 0.0,
     "y": 2.0,
@@ -557,361 +200,223 @@
     "state": "plain"
    },
    {
-    "id": "i_cut_056",
+    "id": "i_cut_019",
     "type": "i_cut",
     "x": 0.0,
-    "y": 3.0,
+    "y": 4.5,
     "z": 0,
     "rot": 6,
     "state": "plain"
    },
    {
-    "id": "i_cut_057",
-    "type": "i_cut",
-    "x": 0.0,
-    "y": 4.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_cut_058",
-    "type": "i_cut",
-    "x": 0.0,
+    "id": "reception",
+    "type": "s_counter",
+    "x": 3.8,
     "y": 5.0,
     "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_cut_059",
-    "type": "i_cut",
-    "x": 0.0,
-    "y": 6.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_cut_060",
-    "type": "i_cut",
-    "x": 0.0,
-    "y": 7.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_cut_061",
-    "type": "i_cut",
-    "x": 0.0,
-    "y": 8.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_cut_062",
-    "type": "i_cut",
-    "x": 0.0,
-    "y": 9.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_cut_063",
-    "type": "i_cut",
-    "x": 0.0,
-    "y": 10.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_cut_064",
-    "type": "i_cut",
-    "x": 0.0,
-    "y": 11.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_cut_065",
-    "type": "i_cut",
-    "x": 0.0,
-    "y": 12.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_cut_066",
-    "type": "i_cut",
-    "x": 0.0,
-    "y": 13.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_cut_067",
-    "type": "i_cut",
-    "x": 0.0,
-    "y": 14.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_cut_068",
-    "type": "i_cut",
-    "x": 0.0,
-    "y": 15.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_cut_069",
-    "type": "i_cut",
-    "x": 0.0,
-    "y": 16.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "gate_l",
-    "type": "w_gate_l",
-    "x": 8.55,
-    "y": 0.55,
-    "z": 0,
-    "state": "open",
-    "fade_group": "gate"
-   },
-   {
-    "id": "gate_r",
-    "type": "w_gate_r",
-    "x": 11.45,
-    "y": 0.55,
-    "z": 0,
-    "state": "open",
-    "fade_group": "gate"
-   },
-   {
-    "id": "gate_p_l",
-    "type": "w_pillar",
-    "x": 8.2,
-    "y": 0.7,
-    "z": 0
-   },
-   {
-    "id": "gate_p_r",
-    "type": "w_pillar",
-    "x": 11.8,
-    "y": 0.7,
-    "z": 0
-   },
-   {
-    "id": "guard_booth",
-    "type": "p_locker",
-    "x": 6.8,
-    "y": 1.8,
-    "z": 0,
     "interact": "notice",
-    "note": "门岗 · 访客登记（演示）· 云栖里安保",
+    "note": "石材前台 · 云栖里物业 / 访客平板登记",
     "reach": [
-     6.8,
-     2.5
+     3.8,
+     4.35
     ]
    },
    {
-    "id": "gate_sign",
-    "type": "p_notice",
+    "id": "recv_stool",
+    "type": "s_barstool",
+    "x": 2.4,
+    "y": 4.6,
+    "z": 0
+   },
+   {
+    "id": "water",
+    "type": "s_cooler",
+    "x": 5.8,
+    "y": 5.0,
+    "z": 0,
+    "state": "full",
+    "interact": "notice",
+    "note": "直饮水",
+    "reach": [
+     5.8,
+     4.4
+    ]
+   },
+   {
+    "id": "mail_wall",
+    "type": "i_mailbox",
+    "x": 7.2,
+    "y": 5.8,
+    "z": 0,
+    "interact": "notice",
+    "note": "智能信报墙 · 扫码取件",
+    "reach": [
+     7.2,
+     5.15
+    ]
+   },
+   {
+    "id": "wait1",
+    "type": "f_chair",
+    "x": 1.5,
+    "y": 2.0,
+    "z": 0,
+    "rot": 2,
+    "interact": "sit",
+    "reach": [
+     2.05,
+     2.0
+    ]
+   },
+   {
+    "id": "wait2",
+    "type": "f_chair",
+    "x": 2.7,
+    "y": 2.0,
+    "z": 0,
+    "rot": 2,
+    "interact": "sit",
+    "reach": [
+     3.25,
+     2.0
+    ]
+   },
+   {
+    "id": "wait_table",
+    "type": "f_table",
+    "x": 2.1,
+    "y": 2.9,
+    "z": 0
+   },
+   {
+    "id": "plant1",
+    "type": "p_planter",
+    "x": 0.9,
+    "y": 5.2,
+    "z": 0
+   },
+   {
+    "id": "plant2",
+    "type": "p_planter",
+    "x": 8.5,
+    "y": 1.3,
+    "z": 0
+   },
+   {
+    "id": "plant3",
+    "type": "p_planter",
+    "x": 0.9,
+    "y": 1.2,
+    "z": 0
+   },
+   {
+    "id": "plant4",
+    "type": "p_planter",
     "x": 5.5,
     "y": 1.2,
+    "z": 0
+   },
+   {
+    "id": "led1",
+    "type": "i_track",
+    "x": 1.5,
+    "y": 6.5,
+    "z": 2.55
+   },
+   {
+    "id": "led2",
+    "type": "i_track",
+    "x": 4.0,
+    "y": 6.5,
+    "z": 2.55
+   },
+   {
+    "id": "led3",
+    "type": "i_track",
+    "x": 6.5,
+    "y": 6.5,
+    "z": 2.55
+   },
+   {
+    "id": "led4",
+    "type": "i_track",
+    "x": 8.5,
+    "y": 6.5,
+    "z": 2.55
+   },
+   {
+    "id": "lobby_led",
+    "type": "i_pendant",
+    "x": 3.6,
+    "y": 3.2,
     "z": 0,
-    "interact": "notice",
-    "note": "云栖里 · 门禁小区 · 非机动车请停东侧",
+    "state": "on",
+    "interact": "light",
     "reach": [
-     5.5,
-     1.8
+     3.6,
+     3.2
     ]
    },
    {
-    "id": "fence_s1",
-    "type": "w_fence",
-    "x": 3.0,
-    "y": 0.7,
-    "z": 0
+    "id": "lobby_led2",
+    "type": "i_pendant",
+    "x": 7.0,
+    "y": 3.5,
+    "z": 0,
+    "state": "on",
+    "interact": "light",
+    "reach": [
+     7.0,
+     3.5
+    ]
    },
    {
-    "id": "fence_s2",
-    "type": "w_fence",
-    "x": 5.2,
-    "y": 0.7,
-    "z": 0
+    "id": "lobby_ac",
+    "type": "i_ac",
+    "x": 5.0,
+    "y": 6.55,
+    "z": 2.35,
+    "state": "off",
+    "interact": "ac",
+    "reach": [
+     5.0,
+     5.9
+    ]
    },
    {
-    "id": "fence_s3",
-    "type": "w_fence",
-    "x": 14.0,
-    "y": 0.7,
-    "z": 0
-   },
-   {
-    "id": "fence_s4",
-    "type": "w_fence",
-    "x": 16.2,
-    "y": 0.7,
-    "z": 0
-   },
-   {
-    "id": "fence_s5",
-    "type": "w_fence",
-    "x": 18.2,
-    "y": 0.7,
-    "z": 0
-   },
-   {
-    "id": "hedge_w1",
-    "type": "p_hedge",
+    "id": "entry_mat",
+    "type": "d_mat",
     "x": 4.5,
-    "y": 5.5,
+    "y": 0.65,
     "z": 0
    },
    {
-    "id": "hedge_w2",
-    "type": "p_hedge",
-    "x": 4.5,
-    "y": 7.5,
+    "id": "wait_rug",
+    "type": "d_rug",
+    "x": 2.0,
+    "y": 2.2,
     "z": 0
    },
    {
-    "id": "hedge_e1",
-    "type": "p_hedge",
-    "x": 15.5,
-    "y": 5.5,
-    "z": 0
-   },
-   {
-    "id": "hedge_e2",
-    "type": "p_hedge",
-    "x": 15.5,
-    "y": 7.5,
-    "z": 0
-   },
-   {
-    "id": "tree1",
-    "type": "p_tree",
-    "x": 3.2,
-    "y": 4.2,
-    "z": 0
-   },
-   {
-    "id": "tree2",
-    "type": "p_tree",
-    "x": 3.5,
-    "y": 10.0,
-    "z": 0
-   },
-   {
-    "id": "tree3",
-    "type": "p_tree",
-    "x": 16.8,
-    "y": 4.4,
-    "z": 0
-   },
-   {
-    "id": "tree4",
-    "type": "p_tree",
-    "x": 16.5,
-    "y": 10.2,
-    "z": 0
-   },
-   {
-    "id": "planter1",
-    "type": "p_planter",
-    "x": 8.2,
-    "y": 7.0,
-    "z": 0
-   },
-   {
-    "id": "planter2",
-    "type": "p_planter",
-    "x": 11.8,
-    "y": 7.0,
-    "z": 0
-   },
-   {
-    "id": "planter3",
-    "type": "p_planter",
-    "x": 10.0,
-    "y": 5.0,
+    "id": "unit_a101",
+    "type": "i_door",
+    "x": 9.7,
+    "y": 1.8,
     "z": 0,
-    "rot": 6
-   },
-   {
-    "id": "lamp1",
-    "type": "p_lamp",
-    "x": 7.2,
-    "y": 3.8,
-    "z": 0,
-    "state": "ok"
-   },
-   {
-    "id": "lamp2",
-    "type": "p_lamp",
-    "x": 12.8,
-    "y": 3.8,
-    "z": 0,
-    "state": "ok"
-   },
-   {
-    "id": "lamp3",
-    "type": "p_lamp",
-    "x": 7.2,
-    "y": 11.8,
-    "z": 0,
-    "state": "ok"
-   },
-   {
-    "id": "lamp4",
-    "type": "p_lamp",
-    "x": 12.8,
-    "y": 11.8,
-    "z": 0,
-    "state": "ok"
-   },
-   {
-    "id": "bins",
-    "type": "p_bins",
-    "x": 17.5,
-    "y": 13.8,
-    "z": 0
-   },
-   {
-    "id": "lobby_steps",
-    "type": "f_steps",
-    "x": 10.0,
-    "y": 15.3,
-    "z": 0
-   },
-   {
-    "id": "lobby_plant_l",
-    "type": "p_planter",
-    "x": 7.5,
-    "y": 14.0,
-    "z": 0
-   },
-   {
-    "id": "lobby_plant_r",
-    "type": "p_planter",
-    "x": 12.5,
-    "y": 14.0,
-    "z": 0
+    "state": "closed",
+    "interact": "portal",
+    "to": "room_midtown_a101",
+    "spawn": [
+     7.4,
+     2.4,
+     "W"
+    ],
+    "label": "A-101",
+    "reach": [
+     9.0,
+     1.8
+    ],
+    "variant": "base"
    }
   ],
   "colliders": [
@@ -919,92 +424,92 @@
     "id": "wall0_0",
     "rect": [
      0.0,
-     16.0,
-     3.0,
-     16.6
+     7.0,
+     1.5,
+     7.6
     ]
    },
    {
     "id": "wall0_1",
     "rect": [
+     3.0,
+     7.0,
      4.5,
-     16.0,
-     9.0,
-     16.6
+     7.6
     ]
    },
    {
     "id": "wall0_2",
     "rect": [
-     10.2,
-     16.0,
-     14.5,
-     16.6
+     6.0,
+     7.0,
+     7.5,
+     7.6
     ]
    },
    {
     "id": "wall0_3",
     "rect": [
-     16.0,
-     16.0,
-     20.0,
-     16.6
+     9.0,
+     7.0,
+     10.0,
+     7.6
     ]
    },
    {
-    "id": "wall1_4",
+    "id": "wall2_4",
     "rect": [
-     20.0,
      0.0,
-     20.6,
-     16.0
+     -0.6,
+     3.0,
+     0.15
     ]
    },
    {
     "id": "wall2_5",
     "rect": [
-     0.0,
+     7.0,
      -0.6,
-     8.5,
+     10.0,
      0.15
     ]
    },
    {
-    "id": "wall2_6",
+    "id": "wall3_6",
     "rect": [
-     11.5,
      -0.6,
-     20.0,
-     0.15
+     0.0,
+     0.15,
+     2.0
     ]
    },
    {
     "id": "wall3_7",
     "rect": [
      -0.6,
-     0.0,
+     3.5,
      0.15,
-     16.0
+     4.5
     ]
    }
   ],
   "portals": [
    {
-    "id": "exit_street",
+    "id": "to_courtyard",
     "rect": [
-     8.6,
-     0.35,
-     11.4,
-     1.1
+     3.0,
+     0.2,
+     7.0,
+     0.95
     ],
     "to": "street",
     "spawn": [
-     116.0,
-     3.0,
+     151.5,
+     14.2,
      "S"
     ],
     "dir": "S",
-    "label": "出门 · 街道"
+    "label": "玻璃门 · 庭院"
    }
   ],
   "laundry": [],
@@ -1422,12 +927,12 @@
   },
   "repair_hours_scale": 1.0,
   "estate": true,
-  "_doc": "Midtown-B gated 小区: perimeter, S gate+guard, garden path, N lobby. fade_group lobby_facade/gate.",
+  "_doc": "Tier-1 redo: plain walls, terrazzo, glass openings, LED on, stone counter, mail wall, elev glass door — no corkboard/stair.",
   "bounds": {
-   "x0": 0.3,
-   "y0": 0.3,
-   "x1": 19.7,
-   "y1": 15.7
+   "x0": 0.2,
+   "y0": 0.2,
+   "x1": 9.8,
+   "y1": 6.8
   },
   "ground": {
    "origin": [
@@ -1435,404 +940,486 @@
     0
    ],
    "chunk": 2,
-   "cols": 10,
-   "rows": 8,
+   "cols": 5,
+   "rows": 4,
    "legend": {
-    "G": "g_grass",
-    "S": "g_sidewalk",
-    "K": "g_concrete",
-    "C": "g_court"
+    "T": "g_terrazzo"
    },
    "data_south_to_north": [
-    "GGSSSSGGGG",
-    "GGSSSSGGGG",
-    "GGSSSSGGGG",
-    "GGSSKKSSGG",
-    "GGSSKKSSGG",
-    "GGSSKKSSGG",
-    "KKKKKKKKKK",
-    "KKKKKKKKKK"
+    "TTTTT",
+    "TTTTT",
+    "TTTTT",
+    "TTTTT"
    ]
   },
   "spawn": [
-   10.0,
-   1.8,
+   4.5,
+   1.4,
    "N"
   ],
-  "swing": [
-   {
-    "door": "lobby_door",
-    "rect": [
-     9.0,
-     15.14,
-     10.2,
-     16.0
-    ],
-    "back": null
-   }
-  ],
+  "swing": [],
   "_short": [],
   "layout_check": {
    "problems": [],
-   "checks": 7
+   "checks": 14
   },
   "_estate_meta": {
-   "walkable_m2": 298.8,
-   "source": "estate_compound.json",
+   "walkable_m2": 63.4,
+   "source": "estate_lobby.json",
    "fade": "partitions + tagged fade_group reuse world.js occluder fade (read-only)"
   }
  },
- "estate_lobby": {
+ "estate_club": {
   "format": "fushi-scene",
   "version": 2,
-  "id": "estate_lobby",
-  "name": "云栖里 · 现代大堂",
+  "id": "estate_club",
+  "name": "云栖会所 · 休闲健身",
   "interior": true,
   "units": "m",
   "grid_m": 0.5,
   "objects": [
    {
-    "id": "lobby_win",
+    "id": "cl_w1",
     "type": "i_window",
-    "x": 1.0,
-    "y": 5.5,
+    "x": 2.0,
+    "y": 7.0,
     "z": 0,
     "rot": 0,
     "interact": "window_in",
     "reach": [
-     1.75,
-     4.2
+     2.75,
+     5.9
     ],
-    "state": "plain"
+    "state": "tile"
    },
    {
-    "id": "lobby_win2",
+    "id": "cl_w2",
     "type": "i_window",
-    "x": 4.5,
-    "y": 5.5,
+    "x": 6.0,
+    "y": 7.0,
     "z": 0,
     "rot": 0,
     "interact": "window_in",
     "reach": [
-     5.25,
-     4.2
+     6.75,
+     5.9
     ],
-    "state": "plain"
+    "state": "tile"
    },
    {
     "id": "i_wall_002",
     "type": "i_wall",
     "x": 0.0,
-    "y": 5.5,
+    "y": 7.0,
     "z": 0,
     "rot": 0,
-    "state": "plain"
+    "state": "tile"
    },
    {
     "id": "i_wall_003",
     "type": "i_wall",
-    "x": 2.5,
-    "y": 5.5,
+    "x": 1.0,
+    "y": 7.0,
     "z": 0,
     "rot": 0,
-    "state": "plain"
+    "state": "tile"
    },
    {
     "id": "i_wall_004",
     "type": "i_wall",
     "x": 3.5,
-    "y": 5.5,
+    "y": 7.0,
     "z": 0,
     "rot": 0,
-    "state": "plain"
+    "state": "tile"
    },
    {
     "id": "i_wall_005",
     "type": "i_wall",
-    "x": 6.0,
-    "y": 5.5,
+    "x": 4.5,
+    "y": 7.0,
     "z": 0,
     "rot": 0,
-    "state": "plain"
+    "state": "tile"
    },
    {
     "id": "i_wall_006",
     "type": "i_wall",
-    "x": 7.0,
-    "y": 5.5,
+    "x": 5.0,
+    "y": 7.0,
     "z": 0,
     "rot": 0,
-    "state": "plain"
+    "state": "tile"
    },
    {
-    "id": "unit_a101",
-    "type": "i_door",
-    "x": 8.0,
-    "y": 2.2,
+    "id": "i_wall_007",
+    "type": "i_wall",
+    "x": 7.5,
+    "y": 7.0,
     "z": 0,
-    "rot": 6,
-    "interact": "portal",
-    "to": "room_midtown_a101",
-    "spawn": [
-     7.4,
-     2.4,
-     "W"
-    ],
-    "label": "A-101",
-    "block": false,
-    "state": "closed",
-    "reach": [
-     7.55,
-     1.6
-    ]
+    "rot": 0,
+    "state": "tile"
    },
    {
     "id": "i_wall_008",
     "type": "i_wall",
-    "x": 8.0,
-    "y": 1.0,
+    "x": 8.5,
+    "y": 7.0,
     "z": 0,
-    "rot": 6,
-    "state": "plain"
+    "rot": 0,
+    "state": "tile"
    },
    {
     "id": "i_wall_009",
     "type": "i_wall",
-    "x": 8.0,
-    "y": 3.2,
+    "x": 9.0,
+    "y": 7.0,
     "z": 0,
-    "rot": 6,
-    "state": "plain"
+    "rot": 0,
+    "state": "tile"
    },
    {
     "id": "i_wall_010",
     "type": "i_wall",
-    "x": 8.0,
-    "y": 3.5,
+    "x": 10.0,
+    "y": 1.0,
     "z": 0,
     "rot": 6,
-    "state": "plain"
+    "state": "tile"
    },
    {
-    "id": "i_cut_011",
+    "id": "i_wall_011",
+    "type": "i_wall",
+    "x": 10.0,
+    "y": 2.0,
+    "z": 0,
+    "rot": 6,
+    "state": "tile"
+   },
+   {
+    "id": "i_wall_012",
+    "type": "i_wall",
+    "x": 10.0,
+    "y": 3.0,
+    "z": 0,
+    "rot": 6,
+    "state": "tile"
+   },
+   {
+    "id": "i_wall_013",
+    "type": "i_wall",
+    "x": 10.0,
+    "y": 6.0,
+    "z": 0,
+    "rot": 6,
+    "state": "tile"
+   },
+   {
+    "id": "i_wall_014",
+    "type": "i_wall",
+    "x": 10.0,
+    "y": 7.0,
+    "z": 0,
+    "rot": 6,
+    "state": "tile"
+   },
+   {
+    "id": "i_cut_015",
     "type": "i_cut",
     "x": 0.0,
     "y": 0.0,
     "z": 0,
     "rot": 0,
-    "state": "plain"
+    "state": "tile"
    },
    {
-    "id": "i_cut_012",
+    "id": "i_cut_016",
     "type": "i_cut",
     "x": 1.0,
     "y": 0.0,
     "z": 0,
     "rot": 0,
-    "state": "plain"
+    "state": "tile"
    },
    {
-    "id": "i_cut_013",
+    "id": "i_cut_017",
     "type": "i_cut",
-    "x": 1.5,
+    "x": 2.0,
     "y": 0.0,
     "z": 0,
     "rot": 0,
-    "state": "plain"
+    "state": "tile"
    },
    {
-    "id": "i_cut_014",
+    "id": "i_cut_018",
     "type": "i_cut",
-    "x": 5.5,
+    "x": 2.5,
     "y": 0.0,
     "z": 0,
     "rot": 0,
-    "state": "plain"
+    "state": "tile"
    },
    {
-    "id": "i_cut_015",
+    "id": "i_cut_019",
     "type": "i_cut",
     "x": 6.5,
     "y": 0.0,
     "z": 0,
     "rot": 0,
-    "state": "plain"
+    "state": "tile"
    },
    {
-    "id": "i_cut_016",
+    "id": "i_cut_020",
     "type": "i_cut",
-    "x": 7.0,
+    "x": 7.5,
     "y": 0.0,
     "z": 0,
     "rot": 0,
-    "state": "plain"
+    "state": "tile"
    },
    {
-    "id": "i_cut_017",
+    "id": "i_cut_021",
+    "type": "i_cut",
+    "x": 8.5,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "tile"
+   },
+   {
+    "id": "i_cut_022",
+    "type": "i_cut",
+    "x": 9.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "tile"
+   },
+   {
+    "id": "i_cut_023",
     "type": "i_cut",
     "x": 0.0,
     "y": 1.0,
     "z": 0,
     "rot": 6,
-    "state": "plain"
+    "state": "tile"
    },
    {
-    "id": "i_cut_018",
+    "id": "i_cut_024",
     "type": "i_cut",
     "x": 0.0,
     "y": 2.0,
     "z": 0,
     "rot": 6,
-    "state": "plain"
+    "state": "tile"
    },
    {
-    "id": "i_cut_019",
+    "id": "i_cut_025",
     "type": "i_cut",
     "x": 0.0,
     "y": 3.0,
     "z": 0,
     "rot": 6,
-    "state": "plain"
+    "state": "tile"
    },
    {
-    "id": "i_cut_020",
+    "id": "i_cut_026",
     "type": "i_cut",
     "x": 0.0,
     "y": 4.0,
     "z": 0,
     "rot": 6,
-    "state": "plain"
+    "state": "tile"
    },
    {
-    "id": "i_cut_021",
+    "id": "i_cut_027",
     "type": "i_cut",
     "x": 0.0,
     "y": 5.0,
     "z": 0,
     "rot": 6,
-    "state": "plain"
+    "state": "tile"
    },
    {
-    "id": "i_cut_022",
+    "id": "i_cut_028",
     "type": "i_cut",
     "x": 0.0,
-    "y": 5.5,
+    "y": 6.0,
     "z": 0,
     "rot": 6,
-    "state": "plain"
+    "state": "tile"
    },
    {
-    "id": "reception",
-    "type": "f_table",
-    "x": 3.5,
-    "y": 3.8,
+    "id": "i_cut_029",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 7.0,
     "z": 0,
-    "interact": "notice",
-    "note": "前台 · 云栖里物业（演示）",
-    "reach": [
-     2.7,
-     3.8
-    ]
+    "rot": 6,
+    "state": "tile"
    },
    {
-    "id": "recv_stool",
-    "type": "f_stool",
-    "x": 2.9,
-    "y": 3.8,
-    "z": 0
-   },
-   {
-    "id": "mail_shelf",
-    "type": "f_shelf",
-    "x": 6.4,
-    "y": 4.7,
-    "z": 0,
-    "interact": "notice",
-    "note": "信报柜 · 扫码取件",
-    "reach": [
-     6.4,
-     4.15
-    ]
-   },
-   {
-    "id": "wait1",
-    "type": "f_chair",
-    "x": 1.5,
-    "y": 1.6,
-    "z": 0,
-    "rot": 2,
-    "interact": "sit",
-    "reach": [
-     2.05,
-     1.6
-    ]
-   },
-   {
-    "id": "wait2",
-    "type": "f_chair",
-    "x": 2.6,
-    "y": 1.6,
-    "z": 0,
-    "rot": 2,
-    "interact": "sit",
-    "reach": [
-     3.15,
-     1.6
-    ]
-   },
-   {
-    "id": "lobby_light",
-    "type": "i_pendant",
+    "id": "club_desk",
+    "type": "s_counter",
     "x": 3.8,
-    "y": 2.5,
+    "y": 5.3,
     "z": 0,
-    "state": "off",
-    "interact": "light",
+    "interact": "notice",
+    "note": "会所前台",
     "reach": [
      3.8,
-     2.5
-    ]
-   },
-   {
-    "id": "lobby_board",
-    "type": "i_notice",
-    "x": 2.2,
-    "y": 5.35,
-    "z": 1.2,
-    "interact": "notice",
-    "note": "云栖里公告：门禁 24h · 访客登记 · 租金见表 rent_table",
-    "reach": [
-     2.2,
      4.6
     ]
    },
    {
-    "id": "elev_stub",
-    "type": "i_notice",
-    "x": 7.55,
-    "y": 4.2,
-    "z": 1.3,
-    "interact": "notice",
-    "note": "电梯厅 · 7F以上由 Midtown-A 负责（本轨：庭院/大堂/户型）",
+    "id": "cooler",
+    "type": "s_cooler",
+    "x": 5.8,
+    "y": 5.3,
+    "z": 0,
+    "state": "full",
     "reach": [
-     6.9,
-     4.2
+     5.8,
+     4.6
     ]
    },
    {
-    "id": "plant1",
+    "id": "lounge_t",
+    "type": "f_table",
+    "x": 2.2,
+    "y": 2.9,
+    "z": 0
+   },
+   {
+    "id": "c1",
+    "type": "f_chair",
+    "x": 1.4,
+    "y": 2.0,
+    "z": 0,
+    "rot": 2,
+    "interact": "sit",
+    "reach": [
+     1.95,
+     2.0
+    ]
+   },
+   {
+    "id": "c2",
+    "type": "f_chair",
+    "x": 3.0,
+    "y": 2.0,
+    "z": 0,
+    "rot": 6,
+    "interact": "sit",
+    "reach": [
+     3.55,
+     2.0
+    ]
+   },
+   {
+    "id": "mat1",
+    "type": "d_mat",
+    "x": 7.0,
+    "y": 2.5,
+    "z": 0,
+    "interact": "notice",
+    "note": "瑜伽垫",
+    "reach": [
+     7.0,
+     3.2
+    ]
+   },
+   {
+    "id": "mat2",
+    "type": "d_mat",
+    "x": 8.5,
+    "y": 2.8,
+    "z": 0
+   },
+   {
+    "id": "locker",
+    "type": "p_locker",
+    "x": 8.5,
+    "y": 5.5,
+    "z": 0,
+    "interact": "notice",
+    "note": "更衣柜",
+    "reach": [
+     8.5,
+     4.9
+    ]
+   },
+   {
+    "id": "towels",
+    "type": "i_dryrack",
+    "x": 8.4,
+    "y": 3.6,
+    "z": 0,
+    "reach": [
+     7.7,
+     3.6
+    ]
+   },
+   {
+    "id": "p1",
     "type": "p_planter",
-    "x": 6.5,
+    "x": 1.0,
+    "y": 5.5,
+    "z": 0
+   },
+   {
+    "id": "p2",
+    "type": "p_planter",
+    "x": 1.0,
     "y": 1.3,
     "z": 0
    },
    {
-    "id": "plant2",
-    "type": "p_planter",
-    "x": 0.9,
-    "y": 3.6,
+    "id": "led1",
+    "type": "i_track",
+    "x": 3.0,
+    "y": 6.5,
+    "z": 2.4
+   },
+   {
+    "id": "led2",
+    "type": "i_track",
+    "x": 7.0,
+    "y": 6.5,
+    "z": 2.4
+   },
+   {
+    "id": "lt",
+    "type": "i_pendant",
+    "x": 2.2,
+    "y": 4.0,
     "z": 0,
-    "rot": 6
+    "state": "on",
+    "interact": "light",
+    "reach": [
+     2.2,
+     4.0
+    ]
+   },
+   {
+    "id": "rules",
+    "type": "i_notice",
+    "x": 5.0,
+    "y": 6.7,
+    "z": 1.3,
+    "interact": "notice",
+    "note": "会所 06:00–22:00 · 轻训",
+    "reach": [
+     5.0,
+     6.0
+    ]
+   },
+   {
+    "id": "entry_mat",
+    "type": "d_mat",
+    "x": 4.5,
+    "y": 0.7,
+    "z": 0
    }
   ],
   "colliders": [
@@ -1840,45 +1427,45 @@
     "id": "wall0_0",
     "rect": [
      0.0,
-     5.5,
-     1.0,
-     6.1
+     7.0,
+     2.0,
+     7.6
     ]
    },
    {
     "id": "wall0_1",
     "rect": [
-     2.5,
-     5.5,
-     4.5,
-     6.1
+     3.5,
+     7.0,
+     6.0,
+     7.6
     ]
    },
    {
     "id": "wall0_2",
     "rect": [
-     6.0,
-     5.5,
-     8.0,
-     6.1
+     7.5,
+     7.0,
+     10.0,
+     7.6
     ]
    },
    {
     "id": "wall1_3",
     "rect": [
-     8.0,
+     10.0,
      0.0,
-     8.6,
-     1.0
+     10.6,
+     3.0
     ]
    },
    {
     "id": "wall1_4",
     "rect": [
-     8.0,
-     2.2,
-     8.6,
-     3.5
+     10.0,
+     5.0,
+     10.6,
+     7.0
     ]
    },
    {
@@ -1886,16 +1473,16 @@
     "rect": [
      0.0,
      -0.6,
-     2.5,
+     3.5,
      0.15
     ]
    },
    {
     "id": "wall2_6",
     "rect": [
-     5.5,
+     6.5,
      -0.6,
-     8.0,
+     10.0,
      0.15
     ]
    },
@@ -1905,23 +1492,23 @@
      -0.6,
      0.0,
      0.15,
-     5.5
+     7.0
     ]
    }
   ],
   "portals": [
    {
-    "id": "to_compound",
+    "id": "to_cy",
     "rect": [
-     2.6,
+     3.5,
      0.2,
-     5.4,
-     0.85
+     6.5,
+     0.95
     ],
-    "to": "estate_compound",
+    "to": "street",
     "spawn": [
-     10.0,
-     13.5,
+     154.0,
+     14.2,
      "S"
     ],
     "dir": "S",
@@ -2343,12 +1930,12 @@
   },
   "repair_hours_scale": 1.0,
   "estate": true,
-  "_doc": "Midtown-B bright lobby. S gap = courtyard entry; E = unit A-101; elev stub notice (Midtown-A). N windows.",
+  "_doc": "Bright club stub: lounge + mats. Outdoor courtyard is primary; this is optional interior.",
   "bounds": {
-   "x0": 0.15,
-   "y0": 0.15,
-   "x1": 7.85,
-   "y1": 5.35
+   "x0": 0.2,
+   "y0": 0.2,
+   "x1": 9.8,
+   "y1": 6.8
   },
   "ground": {
    "origin": [
@@ -2356,43 +1943,34 @@
     0
    ],
    "chunk": 2,
-   "cols": 4,
-   "rows": 3,
+   "cols": 5,
+   "rows": 4,
    "legend": {
     "T": "g_terrazzo",
+    "W": "g_wood",
     "K": "g_tile"
    },
    "data_south_to_north": [
-    "TTTT",
-    "TTTT",
-    "TTKK"
+    "TTTTT",
+    "TTWWW",
+    "TTWWW",
+    "TTKKK"
    ]
   },
   "spawn": [
-   4.0,
-   1.3,
+   4.5,
+   1.4,
    "N"
   ],
-  "swing": [
-   {
-    "door": "unit_a101",
-    "rect": [
-     7.14,
-     1.0,
-     8.0,
-     2.2
-    ],
-    "back": null
-   }
-  ],
+  "swing": [],
   "_short": [],
   "layout_check": {
    "problems": [],
-   "checks": 12
+   "checks": 10
   },
   "_estate_meta": {
-   "walkable_m2": 40.0,
-   "source": "estate_lobby.json",
+   "walkable_m2": 63.4,
+   "source": "estate_club.json",
    "fade": "partitions + tagged fade_group reuse world.js occluder fade (read-only)"
   }
  },
@@ -3701,7 +3279,7 @@
  "_street": {
   "chunk_id": "estate",
   "rect": [
-   147.0,
+   146.0,
    -40.0,
    210.0,
    64.0
@@ -3761,6 +3339,6 @@
     }
    ]
   },
-  "object_count": 605
+  "object_count": 648
  }
 }

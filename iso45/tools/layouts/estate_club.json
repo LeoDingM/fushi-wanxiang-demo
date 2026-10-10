@@ -1,0 +1,273 @@
+{
+ "id": "estate_club",
+ "name": "云栖会所 · 休闲健身",
+ "_doc": "Bright club stub: lounge + mats. Outdoor courtyard is primary; this is optional interior.",
+ "bounds": [
+  0.2,
+  0.2,
+  9.8,
+  6.8
+ ],
+ "ground": {
+  "origin": [
+   0,
+   0
+  ],
+  "chunk": 2,
+  "cols": 5,
+  "rows": 4,
+  "legend": {
+   "T": "g_terrazzo",
+   "W": "g_wood",
+   "K": "g_tile"
+  },
+  "data_south_to_north": [
+   "TTTTT",
+   "TTWWW",
+   "TTWWW",
+   "TTKKK"
+  ]
+ },
+ "walls": [
+  {
+   "side": "N",
+   "line": 7.0,
+   "from": 0.0,
+   "to": 10.0,
+   "finish": "tile",
+   "openings": [
+    {
+     "kind": "window",
+     "at": 2.0,
+     "interact": "window_in",
+     "id": "cl_w1",
+     "reach": [
+      2.75,
+      5.9
+     ]
+    },
+    {
+     "kind": "window",
+     "at": 6.0,
+     "interact": "window_in",
+     "id": "cl_w2",
+     "reach": [
+      6.75,
+      5.9
+     ]
+    }
+   ]
+  },
+  {
+   "side": "E",
+   "line": 10.0,
+   "from": 0.0,
+   "to": 7.0,
+   "finish": "tile",
+   "openings": [
+    {
+     "kind": "gap",
+     "at": 3.0,
+     "w": 2.0
+    }
+   ]
+  },
+  {
+   "side": "S",
+   "line": 0.0,
+   "from": 0.0,
+   "to": 10.0,
+   "finish": "tile",
+   "openings": [
+    {
+     "kind": "gap",
+     "at": 3.5,
+     "w": 3.0
+    }
+   ]
+  },
+  {
+   "side": "W",
+   "line": 0.0,
+   "from": 0.0,
+   "to": 7.0,
+   "finish": "tile"
+  }
+ ],
+ "furniture": [
+  {
+   "type": "s_counter",
+   "x": 3.8,
+   "y": 5.3,
+   "id": "club_desk",
+   "interact": "notice",
+   "note": "会所前台",
+   "reach": [
+    3.8,
+    4.6
+   ]
+  },
+  {
+   "type": "s_cooler",
+   "x": 5.8,
+   "y": 5.3,
+   "state": "full",
+   "id": "cooler",
+   "reach": [
+    5.8,
+    4.6
+   ]
+  },
+  {
+   "type": "f_table",
+   "x": 2.2,
+   "y": 2.9,
+   "id": "lounge_t"
+  },
+  {
+   "type": "f_chair",
+   "x": 1.4,
+   "y": 2.0,
+   "rot": 2,
+   "id": "c1",
+   "interact": "sit",
+   "reach": [
+    1.95,
+    2.0
+   ]
+  },
+  {
+   "type": "f_chair",
+   "x": 3.0,
+   "y": 2.0,
+   "rot": 6,
+   "id": "c2",
+   "interact": "sit",
+   "reach": [
+    3.55,
+    2.0
+   ]
+  },
+  {
+   "type": "d_mat",
+   "x": 7.0,
+   "y": 2.5,
+   "id": "mat1",
+   "interact": "notice",
+   "note": "瑜伽垫",
+   "reach": [
+    7.0,
+    3.2
+   ]
+  },
+  {
+   "type": "d_mat",
+   "x": 8.5,
+   "y": 2.8,
+   "id": "mat2"
+  },
+  {
+   "type": "p_locker",
+   "x": 8.5,
+   "y": 5.5,
+   "id": "locker",
+   "interact": "notice",
+   "note": "更衣柜",
+   "reach": [
+    8.5,
+    4.9
+   ]
+  },
+  {
+   "type": "i_dryrack",
+   "x": 8.4,
+   "y": 3.6,
+   "id": "towels",
+   "reach": [
+    7.7,
+    3.6
+   ]
+  },
+  {
+   "type": "p_planter",
+   "x": 1.0,
+   "y": 5.5,
+   "id": "p1"
+  },
+  {
+   "type": "p_planter",
+   "x": 1.0,
+   "y": 1.3,
+   "id": "p2"
+  },
+  {
+   "type": "i_track",
+   "x": 3.0,
+   "y": 6.5,
+   "z": 2.4,
+   "id": "led1"
+  },
+  {
+   "type": "i_track",
+   "x": 7.0,
+   "y": 6.5,
+   "z": 2.4,
+   "id": "led2"
+  },
+  {
+   "type": "i_pendant",
+   "x": 2.2,
+   "y": 4.0,
+   "state": "on",
+   "interact": "light",
+   "id": "lt",
+   "reach": [
+    2.2,
+    4.0
+   ]
+  },
+  {
+   "type": "i_notice",
+   "x": 5.0,
+   "y": 6.7,
+   "z": 1.3,
+   "id": "rules",
+   "interact": "notice",
+   "note": "会所 06:00–22:00 · 轻训",
+   "reach": [
+    5.0,
+    6.0
+   ]
+  },
+  {
+   "type": "d_mat",
+   "x": 4.5,
+   "y": 0.7,
+   "id": "entry_mat"
+  }
+ ],
+ "portals": [
+  {
+   "id": "to_cy",
+   "rect": [
+    3.5,
+    0.2,
+    6.5,
+    0.95
+   ],
+   "to": "street",
+   "spawn": [
+    154.0,
+    14.2,
+    "S"
+   ],
+   "dir": "S",
+   "label": "出门 · 庭院"
+  }
+ ],
+ "spawn": [
+  4.5,
+  1.4,
+  "N"
+ ]
+}
