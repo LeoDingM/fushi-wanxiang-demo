@@ -130,7 +130,7 @@
    "label": "饱腹",
    "icon": "🍚",
    "start": 70,
-   "decay_per_h": 3.5,
+   "decay_per_h": 4.2,
    "sleep_decay_per_h": 1.6,
    "warn": 25,
    "critical": 8
@@ -270,7 +270,60 @@
  "money": {
   "start": 1500,
   "currency": "¥",
-  "_doc": "李默 just moved in: paid 押一付一 for 2F-02 (deposit ¥850 + first month ¥850) from his savings; ¥1500 left on WeChat · balance (Stage 3 rebalance for the ¥850 room): 便利店 ¥18/h ≈ ¥3.5-4k/month full-time; rent+utilities+food ≈ ¥1.7-2k -> full-time saves, the 4 h evening part-time alone barely covers the month"
+  "_doc": "李默 just moved in: paid 押一付一 for 2F-02 (deposit ¥850 + first month ¥850) from his savings; ¥1500 left on WeChat · balance (Stage 3 rebalance for the ¥850 room): 便利店 ¥18/h ≈ ¥3.5-4k/month full-time; rent+utilities+food ≈ ¥1.7-2k -> full-time saves, the 4 h evening part-time alone barely covers the month · Stage 4 rebalance: budget peripheral prices (see `prices`); a full-time clerk with normal habits saves roughly ¥1k/month, part-time alone is about break-even"
+ },
+ "prices": {
+  "_doc": "★ ALL PRICES IN ONE PLACE (¥). Edit numbers here only — at load the rules engine copies them onto actions[].cost / items[].price / the job and rewrites the （¥N） in labels. Level: peripheral old neighbourhood (城中村/老小区) in a tier-1 city, 2026. Rent itself lives in lease.rent / rent_table (2F-02 = ¥850).",
+  "breakfast · 早点 ¥4–8": {
+   "buy_breakfast": 6
+  },
+  "eat out · 面馆/快餐 ¥10–15": {
+   "buy_noodle_shop": 12,
+   "buy_kuaican": 14
+  },
+  "takeout · 外卖（含满减）¥15–22": {
+   "order_hmj": 18,
+   "order_zjf": 17,
+   "order_mlt": 20
+  },
+  "convenience store · 便利店": {
+   "bento": 15,
+   "buy_oden": 8,
+   "bread": 6,
+   "milk": 5,
+   "bun": 2,
+   "drink": 4,
+   "buy_drink": 4,
+   "buy_coffee": 9
+  },
+  "drinks / treats · 奶茶 ¥8–12": {
+   "buy_milktea": 10
+  },
+  "ingredients · 食材（一顿约¥8–12）": {
+   "noodles": 6.5,
+   "egg": 1.5,
+   "veg": 7
+  },
+  "outing · 休息日出门": {
+   "go_out": 50
+  },
+  "gifts / household": {
+   "fruit": 20,
+   "tea": 48,
+   "candy": 6,
+   "cigs": 20,
+   "detergent": 18
+  },
+  "job · 工资与员工餐": {
+   "wage_per_h": 15,
+   "staff_meal": 8
+  },
+  "fixed monthly · 月固定": {
+   "property": 40,
+   "broadband": 40,
+   "phone": 29,
+   "installment": 199
+  }
  },
  "items": {
   "noodles": {
@@ -287,7 +340,7 @@
   },
   "bread": {
    "label": "面包",
-   "price": 8
+   "price": 9
   },
   "drink": {
    "label": "冰红茶",
@@ -299,11 +352,11 @@
   },
   "bento": {
    "label": "便当",
-   "price": 22
+   "price": 25
   },
   "milk": {
    "label": "牛奶",
-   "price": 6
+   "price": 7
   },
   "fruit": {
    "label": "一袋水果",
@@ -537,10 +590,10 @@
    }
   },
   "buy_breakfast": {
-   "label": "买早点（¥10）",
+   "label": "买早点（¥12）",
    "place": "stall",
    "minutes": 4,
-   "cost": 10,
+   "cost": 12,
    "effects": {
     "hunger": 35,
     "mood": 4
@@ -548,7 +601,7 @@
    "requires": {
     "flag": "vendor_open"
    },
-   "text": "两个肉包一杯豆浆"
+   "text": "两个肉包一杯豆浆，再加个茶叶蛋"
   },
   "buy_drink": {
    "label": "买冰红茶（¥4）",
@@ -599,10 +652,10 @@
    "text": "冰牛奶"
   },
   "buy_oden": {
-   "label": "来份关东煮（¥12）",
+   "label": "来份关东煮（¥14）",
    "place": "store_hot",
    "minutes": 6,
-   "cost": 12,
+   "cost": 14,
    "effects": {
     "hunger": 32,
     "mood": 5
@@ -621,10 +674,10 @@
    "text": "热美式，提神"
   },
   "order_hmj": {
-   "label": "点外卖：黄焖鸡米饭（¥26）",
+   "label": "点外卖：黄焖鸡米饭（¥30）",
    "place": "pc",
    "minutes": 38,
-   "cost": 26,
+   "cost": 30,
    "effects": {
     "hunger": 62,
     "mood": 6
@@ -633,10 +686,10 @@
    "kind": "takeout"
   },
   "order_mlt": {
-   "label": "点外卖：麻辣烫（¥32）",
+   "label": "点外卖：麻辣烫（¥36）",
    "place": "pc",
    "minutes": 38,
-   "cost": 32,
+   "cost": 36,
    "effects": {
     "hunger": 55,
     "mood": 9
@@ -645,10 +698,10 @@
    "kind": "takeout"
   },
   "order_zjf": {
-   "label": "点外卖：隆江猪脚饭（¥28）",
+   "label": "点外卖：隆江猪脚饭（¥32）",
    "place": "pc",
    "minutes": 38,
-   "cost": 28,
+   "cost": 32,
    "effects": {
     "hunger": 66,
     "mood": 7
@@ -695,6 +748,70 @@
    "kind": "laundry_collect",
    "rack": "roof",
    "text": "晒得干干的，有太阳味"
+  },
+  "eat_home": {
+   "label": "坐下吃饭",
+   "place": "table",
+   "minutes": 15,
+   "effects": {
+    "mood": 4
+   },
+   "requires": {
+    "flag": "meal_ready",
+    "reason": "桌上没有饭菜"
+   },
+   "text": "坐在小圆凳上把饭吃完"
+  },
+  "buy_milktea": {
+   "label": "买杯奶茶（¥16）",
+   "place": "store_hot",
+   "minutes": 5,
+   "cost": 16,
+   "effects": {
+    "mood": 8,
+    "hunger": 6
+   },
+   "text": "三分糖去冰，续命",
+   "kind": "treat"
+  },
+  "go_out": {
+   "label": "休息日出门吃饭逛逛（¥85）",
+   "place": "street",
+   "minutes": 180,
+   "cost": 85,
+   "effects": {
+    "mood": 22,
+    "hunger": 40,
+    "energy": -10
+   },
+   "requires": {
+    "off_day": true
+   },
+   "text": "和老同学吃了顿烤鱼，又逛了逛商场"
+  },
+  "buy_noodle_shop": {
+   "label": "楼下面馆：牛肉面（¥12）",
+   "place": "street",
+   "minutes": 20,
+   "cost": 12,
+   "effects": {
+    "hunger": 55,
+    "mood": 5
+   },
+   "text": "一碗牛肉面加个煎蛋，汤底很足",
+   "kind": "eatout"
+  },
+  "buy_kuaican": {
+   "label": "两荤一素快餐（¥14）",
+   "place": "street",
+   "minutes": 20,
+   "cost": 14,
+   "effects": {
+    "hunger": 62,
+    "mood": 4
+   },
+   "text": "快餐店打了两荤一素，米饭随便加",
+   "kind": "eatout"
   }
  },
  "shops": {
@@ -805,8 +922,9 @@
     }
    },
    "holiday_mul": 3,
-   "_doc": "hourly 便利店店员 (tier-1 2026: ¥22–28/h). 8 h shifts (+ a 4 h part-time peak shift); 夜班 +20%; 法定节假日 ×3 (劳动法第44条)",
-   "perf_bonus_per_h": 2
+   "_doc": "hourly 便利店店员 (peripheral tier-1 2026: ~¥15–18/h, wage set in prices). 8 h shifts (+ a 4 h part-time peak shift); 夜班 +20%; 法定节假日 ×3 (劳动法第44条) · 下班可领一份员工价便当（prices.staff_meal，从工资扣）",
+   "perf_bonus_per_h": 2,
+   "staff_meal_price": 12
   }
  },
  "social": {
@@ -1332,6 +1450,14 @@
    "broadband": {
     "label": "宽带",
     "amount": 50
+   },
+   "phone": {
+    "label": "话费",
+    "amount": 39
+   },
+   "installment": {
+    "label": "手机分期（花呗）",
+    "amount": 199
    }
   },
   "payee": "物业 / 国网 / 燃气公司"

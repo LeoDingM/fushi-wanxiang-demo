@@ -134,12 +134,14 @@
     if (this.kickT > 0) { const v = SP.dirVec[this.dir]; X += Math.round((v[0] - v[1]) * 2); }
     let bikeAfter = false, g = null;
     if (this.carry) { g = this.bikePose(this.x, this.y, this.dir); bikeAfter = g.x + g.y < this.x + this.y; if (!bikeAfter) drawBike(ctx, this, g); }
+    const fr = this.frosted && !erase; if (fr) { ctx.save(); ctx.filter = "blur(1.1px) saturate(0.35) brightness(1.25)"; }
     for (const [k, a] of this.frameKeys()) {
       const f = D.frames[k]; if (!f) continue;
-      if (a < 0.999) ctx.globalAlpha = a;
+      if (a < 0.999 || fr) ctx.globalAlpha = fr ? 0.78 : a;
       ctx.drawImage(src, f[0], f[1], f[2], f[3], X - Math.round(f[4]), Y - Math.round(f[5]), f[2], f[3]);
       ctx.globalAlpha = 1;
     }
+    if (fr) ctx.restore();
     if (this.umbrella && !this.isPlayer) SP.drawFrame(ctx, this.umbKey(), X + this.umbDX(), Y - 36);
     if (bikeAfter) drawBike(ctx, this, g);
     if (this.bubble && !erase) {
@@ -208,7 +210,7 @@
         }
       }
       for (const a of AC.list) {
-        if (a.hidden) continue;
+        if (a.hidden || a.posed) continue;                 // posed on a chair / in the shower / in bed: placed there on purpose
         SP.world._mover = a; const onRoof = a.level === "roof";
         for (let k = 0; k < 3; k++) {
           let fixed = false;

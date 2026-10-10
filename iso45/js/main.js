@@ -122,11 +122,28 @@
   function nearest() { return player.carry ? null : W.nearest(player.x, player.y); }
   /** F / 踢: a short kick pose; kicks the nearest kickable thing (lamp, bin, bike, vending machine, pot, poster, window,
       parked car, laundry line, puddle, leaf pile) */
+  /** readable bus-stop plate: crisp screen-space lettering anchored on the stop's sign pole (the 0.6 m pixel board
+      itself is only ~20 px wide), shown when 李默 is within 10 m, fading out with distance */
+  function drawStopSign(z, cx, cy) {
+    if (W.interior || z < 0.35) return;
+    const o = W.byId.bus_stop; if (!o) return;
+    const px = o.x - 2.5, py = o.y, d = Math.hypot(player.x - px, player.y - py); if (d > 10) return;
+    const X = Math.round((SP.sx(px, py) - cx) * z), Y = Math.round((SP.sy(px, py, 3.15) - cy) * z);
+    const k = Math.max(1, Math.min(2, z * 1.6)) * (canvas.width / Math.max(1, canvas.getBoundingClientRect().width || canvas.width));
+    ctx.save(); ctx.globalAlpha = Math.min(1, (10 - d) / 3);
+    const w = Math.round(150 * k), h = Math.round(38 * k), x0 = X - w / 2, y0 = Y - h;
+    ctx.fillStyle = "#1d4f91"; ctx.fillRect(x0, y0, w, h); ctx.fillStyle = "#f2f4f8"; ctx.fillRect(x0 + k, y0 + k, w - 2 * k, Math.round(4 * k));
+    ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.textBaseline = "alphabetic";
+    ctx.font = `bold ${Math.round(14 * k)}px sans-serif`; ctx.fillText("井槐里 站", X, y0 + Math.round(21 * k));
+    ctx.font = `${Math.round(9 * k)}px sans-serif`; ctx.fillText("12路 · 35路 · 夜2路  6:00–23:00", X, y0 + Math.round(33 * k));
+    ctx.fillStyle = "#1d4f91"; ctx.fillRect(X - k, Y, 2 * k, Math.round(5 * k));
+    ctx.restore();
+  }
   function kick() {
     if (player.kickT > 0 || player.carry) return;
     player.kickT = 0.38;
     const o = W.nearest(player.x, player.y), a = o && W.actionFor(o, "kick");
-    if (!a) { toast("踢了一脚空气"); return; }
+    if (!a) { if (W.interior && SP.game) { SP.game.noise(player.x, player.y, "stomp"); toast("咚！（跺了一下脚）"); return; } toast("踢了一脚空气"); return; }
     const r = W.act(o, "kick", player); if (r) toast(r);
   }
   function interact() {
@@ -168,6 +185,7 @@
   SP.canRun = () => !player.umbrella && !player.carry && !(player.kickT > 0) && !st.slowZone && !(SP.game && SP.game.exhausted && SP.game.exhausted());
   function wantRun(v) {
     if (!v || !SP.canRun()) return false;
+    if (st.autoRun) return true;                                    // clipping audit at running speed
     if (v[2] === "touch") return SP.runToggle || (SP.touchInput && SP.touchInput.m > 0.85);
     return !!(keys.shift || SP.runToggle || (SP.input && SP.input.shift));
   }
@@ -303,6 +321,7 @@
     SP.env.drawFog(ctx, canvas.width, canvas.height);
     SP.env.drawWeather(ctx, canvas.width, canvas.height, cam.x, cam.y, cam.zoom, st.lastDt || 1 / 60);
     if (st.debug) drawDebugText(list, pi);
+    drawStopSign(z, cx, cy);
     if (SP.game) { SP.game.drawOverlay(ctx, canvas.width, canvas.height); SP.game.hud(); }
     hud();
   }
@@ -446,7 +465,7 @@
   function auditRun(o) {
     o = Object.assign({ seconds: 60, dt: 1 / 30, sortEvery: 10, pixelEvery: 240, seed: 7, reset: false }, o || {});
     if (o.reset || !AUD.C) { AUD.C = SP.audit.counts(); AUD.walker = SP.audit.randomWalker(o.seed); AUD.i = 0; }
-    const C = AUD.C; st.autoWalk = AUD.walker;
+    const C = AUD.C; st.autoWalk = AUD.walker; st.autoRun = !!o.run; st.auditLock = !!o.lock;
     const n = Math.round(o.seconds / o.dt), t0 = performance.now();
     for (let k = 0; k < n; k++) {
       const prev = SP.actors.list.map((q) => [q.x, q.y]);
@@ -463,7 +482,7 @@
         if (AUD.i % o.pixelEvery === 0 || (crowd && AUD.i % 15 === 0)) SP.audit.checkPixels(list, C);
       }
     }
-    st.autoWalk = null;
+    st.autoWalk = null; st.autoRun = false; st.auditLock = false;
     C.simSeconds = +(C.steps * o.dt).toFixed(1); C.ms = (C.ms || 0) + Math.round(performance.now() - t0);
     const travel = {}; for (const k in C.travel) travel[k] = Math.round(C.travel[k]);
     const amb = Object.entries(C.ambiguous || {}).sort((p, q) => q[1] - p[1]).slice(0, 12);

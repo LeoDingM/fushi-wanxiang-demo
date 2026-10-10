@@ -15,7 +15,8 @@
     cook_noodles: { obj: "kitchen", during: "cooking", after: "off", then: { table: "meal" }, pose: { clip: "cook", dir: "W", at: [1.02, 1.25] } },
     cook_veg: { obj: "kitchen", during: "cooking", after: "off", then: { table: "meal" }, pose: { clip: "cook", dir: "W", at: [1.02, 1.25] } },
     snack: { obj: "fridge", during: "open", after: "closed" }, drink_fridge: { obj: "fridge", during: "open", after: "closed" },
-    shower: { obj: "shower", during: "running", after: "dry", hide: true },
+    shower: { obj: "shower", during: "running", after: "dry", frosted: true, close: "bath_door", pose: { idle: true, dir: "S", at: [5.6, 3.5] } },
+    eat_home: { obj: "table", after: "default", pose: { clip: "eat", dir: "N", at: "stool" } },
     browse: { obj: "desk", during: "on", after: "off", pose: { clip: "sit", dir: "N", at: "chair", intro: 1 } },
     change: { obj: "wardrobe", during: "open", after: "closed" },
     make_bed: { obj: "bed", after: "made" },
@@ -34,7 +35,8 @@
   };
   G.flags = function () {
     const v = (SP.place.npcs || SP.actors.list).find((a) => a.id === "vendor"), bed = W.byId.bed;
-    return { vendor_open: !!(v && !v.hidden && v.act === "cook"), bed_messy: !!(bed && bed.state === "messy") };
+    const tb = W.byId.table;
+    return { vendor_open: !!(v && !v.hidden && v.act === "cook"), bed_messy: !!(bed && bed.state === "messy"), meal_ready: !!(tb && tb.state === "meal") };
   };
   G.ctx = function () {
     return { abs: C.abs(), flags: G.flags(), outdoors: !W.interior || !!W.data.outdoor, weather: C.intensity > 0.15 ? C.weather : "clear", intensity: C.intensity,
@@ -116,7 +118,7 @@
       case "idoor": return kind === "use" ? { label: (o.state === "open" ? "关上" : "打开") + (o.name || "门"), do: "game" } : null;
       case "bedlamp": return kind === "use" ? { label: o.state === "on" ? "关台灯" : "开台灯", do: "game" } : null;
       case "stairs": return kind === "use" ? { label: (o.go === "up" ? (o.to === "roof" ? "上天台" : "上楼") : "下楼") + " · 选楼层", do: "game" } : null;
-      case "table": return kind === "use" ? (o.state === "meal" ? { label: "收拾碗筷", do: "game" } : { label: "看看", do: "game" }) : null;
+      case "table": return kind === "use" ? (o.state === "meal" ? { label: "坐下吃饭", do: "game" } : { label: "看看", do: "game" }) : null;
     }
     return undefined;
   };
@@ -134,8 +136,8 @@
         for (const x of W.objects) if (x.interact === "light") W.setState(x, on ? "on" : "off");
         W.logEvent(on ? "李默开了灯" : "李默关了灯"); return on ? "开灯" : "关灯";
       }
-      case "hall_light": o.wake = C.abs(); W.setState(o, "on"); return "咚！声控灯亮了";
-      case "neighbor_door": return o.note ? `咚咚咚……${o.name}：${o.note}` : `咚咚咚……${o.name || "邻居家"} 没人应`;
+      case "hall_light": G.noise(P0().x, P0().y, "stomp"); return "咚！（跺了一下脚）";
+      case "neighbor_door": return G.knock(o);
       case "mailbox": {
         const L = R.data.lease, ub = G.ps.bills && G.ps.bills.find((b) => b.kind === "utilities");
         if (G.ps.owed > 0) return `信箱里塞了张纸条：「2F-02 房租 ¥${G.ps.owed} 已逾期，请尽快转账 —— ${L ? L.landlord : R.data.rent.landlord}」`;
@@ -154,7 +156,7 @@
       }
       case "bedlamp": W.setState(o, o.state === "on" ? "off" : "on"); return o.state === "on" ? "台灯亮了" : "台灯关了";
       case "door": G.go({ to: "stair_1f", spawn: SP.scenes.stair_1f.spawn, door: "unit_door" }); return null;
-      case "table": if (o.state === "meal") { W.setState(o, "default"); W.logEvent("李默收拾了碗筷"); return "碗筷洗干净了"; } return "一张折叠小饭桌";
+      case "table": if (o.state === "meal") return G.start("eat_home", o); return "一张折叠小饭桌，旁边一张红色小圆凳";
     }
     return null;
   };
@@ -167,6 +169,7 @@
     after(r, o);
     return null;
   };
+  const q0 = (q) => !q.clip || !!SP.img.actor_li_mo_home;
   function after(r, o) {
     const vis = VIS[r.id] || {}, obj = vis.obj ? W.byId[vis.obj] : null;
     if (obj && vis.during) W.setState(obj, vis.during);
@@ -176,20 +179,64 @@
       C.skipTo((C.min + r.minutes) % 1440, dur);
       G.activity = { id: r.id, label: r.label, text: r.text, vis, obj, t: 0, dur, sleep, minutes: r.minutes };
       if (vis.hide) P.hidden = true;
-      if (vis.pose && SP.img.actor_li_mo_home && (typeof vis.pose.at !== "string" || W.byId[vis.pose.at])) {   // sit / lie / cook pose at the furniture
+      if (vis.pose && (q0(vis.pose) || vis.pose.idle) && (typeof vis.pose.at !== "string" || W.byId[vis.pose.at])) {   // sit / lie / cook / eat pose at the furniture
         const q = vis.pose, at = typeof q.at === "string" ? [W.byId[q.at].x, W.byId[q.at].y] : q.at;
-        G.activity.back = [P.x, P.y, P.dir]; P.x = at[0]; P.y = at[1]; P.dir = P.target = q.dir;
-        P.homeClip = P.clip = q.clip; P.clipIntro = q.intro || 0; P.clipHold = !!q.hold; P.t = 0; P.frame = 0;
+        G.activity.back = [P.x, P.y, P.dir]; P.x = at[0]; P.y = at[1]; P.dir = P.target = q.dir; P.posed = true;
+        if (q.clip) { P.homeClip = P.clip = q.clip; P.clipIntro = q.intro || 0; P.clipHold = !!q.hold; P.t = 0; P.frame = 0; }
       }
+      if (vis.frosted) P.frosted = true;                                   // silhouette behind the frosted shower screen
+      if (vis.close && W.byId[vis.close] && W.byId[vis.close].state === "open") { G.activity.reopen = vis.close; W.setState(W.byId[vis.close], "closed"); W.rebuildColliders(); }
     } else finish({ vis, obj, text: r.text, id: r.id });
-    W.logEvent(`李默：${r.label}`);
+    W.logEvent(`李默：${r.label}${r.paid ? `（${r.paid.method} ¥${r.paid.amount}）` : ""}`);
+    if (r.paid) G.payCard({ amount: r.paid.amount, method: r.paid.method, to: PAYEE[R.data.actions[r.id].place] || PAYEE[R.data.actions[r.id].kind] || "商家", what: r.label.replace(/（¥\d+）/, "") });
   }
+  const PAYEE = { stall: "王姐早点摊", store_hot: "邻里便利 24h", pc: "外卖平台", takeout: "外卖平台", street: "商场 · 烤鱼店", treat: "奶茶店" };
+  const P0 = () => SP.player;
+  /** WeChat / Alipay-style payment + message cards (DOM, top-centre, stack of 3) */
+  const payEl = document.getElementById("paystack");
+  G.payCard = function (c) {
+    if (!payEl) return;
+    const ali = /支付宝/.test(c.method || ""), el = document.createElement("div");
+    el.className = "pay " + (c.msg ? "msg" : ali ? "ali" : "wx");
+    if (c.msg) el.innerHTML = `<div class="hd"><i>微信</i>${c.from}</div><div class="bd">${c.msg}</div>`;
+    else el.innerHTML = `<div class="hd"><i>${c.income ? "微信收款" : c.method || "微信支付"}</i>${c.income ? "到账" : "支付成功 ✓"}</div><div class="amt">${c.income ? "+" : "-"}¥${(+c.amount).toFixed(c.amount % 1 ? 2 : 0)}</div><div class="bd">${c.income ? c.from : "付款给 " + c.to}${c.what ? " · " + c.what : ""}</div>`;
+    payEl.prepend(el); while (payEl.children.length > 3) payEl.lastChild.remove();
+    setTimeout(() => el.classList.add("out"), c.msg ? 4200 : 2600); setTimeout(() => el.remove(), c.msg ? 4800 : 3200);
+  };
+  /** noise -> the stairwell's sound-activated lights (声控灯): stomp, knock, a slammed door, running feet */
+  G.t = 0; G.queue = [];
+  G.later = (sec, fn) => G.queue.push([G.t + sec, fn]);              // game-time delays (deterministic in tests)
+  G.noise = function (x, y, kind) {
+    for (const o of W.objects) if (o.auto_light && Math.hypot(x - o.x, y - o.y) < 7) { o.wakeT = G.t; if (o.state !== "on" && G.lightWanted(o)) W.setState(o, "on"); }
+    G.lastNoise = kind;
+  };
+  /** knocking on a neighbour door: who is home, time of day, knocked again -> reply after a beat (data: interiors45 knock) */
+  G.knock = function (o) {
+    G.noise(o.x, o.y - 0.4, "knock");
+    const K = o.knock, m = C.min, late = m >= 22.5 * 60 || m < 7 * 60, key = o.id;
+    G.knocks = G.knocks || {}; const prev = G.knocks[key]; G.knocks[key] = C.abs();
+    W.logEvent(`李默敲了 ${o.name} 的门`);
+    if (!K || !K.who) { const t = (K && K.empty) || o.note || "没人应"; G.later(0.9, () => { SP.toast(t, 2600); W.logEvent(t); }); return "咚咚咚……"; }
+    const home = K.home[0] <= m && m < K.home[1];
+    if (!home) { G.later(1.1, () => { SP.toast(K.away || "没人应。", 2600); W.logEvent(K.away || "没人应。"); }); return "咚咚咚……"; }
+    const again = prev != null && C.abs() - prev < 60, pool = again ? K.again : late ? K.night : K.day;
+    const line = pool[Math.floor(Math.random() * pool.length)];
+    if (late || again) R.applyEffects ? R.applyEffects(G.ps, { mood: -2 }) : (G.ps.needs.mood = Math.max(0, G.ps.needs.mood - 2));
+    G.later(1.2, () => {
+      if (K.opens && !again && W.byId[o.id] === o) { W.setState(o, "open"); o.closeAt = SP.now + 3.2; }
+      SP.toast(`${o.name} ${K.who}：${line}`, 3400); W.logEvent(`${K.who}：${line}`);
+    });
+    return "咚咚咚……";
+  };
   function finish(a) {
     if (a.obj && a.vis.after) W.setState(a.obj, a.vis.after);
     for (const [id, st] of Object.entries(a.vis.then || {})) if (W.byId[id]) W.setState(W.byId[id], st);
     SP.player.hidden = false;
     const P = SP.player;
-    if (P.homeClip) { P.homeClip = P.clip = null; P.clipIntro = 0; P.clipHold = false; if (a.back) { P.x = a.back[0]; P.y = a.back[1]; P.dir = P.target = a.back[2]; } }
+    if (P.homeClip) { P.homeClip = P.clip = null; P.clipIntro = 0; P.clipHold = false; }
+    if (P.posed) { P.posed = false; if (a.back) { P.x = a.back[0]; P.y = a.back[1]; P.dir = P.target = a.back[2]; } }
+    P.frosted = false;
+    if (a.reopen && W.byId[a.reopen]) { W.setState(W.byId[a.reopen], "open"); W.rebuildColliders(); }
     if (a.text) SP.toast(a.text);
     G.activity = null;
   }
@@ -251,6 +298,7 @@
     SP.place.enter(to, spawn);
     G.armed = false; G.spawnAt = [P.x, P.y]; G.trans && (G.trans.done = true); G.lastXY = [P.x, P.y];
     G.lastGo = { to, t: SP.now }; G.transits = (G.transits || 0) + 1;
+    if (W.interior) G.noise(P.x, P.y, "door");                         // the door bangs shut behind him: hall light wakes
     for (const o of W.objects) if (DOORS[o.type] && o.state === "open") W.setState(o, "closed");
     const d = door && W.byId[door];
     if (d && DOORS[d.type]) { W.setState(d, "open"); d.closeAt = SP.now + 0.9; }
@@ -266,6 +314,9 @@
   // ---------- per fixed step ----------
   G.update = function (dt, gm) {
     const P = SP.player, ctx = G.ctx();
+    G.t += dt;
+    if (G.queue.length) { const due = G.queue.filter((q) => q[0] <= G.t); G.queue = G.queue.filter((q) => q[0] > G.t); for (const q of due) q[1](); }
+    if (W.interior && P.running && P.moving && (G._runN = (G._runN || 0) + dt) > 0.4) { G._runN = 0; G.noise(P.x, P.y, "run"); }
     // velocity for the directional walk-in triggers (N / S / E / W)
     const L0 = G.lastXY || [P.x, P.y]; G.vx = (P.x - L0[0]) / Math.max(dt, 1e-3); G.vy = (P.y - L0[1]) / Math.max(dt, 1e-3); G.lastXY = [P.x, P.y];
     G.moving = !!P.moving || Math.hypot(G.vx, G.vy) > 0.05;
@@ -277,7 +328,11 @@
       if (e.type === "need_low") { const t = NEED_TXT[e.need][e.level === "critical" ? 1 : 0]; SP.toast(t, 2600); W.logEvent(t); }
       else if (e.type === "rent_paid") { W.logEvent(`${e.late ? "补交" : "自动交了"}房租 ¥${e.amount}`); SP.toast(`交房租 ¥${e.amount}`, 2600); }
       else if (e.type === "rent_owed") { W.logEvent(`房租没交上！欠 ¥${e.owed}`); SP.toast(`钱不够交房租，欠 ¥${e.owed}`, 3200); }
+      else if (e.type === "landlord_msg") { G.payCard({ msg: e.text, from: R.data.lease.landlord }); W.logEvent(EVT.landlord_msg(e)); }
       else if (EVT[e.type]) { const t = EVT[e.type](e); if (t) { SP.toast(t, 3000); W.logEvent(t); } }
+      if (e.type === "rent_paid") G.payCard({ amount: e.amount, method: R.data.payment.transfer || "微信转账", to: R.data.lease.landlord, what: "房租" });
+      if (e.type === "util_paid") G.payCard({ amount: e.amount, method: R.payLabel(G.ps) + "代扣", to: "物业 / 水电燃气", what: e.label });
+      if (e.type === "shift_paid") G.payCard({ amount: e.pay, income: true, from: "邻里便利 · 工资" });
     }
     G.speedMul = R.status(G.ps, ctx).speedMul;
     G.syncLaundry();
@@ -289,7 +344,7 @@
     }
     for (const o of W.objects) if (o.closeAt && SP.now > o.closeAt) { o.closeAt = 0; W.setState(o, "closed"); }
     // walk-in portals (armed again once 李默 has stepped out of every portal rect)
-    if (!G.trans && !G.activity) {
+    if (!G.trans && !G.activity && !SP.state.auditLock) {
       let inside = false;
       for (const p of W.portals) {
         if (!inRect(p.rect, P.x, P.y)) continue;
@@ -316,10 +371,11 @@
     G.updateLights(false);
   };
   /** stairwell sound-activated lights: on when it is dim and somebody is near / stamped, off after a while */
+  /** 声控灯: dark enough (windowless 1F hall: always) AND a noise in the last 25 s (stomp / knock / door / running feet) */
+  G.lightWanted = (o) => C.dark > 0.08 || W.sceneId === "stair_1f";
   G.updateLights = function (force) {
     for (const o of W.objects) if (o.auto_light) {
-      const near = Math.hypot(SP.player.x - o.x, SP.player.y - o.y) < 5;
-      const want = (C.dark > 0.08 || W.sceneId === "stair_1f") && (near || (o.wake && C.abs() - o.wake < 2)) ? "on" : "off";
+      const want = G.lightWanted(o) && o.wakeT != null && G.t - o.wakeT < 25 ? "on" : "off";
       if (o.state !== want) W.setState(o, want);
     }
   };
@@ -333,7 +389,7 @@
     if (a > 0.003) { ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = SP.clamp(a, 0, 1); ctx.fillStyle = "#07080c"; ctx.fillRect(0, 0, cw, ch); ctx.globalAlpha = 1; }
     if (A) {
       ctx.setTransform(1, 0, 0, 1, 0, 0);
-      const k = SP.clamp(A.t / A.dur, 0, 1), w = Math.min(260, cw * 0.6), x = Math.round((cw - w) / 2), y = Math.round(ch * (A.sleep ? 0.46 : 0.2));
+      const k = SP.clamp(A.t / A.dur, 0, 1), w = Math.min(260, cw * 0.6), x = Math.round((cw - w) / 2), y = Math.round(A.sleep ? ch * 0.46 : ch * 0.84);   // bottom centre: clear of the needs / rent HUD rows and of the room
       ctx.font = "bold 14px sans-serif"; ctx.textAlign = "center"; ctx.fillStyle = "#f4ead2";
       ctx.fillText(A.sleep ? `💤 ${A.label}…  ${C.clockLabel()}` : `${A.label}…  ${C.clockLabel()}`, Math.round(cw / 2), y - 8);
       ctx.fillStyle = "rgba(20,22,30,.8)"; ctx.fillRect(x, y, w, 6); ctx.fillStyle = "#e8b860"; ctx.fillRect(x, y, Math.round(w * k), 6);

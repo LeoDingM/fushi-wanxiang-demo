@@ -11,7 +11,20 @@
   const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
   const DAY = 1440;
 
+  /** copy the single editable price table (data.prices) onto actions / items / job / fixed fees; rewrite （¥N） in labels */
+  function applyPrices(D) {
+    const P = D.prices; if (!P || P._applied) return; P._applied = true;
+    const fmt = (v) => (Math.round(v * 100) / 100).toString();
+    for (const [grp, tab] of Object.entries(P)) if (grp[0] !== "_" && tab && typeof tab === "object") for (const [k, v] of Object.entries(tab)) {
+      if (D.actions[k]) { D.actions[k].cost = v; D.actions[k].label = D.actions[k].label.replace(/（¥[\d.]+）/, `（¥${fmt(v)}）`); }
+      else if (D.items[k]) D.items[k].price = v;
+      else if (k === "wage_per_h" && D.jobs && D.jobs.store_clerk) D.jobs.store_clerk.pay_per_h = v;
+      else if (k === "staff_meal" && D.jobs && D.jobs.store_clerk) D.jobs.store_clerk.staff_meal_price = v;
+      else if (D.utilities && D.utilities.fixed && D.utilities.fixed[k]) D.utilities.fixed[k].amount = v;
+    }
+  }
   function create(data) {
+    applyPrices(data);
     const D = data, NEEDS = Object.keys(D.needs);
     const R = { data: D, needs: NEEDS };
 
@@ -142,7 +155,8 @@
       if (a.allowed_from != null && !inWindow((ctx.abs || 0) % DAY, a.allowed_from, a.allowed_to)) return fail("还不到睡觉的时候");
       const q = a.requires || {};
       if (q.energy_below != null && !(s.needs.energy < q.energy_below)) return fail("现在不困");
-      if (q.flag && !(ctx.flags && ctx.flags[q.flag])) return fail("现在没开");
+      if (q.flag && !(ctx.flags && ctx.flags[q.flag])) return fail(q.reason || "现在没开");
+      if (q.off_day && BASE != null && !R.date(ctx.abs || 0).off) return fail("今天要上班");
       out.cost = R.costOf(s, id);
       if (out.cost && s.money < out.cost) return fail("钱不够");
       for (const [it, n] of Object.entries(a.consume || {})) if ((s.items[it] || 0) < n) return fail(`没有${D.items[it].label}了`);
@@ -298,6 +312,7 @@
         const pay = Math.max(0, Math.round(base - cut + bonus));
         s.money += pay; s.stats.earned += pay; s.stats.shifts++; s.job.shifts++;
         if (why !== "left") for (const [it, n] of Object.entries(J.staff_meal || {})) R.addItem(s, it, n);
+        if (why !== "left" && J.staff_meal_price) { s.money -= J.staff_meal_price; s.stats.spent += J.staff_meal_price; }   // 员工价便当，从工资里扣
         const ev = note(s, { type: "shift_paid", id: sh.id, pay, base: Math.round(base), cut: Math.round(cut), bonus, perf: Math.round(perf * 100) / 100, done: sh.done, failed: sh.failed, hours: Math.round(hours * 10) / 10, why, holiday: hol > 1 }, abs);
         s.shift = null;
         return { ok: true, pay, events: [ev] };

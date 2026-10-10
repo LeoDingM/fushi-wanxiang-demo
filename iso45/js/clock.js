@@ -97,6 +97,11 @@
     return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
   };
   C.dateLabel = function () {
+    const GR = SP.game && SP.game.rules;
+    if (GR) {   // real calendar from shared-rules: weekday, weekend / 法定节假日 / 调休上班 (visual seasons stay demo-compressed)
+      const d = GR.date(C.abs()), tag = d.holiday ? ` · ${d.holiday}${d.statutory ? "（三倍工资）" : "假期"}` : d.makeup ? " · 调休上班" : d.weekend ? " · 周末" : "";
+      return `${d.label}${tag} · 第${C.day + 1}天`;
+    }
     const ss = C.cal.season_start[C.season], i = C.day % C.daysPerSeason, yr = C.cal.start[0] + Math.floor(C.day / (C.daysPerSeason * 4)) + (C.season === "winter" && ss[0] < 3 ? 1 : 0);
     const d = new Date(yr, ss[0] - 1, ss[1] + Math.round(i * 90 / C.daysPerSeason));
     return `${d.getMonth() + 1}月${d.getDate()}日 周${"日一二三四五六"[d.getDay()]} · 第${C.day + 1}天`;
