@@ -3,3 +3,4 @@
 - 20:10 polish: evening lit 55-65%, 2F-02 AC indoor+facade, metro exit placement; CBD hold pending redesign READY
 - 20:15 Stage 6b: redesign CBD integrated (Leo caps / compound / lake / atrium mall); metro↔CBD; zips include kit_cbd
 - 20:35 metro street entrance stairs + skip 地面入口 (B1 direct); await metro READY for concourse redesign
+- 20:41 CBD deeper redesign + gate twitch fix + glass pavilion metro entrance

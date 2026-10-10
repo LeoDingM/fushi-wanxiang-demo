@@ -206,19 +206,22 @@
         I.active = true; S.running || startLoop();
         if (o.exit) S.exitLetter = o.exit;
         let sp = o.spawn;
-        // CBD re-entry at a specific exit letter lands in unpaid near that exit (no street facade)
-        if (!sp && o.exit && DATA.areas[id] && DATA.areas[id].exit_spawns) sp = DATA.areas[id].exit_spawns[o.exit];
+        // CBD (and any multi-exit station): land in unpaid by the named exit — never the deprecated street facade
+        if (!sp && S.exitLetter && DATA.areas[id] && DATA.areas[id].exit_spawns)
+          sp = DATA.areas[id].exit_spawns[S.exitLetter] || DATA.areas[id].exit_spawns.A;
+        // Fresh street→station entry: always re-do security (OUT gate also clears)
+        if (!o.resume) { S.secured = false; S.bag = null; }
         goArea(id, sp);
       });
     };
     function goArea(id, spawn) {
       const prevKind = S.W && S.W.A.kind;
       S.W = buildArea(id); const A = S.W.A;
-      if (A.kind === "street" || (A.kind === "concourse" && !MS.entry)) { S.secured = false; S.bag = null; }
+      // secured cleared on fresh I.enter / OUT gate / street portal — not on every goArea (keeps unpaid→gate path)
       if (!S.player) S.player = new Actor({ id: "limo", set: "li_mo", speed: 1.75, r: 0.22, isPlayer: true });
       const p = S.player;
       let sp = spawn;
-      if (sp === "exit" || (!sp && A.kind === "concourse" && A.exit_spawns && prevKind === "street")) sp = A.exit_spawns ? A.exit_spawns[S.exitLetter] : null;
+      if (sp === "exit" || (!sp && A.kind === "concourse" && A.exit_spawns && (prevKind === "street" || prevKind == null))) sp = A.exit_spawns[S.exitLetter] || A.exit_spawns.A;
       sp = sp || A.spawn; p.x = sp[0]; p.y = sp[1]; p.dir = sp[2] || "S"; p.moving = false;
       S.actors = [p]; S.npcs = []; S.staff = [];
       for (const s of A.staff || []) { const a = new Actor({ set: s.set || s.sprite, x: s.at[0], y: s.at[1], dir: s.dir, staff: true, name: s.name, id: s.id, r: 0.22 }); S.actors.push(a); S.staff.push(a); }
@@ -494,7 +497,9 @@
     }
     function platformOf(sid) { return Object.values(DATA.areas).find((a) => a.kind === "platform" && a.station === sid).id; }
     function ride(dest, T) {
-      const here = S.W.A.station, E = MS.entry, fare = I.fare(here, dest), mins = I.rideMin(here, dest);
+      const here = S.W.A.station, fare = I.fare(here, dest), mins = I.rideMin(here, dest);
+      if (!MS.entry) MS.entry = { station: here, method: "qr", t: host.now() };
+      const E = MS.entry;
       S.menu = null; S.ride = { t: 0, dur: 3.2, from: here, to: dest, dir: T.dir, mins };
       fadeTo(() => {}, 0.35);
       S.ride.finish = () => {
@@ -502,7 +507,8 @@
         let msg;
         if (E.method === "qr") { if (!host.spend(fare, `地铁 ${stById[here].name}→${stById[dest].name}`, "乘车码")) { MS.debt = (MS.debt || 0) + fare; msg = `乘车码欠费 ¥${fare}`; } else msg = `乘车码扣费 ¥${fare}`; }
         else if (E.method === "card") { if (MS.card >= fare) { MS.card -= fare; msg = `交通卡扣费 ¥${fare} · 余额 ¥${MS.card}`; } else { const sh = fare - MS.card; MS.card = 0; host.spend(sh, "地铁补票"); msg = `交通卡余额不足，补票 ¥${sh}`; } }
-        else { const d = fare - E.token.fare; if (d > 0) { host.spend(d, "地铁补票"); msg = `单程票超程，补票 ¥${d}`; } else msg = `单程票 ¥${E.token.fare}`; }
+        else if (E.method === "token" && E.token) { const d = fare - E.token.fare; if (d > 0) { host.spend(d, "地铁补票"); msg = `单程票超程，补票 ¥${d}`; } else msg = `单程票 ¥${E.token.fare}`; }
+        else { if (!host.spend(fare, `地铁 ${stById[here].name}→${stById[dest].name}`)) MS.debt = (MS.debt || 0) + fare; msg = `扣费 ¥${fare}`; }
         E.rode = true; E.to = dest; E.fare = fare; log(`地铁 ${stById[here].name}→${stById[dest].name} ${mins}分钟 · ${msg}`);
         const plat = DATA.areas[platformOf(dest)], dyN = (plat.tracks.find((t) => t.id === "N") || {}).door_y || 8.2;
         const dyS = (plat.tracks.find((t) => t.id === "S") || {}).door_y || 3.8;
@@ -572,7 +578,7 @@
         S.portalArmed = false;
         if (inP.hours && !open(minOfDay())) { toast(`地铁已停运（运营时间 ${R.hours.label}）`, 2.4); p.y -= 0.4; }
         else if (inP.to === "exit:street") fadeTo(() => leave("street", {}), 0.3);
-        else if (inP.to === "exit:cbd") fadeTo(() => leave("cbd", { exit: S.exitLetter }), 0.3);
+        else if (inP.to === "exit:cbd") { if (inP.exit) S.exitLetter = inP.exit; fadeTo(() => leave("cbd", { exit: S.exitLetter }), 0.3); }
         else { if (inP.exit) S.exitLetter = inP.exit; const sp = inP.spawn; fadeTo(() => goArea(inP.to, sp), 0.3); }
       }
       // toasts
@@ -1024,8 +1030,8 @@
     function toStreet() {                                    // back on 井槐里路 next to the entrance (its reach point)
       if (W.sceneId && W.sceneId !== "street" && SP.place) SP.place.enter("street");
       const o = (W.byId && W.byId.metro_jhl) || fromObj, P = SP.player;
-      if (o && o.reach) { P.x = o.reach[0]; P.y = o.reach[1]; P.dir = "S"; }
-      else if (o) { P.x = o.x; P.y = o.y + 1.8; P.dir = "S"; }
+      if (o && o.reach) { P.x = o.reach[0]; P.y = o.reach[1]; P.dir = "N"; }  // face the stair mouth
+      else if (o) { P.x = o.x; P.y = o.y - 1.8; P.dir = "N"; }
       if (G) { G.armed = false; G.lastXY = [P.x, P.y]; }
     }
     function toCbd(info) {                                   // CBD module id 'cbd': hand over the exit letter

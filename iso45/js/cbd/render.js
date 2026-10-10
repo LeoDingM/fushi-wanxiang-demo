@@ -2,7 +2,7 @@
    in at <= 1/16), building / tower parts (pattern-filled faces at the kit scale, mip-mapped facades), painter list with
    prism-order topological sort, occluder fade, and the frame compositor (ground -> sorted drawables -> lightmap ->
    emissive -> halos / aviation lights -> weather -> labels).
-   LOD:  z >= 0.125 full sort incl. props / people;  z < 0.125 depth-sorted buildings + cars;  z < 0.04 tower impostors. */
+   LOD: near = podium-only towers + occluder fade; mid = gradual shaft; z < 0.048 full impostors; z < 0.125 skip props. */
 (function (SP) {
   "use strict";
   const C = SP.cbd, X = C._; if (!X) return; C._mods.render = true;

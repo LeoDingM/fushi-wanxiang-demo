@@ -62,7 +62,7 @@
     const Xs = Math.round(SX(g.x, g.y)), Ys = Math.round(SY(g.x, g.y, 0));
     return { kind: "dog", key, X: Xs, Y: Ys, a, rect: { x0: Xs - f[4], y0: Ys - f[5], x1: Xs - f[4] + f[2], y1: Ys - f[5] + f[3] }, sh: [{ p: [[g.x - 0.3, g.y - 0.15], [g.x + 0.3, g.y - 0.15], [g.x + 0.3, g.y + 0.15], [g.x - 0.3, g.y + 0.15]] }], z0: 0, z1: 0.6, depth: g.x + g.y, alpha: 1 };
   }
-  /** occluder fade: static drawables painted after 李默 whose silhouette covers his body ease to 35 % */
+  /** occluder fade: statics painted after 李默 that cover his body ease to ~30 % (towers same as residential walls) */
   function fade(list) {
     const P = C.player, br = P.bodyRect(), cx = (br.x0 + br.x1) / 2, pts = [[cx, br.y0 + 8], [cx, (br.y0 + br.y1) / 2], [cx, br.y1 - 6]];
     let after = false;
@@ -75,7 +75,7 @@
         else if (d.tree) cover = pts.some(([x, y]) => y < d.Y - 70 && x > d.rect.x0 + 24 && x < d.rect.x1 - 24);
         else cover = d.z1 > 1.9;
       }
-      const tgt = cover ? 0.35 : 1; d.alpha += (tgt - d.alpha) * Math.min(1, (C.dt || 0.016) * 8); if (Math.abs(d.alpha - tgt) < 0.01) d.alpha = tgt;
+      const tgt = cover ? (d.tower ? 0.28 : 0.32) : 1; d.alpha += (tgt - d.alpha) * Math.min(1, (C.dt || 0.016) * 8); if (Math.abs(d.alpha - tgt) < 0.01) d.alpha = tgt;
     }
   }
   function leash(ctx, a) { const g = a.dog, [Xs, Ys] = a.screen(); ctx.strokeStyle = "rgba(40,40,40,0.8)"; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(Xs + 6, Ys - 38); ctx.lineTo(Math.round(SX(g.x, g.y)) + 4, Math.round(SY(g.x, g.y, 0.45))); ctx.stroke(); }
@@ -94,11 +94,16 @@
     X.drawGround(ctx, view, z);
     if (ck && ck.wet > 0.02) { ctx.fillStyle = `rgba(10,20,40,${ck.wet * 0.2})`; ctx.fillRect(view.x0, view.y0, view.x1 - view.x0, view.y1 - view.y0); }
     if (z >= 0.2) X.waterFx(ctx);
-    const far = z < 0.125, useImp = z < 0.04, pad = 120 / z;
+    // LOD: near keep podium/low detail; full tower impostors only beyond distance threshold (拉远才显示楼)
+    const far = z < 0.125, useImp = z < 0.048, pad = 120 / z;
     const L0 = X.gquery({ x0: view.x0 - pad, y0: view.y0 - pad, x1: view.x1 + pad, y1: view.y1 + pad }, []);
     let list = [];
     if (useImp) list = X.impostorList(L0, z, n);
-    else for (const d of L0) { if (far && d.kind === "prop") continue; d.static = true; list.push(d); }
+    else for (const d of L0) {
+      if (far && d.kind === "prop") continue;
+      if (d.tower && !X.towerPartVisible(d, z)) continue;
+      d.static = true; list.push(d);
+    }
     for (const c of TR.cars) { const dd = X.carDrawable(c); if (dd && overlap(dd.rect, view)) list.push(dd); }
     if (!far) {
       for (const a of [C.player].concat(NPC.list)) {

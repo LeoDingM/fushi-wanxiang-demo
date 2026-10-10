@@ -479,9 +479,9 @@ def place_towers(table, rnd):
     by = {t["id"]: dict(t) for t in table}
     # four map anchors (kept walkable for lobbies)
     inmap = {
-        "tianshu": (300, 300, 56, "oct", "diagrid"),
+        "tianshu": (300, 340, 56, "oct", "diagrid"),
         "kunpeng": (216, 330, 48, "rect", "glass_silver"),
-        "xinglan": (330, 216, 46, "circ", "glass_teal"),
+        "xinglan": (390, 230, 46, "circ", "glass_teal"),
         "huichao": (200, 250, 38, "rect", "glass_blue"),
     }
     out = []
@@ -546,18 +546,33 @@ def layout(rules_cbd):
     zone("plaza", rect(*B))
     zone("plaza", rect(-40, -40, 0, 400)); zone("plaza", rect(360, -40, 400, 400))
     zone("plaza", rect(-40, -40, 400, 0)); zone("plaza", rect(-40, 360, 400, 400))
-    # ---- 中央公园 (SW block) — large central lake as the clear focus + pier / boardwalk
-    zone("grass", rect(0, 3, 146, 146)); zone("plaza", rect(112, 112, 148, 148))
-    zone("plaza", ellipse(62, 70, 44, 36, 36))                                   # stone shoreline
-    zone("water", ellipse(62, 70, 40, 32, 36))                                    # central lake
-    zone("deck", rect(44, 34, 80, 40))                                            # north pier deck
-    zone("deck", rect(78, 62, 104, 70))                                           # east boardwalk tongue
-    zone("deck", rect(52, 96, 72, 102))                                           # south viewing pier
-    loop = ellipse(62, 70, 52, 44, 32)
-    paths = [loop + [loop[0]], [(62, 114), (62, 148)], [(114, 70), (148, 70)], [(100, 100), (128, 128), (148, 148)], [(18, 70), (2, 70)], [(62, 26), (62, 3)]]
+    # ---- 中央公园 (SW) — inspired by Central Park / 人才公园 / 花城广场 (original layout)
+    # large lake with island + bridges, lawn amphitheatre, tree alleys, flower beds, jogging loop, boardwalk, café kiosks, landmark plaza
+    zone("grass", rect(0, 3, 146, 146))
+    zone("plaza", rect(108, 108, 148, 148))                                       # SE landmark plaza
+    zone("plaza", ellipse(64, 68, 50, 42, 36))                                    # stone shoreline ring
+    zone("water", ellipse(64, 68, 46, 38, 40))                                    # large central lake
+    zone("grass", ellipse(58, 62, 10, 7, 16))                                     # island A
+    zone("grass", ellipse(78, 78, 7, 5.5, 14))                                    # island B
+    zone("deck", rect(52, 58, 64, 62))                                            # bridge → island A
+    zone("deck", rect(68, 70, 78, 74))                                            # bridge → island B
+    zone("deck", rect(40, 28, 88, 36))                                            # north lakeside boardwalk
+    zone("deck", rect(100, 52, 112, 88))                                          # east boardwalk
+    zone("deck", rect(48, 100, 80, 108))                                          # south pier / pier café deck
+    # lawn amphitheatre (terraced arcs on the west shore)
+    zone("lawn", ellipse(28, 68, 18, 22, 20))
+    zone("plaza_dk", ellipse(32, 68, 12, 14, 16))
+    zone("lawn", ellipse(118, 28, 14, 11, 14)); zone("lawn", ellipse(20, 120, 12, 14, 14))
+    # tree alleys (N–S and E–W through the park)
+    for pl in ([[20, 40], [100, 40]], [[40, 20], [40, 110]], [[90, 30], [90, 100]]):
+        for q in strip(pl, 5.5): zone("path", q)
+    jog = ellipse(64, 68, 56, 48, 36)                                             # jogging / cycling loop
+    loop = ellipse(64, 68, 50, 42, 32)                                            # lakeside promenade
+    paths = [jog + [jog[0]], loop + [loop[0]],
+             [(64, 116), (64, 148)], [(116, 68), (148, 68)], [(104, 104), (128, 128), (148, 148)],
+             [(16, 68), (2, 68)], [(64, 20), (64, 3)]]
     for pl in paths:
-        for q in strip(pl, 3.4): zone("path", q)
-    zone("lawn", ellipse(118, 24, 16, 12, 16)); zone("lawn", ellipse(18, 124, 14, 16, 16))
+        for q in strip(pl, 3.2): zone("path", q)
     # ---- avenues
     zone("paver", rect(0, 148, 360, 155)); zone("paver", rect(0, 187, 360, 194)); zone("paver", rect(148, 0, 155, 360)); zone("paver", rect(181, 0, 188, 360))
     zone("asphalt", rect(0, 155, 360, 187)); zone("asphalt", rect(155, 0, 181, 360))
@@ -615,33 +630,69 @@ def layout(rules_cbd):
         dict(shape="ell", cx=74, cy=280, rx=58, ry=50, n=32, z0=32, z1=36, style="canopy", ring=dict(rx=34, ry=27))],
         door=[74, 229.5], gates=[[74, 232, "S"], [18, 280, "W"]], sign=dict(x=74, y=231.9, z=27, text="云汇体育中心 YUNHUI ARENA"),
         foot=[["ell", 74, 280, 56, 48, 32]])
-    # ---- 云麓花园 · modern wealthy residential compound (gated mid-rise glass/stone, courtyards, lobby, garage ramp)
-    # occupies the quiet NE pocket between the avenues and the skyline (away from the old home block feel)
-    zone("plaza", rect(248, 200, 348, 250))
-    zone("lawn", rect(256, 210, 292, 240)); zone("lawn", rect(300, 210, 340, 240))   # landscaped courtyards
-    zone("path", rect(272, 208, 280, 242)); zone("path", rect(308, 208, 316, 242)); zone("path", rect(252, 224, 342, 230))
-    zone("plaza_dk", rect(250, 248, 270, 250)); zone("asphalt", rect(252, 242, 268, 248))  # underground garage ramp apron
-    # gatehouses + perimeter mid-rises (glass / stone, 8–12 floors ≈ 28–42 m)
+    # ---- 云麓花园 · recognizable Chinese high-end gated community
+    # grand gatehouse + guard booth + access control, perimeter wall, mid/high-rise + 独栋别墅 cluster,
+    # clubhouse + pool pavilion, visitor parking, underground garage ramp, name stone, walkable courtyards
+    CX0, CY0, CX1, CY1 = 248, 198, 348, 268
+    zone("plaza", rect(CX0, CY0, CX1, CY1))
+    zone("lawn", rect(256, 220, 300, 246))                                        # west courtyard
+    zone("lawn", rect(306, 218, 340, 250))                                        # east villa gardens strip
+    zone("path", rect(286, 206, 294, 262)); zone("path", rect(254, 242, 340, 248)) # main walk axes
+    zone("path", rect(256, 220, 300, 226)); zone("path", rect(310, 248, 344, 254))
+    zone("asphalt", rect(252, 258, 280, 266))                                     # visitor parking
+    zone("asphalt", rect(252, 250, 268, 258))                                     # garage ramp apron
+    zone("plaza_dk", rect(280, 198, 302, 206))                                    # gate forecourt
+    # perimeter wall segments (low stone, gaps at south gate + east service)
+    for wi, (x0, y0, x1, y1) in enumerate((
+        (248, 198, 278, 201), (304, 198, 348, 201),                               # south wall (gap = gate)
+        (248, 201, 251, 265), (345, 201, 348, 265),                               # west / east walls
+        (248, 265, 348, 268),                                                     # north wall
+    )):
+        bld(f"res_wall_{wi}", "云麓花园围墙", "compound", [
+            dict(shape="rect", x0=x0, y0=y0, x1=x1, y1=y1, z0=0, z1=2.8, style="stone_grid")],
+            foot=[[x0, y0, x1, y1]])
+    # grand gatehouse (双柱门楼) + guard booth + access control canopy
     bld("res_gate_s", "云麓花园 · 南门", "compound", [
-        dict(shape="rect", x0=278, y0=200, x1=298, y1=206, z0=0, z1=6, style="stone_grid"),
-        dict(shape="rect", x0=282, y0=200.4, x1=294, y1=205.6, z0=3, z1=5.5, style="mall_glass")],
-        door=[288, 199.2], sign=dict(x=288, y=200.2, z=6.5, text="云麓花园"), foot=[[278, 200, 298, 206]])
-    bld("res_lobby", "云麓花园 · 会所大堂", "compound", [
-        dict(shape="rect", x0=306, y0=202, x1=338, y1=214, z0=0, z1=8, style="lobby"),
-        dict(shape="rect", x0=308, y0=204, x1=336, y1=212, z0=8, z1=11, style="mall_glass")],
-        door=[322, 201.4], sign=dict(x=322, y=202.2, z=9, text="会所"), foot=[[306, 202, 338, 214]])
-    for i, (x0, name, h, st) in enumerate([
-        (252, "云麓 · 望湖苑", 36, "apt"), (274, "云麓 · 听风苑", 40, "glass_silver"),
-        (298, "云麓 · 澄心苑", 38, "apt"), (322, "云麓 · 静澜苑", 42, "glass_teal"),
+        dict(shape="rect", x0=278, y0=196.5, x1=284, y1=206, z0=0, z1=7, style="stone_grid"),
+        dict(shape="rect", x0=298, y0=196.5, x1=304, y1=206, z0=0, z1=7, style="stone_grid"),
+        dict(shape="rect", x0=278, y0=196.5, x1=304, y1=199, z0=5.5, z1=7.2, style="lobby"),
+        dict(shape="rect", x0=284.5, y0=199, x1=297.5, y1=201.2, z0=3.2, z1=3.8, style="canopy"),
+        dict(shape="rect", x0=286, y0=201.5, x1=292, y1=205.5, z0=0, z1=3.2, style="dark_glass")],  # guard booth
+        door=[291, 198.5], sign=dict(x=291, y=197.2, z=7.8, text="云麓花园"),
+        foot=[[278, 196.5, 304, 206]])
+    # name stone (门牌石)
+    bld("res_stone", "云麓花园 · 门牌石", "compound", [
+        dict(shape="rect", x0=268, y0=199.2, x1=275, y1=202.5, z0=0, z1=1.6, style="stone_grid")],
+        sign=dict(x=271.5, y=199.5, z=2.0, text="云麓花园"), foot=[[268, 199.2, 275, 202.5]])
+    # clubhouse + pool pavilion
+    bld("res_club", "云麓花园 · 会所", "compound", [
+        dict(shape="rect", x0=256, y0=206, x1=284, y1=218, z0=0, z1=5, style="lobby"),
+        dict(shape="rect", x0=258, y0=208, x1=282, y1=216, z0=5, z1=9, style="mall_glass"),
+        dict(shape="rect", x0=284, y0=208, x1=298, y1=218, z0=0, z1=4, style="stone_grid")],         # gym / pool pavilion
+        door=[270, 205.4], sign=dict(x=270, y=206.2, z=9.5, text="会所"), foot=[[256, 206, 298, 218]])
+    zone("water", rect(286, 210, 296, 216))                                       # outdoor pool
+    # mid/high-rise apartment towers (12–18F ≈ 40–58 m, still ≤200 cap)
+    for i, (x0, y0, name, h, st) in enumerate([
+        (254, 226, "云麓 · 望湖苑", 52, "apt"), (276, 226, "云麓 · 听风苑", 56, "glass_silver"),
+        (254, 246, "云麓 · 澄心苑", 48, "apt"),
     ]):
-        bld(f"res_b{i}", name, "compound", [
-            dict(shape="rect", x0=x0, y0=214, x1=x0 + 18, y1=248, z0=0, z1=4, style="stone_grid"),
-            dict(shape="rect", x0=x0 + 0.5, y0=214.5, x1=x0 + 17.5, y1=247.5, z0=4, z1=h, style=st)],
-            door=[x0 + 9, 213.2], foot=[[x0, 214, x0 + 18, 248]])
+        bld(f"res_t{i}", name, "compound", [
+            dict(shape="rect", x0=x0, y0=y0, x1=x0 + 18, y1=y0 + 20, z0=0, z1=4, style="stone_grid"),
+            dict(shape="rect", x0=x0 + 0.5, y0=y0 + 0.5, x1=x0 + 17.5, y1=y0 + 19.5, z0=4, z1=h, style=st)],
+            door=[x0 + 9, y0 - 0.6], foot=[[x0, y0, x0 + 18, y0 + 20]])
+    # detached villas (独栋别墅) with private gardens — east cluster
+    for i, (x0, y0) in enumerate([(308, 220), (324, 220), (308, 238), (324, 238), (316, 250)]):
+        zone("lawn", rect(x0 - 1, y0 - 1, x0 + 15, y0 + 14))
+        bld(f"res_v{i}", f"云麓 · 别墅{i+1}号", "compound", [
+            dict(shape="rect", x0=x0 + 2, y0=y0 + 2, x1=x0 + 12, y1=y0 + 11, z0=0, z1=3.2, style="stone_grid"),
+            dict(shape="rect", x0=x0 + 2.4, y0=y0 + 2.4, x1=x0 + 11.6, y1=y0 + 10.6, z0=3.2, z1=8.5, style="glass_gold" if i % 2 else "apt"),
+            dict(shape="rect", x0=x0 + 4, y0=y0 + 4, x1=x0 + 8, y1=y0 + 7, z0=8.5, z1=11.2, style="stone_grid")],
+            door=[x0 + 7, y0 + 1.4], foot=[[x0 + 2, y0 + 2, x0 + 12, y0 + 11]])
+    # underground garage ramp
     bld("res_garage", "云麓花园 · 地库入口", "compound", [
-        dict(shape="rect", x0=252, y0=242, x1=268, y1=248, z0=0, z1=3.2, style="stone_grid"),
-        dict(shape="rect", x0=254, y0=243, x1=266, y1=247, z0=0.4, z1=2.6, style="dark_glass")],
-        door=[260, 241.5], sign=dict(x=260, y=242.2, z=3.6, text="地下车库"), foot=[[252, 242, 268, 248]])
+        dict(shape="rect", x0=252, y0=250, x1=268, y1=258, z0=0, z1=3.0, style="stone_grid"),
+        dict(shape="rect", x0=254, y0=251, x1=266, y1=257, z0=0.3, z1=2.4, style="dark_glass")],
+        door=[260, 249.4], sign=dict(x=260, y=250.2, z=3.4, text="地下车库"), foot=[[252, 250, 268, 258]])
     # ---- towers
     table = rules_cbd["towers"]
     towers, fabric = place_towers(table, random.Random(7))
@@ -665,19 +716,17 @@ def layout(rules_cbd):
                 if segdist(x, y, a, b) < d: return True
         return False
     def in_ell(x, y, cx, cy, rx, ry): return ((x - cx) / rx) ** 2 + ((y - cy) / ry) ** 2 < 1
-    prop("fountain", 62, 70); take(62, 70, 6)
-    prop("sculpture", 120, 120, 0); take(120, 120, 2.5)
+    prop("fountain", 32, 68); take(32, 68, 4)   # amphitheatre fountain
+    prop("sculpture", 22, 40, 0); take(22, 40, 2.5)
     prop("kiosk", 136, 124, 6); take(136, 124, 2.5)
     for i, (x, y) in enumerate(loop):
-        a = math.atan2(y - 70, x - 62); ox, oy = math.cos(a) * 2.9, math.sin(a) * 2.9
+        a = math.atan2(y - 68, x - 64); ox, oy = math.cos(a) * 2.9, math.sin(a) * 2.9
         if i % 3 == 1:
             fx, fy = -math.cos(a), -math.sin(a)            # face the lake
             rot = min((0, 2, 4, 6), key=lambda r: -(fx * math.sin(r * math.pi / 4) + fy * -math.cos(r * math.pi / 4)))
             prop("bench", x + ox, y + oy, rot, bench=True, face=[round(fx, 2), round(fy, 2)]); take(x + ox, y + oy, 1.2)
         if i % 3 == 0: prop("lamp_park", x + ox * 0.8, y + oy * 0.8); take(x + ox * 0.8, y + oy * 0.8, 0.4)
-    for x in (48, 62, 76): prop("lamp_park", x, 33.8); take(x, 33.8, 0.4)
-    for x in (84, 96): prop("lamp_park", x, 66); take(x, 66, 0.4)
-    for x in (56, 68): prop("lamp_park", x, 99); take(x, 99, 0.4)
+    for x in (48, 64, 80): prop("lamp_park", x, 26.5); take(x, 26.5, 0.4)
     for x in range(4, 146, 2):
         if 61 <= x <= 67 or x > 110: continue
         prop("hedge", x + 1, 146.6, 0); 
@@ -687,7 +736,7 @@ def layout(rules_cbd):
     for i in range(170):
         for _ in range(40):
             x, y = rnd.uniform(4, 143), rnd.uniform(5, 143)
-            if in_ell(x, y, 62, 70, 46, 38) or near_path(x, y, 3.6) or (x > 108 and y > 108) or in_ell(x, y, 112, 28, 17, 13) or in_ell(x, y, 22, 118, 14, 17): continue
+            if in_ell(x, y, 64, 68, 52, 44) or in_ell(x, y, 58, 62, 12, 9) or in_ell(x, y, 78, 78, 9, 7) or near_path(x, y, 3.6) or (x > 108 and y > 108) or in_ell(x, y, 112, 28, 17, 13) or in_ell(x, y, 22, 118, 14, 17): continue
             if not ok(x, y, 3.0): continue
             prop("tree_a", x, y, 0, "t2" if rnd.random() < 0.4 else "base"); take(x, y, 2.2); break
     for (x, y) in ((112, 28), (22, 118)):
@@ -759,16 +808,35 @@ def layout(rules_cbd):
         if x > 146 or y < 196: continue
         prop("tree_a" if i % 2 else "lamp_park", x, y, 0, "base")
     for (x, y) in ((60, 226), (88, 226), (14, 266), (14, 294)): prop("totem", x, y, 0)
-    # compound landscaping (quiet streets)
-    for x in range(256, 340, 10):
-        if ok(x, 207, 0.8): prop("tree_b", x, 207); take(x, 207, 1.2)
-        if ok(x, 246, 0.8): prop("hedge", x, 246.6, 0)
-    for y in range(212, 244, 8):
-        if ok(250, y, 0.8): prop("lamp_park", 250.5, y)
+    # park landmarks: original sculpture + plaza landmark device + cafés / kiosks + flower beds + amphitheatre benches
+    prop("sculpture", 128, 128, 0); take(128, 128, 3)
+    bld("park_landmark", "云汇之环", "park", [
+        dict(shape="circ", cx=128, cy=128, r=6.5, n=20, z0=0, z1=1.2, style="stone_grid"),
+        dict(shape="circ", cx=128, cy=128, r=4.2, n=16, z0=1.2, z1=9.5, style="glass_teal"),
+        dict(shape="circ", cx=128, cy=128, r=2.0, n=12, z0=9.5, z1=14, style="glass_gold", crown="lantern")],
+        sign=dict(x=128, y=118, z=3, text="云汇之环"), foot=[["ell", 128, 128, 6.5, 6.5, 16]])
+    prop("kiosk", 88, 104, 0); take(88, 104, 2.5)
+    prop("kiosk", 48, 104, 0); take(48, 104, 2.5)
+    prop("cafe_set", 52, 102, 0); prop("cafe_set", 58, 102, 0, "b")
+    prop("cafe_set", 102, 64, 2); prop("cafe_set", 102, 70, 2, "b")
+    for (x, y) in ((30, 50), (30, 86), (100, 30), (20, 110), (110, 50), (50, 30)):
+        prop("flowerbed", x, y); take(x, y, 2.2)
+    for i, (x, y) in enumerate(ellipse(32, 68, 14, 16, 12)):
+        if i % 2 == 0: prop("bench", x, y, 2 if x < 32 else 6, bench=True, face=[1 if x < 32 else -1, 0]); take(x, y, 1.1)
+    for x in (48, 64, 80): prop("lamp_park", x, 30.5); take(x, 30.5, 0.4)
+    for y in (56, 72, 88): prop("lamp_park", 104, y); take(104, y, 0.4)
+    # compound landscaping
+    for x in range(256, 346, 8):
+        if ok(x, 204, 0.8): prop("tree_b", x, 204); take(x, 204, 1.1)
+        if ok(x, 262, 0.8): prop("hedge", x, 262.5, 0)
+    for y in range(210, 262, 8):
+        if ok(252, y, 0.8): prop("lamp_park", 252.5, y)
         if ok(346, y, 0.8): prop("lamp_park", 345.5, y)
-    for (x, y) in ((264, 224), (284, 224), (310, 224), (330, 224)): prop("flowerbed", x, y); take(x, y, 2)
-    for (x, y) in ((276, 218), (312, 218), (276, 236), (312, 236)): prop("bench", x, y, 0 if y < 224 else 4, bench=True, face=[0, 1 if y < 224 else -1])
-    prop("totem", 288, 207.5, 0)
+    for (x, y) in ((266, 236), (288, 236), (266, 258), (320, 236), (336, 250)):
+        prop("flowerbed", x, y); take(x, y, 2)
+    for (x, y) in ((270, 230), (290, 250), (320, 230)): prop("bench", x, y, 0, bench=True, face=[0, 1])
+    prop("totem", 291, 207, 0); prop("bin", 300, 208); prop("planter", 274, 208, 0); prop("planter", 308, 208, 0)
+    for x in (256, 264, 272): prop("bollard", x, 260)   # parking bollards
     # ---- nav graph (centre lines; crosswalk edges carry the signal leg)
     L = []
     def line(*pts, cw=None): L.append(([tuple(p) for p in pts], cw))
@@ -783,9 +851,9 @@ def layout(rules_cbd):
     for i in range(6):
         x0 = 206 + i * 25; line((x0 + 11, 119), (x0 + 11, 126.6)); line((x0 + 11, 119), (x0 + 11, 111.4))
         line((x0 + 23.5, 87), (x0 + 23.5, 119))
-    line((288, 190.5), (288, 200)); line((258, 250), (258, 356)); line((184.5, 262), (356, 262))
-    line((288, 199.2), (288, 224)); line((252, 227), (342, 227)); line((276, 208), (276, 242)); line((312, 208), (312, 242))
-    line((322, 201.4), (322, 208)); line((260, 241.5), (260, 227))
+    line((291, 190.5), (291, 200)); line((258, 268), (258, 356)); line((184.5, 262), (356, 262))
+    line((291, 198.5), (291, 246)); line((254, 245), (340, 245)); line((270, 208), (270, 220)); line((260, 249.4), (260, 245))
+    line((316, 230), (316, 245)); line((328, 230), (328, 245))
     for a, b in (((300, 268.5), (300, 262)), ((268.5, 300), (258, 300)), ((222, 299.5), (222, 262)), ((195.5, 326), (184.5, 326)),
                  ((326, 196.5), (326, 190.5)), ((300.5, 222), (258, 222)), ((226, 216.5), (226, 190.5)), ((204.5, 236), (184.5, 236))): line(a, b)
     line((192.4, 202), (184.5, 202)); line((192.4, 138), (184.5, 138)); line((138, 198.4), (138, 190.5))
@@ -817,7 +885,7 @@ def layout(rules_cbd):
         "metro": {e["id"]: nearest((e["spawn"][0], e["spawn"][1])) for e in EX},
         "lobby": [nearest(p) for p in ((300, 268.5), (268.5, 300), (216, 318), (204, 330), (330, 204), (318, 216), (220, 218), (208, 230))],
         "shop": [nearest((206 + i * 25 + 11, 126.6)) for i in range(6)] + [nearest((206 + i * 25 + 11, 111.4)) for i in range(6)],
-        "mall": [nearest((186, 48))], "compound": [nearest((288, 199.2)), nearest((322, 201.4))], "stadium": [nearest((74, 229.5)), nearest((14.5, 280))], "brt": [nearest((120, 171)), nearest((136, 171))],
+        "mall": [nearest((186, 48))], "compound": [nearest((291, 198.5)), nearest((270, 205.4)), nearest((260, 249.4))], "stadium": [nearest((74, 229.5)), nearest((14.5, 280))], "brt": [nearest((120, 171)), nearest((136, 171))],
         "bus": [nearest((183.6, 100))], "taxi": [nearest((183.6, 52))],
         "park_loop": [nearest(p) for p in loop], "edge": [nearest(p) for p in ((2, 151.5), (356, 151.5), (2, 190.5), (356, 190.5), (151.5, 2), (184.5, 2), (151.5, 356), (184.5, 356))],
     }
@@ -834,7 +902,7 @@ def layout(rules_cbd):
     traffic = dict(lanes=lanes, span=[-70, 430], signal=dict(EW=26, Y=3, AR=2, NS=24), crosswalks=dict(W=[149, 155, 154, 187], E=[182, 155, 187, 187], S=[155, 149, 181, 154], N=[155, 188, 181, 193]),
                    cw_phase=dict(W="NS", E="NS", S="EW", N="EW"))
     return dict(zones=Z, marks=MK, buildings=BL, towers=towers, fabric=fabric, props=PR, exits=EX, nav=dict(nodes=nodes, edges=edges), poi=POI,
-                benches=benches, buskers=BUSK, traffic=traffic, lake=dict(c=[62, 70], r=[40, 32]), fountain=[62, 70], compound={"id":"yunlu","name":"云麓花园","door":[288,199.2]})
+                benches=benches, buskers=BUSK, traffic=traffic, lake=dict(c=[64, 68], r=[46, 38], islands=[[58, 62, 10, 7], [78, 78, 7, 5.5]]), fountain=[32, 68], compound={"id":"yunlu","name":"云麓花园","door":[291,198.5]})
 
 # ============================================================== 4. rules section (keys ADDED only)
 SCHEDULE = {   # hourly (0-23) crowd / traffic multipliers, 1 = busy
@@ -850,7 +918,7 @@ SCHEDULE = {   # hourly (0-23) crowd / traffic multipliers, 1 = busy
 }
 def rules_section():
     return {
-        "_doc": "云汇CBD (place 'cbd'). towers skyline density (Leo): ONLY 1 tower ≥600 m (天枢), 2 at 500–600 m, 5 at 400–500 m, 7 at 300–400 m; ALL other buildings ≤200 m (avg ~150 m), spaced with plazas. Top 15 have unique original silhouettes. Also: 云麓花园 wealthy compound, central lake park, modern atrium mall 云汇天地. metro_exits A–D → place metro_cbd.",
+        "_doc": "云汇CBD (place 'cbd'). towers skyline density (Leo): ONLY 1 tower ≥600 m (天枢), 2 at 500–600 m, 5 at 400–500 m, 7 at 300–400 m; ALL other buildings ≤200 m (avg ~150 m), spaced with plazas. Top 15 have unique original silhouettes. Also: 云麓花园 gated compound (gatehouse/villas/clubhouse), Central-Park-style lake park with 云汇之环 landmark, modern atrium mall 云汇天地. metro_exits A–D → place metro_cbd.",
         "district": {"name": "云汇CBD", "en": "Yunhui CBD", "rent_district": "cbd_adjacent", "landmark": "tianshu"},
         "towers": towers_table(),
         "metro_exits": {"place": "metro_cbd", "station": "云汇中心站", "exits": {"A": "中央公园", "B": "云汇天地 / 臻品街", "C": "天枢塔 / 金融城", "D": "云汇体育中心"}},

@@ -40,7 +40,8 @@
       W.towers.push(t);
     }
     const lake = partPoly({ shape: "ell", cx: D.lake.c[0], cy: D.lake.c[1], rx: D.lake.r[0] - 0.3, ry: D.lake.r[1] - 0.3, n: 28 });
-    W.colliders.push({ poly: lake, box: bbox(lake), id: "lake", water: true });
+    const lakeHoles = (D.lake.islands || []).map((isl) => partPoly({ shape: "ell", cx: isl[0], cy: isl[1], rx: isl[2] + 0.5, ry: isl[3] + 0.5, n: 16 }));
+    W.colliders.push({ poly: lake, box: bbox(lake), id: "lake", water: true, holes: lakeHoles });
     W.cgrid = new Map();
     for (const c of W.colliders) for (let gx = Math.floor(c.box[0] / 8); gx <= Math.floor(c.box[2] / 8); gx++) for (let gy = Math.floor(c.box[1] / 8); gy <= Math.floor(c.box[3] / 8); gy++) { const k = gk(gx, gy); let l = W.cgrid.get(k); if (!l) W.cgrid.set(k, (l = [])); l.push(c); }
     buildLights();
@@ -88,7 +89,7 @@
     const q = X.qn();
     for (let gx = Math.floor((x - r) / 8); gx <= Math.floor((x + r) / 8); gx++) for (let gy = Math.floor((y - r) / 8); gy <= Math.floor((y + r) / 8); gy++) {
       const l = W.cgrid.get(gk(gx, gy)); if (!l) continue;
-      for (const c of l) { if (c._q === q) continue; c._q = q; if (x + r < c.box[0] || x - r > c.box[2] || y + r < c.box[1] || y - r > c.box[3]) continue; if (polyDist(x, y, c.poly) < r) return c; }
+      for (const c of l) { if (c._q === q) continue; c._q = q; if (x + r < c.box[0] || x - r > c.box[2] || y + r < c.box[1] || y - r > c.box[3]) continue; if (c.holes && c.holes.some((h) => polyDist(x, y, h) < 0)) continue; if (polyDist(x, y, c.poly) < r) return c; }
     }
     for (const a of NPC.list) if (a !== self && !a.hidden && !a.gone && Math.abs(a.x - x) < 0.6 && Math.abs(a.y - y) < 0.6 && Math.hypot(a.x - x, a.y - y) < r + 0.22) return a;
     for (const car of TR.cars) if (Math.abs(car.x - x) < car.hl + 1 && Math.abs(car.y - y) < car.hl + 1 && inCar(car, x, y, r)) return car;

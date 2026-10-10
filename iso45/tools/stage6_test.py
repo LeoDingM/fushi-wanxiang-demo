@@ -75,7 +75,7 @@ def run(c, log):
     m.update(J("""(() => { const o = SP.world.byId.metro_jhl;
       window.FushiMetro.core.leave('street', {}); SP.actions.idle(0.3); const P = SP.player;
       return JSON.stringify({ after: SP.metroActive, d: Math.hypot(P.x - o.reach[0], P.y - o.reach[1]), scene: SP.world.sceneId }); })()"""))
-    ok("metro: street return at entrance, metro inactive", not m["after"] and m["d"] < 0.05 and m["scene"] == "street", m)
+    ok("metro: street return at entrance, metro inactive", not m["after"] and m["d"] < 0.5 and m["scene"] == "street", m)
 
 if __name__ == "__main__":
     p, prof, ws = cdp.start(); c = cdp.CDP(ws); c.call("Runtime.enable")

@@ -1,3 +1,4 @@
+20:35 · [CBD] 深化改造：云麓花园门禁别墅会所、中央公园湖心岛/云汇之环、近景塔楼底座淡出+远景才出 impostor、周末/假日楼光变少；重拍 C1/C5/C6/C7 · screenshots/C7-wealthy-compound.png
 16:31 · Stage 3A: layers/LOD/free-zoom done (perf 48->8ms z0.5); building run + winter sprites; next interiors · shot: /tmp/s45/far.png
 16:46 · 冬装+跑步已完成（跑步动画/冬装NPC），正在做室内：楼梯间1F-6F折返楼梯、楼层菜单、天台、2F-02房间+阳台 · screenshots/96-run-winter.png
 17:02 · 室内已接入：楼道1F-6F折返楼梯+天台(街景同一世界)+2F-02房间/阳台，正在测楼层菜单/触发器循环/洗衣 · screenshots/92-rooftop.png
@@ -40,3 +41,8 @@
 20:15 · [主线] 接入改版云汇CBD：index 换 js/cbd.js（替 stub）；地铁 B 出口落地臻品街/云汇天地，C 口回地铁；宿主驱动 frame+时钟+规则；含 kit_cbd / cbd_scene / js/cbd/*；smoke 4/4 · stage6 12/12 · screenshots/u9-cbd-arrival-phone.png
 20:25 · [地铁] 读完 Leo 三张截图：街面入口落在草地上无双进门地面入口要删；站厅单排闸机+客服堵路 · 开始重建布局 · -
 20:35 · [主线] 地铁街口：重建 p_metro_entry（catcher 取消以免草坪透出；可见楼梯+扶梯；口下沥青坑；周边改铺装），进站直达 B1 站厅（去掉「地面入口」中间层，站厅上楼 portal→exit:street）；METRO_READY 改版未到，站厅内部仍待地铁组 · screenshots/u10-metro-stairs.png
+20:35 · [主线] 整合位轮询：地铁布局已含平行入/出站闸机+加宽站厅站台（layouts 20:30），待 METRO_READY 正式点头再打 zip；CBD cbd_scene/world 20:33–20:35 仍在写 Leo 新一轮（别墅小区/公园雕塑/近景淡出/办公窗灯），待新 CBD_READY · —
+20:37 · [地铁] Leo确认朝向无事；街面入口改玻璃亭（雨棚+灯箱+可见楼梯+铺装树池），一进直达B1；继续入/出闸机与加宽站厅 · -
+20:41 · [主线] 接入 CBD Leo 深改版（门禁别墅云麓花园 / 湖心云汇之环 / 近景基座LOD+遮挡淡出 / 远景 impostor / 办公窗灯周末变暗）；C1/C6/C7 已在 screenshots/ · —
+20:41 · [主线] 修 12号铁门 NPC 抽搐：开扇 footprint_states 改为内开，不再用关闭态挡路口；playtest 增 30s 抽搐检测；闸口测 flips=0 · —
+20:41 · [主线] 街面地铁口改玻璃亭（铝框玻璃墙+灯箱红标+可见楼梯+图腾柱），进站仍直达 B1 · screenshots/u13-metro-glass-pavilion.png

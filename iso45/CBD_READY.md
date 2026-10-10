@@ -1,6 +1,6 @@
 # 云汇CBD (place `cbd`) — ready for integration
 
-> Leo density / design pass applied (2026-10-10): capped skyline, unique top-15 silhouettes, 云麓花园 compound, larger central lake, atrium mall redesign. Re-capture C1–C7 done.
+> Leo deeper redesign (2026-10-10): height caps kept; 云麓花园 rebuilt as Chinese gated compound (gatehouse/villas/clubhouse); Central-Park-style lake park + 云汇之环; near-zoom podium LOD + occluder fade; seeded floor/bay night lights with weekend dimming. Re-capture C1/C5/C6/C7.
 
 Standalone preview: `cbd_preview.html` (desktop + phone; `?touch=1`). Smoke + captures: `python3 tools/cbd_capture.py all` (0 JS errors).
 
@@ -15,7 +15,7 @@ Standalone preview: `cbd_preview.html` (desktop + phone; `?touch=1`). Smoke + ca
 | `shared-rules/rules.json` → key `cbd` only | towers table, metro_exits, schedule, pois (incl. compound) |
 
 ## Load order
-Core already has: `kit/kit_manifest.js`, `shared-rules/rules.data.js`, `js/actors_data.js`, `js/core.js`, `js/clock.js`, `js/actors.js`.
+Core already has: `kit/kit_manifest.js`, `shared-rules/rules.data.js`, `shared-rules/rules.js` (calendar), `js/actors_data.js`, `js/core.js`, `js/clock.js`, `js/actors.js`.
 Add one tag after them:
 ```html
 <script src="js/cbd.js"></script>
@@ -67,15 +67,21 @@ Each exit: `{to:"metro_cbd", link:"A".."D"}`. Metro → CBD: `SP.places.cbd.ente
 
 Top **15** each have an **original** silhouette (not copies of real landmarks): twist / sail / twin blades / atrium slot / stacked cylinders / blade lean / twin linked by skybridge / petal oct / deep terraces / diagrid / etc., with distinct facade palettes (`diagrid`, `glass_*`, `dark_glass`, `apt`, …).
 
-Walkable-map anchors (lobbies): 天枢塔 · 鲲鹏 · 星澜 · 汇潮. Other tall towers sit on a **sparse ring** with wide gaps so the skyline is not a packed wall. Max zoom-out frames the full landmark including crown; labels are decluttered (tallest first, no overlap; 天枢 bold gold).
+Walkable-map anchors (lobbies): 天枢塔 (300,340) · 鲲鹏 · 星澜 (390,230) · 汇潮 — spaced clear of 云麓花园. Other tall towers sit on a **sparse ring** with wide gaps so the skyline is not a packed wall. Max zoom-out frames the full landmark including crown; labels are decluttered (tallest first, no overlap; 天枢 bold gold).
 
 ## Content
-- **中央公园**: large central lake (shoreline plaza, north pier, east boardwalk, south viewing pier, fountain 07:00–22:30, water shimmer), seasonal trees, paths, benches, joggers / dog walkers by schedule.
+- **中央公园**: Central-Park / 人才公园 / 花城广场–inspired original layout — large lake with two islands + bridges, lakeside boardwalk, lawn amphitheatre + fountain, tree alleys, flower beds, jogging loop, pier cafés / kiosks, plaza landmark **云汇之环** (+ sculpture). Seasonal trees, benches, joggers / dog walkers by schedule.
 - **臻品街**: boutiques / cafés, planters, evening buskers.
-- **云汇天地**: modern atrium mall — curved glass curtain + stone podium, glazed roof lantern, west atrium hall (escalators through glass), LED canopy blade, outdoor plaza + LED screen slabs.
-- **云汇体育中心**: arena exterior (unchanged bowl + roof ring).
-- **云麓花园**: gated wealthy residential compound (南门 · 会所大堂 · 四栋中层玻璃/石材公寓 · 景观庭院 · 地下车库坡道), quiet streets — contrast to the old home block.
+- **云汇天地**: modern atrium mall — curved glass curtain + stone podium, glazed roof lantern, west atrium hall, LED canopy, outdoor plaza + LED screens.
+- **云汇体育中心**: arena exterior (bowl + roof ring).
+- **云麓花园**: recognizable Chinese high-end gated community — grand gatehouse + guard booth + access canopy, name stone「云麓花园」, perimeter wall, mid/high-rise 望湖/听风/澄心苑, cluster of 独栋别墅 with private gardens, clubhouse + outdoor pool pavilion, visitor parking, underground garage ramp, walkable courtyards.
 - Roads / BRT / taxis / rush-hour crowds as before.
+
+## LOD / occlusion / night lights
+- **Near zoom** (`z ≥ 0.14`): only tower podium / lower floors (~40 m); skyscraper shafts stay off so they don't wall off 李默. Occluder fade (~28–32 % alpha) on any static (incl. tower bases) painted after him whose silhouette covers his body — same idea as residential walls.
+- **Mid zoom**: shaft height reveals gradually (ease-in).
+- **Far zoom** (`z < ~0.048`): full-height **impostors** only beyond that distance threshold (拉远到一定距离才显示楼出来); skyline camera frame + decluttered labels unchanged.
+- **Night windows**: per-tower / per-day / per-hour seeded floor+bay occupancy — contiguous lit office clusters, scattered singles, empty strips; offices dim on weekends/法定节假日 via `FushiRules.date(...).off` (shared-rules calendar). Impostors re-bake when hour or day changes.
 
 ## Screenshots
 `screenshots/C1-park.png` · `C2-pedestrian-street.png` · `C3-mall-stadium.png` · `C4-towers-base.png` · `C5-skyline-far.png` (desktop 1280×720) · `C6-night-skyline.png` · `C7-wealthy-compound.png` (phone 390×844 except C5).

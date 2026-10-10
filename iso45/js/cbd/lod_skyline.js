@@ -5,7 +5,14 @@
   "use strict";
   const C = SP.cbd, X = C._; if (!X) return; C._mods.lod_skyline = true;
   const { D, K, TEX, W, IMP, SX, SY, KX, KY, PZ, clamp, hash, shash, partPoly } = X;
-  /** lit-window tile: 4 modules x 6 floors of the style's emit module, each cell on with probability dens; mip level m */
+  /** LOD: near zoom only podium / lower floors; mid gradually reveals; full shaft only when zoomed far enough for impostors */
+  X.towerPartVisible = function (d, z) {
+    const POD = 40, H = (d.b && d.b.h) || d.z1 || 120;
+    if (z >= 0.14) return d.z0 < POD;
+    if (z >= 0.055) { const t = (0.14 - z) / (0.14 - 0.055); return d.z0 < POD + t * t * Math.max(0, H - POD); }
+    return true;
+  };
+  /** lit-window tile fallback (shops / non-tower): dens-based mosaic */
   function litTile(style, dens, m) {
     const key = style + "|" + dens + "|" + m; let t = TEX.lit.get(key); if (t) return t;
     const E = TEX.facE[style]; if (!E) return null;
@@ -21,10 +28,47 @@
   }
   const mipEC = new Map();
   function mipE(style, m) { const k = style + m; let c = mipEC.get(k); if (!c) { c = TEX.facE[style]; for (let i = 0; i < m; i++) c = X.half(c); mipEC.set(k, c); } return c; }
+  function isOffDay() {
+    try {
+      const GR = (SP.game && SP.game.rules) || (typeof FushiRules !== "undefined" && window.FUSHI_RULES_DATA && (C._rules || (C._rules = FushiRules.create(window.FUSHI_RULES_DATA))));
+      if (GR && SP.clock && SP.clock.abs != null) return !!GR.date(SP.clock.abs()).off;
+    } catch (e) {}
+    const day = SP.clock ? SP.clock.day : 0; return day % 7 === 5 || day % 7 === 6;
+  }
   function litDensity(t) {
     const h = ((SP.clock ? SP.clock.min : 720) / 60) % 24, home = /公寓|酒店|住宅/.test(t.use || "") || t.style === "apt";
-    if (home) return h < 6 ? 0.15 : h < 17 ? 0.2 : h < 23 ? 0.75 : 0.35;
-    return h < 6 ? 0.12 : h < 8 ? 0.3 : h < 18 ? 0.6 : h < 21 ? 0.7 : h < 23.5 ? 0.42 : 0.2;
+    const off = isOffDay();
+    if (home) return (h < 6 ? 0.12 : h < 17 ? 0.18 : h < 23 ? 0.72 : 0.32) * (off ? 1.05 : 1);
+    // offices: weekends/holidays much dimmer (less overtime)
+    const base = h < 6 ? 0.08 : h < 8 ? 0.28 : h < 18 ? 0.55 : h < 21 ? 0.68 : h < 23.5 ? 0.38 : 0.14;
+    return base * (off ? 0.28 : 1);
+  }
+  /** per-tower / per-day floor+bay occupancy: contiguous office clusters, scattered singles, empty strips */
+  const occCache = new Map();
+  function towerOcc(t) {
+    const day = SP.clock ? SP.clock.day : 0, hr = Math.floor(((SP.clock ? SP.clock.min : 720) / 60) % 24);
+    const off = isOffDay() ? 1 : 0;
+    const key = t.id + "|" + day + "|" + hr + "|" + off; let O = occCache.get(key); if (O) return O;
+    const dens = litDensity(t), floors = Math.max(8, Math.ceil((t.h || 120) / 3.6)), bays = 8;
+    const seed = shash(t.id) ^ (day * 9973) ^ (hr * 131);
+    const floorOn = new Float32Array(floors), bay = new Uint8Array(floors * bays);
+    // seed contiguous clusters
+    let i = 2;
+    while (i < floors - 1) {
+      const roll = hash(seed + i * 17, 3);
+      if (roll < dens * 0.55) {
+        const len = 2 + Math.floor(hash(seed, i * 9) * (off ? 3 : 7));
+        for (let k = 0; k < len && i + k < floors - 1; k++) floorOn[i + k] = 0.85 + 0.15 * hash(i + k, seed);
+        i += len + 1 + Math.floor(hash(seed + i, 11) * (off ? 6 : 3)); // empty strip after cluster
+      } else if (roll < dens * 0.85) { floorOn[i] = 0.5; i += 1 + Math.floor(hash(i, seed) * 4); }
+      else i += 1 + Math.floor(hash(seed + 5, i) * (off ? 5 : 2));
+    }
+    for (let f = 0; f < floors; f++) for (let b = 0; b < bays; b++) {
+      const h = hash(seed + f * 31, b * 17 + 7);
+      if (floorOn[f] > 0.4) bay[f * bays + b] = h < 0.78 + floorOn[f] * 0.15 ? 2 : h < 0.92 ? 1 : 0;
+      else bay[f * bays + b] = h < dens * 0.12 ? 2 : h < dens * 0.2 ? 1 : 0; // scattered singles on dark floors
+    }
+    O = { floors, bays, bay, dens, day, hr }; occCache.set(key, O); if (occCache.size > 80) occCache.clear(); return O;
   }
   /** emissive layer of one part (night): lit windows / shop fronts / crown + spire lighting. returns true if it emitted */
   X.emitPart = function (ex, d, z, nk) {
@@ -36,15 +80,35 @@
     }
     const S = K.facades[style]; if (!S || !S.emit || !TEX.facE[style]) return false;
     const M = ex.getTransform(), mip = X.mipFor(z), shop = style.startsWith("shop") || style === "mall_stone" || style === "lobby";
-    let src, dens = 1;
-    if (shop) src = mip ? mipE(style, mip) : TEX.facE[style];
-    else { const o = d.tower ? litDensity(d.b) : 0.55; dens = o > 0.55 ? 0.65 : o > 0.25 ? 0.4 : 0.18; src = litTile(style, dens, mip); }
-    if (!src) return false;
-    const pat = X.pattern(ex, src, "e:" + style + ":" + dens + ":" + mip), sc = 1 << mip;
+    if (shop || !d.tower) {
+      const dens = shop ? 1 : 0.55, src = shop ? (mip ? mipE(style, mip) : TEX.facE[style]) : litTile(style, dens > 0.55 ? 0.65 : 0.4, mip);
+      if (!src) return false;
+      const pat = X.pattern(ex, src, "e:" + style + ":" + dens + ":" + mip), sc = 1 << mip;
+      for (const f of d.faces) {
+        ex.setTransform(M.multiply(new DOMMatrix([(f.ex - f.ey) * KX, -(f.ex + f.ey) * KY, 0, -PZ, SX(f.a[0], f.a[1]), SY(f.a[0], f.a[1], 0)])));
+        pat.setTransform(new DOMMatrix([sc / 32, 0, 0, -sc / PZ, (d.uoff || 0) % (S.w * 4), S.h * 600]));
+        ex.fillStyle = pat; ex.globalAlpha = nk * (f.shade < 0.8 ? 0.85 : 1); ex.fillRect(0, d.z0, f.L, d.z1 - d.z0);
+      }
+      ex.globalAlpha = 1; ex.setTransform(M); return true;
+    }
+    // tower: per-floor / per-bay seeded occupancy
+    const E = mip ? mipE(style, mip) : TEX.facE[style]; if (!E) return false;
+    const O = towerOcc(d.b), FH = 3.6, sc = 1 << mip;
+    const pat = X.pattern(ex, E, "e1:" + style + ":" + mip);
     for (const f of d.faces) {
       ex.setTransform(M.multiply(new DOMMatrix([(f.ex - f.ey) * KX, -(f.ex + f.ey) * KY, 0, -PZ, SX(f.a[0], f.a[1]), SY(f.a[0], f.a[1], 0)])));
-      pat.setTransform(new DOMMatrix([sc / 32, 0, 0, -sc / PZ, (d.uoff || 0) % (S.w * 4), S.h * 600]));
-      ex.fillStyle = pat; ex.globalAlpha = nk * (f.shade < 0.8 ? 0.85 : 1); ex.fillRect(0, d.z0, f.L, d.z1 - d.z0);
+      pat.setTransform(new DOMMatrix([sc / 32, 0, 0, -sc / PZ, (d.uoff || 0) % (S.w * 4), 0]));
+      ex.fillStyle = pat;
+      const f0 = Math.max(0, Math.floor(d.z0 / FH)), f1 = Math.min(O.floors, Math.ceil(d.z1 / FH));
+      for (let fi = f0; fi < f1; fi++) {
+        const z0 = Math.max(d.z0, fi * FH), z1 = Math.min(d.z1, (fi + 1) * FH); if (z1 <= z0) continue;
+        const bayW = f.L / O.bays;
+        for (let bi = 0; bi < O.bays; bi++) {
+          const lvl = O.bay[fi * O.bays + bi]; if (!lvl) continue;
+          ex.globalAlpha = nk * (lvl === 2 ? (f.shade < 0.8 ? 0.85 : 1) : 0.28);
+          ex.fillRect(bi * bayW + 0.15, z0, bayW - 0.3, z1 - z0);
+        }
+      }
     }
     ex.globalAlpha = 1; ex.setTransform(M); return true;
   };
@@ -59,7 +123,7 @@
     const sorted = t.drawables.slice().sort((a, b) => a.z0 - b.z0);
     for (const d of sorted) { const a = d.alpha; d.alpha = 1; X.drawPart(x, d, s); d.alpha = a; }
     for (const d of sorted) { X.erasePart(xe, d); X.emitPart(xe, d, s, 1); }
-    I = { c, e: ce, x0: r.x0 - 1 / s, y0: r.y0 - 1 / s, w: w / s, h: h / s, hour: Math.floor((SP.clock ? SP.clock.min : 720) / 60) };
+    I = { c, e: ce, x0: r.x0 - 1 / s, y0: r.y0 - 1 / s, w: w / s, h: h / s, hour: Math.floor((SP.clock ? SP.clock.min : 720) / 60), day: SP.clock ? SP.clock.day : 0 };
     IMP.set(k, I); C.stats.imps = IMP.size; return I;
   }
   /** far-zoom painter list: one impostor per tower (falls back to its parts while the impostor is still queued) */
@@ -71,7 +135,8 @@
       if (!d.tower) { list.push(d); continue; }
       if (seen.has(d.b)) continue; seen.add(d.b);
       let I = IMP.get(d.b.id + "|" + s);
-      if (I && I.hour !== hr && n > 0.1 && impBudget > 0) { IMP.delete(d.b.id + "|" + s); I = null; }
+      const day = SP.clock ? SP.clock.day : 0;
+      if (I && ((I.hour !== hr && n > 0.1) || I.day !== day) && impBudget > 0) { IMP.delete(d.b.id + "|" + s); I = null; }
       I = I || impostor(d.b, s);
       if (I) list.push({ kind: "imp", t: d.b, I, depth: d.b.depth, z0: 0, rect: { x0: I.x0, y0: I.y0, x1: I.x0 + I.w, y1: I.y0 + I.h } });
       else for (const q of d.b.drawables) list.push(q);

@@ -141,6 +141,18 @@ def main(hours):
         trav = g(f"(()=>{{const L=window.SP.npcs.list,p0=L.map(a=>[a.x,a.y]);let d=L.map(()=>0);for(let i=0;i<1800;i++){{const q=L.map(a=>[a.x,a.y]);{P}.sim(1/30);L.forEach((a,j)=>d[j]+=Math.hypot(a.x-q[j][0],a.y-q[j][1]))}}return L.map((a,j)=>a.id+':'+d[j].toFixed(0))}})()")
         STAFF = ("noodle_boss", "tea_girl")       # shop staff pace a 1-2 m counter beat with long dwells
         check("all walking NPCs keep walking their routes (60 s); shop staff keep moving at their counters", all(float(t.split(":")[1]) > (3 if t.split(":")[0] in STAFF else 20) for t in trav), " ".join(trav))
+        jit = g("""(()=>{ const near=(x,y)=>x>4.2&&x<8.2&&y>3.6&&y<5.2; const ids=["student","vendor","office"];
+          const hist=Object.fromEntries(ids.map(id=>[id,[]]));
+          for(let i=0;i<900;i++){ window.__proto.sim(1/30);
+            for(const id of ids){ const a=window.SP.npcs.list.find(n=>n.id===id); if(a&&near(a.x,a.y)) hist[id].push([a.dir, +(a.brain&&a.brain.stuck||0)]); }
+          }
+          const flips={}; for(const id of ids){ let f=0,H=hist[id]; for(let i=1;i<H.length;i++) if(H[i][0]&&H[i-1][0]&&H[i][0]!==H[i-1][0]&&H[i][1]>0.15) f++; flips[id]=f; }
+          const W=window.SP.world, polys=W.footprints(W.byId.gate_l)||[];
+          const across=polys.some(poly=>{ const xs=poly.map(p=>p[0]), ys=poly.map(p=>p[1]);
+            return Math.max(...xs)>5.4 && Math.min(...xs)<7.0 && Math.abs((Math.min(...ys)+Math.max(...ys))/2 - 4.3)<0.2; });
+          return {flips, across, state:W.byId.gate_l.state, n:Object.fromEntries(ids.map(id=>[id,hist[id].length]))}; })()""")
+        check("12号 iron gate: open leaves clear the mouth (no closed-leaf collider across the gap)", jit["state"]=="open" and not jit["across"], jit)
+        check("12号 iron gate: NPCs don't twitch at the gate for 30 s (≤8 stuck heading flips)", all(v<=8 for v in jit["flips"].values()), jit)
         # --- traffic
         unpark(); park()
         place(12.0, -3.0, "N"); step(3.0)
