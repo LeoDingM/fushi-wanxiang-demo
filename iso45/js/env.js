@@ -179,7 +179,7 @@
   function staticLights() {
     const c = C(), key = `${c.lampsOn ? 1 : 0}|${Math.floor(c.abs())}|${SP.layers ? SP.layers.stats.rebuilds : 0}|${SP.tint.night > 0.35 ? 1 : 0}`;
     if (LC && key === LCkey) return LC;
-    const out = { fixed: [], lamps: [], cars: [], doors: [] }, P = (x, y, z, r, col, a, flat, refl) => out.fixed.push({ x, y, z, r, c: col, a, flat, refl, X: SP.sx(x, y), Y: SP.sy(x, y, 0) });
+    const out = { fixed: [], lamps: [], cars: [], doors: [], tv: [] }, P = (x, y, z, r, col, a, flat, refl) => out.fixed.push({ x, y, z, r, c: col, a, flat, refl, X: SP.sx(x, y), Y: SP.sy(x, y, 0) });
     const lamps = c.lampsOn ? 1 : 0;
     for (const o of W.objects) {
       if (!/^[pfi]_/.test(o.type)) continue;
@@ -196,7 +196,8 @@
         case "p_locker": { const h = W.local(o, 0, -0.35, 1.3); P(h[0], h[1], h[2], 1.4, COOL, 0.55, false, true); } break;
         case "p_vending": if (o.state === "ok") { const h = W.local(o, 0, -0.5, 1.2); P(h[0], h[1], h[2], 1.6, COOL, 0.7, false, true); P(h[0], h[1], 0, 2.2, COOL, 0.5, true); } break;
         case "p_busstop": { const h = W.local(o, 0, -0.3, 1.5); P(h[0], h[1], h[2], 2.0, COOL, 0.6, false, true); P(h[0], h[1], 0, 2.4, COOL, 0.4, true); } break;
-        case "f_window": if (W.shownState(o) === "lit") { const h = W.local(o, 1.5, -0.25, 1.6); P(h[0], h[1], h[2], 2.0, WIN, 0.55, false, (o.z || 0) < 0.5); if ((o.z || 0) < 0.5) { const g = W.local(o, 1.5, -1.3, 0); P(g[0], g[1], 0, 3.2, WIN, 0.5, true); } } break;
+        case "f_window": if (W.shownState(o) === "lit" && SP.households && SP.households.windowTV(o)) out.tv.push(o);
+          if (W.shownState(o) === "lit") { const h = W.local(o, 1.5, -0.25, 1.6); P(h[0], h[1], h[2], 2.0, WIN, 0.55, false, (o.z || 0) < 0.5); if ((o.z || 0) < 0.5) { const g = W.local(o, 1.5, -1.3, 0); P(g[0], g[1], 0, 3.2, WIN, 0.5, true); } } break;
         case "f_door": { const h = W.local(o, 1.5, -0.3, 2.45), g = W.local(o, 1.5, -1.4, 0), main = o.id === "unit_door";   // entrance lamp + its pool
           P(h[0], h[1], h[2], main ? 3.0 : 2.4, DOOR, 1.0, false, true); P(g[0], g[1], 0, main ? 5.6 : 4.4, DOOR, main ? 1.0 : 0.85, true); out.doors.push(o); } break;
         case "f_eatery": if (o.state !== "shut") { const cl = NEON[o.state] || WARM, h = W.local(o, 1.5, -0.6, 1.4), g = W.local(o, 1.5, -1.8, 0), sg = W.local(o, 1.5, -0.3, 2.7);
@@ -219,6 +220,11 @@
     const SL = staticLights();
     if (n > 0.01) {
       for (const L of SL.fixed) { if (L.r * S < zmin || far(L.X, L.Y)) continue; out.push({ x: L.x, y: L.y, z: L.z, r: L.r, c: L.c, a: L.a * n, flat: L.flat, refl: L.refl }); }
+      for (const o of SL.tv) {                 // TV glow: a cool flickering light in the window (per-household, evenings)
+        const h = W.local(o, 1.5, -0.3, 1.5); if (far(SP.sx(h[0], h[1]), SP.sy(h[0], h[1], h[2]))) continue;
+        const k = SP.strHash(o.id), f = 0.55 + 0.3 * Math.sin(SP.now * 7.3 + k) * Math.sin(SP.now * 2.1 + k * 0.7) + 0.15 * SP.hash(Math.floor(SP.now * 5), k);
+        P(h[0], h[1], h[2], 1.7, [140, 175, 255], 0.55 * f * n, false, false);
+      }
       if (c.lampsOn) for (const o of SL.lamps) {
         if (far(SP.sx(o.x, o.y), SP.sy(o.x, o.y, 0))) continue;
         const on = o.state !== "broken" || SP.hash(Math.floor(SP.now * 9), SP.strHash(o.id)) > 0.55; if (!on) continue;

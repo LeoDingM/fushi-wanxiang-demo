@@ -46,12 +46,12 @@
   setTimeout(layout, 0);
 
   // ---------- no page scroll / pinch / double-tap zoom ----------
-  document.addEventListener("touchmove", (e) => e.preventDefault(), { passive: false });
+  document.addEventListener("touchmove", (e) => { if (!SP.metroActive) e.preventDefault(); }, { passive: false });   // page-level handlers are no-ops while the metro canvas is up
   document.addEventListener("gesturestart", (e) => e.preventDefault());
-  document.addEventListener("dblclick", (e) => e.preventDefault());
+  document.addEventListener("dblclick", (e) => { if (!SP.metroActive) e.preventDefault(); });
   document.addEventListener("contextmenu", (e) => { if (touch) e.preventDefault(); });
   let lastTouchEnd = 0;
-  document.addEventListener("touchend", (e) => { const now = Date.now(); if (now - lastTouchEnd < 320 && !e.target.closest("button")) e.preventDefault(); lastTouchEnd = now; }, { passive: false });
+  document.addEventListener("touchend", (e) => { if (SP.metroActive) return; const now = Date.now(); if (now - lastTouchEnd < 320 && !e.target.closest("button")) e.preventDefault(); lastTouchEnd = now; }, { passive: false });
 
   if (!touch) return;
 
@@ -80,12 +80,13 @@
   function pinchState(T) { const a = T[0], b = T[1]; return [Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY), (a.clientX + b.clientX) / 2, (a.clientY + b.clientY) / 2]; }
   const cs = () => canvas.width / Math.max(1, canvas.getBoundingClientRect().width);
   document.addEventListener("touchstart", (e) => {
+    if (SP.metroActive) return;
     const T = pts(e); if (T.length < 2) return;
     if (SP.touchRelease) SP.touchRelease();
     const [d, mx, my] = pinchState(T); Object.assign(PZ, { on: true, d, mx, my });
   }, { passive: true });
   document.addEventListener("touchmove", (e) => {
-    if (!PZ.on) return; const T = pts(e); if (T.length < 2) return;
+    if (!PZ.on || SP.metroActive) return; const T = pts(e); if (T.length < 2) return;
     const [d, mx, my] = pinchState(T), k = cs(), r = canvas.getBoundingClientRect();
     if (SP.panBy) SP.panBy(-(mx - PZ.mx) * k, -(my - PZ.my) * k);            // two-finger drag pans
     if (PZ.d > 4 && SP.zoomBy) SP.zoomBy(d / PZ.d, (mx - r.left) * k, (my - r.top) * k, true);
@@ -109,7 +110,7 @@
   function release() { TI.active = false; TI.id = null; TI.m = 0; TI.x = TI.y = 0; setKnob(0, 0); base.style.transform = ""; base.classList.remove("on"); }
   SP.touchRelease = release;
   zone.addEventListener("pointerdown", (e) => {
-    if (TI.active || PZ.on) return;
+    if (TI.active || PZ.on || SP.metroActive) return;
     e.preventDefault();
     try { zone.setPointerCapture(e.pointerId); } catch (_) {}
     TI.active = true; TI.id = e.pointerId;

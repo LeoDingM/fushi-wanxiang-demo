@@ -184,7 +184,7 @@ def main(hours):
         # --- time of day + debug
         g(f"{P}.setTime('dusk',true)"); step(0.1); dusk = g("window.SP.tint.night")
         g(f"{P}.setTime('night',true)"); step(0.2)
-        check("dusk + night tints; lit window state at night", 0.2 < dusk < 0.5 and "/lit/" in json.dumps(g(f"{P}.world.objects.filter(o=>o.night_lit).map(o=>window.SP.frameKey(o.type,o.variant,'main',{P}.world.shownState(o),o.rot)).slice(0,3)")))
+        check("dusk + night tints; lit window state at night", 0.2 < dusk < 0.5 and "/lit/" in json.dumps(g(f"{P}.world.objects.filter(o=>o.night_lit).map(o=>window.SP.frameKey(o.type,o.variant,'main',{P}.world.shownState(o),o.rot)).filter(k=>k.includes('/lit/')).slice(0,3)")))
         g(f"{P}.state.debug=true"); step(0.05); check("debug view renders (sort edges counted)", g("window.SP.world.sortEdges.length") > 20); g(f"{P}.state.debug=false")
         g(f"{P}.reset()"); step(0.2)
         check("reset restores initial states", g(f"{P}.world.byId.win_S2F_4.state") == "intact" and g(f"{P}.world.decals.length") == 0 and g(f"{P}.state.time") == "night")

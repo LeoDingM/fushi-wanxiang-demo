@@ -24,3 +24,9 @@
 - [主线] 19:40 街道延伸+阳台+便利店接入完成：东侧街区分块流式加载（chunks/east.js，靠近/镜头可见时载入，远离卸载并记住破损状态，重置清空）；拐角新街段含 兰州牛肉面 / 好味快餐 / 茶语奶茶 临街小店（按营业时间开关门，按共享价格表下单）、店员与下班白领 NPC；井槐里站地铁口（旧式花岗岩栏杆+钢玻璃雨棚+蓝色站名牌，06:00–23:30，交互预留给地铁模块）；修复 pole_e3 电线导致首帧崩溃（电线按分块标记+anchorPt 容错+首 60 帧冒烟测试）；2F-02 阳台移到远侧（床头墙后，推拉门进入），衣柜靠卫生间隔墙，镜头侧不再有高物；24便利店模块按 STORE_READY 接入（4 个 script 标签，街门「进 24便利店」）。截图：screenshots/h1-room-declutter.png、screenshots/s5-east-eateries.png、screenshots/s5-metro-entrance.png。回归：playtest 105（2 项为测试阈值调整：店员 NPC 移动量、商店贴图懒加载）、室内 26、街区 8、冒烟 4、便利店 13、规则 29、手机 0 错误、穿模审计 0。
 - [主线] 19:58 便利店打磨版接入：js/actors_store.js 启动后懒加载（店服/店员贴图首次使用时加载，未加载时用后备贴图，不再抛错）；核心新增 SP.outfitHooks 换装钩子；员工室 store_24_staff 已注册。截图：screenshots/s5-east-eateries.png
 19:31 · [地铁] js/metro.js + metro_preview.html 跑通全流程自动测试：安检/售票机/充值/三种过闸/候车/列车进站开门/乘车扣费/CBD出站B口/反向回井槐里；修复进区域后摇杆残留导致弹回、拥挤度0无效、重复提示 · -
+19:34 · [CBD] kit_cbd 图集+cbd_scene.json/js 已生成；js/cbd.js 写入被自动审查拦截（超长命令无法分类），待处理 · -
+19:37 · [地铁] 完成：installCore 接入胶水（SP.places.metro_jhl / metro_cbd，冻结核心时钟、R.spend扣费、G.ps.metro存卡）实测通过；CBD 出口名对齐 cbd_scene.js；规则同步到 canonical shared-rules（29/29）；截图 M1–M5 + METRO_READY.md 已写 · -
+19:58 · [主线] 地铁接入：index.html 加 kit_metro/metro45/metro.js 三个标签 + js/cbd_stub.js（CBD 未接入前，出站显示「中央商务区 · 即将开放」并留在站内可原路乘车回井槐里）；井槐里站入口营业改 06:00–23:00；地铁界面开启时页面级触摸/双击/捏合处理全部让位 · screenshots/u3-metro-cbd-soon.png
+19:58 · [主线] 住户模拟：每扇住宅窗归属一个单元/住户（上班族/家庭/退休/学生/夜猫子/倒班/空置，按日种子+周末节假日+天气），窗灯与电视闪光按住户作息亮灭；12号楼道各户门与立面同一单元，敲门回应随作息（在家应门/外出没人/睡着多半不应偶尔迷糊抱怨/空置）· screenshots/u1-households-night.png
+19:58 · [主线] 2F-02 开关状态离开后保留（灯/台灯/电脑/空调/门），灯没关时南立面窗户继续亮、电表继续走；按电器功率计量（shared-rules appliances），阶梯电价，月度水电账单按实际用量；电脑可在桌前关机，新增壁挂空调（1 kW）、1F 电表箱可查看本月用电构成；出门忘关灯低调提示 · screenshots/u2-meter-bill.png
+19:58 · [主线] 立面：2F-02 阳台已移到北侧（院子一侧，镜头看不到），南立面该位置改为普通窗（随房间灯亮灭），不再显示晾衣阳台。回归：playtest 105/105、interior 26/26、stage5 8/8、stage6 10/10、规则 31/31、smoke 4/4

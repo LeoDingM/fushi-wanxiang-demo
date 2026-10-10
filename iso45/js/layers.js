@@ -439,7 +439,7 @@
   Ly.tileCount = () => tiles.size;
   /** once per game minute: lit windows switch on / off -> those objects re-bake */
   Ly.checkLit = function () {
-    for (const o of W.objects) { if (o.type !== "f_window" || !o.night_lit) continue; const s = W.shownState(o); if (o._ls !== s) { if (o._ls !== undefined) Ly.need = true; o._ls = s; } }
+    for (const o of W.objects) { if (o.type !== "f_window" || !(o.night_lit || o._unit || (SP.households && SP.households.unitOf(o)))) continue; const s = W.shownState(o); if (o._ls !== s) { if (o._ls !== undefined) Ly.need = true; o._ls = s; } }
   };
   Ly.flush = function () { for (const t of tiles.values()) { t.gd = true; t.od = true; t.ek = null; } };
 })(window.SP);

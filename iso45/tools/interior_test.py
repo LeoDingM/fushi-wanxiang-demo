@@ -89,8 +89,8 @@ def run(c, log):
       const m0=G.ps.money; G.start('order_hmj', W.byId.desk); o.paid=m0-G.ps.money; o.cards=document.getElementById('paystack').children.length; SP.actions.idle(4);
       SP.actions.go('stair_4f'); SP.clock.min=23*60; const L=W.byId.hall_light_4f; SP.actions.idle(30); o.l0=L.state; window.__proto.kick ? 0 : 0;
       G.noise(P.x,P.y,'stomp'); SP.actions.idle(0.2); o.l1=L.state; SP.actions.idle(27); o.l2=L.state;
-      SP.clock.min=14*60; P.x=4.3; P.y=3.6; const d=W.byId.door_4f02; G.knocks={}; G.knock(d); SP.actions.idle(1.5); o.knock=W.log.slice(-1)[0].text;
-      SP.actions.go('stair_5f'); P.x=2.1; P.y=3.6; G.knock(W.byId.door_5f01); SP.actions.idle(1.5); o.knock5=W.log.slice(-1)[0].text; o.open5=W.byId.door_5f01.state;
+      SP.clock.min=14*60; P.x=4.3; P.y=3.6; const d=W.byId.door_4f02; G.knocks={}; const HS=SP.households.state; SP.households.state=()=>({st:'out'}); G.knock(d); SP.actions.idle(1.5); o.knock=W.log.slice(-1)[0].text;
+      SP.actions.go('stair_5f'); P.x=2.1; P.y=3.6; SP.households.state=()=>({st:'home'}); G.knock(W.byId.door_5f01); SP.actions.idle(1.5); SP.households.state=HS; o.knock5=W.log.slice(-1)[0].text; o.open5=W.byId.door_5f01.state;
       const GR=G.rules; o.nd=GR.date(GR.dayOf(2026,10,1)*1440+600); o.wk=GR.date(GR.dayOf(2026,3,28)*1440).weekend;
       return JSON.stringify(o); })()"""))
     ok("home: cook pose at the stove -> meal on the table, hunger up", r4["cook"] == "cook" and r4["meal"] == "meal" and r4["h1"] > 60, r4)

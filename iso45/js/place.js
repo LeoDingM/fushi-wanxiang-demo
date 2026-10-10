@@ -6,7 +6,16 @@
 (function (SP) {
   "use strict";
   const W = SP.world;
-  const PL = (SP.place = { street: null, npcs: null });
+  const PL = (SP.place = { street: null, npcs: null, istate: {} });
+  /** interiors keep their switchable states (lights, PC, AC, doors, kitchen ...) while 李默 is elsewhere: saved on leave,
+      re-applied on the next visit (reset clears them). Game code reads them through PL.stateOf(scene). */
+  const SAVE = (o) => o.interact && o.interact !== "portal" && o.interact !== "neighbor_door";
+  function saveInterior() { if (!W.interior) return; const m = {}; for (const o of W.objects) if (SAVE(o)) m[o.id] = o.state; PL.istate[W.sceneId] = m; }
+  PL.stateOf = function (scene) {
+    if (W.interior && W.sceneId === scene) { const m = {}; for (const o of W.objects) if (SAVE(o)) m[o.id] = o.state; return m; }
+    if (PL.istate[scene]) return PL.istate[scene];
+    const m = {}; for (const o of (SP.scenes[scene] && SP.scenes[scene].objects) || []) if (SAVE(o)) m[o.id] = o.state; return m;
+  };
   SP.scenes = Object.assign({}, window.INTERIORS45 || {});
   SP.scenes.roof = { id: "roof", floor: 7, roof: true, name: "12号天台" };
   const KEEP = ["data", "objects", "byId", "decals", "timers", "defs", "hazards", "puddles", "leafPiles", "laundry", "colliders", "cgrid",
@@ -30,14 +39,17 @@
     const toInt = !!(SP.scenes[to] && SP.scenes[to].interior);
     if (toInt) {
       if (!W.interior) { PL.street = {}; for (const k of KEEP) PL.street[k] = W[k]; PL.npcs = SP.actors.list.filter((a) => a !== P); PL.streetZoom = cam.zt == null ? cam.zoom : cam.zt; }
+      saveInterior();
       W.interior = true; W.sceneId = to; W.groundTiles = new Map();
       W.load(SP.scenes[to]);
+      { const m = PL.istate[to]; if (m) for (const o of W.objects) if (m[o.id] != null && o.state !== m[o.id]) o.state = m[o.id]; if (m) W.rebuildColliders(); }
       W.portals = W.data.portals || [];
       SP.actors.list = [P]; P.level = ""; P.z = 0;
       if (from === "street" || from === "roof" || !PL.intZoom) PL.intZoom = fitZoom();
       cam.zoom = cam.zt = PL.intZoom;
     } else {
       if (W.interior) {
+        saveInterior();
         for (const k of KEEP) W[k] = PL.street[k];
         SP.actors.list = [P].concat(PL.npcs || []); W.interior = false;
         W.rebuildColliders(); W.bakeGround();

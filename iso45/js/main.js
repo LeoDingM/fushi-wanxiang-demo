@@ -119,7 +119,7 @@
     SP.actors.list = [player].concat(st.npcs ? SP.npcs.init(W.data.npcs) : []);
     SP.actors.resolve(12);                       // never start interpenetrating
   }
-  function resetScene() { if (W.interior || player.level) SP.place.enter("street"); player.carry = null; W.load(window.SCENE_DATA); SP.fx.reset(); SP.traffic.reset(); SP.env.clearStamps(); spawnActors(); toast("场景已重置"); }
+  function resetScene() { if (W.interior || player.level) SP.place.enter("street"); SP.place.istate = {}; player.carry = null; W.load(window.SCENE_DATA); SP.fx.reset(); SP.traffic.reset(); SP.env.clearStamps(); spawnActors(); toast("场景已重置"); }
   function nearest() {
     if (player.carry) return null;
     const best = W.nearest(player.x, player.y, player.dir), L = (W.nearList || []).filter((o) => W.actionFor(o, "use") || W.actionFor(o, "kick"));

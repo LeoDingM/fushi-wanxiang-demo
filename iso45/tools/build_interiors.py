@@ -16,7 +16,7 @@ KNOCK = {
  "2F-01": {"who": "王阿姨", "home": [0, 1440], "opens": True, "day": ["哎，小李啊？我在看电视呢，有事吗？", "小李吃饭没？阿姨包了饺子，等下给你端一碗。"], "night": ["这么晚了谁呀……小李？早点睡吧。"], "again": ["又敲？阿姨耳朵没那么背～"]},
  "3F-01": {"who": "张大爷", "home": [0, 1440], "opens": True, "day": ["谁呀？——哦，楼下的小伙子。没事没事，进来坐会儿？", "门没锁，有事说！电视声音开太大了是吧？我关小点。"], "night": ["大半夜的敲什么门！……哦，是你啊。"], "again": ["行了行了，听见了！"]},
  "3F-02": {"who": None, "home": [0, 0], "day": [], "night": [], "again": [], "empty": "门口有一袋待扔的垃圾，里面没人。"},
- "4F-01": {"who": "一只猫", "home": [0, 1440], "opens": False, "day": ["“喵——”（门缝下面伸出一只爪子）", "“喵？”（猫在门后蹭门）"], "night": ["“喵呜！”（被吵醒了，很不高兴）"], "again": ["“……”（猫不理你了）"]},
+ "4F-01": {"who": "一只猫", "pet": True, "home": [0, 1440], "opens": False, "day": ["“喵——”（门缝下面伸出一只爪子）", "“喵？”（猫在门后蹭门）"], "night": ["“喵呜！”（被吵醒了，很不高兴）"], "again": ["“……”（猫不理你了）"]},
  "4F-02": {"who": "周姐", "home": [1110, 1440], "opens": True, "day": ["刚下班，有快递帮我收了吗？谢谢啊！", "牛奶是我订的，别拿哈～"], "night": ["嘘——孩子刚睡着。"], "again": ["还有事？"], "away": "没人应。门把上挂着一袋刚送来的牛奶。"},
  "5F-01": {"who": "老陈", "home": [0, 1440], "opens": True, "day": ["（二胡声停了）吵到你了？我再拉一首就停～", "年轻人也喜欢二胡？哪天教你。"], "night": ["（二胡声戛然而止）……对不住对不住，这就睡。"], "again": ["好了好了，今天不拉了！"]},
  "5F-02": {"who": "刘婶", "home": [600, 1320], "opens": True, "day": ["炖了排骨，闻着香吧？等下给你盛一碗！", "小李呀，房东那边要是催租，跟婶说一声。"], "night": ["谁呀……这么晚了。"], "again": ["哎哟，又是你，排骨还没好呢！"], "away": "门缝里飘出炖肉的香味，但没人开门。"},
@@ -62,7 +62,7 @@ def stair(f):
         add(S, "i_wall", 1.5, 4.0, state=fin); add(S, "i_wall", 2.5, 4.0, state="dado")
         add(S, "i_mailbox", 2.2, 3.98, z=0.95, interact="mailbox", id="mailbox_1f")
         add(S, "i_wall", 3.5, 4.0, state=fin); add(S, "i_wall", 3.9, 4.0, state="dado")
-        add(S, "i_meter", 4.3, 3.98, z=1.5, id="meter_1f")
+        add(S, "i_meter", 4.3, 3.98, z=1.5, id="meter_1f", interact="meter", name="电表箱", reach=[4.3, 3.55])
         add(S, "i_notice", 0.75, 3.98, z=1.15, interact="notice", id="notice_1f")
     else:
         add(S, "i_door", 1.5, 4.0, state="closed", variant=(n1 or ("base", ""))[0], interact="neighbor_door", name=f"{f}F-01", note=(n1 or ("", ""))[1], knock=KNOCK.get(f"{f}F-01"), id=f"door_{f}f01", reach=[2.1, 3.6])

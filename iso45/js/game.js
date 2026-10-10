@@ -17,7 +17,7 @@
     snack: { obj: "fridge", during: "open", after: "closed" }, drink_fridge: { obj: "fridge", during: "open", after: "closed" },
     shower: { obj: "shower", during: "running", after: "dry", frosted: true, close: "bath_door", pose: { idle: true, dir: "S", at: [5.6, 3.5] } },
     eat_home: { obj: "table", after: "default", pose: { clip: "eat", dir: "N", at: "stool" } },
-    browse: { obj: "desk", during: "on", after: "off", pose: { clip: "sit", dir: "S", at: "chair", intro: 1 } },
+    browse: { obj: "desk", during: "on", after: "on", pose: { clip: "sit", dir: "S", at: "chair", intro: 1 } },
     change: { obj: "wardrobe", during: "open", after: "closed" },
     make_bed: { obj: "bed", after: "made" },
     wash_clothes: { obj: "washer", during: "running", after: "running" },
@@ -91,9 +91,8 @@
         L.items = n > 0 ? rackItems(L, r, n, byId) : [];
       }
     }
-    // the street facade shows 2F-02's balcony laundry (the 45° kit's laundry balcony state + the pole items)
-    const sb = W.interior ? st0 && st0.byId : W.byId, bo = sb && sb.balc_S2F_3;
-    if (bo) { const st = cl.rack.balcony ? "laundry" : "default"; if (bo.state !== st) { if (W.interior) bo.state = st; else W.setState(bo, st); } }
+    // 2F-02's enclosed balcony is on the north (courtyard) side of 12号 now, which this camera never sees; its south
+    // window (win_S2F_3) instead shows the flat's lights (households.js)
   };
 
   // ---------- interactions offered by the gameplay layer (world.actionFor asks here first) ----------
@@ -123,6 +122,8 @@
       case "door": return kind === "use" && o.id === "unit_door" ? { label: "进单元楼（12号）", do: "game" } : undefined;
       case "idoor": return kind === "use" ? { label: (o.state === "open" ? "关上" : "打开") + (o.name || "门"), do: "game" } : null;
       case "bedlamp": return kind === "use" ? { label: o.state === "on" ? "关台灯" : "开台灯", do: "game" } : null;
+      case "ac": return kind === "use" ? { label: o.state === "on" ? "关空调" : "开空调（1 kW）", do: "game" } : null;
+      case "meter": return kind === "use" ? { label: "看电表 · 本月水电", do: "game" } : null;
       case "stairs": return kind === "use" ? { label: (o.go === "up" ? (o.to === "roof" ? "上天台" : "上楼") : "下楼") + " · 选楼层", do: "game" } : null;
       case "table": return kind === "use" ? (o.state === "meal" ? { label: "坐下吃饭", do: "game" } : { label: "看看", do: "game" }) : null;
     }
@@ -139,6 +140,10 @@
     }
     if (place) {
       const opts = R.actionsAt(G.ps, place, G.ctx()).filter((a) => a.ok || a.reason !== "not here");
+      if (k === "pc") {
+        if (o.state === "on") opts.push({ id: "_pc_off", label: "关电脑（待机也耗电）", ok: true, fn: () => { W.setState(o, "off"); G.syncPower(); return "电脑关了，风扇声停了"; } });
+        opts.push({ id: "_bill", label: "手机上看本月水电", ok: true, fn: () => { G.meterCard(); return null; } });
+      }
       if (opts.length === 1) return G.start(opts[0].id, o);
       G.openMenu(o, opts); return null;
     }
@@ -167,7 +172,9 @@
         W.setState(o, open ? "open" : "closed"); W.rebuildColliders(); W.logEvent(`李默${open ? "打开" : "关上"}了${o.name || "门"}`);
         return open ? "吱呀——门开了" : "门关上了";
       }
-      case "bedlamp": W.setState(o, o.state === "on" ? "off" : "on"); return o.state === "on" ? "台灯亮了" : "台灯关了";
+      case "bedlamp": W.setState(o, o.state === "on" ? "off" : "on"); G.syncPower(); return o.state === "on" ? "台灯亮了" : "台灯关了";
+      case "ac": W.setState(o, o.state === "on" ? "off" : "on"); G.syncPower(); return o.state === "on" ? "空调「嘀」一声开了，出风口慢慢吹出风" : "空调关了";
+      case "meter": G.meterCard(); return null;
       case "door": G.go({ to: "stair_1f", spawn: SP.scenes.stair_1f.spawn, door: "unit_door" }); return null;
       case "table": if (o.state === "meal") return G.start("eat_home", o); return "一张折叠小饭桌，旁边一张红色小圆凳";
     }
@@ -214,7 +221,7 @@
     if (c.msg) el.innerHTML = `<div class="hd"><i>微信</i>${c.from}</div><div class="bd">${c.msg}</div>`;
     else el.innerHTML = `<div class="hd"><i>${c.income ? "微信收款" : c.method || "微信支付"}</i>${c.income ? "到账" : "支付成功 ✓"}</div><div class="amt">${c.income ? "+" : "-"}¥${(+c.amount).toFixed(c.amount % 1 ? 2 : 0)}</div><div class="bd">${c.income ? c.from : "付款给 " + c.to}${c.what ? " · " + c.what : ""}</div>`;
     payEl.prepend(el); while (payEl.children.length > 3) payEl.lastChild.remove();
-    setTimeout(() => el.classList.add("out"), c.msg ? 4200 : 2600); setTimeout(() => el.remove(), c.msg ? 4800 : 3200);
+    setTimeout(() => el.classList.add("out"), c.ms || (c.msg ? 4200 : 2600)); setTimeout(() => el.remove(), (c.ms || (c.msg ? 4200 : 2600)) + 600);
   };
   /** noise -> the stairwell's sound-activated lights (声控灯): stomp, knock, a slammed door, running feet */
   G.t = 0; G.queue = [];
@@ -229,9 +236,19 @@
     const K = o.knock, m = C.min, late = m >= 22.5 * 60 || m < 7 * 60, key = o.id;
     G.knocks = G.knocks || {}; const prev = G.knocks[key]; G.knocks[key] = C.abs();
     W.logEvent(`李默敲了 ${o.name} 的门`);
-    if (!K || !K.who) { const t = (K && K.empty) || o.note || "没人应"; G.later(0.9, () => { SP.toast(t, 2600); W.logEvent(t); }); return "咚咚咚……"; }
-    const home = K.home[0] <= m && m < K.home[1];
-    if (!home) { G.later(1.1, () => { SP.toast(K.away || "没人应。", 2600); W.logEvent(K.away || "没人应。"); }); return "咚咚咚……"; }
+    // occupancy from the household simulation (the same unit lights the facade window): home -> answers; asleep -> mostly
+    // silence, sometimes a sleepy grumble; out / vacant -> nobody
+    const hs = SP.households ? SP.households.state("b12_" + o.name) : { st: "home" }, say = (t, d) => G.later(d || 1.1, () => { SP.toast(t, 2600); W.logEvent(t); });
+    G.lastKnock = { id: o.id, st: hs.st };
+    if (!K || !K.who || hs.st === "vacant") { say((K && K.empty) || o.note || "没人应", 0.9); return "咚咚咚……"; }
+    if (K.pet && hs.st !== "home") { const pl = K.day; G.later(1.2, () => { const l = pl[Math.floor(Math.random() * pl.length)]; SP.toast(`${o.name} ${K.who}：${l}`, 3000); W.logEvent(`${K.who}：${l}`); }); return "咚咚咚……"; }
+    if (hs.st === "out") { say(K.away || "没人应。"); return "咚咚咚……"; }
+    if (hs.st === "asleep") {
+      if (Math.random() < 0.7) { say("没人应。门后黑着，大概睡了。"); return "咚咚咚……"; }
+      const l = (K.night && K.night[0]) || "（迷迷糊糊）……谁啊？明天再说吧。";
+      if (R.applyEffects) R.applyEffects(G.ps, { mood: -2 });
+      G.later(1.6, () => { SP.toast(`${o.name} ${K.who}（被吵醒）：${l}`, 3200); W.logEvent(`${K.who}（被吵醒）：${l}`); }); return "咚咚咚……";
+    }
     const again = prev != null && C.abs() - prev < 60, pool = again ? K.again : late ? K.night : K.day;
     const line = pool[Math.floor(Math.random() * pool.length)];
     if (late || again) R.applyEffects ? R.applyEffects(G.ps, { mood: -2 }) : (G.ps.needs.mood = Math.max(0, G.ps.needs.mood - 2));
@@ -292,6 +309,7 @@
     const a = i == null ? m.opts.find((x) => x.ok) : m.opts[i];
     if (!a || !a.ok) return;
     if (a.go) { G.closeMenu(); G.go(a.go); return; }
+    if (a.fn) { G.closeMenu(); const t = a.fn(); if (t) SP.toast(t); return; }
     const msg = G.start(a.id, m.o); if (msg) SP.toast(msg);
   };
 
@@ -306,8 +324,29 @@
     if (d && DOORS[d.type]) { W.setState(d, "open"); }
     if (d && d.id === "unit_door") { W.setState(d, "open"); d.closeAt = SP.now + 1.2; }
   };
+  /** 2F-02's switchable appliances (from its live or saved object states) -> shared-rules power state */
+  const PWR = { room_light: ["ceiling_light"], nightstand: ["desk_lamp"], desk: ["pc", "monitor"], ac: ["ac"] };
+  G.syncPower = function () {
+    if (!G.ps || !R.power) return;
+    const st = SP.place.stateOf("room_2f02");
+    for (const [id, aps] of Object.entries(PWR)) for (const a of aps) if (R.power.isOn(G.ps, a) !== (st[id] === "on")) R.power.set(G.ps, a, st[id] === "on");
+  };
+  /** meter / bill card: this month's kWh by appliance, water, gas, the estimate with tiered power price */
+  G.meterCard = function () {
+    const pv = R.utilities.preview(G.ps), P = pv.lines.find((l) => l.id === "power"), AP = R.data.appliances;
+    const by = Object.entries((P && P.by) || {}).filter(([, v]) => v > 0.005).sort((a, b) => b[1] - a[1]).slice(0, 6)
+      .map(([k, v]) => `${(AP[k] && AP[k].label) || k} ${v.toFixed(2)}度`).join(" · ");
+    const L = pv.lines.filter((l) => l.unit).map((l) => `${l.label} ${l.qty}${l.unit} ¥${l.amount.toFixed(2)}`).join("　");
+    const nx = R.date(pv.next), now = R.power.watts(G.ps);
+    const msg = `本月 ${L}<br>用电构成：${by || "—"}<br>当前功率 ${now} W · 下次扣费 ${nx.m}月${nx.d}日（含物业/宽带等固定费，预计合计 ¥${pv.total}）`;
+    G.payCard({ msg, from: "国网电力 · 电费账单", ms: 7000 }); W.logEvent(`查看电表：本月用电 ${P ? P.qty : 0} 度，预计 ¥${P ? P.amount.toFixed(2) : 0}`);
+  };
   G.switchScene = function (to, spawn, door) {
     const P = SP.player;
+    if (W.sceneId === "room_2f02" && to !== "room_2f02") {     // leaving the flat: a low-key reminder if things stay on
+      const on = Object.keys(G.ps.power ? G.ps.power.on : {}).filter((k) => R.data.appliances[k] && !R.data.appliances[k].always);
+      if (on.length) { const w = on.reduce((t, k) => t + R.data.appliances[k].w, 0); G.later(1.0, () => SP.toast(`家里${on.map((k) => R.data.appliances[k].label.replace(/（.*）/, "")).join("、")}还开着（约 ${w} W，每小时 ${(w / 1000).toFixed(2)} 度）`, 2600)); }
+    }
     SP.place.enter(to, spawn);
     G.armed = false; G.spawnAt = [P.x, P.y]; G.trans && (G.trans.done = true); G.lastXY = [P.x, P.y];
     G.lastGo = { to, t: SP.now }; G.transits = (G.transits || 0) + 1;
@@ -336,6 +375,7 @@
     // walk speed on the stair flights (no running into a stair mouth)
     SP.state.slowZone = !!(W.interior && W.sceneId.startsWith("stair") && P.x > 4.9 && P.y > 0.2);
     if (G.activity) ctx.activity = G.activity.sleep ? G.activity.id : null;
+    G.syncPower();
     const evs = R.tick(G.ps, gm, ctx);
     for (const e of evs) {
       if (e.type === "need_low") { const t = NEED_TXT[e.need][e.level === "critical" ? 1 : 0]; SP.toast(t, 2600); W.logEvent(t); }

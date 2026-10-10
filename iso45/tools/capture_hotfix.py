@@ -12,6 +12,9 @@ J = {
  "h4": (S + "h4-night-entrances.png", "?manual=1&time=night&zoom=1.1", 1500, "SP.player.x=1.5; SP.player.y=10.2; SP.player.setDir('S'); SP.actions.idle(1);" + R),
  "e1": (S + "s5-east-eateries.png", "?manual=1&time=dusk&zoom=1", 1500, "SP.player.x=55; SP.player.y=2.2; SP.actions.idle(1.5); SP.chunks.loadAll();" + R),
  "e2": (S + "s5-metro-entrance.png", "?manual=1&time=night&zoom=1.4", 1500, "SP.player.x=38.1; SP.player.y=-12.2; SP.player.setDir('E'); SP.actions.idle(1.5);" + R),
+ "u1": (S + "u1-households-night.png", "?manual=1&time=night&zoom=0.8", 1500, "SP.clock.min=22*60+30; SP.player.x=1.5; SP.player.y=10.2; SP.actions.idle(1);" + R),
+ "u2": (S + "u2-meter-bill.png", "?touch=1&manual=1&time=night", 1200, ROOM + "W.setState(W.byId.room_light,'on'); W.setState(W.byId.ac,'on'); SP.game.syncPower(); SP.clock.skipTo((SP.clock.min+300)%1440,1); SP.actions.idle(1.8); P.x=2.6; P.y=2.4; SP.game.meterCard();" + R),
+ "u3": (S + "u3-metro-cbd-soon.png", "?touch=1&manual=1&time=afternoon", 1800, "SP.game.use(SP.world.byId.metro_jhl); setTimeout(()=>FushiMetro.core.leave('cbd',{exit:'B'}),300);"),
  "w": ("/tmp/s45/h_w.png", "?manual=1&time=night&season=winter&weather=snow", 1500, "SP.player.x=1.5; SP.player.y=10.2; SP.cam.zoom=1.2; SP.actions.idle(1);" + R),
  "s": ("/tmp/s45/h_s.png", "?manual=1&time=night&season=summer&weather=clear", 1500, "SP.player.x=1.5; SP.player.y=10.2; SP.cam.zoom=1.2; SP.actions.idle(1);" + R),
 }

@@ -320,6 +320,20 @@
    "state": "glass",
    "id": "balfront_w",
    "ghost": 0.38
+  },
+  {
+   "type": "i_ac",
+   "x": 1.75,
+   "y": 3.98,
+   "state": "off",
+   "interact": "ac",
+   "id": "ac",
+   "name": "空调",
+   "reach": [
+    2.3,
+    2.62
+   ],
+   "_doc": "wall-mounted split AC over the window (1 kW while on)"
   }
  ],
  "colliders": [

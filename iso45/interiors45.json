@@ -63,7 +63,13 @@
     "type": "i_meter",
     "x": 4.3,
     "y": 3.98,
-    "z": 1.5
+    "z": 1.5,
+    "interact": "meter",
+    "name": "电表箱",
+    "reach": [
+     4.3,
+     3.55
+    ]
    },
    {
     "id": "notice_1f",
@@ -2600,6 +2606,7 @@
     "note": "门后一只猫“喵”了一声。",
     "knock": {
      "who": "一只猫",
+     "pet": true,
      "home": [
       0,
       1440
@@ -5658,6 +5665,21 @@
     "rot": 6,
     "state": "glass",
     "ghost": 0.38
+   },
+   {
+    "id": "ac",
+    "type": "i_ac",
+    "x": 1.75,
+    "y": 3.98,
+    "z": 0,
+    "state": "off",
+    "interact": "ac",
+    "name": "空调",
+    "reach": [
+     2.3,
+     2.62
+    ],
+    "_doc": "wall-mounted split AC over the window (1 kW while on)"
    }
   ],
   "colliders": [
@@ -6268,7 +6290,7 @@
    "W"
   ],
   "layout_check": {
-   "checked": 19,
+   "checked": 20,
    "problems": []
   },
   "bg_view": true

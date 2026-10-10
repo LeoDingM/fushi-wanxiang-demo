@@ -77,6 +77,7 @@
       if (D.payment) s.pay = D.payment.default;
       if (D.lease) R.lease.init(s, abs || 0, (over && over.plan) || D.lease.plan);
       if (D.utilities) { s.meter = { water: 0, power: 0, gas: 0 }; s.utilNext = R.utilities.nextBill(abs || 0); }
+      if (D.appliances) s.power = { on: {}, kwh: {} };
       if (D.laundry) s.clothes = { clean: D.laundry.start.clean, dirty: D.laundry.start.dirty, worn_h: 0, washer: null, rack: {} };
       Object.assign(s, over || {}); delete s.plan;
       if (D.quests) { s.quests = {}; questStarts(s, null, abs || 0); }
@@ -120,6 +121,7 @@
       if (s.shift && D.jobs) { const J = D.jobs[s.shift.job]; for (const [n, v] of Object.entries(J.per_h || {})) add(s, n, v * h); }
       const abs = ctx.abs == null ? 0 : ctx.abs;
       if (s.clothes) evs.push(...R.clothes.tick(s, h, ctx, sleeping));
+      if (s.meter && D.appliances) R.power.tick(s, h);
       if (s.meter) evs.push(...R.utilities.tick(s, h, abs));
       if (s.lease) evs.push(...R.lease.tick(s, abs));
       // legacy weekly rent: due every N days at due_min; pay automatically if the money is there, otherwise it is owed
@@ -181,6 +183,7 @@
       if (cost) { s.money -= cost; s.stats.spent += cost; }
       for (const [it, n] of Object.entries(a.consume || {})) s.items[it] -= n;
       if (a.use && s.meter) for (const [k, v] of Object.entries(a.use)) s.meter[k] += v;
+      if (s.meter && D.appliances) R.power.perform(s, a, c.minutes);
       if (a.kind && a.kind.slice(0, 7) === "laundry" || a.kind === "change_clothes") evs.push(...R.clothes.perform(s, a, abs));
       for (const [n, v] of Object.entries(a.set || {})) s.needs[n] = clamp(v, 0, 100);
       for (const [n, v] of Object.entries(a.effects || {})) add(s, n, v);
@@ -557,6 +560,55 @@
     };
 
     // =====================================================================================================
+    // power: per-appliance metering (D.appliances, watts). s.power.on = switched-on appliances (lights, PC, AC ...),
+    // `always` ones (fridge, router) draw 24 h; actions add what they `run` (induction, water heater, washer) and the
+    // extra `busy` draw (PC while browsing). kWh land in s.meter.power and per appliance in s.power.kwh (this month).
+    R.power = {
+      ensure: (s) => (s.power = s.power || { on: {}, kwh: {} }),
+      set: function (s, id, on) { const P = R.power.ensure(s); if (!D.appliances[id]) return false; if (on) P.on[id] = 1; else delete P.on[id]; return true; },
+      isOn: (s, id) => !!(s.power && s.power.on[id]),
+      add: function (s, id, kwh) { if (!(kwh > 0)) return; const P = R.power.ensure(s); s.meter.power += kwh; P.kwh[id] = (P.kwh[id] || 0) + kwh; },
+      /** current draw in W (always-on + switched on) */
+      watts: function (s) { let w = 0; for (const [id, A] of Object.entries(D.appliances)) if (id[0] !== "_" && (A.always || R.power.isOn(s, id))) w += A.w; return w; },
+      tick: function (s, h) { for (const [id, A] of Object.entries(D.appliances)) if (id[0] !== "_" && (A.always || R.power.isOn(s, id))) R.power.add(s, id, A.w * h / 1000); },
+      perform: function (s, a, minutes) {
+        for (const r of a.runs || []) { const [id, m] = Array.isArray(r) ? r : [r, minutes]; const A = D.appliances[id]; if (A && !R.power.isOn(s, id)) R.power.add(s, id, A.w * (m || 0) / 60 / 1000); }
+        for (const id of a.busy || []) { const A = D.appliances[id]; if (A) R.power.add(s, id, ((A.w_busy || A.w) - (R.power.isOn(s, id) ? A.w : 0)) * (minutes || 0) / 60 / 1000); }
+      },
+    };
+
+    // households: occupancy per residential unit (D.households). state(id, abs, ctx) -> { st: home|out|asleep|vacant|player, tv, profile }
+    const fnv = (str) => { let h = 2166136261; for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 16777619); } return ((h >>> 0) % 100000) / 100000; };
+    R.households = {
+      profile: function (id) {
+        const H = D.households; if (!H) return "vacant";
+        if (H.fixed && H.fixed[id]) return H.fixed[id];
+        let u = fnv(id + "|p"), acc = 0;
+        for (const [k, w] of Object.entries(H.weights)) { acc += w; if (u < acc) return k; }
+        return "office";
+      },
+      state: function (id, abs, ctx) {
+        const H = D.households, prof = R.households.profile(id);
+        if (prof === "player" || prof === "vacant" || !H) return { st: prof === "player" ? "player" : "vacant", tv: false, profile: prof };
+        const P = H.profiles[prof], day = Math.floor(abs / DAY), m = abs - day * DAY, off = R.date(abs).off;
+        const sch = off ? P.off : P.work, j = (fnv(id + "|" + day) - 0.5) * 2 * (H.jitter_min || 0);
+        let st = sch[0][1];
+        for (const [t0, k] of sch) if (m >= t0 + (t0 ? j : 0)) st = k;
+        const bad = ctx && (ctx.weather === "rain" || ctx.weather === "snow") && (ctx.intensity == null || ctx.intensity > 0.3);
+        if (st === "out" && bad && off && m > 480 && m < 1200 && fnv(id + "|w" + day) < (H.p_weather_home || 0)) st = "home";
+        const tv = st === "home" && m >= 1110 && m < 1380 && fnv(id + "|tv" + day) < (P.tv || 0);
+        return { st, tv, profile: prof, label: P.label };
+      },
+      /** window light: home -> lit; a few leave a light on when out, a few sleep with a night light */
+      lit: function (id, abs, ctx) {
+        const H = D.households, r = R.households.state(id, abs, ctx), day = Math.floor(abs / DAY);
+        if (r.st === "home") return { lit: true, tv: r.tv, st: r.st };
+        if (r.st === "out") return { lit: fnv(id + "|on" + day) < (H.p_left_on || 0), tv: false, st: r.st };
+        if (r.st === "asleep") return { lit: fnv(id + "|nl" + day) < (H.p_nightlight || 0), dim: true, tv: false, st: r.st };
+        return { lit: false, tv: false, st: r.st };
+      },
+    };
+
     // utilities: meters (water 吨 / power 度 / gas 立方) from actions + base load; monthly bill with 物业费 + 宽带, 代扣
     const UT = () => D.utilities;
     R.utilities = {
@@ -568,9 +620,17 @@
       },
       lines: function (s) {
         const U = UT(), L = [];
-        for (const [k, r] of Object.entries(U.rates)) L.push({ id: k, label: r.label, qty: Math.round(s.meter[k] * 100) / 100, unit: r.unit, amount: Math.round(s.meter[k] * r.price * 100) / 100 });
+        for (const [k, r] of Object.entries(U.rates)) L.push({ id: k, label: r.label, qty: Math.round(s.meter[k] * 100) / 100, unit: r.unit, amount: Math.round(R.utilities.cost(r, s.meter[k]) * 100) / 100,
+                                                          by: k === "power" && s.power ? Object.assign({}, s.power.kwh) : undefined });
         for (const [k, f] of Object.entries(U.fixed || {})) L.push({ id: k, label: f.label, amount: f.amount });
         return L;
+      },
+      /** tiered price (rates.x.tiers = [[up to qty, price], ..., [null, price]]) or flat price */
+      cost: function (r, q) {
+        if (!r.tiers) return q * r.price;
+        let left = q, prev = 0, sum = 0;
+        for (const [cap, pr] of r.tiers) { const band = cap == null ? left : Math.min(left, cap - prev); sum += Math.max(0, band) * pr; left -= Math.max(0, band); prev = cap; if (left <= 0) break; }
+        return sum;
       },
       preview: (s) => { const L = R.utilities.lines(s); return { lines: L, total: Math.round(L.reduce((t, x) => t + x.amount, 0)), next: s.utilNext }; },
       tick: function (s, h, abs) {
@@ -581,7 +641,7 @@
           const label = `${dt.m}月水电燃气物业`;
           if (s.money >= total) { s.money -= total; s.stats.spent += total; evs.push(note(s, { type: "util_paid", amount: total, label, lines: L }, t)); }
           else { s.bills.push({ id: "util-" + dt.y + "-" + dt.m, kind: "utilities", label, amount: total, t, due: t + U.due_days * DAY, by: [] }); evs.push(note(s, { type: "billed", id: "util-" + dt.y + "-" + dt.m, amount: total, label }, t)); }
-          s.meter = { water: 0, power: 0, gas: 0 }; s.utilNext = R.utilities.nextBill(t + 1);
+          s.meter = { water: 0, power: 0, gas: 0 }; if (s.power) s.power.kwh = {}; s.utilNext = R.utilities.nextBill(t + 1);
         }
         return evs;
       },

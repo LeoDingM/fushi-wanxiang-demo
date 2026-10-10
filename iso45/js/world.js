@@ -26,6 +26,9 @@
     return o.variant;
   };
   W.shownState = function (o) {
+    if (o.type === "f_window" && o.state === "intact" && SP.tint.night > 0.35 && SP.households && !W.interior) {
+      const h = SP.households.windowLit(o); if (h !== null) return h ? "lit" : o.state;      // per-household occupancy (shared-rules)
+    }
     if (o.type === "f_window" && o.state === "intact" && o.night_lit && SP.tint.night > 0.35) {
       const c = SP.clock, m = c ? c.min : 1200;                  // most lights go out after ~23:00 (per-window, per-day hash)
       if (c && (m > 1380 || m < 330) && SP.hash(SP.strHash(o.id), c.day) < 0.7) return o.state;
