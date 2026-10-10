@@ -5479,12 +5479,22 @@
     "y": 3.42,
     "z": 0,
     "state": "made",
-    "interact": "bed"
+    "interact": "bed",
+    "reach": [
+     [
+      0.8,
+      2.62
+     ],
+     [
+      1.6,
+      2.62
+     ]
+    ]
    },
    {
     "id": "nightstand",
     "type": "f_nightstand",
-    "x": 2.4,
+    "x": 2.45,
     "y": 3.75,
     "z": 0,
     "state": "on",
@@ -5494,36 +5504,33 @@
    {
     "id": "desk",
     "type": "f_desk",
-    "x": 3.24,
-    "y": 3.65,
+    "x": 3.2,
+    "y": 0.48,
     "z": 0,
     "state": "off",
-    "interact": "pc"
+    "interact": "pc",
+    "rot": 4,
+    "_doc": "desk against the balcony divider (camera side, low), monitor faces north"
    },
    {
     "id": "chair",
     "type": "f_chair",
-    "x": 3.24,
-    "y": 3.05,
+    "x": 3.2,
+    "y": 1.08,
     "z": 0,
-    "rot": 4,
-    "_doc": "backrest south: faces the desk / monitor"
+    "rot": 0,
+    "_doc": "backrest north: faces the desk / monitor"
    },
    {
     "id": "wardrobe",
     "type": "f_wardrobe",
-    "x": 4.3,
-    "y": 1.68,
+    "x": 3.55,
+    "y": 3.45,
     "z": 0,
     "state": "closed",
-    "interact": "wardrobe"
-   },
-   {
-    "id": "rug",
-    "type": "d_rug",
-    "x": 2.0,
-    "y": 1.3,
-    "z": 0
+    "interact": "wardrobe",
+    "rot": 6,
+    "_doc": "against the bathroom partition (far side), facing the room — no tall piece on the camera side"
    },
    {
     "id": "table",
@@ -5621,7 +5628,8 @@
     "x": 0.0,
     "y": -1.5,
     "z": 0,
-    "state": "glass"
+    "state": "glass",
+    "ghost": 0.5
    },
    {
     "id": "balfront_1",
@@ -5629,7 +5637,8 @@
     "x": 1.5,
     "y": -1.5,
     "z": 0,
-    "state": "glass"
+    "state": "glass",
+    "ghost": 0.5
    },
    {
     "id": "balfront_2",
@@ -5637,7 +5646,8 @@
     "x": 2.5,
     "y": -1.5,
     "z": 0,
-    "state": "glass"
+    "state": "glass",
+    "ghost": 0.5
    },
    {
     "id": "balfront_w",
@@ -5646,7 +5656,8 @@
     "y": 0.0,
     "z": 0,
     "rot": 6,
-    "state": "glass"
+    "state": "glass",
+    "ghost": 0.5
    }
   ],
   "colliders": [
@@ -6244,7 +6255,7 @@
    "start_weather": "clear"
   },
   "repair_hours_scale": 1.0,
-  "_doc": "room-layout data (tools/roomlayout.py). Main room 3.85 x 4 m (15 m²) + bathroom 2.05 x 2 m (enclosed: partitions + door) + entry strip + 4 x 1.5 m enclosed glass balcony.",
+  "_doc": "room-layout data (tools/roomlayout.py). Main room 3.85 x 4 m (15 m²) + bathroom 2.05 x 2 m (enclosed: partitions + door) + entry strip + 4 x 1.5 m enclosed glass balcony. · hotfix: decluttered (no rug, wardrobe moved to the far partition, desk low on the camera side), bed reachable from its open long side, balcony glass always half see-through",
   "bounds": {
    "x0": 0.15,
    "y0": -1.35,

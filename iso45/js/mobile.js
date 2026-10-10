@@ -65,6 +65,7 @@
     '<button type="button" id="btn-umb" class="tbtn small" aria-label="撑伞">☂<i>伞</i></button>' +
     '<button type="button" id="btn-kick" class="tbtn">踢</button>' +
     '<button type="button" id="btn-run" class="tbtn" aria-label="跑步开关">跑</button>' +
+    '<button type="button" id="btn-cycle" class="tbtn small" aria-label="换个目标" style="display:none">⇄<i>换</i></button>' +
     '<div id="zoombar"><button type="button" id="btn-zin" class="zbtn" aria-label="放大">＋</button><button type="button" id="btn-zout" class="zbtn" aria-label="缩小">－</button><button type="button" id="btn-zc" class="zbtn" aria-label="回到李默">⌖</button></div>' +
     '<div id="evbar"><button type="button" class="ebtn" id="ev-tog" aria-label="调试菜单">☰</button>' +
     '<button type="button" class="ebtn" data-tev="broken_window">破窗</button><button type="button" class="ebtn" data-tev="fire">起火</button>' +
@@ -129,6 +130,7 @@
   tap($("btn-umb"), () => SP.actions.umbrella());
   tap($("btn-kick"), () => SP.actions.kick());
   tap($("btn-run"), () => { SP.runToggle = !SP.runToggle; });
+  tap($("btn-cycle"), () => SP.cycleTarget && SP.cycleTarget());
   tap($("btn-zin"), () => SP.actions.zoom(1));               // + / - step through the zoom presets
   tap($("btn-zout"), () => SP.actions.zoom(-1));
   tap($("btn-zc"), () => SP.actions.recenter());

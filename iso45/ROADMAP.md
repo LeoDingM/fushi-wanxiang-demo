@@ -1,0 +1,1 @@
+- Hotfix 1 (19:02): rooftop light layers, interior culling after reset, interaction target cycling + bed sleep, 2F-02 declutter, night lighting (door lamps, doorplates, colour temperatures, season/weather grade).

@@ -1,0 +1,418 @@
+{
+ "id": "room_2f02",
+ "name": "2F-02 · 我的出租屋 · 月租¥850",
+ "_doc": "room-layout data (tools/roomlayout.py). Main room 3.85 x 4 m (15 m²) + bathroom 2.05 x 2 m (enclosed: partitions + door) + entry strip + 4 x 1.5 m enclosed glass balcony. · hotfix: decluttered (no rug, wardrobe moved to the far partition, desk low on the camera side), bed reachable from its open long side, balcony glass always half see-through",
+ "bounds": [
+  0.15,
+  -1.35,
+  6.05,
+  4.0
+ ],
+ "ground": {
+  "origin": [
+   0,
+   -2
+  ],
+  "chunk": 2,
+  "cols": 4,
+  "rows": 3,
+  "legend": {
+   "W": "g_wood:a",
+   "T": "g_tile"
+  },
+  "data_south_to_north": [
+   "TT..",
+   "WWW.",
+   "WWT."
+  ]
+ },
+ "walls": [
+  {
+   "side": "N",
+   "line": 4.0,
+   "from": 0.0,
+   "to": 3.85,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "window",
+     "at": 1.0,
+     "interact": "window_in",
+     "view": true,
+     "id": "room_win",
+     "reach": [
+      1.75,
+      2.6
+     ]
+    }
+   ]
+  },
+  {
+   "side": "N",
+   "line": 4.0,
+   "from": 3.85,
+   "to": 6.05,
+   "finish": "tile"
+  },
+  {
+   "side": "E",
+   "line": 6.05,
+   "from": 0.0,
+   "to": 4.0,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "door",
+     "at": 0.2,
+     "id": "room_door",
+     "interact": "portal",
+     "to": "stair_2f",
+     "spawn": [
+      4.3,
+      3.45,
+      "S"
+     ],
+     "label": "出门",
+     "block": false
+    }
+   ]
+  },
+  {
+   "side": "S",
+   "line": 0.0,
+   "from": 0.0,
+   "to": 6.05,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "gap",
+     "at": 1.0,
+     "w": 1.4
+    }
+   ],
+   "th": [
+    0.0,
+    0.15
+   ],
+   "_doc": "room/balcony divider: the balcony lies south, so the collider is the wall body only"
+  },
+  {
+   "side": "W",
+   "line": 0.0,
+   "from": 0.0,
+   "to": 4.0,
+   "finish": "plain"
+  },
+  {
+   "side": "E",
+   "line": 4.0,
+   "from": -1.5,
+   "to": 0.0,
+   "finish": "tile"
+  },
+  {
+   "side": "P",
+   "axis": "x",
+   "line": 2.0,
+   "from": 3.85,
+   "to": 6.05,
+   "finish": "tile",
+   "openings": [
+    {
+     "kind": "door",
+     "at": 4.85,
+     "id": "bath_door",
+     "interact": "idoor",
+     "name": "卫生间门"
+    }
+   ]
+  },
+  {
+   "side": "P",
+   "axis": "y",
+   "line": 3.85,
+   "from": 2.0,
+   "to": 4.0,
+   "finish": "plain"
+  }
+ ],
+ "furniture": [
+  {
+   "type": "f_kitchen",
+   "x": 0.47,
+   "y": 1.25,
+   "rot": 2,
+   "state": "off",
+   "interact": "stove",
+   "id": "kitchen",
+   "reach": [
+    1.0,
+    1.25
+   ]
+  },
+  {
+   "type": "f_fridge",
+   "x": 0.47,
+   "y": 2.5,
+   "state": "closed",
+   "interact": "fridge",
+   "id": "fridge"
+  },
+  {
+   "type": "f_bed",
+   "x": 1.15,
+   "y": 3.42,
+   "state": "made",
+   "interact": "bed",
+   "id": "bed",
+   "reach": [
+    [
+     0.8,
+     2.62
+    ],
+    [
+     1.6,
+     2.62
+    ]
+   ]
+  },
+  {
+   "type": "f_nightstand",
+   "x": 2.45,
+   "y": 3.75,
+   "state": "on",
+   "interact": "bedlamp",
+   "id": "nightstand",
+   "name": "床头柜 · 台灯"
+  },
+  {
+   "type": "f_desk",
+   "x": 3.2,
+   "y": 0.48,
+   "state": "off",
+   "interact": "pc",
+   "id": "desk",
+   "rot": 4,
+   "_doc": "desk against the balcony divider (camera side, low), monitor faces north"
+  },
+  {
+   "type": "f_chair",
+   "x": 3.2,
+   "y": 1.08,
+   "id": "chair",
+   "rot": 0,
+   "_doc": "backrest north: faces the desk / monitor"
+  },
+  {
+   "type": "f_wardrobe",
+   "x": 3.55,
+   "y": 3.45,
+   "state": "closed",
+   "interact": "wardrobe",
+   "id": "wardrobe",
+   "rot": 6,
+   "_doc": "against the bathroom partition (far side), facing the room — no tall piece on the camera side"
+  },
+  {
+   "type": "f_table",
+   "x": 2.0,
+   "y": 1.3,
+   "state": "meal",
+   "interact": "table",
+   "id": "table"
+  },
+  {
+   "type": "f_stool",
+   "x": 2.0,
+   "y": 0.8,
+   "id": "stool",
+   "_doc": "red plastic stool: sit-and-eat (eat_home)"
+  },
+  {
+   "type": "i_pendant",
+   "x": 2.0,
+   "y": 1.9,
+   "state": "on",
+   "interact": "light",
+   "id": "room_light",
+   "reach": [
+    2.0,
+    1.9
+   ]
+  },
+  {
+   "type": "f_toilet",
+   "x": 4.3,
+   "y": 3.62,
+   "interact": "toilet",
+   "id": "toilet"
+  },
+  {
+   "type": "f_basin",
+   "x": 4.85,
+   "y": 3.8,
+   "interact": "basin",
+   "id": "basin"
+  },
+  {
+   "type": "f_shower",
+   "x": 5.6,
+   "y": 3.55,
+   "state": "dry",
+   "interact": "shower",
+   "id": "shower"
+  },
+  {
+   "type": "d_mat",
+   "x": 5.0,
+   "y": 2.55,
+   "id": "bath_mat"
+  },
+  {
+   "type": "i_track",
+   "x": 1.7,
+   "y": 0.07,
+   "id": "track"
+  },
+  {
+   "type": "f_washer",
+   "x": 3.55,
+   "y": -0.75,
+   "state": "idle",
+   "interact": "washer",
+   "id": "washer"
+  },
+  {
+   "type": "i_dryrack",
+   "x": 1.9,
+   "y": -0.75,
+   "interact": "rack",
+   "id": "rack",
+   "reach": [
+    1.9,
+    -0.75
+   ]
+  },
+  {
+   "type": "i_balfront",
+   "x": 0.0,
+   "y": -1.5,
+   "state": "glass",
+   "id": "balfront_0",
+   "ghost": 0.38
+  },
+  {
+   "type": "i_balfront",
+   "x": 1.5,
+   "y": -1.5,
+   "state": "glass",
+   "id": "balfront_1",
+   "ghost": 0.38
+  },
+  {
+   "type": "i_balfront",
+   "x": 2.5,
+   "y": -1.5,
+   "state": "glass",
+   "id": "balfront_2",
+   "ghost": 0.38
+  },
+  {
+   "type": "i_balfront",
+   "x": 0.0,
+   "y": 0.0,
+   "rot": 6,
+   "state": "glass",
+   "id": "balfront_w",
+   "ghost": 0.38
+  }
+ ],
+ "colliders": [
+  {
+   "id": "bal_s",
+   "rect": [
+    -1,
+    -3,
+    7,
+    -1.35
+   ]
+  },
+  {
+   "id": "bal_w",
+   "rect": [
+    -1,
+    -1.6,
+    0.15,
+    0.0
+   ]
+  },
+  {
+   "id": "bal_e",
+   "rect": [
+    4.0,
+    -3,
+    7,
+    0.0
+   ]
+  }
+ ],
+ "laundry": [
+  {
+   "id": "bal_pole0",
+   "pts": [
+    0.7,
+    -0.88,
+    3.1,
+    -0.88
+   ],
+   "z": 2.06,
+   "rack": "balcony",
+   "max": 3,
+   "items": [],
+   "indoor": true,
+   "mine": true,
+   "half": 0
+  },
+  {
+   "id": "bal_pole1",
+   "pts": [
+    0.7,
+    -0.62,
+    3.1,
+    -0.62
+   ],
+   "z": 2.06,
+   "rack": "balcony",
+   "max": 3,
+   "items": [],
+   "indoor": true,
+   "mine": true,
+   "half": 1
+  }
+ ],
+ "portals": [
+  {
+   "id": "exit_hall",
+   "rect": [
+    5.55,
+    0.3,
+    5.95,
+    1.3
+   ],
+   "dir": "E",
+   "to": "stair_2f",
+   "spawn": [
+    4.3,
+    3.45,
+    "S"
+   ],
+   "label": "出门",
+   "door": "door_2f02"
+  }
+ ],
+ "spawn": [
+  5.25,
+  0.8,
+  "W"
+ ]
+}

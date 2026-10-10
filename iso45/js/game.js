@@ -17,7 +17,7 @@
     snack: { obj: "fridge", during: "open", after: "closed" }, drink_fridge: { obj: "fridge", during: "open", after: "closed" },
     shower: { obj: "shower", during: "running", after: "dry", frosted: true, close: "bath_door", pose: { idle: true, dir: "S", at: [5.6, 3.5] } },
     eat_home: { obj: "table", after: "default", pose: { clip: "eat", dir: "N", at: "stool" } },
-    browse: { obj: "desk", during: "on", after: "off", pose: { clip: "sit", dir: "N", at: "chair", intro: 1 } },
+    browse: { obj: "desk", during: "on", after: "off", pose: { clip: "sit", dir: "S", at: "chair", intro: 1 } },
     change: { obj: "wardrobe", during: "open", after: "closed" },
     make_bed: { obj: "bed", after: "made" },
     wash_clothes: { obj: "washer", during: "running", after: "running" },

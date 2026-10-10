@@ -279,7 +279,9 @@
   },
   "eat out · 面馆/快餐 ¥10–15": {
    "buy_noodle_shop": 12,
-   "buy_kuaican": 14
+   "buy_kuaican": 14,
+   "buy_noodle_big": 15,
+   "buy_kc_cheap": 10
   },
   "takeout · 外卖（含满减）¥15–22": {
    "order_hmj": 18,
@@ -297,7 +299,8 @@
    "buy_coffee": 9
   },
   "drinks / treats · 奶茶 ¥8–12": {
-   "buy_milktea": 10
+   "buy_milktea": 10,
+   "buy_tea_lemon": 8
   },
   "ingredients · 食材（一顿约¥8–12）": {
    "noodles": 6.5,
@@ -323,6 +326,17 @@
    "broadband": 40,
    "phone": 29,
    "installment": 199
+  },
+  "store · 便利店货架/冷柜（js/store.js，新增）": {
+   "st_water": 2,
+   "st_cola": 3.5,
+   "st_yogurt": 6,
+   "st_onigiri": 6,
+   "st_sandwich": 9,
+   "st_cup_noodle": 5,
+   "st_icecream": 5,
+   "st_latte": 12,
+   "st_tea_egg": 2
   }
  },
  "items": {
@@ -764,14 +778,14 @@
   },
   "buy_milktea": {
    "label": "买杯奶茶（¥16）",
-   "place": "store_hot",
+   "place": "tea",
    "minutes": 5,
    "cost": 16,
    "effects": {
     "mood": 8,
     "hunger": 6
    },
-   "text": "三分糖去冰，续命",
+   "text": "三分糖去冰，店员说今天第二杯半价",
    "kind": "treat"
   },
   "go_out": {
@@ -791,7 +805,7 @@
   },
   "buy_noodle_shop": {
    "label": "楼下面馆：牛肉面（¥12）",
-   "place": "street",
+   "place": "noodle",
    "minutes": 20,
    "cost": 12,
    "effects": {
@@ -803,7 +817,7 @@
   },
   "buy_kuaican": {
    "label": "两荤一素快餐（¥14）",
-   "place": "street",
+   "place": "kuaican",
    "minutes": 20,
    "cost": 14,
    "effects": {
@@ -812,6 +826,66 @@
    },
    "text": "快餐店打了两荤一素，米饭随便加",
    "kind": "eatout"
+  },
+  "buy_tea_lemon": {
+   "label": "柠檬茶（¥8）",
+   "place": "tea",
+   "minutes": 4,
+   "cost": 8,
+   "effects": {
+    "mood": 5,
+    "hunger": 2
+   },
+   "text": "手打柠檬茶，很解暑",
+   "kind": "treat"
+  },
+  "buy_noodle_big": {
+   "label": "大碗牛肉面加蛋（¥15）",
+   "place": "noodle",
+   "minutes": 22,
+   "cost": 15,
+   "effects": {
+    "hunger": 70,
+    "mood": 6
+   },
+   "text": "大碗加蛋，辣子多放",
+   "kind": "eatout"
+  },
+  "buy_kc_cheap": {
+   "label": "一荤两素（¥10）",
+   "place": "kuaican",
+   "minutes": 18,
+   "cost": 10,
+   "effects": {
+    "hunger": 52,
+    "mood": 3
+   },
+   "text": "一荤两素，便宜管饱",
+   "kind": "eatout"
+  },
+  "heat_bento_store": {
+   "label": "用微波炉热便当",
+   "place": "micro",
+   "minutes": 3,
+   "consume": {
+    "bento": 1
+   },
+   "effects": {},
+   "text": "店里的微波炉「叮」了一声"
+  },
+  "eat_bar": {
+   "label": "坐在窗边吧台吃",
+   "place": "bar",
+   "minutes": 12,
+   "effects": {
+    "hunger": 60,
+    "mood": 5
+   },
+   "requires": {
+    "flag": "bar_meal",
+    "reason": "吧台上没有热好的饭"
+   },
+   "text": "坐在窗边，看着街上的人吃完了便当"
   }
  },
  "shops": {
@@ -924,7 +998,16 @@
    "holiday_mul": 3,
    "_doc": "hourly 便利店店员 (peripheral tier-1 2026: ~¥15–18/h, wage set in prices). 8 h shifts (+ a 4 h part-time peak shift); 夜班 +20%; 法定节假日 ×3 (劳动法第44条) · 下班可领一份员工价便当（prices.staff_meal，从工资扣）",
    "perf_bonus_per_h": 2,
-   "staff_meal_price": 12
+   "staff_meal_price": 12,
+   "booking": {
+    "_doc": "排班: book shifts with the manager up to max_ahead_days ahead; you can only clock in to a booked shift. A booked shift you never clock in to = 旷工 (mood hit + strike); fire_after strikes -> fired (apply again).",
+    "required": true,
+    "max_ahead_days": 2,
+    "max_booked": 6,
+    "no_show_mood": -6,
+    "fire_after": 3
+   },
+   "_wage_note": "⚠ ¥15/h (prices.wage_per_h) is a gameplay choice to keep money tight. Real 2025–26 tier-1 legal minimums for part-time (非全日制) work are higher, roughly ¥24–28/h (e.g. Beijing ¥27.7/h, Shanghai ~¥25/h, Shenzhen ~¥23.7/h — check the current local notice). Raise wage_per_h in `prices` to make it realistic."
   }
  },
  "social": {
@@ -1544,5 +1627,209 @@
     "type": "小单间 ~14㎡ + 独立卫生间 + 封闭玻璃阳台"
    }
   }
+ },
+ "store": {
+  "_doc": "24便利店 interior (scene-proto-45 js/store.js · tools/test_store.js). Goods sold in the store: price_key looks the price up in `prices` (existing keys reused: bento ¥15, buy_oden ¥8, drink ¥4, milk ¥5, bread ¥6, bun ¥2, buy_coffee ¥9, cigs; new ones in the 'store · 便利店货架/冷柜' price group). Picked goods go into a basket and are paid at the counter (scan + 微信支付 / 支付宝 card); hot food / coffee are paid on the spot. item = inventory id when it is something you can carry home (fridge: eat_bento, drink_milk). eat = effects when eaten at the window bar (needs a free stool). Keys only added here — no existing value was changed.",
+  "label": "邻里便利 24h",
+  "payee": "邻里便利 24h",
+  "shop": "store",
+  "goods": {
+   "bento": {
+    "label": "便当",
+    "where": "fridge",
+    "price_key": "bento",
+    "item": "bento",
+    "needs_heat": true,
+    "eat": {
+     "hunger": 60,
+     "mood": 5
+    },
+    "eat_min": 12
+   },
+   "drink": {
+    "label": "冰红茶",
+    "where": "fridge",
+    "price_key": "drink",
+    "item": "drink",
+    "eat": {
+     "hunger": 3,
+     "energy": 8,
+     "mood": 3
+    },
+    "eat_min": 3
+   },
+   "milk": {
+    "label": "牛奶",
+    "where": "fridge",
+    "price_key": "milk",
+    "item": "milk",
+    "eat": {
+     "hunger": 10,
+     "mood": 2
+    },
+    "eat_min": 3
+   },
+   "st_water": {
+    "label": "矿泉水",
+    "where": "fridge",
+    "price_key": "st_water",
+    "eat": {
+     "energy": 2,
+     "mood": 1
+    },
+    "eat_min": 2
+   },
+   "st_cola": {
+    "label": "可乐",
+    "where": "fridge",
+    "price_key": "st_cola",
+    "eat": {
+     "energy": 6,
+     "mood": 4
+    },
+    "eat_min": 3
+   },
+   "st_yogurt": {
+    "label": "酸奶",
+    "where": "fridge",
+    "price_key": "st_yogurt",
+    "eat": {
+     "hunger": 12,
+     "mood": 3
+    },
+    "eat_min": 4
+   },
+   "st_icecream": {
+    "label": "雪糕",
+    "where": "fridge",
+    "price_key": "st_icecream",
+    "eat": {
+     "hunger": 4,
+     "mood": 6
+    },
+    "eat_min": 4
+   },
+   "bread": {
+    "label": "面包",
+    "where": "shelf",
+    "price_key": "bread",
+    "item": "bread",
+    "eat": {
+     "hunger": 25,
+     "mood": 1
+    },
+    "eat_min": 6
+   },
+   "st_onigiri": {
+    "label": "饭团",
+    "where": "shelf",
+    "price_key": "st_onigiri",
+    "eat": {
+     "hunger": 28,
+     "mood": 2
+    },
+    "eat_min": 6
+   },
+   "st_sandwich": {
+    "label": "三明治",
+    "where": "shelf",
+    "price_key": "st_sandwich",
+    "eat": {
+     "hunger": 35,
+     "mood": 3
+    },
+    "eat_min": 8
+   },
+   "st_cup_noodle": {
+    "label": "杯面（柜台有热水）",
+    "where": "shelf",
+    "price_key": "st_cup_noodle",
+    "eat": {
+     "hunger": 38,
+     "mood": 2
+    },
+    "eat_min": 10
+   },
+   "bun": {
+    "label": "包子",
+    "where": "counter",
+    "price_key": "bun",
+    "eat": {
+     "hunger": 12,
+     "mood": 1
+    },
+    "eat_min": 4
+   },
+   "st_tea_egg": {
+    "label": "茶叶蛋",
+    "where": "counter",
+    "price_key": "st_tea_egg",
+    "eat": {
+     "hunger": 10,
+     "mood": 1
+    },
+    "eat_min": 3
+   },
+   "cigs": {
+    "label": "一包烟",
+    "where": "counter",
+    "price_key": "cigs",
+    "item": "cigs",
+    "age_check": true
+   }
+  },
+  "hot": {
+   "_doc": "paid on the spot (not via the basket): oden at the counter pot, coffee at the self-service machine (scan the QR on the machine). Effects = the existing actions buy_oden / buy_coffee; latte is new.",
+   "oden": {
+    "label": "关东煮",
+    "action": "buy_oden",
+    "place": "oden",
+    "minutes": 6
+   },
+   "americano": {
+    "label": "美式咖啡",
+    "action": "buy_coffee",
+    "place": "coffee",
+    "minutes": 3
+   },
+   "latte": {
+    "label": "拿铁",
+    "price_key": "st_latte",
+    "place": "coffee",
+    "minutes": 3,
+    "effects": {
+     "energy": 16,
+     "mood": 4
+    }
+   }
+  },
+  "microwave": {
+   "minutes": 3,
+   "_doc": "heat a cold bento from the basket / inventory (free, self-service); the hot bento is placed on the window bar or taken away"
+  },
+  "bar": {
+   "seats": 3,
+   "_doc": "eat at the window bar: sit on a free stool (shoppers also use them), eat one bought item (eat effects + eat_min). A heated bento gives +3 mood over a cold one (cold bento: hunger x0.8, mood -2)."
+  },
+  "shift": {
+   "_doc": "store side of the job (rules: jobs.store_clerk — booking, check-in window, late cut, no-show strikes, task loop, pay). Task kinds -> what you do in the store: checkout = a shopper waits at the counter, scan their items at the counter from the staff lane (items x scan_s seconds); restock = the named shelf / fridge shows 'low', restock it (restock_min); mop = the trash corner is messy: tidy + mop (mop_min); oden = top up the pot (oden_min). Quality: done within half the deadline = 1.0, later = 0.7.",
+   "targets": {
+    "shelf_a": "货架 · 零食日用",
+    "shelf_b": "货架 · 面包泡面",
+    "cooler": "饮料冷柜"
+   },
+   "scan_s": 0.6,
+   "restock_min": 12,
+   "mop_min": 10,
+   "oden_min": 6,
+   "quality_fast": 1.0,
+   "quality_slow": 0.7,
+   "clock_in_at": [
+    "counter",
+    "staff_door"
+   ],
+   "uniform_note": "打卡时换上店服（员工室）"
+  },
+  "_wage_note": "⚠ 店员时薪 = prices.wage_per_h（默认 ¥15/h，游戏性取值，让钱紧一点）。现实中一线城市非全日制最低小时工资更高（2025–26 约 ¥24–28/h：北京约 ¥27.7、上海约 ¥25、深圳约 ¥23.7，以当地最新公告为准），全日制月最低工资约 ¥2500–2700。想更真实就调高 prices.wage_per_h。"
  }
 }

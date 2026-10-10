@@ -130,6 +130,7 @@
         s.rentDue = R.nextRentDue(s.rentDue);
       }
       if (s.shift) evs.push(...R.job.tick(s, abs));
+      if (s.job && s.job.booked && s.job.booked.length) evs.push(...R.job.noShows(s, abs));
       // unpaid bills past due: mood penalty once per day
       if (s.bills && s.bills.length && D.damage) {
         const day = Math.floor(abs / DAY);
@@ -256,6 +257,7 @@
         const w = R.job.windowAt(abs);
         if (!w) { const n = R.job.next(abs); return { ok: false, reason: `现在不是上班时间（下个班 ${n.shift.label} ${n.shift.from}）` }; }
         if (s.job.last[w.shift.id + "@" + w.start]) return { ok: false, reason: "这个班已经上过了" };
+        if (J.booking && J.booking.required && !(s.job.booked || []).some((b) => b.start === w.start && b.id === w.shift.id)) return { ok: false, reason: `这个班没排你（先找店长排班）` };
         const today = Math.floor(abs / DAY), n = Object.values(s.job.last).filter((d) => d === today).length;
         if (n >= J.max_per_day) return { ok: false, reason: "今天已经上过班了，歇歇吧" };
         return Object.assign({ ok: true }, w);
@@ -264,6 +266,7 @@
         const c = R.job.canStart(s, abs); if (!c.ok) return c;
         const J = R.job.def(), T = J.tasks, r = rng(Math.floor(c.start / 7) + 9173 * (s.job.shifts + 1));
         s.job.last[c.shift.id + "@" + c.start] = Math.floor(abs / DAY);
+        if (s.job.booked) s.job.booked = s.job.booked.filter((b) => !(b.start === c.start && b.id === c.shift.id));
         s.shift = { job: JOB.id, id: c.shift.id, label: c.shift.label, start: c.start, end: c.end, checkin: abs, late: c.late, mul: c.shift.pay_mul || 1,
                     tasks: [], seq: 0, next: abs + T.first_after_min, done: 0, failed: 0, q: 0, seed: Math.floor(r() * 1e9) };
         return { ok: true, shift: s.shift, events: [note(s, { type: "shift_start", id: c.shift.id, late: c.late }, abs)] };
@@ -292,6 +295,41 @@
         return evs;
       },
       open: (s) => (s.shift ? s.shift.tasks.filter((t) => !t.done && !t.failed) : []),
+      /** shifts you could book (排班) from abs: today's not-yet-started ones + the next max_ahead_days days */
+      slots: function (s, abs) {
+        const J = R.job.def(), B = J.booking || {}, day = Math.floor(abs / DAY), out = [];
+        for (let dd = 0; dd <= (B.max_ahead_days || 2); dd++) for (const sh of J.shifts) {
+          const st = (day + dd) * DAY + hm(sh.from); if (st <= abs + 30) continue;
+          const booked = (s.job && s.job.booked || []).some((b) => b.start === st && b.id === sh.id);
+          out.push({ id: sh.id, label: sh.label, from: sh.from, to: sh.to, start: st, day: day + dd, booked, date: R.date(st).label });
+        }
+        return out;
+      },
+      book: function (s, abs, id, start) {
+        const J = R.job.def(), B = J.booking || {};
+        if (!s.job) return { ok: false, reason: "还没被录用" };
+        const sl = R.job.slots(s, abs).find((x) => x.id === id && x.start === start); if (!sl) return { ok: false, reason: "排不了这个班" };
+        if (sl.booked) return { ok: false, reason: "已经排了" };
+        s.job.booked = s.job.booked || [];
+        if (s.job.booked.length >= (B.max_booked || 6)) return { ok: false, reason: "排太多班了" };
+        if (s.job.booked.some((b) => Math.floor(b.start / DAY) === sl.day && (J.max_per_day || 1) <= 1)) return { ok: false, reason: "这天已经排了一个班" };
+        s.job.booked.push({ id, start, label: sl.label }); s.job.booked.sort((a, b) => a.start - b.start);
+        return { ok: true, slot: sl, events: [note(s, { type: "shift_booked", id, start, label: sl.label, date: sl.date }, abs)] };
+      },
+      /** book whatever shift's check-in window contains abs (dev / tests / "顶班" when the manager asks you on the spot) */
+      bookAt: function (s, abs) { const w = R.job.windowAt(abs); if (!w || !s.job) return { ok: false }; s.job.booked = s.job.booked || []; if (!s.job.booked.some((b) => b.start === w.start)) s.job.booked.push({ id: w.shift.id, start: w.start, label: w.shift.label }); return { ok: true }; },
+      unbook: function (s, abs, start) { if (!s.job || !s.job.booked) return { ok: false }; const n = s.job.booked.length; s.job.booked = s.job.booked.filter((b) => b.start !== start || b.start - abs < 120); return { ok: s.job.booked.length < n }; },
+      /** booked shifts whose check-in window closed without you: 旷工 -> mood hit + strike (3 strikes -> fired) */
+      noShows: function (s, abs) {
+        const J = R.job.def(), B = J.booking || {}, evs = [];
+        for (const b of s.job.booked.slice()) if (abs > b.start + J.checkin_after_min && !(s.shift && s.shift.start === b.start)) {
+          s.job.booked = s.job.booked.filter((x) => x !== b); s.job.strikes = (s.job.strikes || 0) + 1;
+          s.needs.mood = clamp(s.needs.mood + (B.no_show_mood || -6), 0, 100);
+          evs.push(note(s, { type: "shift_missed", id: b.id, label: b.label, strikes: s.job.strikes }, abs));
+          if (B.fire_after && s.job.strikes >= B.fire_after) { evs.push(note(s, { type: "fired", strikes: s.job.strikes }, abs)); s.job = null; break; }
+        }
+        return evs;
+      },
       complete: function (s, taskId, quality, abs) {
         const sh = s.shift; if (!sh) return { ok: false, reason: "没在上班" };
         const t = sh.tasks.find((x) => x.id === taskId); if (!t || t.done || t.failed) return { ok: false, reason: "没有这个活" };

@@ -48,6 +48,8 @@
     .tbtn.on { background: rgba(110,200,196,0.3); }
     #btn-time { right: calc(130px + env(safe-area-inset-right, 0px)); bottom: calc(28px + env(safe-area-inset-bottom, 0px)); }
     #btn-umb { right: calc(40px + env(safe-area-inset-right, 0px)); bottom: calc(146px + env(safe-area-inset-bottom, 0px)); }
+    #btn-cycle { right: calc(118px + env(safe-area-inset-right, 0px)); bottom: calc(176px + env(safe-area-inset-bottom, 0px)); border-color: #f0c674; color: #ffe1a0; }
+    body.landscape #btn-cycle { right: calc(92px + env(safe-area-inset-right, 0px)); bottom: 136px; width: 46px; height: 46px; }
     #btn-kick { right: calc(128px + env(safe-area-inset-right, 0px)); bottom: calc(96px + env(safe-area-inset-bottom, 0px)); width: 62px; height: 62px; font-size: 17px; font-weight: 600; color: #ffb3a0; border-color: rgba(230,120,100,0.6); }
     #btn-run { right: calc(206px + env(safe-area-inset-right, 0px)); bottom: calc(40px + env(safe-area-inset-bottom, 0px)); width: 54px; height: 54px; font-size: 16px; font-weight: 600; color: #a8e0ff; border-color: rgba(120,190,240,0.55); }
     #btn-run.on { background: rgba(80,150,210,0.5); color: #fff; border-color: #9fd6ff; }
@@ -97,6 +99,7 @@
     body.mobile #needs .nd u { width: 30px; }
     body.mobile #needs .cond { text-align: left; }
     body.mobile.landscape #needs { top: 46px; }
+    body.mobile:not(.landscape) #needs { left: calc(62px + env(safe-area-inset-left, 0px)); max-width: calc(100% - 120px); }   /* portrait: clear of the zoom column + ☰ menu */
     body.mobile #amenu { bottom: calc(env(safe-area-inset-bottom, 0px) + 190px); min-width: 250px; }
     body.mobile.landscape #amenu { bottom: 16px; }
     body.mobile #amenu button { padding: 10px 12px; font-size: 15px; }

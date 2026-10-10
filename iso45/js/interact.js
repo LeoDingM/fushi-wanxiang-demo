@@ -104,7 +104,11 @@
 
   // ---------- interactions ----------
   /** anchor point of an interactable on the ground (where you stand to use it) */
-  function reachPt(o) {
+  function reachPt(o, x, y) {
+    if (o.reach && Array.isArray(o.reach[0])) {        // several approach spots (bed: its open long side): the nearest one
+      if (x == null) return o.reach[0];
+      return o.reach.reduce((b, p) => (Math.hypot(x - p[0], y - p[1]) < Math.hypot(x - b[0], y - b[1]) ? p : b));
+    }
     if (o.reach) return o.reach;
     if (o.type === "f_door") return W.local(o, 1.5, -0.9, 0);
     if (o.interact === "gate") return W.local(o, o.type === "w_gate_l" ? 0.85 : -0.85, 0, 0);
@@ -115,17 +119,27 @@
   }
   W.reachPt = reachPt;
   /** nearest interactable in reach of (x, y): objects, laundry, puddles (wet), leaf piles (autumn) */
-  W.nearest = function (x, y) {
+  /** every interactable in reach, best first: distance to its (nearest) approach spot, minus a bonus for the one 李默
+      faces. W.nearList keeps the ranked list so the player can cycle (Tab / Q · phone ⇄) when several are in reach. */
+  W.nearest = function (x, y, dir) {
     let best = null, bd = 1.6;
-    const roof = SP.player && SP.player.level === "roof";
+    const roof = SP.player && SP.player.level === "roof", cands = [];
+    const fv = dir && SP.dirVec[dir] ? SP.dirVec[dir] : null, fl = fv ? Math.hypot(fv[0], fv[1]) || 1 : 1;
     for (const o of W.objects) {
       if (!o.interact || o.carried) continue;
       if (!W.interior && ((o.z || 0) >= 17) !== roof) continue;          // street things from the street, roof things on the roof
-      const p = reachPt(o);
+      if (SP.game && SP.game.actionFor && W.interior && SP.game.actionFor(o, "use") === null && !(W.defs[o.interact] && W.defs[o.interact].kick)) continue;   // nothing to do here
+      const p = reachPt(o, x, y);
       let d = Math.hypot(x - p[0], y - p[1]) - (o.interact === "gate" ? 0.3 : o.interact === "car" ? 2.2 : o.interact === "window" || o.interact === "shop" ? 0.4 : 0.8);
       if ((o.interact === "window" || o.interact === "shop") && d > 0.9) continue;
+      if (d >= 1.6) continue;
+      let sc = d;
+      if (fv) { const vx = o.x - x, vy = o.y - y, L = Math.hypot(vx, vy) || 1; sc -= 0.45 * Math.max(0, (vx * fv[0] + vy * fv[1]) / (L * fl)); }
+      cands.push([sc, o]);
       if (d < bd) { bd = d; best = o; }
     }
+    cands.sort((a, b) => a[0] - b[0]); W.nearList = cands.map((c) => c[1]);
+    if (W.nearList.length) { best = W.nearList[0]; bd = Math.min(bd, 0.79); }
     for (const L of W.laundry) {
       if (L.mine || (!W.interior && (L.z >= 17) !== roof)) continue;       // 李默's own racks: via the washer / rack / roof post
       const a = W.byId[L.from], b = W.byId[L.to]; if (!a || !b) continue;

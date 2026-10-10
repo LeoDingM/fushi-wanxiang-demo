@@ -341,7 +341,7 @@
       for (const part of P.parts) {
         const on = hit.has(o.fade_group) || hit.has(o.id + "/" + part);
         const fadeable = P.fadeable || (P.fade_parts && P.fade_parts.includes(part));
-        const target = on && fadeable ? FADE_ALPHA : 1;
+        const target = Math.min(on && fadeable ? FADE_ALPHA : 1, o.ghost || 1);   // ghost: always half see-through (balcony glass)
         const a = o.alpha[part] == null ? 1 : o.alpha[part];
         const na = Math.abs(target - a) < 0.005 ? target : a + (target - a) * k;
         if (q(na) !== q(a)) ch.push(o.id + "/" + part);

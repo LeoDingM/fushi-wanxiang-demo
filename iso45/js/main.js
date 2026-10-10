@@ -87,6 +87,7 @@
     if (k === "capslock") SP.runToggle = !SP.runToggle;
     if (k === "y") setSeason(SEASONS[(SEASONS.indexOf(SP.season) + 1) % SEASONS.length]);
     if (k === "l") st.showLog = !st.showLog;
+    if (k === "tab" || k === "q") { e.preventDefault && e.preventDefault(); SP.cycleTarget(); }
   });
   canvas.addEventListener("wheel", (e) => {
     e.preventDefault(); const r = canvas.getBoundingClientRect(), sx = canvas.width / r.width;
@@ -119,7 +120,16 @@
     SP.actors.resolve(12);                       // never start interpenetrating
   }
   function resetScene() { if (W.interior || player.level) SP.place.enter("street"); player.carry = null; W.load(window.SCENE_DATA); SP.fx.reset(); SP.traffic.reset(); SP.env.clearStamps(); spawnActors(); toast("场景已重置"); }
-  function nearest() { return player.carry ? null : W.nearest(player.x, player.y); }
+  function nearest() {
+    if (player.carry) return null;
+    const best = W.nearest(player.x, player.y, player.dir), L = (W.nearList || []).filter((o) => W.actionFor(o, "use") || W.actionFor(o, "kick"));
+    const sig = L.map((o) => o.id).join("|"); if (sig !== st.nearSig) { st.nearSig = sig; st.pickIdx = 0; }
+    st.nearN = L.length;
+    if (!L.length) return best;
+    return L[st.pickIdx % L.length];
+  }
+  /** several interactables in reach: Tab / Q / phone ⇄ cycles the target */
+  SP.cycleTarget = function () { if ((st.nearN || 0) > 1) { st.pickIdx = (st.pickIdx || 0) + 1; st.near = nearest(); st.pickHold = SP.now; } };
   /** F / 踢: a short kick pose; kicks the nearest kickable thing (lamp, bin, bike, vending machine, pot, poster, window,
       parked car, laundry line, puddle, leaf pile) */
   /** readable bus-stop plate: crisp screen-space lettering anchored on the stop's sign pole (the 0.6 m pixel board
@@ -138,6 +148,33 @@
     ctx.font = `${Math.round(9 * k)}px sans-serif`; ctx.fillText("12路 · 35路 · 夜2路  6:00–23:00", X, y0 + Math.round(33 * k));
     ctx.fillStyle = "#1d4f91"; ctx.fillRect(X - k, Y, 2 * k, Math.round(5 * k));
     ctx.restore();
+  }
+  /** lit blue doorplates (门牌) over building entrances: crisp, glow at night, within 14 m (12号 always a bit larger) */
+  const PLATE_NO = { unit_door: "井槐里 12号", nb_n1: "井槐里 14号", nb_e1: "井槐里 16号", nb_w1: "井槐里 8号", nb_e4: "井槐里 20号" };
+  function drawDoorPlates(z, cx, cy) {
+    if (W.interior || z < 0.35 || player.level === "roof") return;
+    const n = SP.tint.night || 0, kk = canvas.width / Math.max(1, canvas.getBoundingClientRect().width || canvas.width);
+    for (const o of W.objects) {
+      if (o.type !== "f_door") continue;
+      const tag = o.id === "unit_door" ? "unit_door" : o.id.split("_").slice(0, 2).join("_"), txt = o.plate || PLATE_NO[tag]; if (!txt) continue;
+      const p = W.local(o, 1.5, -0.1, 2.75), d = Math.hypot(player.x - p[0], player.y - p[1]); if (d > 14) continue;
+      const X = Math.round((SP.sx(p[0], p[1]) - cx) * z), Y = Math.round((SP.sy(p[0], p[1], p[2]) - cy) * z);
+      const main = tag === "unit_door", k = Math.max(0.8, Math.min(1.6, z * 1.3)) * kk * (main ? 1.15 : 0.9);
+      const w = Math.round(78 * k), h = Math.round(20 * k);
+      ctx.save(); ctx.globalAlpha = Math.min(1, (14 - d) / 4);
+      if (n > 0.2) { ctx.shadowColor = "rgba(160,200,255,0.9)"; ctx.shadowBlur = 10 * k * n; }
+      ctx.fillStyle = n > 0.2 ? "#2f6fd0" : "#1d4f91"; ctx.fillRect(X - w / 2, Y - h, w, h); ctx.shadowBlur = 0;
+      ctx.strokeStyle = "#e8eef8"; ctx.lineWidth = Math.max(1, k); ctx.strokeRect(X - w / 2 + 1.5 * k, Y - h + 1.5 * k, w - 3 * k, h - 3 * k);
+      ctx.fillStyle = "#fff"; ctx.textAlign = "center"; ctx.font = `bold ${Math.round(11 * k)}px sans-serif`; ctx.fillText(txt, X, Y - Math.round(6 * k));
+      if (n > 0.2) {   // the entrance wall lamp itself: a bright fixture just above the door
+        const L = W.local(o, 1.5, -0.25, 2.45), lx = Math.round((SP.sx(L[0], L[1]) - cx) * z), ly = Math.round((SP.sy(L[0], L[1], L[2]) - cy) * z);
+        ctx.globalCompositeOperation = "lighter"; const g = ctx.createRadialGradient(lx, ly, 0, lx, ly, 18 * k);
+        g.addColorStop(0, `rgba(255,236,190,${0.95 * n})`); g.addColorStop(0.25, `rgba(255,200,130,${0.45 * n})`); g.addColorStop(1, "rgba(255,180,100,0)");
+        ctx.fillStyle = g; ctx.fillRect(lx - 18 * k, ly - 18 * k, 36 * k, 36 * k); ctx.globalCompositeOperation = "source-over";
+        ctx.fillStyle = "#fff6dc"; ctx.fillRect(lx - 3 * k, ly - 1.5 * k, 6 * k, 3 * k);
+      }
+      ctx.restore();
+    }
   }
   function kick() {
     if (player.kickT > 0 || player.carry) return;
@@ -308,6 +345,7 @@
     const E = SP.env;
     const R = SP.layers.render({ canvas, ctx, z, cx, cy, view, player, actorDrawable, dt: st.lastDt || 1 / 60, shadowDyn });
     st.playerIndex = R.pi; st.dynCount = R.dyn.length;
+    { const K = {}; for (const d of R.dyn) K[d.kind === "actor" && !d.actor.isPlayer ? "npc" : d.kind] = (K[d.kind === "actor" && !d.actor.isPlayer ? "npc" : d.kind] || 0) + 1; st.dynKinds = K; }
     ctx.setTransform(z, 0, 0, z, -cx * z, -cy * z);
     if (z >= 0.2) drawWires();
     E.applyLight(ctx, canvas, z, cx, cy, R.lights);
@@ -321,7 +359,7 @@
     SP.env.drawFog(ctx, canvas.width, canvas.height);
     SP.env.drawWeather(ctx, canvas.width, canvas.height, cam.x, cam.y, cam.zoom, st.lastDt || 1 / 60);
     if (st.debug) drawDebugText(list, pi);
-    drawStopSign(z, cx, cy);
+    drawStopSign(z, cx, cy); drawDoorPlates(z, cx, cy);
     if (SP.game) { SP.game.drawOverlay(ctx, canvas.width, canvas.height); SP.game.hud(); }
     hud();
   }
@@ -337,6 +375,20 @@
       const g = ctx.createLinearGradient(w, 0, w * 0.25, h);
       g.addColorStop(0, `rgba(255,196,120,${0.55 * warm})`); g.addColorStop(0.55, `rgba(255,214,160,${0.18 * warm})`); g.addColorStop(1, `rgba(70,80,130,${0.35 * warm})`);
       ctx.fillStyle = g; ctx.fillRect(0, 0, w, h); ctx.restore();
+    }
+    // global colour grade by season / weather / time (hotfix): winter + snow cooler blue, summer warmer, rain desaturated cool,
+    // dusk warm orange (above), deep night blue. Cheap full-screen composites only.
+    if (st.grade && !W.interior) {
+      const se = CK.season, wet = CK.weather === "rain" ? CK.intensity : 0, sn = Math.max(CK.snow || 0, CK.weather === "snow" ? CK.intensity : 0);
+      const cold = se === "winter" ? 0.55 : se === "autumn" ? 0.15 : 0, hot = se === "summer" ? 0.5 : 0;
+      ctx.save();
+      if (wet > 0.05) { ctx.globalCompositeOperation = "saturation"; ctx.fillStyle = `rgba(128,128,128,${0.35 * wet})`; ctx.fillRect(0, 0, w, h); }
+      ctx.globalCompositeOperation = "soft-light";
+      const cool = Math.min(0.45, cold * 0.8 + sn * 0.35 + wet * 0.3) * (0.5 + 0.5 * n);
+      if (cool > 0.02) { ctx.fillStyle = `rgba(90,130,210,${cool})`; ctx.fillRect(0, 0, w, h); }
+      if (hot > 0.02) { ctx.fillStyle = `rgba(255,170,90,${hot * (0.45 + 0.35 * n)})`; ctx.fillRect(0, 0, w, h); }
+      if (n > 0.6 && tn === "night") { ctx.fillStyle = `rgba(40,70,170,${0.3 * (n - 0.6) / 0.4})`; ctx.fillRect(0, 0, w, h); }
+      ctx.restore();
     }
     if (n > 0.02) {
       const g = ctx.createRadialGradient(w / 2, h / 2, h * 0.35, w / 2, h / 2, h * 0.95);
@@ -443,7 +495,8 @@
     const tm = st.toast ? st.toast.msg : ""; if (toastEl.textContent !== tm) { toastEl.textContent = tm; toastEl.style.opacity = st.toast ? 1 : 0; }
     let pr = "";
     if (player.carry) pr = "E 停车锁车";
-    else if (st.near) { const u = W.actionFor(st.near, "use"), k = W.actionFor(st.near, "kick"); pr = [u && "E " + u.label, k && "F " + k.label].filter(Boolean).join("  ·  "); }
+    else if (st.near) { const u = W.actionFor(st.near, "use"), k = W.actionFor(st.near, "kick"); pr = [u && "E " + u.label, k && "F " + k.label].filter(Boolean).join("  ·  ") + (st.nearN > 1 ? `   ⇄ ${(st.pickIdx % st.nearN) + 1}/${st.nearN}（Tab 换）` : ""); }
+    { const cy = document.getElementById("btn-cycle"); if (cy) cy.style.display = st.nearN > 1 && !player.carry ? "" : "none"; }
     if (promptEl.textContent !== pr) promptEl.textContent = pr;
     SP.promptActions = { use: !!(player.carry || (st.near && W.actionFor(st.near, "use"))), kick: !!(st.near && W.actionFor(st.near, "kick")) };
     if (logEl) { const on = !!st.showLog; logEl.style.display = on ? "block" : "none"; if (on) { const L = W.log.slice(-8).map((e) => `${e.clock || ""} ${e.text}`).join("\n"); if (logEl.textContent !== L) logEl.textContent = L; } }

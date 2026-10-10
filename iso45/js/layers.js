@@ -309,7 +309,8 @@
   /** dynamic drawables (everything that moves or animates) overlapping view */
   Ly.dynamics = function (view, actorDrawable) {
     const all = [];
-    SP.traffic.drawables(all); SP.fx.drawables(all); SP.env.drawables(all);
+    if (!W.interior) SP.traffic.drawables(all);            // indoors: the street's cars / bus are never drawn (they keep their street coords)
+    SP.fx.drawables(all); SP.env.drawables(all);
     for (const o of W.objects) if (o.overlays.length) { const tmp = []; W.overlayDrawables(o, tmp); for (const d of tmp) all.push(d); }
     for (const a of SP.actors.list) if (!a.hidden) all.push(actorDrawable(a));
     return all.filter((d) => SP.rectsOverlap(d.rect, view));
