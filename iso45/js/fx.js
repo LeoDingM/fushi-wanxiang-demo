@@ -31,6 +31,9 @@
   FX.water = function (x, y, z) { for (let i = 0; i < 14; i++) push({ kind: "pix", x: x + (R() - 0.5) * 0.2, y, z: z + 0.3, vx: (R() - 0.5) * 0.4, vy: 0, vz: -0.5 - R(), col: WATER[i % 3], size: 1, life: 0.6, water: true }); };
   FX.pickup = function (x, y, z) { push({ kind: "can", x, y, z, vz: 0.9, t: 0, life: 1.4, key: "fx/can" }); };
   FX.leafBurst = function (x, y, n) { for (let i = 0; i < n; i++) push({ kind: "pix", x: x + (R() - 0.5) * 0.6, y: y + (R() - 0.5) * 0.3, z: 0.05, vx: (R() - 0.5) * 2.4, vy: (R() - 0.5) * 2.4, vz: 1 + R() * 1.6, col: LEAF[i % 4], size: 2, life: 8, leafy: true }); };
+  const DUST = ["#b8ab98", "#a39784", "#c9bfae"], SNOWK = ["#f4f6fb", "#e2e8f2", "#ffffff"];
+  /** running foot strike: a few low pixels kicked backwards (dust on dry ground, powder in snow) */
+  FX.kick = function (x, y, kind) { const C = kind === "snow" ? SNOWK : DUST; for (let i = 0; i < (kind === "snow" ? 7 : 5); i++) { const a = R() * 6.28, sp = 0.3 + R() * 0.7; push({ kind: "pix", x: x + (R() - 0.5) * 0.2, y: y + (R() - 0.5) * 0.2, z: 0.03, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, vz: 0.5 + R() * 0.9, col: C[i % 3], size: kind === "snow" ? 2 : 1, life: 0.5 }); } };
   FX.breath = function (x, y, z) { push({ kind: "breath", x, y, z, vx: (R() - 0.5) * 0.1, vy: 0, vz: 0.12, t: 0, life: 1.1 }); };
   FX.update = function (dt) {
     const C = SP.clock;

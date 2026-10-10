@@ -4841,11 +4841,240 @@
   },
   {
    "id": "roof_12",
-   "type": "b_roof_a",
+   "type": "b_roof_deck",
    "x": -6.0,
    "y": 13.0,
    "z": 18.0,
-   "fade_group": "b12"
+   "fade_group": "b12",
+   "sortz": [
+    -0.4,
+    0.0
+   ]
+  },
+  {
+   "id": "par_s0",
+   "type": "p_parapet",
+   "x": -5.0,
+   "y": 13.12,
+   "z": 18.0,
+   "on_roof": "b12"
+  },
+  {
+   "id": "par_s1",
+   "type": "p_parapet",
+   "x": -3.0,
+   "y": 13.12,
+   "z": 18.0,
+   "on_roof": "b12"
+  },
+  {
+   "id": "par_s2",
+   "type": "p_parapet",
+   "x": -1.0,
+   "y": 13.12,
+   "z": 18.0,
+   "on_roof": "b12"
+  },
+  {
+   "id": "par_s3",
+   "type": "p_parapet",
+   "x": 1.0,
+   "y": 13.12,
+   "z": 18.0,
+   "on_roof": "b12"
+  },
+  {
+   "id": "par_s4",
+   "type": "p_parapet",
+   "x": 3.0,
+   "y": 13.12,
+   "z": 18.0,
+   "on_roof": "b12"
+  },
+  {
+   "id": "par_s5",
+   "type": "p_parapet",
+   "x": 5.0,
+   "y": 13.12,
+   "z": 18.0,
+   "on_roof": "b12"
+  },
+  {
+   "id": "par_s6",
+   "type": "p_parapet",
+   "x": 7.0,
+   "y": 13.12,
+   "z": 18.0,
+   "on_roof": "b12"
+  },
+  {
+   "id": "par_s7",
+   "type": "p_parapet",
+   "x": 8.0,
+   "y": 13.12,
+   "z": 18.0,
+   "on_roof": "b12"
+  },
+  {
+   "id": "par_w0",
+   "type": "p_parapet",
+   "x": -5.88,
+   "y": 14.0,
+   "z": 18.0,
+   "rot": 2,
+   "on_roof": "b12"
+  },
+  {
+   "id": "par_w1",
+   "type": "p_parapet",
+   "x": -5.88,
+   "y": 16.0,
+   "z": 18.0,
+   "rot": 2,
+   "on_roof": "b12"
+  },
+  {
+   "id": "par_w2",
+   "type": "p_parapet",
+   "x": -5.88,
+   "y": 18.0,
+   "z": 18.0,
+   "rot": 2,
+   "on_roof": "b12"
+  },
+  {
+   "id": "par_w3",
+   "type": "p_parapet",
+   "x": -5.88,
+   "y": 20.0,
+   "z": 18.0,
+   "rot": 2,
+   "on_roof": "b12"
+  },
+  {
+   "id": "par_w4",
+   "type": "p_parapet",
+   "x": -5.88,
+   "y": 22.0,
+   "z": 18.0,
+   "rot": 2,
+   "on_roof": "b12"
+  },
+  {
+   "id": "par_w5",
+   "type": "p_parapet",
+   "x": -5.88,
+   "y": 24.0,
+   "z": 18.0,
+   "rot": 2,
+   "on_roof": "b12"
+  },
+  {
+   "id": "roof_hut",
+   "type": "i_roofhut",
+   "x": -1.5,
+   "y": 19.9,
+   "z": 18.0,
+   "state": "closed",
+   "on_roof": "b12",
+   "interact": "stairs",
+   "go": "down",
+   "to": "stair_6f",
+   "reach": [
+    -1.1,
+    18.45
+   ]
+  },
+  {
+   "id": "roof_tank",
+   "type": "p_tank",
+   "x": 6.6,
+   "y": 22.6,
+   "z": 18.0,
+   "on_roof": "b12"
+  },
+  {
+   "id": "roof_tank2",
+   "type": "p_tank",
+   "x": 4.6,
+   "y": 23.3,
+   "z": 18.0,
+   "on_roof": "b12"
+  },
+  {
+   "id": "roof_solar",
+   "type": "p_solar",
+   "x": 1.6,
+   "y": 23.4,
+   "z": 18.0,
+   "on_roof": "b12"
+  },
+  {
+   "id": "roof_ant1",
+   "type": "p_antenna",
+   "x": 7.9,
+   "y": 15.0,
+   "z": 18.0,
+   "on_roof": "b12"
+  },
+  {
+   "id": "roof_ant2",
+   "type": "p_antenna",
+   "x": -4.6,
+   "y": 23.9,
+   "z": 18.0,
+   "on_roof": "b12"
+  },
+  {
+   "id": "rpost_1",
+   "type": "p_post",
+   "x": -4.4,
+   "y": 15.4,
+   "z": 18.0,
+   "on_roof": "b12"
+  },
+  {
+   "id": "rpost_2",
+   "type": "p_post",
+   "x": 1.2,
+   "y": 15.4,
+   "z": 18.0,
+   "on_roof": "b12"
+  },
+  {
+   "id": "rpost_3",
+   "type": "p_post",
+   "x": -4.4,
+   "y": 17.0,
+   "z": 18.0,
+   "on_roof": "b12"
+  },
+  {
+   "id": "rpost_4",
+   "type": "p_post",
+   "x": 1.2,
+   "y": 17.0,
+   "z": 18.0,
+   "on_roof": "b12",
+   "interact": "roof_line"
+  },
+  {
+   "id": "roof_pot1",
+   "type": "p_pot",
+   "x": 7.6,
+   "y": 13.9,
+   "z": 18.0,
+   "state": "grown",
+   "on_roof": "b12"
+  },
+  {
+   "id": "roof_pot2",
+   "type": "p_pot",
+   "x": -5.2,
+   "y": 21.0,
+   "z": 18.0,
+   "state": "grown",
+   "on_roof": "b12"
   },
   {
    "id": "steps",
@@ -18830,9 +19059,108 @@
      "#d47878"
     ]
    ]
+  },
+  {
+   "id": "rline_1",
+   "from": "rpost_1",
+   "to": "rpost_2",
+   "z": 19.86,
+   "interact": "laundry",
+   "items": [
+    [
+     0.5,
+     0.42,
+     0.6,
+     "#e6e0cf"
+    ],
+    [
+     1.2,
+     0.36,
+     0.7,
+     "#7a9ed6"
+    ],
+    [
+     2.0,
+     0.5,
+     0.45,
+     "#d47878"
+    ],
+    [
+     3.4,
+     0.6,
+     0.9,
+     "#c9b98f"
+    ],
+    [
+     4.5,
+     0.34,
+     0.6,
+     "#6fae7d"
+    ]
+   ]
+  },
+  {
+   "id": "rline_me",
+   "from": "rpost_3",
+   "to": "rpost_4",
+   "z": 19.86,
+   "rack": "roof",
+   "max": 6,
+   "mine": true,
+   "items": []
+  },
+  {
+   "id": "bal_2f02",
+   "pts": [
+    3.5,
+    12.35,
+    5.6,
+    12.35
+   ],
+   "z": 5.05,
+   "rack": "balcony",
+   "max": 5,
+   "mine": true,
+   "indoor": true,
+   "items": []
   }
  ],
  "repair_hours_scale": 1.0,
+ "roof": {
+  "id": "roof12",
+  "z": 18.0,
+  "rect": [
+   -5.7,
+   13.3,
+   8.7,
+   24.7
+  ],
+  "spawn": [
+   -1.1,
+   18.3,
+   "S"
+  ],
+  "portals": [
+   {
+    "id": "down_6f",
+    "rect": [
+     -1.6,
+     18.62,
+     -0.6,
+     19.0
+    ],
+    "dir": "N",
+    "to": "stair_6f",
+    "spawn": [
+     7.0,
+     0.34,
+     "S"
+    ],
+    "label": "下楼（6F）",
+    "door": "roof_hut"
+   }
+  ]
+ },
  "interactions": {
   "_doc": "per interact kind (ported from scene-proto): use (E / 互动) and kick (F / 踢) actions by current state; repair / grow = state -> state after N in-game hours",
   "lamp": {

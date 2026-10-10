@@ -33,7 +33,7 @@
     return o.state;
   };
   W.load = function (data) {
-    W.data = data; W.objects = []; W.byId = {}; W.decals = []; W.log = []; W.timers = [];
+    W.data = data; W.objects = []; W.byId = {}; W.decals = []; W.log = W.log || []; W.timers = [];
     for (const src of data.objects) {
       const o = Object.assign({ z: 0, rot: 0, variant: "base" }, src);
       const P = piece(o);
@@ -60,13 +60,16 @@
     for (const o of W.objects) o._box = null;          // sort boxes depend on state (gate leaves, crashed car)
     for (const o of W.objects) {
       if (piece(o).layer !== "sorted" || o.carried) continue;     // a pushed bike collides as part of 李默
-      for (const poly of W.footprints(o)) C.push({ poly, box: SP.polyBox(poly), id: o.id });
+      for (const poly of W.footprints(o)) C.push({ poly, box: SP.polyBox(poly), id: o.id, roof: !!o.on_roof });
     }
+    // interior doors (room-layout system): the door bay blocks while closed; open = walk through
+    for (const o of W.objects) if (o.block && o.state !== "open") { const [x0, y0, x1, y1] = o.block; C.push({ poly: [[x0, y0], [x1, y0], [x1, y1], [x0, y1]], box: o.block, id: o.id }); }
     for (const c of W.data.colliders || []) {
       const [x0, y0, x1, y1] = c.rect;
       C.push({ poly: [[x0, y0], [x1, y0], [x1, y1], [x0, y1]], box: c.rect, id: c.id });
     }
     W.colliders = C;
+    if (SP.layers) SP.layers.invalidate();
     // uniform 2 m grid for fast circle queries
     const G = (W.cgrid = new Map()), CS = 2;
     C.forEach((c, i) => {
@@ -81,12 +84,17 @@
     const CS = 2, out = new Set();
     for (let gx = Math.floor((x - r) / CS); gx <= Math.floor((x + r) / CS); gx++)
       for (let gy = Math.floor((y - r) / CS); gy <= Math.floor((y + r) / CS); gy++) { const l = W.cgrid.get(gx * 1000 + gy); if (l) for (const i of l) out.add(i); }
-    return [...out].map((i) => W.colliders[i]);
+    // two levels share the street world: on the 12号 roof only roof props collide, on the street never roof props
+    const roof = !!(W._mover && W._mover.level === "roof");
+    const res = []; for (const i of out) { const c = W.colliders[i]; if (!!c.roof === roof) res.push(c); }
+    return res;
   };
   /** static footprint / bounds hit for a circle; returns the collider id or null */
   W.blockedStatic = function (x, y, r) {
     const B = W.data.bounds;
     if (x - r < B.x0 || x + r > B.x1 || y - r < B.y0 || y + r > B.y1) return "bounds";
+    // the 12号 rooftop is a level of the street world: whoever walks up there stays inside the parapets
+    const M = W._mover; if (M && M.level === "roof" && W.data.roof) { const R = W.data.roof.rect; if (x - r < R[0] || x + r > R[2] || y - r < R[1] || y + r > R[3]) return "parapet"; }
     for (const c of W.nearColliders(x, y, r)) {
       const b = c.box;
       if (x + r <= b[0] || x - r >= b[2] || y + r <= b[1] || y - r >= b[3]) continue;
@@ -97,7 +105,7 @@
   /** static + cars */
   W.blocked = function (x, y, r, ignoreCars) {
     const s = W.blockedStatic(x, y, r); if (s) return s;
-    if (!ignoreCars && SP.traffic) for (const car of SP.traffic.allCars()) if (SP.circlePoly(x, y, r, car.poly)) return car.id;
+    if (!ignoreCars && SP.traffic && !(W._mover && W._mover.level === "roof")) for (const car of SP.traffic.allCars()) if (SP.circlePoly(x, y, r, car.poly)) return car.id;
     return null;
   };
 
@@ -111,6 +119,7 @@
     const items = [];
     G.data_south_to_north.forEach((row, r) => {
       for (let col = 0; col < row.length; col++) {
+        if (!G.legend[row[col]]) continue;                          // "." = no floor (interiors: outside the room)
         const [pc, st] = G.legend[row[col]].split(":"), key = SP.frameKey(pc, "base", "main", st || "default", 0);
         const gx = X0 + col * ch, gy = Y0 + r * ch, X = SP.sx(gx, gy), Y = SP.sy(gx, gy, 0);
         if (key) items.push({ key, X, Y, rect: SP.frameRect(key, X, Y), o: 0, road: pc === "g_asphalt", g: [gx, gy, ch] });
@@ -137,6 +146,7 @@
           const k = tx + "," + ty; if (!idx.has(k)) idx.set(k, []); idx.get(k).push(it);
         }
     }
+    W.groundItems = items; if (SP.layers) SP.layers.groundChanged();
     W.groundIdx = idx; W.groundTiles = W.groundTiles || new Map(); W.groundTiles.forEach((t) => (t.tint = null));
     W.groundTintKey = gkey();
   };
@@ -171,6 +181,11 @@
   function rotRectBox(r, o) { return SP.polyBox(SP.footPoly(r, o.rot, o.x, o.y)); }
   /** world sort box of an object part: {x0,y0,x1,y1,z0,z1} + optional ground polygon (for rotated pieces) */
   W.sortBox = function (o, part) {
+    const b = sortBox0(o, part);
+    if (o.sortz) { b.z0 = (o.z || 0) + o.sortz[0]; b.z1 = (o.z || 0) + o.sortz[1]; }   // per-object band (stair well: below the floor)
+    return b;
+  };
+  function sortBox0(o, part) {
     const P = piece(o);
     const gv = o.variant !== "base" && P.geo_var && P.geo_var[o.variant], ss = W.shownState(o);
     const g = (gv && gv[ss] && gv[ss][part]) || (P.geo && P.geo[ss] && P.geo[ss][part]) || (P.geo && P.geo[o.state] && P.geo[o.state][part]);
@@ -195,18 +210,28 @@
       } else b = [o.x - 0.15, o.y - 0.15, o.x + 0.15, o.y + 0.15];
     }
     return { x0: b[0], y0: b[1], x1: b[2], y1: b[3], z0: (o.z || 0) + z[0], z1: (o.z || 0) + z[1], polys };
-  };
+  }
   /** drawable for a character: box = foot circle(s) */
   W.actorBox = function (a) {
     const cs = a.circles();
     let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
     for (const [cx, cy, r] of cs) { x0 = Math.min(x0, cx - r); y0 = Math.min(y0, cy - r); x1 = Math.max(x1, cx + r); y1 = Math.max(y1, cy + r); }
-    return { x0, y0, x1, y1, z0: 0, z1: a.height, circles: cs };
+    const z = a.z || 0;
+    return { x0, y0, x1, y1, z0: z, z1: z + a.height, circles: cs };
   };
 
   /** geometric front-to-back relation. +1: a in front of b (draw a after b), -1: b in front, 0: unconstrained */
+  // walkable roofs: things standing on a building's roof (props tagged on_roof, 李默 at level "roof") are drawn over
+  // that building's own modules below the roof line, whatever the ground-box separation says
+  const roofOf = (d) => {
+    const R = W.data.roof, b = d.box; if (!R || !b || b.z0 < R.z - 0.05) return null;
+    const r = R.rect; return b.x0 > r[0] - 0.8 && b.x1 < r[2] + 0.8 && b.y0 > r[1] - 0.8 && b.y1 < r[3] + 0.8 ? "b12" : null;
+  };
   W.front = function (a, b) {
     const A = a.box, B = b.box;
+    const ra = roofOf(a), rb = roofOf(b);
+    if (ra && b.o && b.o.fade_group === ra && A.z0 >= B.z1 - 0.05) return 1;
+    if (rb && a.o && a.o.fade_group === rb && B.z0 >= A.z1 - 0.05) return -1;
     const aX = A.x1 <= B.x0 + EPS, bX = B.x1 <= A.x0 + EPS, aY = A.y1 <= B.y0 + EPS, bY = B.y1 <= A.y0 + EPS;
     const aF = aX || aY, bF = bX || bY;
     if (aF && !bF) return 1;
@@ -282,6 +307,12 @@
         out.push({ kind: "obj", o, part, key, X, Y, rect, box, depth: (box.x0 + box.x1 + box.y0 + box.y1) / 2, zo: (P.z_order || 0) + pi * 0.01,
                    sid: o.id + "/" + part, fadeable });
       });
+      W.overlayDrawables(o, out);
+    }
+    return out;
+  };
+  W.overlayDrawables = function (o, out) {
+    const P = piece(o);
       for (const ov of o.overlays) if (ov.type === "soot" && ov.active) {
         const c = SP.rotPt([1.5, -0.02, 2.42], o.rot), sx = SP.sx(o.x + c[0], o.y + c[1]), sy = SP.sy(o.x + c[0], o.y + c[1], o.z + c[2]);
         const box = W.sortBox(o, P.parts[0]);
@@ -289,7 +320,6 @@
         out.push({ kind: "overlay", o, key: "fx/soot", X: sx, Y: sy, rect, box, depth: (box.x0 + box.x1 + box.y0 + box.y1) / 2, zo: (P.z_order || 0) + 0.5,
                    sid: o.id + "/soot", alpha: Math.min(1, ov.t / 3), shear: o.rot === 6 ? 0.5 : -0.5 });
       }
-    }
     return out;
   };
   /** occluder fading: anything drawn after the player whose opaque cells cover his body fades (by fade_group) */
@@ -299,11 +329,12 @@
     for (let i = playerIdx + 1; i < list.length; i++) {
       const d = list[i];
       if (!d.fadeable) continue;
+      if (SP.player && SP.player.level === "roof" && d.box && d.box.z1 <= SP.player.z + 0.6) continue;   // the building under his feet
       const f = SP.frame(d.key), dx = Math.round(d.X) - f[4], dy = Math.round(d.Y) - f[5];
       if (body.x1 < dx || body.x0 > dx + f[2] || body.y1 < dy || body.y0 > dy + f[3]) continue;
       if (SP.maskHits(d.key, dx, dy, body) >= 3) { hit.add(d.o.fade_group || d.o.id + "/" + d.part); W.fading.push(d.o.id + "/" + d.part); }
     }
-    const k = Math.min(1, dt * FADE_RATE);
+    const k = Math.min(1, dt * FADE_RATE), q = (a) => (a > 0.985 ? 1 : Math.round(a * 8) / 8), ch = (W.fadeChanged = []);
     for (const o of W.objects) {
       const P = piece(o);
       if (P.layer !== "sorted" || !(P.fadeable || P.fade_parts)) continue;
@@ -312,7 +343,9 @@
         const fadeable = P.fadeable || (P.fade_parts && P.fade_parts.includes(part));
         const target = on && fadeable ? FADE_ALPHA : 1;
         const a = o.alpha[part] == null ? 1 : o.alpha[part];
-        o.alpha[part] = Math.abs(target - a) < 0.005 ? target : a + (target - a) * k;
+        const na = Math.abs(target - a) < 0.005 ? target : a + (target - a) * k;
+        if (q(na) !== q(a)) ch.push(o.id + "/" + part);
+        o.alpha[part] = na;
       }
     }
     W.fadeHit = [...hit];

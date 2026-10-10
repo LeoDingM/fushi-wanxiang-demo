@@ -27,8 +27,12 @@
   /** called by movers every step with the distance walked: footprints in snow, splashes in puddles / heavy rain */
   E.stepFx = function (a, dist) {
     const c = C(); a._acc = (a._acc || 0) + dist;
-    if (a._acc < (a.vehicle ? 0.5 : 0.36)) return;
+    if (a._acc < (a.vehicle ? 0.5 : a.running ? 0.95 : 0.36)) return;
     a._acc = 0; a._foot = a._foot ? 0 : 1;
+    if (a.running) {           // run foot strike: kick-up puff (dust / water / snow)
+      const k = c.snow > 0.12 ? "snow" : c.wet > 0.3 ? "water" : "dust";
+      if (k === "water") SP.fx.splash(a.x, a.y, 7); else SP.fx.kick(a.x, a.y, k);
+    }
     const dx = a.x - (a._lx ?? a.x), dy = a.y - (a._ly ?? a.y), n = Math.hypot(dx, dy) || 1; a._lx = a.x; a._ly = a.y;
     if (c.snow > 0.12) {
       if (a.vehicle) { for (const s of [-0.18, 0.18]) E.stamp(a.x - dy / n * s, a.y + dx / n * s, 2, dx, dy); }
@@ -61,7 +65,7 @@
   };
 
   // ---------------- ground snow (baked into ground tiles, 3 steps) ----------------
-  E.snowLevel = () => { const s = C() ? C().snow : 0; return s < 0.12 ? 0 : s < 0.42 ? 1 : s < 0.72 ? 2 : 3; };
+  E.snowLevel = () => { if (W.interior) return 0; const s = C() ? C().snow : 0; return s < 0.12 ? 0 : s < 0.42 ? 1 : s < 0.72 ? 2 : 3; };
   const pats = {};
   function snowPattern(ctx, level, road) {
     const k = level + (road ? "r" : "s"); if (pats[k]) return pats[k];
@@ -92,6 +96,7 @@
   // ---------------- ground fx (per frame, under shadows / objects) ----------------
   const fxKey = (base, i) => { for (let k = i; k >= 0; k--) if (SP.frame(`fx/${base}/${k}`)) return `fx/${base}/${k}`; return null; };
   E.drawGround = function (ctx, view) {
+    if (W.interior) return;
     const c = C(), now = c.abs();
     // leaf piles (autumn)
     if (c.season === "autumn") (W.leafPiles || []).forEach((p, i) => {
@@ -163,34 +168,56 @@
 
   // ---------------- light sources ----------------
   const WARM = [255, 214, 150], LAMP = [255, 224, 168], COOL = [210, 232, 255], WIN = [255, 202, 128], SIGN = [130, 255, 176];
-  E.lights = function (view) {
-    const c = C(), n = E.night, out = [], P = (x, y, z, r, col, a, flat, refl) => out.push({ x, y, z, r, c: col, a, flat, refl });
-    if (n > 0.01) {
-      const V = view, far = (x, y) => { const X = SP.sx(x, y), Y = SP.sy(x, y, 0); return X < V.x0 - 300 || X > V.x1 + 300 || Y < V.y0 - 200 || Y > V.y1 + 500; };
-      const lamps = c.lampsOn ? 1 : 0;
-      for (const o of W.objects) {
-        if (!o.type.startsWith("p_") && !o.type.startsWith("f_")) continue;
-        if (far(o.x, o.y)) continue;
-        switch (o.type) {
-          case "p_pole": if (lamps) { const h = W.local(o, 0, -1.45, 6.8); P(h[0], h[1], h[2], 2.4, LAMP, 0.85 * n, false, true); P(h[0], h[1], 0, 5.2, LAMP, 0.95 * n, true); } break;
-          case "p_lamp": {
-            if (!lamps) break;
-            const on = o.state !== "broken" || SP.hash(Math.floor(SP.now * 9), SP.strHash(o.id)) > 0.55; if (!on) break;
-            const h = W.local(o, 0, -0.9, 4.1); P(h[0], h[1], h[2], 2.0, LAMP, 0.85 * n, false, true); P(h[0], h[1], 0, 3.8, LAMP, (o.state === "broken" ? 0.45 : 0.78) * n, true); break;
-          }
-          case "p_stall": if (!SP.npcs.list.some((q) => q.id === "vendor" && q.hidden)) { const h = W.local(o, 0, -0.6, 1.86); P(h[0], h[1], h[2], 2.2, WARM, 0.8 * n, false, true); P(h[0], h[1], 0, 2.6, WARM, 0.5 * n, true); } break;
-          case "p_locker": { const h = W.local(o, 0, -0.35, 1.3); P(h[0], h[1], h[2], 1.4, COOL, 0.55 * n, false, true); } break;
-          case "p_vending": if (o.state === "ok") { const h = W.local(o, 0, -0.5, 1.2); P(h[0], h[1], h[2], 1.6, COOL, 0.7 * n, false, true); P(h[0], h[1], 0, 2.2, COOL, 0.5 * n, true); } break;
-          case "p_busstop": { const h = W.local(o, 0, -0.3, 1.5); P(h[0], h[1], h[2], 2.0, COOL, 0.6 * n, false, true); P(h[0], h[1], 0, 2.4, COOL, 0.4 * n, true); } break;
-          case "f_window": if (W.shownState(o) === "lit") { const h = W.local(o, 1.5, -0.25, 1.6); P(h[0], h[1], h[2], 1.6, WIN, 0.55 * n, false, (o.z || 0) < 0.5); if ((o.z || 0) < 0.5) { const g = W.local(o, 1.5, -1.0, 0); P(g[0], g[1], 0, 2.0, WIN, 0.45 * n, true); } } break;
-          case "f_shop": if (o.state !== "shut") { const h = W.local(o, 1.5, -0.6, 1.4); P(h[0], h[1], h[2], 2.6, [255, 240, 214], 0.75 * n, false, true); const g = W.local(o, 1.5, -1.6, 0); P(g[0], g[1], 0, 3.2, [255, 236, 200], 0.65 * n, true); } break;
-          case "f_shopsign": { const h = W.local(o, 1.5, -0.4, 0.3); P(h[0], h[1], h[2], 2.2, SIGN, 0.45 * n, false, true); } break;
-          case "p_car": if (o.alarmUntil > SP.now && Math.floor(SP.now * 4) % 2 === 0) { const h = W.local(o, 0, 0, 0.7); P(h[0], h[1], h[2], 2.4, [255, 170, 40], 0.9, false, true); }
-                        else if (o.honkT > SP.now) { const h = W.local(o, 0, -2.2, 0.6); P(h[0], h[1], 0, 3.0, [255, 240, 200], 0.6, true); } break;
-        }
+  /* light sources. The static ones (poles, lit windows, shops, signs, vending, lockers, bus stops, stall) are collected
+     once per game minute / state change into a list with unit night strength; per frame only the view filter, the
+     night factor and the flickering / flashing ones (broken lamps, car alarms, honks, traffic, fire) are computed. */
+  let LC = null, LCkey = "";
+  function staticLights() {
+    const c = C(), key = `${c.lampsOn ? 1 : 0}|${Math.floor(c.abs())}|${SP.layers ? SP.layers.stats.rebuilds : 0}|${SP.tint.night > 0.35 ? 1 : 0}`;
+    if (LC && key === LCkey) return LC;
+    const out = { fixed: [], lamps: [], cars: [] }, P = (x, y, z, r, col, a, flat, refl) => out.fixed.push({ x, y, z, r, c: col, a, flat, refl, X: SP.sx(x, y), Y: SP.sy(x, y, 0) });
+    const lamps = c.lampsOn ? 1 : 0;
+    for (const o of W.objects) {
+      if (!/^[pfi]_/.test(o.type)) continue;
+      switch (o.type) {
+        case "i_pendant": if (o.state === "on") { P(o.x, o.y, 2.2, 4.2, [255, 226, 180], 1.0, false, false); P(o.x, o.y, 0, 4.6, [255, 222, 176], 0.9, true); } break;
+        case "f_kitchen": if (o.state === "cooking") P(o.x + 0.35, o.y, 0.95, 1.2, [255, 140, 60], 0.7, false, false); break;
+        case "f_nightstand": if (o.state === "on") { P(o.x, o.y + 0.05, 0.9, 2.2, [255, 214, 150], 0.9, false, false); P(o.x, o.y, 0, 2.4, [255, 210, 150], 0.7, true); } break;
+        case "f_desk": if (o.state === "on") P(o.x, o.y, 1.0, 1.6, [150, 190, 255], 0.75, false, false); break;
+        case "f_washer": if (o.state !== "idle") P(o.x + 0.18, o.y - 0.31, 0.78, 0.6, [120, 255, 160], 0.6, false, false); break;
+        case "i_roofhut": { const h = W.local(o, 0.4, -1.0, 2.15); P(h[0], h[1], h[2], 2.2, LAMP, 0.8, false, false); P(h[0], h[1], o.z || 0, 2.6, LAMP, 0.6, true); } break;
+        case "p_pole": if (lamps) { const h = W.local(o, 0, -1.45, 6.8); P(h[0], h[1], h[2], 2.4, LAMP, 0.85, false, true); P(h[0], h[1], 0, 5.2, LAMP, 0.95, true); } break;
+        case "p_lamp": out.lamps.push(o); break;
+        case "p_stall": out.stall = o; break;
+        case "p_locker": { const h = W.local(o, 0, -0.35, 1.3); P(h[0], h[1], h[2], 1.4, COOL, 0.55, false, true); } break;
+        case "p_vending": if (o.state === "ok") { const h = W.local(o, 0, -0.5, 1.2); P(h[0], h[1], h[2], 1.6, COOL, 0.7, false, true); P(h[0], h[1], 0, 2.2, COOL, 0.5, true); } break;
+        case "p_busstop": { const h = W.local(o, 0, -0.3, 1.5); P(h[0], h[1], h[2], 2.0, COOL, 0.6, false, true); P(h[0], h[1], 0, 2.4, COOL, 0.4, true); } break;
+        case "f_window": if (W.shownState(o) === "lit") { const h = W.local(o, 1.5, -0.25, 1.6); P(h[0], h[1], h[2], 1.6, WIN, 0.55, false, (o.z || 0) < 0.5); if ((o.z || 0) < 0.5) { const g = W.local(o, 1.5, -1.0, 0); P(g[0], g[1], 0, 2.0, WIN, 0.45, true); } } break;
+        case "f_shop": if (o.state !== "shut") { const h = W.local(o, 1.5, -0.6, 1.4); P(h[0], h[1], h[2], 2.6, [255, 240, 214], 0.75, false, true); const g = W.local(o, 1.5, -1.6, 0); P(g[0], g[1], 0, 3.2, [255, 236, 200], 0.65, true); } break;
+        case "f_shopsign": { const h = W.local(o, 1.5, -0.4, 0.3); P(h[0], h[1], h[2], 2.2, SIGN, 0.45, false, true); } break;
+        case "p_car": out.cars.push(o); break;
       }
-    } else {           // daytime: only alarms / honks flash
-      for (const o of W.objects) if (o.type === "p_car" && o.alarmUntil > SP.now && Math.floor(SP.now * 4) % 2 === 0) { const h = W.local(o, 0, 0, 0.7); P(h[0], h[1], h[2], 2.0, [255, 170, 40], 0.6, false, false); }
+    }
+    LC = out; LCkey = key; return out;
+  }
+  E.invalidateLights = () => { LC = null; };
+  E.lights = function (view, zoom) {
+    const c = C(), n = W.interior ? Math.max(E.night, 0.55) : E.night, out = [], P = (x, y, z, r, col, a, flat, refl) => out.push({ x, y, z, r, c: col, a, flat, refl });
+    const V = view, far = (X, Y) => X < V.x0 - 300 || X > V.x1 + 300 || Y < V.y0 - 200 || Y > V.y1 + 500;
+    const S = PX(), zmin = zoom ? 2.5 / zoom : 0;          // far zoom: lights smaller than ~2.5 screen px are skipped
+    const SL = staticLights();
+    if (n > 0.01) {
+      for (const L of SL.fixed) { if (L.r * S < zmin || far(L.X, L.Y)) continue; out.push({ x: L.x, y: L.y, z: L.z, r: L.r, c: L.c, a: L.a * n, flat: L.flat, refl: L.refl }); }
+      if (c.lampsOn) for (const o of SL.lamps) {
+        if (far(SP.sx(o.x, o.y), SP.sy(o.x, o.y, 0))) continue;
+        const on = o.state !== "broken" || SP.hash(Math.floor(SP.now * 9), SP.strHash(o.id)) > 0.55; if (!on) continue;
+        const h = W.local(o, 0, -0.9, 4.1); P(h[0], h[1], h[2], 2.0, LAMP, 0.85 * n, false, true); P(h[0], h[1], 0, 3.8, LAMP, (o.state === "broken" ? 0.45 : 0.78) * n, true);
+      }
+      const st = SL.stall; if (st && !SP.npcs.list.some((q) => q.id === "vendor" && q.hidden)) { const h = W.local(st, 0, -0.6, 1.86); P(h[0], h[1], h[2], 2.2, WARM, 0.8 * n, false, true); P(h[0], h[1], 0, 2.6, WARM, 0.5 * n, true); }
+    }
+    for (const o of SL.cars) {
+      if (o.alarmUntil > SP.now && Math.floor(SP.now * 4) % 2 === 0) { const h = W.local(o, 0, 0, 0.7); P(h[0], h[1], h[2], n > 0.01 ? 2.4 : 2.0, [255, 170, 40], n > 0.01 ? 0.9 : 0.6, false, n > 0.01); }
+      else if (n > 0.01 && o.honkT > SP.now) { const h = W.local(o, 0, -2.2, 0.6); P(h[0], h[1], 0, 3.0, [255, 240, 200], 0.6, true); }
     }
     for (const g of SP.traffic.glows()) out.push(Object.assign({ refl: !g.flat }, g, { a: g.a * 1.6 }));
     for (const g of SP.fx.glows) out.push(Object.assign({ refl: true }, g, { a: g.a * 1.4 }));
@@ -198,8 +225,14 @@
   };
   // ---------------- lightmap ----------------
   const lm = document.createElement("canvas"), lx = lm.getContext("2d"), LS = 0.5;
+  /** ambient: outdoors the clock's; indoors daylight through the windows (dimmer, warmer) -> dark at night */
+  E.ambient = function () {
+    const a = C().ambient; if (!W.interior) return a;
+    const n = E.night, d = [a[0] * 0.8 + 22, a[1] * 0.78 + 20, a[2] * 0.74 + 18], N = [34, 36, 52];
+    return d.map((v, i) => Math.round(Math.min(255, v * (1 - n) + N[i] * n)));
+  };
   E.applyLight = function (ctx, tgt, z, cx, cy, lights) {
-    const amb = C().ambient;
+    const amb = E.ambient();
     ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalCompositeOperation = "multiply";
     const vis = lights.filter((L) => L.a > 0.01);
     if (!vis.length) { if (amb[0] + amb[1] + amb[2] < 762) { ctx.fillStyle = `rgb(${amb[0]},${amb[1]},${amb[2]})`; ctx.fillRect(0, 0, tgt.width, tgt.height); } ctx.restore(); E.lightCount = 0; return; }
@@ -257,13 +290,14 @@
   E.emitComposite = function (ctx) {
     if (!E.emitOn || !E.emitRects.length) return;
     ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalCompositeOperation = "lighter"; ctx.globalAlpha = Math.min(1, E.night * 1.15);
-    ctx.drawImage(em, 0, 0); ctx.restore();
+    ctx.drawImage(E.emitCanvas || em, 0, 0); ctx.restore();
   };
 
   // ---------------- laundry line (sorted drawable) ----------------
   E.drawables = function (out, view) {
     for (const L of W.laundry || []) {
-      const a = W.byId[L.from], b = W.byId[L.to]; if (!a || !b) continue;
+      const a = L.pts ? { x: L.pts[0], y: L.pts[1] } : W.byId[L.from], b = L.pts ? { x: L.pts[2], y: L.pts[3] } : W.byId[L.to]; if (!a || !b) continue;
+      if (L.mine && !(L.items && L.items.length)) continue;
       const x0 = Math.min(a.x, b.x), x1 = Math.max(a.x, b.x), y0 = Math.min(a.y, b.y), y1 = Math.max(a.y, b.y);
       const pts = [[a.x, a.y, L.z], [b.x, b.y, L.z], [a.x, a.y, L.z - 0.8], [b.x, b.y, L.z - 0.8]].map((p) => SP.scr(p[0], p[1], p[2]));
       const rect = { x0: Math.min(...pts.map((p) => p[0])) - 6, y0: Math.min(...pts.map((p) => p[1])) - 6, x1: Math.max(...pts.map((p) => p[0])) + 6, y1: Math.max(...pts.map((p) => p[1])) + 10 };
@@ -299,7 +333,8 @@
   // ---------------- screen-space weather + fog ----------------
   const drops = [], flakes = []; let lastCX = null, lastCY = 0;
   E.drawWeather = function (ctx, w, h, camX, camY, zoom, dt) {
-    const c = C(), I = c.intensity, mob = w * h < 600000;
+    if (W.interior) return;
+    const c = C(), mob = w * h < 600000, I = c.intensity * SP.clamp(zoom / 0.5, 0.15, 1);     // far zoom: thinner
     const dX = lastCX == null ? 0 : (camX - lastCX) * zoom, dY = lastCX == null ? 0 : (camY - lastCY) * zoom; lastCX = camX; lastCY = camY;
     ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0);
     const wantR = c.weather === "rain" ? Math.round(I * (mob ? 160 : 340) * Math.min(1.5, w * h / 900000 + 0.4)) : 0;
@@ -332,7 +367,7 @@
     ctx.restore();
   };
   E.drawFog = function (ctx, w, h) {
-    const f = C().fog; if (f < 0.02) return;
+    const f = C().fog; if (f < 0.02 || W.interior) return;
     const a = C().ambient, col = [Math.round(a[0] * 0.75 + 50), Math.round(a[1] * 0.75 + 52), Math.round(a[2] * 0.75 + 58)].map((v) => Math.min(255, v));
     ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0);
     const g = ctx.createLinearGradient(0, 0, 0, h);

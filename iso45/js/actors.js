@@ -15,7 +15,18 @@
                           radius: 0.22, height: 1.85, speed: 1.7, vehicle: false, umbrella: false, clip: null, isPlayer: false }, opt);
     this.target = this.dir;
   });
-  A.prototype.data = function () { return window.ACTORS[this.umbrella && this.isPlayer ? "li_mo_umb" : this.set]; };
+  /** atlas set: umbrella (李默), + winter wear (puffer + scarf) when it is cold; winter atlases load lazily */
+  A.prototype.atlasName = function () {
+    if (this.homeClip && SP.img.actor_li_mo_home) return "li_mo_home";     // indoor poses (sit at the PC, lie in bed, cook)
+    const b = this.umbrella && this.isPlayer ? "li_mo_umb" : this.set;
+    if (SP.winterWear && window.ACTORS[b + "_w"]) { if (SP.img["actor_" + b + "_w"]) return b + "_w"; SP.ensureActor(b + "_w"); }
+    return b;
+  };
+  A.prototype.data = function () { return window.ACTORS[this.atlasName()]; };
+  SP.ensureActor = function (name) {
+    if (SP.img["actor_" + name] || (SP._actLoading || (SP._actLoading = {}))[name]) return;
+    SP._actLoading[name] = true; const im = new Image(); im.onload = () => { SP.img["actor_" + name] = im; if (SP.tintedActors) SP.tintedActors[name] = im; }; im.src = window.ACTORS[name].img;
+  };
   A.prototype.setDir = function (d) { this.dir = this.target = d; this.turnT = 0; };
   A.prototype.r = function () { return this.umbrella ? 0.55 : this.radius; };
   /** foot circles [x, y, r] (optionally for another position / facing) */
@@ -63,10 +74,13 @@
     if (moving && !this.moving) { this.phase = this.settle && this.settle.walk != null ? this.settle.walk / walkN : this.phase; this.settle = null; }
     if (!moving && this.moving && !this.vehicle) { this.t = 0; this.settle = A.planSettle(this.frame, walkN); }
     this.moving = moving;
-    if (this.clip) { this.t += dt; this.frame = Math.floor(this.t * 6) % D.clips[this.clip]; return; }
+    if (this.clip) {
+      this.t += dt; const N = D.clips[this.clip] || 1, f = Math.floor(this.t * 6), I = this.clipIntro || 0;
+      this.frame = f < I ? f : this.clipHold ? N - 1 : I + (f - I) % Math.max(1, N - I); return;
+    }
     if (moving) {
       let g = dist; if (g < 1e-4 && dt > 0) g = this.speed * dt * 0.4;
-      const stride = this.vehicle ? 1.6 : (D.stride_m || 1.15);
+      const stride = this.vehicle ? 1.6 : this.walkClip() === "run" ? 2.0 : (D.stride_m || 1.15);
       this.phase = (this.phase + g / stride) % 1;
       this.frame = Math.round(this.phase * walkN) % walkN;
     } else if (this.settle) {
@@ -75,7 +89,7 @@
       if (i >= S.steps.length) { this.settle = null; this.t = 0; this.frame = 0; } else { Object.assign(S, S.steps[i]); this.frame = 0; }
     } else { this.t += dt; this.frame = Math.floor(this.t * IDLE_FPS) % (D.clips[this.idleClip()] || 1); }
   };
-  A.prototype.walkClip = function () { return this.vehicle ? "ride" : this.umbrella && this.isPlayer ? "uwalk" : "walk"; };
+  A.prototype.walkClip = function () { return this.vehicle ? "ride" : this.umbrella && this.isPlayer ? "uwalk" : (this.runK || 0) > 0.5 && this.data().clips.run ? "run" : "walk"; };
   A.prototype.idleClip = function () { return this.vehicle ? "stop" : this.umbrella && this.isPlayer ? "uidle" : "idle"; };
   A.planSettle = function (f, N) {
     const half = N / 2, back = f % half, steps = [];
@@ -95,8 +109,7 @@
     if (S) return S.blend > 0 ? [[`${this.idleClip()}_${d}_0`, 1], [`${this.walkClip()}_${d}_${S.walk}`, 1 - S.blend]] : [[`${this.walkClip()}_${d}_${S.walk}`, 1]];
     return [[`${this.idleClip()}_${d}_${this.frame}`, 1]];
   };
-  A.prototype.screen = function () { return [Math.round(SP.sx(this.x, this.y)), Math.round(SP.sy(this.x, this.y, 0))]; };
-  A.prototype.atlasName = function () { return this.umbrella ? "li_mo_umb" : this.set; };
+  A.prototype.screen = function () { return [Math.round(SP.sx(this.x, this.y)), Math.round(SP.sy(this.x, this.y, this.z || 0))]; };
   /** screen rect of the sprite (union of drawn frames) */
   A.prototype.spriteRect = function () {
     const [X, Y] = this.screen(), D = this.data(); let r = null;
@@ -142,12 +155,13 @@
   const GAP = 0.004;                            // tiny skin so float noise never reads as contact
   /** true if actor a with circles at (x, y, dir) touches nothing (static footprints, bounds, cars, other actors) */
   AC.shapeClear = function (a, x, y, dir, ignoreCars) {
+    SP.world._mover = a;
     const W = SP.world, haz = !a.isPlayer && W.hazards && W.hazards.length;
     for (const [cx, cy, r] of a.circles(x, y, dir)) {
       if (W.blocked(cx, cy, r + GAP, ignoreCars)) return false;
       if (haz && W.hazardBlocks(a.x, a.y, cx, cy, r)) return false;     // NPCs keep out of broken glass
       for (const b of AC.list) {
-        if (b === a || b.hidden) continue;
+        if (b === a || b.hidden || (b.level || "") !== (a.level || "")) continue;
         for (const [bx, by, br] of b.circles()) if (Math.hypot(cx - bx, cy - by) < r + br + GAP) return false;
       }
     }
@@ -156,12 +170,13 @@
   AC.whoBlocks = function (a, x, y, dir) {
     for (const [cx, cy, r] of a.circles(x, y, dir)) {
       const s = SP.world.blocked(cx, cy, r + GAP); if (s) return s;
-      for (const b of AC.list) if (b !== a && !b.hidden) for (const [bx, by, br] of b.circles()) if (Math.hypot(cx - bx, cy - by) < r + br + GAP) return b.id;
+      for (const b of AC.list) if (b !== a && !b.hidden && (b.level || "") === (a.level || "")) for (const [bx, by, br] of b.circles()) if (Math.hypot(cx - bx, cy - by) < r + br + GAP) return b.id;
     }
     return null;
   };
   /** move with sub-steps + sliding along world axes; returns distance actually travelled */
   AC.move = function (a, vx, vy) {
+    SP.world._mover = a;
     const L = Math.hypot(vx, vy); if (L < 1e-9) return 0;
     const n = Math.max(1, Math.ceil(L / 0.04)), sx = vx / n, sy = vy / n, x0 = a.x, y0 = a.y;
     a.blockedBy = null;
@@ -180,7 +195,7 @@
       let any = false;
       for (let i = 0; i < AC.list.length; i++) for (let j = i + 1; j < AC.list.length; j++) {
         const a = AC.list[i], b = AC.list[j];
-        if (a.hidden || b.hidden) continue;
+        if (a.hidden || b.hidden || (a.level || "") !== (b.level || "")) continue;
         for (const [ax, ay, ar] of a.circles()) for (const [bx, by, br] of b.circles()) {
           let dx = ax - bx, dy = ay - by, d = Math.hypot(dx, dy); const need = ar + br + GAP * 2;
           if (d >= need) continue;
@@ -194,10 +209,11 @@
       }
       for (const a of AC.list) {
         if (a.hidden) continue;
+        SP.world._mover = a; const onRoof = a.level === "roof";
         for (let k = 0; k < 3; k++) {
           let fixed = false;
           for (const [cx, cy, r] of a.circles()) {
-            const polys = SP.world.nearColliders(cx, cy, r + 0.1).map((c) => c.poly).concat(SP.traffic ? SP.traffic.allCars().map((c) => c.poly) : []);
+            const polys = SP.world.nearColliders(cx, cy, r + 0.1).map((c) => c.poly).concat(SP.traffic && !onRoof ? SP.traffic.allCars().map((c) => c.poly) : []);
             for (const p of polys) {
               const q = SP.polyDist(cx, cy, p); if (q.d >= r + GAP) continue;
               let nx = cx - q.x, ny = cy - q.y, L = Math.hypot(nx, ny);

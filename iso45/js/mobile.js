@@ -4,7 +4,8 @@
    - floating analog joystick (left half): its SCREEN direction is mapped to a world vector exactly like WASD
      (SP.screenToWorldDir), so pushing up walks up the screen
    - 互动 button (E, pulses when something is in reach), 时间 (T), 伞 (U), event buttons 破窗/起火/撞车, 重置, 调试
-   - no page scroll / pinch / double-tap zoom. Desktop keyboard play is unchanged (controls only on touch devices,
+   - two-finger pinch = GAME zoom around the pinch point (+ two-finger drag pans, ⌖ recenters); no page scroll /
+     page pinch / double-tap zoom. Desktop keyboard play is unchanged (controls only on touch devices,
      or with ?touch=1; ?touch=0 hides them). */
 (function (SP) {
   "use strict";
@@ -63,13 +64,34 @@
     '<button type="button" id="btn-time" class="tbtn small" aria-label="切换时段">◐<i>时间</i></button>' +
     '<button type="button" id="btn-umb" class="tbtn small" aria-label="撑伞">☂<i>伞</i></button>' +
     '<button type="button" id="btn-kick" class="tbtn">踢</button>' +
-    '<div id="zoombar"><button type="button" id="btn-zin" class="zbtn" aria-label="放大">＋</button><button type="button" id="btn-zout" class="zbtn" aria-label="缩小">－</button></div>' +
-    '<div id="evbar">' +
+    '<button type="button" id="btn-run" class="tbtn" aria-label="跑步开关">跑</button>' +
+    '<div id="zoombar"><button type="button" id="btn-zin" class="zbtn" aria-label="放大">＋</button><button type="button" id="btn-zout" class="zbtn" aria-label="缩小">－</button><button type="button" id="btn-zc" class="zbtn" aria-label="回到李默">⌖</button></div>' +
+    '<div id="evbar"><button type="button" class="ebtn" id="ev-tog" aria-label="调试菜单">☰</button>' +
     '<button type="button" class="ebtn" data-tev="broken_window">破窗</button><button type="button" class="ebtn" data-tev="fire">起火</button>' +
     '<button type="button" class="ebtn" data-tev="crash">撞车</button><button type="button" class="ebtn" data-tev="reset">重置</button>' +
     '<button type="button" class="ebtn" data-tev="weather">天气</button><button type="button" class="ebtn" data-tev="season">季节</button>' +
     '<button type="button" class="ebtn" data-tev="log">日志</button><button type="button" class="ebtn" data-tev="debug">调试</button></div>';
   body.appendChild(root);
+  // ---------- two-finger pinch zoom (page zoom stays disabled; the GAME zooms around the pinch point) ----------
+  const PZ = (SP.pinch = { on: false, d: 0, mx: 0, my: 0 });
+  const free = (t) => !(t.target && t.target.closest && t.target.closest("button"));
+  const pts = (e) => [...e.touches].filter(free);
+  function pinchState(T) { const a = T[0], b = T[1]; return [Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY), (a.clientX + b.clientX) / 2, (a.clientY + b.clientY) / 2]; }
+  const cs = () => canvas.width / Math.max(1, canvas.getBoundingClientRect().width);
+  document.addEventListener("touchstart", (e) => {
+    const T = pts(e); if (T.length < 2) return;
+    if (SP.touchRelease) SP.touchRelease();
+    const [d, mx, my] = pinchState(T); Object.assign(PZ, { on: true, d, mx, my });
+  }, { passive: true });
+  document.addEventListener("touchmove", (e) => {
+    if (!PZ.on) return; const T = pts(e); if (T.length < 2) return;
+    const [d, mx, my] = pinchState(T), k = cs(), r = canvas.getBoundingClientRect();
+    if (SP.panBy) SP.panBy(-(mx - PZ.mx) * k, -(my - PZ.my) * k);            // two-finger drag pans
+    if (PZ.d > 4 && SP.zoomBy) SP.zoomBy(d / PZ.d, (mx - r.left) * k, (my - r.top) * k, true);
+    Object.assign(PZ, { d, mx, my });
+  }, { passive: true });
+  const pinchEnd = (e) => { if (PZ.on && pts(e).length < 2) { PZ.on = false; if (SP.zoomEnd) SP.zoomEnd(); } };
+  document.addEventListener("touchend", pinchEnd, { passive: true }); document.addEventListener("touchcancel", pinchEnd, { passive: true });
   const zone = $("joy-zone"), base = $("joy-base"), knob = $("joy-knob");
   const R = 52, DEAD = 0.18;
   function baseCentre() { const r = base.getBoundingClientRect(); return [r.left + r.width / 2, r.top + r.height / 2]; }
@@ -86,7 +108,7 @@
   function release() { TI.active = false; TI.id = null; TI.m = 0; TI.x = TI.y = 0; setKnob(0, 0); base.style.transform = ""; base.classList.remove("on"); }
   SP.touchRelease = release;
   zone.addEventListener("pointerdown", (e) => {
-    if (TI.active) return;
+    if (TI.active || PZ.on) return;
     e.preventDefault();
     try { zone.setPointerCapture(e.pointerId); } catch (_) {}
     TI.active = true; TI.id = e.pointerId;
@@ -94,7 +116,7 @@
     base.style.transform = `translate(${e.clientX - hx}px, ${e.clientY - hy}px)`;
     TI.c = [e.clientX, e.clientY]; base.classList.add("on"); moveTo(e.clientX, e.clientY);
   });
-  zone.addEventListener("pointermove", (e) => { if (TI.active && e.pointerId === TI.id) { e.preventDefault(); moveTo(e.clientX, e.clientY); } });
+  zone.addEventListener("pointermove", (e) => { if (PZ.on) return; if (TI.active && e.pointerId === TI.id) { e.preventDefault(); moveTo(e.clientX, e.clientY); } });
   ["pointerup", "pointercancel", "lostpointercapture"].forEach((t) => zone.addEventListener(t, (e) => { if (e.pointerId === TI.id) release(); }));
   window.addEventListener("blur", release);
   function tap(el, fn) {
@@ -106,13 +128,17 @@
   tap($("btn-time"), () => SP.actions.time());
   tap($("btn-umb"), () => SP.actions.umbrella());
   tap($("btn-kick"), () => SP.actions.kick());
-  tap($("btn-zin"), () => SP.actions.zoom(1));               // pinch-free zoom (pinch is disabled page-wide)
+  tap($("btn-run"), () => { SP.runToggle = !SP.runToggle; });
+  tap($("btn-zin"), () => SP.actions.zoom(1));               // + / - step through the zoom presets
   tap($("btn-zout"), () => SP.actions.zoom(-1));
+  tap($("btn-zc"), () => SP.actions.recenter());
+  const evbar = root.querySelector("#evbar"), evtog = root.querySelector("#ev-tog");
+  tap(evtog, () => { evbar.classList.toggle("open"); evtog.textContent = evbar.classList.contains("open") ? "✕" : "☰"; });
   root.querySelectorAll("[data-tev]").forEach((b) => tap(b, () => { const v = b.dataset.tev; if (v === "reset") SP.actions.reset(); else if (v === "debug") SP.actions.debug(); else if (v === "weather") SP.actions.weather(); else if (v === "season") SP.actions.season(); else if (v === "nextday") SP.actions.nextDay(); else if (v === "log") SP.actions.log(); else SP.actions.event(v); }));
   if (force !== "1") window.addEventListener("keydown", () => body.classList.add("kbd"), { once: true });
-  const act = $("btn-act"), umb = $("btn-umb"), kickB = $("btn-kick");
+  const act = $("btn-act"), umb = $("btn-umb"), kickB = $("btn-kick"), runB = $("btn-run");
   (function tick() {
-    if (SP.actions) { act.classList.toggle("ready", !!(SP.promptActions && SP.promptActions.use)); kickB.classList.toggle("ready", !!(SP.promptActions && SP.promptActions.kick)); umb.classList.toggle("on", !!(SP.player && SP.player.umbrella)); }
+    if (SP.actions) { act.classList.toggle("ready", !!(SP.promptActions && SP.promptActions.use)); kickB.classList.toggle("ready", !!(SP.promptActions && SP.promptActions.kick)); umb.classList.toggle("on", !!(SP.player && SP.player.umbrella)); runB.classList.toggle("on", !!SP.runToggle); }
     requestAnimationFrame(tick);
   })();
 })(window.SP);

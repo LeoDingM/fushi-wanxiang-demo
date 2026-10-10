@@ -45,7 +45,7 @@
       const grows = JSON.stringify(now) !== JSON.stringify(next);
       if (grows && W.occupied(next)) return false;
     }
-    o.state = state; o.since = C() ? C().abs() : 0; o._box = null;
+    o.state = state; o.since = C() ? C().abs() : 0; o._box = null; if (SP.env && SP.env.invalidateLights) SP.env.invalidateLights();
     W.rebuildColliders(); W.groundDirty = true;
     return true;
   };
@@ -78,6 +78,7 @@
     }
     const raining = c.weather === "rain" && c.intensity > 0.25;
     for (const L of W.laundry) {
+      if (L.mine) continue;
       const d = W.defs[L.interact] || {};
       if (L.state === "hung" && raining) { L.state = "taken"; L.since = now; W.logEvent("下雨了，邻居赶紧把晾的衣服收回家"); }
       else if (L.state === "taken" && !raining && c.wet < 0.3 && c.min > 420 && c.min < 1080 && now - L.since > 30) { L.state = "hung"; L.since = now; L.wet = 0.6; W.logEvent("天晴了，邻居又把衣服晾了出来"); }
@@ -104,6 +105,7 @@
   // ---------- interactions ----------
   /** anchor point of an interactable on the ground (where you stand to use it) */
   function reachPt(o) {
+    if (o.reach) return o.reach;
     if (o.type === "f_door") return W.local(o, 1.5, -0.9, 0);
     if (o.interact === "gate") return W.local(o, o.type === "w_gate_l" ? 0.85 : -0.85, 0, 0);
     if (o.interact === "window" || o.interact === "shop") return W.local(o, 1.5, -0.6, 0);
@@ -115,14 +117,17 @@
   /** nearest interactable in reach of (x, y): objects, laundry, puddles (wet), leaf piles (autumn) */
   W.nearest = function (x, y) {
     let best = null, bd = 1.6;
+    const roof = SP.player && SP.player.level === "roof";
     for (const o of W.objects) {
       if (!o.interact || o.carried) continue;
+      if (!W.interior && ((o.z || 0) >= 17) !== roof) continue;          // street things from the street, roof things on the roof
       const p = reachPt(o);
       let d = Math.hypot(x - p[0], y - p[1]) - (o.interact === "gate" ? 0.3 : o.interact === "car" ? 2.2 : o.interact === "window" || o.interact === "shop" ? 0.4 : 0.8);
       if ((o.interact === "window" || o.interact === "shop") && d > 0.9) continue;
       if (d < bd) { bd = d; best = o; }
     }
     for (const L of W.laundry) {
+      if (L.mine || (!W.interior && (L.z >= 17) !== roof)) continue;       // 李默's own racks: via the washer / rack / roof post
       const a = W.byId[L.from], b = W.byId[L.to]; if (!a || !b) continue;
       const t = SP.clamp(((x - a.x) * (b.x - a.x) + (y - a.y) * (b.y - a.y)) / ((b.x - a.x) ** 2 + (b.y - a.y) ** 2), 0, 1);
       const d = Math.hypot(x - (a.x + (b.x - a.x) * t), y - (a.y + (b.y - a.y) * t)) - 0.55;
@@ -135,6 +140,7 @@
   };
   W.actionFor = function (o, kind) {
     if (!o) return null;
+    if (SP.game) { const g = SP.game.actionFor(o, kind); if (g !== undefined) return g; }
     if (o.interact === "puddle") return kind === "use" ? { label: "踩水" } : { label: "跺脚溅水" };
     if (o.interact === "leafpile") return kind === "use" ? { label: "捧起落叶" } : { label: "踢散落叶" };
     if (o.interact === "laundry") { const d = W.defs.laundry; return d && d[kind] && d[kind][o.L.state] || null; }
@@ -163,6 +169,7 @@
       if (kind === "kick") { SP.fx.shake = 0.18; SP.actors.alarm(o.x, o.y, 8); }
       return a.toast ? a.toast.replace("{dry}", L.wet > 0.2 ? "衣服还潮着呢" : "晒得干干的，有太阳的味道") : a.log || null;
     }
+    if (a.do === "game") return SP.game.use(o);
     if (a.do) { const r = W.doSpecial(a.do, o, actor); if (r !== undefined) return r; }
     if (a.to && !W.setState(o, a.to)) return "有人挡着，先让开";
     if (a.fx) W.objFx(o, a.fx);

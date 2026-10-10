@@ -69,3 +69,11 @@ URL params: `debug=1`, `time=morning|day|afternoon|dusk|night|HH:MM`, `season=sp
 `69-mobile-portrait` / `69-mobile-landscape` · `clip-audit.json` (full audit result).
 Stage 2: `70-overview-v2` · `71-compare-v2` · `72-dusk` · `73-night` · `74-mobile` · `75-walk.mp4` (30 fps, dusk rain,
 umbrella) · `76-rain-night` · `77-snow-steps` · `78-seasons` · `79-fog` · `80-interactions` · `81-weather-mobile`.
+
+## Stage 3 · 室内 + 房间布局系统（2026-10-10）
+- 12号楼楼道 1F–6F 折返楼梯（每层上下两段梯段，碰撞与画面一致），楼层菜单（含天台），触发器松手才重新武装（快速上下循环测试）。天台属于街景同一世界（天气/季节/昼夜生效）。
+- 2F-02 由数据生成：`tools/layouts/room_2f02.json` → `tools/roomlayout.py`（外墙/切墙/隔墙/门/窗/家具槽）。构建时校验：家具互不重叠、不压墙、不挡门的开合区、每个可互动物件/门两侧/出口从出生点可步行到达（栅格泛洪，李默半径 0.22 m），失败则构建报错；运行时 interior_test 再做一遍泛洪。
+- 卫生间：隔墙 + 真实门（开/关状态，关门有碰撞，站在门口关不上）；隔墙、衣柜、冰箱、灶台、阳台玻璃挡住李默时半透明淡出。
+- 封闭玻璃阳台（铝框推拉窗）+ 洗衣机 + 晾衣杆，晾的衣服在外立面可见。床靠窗 + 床头柜台灯，书桌电脑 + 椅子朝向书桌。
+- 室内姿势（45° Blender 管线 li_mo_home）：坐下打字（上网）、盖被躺下（睡觉/午睡）、灶台炒菜；洗澡人在卫生间内隐藏。
+- 经济：2F-02 月租 ¥850（shared-rules rent_table：外围 ¥800–900 / 内环 ¥1100–1300 / CBD 旁更高），开局 ¥1500，便利店 ¥18/h。

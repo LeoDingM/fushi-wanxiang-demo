@@ -7,6 +7,16 @@
   "use strict";
   const K = window.KIT_MANIFEST;
   const PJ = K.projection;
+  /* interior kit (Stage 3, kit_int/): its own atlas; frames are merged into the one frame table with a 7th field = 1
+     (drawFrame / drawEmit / eraseFrame pick the interior atlas), pieces / masks / emit lists merged (street keys win) */
+  const KI = window.KIT_INT_MANIFEST;
+  if (KI) {
+    for (const [k, f] of Object.entries(KI.frames)) if (!K.frames[k]) K.frames[k] = f.slice(0, 6).concat([1]);
+    for (const [k, v] of Object.entries(KI.pieces)) if (!K.pieces[k]) K.pieces[k] = v;
+    for (const [k, v] of Object.entries(KI.masks || {})) if (!K.masks[k]) K.masks[k] = v;
+    K.emit = (K.emit || []).concat((KI.emit || []).filter((k) => K.frames[k] && K.frames[k][6]));
+  }
+  const srcOf = (f, raw) => (f[6] ? SP.img.int_atlas : raw ? (SP.baseAtlas || SP.img.atlas) : SP.tinted);
   SP.KX = PJ.px_x_per_m; SP.KY = PJ.px_y_per_m; SP.PZ = PJ.px_z_per_m;      // 32, 16, 39.19
   SP.sx = (x, y) => (x - y) * SP.KX;
   SP.sy = (x, y, z) => -((x + y) * SP.KY + (z || 0) * SP.PZ);
@@ -155,13 +165,13 @@
   SP.drawEmit = function (ctx, key, x, y, alpha) {
     const f = F[key]; if (!f || !EMITSET.has(key)) return;
     ctx.globalAlpha = alpha == null ? 1 : alpha;
-    ctx.drawImage(SP.img.emit, f[0], f[1], f[2], f[3], Math.round(x) - f[4], Math.round(y) - f[5], f[2], f[3]);
+    ctx.drawImage(f[6] ? SP.img.int_emit : SP.img.emit, f[0], f[1], f[2], f[3], Math.round(x) - f[4], Math.round(y) - f[5], f[2], f[3]);
     ctx.globalAlpha = 1;
   };
   /** erase a frame's silhouette from a layer (emissive pixels hidden behind something drawn later) */
   SP.eraseFrame = function (ctx, key, x, y) {
     const f = F[key]; if (!f) return;
-    ctx.drawImage(SP.tinted || SP.img.atlas, f[0], f[1], f[2], f[3], Math.round(x) - f[4], Math.round(y) - f[5], f[2], f[3]);
+    ctx.drawImage(f[6] ? SP.img.int_atlas : SP.tinted || SP.img.atlas, f[0], f[1], f[2], f[3], Math.round(x) - f[4], Math.round(y) - f[5], f[2], f[3]);
   };
   // ---------- light sprites (pre-rendered once per colour; drawn with 'lighter' into the lightmap) ----------
   const lightCache = new Map();
@@ -190,7 +200,7 @@
   SP.strHash = function (s) { let h = 2166136261; for (let i = 0; i < s.length; i++) { h ^= s.charCodeAt(i); h = Math.imul(h, 16777619); } return h >>> 0; };
   SP.drawFrame = function (ctx, key, x, y, alpha, raw) {
     const f = F[key]; if (!f) return;
-    const src = raw ? (SP.baseAtlas || SP.img.atlas) : SP.tinted;
+    const src = srcOf(f, raw);
     if (alpha != null && alpha < 0.999) ctx.globalAlpha = alpha;
     ctx.drawImage(src, f[0], f[1], f[2], f[3], Math.round(x) - f[4], Math.round(y) - f[5], f[2], f[3]);
     if (alpha != null && alpha < 0.999) ctx.globalAlpha = 1;
