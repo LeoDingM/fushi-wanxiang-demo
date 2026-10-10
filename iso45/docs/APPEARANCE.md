@@ -47,7 +47,7 @@ SP.appearance.setOutfitId('casual'|'uniform'|'winter')  // 写入 ps.flags.outfi
 |------|-------|------|------|
 | 警察 | `police` | Blender `police.json` + `police_cap` | 藏青执勤服 + 大盖警帽（前檐+帽徽） |
 | 消防员 | `firefighter` | Blender `firefighter.json` + `fire_helmet` | 橙夹克 + 黄盔（圆顶/后檐/短前檐） |
-| 医护 | `nurse` | Blender `nurse.json` + `nurse_cap` | 浅蓝护士服 + 折翼白帽 + 发髻 |
+| 医护 | `nurse` | Blender `nurse.json`（无帽+bun） | 浅蓝/白 scrub + 发髻（弃纸帽） |
 
 生成（Char-A2）：`art-pack/sprites3d/{police,firefighter,nurse}.json` → `build45.sh` → `out45/` → pack → `img/actors/{police,firefighter,nurse}.png` + `js/actors_civic.js`
 `tools/recolor_civic_actors.py` 已弃用（Leo 拒收矩形帽重着色）  

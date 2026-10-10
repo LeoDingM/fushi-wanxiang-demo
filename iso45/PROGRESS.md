@@ -1,3 +1,4 @@
+23:45 · [外观] Stage Char-A2c：police 扁平大盖帽+短前檐（露眼）、firefighter 圆顶+长后檐、nurse 现代发髻无纸帽；Blender 重渲+actors_civic；screenshots/char-a2c-*；play zip
 23:35 · [外观] Stage Char-A2 hotfix：Blender 正渲 police/firefighter/nurse（police_cap/fire_helmet/nurse_cap）；弃用重着色矩形帽；actors_civic 重打包；Char-B 学校暂停；screenshots/char-a2b-*；play zip
 23:25 · [外观] Stage Char-A/Civic-look：police/firefighter/nurse 重着色图集+NPC_SPEC；civic 一楼 f_shop 玻璃门脸+文字招牌；appearance schema/衣柜/child×0.72；街面 extras×4；docs/APPEARANCE.md+CHAR_READY；appearance_test 12/12；smoke 4/4；双 zip · screenshots/char-a1…a8
 23:12 · [主线] Stage E：背包（报案回执/处方/药品/消防卡片）+微信物业房东联动；公交车程动画+可跳过；馨园1-02南向飘窗阳台 validate 0；夜间派出所来电/急诊迷你事件可跳过；stageE 15/15；smoke 4/4；stage6 PASS；双 zip · screenshots/e1-bag-receipt.png
