@@ -90,3 +90,10 @@
 23:40 · [Stage J] 脏衣 HUD 提示：点击芯片看 上班/睡觉/季节倍率说明
 23:40 · [Stage J] 物业费凭证同步物业微信 + 会话回复；医院处方出示文案加长 + 微信阿姨
 23:40 · [Stage J] 质量：stageJ_test 13/13 · smoke 4/4 · stage6 12/12 · 截图 j1–j6（含护士回归）
+
+23:50 · [Stage K] 门禁登记簿按日筛选 + 昨夜未扫码→门岗盘问（解释/出示/敷衍）· js/stageK.js，未改外观/NPC_SPEC
+23:50 · [Stage K] 换装清爽：clear wearNotices + worn_h=0 + 心情+4（wrap setOutfitId / change_clothes）
+23:50 · [Stage K] 雨天/加班衣服芯片着色（wet/ot）
+23:50 · [Stage K] 处方有效期（游戏日+3）↔药房状态/过期拒取；出示医院过期拦截
+23:50 · [Stage K] 门禁 App ↔ 日程待办合并（missed_scan / scanlog 待办 + 日程页跳转登记簿）
+23:50 · [Stage K] 质量：stageK_test 12/12 · smoke 4/4 · stage6 12/12 · 截图 k1–k6

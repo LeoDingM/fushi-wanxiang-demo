@@ -27,7 +27,23 @@
     rider: "rider",
     teacher: "office",
     guard: "uncle",
-    civilian: "office"
+    civilian: "office",
+    // Char-B layer variants
+    student_skirt: "student_skirt",
+    student_long: "student_long",
+    office_short: "office_short",
+    child_cue: "child_cue"
+  };
+
+  /** Map clothing layers → preferred atlas variant when dedicated art exists. */
+  AP.layerAtlas = function (ap) {
+    if (!ap || !ap.layers) return null;
+    const L = ap.layers;
+    if (ap.ageBand === "child") return "child_cue";
+    if (L.bottom === "skirt") return "student_skirt";
+    if (L.top === "tee_long" || L.top === "shirt") return "student_long";
+    if (L.top === "tee_short" || L.top === "polo") return "office_short";
+    return null;
   };
 
   AP.LAYER_TOP = ["tee_short", "tee_long", "shirt", "polo", "uniform_top"];
@@ -106,10 +122,11 @@
     const ap = npc.appearance || (typeof npc === "object" && npc.job ? npc : null);
     if (!ap) return npc.set || npc.sprite || "office";
     if (ap.outfitSet && window.ACTORS && window.ACTORS[ap.outfitSet]) return ap.outfitSet;
+    const layer = AP.layerAtlas(ap);
+    if (layer && window.ACTORS && window.ACTORS[layer]) return layer;
     const job = ap.job || "civilian";
     const want = AP.JOB_ATLAS[job] || "office";
     if (window.ACTORS && window.ACTORS[want]) return want;
-    // fallbacks if civic atlases not loaded yet
     if (job === "police") return "uncle";
     if (job === "firefighter") return "office";
     if (job === "nurse") return "student";
@@ -126,11 +143,19 @@
     // interim child scale
     const child = appearance.ageBand === "child";
     const teen = appearance.ageBand === "teen";
-    actor.drawScale = child ? 0.72 : teen ? 0.88 : appearance.ageBand === "elder" ? 0.96 : 1;
+    // Char-B: child ~0.62 + slight squat (drawScaleY) until true child meshes
+    actor.drawScale = child ? 0.62 : teen ? 0.86 : appearance.ageBand === "elder" ? 0.96 : 1;
+    actor.drawScaleY = child ? 0.92 : 1; // slightly shorter legs/torso cue
     if (appearance.height === "short" && !child) actor.drawScale *= 0.94;
     if (appearance.height === "tall" && !child) actor.drawScale *= 1.04;
-    actor.radius = (child ? 0.16 : 0.22) * (actor.drawScale < 1 ? 0.95 : 1);
-    actor.height = child ? 1.35 : teen ? 1.65 : 1.8;
+    actor.radius = (child ? 0.14 : 0.22) * (actor.drawScale < 1 ? 0.95 : 1);
+    actor.height = child ? 1.2 : teen ? 1.6 : 1.8;
+    actor.hairId = appearance.hairId || actor.hairId;
+    if (appearance.ageBand === "child" && (!appearance.outfitSet || appearance.outfitSet === "student")) {
+      appearance.outfitSet = "child_cue";
+      const set = AP.resolveAtlas(appearance);
+      actor.set = set; actor.sprite = set;
+    }
     return actor;
   };
 
@@ -192,10 +217,13 @@
       }
     }));
     opts.push({
-      id: "outfit_hint",
-      label: "理发店换发型（未开放）",
-      ok: false,
-      reason: "外观系统预留：后续由街区理发店改 hairId"
+      id: "outfit_hair",
+      label: "去剪艺理发换发型…",
+      ok: true,
+      fn: () => {
+        if (SP.charB && SP.charB.openBarber) { SP.charB.openBarber({ _name: "剪艺理发" }); return null; }
+        return "理发店模块未加载";
+      }
     });
     G.openMenu({ _name: "衣柜 · 换装", interact: "wardrobe" }, opts);
   };
@@ -222,12 +250,13 @@
     if (!SP.Actor || SP.Actor.prototype._charADraw) return;
     const prev = SP.Actor.prototype.draw;
     SP.Actor.prototype.draw = function (ctx, raw, erase) {
-      const s = this.drawScale || 1;
-      if (s === 1 || !ctx) return prev.call(this, ctx, raw, erase);
+      const sx = this.drawScale || 1;
+      const sy = (this.drawScaleY || 1) * sx;
+      if ((sx === 1 && sy === 1) || !ctx) return prev.call(this, ctx, raw, erase);
       const [X, Y] = this.screen();
       ctx.save();
       ctx.translate(X, Y);
-      ctx.scale(s, s);
+      ctx.scale(sx, sy);
       ctx.translate(-X, -Y);
       prev.call(this, ctx, raw, erase);
       ctx.restore();
