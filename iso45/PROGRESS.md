@@ -112,3 +112,10 @@
 00:05 · [Stage M] 日程本周视图加 6–22 时段条，可点小时看明细
 00:05 · [Stage M] 门禁归档 + canvas 长图导出演示（手机 UI）
 00:05 · [Stage M] 质量：stageM_test 12/12 · smoke 4/4 · stage6 12/12 · 截图 m1–m6
+
+00:15 · [Stage N] 物业工单回访结案（待跟进→已结案），可选结案赠续门禁 +6h · js/stageN.js
+00:15 · [Stage N] 连续漏服≥2 → 医院复诊待办；到护士/医生/药房清除
+00:15 · [Stage N] 天气软推荐「一键试穿」仅调 setOutfitId（不改 atlas）
+00:15 · [Stage N] 时段条记录可「前往」POI
+00:15 · [Stage N] 门禁长图分享给阿凯/阿姨/房东（演示微信）
+00:15 · [Stage N] 质量：stageN_test 10/10 · smoke 4/4 · stage6 12/12 · 截图 n1–n6 · 未改 appearance/NPC_SPEC
