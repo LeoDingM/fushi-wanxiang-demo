@@ -37,9 +37,9 @@
     { id: "hospital", x: 22.0, y: -10.0, z: 2.6, img: "img/signs/hospital.png" },
     { id: "fire", x: 58.0, y: -10.0, z: 2.6, img: "img/signs/fire.png" },
     { id: "school_pri", x: -19.0, y: -10.0, z: 2.6, img: "img/signs/school_pri.png" },
-    { id: "school_mid", x: 5.0, y: -10.0, z: 2.6, img: "img/signs/school_mid.png" },
-    { id: "school_high", x: 37.0, y: -10.0, z: 2.6, img: "img/signs/school_high.png" },
-    { id: "barber", x: 49.5, y: 10.0, z: 2.4, img: "img/signs/barber.png" }
+    { id: "school_mid", x: -7.0, y: -10.0, z: 2.6, img: "img/signs/school_mid.png" },
+    { id: "school_high", x: 31.0, y: -10.0, z: 2.6, img: "img/signs/school_high.png" },
+    { id: "barber", x: 48.5, y: 4.2, z: 2.4, img: "img/signs/barber.png" }
   ];
   B._signImgs = {};
 
@@ -141,12 +141,13 @@
         y: pos[1],
         radius: 0.18,
         speed: 0,
-        height: hints.ageBand === "child" ? 1.3 : 1.7
+        height: hints.ageBand === "child" ? 1.15 : 1.7
       });
       a.setDir(pos[2]);
       a.schoolNpc = true;
       a.civicName = hints.job === "teacher" ? "老师" : "同学";
       AP().applyToActor(a, ap);
+      if (hints.ageBand === "child") { a.drawScale = a.drawScale || 0.72; a.radius = 0.14; }
       SP.actors.list.push(a);
     };
     make("stu", spec.studentHints, spec.studentPos, 1100 + sid.length * 17);
@@ -328,9 +329,9 @@
     A.spawnAt = function (key) {
       const map = {
         school_pri: { to: "school_pri", street: [-19, -6.5, "N"] },
-        school_mid: { to: "school_mid", street: [5, -6.5, "N"] },
-        school_high: { to: "school_high", street: [37, -6.5, "N"] },
-        barber: { to: "shop_barber", street: [49.5, 9.0, "S"] }
+        school_mid: { to: "school_mid", street: [-7, -6.5, "N"] },
+        school_high: { to: "school_high", street: [31, -6.5, "N"] },
+        barber: { to: "shop_barber", street: [48.5, 3.2, "N"] }
       };
       if (map[key]) {
         const m = map[key];

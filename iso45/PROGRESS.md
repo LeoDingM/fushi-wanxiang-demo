@@ -1,3 +1,4 @@
+23:55 · [并行·NPC日程] 街坊≥4人日夜日程(home→通勤/上班|学校→晚归) + 打招呼好感 toast/HUD；js/npc_schedule.js（wrap npc.update/interact，未改 stageR/charB/appearance）；NPC_SCHEDULE.md；screenshots/npc-sch1…4；zip scene-proto-45-npc-sch-play.zip
 23:45 · [外观] Stage Char-A2c：police 扁平大盖帽+短前檐（露眼）、firefighter 圆顶+长后檐、nurse 现代发髻无纸帽；Blender 重渲+actors_civic；screenshots/char-a2c-*；play zip
 23:35 · [外观] Stage Char-A2 hotfix：Blender 正渲 police/firefighter/nurse（police_cap/fire_helmet/nurse_cap）；弃用重着色矩形帽；actors_civic 重打包；Char-B 学校暂停；screenshots/char-a2b-*；play zip
 23:25 · [外观] Stage Char-A/Civic-look：police/firefighter/nurse 重着色图集+NPC_SPEC；civic 一楼 f_shop 玻璃门脸+文字招牌；appearance schema/衣柜/child×0.72；街面 extras×4；docs/APPEARANCE.md+CHAR_READY；appearance_test 12/12；smoke 4/4；双 zip · screenshots/char-a1…a8
@@ -148,3 +149,10 @@
 00:55 · [Stage R] 路线→周常通勤模板（保存/套用）
 00:55 · [Stage R] 统一深链路由 + 顶部通知栏捷径
 00:55 · [Stage R] 质量：stageR_test 8/8 · smoke 4/4 · stage6 12/12 · 截图 r1–r6 · 未改外观/学校
+
+01:05 · [Stage S] 信用评分→门禁续期折扣/押金优惠联动 · js/stageS.js
+01:05 · [Stage S] 服药周报近7日热力格
+01:05 · [Stage S] 衣柜收藏按季节置顶
+01:05 · [Stage S] 通勤模板早晨闹钟提醒
+01:05 · [Stage S] 通知栏可折叠 + 捷径自定义顺序
+01:05 · [Stage S] 质量：stageS_test 8/8 · smoke 4/4 · stage6 12/12 · 截图 s1–s6 · 未改外观/学校/store/npc_schedule

@@ -1,4 +1,4 @@
-/* 浮世万象 · scene-proto-45 · 24便利店 (store_24) module: shop + window bar + store NPCs + the clerk shift job.
+/* 浮世万象 · scene-proto-45 · 24便利店 (store_24) module: shop + window bar + store NPCs + the clerk shift job (Store-D deepen).
    Two layers:
    1) FushiStore.create(R) — engine-free store rules on top of shared-rules (R = FushiRules.create(data)): prices from
       rules.prices (store section rules.store), basket + checkout (微信支付 / 支付宝), hot food via the existing actions
@@ -91,10 +91,61 @@
       const J = R.job.def(), lateMin = Math.max(0, r.shift.late - J.late_grace_min);
       return Object.assign(r, { lateMin, cut: Math.round(lateMin * J.late_cut_per_min * 100) / 100 });
     };
-    /** clock out: at / after the end = full pay, earlier = 早退 (early_leave_mul, no bonus / staff meal) */
+    /** clock out: at / after the end = full pay, earlier = 早退 (early_leave_mul, no bonus / staff meal).
+        Store-D: also files a 工资条 into store bag + bank so the loop ends with a tangible slip. */
     F.clockOut = function (ps, abs) {
       if (!ps.shift) return { ok: false, reason: "没在上班" };
-      const why = abs >= ps.shift.end ? "done" : "left"; const r = R.job.finish(ps, abs, why); return Object.assign(r, { why });
+      const sh = ps.shift, why = abs >= sh.end ? "done" : "left";
+      const r = R.job.finish(ps, abs, why); if (!r.ok) return Object.assign(r, { why });
+      const ev = (r.events || []).find((e) => e.type === "shift_paid") || {};
+      const slip = F.makeWageSlip(ps, abs, Object.assign({ why, label: sh.label, start: sh.start, end: sh.end }, ev));
+      return Object.assign(r, { why, slip });
+    };
+    /** wage slip → ps.store.slips + bag count + bank ledger (Chinese, visible in HUD / bag). Idempotent on (at,pay). */
+    F.makeWageSlip = function (ps, abs, ev) {
+      const st = F.state(ps);
+      st.slips = st.slips || []; st.bank = st.bank || [];
+      const pay = ev.pay != null ? ev.pay : 0, hours = ev.hours != null ? ev.hours : 0;
+      const hit = st.slips.find((s) => s.at === abs && s.pay === pay);
+      if (hit) return hit;
+      const slip = {
+        id: "slip_" + abs + "_" + st.slips.length, at: abs, label: "工资条",
+        shift: ev.label || "", why: ev.why || "done",
+        pay, base: ev.base || 0, cut: ev.cut || 0, bonus: ev.bonus || 0, hours,
+        done: ev.done || 0, failed: ev.failed || 0,
+        text: "邻里便利24h · " + (ev.label || "班次") + "\n工时 " + hours + "h · 底薪 ¥" + (ev.base || 0) +
+              (ev.cut ? " · 迟到扣 ¥" + ev.cut : "") + (ev.bonus ? " · 绩效 ¥" + ev.bonus : "") +
+              "\n实发 ¥" + pay + (ev.why === "left" ? "（早退减半）" : ""),
+      };
+      st.slips.push(slip);
+      st.bag.wage_slip = (st.bag.wage_slip || 0) + 1;
+      st.bank.push({ type: "wage", at: abs, amount: pay, slip: slip.id, label: "工资入账 · " + (ev.label || "") });
+      return slip;
+    };
+    /** desired world prop states from open shift tasks (shelf empty→restocked, floor dirty→mopped) */
+    F.propWant = function (ps) {
+      const open = R.job.open(ps), want = { shelf_a: "full", shelf_b: "full", cooler: "full", oden: "full", bins: "clean", floor: "clean" };
+      for (const t of open) {
+        if (t.kind === "restock" && t.target) want[t.target === "cooler" ? "cooler" : t.target] = "low";
+        if (t.kind === "oden") want.oden = "low";
+        if (t.kind === "mop") { want.bins = "messy"; want.floor = "dirty"; }
+      }
+      return want;
+    };
+    /** shift loop phase for HUD: hire → book → clock → tasks → slip */
+    F.phase = function (ps, abs) {
+      if (!ps.job) return { id: "hire", step: 1, label: "① 应聘店员", next: "去收银台找赵姐应聘" };
+      if (ps.shift) {
+        const open = R.job.open(ps);
+        if (open.length) return { id: "tasks", step: 3, label: "② 当班任务", next: open[0].kind === "restock" ? "去补货架/冷柜" : open[0].kind === "mop" ? "去角落拖地" : open[0].kind === "checkout" ? "柜台收银" : open[0].label, open: open.length };
+        const left = ps.shift.end - abs;
+        return { id: "clockout", step: 4, label: "③ 下班打卡", next: left > 0 ? `还可早退（工资减半）· 或等到点` : "下班打卡领工资条" };
+      }
+      const c = R.job.canStart(ps, abs);
+      if (c.ok) return { id: "clockin", step: 2, label: "① 上班打卡", next: `${c.shift.label} ${c.shift.from}–${c.shift.to}` };
+      const bk = (ps.job.booked || [])[0];
+      if (bk) return { id: "wait", step: 2, label: "① 等待上班", next: `已排 ${bk.label}` };
+      return { id: "book", step: 2, label: "① 找店长排班", next: "收银台 / 员工室排班表" };
     };
     F.openTasks = (ps) => R.job.open(ps);
     /** do a task: kind (+ target for restock); quality 1.0 if done within half its deadline, else 0.7 */
@@ -250,23 +301,43 @@
       }
     }
 
-    // ---------- shift <-> store objects ----------
+    // ---------- shift <-> store objects (Store-D: shelf low/full + floor litter when mop open) ----------
     const TARGET_OBJ = { shelf_a: "shelf_a", shelf_b: "shelf_b", cooler: "cooler" };
     function syncShiftWorld() {
-      const sh = ps().shift, open = sh ? R.job.open(ps()) : [];
-      const want = { shelf_a: "full", shelf_b: "full", cooler: "full", oden: "full", bins: "clean" };
-      for (const t of open) { if (t.kind === "restock") want[TARGET_OBJ[t.target]] = "low"; if (t.kind === "oden") want.oden = "low"; if (t.kind === "mop") want.bins = "messy"; }
-      for (const [id, s] of Object.entries(want)) { const o = W.byId[id]; if (o && o.state !== s) W.setState(o, s); }
+      const want = F.propWant(ps());
+      for (const id of ["shelf_a", "shelf_b", "cooler", "oden", "bins"]) {
+        const o = W.byId[id]; if (o && want[id] && o.state !== want[id]) W.setState(o, want[id]);
+      }
+      // dirty floor → litter decals near bins (cleared when mopped)
+      const dirty = want.floor === "dirty";
+      if (dirty && !ST.floorDirty) {
+        ST.floorDirty = true;
+        const bins = W.byId.bins;
+        if (bins) {
+          [[-0.55, -0.55, 0], [0.35, -0.4, 0.18], [-0.1, -0.8, 0.08], [0.5, -0.65, 0.25]].forEach(([dx, dy, sh]) => {
+            W.decals.push({ key: "fx/litter", x: bins.x + dx, y: bins.y + dy, t: 0, shear: sh, storeDirty: true });
+          });
+        }
+      } else if (!dirty && ST.floorDirty) {
+        ST.floorDirty = false;
+        W.decals = W.decals.filter((d) => !d.storeDirty);
+      }
+      ST.propSnap = { shelf: want.shelf_a || want.shelf_b, cooler: want.cooler, bins: want.bins, floor: want.floor, oden: want.oden };
     }
     // rules events (shared state log) -> toasts / pay cards; the core already shows shift_paid
     const EV = {
       hired: () => "🎉 赵姐：行，明天就能来。先去排个班！",
-      shift_start: (e) => e.late > (R.job.def().late_grace_min || 0) ? `上班打卡 · 迟到 ${Math.round(e.late)} 分钟（会扣工资）` : "上班打卡 ✓ 换上店服",
-      task_new: (e) => `🛒 新任务：${e.label}`,
+      shift_start: (e) => e.late > (R.job.def().late_grace_min || 0) ? `① 上班打卡 · 迟到 ${Math.round(e.late)} 分钟（会扣工资）` : "① 上班打卡 ✓ · 去补货/收银/拖地",
+      task_new: (e) => {
+        const tip = e.kind === "restock" ? "（货架空了）" : e.kind === "mop" ? "（地面脏了）" : e.kind === "checkout" ? "（顾客在等）" : e.kind === "oden" ? "（锅见底了）" : "";
+        return `② 新任务：${e.label}${tip}`;
+      },
+      task_done: (e) => e.kind === "restock" ? "货架补满了 ✓" : e.kind === "mop" ? "地面拖干净了 ✓" : null,
       task_failed: (e) => `⚠ ${e.label}没做完，店长皱了皱眉`,
       shift_booked: (e) => `排班成功：${e.date} ${e.label}`,
       shift_missed: (e) => `⚠ 旷工！排了 ${e.label} 没去（第 ${e.strikes} 次）`,
       fired: () => "❌ 赵姐：你被辞退了。想回来就重新应聘吧。",
+      shift_paid: (e) => { F.makeWageSlip(ps(), e.t != null ? e.t : abs(), Object.assign({ label: e.id || "班次", why: e.why || "done" }, e)); return null; },
       store_checkout: null,
     };
     function scanLog() {
@@ -311,14 +382,18 @@
       if (inStore()) {
         if (!ST.wasIn) { ST.wasIn = true; const sp = staffOnDuty(C.min); if (!ps().shift) G.later(0.7, () => { if (inStore()) toast(`${sp.name}：${sp.lines[Math.floor(Math.random() * sp.lines.length)]}`, 2400); }); }
         updateNpcs(dt); syncShiftWorld();
-      } else { ST.wasIn = false; if (ST.npcs.length) ST.npcs = []; }
+      } else {
+        if (ST.wasIn && ST.floorDirty) { ST.floorDirty = false; W.decals = W.decals.filter((d) => !d.storeDirty); }
+        ST.wasIn = false; if (ST.npcs.length) ST.npcs = [];
+      }
       ST.hud();
     };
     // ---------- interactions ----------
     const opt = (label, fn, ok, reason, minutes) => ({ label, fn, ok: ok !== false, reason: reason || "", minutes: minutes || 0 });
     function shiftTask(kind, target, o, label, after) {
       const r = F.doTask(ps(), kind, target, abs()); if (!r.ok) return r.reason;
-      activity(label, r.minutes || 1, { obj: o && o.id, after, dur: r.seconds || undefined, text: `${label} ✓${r.quality < 1 ? "（有点晚了）" : ""}` });
+      const tip = kind === "restock" ? "货架补满了" : kind === "mop" ? "地面拖干净了" : kind === "checkout" ? "顾客买单走了" : kind === "oden" ? "关东煮续好了" : label;
+      activity(label, r.minutes || 1, { obj: o && o.id, after, dur: r.seconds || undefined, text: `${tip} ✓${r.quality < 1 ? "（有点晚了）" : ""}` });
       return null;
     }
     function pickMenu(o, where, title) {
@@ -459,28 +534,53 @@
     }
     function clockOut() {
       const r = F.clockOut(ps(), abs()); if (!r.ok) return r.reason;
-      log(`李默下班打卡（${r.why === "left" ? "早退" : "正常下班"}）`);
-      return r.why === "left" ? "早退了……这班工资减半" : "下班了，辛苦！领了一份员工便当";
+      const slip = r.slip, pay = slip ? slip.pay : (r.pay || 0);
+      log(`李默下班打卡（${r.why === "left" ? "早退" : "正常下班"}）· 工资条 ¥${pay}`);
+      if (slip) toast(`📄 工资条 · 实发 ¥${pay}（已入账）`, 3200);
+      return r.why === "left" ? `早退了……工资减半 · 工资条 ¥${pay}` : `③ 下班打卡 ✓ · 工资条 ¥${pay} + 员工便当`;
     }
     ST.clockIn = clockIn; ST.clockOut = clockOut;
 
-    // ---------- lighting: cool white LED panels + fridge glow, bright clean ambient ----------
-    const LED = [228, 240, 255], FRIDGE = [214, 236, 255];
+    // ---------- lighting (Store-D): day = bright cool LED; night = dimmer cooler ambient + stronger fridge/sign glow (store-local overlay) ----------
+    const LED_DAY = [232, 240, 252], LED_NIGHT = [190, 210, 255], FRIDGE = [214, 236, 255], SIGN = [90, 220, 140];
     const L0 = SP.env.lights, AM0 = SP.env.ambient;
     SP.env.lights = function (view, zoom) {
       const out = L0.call(SP.env, view, zoom);
-      if (inBack()) { out.push({ x: 1.7, y: 1.5, z: 2.5, r: 3.0, c: LED, a: 0.5 }); out.push({ x: 1.7, y: 1.5, z: 0, r: 3.2, c: LED, a: 0.45, flat: true }); return out; }
+      const n = SP.env.night || 0;
+      const LED = LED_DAY.map((v, i) => Math.round(v * (1 - n) + LED_NIGHT[i] * n));
+      const panelA = 0.42 + 0.22 * (1 - n);          // day brighter panels; night dimmer overhead
+      const floorA = 0.38 + 0.18 * (1 - n);
+      if (inBack()) {
+        out.push({ x: 1.7, y: 1.5, z: 2.5, r: 3.0, c: LED, a: panelA });
+        out.push({ x: 1.7, y: 1.5, z: 0, r: 3.2, c: LED, a: floorA, flat: true });
+        return out;
+      }
       if (!inStore()) return out;
-      for (const [x, y] of [[1.5, 1.6], [4.0, 1.6], [6.6, 1.6], [1.5, 4.2], [4.0, 4.2], [6.6, 4.2]]) { out.push({ x, y, z: 2.6, r: 3.6, c: LED, a: 0.55 }); out.push({ x, y, z: 0, r: 4.2, c: LED, a: 0.5, flat: true }); }
-      for (const id of ["cooler", "cooler_b"]) { const o = W.byId[id]; if (o) out.push({ x: o.x, y: o.y - 0.5, z: 1.2, r: 2.2, c: FRIDGE, a: 0.5 }); }
+      for (const [x, y] of [[1.5, 1.6], [4.0, 1.6], [6.6, 1.6], [1.5, 4.2], [4.0, 4.2], [6.6, 4.2]]) {
+        out.push({ x, y, z: 2.6, r: 3.6, c: LED, a: panelA });
+        out.push({ x, y, z: 0, r: 4.2, c: LED, a: floorA, flat: true });
+      }
+      const fridgeA = 0.42 + 0.28 * n;               // night: fridge becomes a main light
+      for (const id of ["cooler", "cooler_b"]) { const o = W.byId[id]; if (o) out.push({ x: o.x, y: o.y - 0.5, z: 1.2, r: 2.2 + 0.4 * n, c: FRIDGE, a: fridgeA }); }
       const m = W.byId.micro; if (m && m.state === "on") out.push({ x: m.x, y: m.y - 0.3, z: 1.0, r: 0.9, c: [255, 230, 170], a: 0.7 });
-      const od = W.byId.oden; if (od) out.push({ x: od.x - 0.3, y: od.y, z: 1.0, r: 1.0, c: [255, 200, 130], a: 0.45 });
+      const od = W.byId.oden; if (od) out.push({ x: od.x - 0.3, y: od.y, z: 1.0, r: 1.0, c: [255, 200, 130], a: 0.4 + 0.2 * n });
+      if (n > 0.25) {                                 // green 24h sign band spill on the storefront at night
+        out.push({ x: 4.5, y: 0.35, z: 2.55, r: 2.8, c: SIGN, a: 0.25 + 0.35 * n });
+        out.push({ x: 2.2, y: 0.4, z: 2.5, r: 1.8, c: SIGN, a: 0.18 + 0.25 * n });
+        out.push({ x: 6.5, y: 0.4, z: 2.5, r: 1.8, c: SIGN, a: 0.18 + 0.25 * n });
+      }
       return out;
     };
     SP.env.ambient = function () {
       const a = AM0.call(SP.env); if (!inStore() && !inBack()) return a;
-      const n = SP.env.night || 0, base = [220, 228, 240];            // 24h LED: bright day and night, a touch cooler at night
-      return base.map((v, i) => Math.round(v * (1 - 0.08 * n) * 0.8 + a[i] * 0.2));
+      const n = SP.env.night || 0;
+      const day = [236, 242, 250], night = [72, 86, 110];   // clear day vs night difference (store-local)
+      return day.map((v, i) => Math.round(v * (1 - n) + night[i] * n));
+    };
+    /** read-only snapshot for tests / capture (day≈0 night≈1 mix) */
+    ST.lightSnap = () => {
+      const n = SP.env.night || 0, amb = SP.env.ambient();
+      return { night: n, ambient: amb, mode: n < 0.35 ? "day" : n > 0.65 ? "night" : "dusk" };
     };
 
     // ---------- shift HUD (DOM, below the needs row) ----------
@@ -493,15 +593,22 @@ body.mobile #storehud{top:calc(env(safe-area-inset-top,0px) + 112px);left:64px;f
 body:not(.mobile) #storehud{top:64px}`;
     document.head.appendChild(css);
     ST.hud = function () {
-      const s = ps(), sh = F.shiftText(s, abs()), st = F.state(s);
+      const s = ps(), sh = F.shiftText(s, abs()), st = F.state(s), ph = F.phase(s, abs());
       let html = "";
-      if (sh) html = `<b>🏪 ${sh.title}</b><br>` + (sh.tasks.length ? sh.tasks.map((t) => `<span class="t">· ${t.label}</span> <i>${t.mins}分内</i>`).join("<br>") : "· 暂时没活，站好柜台") + `<br><span class="bk">完成 ${sh.done} · 失败 ${sh.failed}</span>`;
-      else if (inStore()) {
-        const parts = [];
+      if (sh) {
+        html = `<b>🏪 ${sh.title}</b><br><span class="bk">${ph.label} → ${ph.next}</span><br>` +
+          (sh.tasks.length ? sh.tasks.map((t) => `<span class="t">· ${t.label}</span> <i>${t.mins}分内</i>`).join("<br>") : "· 暂时没活，站好柜台 · 可下班打卡") +
+          `<br><span class="bk">完成 ${sh.done} · 失败 ${sh.failed}</span>`;
+      } else if (inStore() || inBack()) {
+        const parts = [`<span class="bk">${ph.label} · ${ph.next}</span>`];
         if (st.basket.length) parts.push(`🧺 篮子 ${st.basket.length} 件 ${yuan(F.basketTotal(s))}`);
         if (st.hot > 0) parts.push(`🍱 热便当 ×${st.hot}`);
-        const bag = Object.entries(st.bag).filter(([, n]) => n > 0).map(([id, n]) => R.data.store.goods[id].label + (n > 1 ? "×" + n : ""));
+        const bag = Object.entries(st.bag).filter(([, n]) => n > 0).map(([id, n]) => {
+          if (id === "wage_slip") return `📄工资条×${n}`;
+          const g = R.data.store.goods[id]; return (g ? g.label : id) + (n > 1 ? "×" + n : "");
+        });
         if (bag.length) parts.push("🛍 " + bag.join("、"));
+        if (st.slips && st.slips.length) { const last = st.slips[st.slips.length - 1]; parts.push(`🏦 最近入账 ¥${last.pay}`); }
         if (s.job && s.job.booked && s.job.booked.length) { const b = s.job.booked[0], d = R.date(b.start); parts.push(`📅 下个班：${d.label || ""} ${b.label} ${String(Math.floor((b.start % DAY) / 60)).padStart(2, "0")}:${String(b.start % 60).padStart(2, "0")}`); }
         html = parts.join("<br>");
       }
@@ -516,6 +623,24 @@ body:not(.mobile) #storehud{top:64px}`;
       if (!R.job.windowAt(abs())) { const n = R.job.next(abs()); const m = (n.start - 5) % DAY; C.min = m; if (C.computeAmbient) C.computeAmbient(); }
       R.job.bookAt(s, abs()); return clockIn() || "上班打卡 ✓（测试：已自动应聘 + 排班）";
     };
+    /** Store-D capture/tests: inject open tasks so shelf/floor props flip immediately (does not touch shared-rules) */
+    ST.devInjectTasks = function (kinds) {
+      const s = ps(); if (!s.shift) return "没在上班";
+      const now = abs(), list = kinds || ["restock", "mop"];
+      for (const kind of list) {
+        if (s.shift.tasks.some((t) => t.kind === kind && !t.done && !t.failed)) continue;
+        const id = "t" + (++s.shift.seq);
+        const task = { id, kind, label: kind === "restock" ? "补货" : kind === "mop" ? "拖地" : kind === "checkout" ? "收银" : kind === "oden" ? "加关东煮" : kind,
+                       at: now, deadline: now + 40, done: false, failed: false };
+        if (kind === "restock") task.target = "shelf_a";
+        if (kind === "checkout") task.items = 2;
+        s.shift.tasks.push(task);
+        s.log.push({ type: "task_new", task: id, kind, label: task.label, at: now });
+      }
+      syncShiftWorld();
+      return JSON.stringify(ST.propSnap || {});
+    };
+    ST.propState = () => ST.propSnap || F.propWant(ps());
   };
   // auto-install once the core gameplay layer exists (store.js is loaded after game.js)
   if (SP.game && SP.world) ST.install();

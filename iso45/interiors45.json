@@ -22191,7 +22191,7 @@
     "interact": "portal",
     "to": "street",
     "spawn": [
-     5.0,
+     -7.0,
      -6.5,
      "N"
     ],
@@ -23029,7 +23029,7 @@
     "interact": "portal",
     "to": "street",
     "spawn": [
-     37.0,
+     31.0,
      -6.5,
      "N"
     ],
@@ -23844,9 +23844,9 @@
     "interact": "portal",
     "to": "street",
     "spawn": [
-     49.5,
-     9.0,
-     "S"
+     48.5,
+     3.2,
+     "N"
     ],
     "label": "出门",
     "block": false,
