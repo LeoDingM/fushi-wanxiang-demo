@@ -1,1 +1,5894 @@
-{"version":1,"doc":"frame key = piece/variant/part/state/rot ; frames[key] = [x, y, w, h, anchorX, anchorY] in kit_atlas.png (anchor = pixel of the piece origin); key#shadow = ground shadow frame; emit[] = keys with pixels in kit_emit.png; masks[key] = [cols, rows, base64 packbits] opaque 4px cells for occluder fade tests. Units: metres, x east, y north, z up.","projection":{"view":"dimetric-2:1","yaw_deg":45,"pitch_deg":30,"px_per_m":45.2548,"px_x_per_m":32,"px_y_per_m":16,"px_z_per_m":39.1918,"chunk_m":2,"chunk_px":[128,64],"grid_m":0.5,"grid_px":[16,8],"sun_cam":[0.5,-0.62,0.75],"sun_world":[-0.0776,-0.7239,0.6855],"screen":"sx = (x - y) * 32 ; sy = -((x + y) * 16 + z * px_z_per_m)  (y down)"},"atlas":"kit_atlas.png","emit_atlas":"kit_emit.png","atlas_size":[2048,1004],"mask_cell":4,"frames":{"p_metro_entry/base/base/open/0":[0,0,249,249,131,179],"p_metro_entry/base/base/shut/0":[250,0,249,249,131,179],"p_metro_entry/base/base/open/6":[500,0,273,238,142,179],"p_metro_entry/base/base/shut/6":[774,0,273,238,142,179],"i_flight/base/main/up_roof/0":[1048,0,220,202,180,199],"p_metro_entry/base/base/open/0#shadow":[1269,0,269,195,240,132],"p_metro_entry/base/base/shut/0#shadow":[1539,0,336,195,240,132],"p_metro_entry/base/base/open/6#shadow":[0,250,244,184,234,132],"p_metro_entry/base/base/shut/6#shadow":[245,250,244,184,234,132],"f_eatery/base/main/kuaican/0":[490,250,114,173,13,172],"f_eatery/base/main/kuaican/6":[605,250,114,173,5,124],"f_eatery/base/main/noodle/0":[720,250,114,173,13,172],"f_eatery/base/main/noodle/6":[835,250,114,173,5,124],"f_eatery/base/main/tea/0":[950,250,114,173,13,172],"f_eatery/base/main/tea/6":[1065,250,114,173,5,124],"p_metro_entry/base/roof/open/0":[1180,250,269,153,139,203],"p_metro_entry/base/roof/open/6":[1450,250,269,153,130,203],"p_metro_entry/base/roof/shut/0":[1720,250,269,153,139,203],"p_metro_entry/base/roof/shut/6":[0,435,269,153,130,203],"f_eatery/base/main/shut/0":[270,435,112,151,13,150],"f_eatery/base/main/shut/6":[383,435,112,151,3,102],"fx/soot":[496,435,93,150,49,149],"i_flight/base/main/up/0":[590,435,220,148,180,145],"i_flight/base/main/up_roof/0#shadow":[811,435,253,136,259,135],"i_door/base/main/open/0":[1065,435,45,135,5,128],"i_door/wood/main/open/0":[1111,435,45,135,5,128],"i_balfront/base/main/glass/0":[1157,435,57,133,6,133],"i_balfront/base/main/glass/6":[1215,435,57,133,3,109],"i_window/base/main/dado/0":[1273,435,55,133,5,133],"i_window/base/main/dado/6":[1329,435,55,133,2,109],"i_window/base/main/plain/0":[1385,435,55,133,5,133],"i_window/base/main/plain/6":[1441,435,55,133,2,109],"i_window/base/main/tile/0":[1497,435,55,133,5,133],"i_window/base/main/tile/6":[1553,435,55,133,2,109],"i_door/base/main/open/6":[1609,435,58,129,15,109],"i_door/wood/main/open/6":[1668,435,58,129,15,109],"i_door/base/main/closed/0":[1727,435,44,128,5,128],"i_door/base/main/closed/6":[1772,435,43,128,0,109],"i_door/wood/main/closed/0":[1816,435,44,128,5,128],"i_door/wood/main/closed/6":[1861,435,43,128,0,109],"i_wall/base/main/dado/0":[1905,435,37,125,5,125],"i_wall/base/main/dado/6":[1943,435,37,125,0,109],"i_wall/base/main/dado_ads/0":[1981,435,37,125,5,125],"i_wall/base/main/dado_ads/6":[0,589,37,125,0,109],"i_wall/base/main/plain/0":[38,589,37,125,5,125],"i_wall/base/main/plain/6":[76,589,37,125,0,109],"i_wall/base/main/poster/0":[114,589,37,125,5,125],"i_wall/base/main/poster/6":[152,589,37,125,0,109],"i_wall/base/main/tile/0":[190,589,37,125,5,125],"i_wall/base/main/tile/6":[228,589,37,125,0,109],"f_kitchen/base/main/cooking/0":[266,589,81,124,40,104],"f_kitchen/base/main/off/0":[348,589,81,124,40,104],"s_cooler/base/main/full/0":[430,589,83,122,41,101],"s_cooler/base/main/full/2":[514,589,83,122,41,101],"s_cooler/base/main/full/6":[598,589,83,122,42,101],"s_cooler/base/main/low/0":[682,589,83,122,41,101],"s_cooler/base/main/low/2":[766,589,83,122,41,101],"s_cooler/base/main/low/6":[850,589,83,122,42,101],"f_kitchen/base/main/cooking/2":[934,589,81,120,40,100],"f_kitchen/base/main/off/2":[1016,589,81,120,40,100],"i_flight/base/main/down/0":[1098,589,183,118,146,114],"i_side/base/main/dado/0":[1282,589,22,117,11,112],"i_side/base/main/dado/6":[1305,589,22,117,11,112],"i_side/base/main/plain/0":[1328,589,22,117,11,112],"i_side/base/main/plain/6":[1351,589,22,117,11,112],"i_side/base/main/tile/0":[1374,589,22,117,11,112],"i_side/base/main/tile/6":[1397,589,22,117,11,112],"f_wardrobe/base/main/closed/0":[1420,589,56,109,28,95],"f_wardrobe/base/main/closed/2":[1477,589,56,109,28,95],"f_wardrobe/base/main/closed/6":[1534,589,56,109,28,95],"f_wardrobe/base/main/open/0":[1591,589,56,109,28,95],"f_wardrobe/base/main/open/2":[1648,589,56,109,28,95],"f_wardrobe/base/main/open/6":[1705,589,56,109,28,95],"f_shower/base/main/dry/0":[1762,589,58,107,29,93],"f_shower/base/main/running/0":[1821,589,58,107,29,93],"i_meter/base/main/default/0":[1880,589,33,104,14,48],"s_gondola/base/main/full/0":[1914,589,80,97,40,77],"s_gondola/base/main/full/2":[0,715,80,97,40,77],"s_gondola/base/main/low/0":[81,715,80,97,40,77],"s_gondola/base/main/low/2":[162,715,80,97,40,77],"i_flight/base/main/up/0#shadow":[243,715,216,95,222,94],"s_counter/base/main/default/0":[460,715,88,94,44,72],"i_mailbox/base/main/default/0":[549,715,50,91,18,41],"s_bar/base/main/bento/4":[600,715,90,85,45,64],"s_bar/base/main/default/4":[691,715,90,85,45,64],"f_shelf/base/main/default/0":[782,715,38,82,19,72],"f_shelf/base/main/default/2":[821,715,38,82,19,72],"s_counter/base/main/default/4":[860,715,88,82,44,60],"s_bar/base/main/bento/0":[949,715,90,81,45,64],"s_bar/base/main/default/0":[1040,715,90,81,45,64],"i_balfront/base/main/default/0":[1131,715,57,79,6,79],"i_balfront/base/main/default/6":[1189,715,57,79,3,55],"f_sign_kc/base/main/default/6":[1247,715,97,78,53,44],"f_sign_noodle/base/main/default/6":[1345,715,97,78,53,44],"f_sign_tea/base/main/default/6":[1443,715,97,78,53,44],"f_basin/base/main/default/0":[1541,715,29,76,15,74],"f_fridge/base/main/closed/0":[1571,715,40,75,20,65],"f_fridge/base/main/open/0":[1612,715,45,75,25,65],"f_sign_kc/base/main/default/0":[1658,715,98,71,45,42],"f_sign_noodle/base/main/default/0":[1757,715,98,71,45,42],"f_sign_tea/base/main/default/0":[1856,715,98,71,45,42],"s_oden/base/main/full/0":[1955,715,43,71,21,60],"s_oden/base/main/low/0":[1999,715,43,71,21,60],"f_bed/base/main/made/0":[0,813,98,69,49,45],"f_bed/base/main/messy/0":[99,813,99,68,49,44],"f_desk/base/main/off/0":[199,813,60,68,30,54],"f_desk/base/main/on/0":[260,813,60,68,30,54],"f_kitchen/base/main/cooking/0#shadow":[321,813,63,67,103,59],"f_kitchen/base/main/off/0#shadow":[385,813,63,67,103,59],"s_cooler/base/main/full/0#shadow":[449,813,60,66,101,58],"s_cooler/base/main/low/0#shadow":[510,813,60,66,101,58],"i_dryrack/base/main/default/0":[571,813,90,65,45,124],"g_terrazzo/base/main/default/0":[662,813,128,64,64,64],"g_tile/base/main/default/0":[791,813,128,64,64,64],"g_wood/base/main/a/0":[920,813,128,64,64,64],"g_wood/base/main/b/0":[1049,813,128,64,64,64],"s_micro/base/main/off/0":[1178,813,38,63,19,53],"s_micro/base/main/off/6":[1217,813,38,63,19,53],"s_micro/base/main/on/0":[1256,813,38,63,19,53],"s_micro/base/main/on/6":[1295,813,38,63,19,53],"f_desk/base/main/off/4":[1334,813,60,60,30,46],"f_desk/base/main/on/4":[1395,813,60,60,30,46],"f_wardrobe/base/main/open/0#shadow":[1456,813,67,59,88,52],"fx/fire/0":[1524,813,40,58,20,56],"fx/fire/1":[1565,813,40,58,20,56],"fx/fire/2":[1606,813,39,58,20,56],"fx/fire/3":[1646,813,40,58,20,56],"fx/fire/4":[1687,813,40,58,20,56],"fx/fire/5":[1728,813,37,58,18,56],"fx/fire/6":[1766,813,39,58,20,56],"fx/fire/7":[1806,813,38,58,19,56],"i_crank/base/main/default/0":[1845,813,9,56,3,50],"s_bar/base/main/bento/4#shadow":[1855,813,112,56,75,37],"s_bar/base/main/default/4#shadow":[0,883,112,56,75,37],"f_wardrobe/base/main/closed/0#shadow":[113,883,62,54,88,52],"f_washer/base/main/done/0":[176,883,40,53,20,43],"f_washer/base/main/idle/0":[217,883,40,53,20,43],"f_washer/base/main/running/0":[258,883,40,53,20,43],"i_clutter/base/main/broom/0":[299,883,27,52,15,48],"s_bar/base/main/bento/0#shadow":[327,883,102,51,75,37],"s_bar/base/main/default/0#shadow":[430,883,102,51,75,37],"s_counter/base/main/default/0#shadow":[533,883,50,51,71,41],"f_nightstand/base/main/off/0":[584,883,32,50,16,42],"f_nightstand/base/main/on/0":[617,883,32,50,16,42],"f_chair/base/main/default/0":[650,883,29,49,15,44],"f_shower/base/main/dry/0#shadow":[680,883,65,49,88,50],"f_shower/base/main/running/0#shadow":[746,883,65,49,88,50],"s_cooler/base/main/full/6#shadow":[812,883,60,49,101,58],"s_cooler/base/main/low/6#shadow":[873,883,60,49,101,58],"i_clutter/base/main/boxes/0":[934,883,29,48,16,40],"s_cooler/base/main/full/2#shadow":[964,883,60,48,101,58],"s_cooler/base/main/low/2#shadow":[1025,883,60,48,101,58],"f_wardrobe/base/main/closed/2#shadow":[1086,883,62,47,88,52],"f_wardrobe/base/main/closed/6#shadow":[1149,883,62,47,88,52],"f_wardrobe/base/main/open/2#shadow":[1212,883,62,47,88,52],"f_wardrobe/base/main/open/6#shadow":[1275,883,62,47,88,52],"f_toilet/base/main/default/0":[1338,883,29,45,16,40],"s_gondola/base/main/low/0#shadow":[1368,883,42,44,82,36],"f_chair/base/main/default/4":[1411,883,29,43,14,38],"f_kitchen/base/main/cooking/2#shadow":[1441,883,63,43,103,54],"f_kitchen/base/main/off/2#shadow":[1505,883,63,43,103,54],"d_rug/base/main/default/0":[1569,883,82,42,41,21],"f_fridge/base/main/open/0#shadow":[1652,883,54,42,61,35],"f_shelf/base/main/default/0#shadow":[1707,883,46,42,65,39],"s_gondola/base/main/full/0#shadow":[1754,883,42,42,82,34],"i_notice/base/main/default/0":[1797,883,33,41,16,32],"fx/umbrella/0":[1831,883,37,40,18,39],"fx/umbrella/1":[1869,883,37,40,18,39],"fx/umbrella/2":[1907,883,37,40,18,39],"fx/umbrella/3":[1945,883,37,40,18,39],"s_barstool/base/main/default/0":[1983,883,20,40,10,35],"f_table/base/main/default/0":[2004,883,43,39,21,29],"f_table/base/main/meal/0":[0,940,43,39,21,29],"f_basin/base/main/default/0#shadow":[44,940,59,38,65,39],"fx/leaves/0":[104,940,73,37,39,19],"fx/leaves/2":[178,940,70,37,37,20],"i_ac/base/main/on/0":[249,940,42,37,16,101],"i_ac/base/main/on/6":[292,940,42,37,26,101],"i_clutter/base/main/shoes/0":[335,940,32,37,16,28],"i_cut/base/main/dado/0":[368,940,37,37,5,37],"i_cut/base/main/dado/6":[406,940,37,37,0,21],"i_cut/base/main/plain/0":[444,940,37,37,5,37],"i_cut/base/main/plain/6":[482,940,37,37,0,21],"i_cut/base/main/tile/0":[520,940,37,37,5,37],"i_cut/base/main/tile/6":[558,940,37,37,0,21],"fx/leaves/1":[596,940,74,36,37,18],"f_fridge/base/main/closed/0#shadow":[671,940,42,35,61,35],"i_ac/base/main/off/0":[714,940,41,35,16,101],"i_ac/base/main/off/2":[756,940,41,35,16,105],"i_ac/base/main/off/4":[798,940,41,35,25,105],"i_ac/base/main/off/6":[840,940,41,35,25,101],"i_ac/base/main/on/2":[882,940,43,35,16,105],"i_ac/base/main/on/4":[926,940,43,35,27,105],"s_gondola/base/main/full/2#shadow":[970,940,42,35,82,46],"s_gondola/base/main/low/2#shadow":[1013,940,42,35,82,46],"f_shelf/base/main/default/2#shadow":[1056,940,46,34,65,39],"fx/petals/1":[1103,940,74,34,39,17],"f_desk/base/main/off/0#shadow":[1178,940,59,33,51,30],"f_desk/base/main/on/0#shadow":[1238,940,59,33,51,30],"fx/petals/0":[1298,940,72,33,35,18],"s_oden/base/main/full/0#shadow":[1371,940,36,33,57,33],"s_oden/base/main/low/0#shadow":[1408,940,36,33,57,33],"s_counter/base/main/default/4#shadow":[1445,940,28,32,71,22],"fx/crash_decal":[1474,940,125,31,63,17],"i_clutter/base/main/jars/0":[1600,940,25,29,13,22],"s_micro/base/main/off/0#shadow":[1626,940,30,29,49,29],"s_micro/base/main/on/0#shadow":[1657,940,30,29,49,29],"i_clutter/base/main/veg/0":[1688,940,31,27,15,19],"s_micro/base/main/off/6#shadow":[1720,940,30,27,49,29],"s_micro/base/main/on/6#shadow":[1751,940,30,27,49,29],"f_stool/base/main/default/0":[1782,940,16,26,8,23],"f_washer/base/main/done/0#shadow":[1799,940,24,25,43,25],"f_washer/base/main/idle/0#shadow":[1824,940,24,25,43,25],"f_washer/base/main/running/0#shadow":[1849,940,24,25,43,25],"fx/smoke/2":[1874,940,26,25,13,12],"i_track/base/main/default/0":[1901,940,48,25,24,13],"i_track/base/main/default/2":[1950,940,48,25,24,13],"f_chair/base/main/default/0#shadow":[1999,940,40,24,41,24],"f_desk/base/main/off/4#shadow":[0,980,59,24,51,21],"f_desk/base/main/on/4#shadow":[60,980,59,24,51,21],"fx/scorch":[120,980,96,24,48,12],"f_toilet/base/main/default/0#shadow":[217,980,33,23,39,22],"i_clutter/base/main/broom/0#shadow":[251,980,43,23,46,23],"i_clutter/base/main/boxes/0#shadow":[295,980,41,22,30,21],"d_mat/base/main/default/0":[337,980,41,21,20,11],"fx/skid":[379,980,170,21,0,7],"f_nightstand/base/main/off/0#shadow":[550,980,19,20,34,21],"f_nightstand/base/main/on/0#shadow":[570,980,19,20,34,21],"f_table/base/main/default/0#shadow":[590,980,49,20,33,13],"f_table/base/main/meal/0#shadow":[640,980,49,20,33,13],"fx/litter":[690,980,78,20,40,11],"f_bed/base/main/made/0#shadow":[769,980,27,18,76,11],"f_bed/base/main/messy/0#shadow":[797,980,27,18,76,11],"fx/smoke/1":[825,980,17,18,8,9],"fx/glass_decal":[843,980,70,17,35,10],"fx/leafpile/0":[914,980,34,17,17,13],"fx/leafpile/1":[949,980,32,17,15,13],"f_chair/base/main/default/4#shadow":[982,980,27,16,28,17],"i_pendant/base/main/off/0":[1010,980,22,16,11,93],"i_pendant/base/main/on/0":[1033,980,22,16,11,93],"i_clutter/base/main/shoes/0#shadow":[1056,980,13,14,29,13],"f_stool/base/main/default/0#shadow":[1070,980,24,13,21,12],"fx/triangle":[1095,980,15,13,7,12],"i_clutter/base/main/jars/0#shadow":[1111,980,9,13,21,11],"fx/smoke/0":[1121,980,12,12,6,6],"fx/can":[1134,980,4,6,2,5],"i_clutter/base/main/veg/0#shadow":[1139,980,5,6,20,5],"fx/shard/0":[1145,980,3,3,1,1],"fx/shard/1":[1149,980,3,3,1,1],"fx/bit/0":[1153,980,2,2,1,1],"fx/bit/1":[1156,980,3,2,1,1],"fx/bit/2":[1160,980,2,2,1,1],"fx/shard/2":[1163,980,2,2,1,1]},"emit":["p_metro_entry/base/base/open/0","p_metro_entry/base/base/shut/0","p_metro_entry/base/base/open/6","p_metro_entry/base/base/shut/6","f_eatery/base/main/kuaican/0","f_eatery/base/main/kuaican/6","f_eatery/base/main/noodle/0","f_eatery/base/main/noodle/6","f_eatery/base/main/tea/0","f_eatery/base/main/tea/6","f_eatery/base/main/shut/0","f_eatery/base/main/shut/6","f_kitchen/base/main/cooking/0","f_kitchen/base/main/off/0","s_cooler/base/main/full/0","s_cooler/base/main/full/2","s_cooler/base/main/full/6","s_cooler/base/main/low/0","s_cooler/base/main/low/2","s_cooler/base/main/low/6","s_gondola/base/main/full/0","s_gondola/base/main/full/2","s_gondola/base/main/low/0","s_gondola/base/main/low/2","s_counter/base/main/default/0","s_counter/base/main/default/4","f_sign_kc/base/main/default/6","f_sign_noodle/base/main/default/6","f_sign_tea/base/main/default/6","f_fridge/base/main/open/0","f_sign_kc/base/main/default/0","f_sign_noodle/base/main/default/0","f_sign_tea/base/main/default/0","s_oden/base/main/full/0","s_oden/base/main/low/0","f_desk/base/main/on/0","s_micro/base/main/off/0","s_micro/base/main/off/6","s_micro/base/main/on/0","s_micro/base/main/on/6","f_desk/base/main/on/4","f_washer/base/main/done/0","f_washer/base/main/idle/0","f_washer/base/main/running/0","f_nightstand/base/main/on/0","i_ac/base/main/on/0","i_ac/base/main/on/6","i_pendant/base/main/on/0"],"snow_atlas":"kit_snow.png","snow":{"p_metro_entry/base/base/open/0":[0,0,2,1,245,195,0],"p_metro_entry/base/base/open/6":[738,0,5,1,266,195,0],"p_metro_entry/base/roof/open/0":[0,196,2,1,266,146,0],"p_metro_entry/base/roof/open/6":[801,196,1,1,267,146,0],"i_flight/base/main/up/0":[0,343,1,1,217,138,0],"f_eatery/base/main/noodle/0":[654,343,22,44,82,116,0],"f_eatery/base/main/noodle/6":[903,343,10,44,82,116,0],"f_shower/base/main/dry/0":[1152,343,1,1,56,102,0],"i_window/base/main/plain/0":[1323,343,1,0,54,95,0],"i_window/base/main/plain/6":[1488,343,0,0,54,94,0],"s_gondola/base/main/full/0":[1653,343,2,1,76,90,0],"s_gondola/base/main/full/2":[0,482,2,1,76,90,0],"f_kitchen/base/main/off/0":[231,482,1,1,79,87,0],"f_kitchen/base/main/off/2":[471,482,1,1,78,82,0],"i_door/base/main/closed/6":[708,482,0,0,43,82,0],"i_door/wood/main/closed/6":[840,482,0,0,43,82,0],"i_mailbox/base/main/default/0":[972,482,1,1,48,80,0],"f_shelf/base/main/default/0":[1119,482,2,1,34,76,0],"i_door/base/main/closed/0":[1224,482,1,0,42,71,0],"i_door/wood/main/closed/0":[1353,482,1,0,42,71,0],"f_sign_kc/base/main/default/0":[1482,482,4,1,93,66,0],"f_sign_kc/base/main/default/6":[1764,482,1,3,93,66,0],"f_sign_noodle/base/main/default/0":[0,573,4,1,93,66,0],"f_sign_noodle/base/main/default/6":[282,573,1,3,93,66,0],"f_sign_tea/base/main/default/0":[564,573,4,1,93,66,0],"f_sign_tea/base/main/default/6":[846,573,1,3,93,66,0],"i_meter/base/main/default/0":[1128,573,2,1,30,63,0],"s_counter/base/main/default/0":[1221,573,1,1,86,55,0],"f_bed/base/main/made/0":[1482,573,1,1,96,54,0],"f_basin/base/main/default/0":[1773,573,2,1,26,47,0],"i_crank/base/main/default/0":[1854,573,1,1,6,47,0],"f_chair/base/main/default/0":[1875,573,1,1,27,45,0],"s_bar/base/main/default/0":[0,640,1,1,88,45,0],"s_bar/base/main/default/4":[267,640,1,1,88,45,0],"i_dryrack/base/main/default/0":[534,640,1,20,89,44,0],"s_counter/base/main/default/4":[804,640,1,1,86,43,0],"i_balfront/base/main/default/0":[1065,640,0,0,56,42,0],"i_balfront/base/main/default/6":[1236,640,1,0,56,42,0],"f_chair/base/main/default/4":[1407,640,1,1,27,39,0],"f_desk/base/main/off/0":[1491,640,2,1,57,38,0],"f_nightstand/base/main/off/0":[1665,640,2,1,28,38,0],"s_barstool/base/main/default/0":[1752,640,1,1,18,37,0],"i_clutter/base/main/shoes/0":[1809,640,2,1,28,33,0],"f_fridge/base/main/closed/0":[1896,640,1,1,38,31,0],"f_toilet/base/main/default/0":[0,686,1,1,27,31,0],"f_desk/base/main/off/4":[84,686,2,1,57,30,0],"f_washer/base/main/idle/0":[258,686,1,1,37,30,0],"f_wardrobe/base/main/closed/0":[372,686,2,1,53,27,0],"f_wardrobe/base/main/closed/2":[534,686,1,1,53,27,0],"f_wardrobe/base/main/closed/6":[696,686,1,1,53,27,0],"s_micro/base/main/off/0":[858,686,2,1,34,27,0],"s_micro/base/main/off/6":[963,686,2,1,34,27,0],"s_oden/base/main/full/0":[1068,686,1,13,40,24,0],"f_table/base/main/default/0":[1191,686,1,1,40,20,0],"i_ac/base/main/off/2":[1314,686,1,1,38,20,0],"i_ac/base/main/off/4":[1431,686,2,1,38,20,0],"i_ac/base/main/off/0":[1548,686,1,1,38,19,0],"i_ac/base/main/off/6":[1665,686,2,1,38,19,0],"i_cut/base/main/plain/0":[1782,686,0,0,37,18,0],"i_cut/base/main/plain/6":[1896,686,0,0,37,18,0],"i_wall/base/main/plain/0":[0,718,1,0,36,18,0],"i_wall/base/main/plain/6":[111,718,0,0,36,18,0],"f_shelf/base/main/default/2":[222,718,2,1,34,17,0],"i_notice/base/main/default/0":[327,718,2,1,29,15,0],"i_pendant/base/main/off/0":[417,718,1,2,20,13,0],"f_stool/base/main/default/0":[480,718,1,1,14,11,0],"i_side/base/main/plain/0":[525,718,1,0,20,10,0],"i_side/base/main/plain/6":[588,718,1,0,20,10,0]},"masks":{"p_metro_entry/base/base/open/0":[63,63,"AAABgAAAAAAAAAMAAAAAAAAABgAAAAAAAAAMAAAAAAAAABgAAAAAAAAAMAAAAAAAAABgAAAAAAAAAMAAAAAAAAABgAAAAAAAAAMAAAAAAMAABgAAAAABgAAMAAAAAAMAABgAAAAABgAAMAAAAAAMAABgAAAAABgAAMAAAAAAMAABgAAAAABgAAcAAAAAYMAAHwAAAADBgAD/gAAAAYMAB//AAAADhgA//+AAAAeMAf//8AAAPxgP///4AAH+MH////wAD/xj/////gB/+N//////A//x//////+f/8f/////////H/////////Y/////////jH////////wY/////////DH///h////+Y///wD/////H//8AH////4///4AP////3///wA/////////gH/////////A/////////+H////7////8/n///H/////8P//4P/////gf//Af////8A//4A/////gB//AB////+AD/4AD////4AH/AAH////AAPwAAP///4AAYAAAf///AAAAAAA///4AAAAAAB///AAAAAAAD//4AAAAAAAH//AAAAAAAAP/4AAAAAAAAf/AAAAAAAAA/4AAAAAAAAH/AAAAAAAAA/gAAAAAAAAH4AAAAAAAAA/AAAAAAAAABgAAAAA="],"p_metro_entry/base/base/shut/0":[63,63,"AAABgAAAAAAAAAMAAAAAAAAABgAAAAAAAAAMAAAAAAAAABgAAAAAAAAAMAAAAAAAAABgAAAAAAAAAMAAAAAAAAABgAAAAAAAAAMAAAAAAMAABgAAAAABgAAMAAAAAAMAABgAAAAABgAAMAAAAAAMAABgAAAAABgAAMAAAAAAMAABgAAAAABgAAcAAAAAYMAAHwAAAADBgAD/gAAAAYMAB//AAAADhgA//+AAAAeMAf//8AAAPxgP///4AAH+MH////wAD/xj/////gB/+N//////A//x//////+f/8f/////////H/////////4//////////H/////////4//////////H///h/////4///wD/////H//8AH////4///4AP////3///wA/////////gH/////////A/////////+H////7////8/////H/////////4P/////////Af////////4A/////////AB////////4AD////////AAH///////wAAP//////4AAAf/////4AAAA/////8AAAAB////+AAAAAD////gAAAAAH///gAAAAAAP//wAAAAAAAf/4AAAAAAAA/+AAAAAAAAH/AAAAAAAAA/gAAAAAAAAH4AAAAAAAAA/AAAAAAAAABgAAAAA="],"p_metro_entry/base/base/open/6":[69,60,"AAAAAAAcAAAAAAAAAADgAAAAAAAAAAcAAAAAAAAAADgAAAAAAAAAAcAAAAAAAAAADgAAAAAAAAAAcAAAAAAAAAADgAAAAAAAAAAcAAAAAAAAAADgAAAAAAAAAAcAADAAAAAAADgAAYAAAAAAAcAADBwAAAAADgAAYfAAAAAAcAADH8AAAAADgAAY/gAAAAAcAADH9gAAAADgAAY/sAAAAAeAADH9gAAAAP8AAY/8AAAAH/4ADH/gAAAD//wAY//AAAB///gDH/+AAA////AY//8AAf///+DH//4AP////8Y///wH/////7H9//j//////4/v/////////39n////////+/sP/////////9gf/////////sH////3////9j////4P////t////8Af///9////+AD/////////AB/////////gA/////////wAf////////8AP////////9gH////3///+MD////8////Bh////+H///gM/////A///wB/////gH//4AP////wA//8AH////4AB3+AB////8AAA/AAP///+AAABgAB////AAAAAAAP///gAAAAAAB///wAAAAAAAP//4AAAAAAAB//8AAAAAAAAP/+AAAAAAAAB//AAAAAAAAAP/gAAAAAAAAB/wAAAAAAAAAP4AAAAAAAAAAcAAAAAAA="],"p_metro_entry/base/base/shut/6":[69,60,"AAAAAAAcAAAAAAAAAADgAAAAAAAAAAcAAAAAAAAAADgAAAAAAAAAAcAAAAAAAAAADgAAAAAAAAAAcAAAAAAAAAADgAAAAAAAAAAcAAAAAAAAAADgAAAAAAAAAAcAADAAAAAAADgAAYAAAAAAAcAADBwAAAAADgAAYfAAAAAAcAADH8AAAAADgAAY/gAAAAAcAADH9gAAAADgAAY/sAAAAAeAADH9gAAAAP8AAY/8AAAAH/4ADH/gAAAD//wAY//AAAB///gDH/+AAA////AY//8AAf///+DH//4AP////8Y///wH/////7H9//j//////4/v/////////39/////////+/v//////////9///////////v/////3////9/////4P////v////8Af///9////+AD/////////AB/////////gA/////////wAf////////8AP////////9gH////3////sD////8////9h////+H////s/////A////9/////gH////v////wA/////////4AB3///////8AAA///////+AAAB///////AAAAB//////gAAAAD/////wAAAAAH////4AAAAAAP///8AAAAAAAf//+AAAAAAAA///AAAAAAAAB//gAAAAAAAAD/wAAAAAAAAAP4AAAAAAAAAAcAAAAAAA="],"i_flight/base/main/up_roof/0":[55,51,"AAOAAAAAAAAfAAAAAAAA/gAAAAAAB/wAAAAAAD/4AAAAAAH/8AAAAAAH/+AAAAAAD//AAAAAAB//gAAAAAA//wAAAAAAf/4AAAAAAP/8AAAAAAH/+AAAAAAD//HA/AAAB//v//gAAA////4gAAAf///8QAAAP////IAAAH////8AAAD////+AAAB/////AAAA/////gAAA/////8AAB//////AAA//////gAAf/////8AAP/////+AAB//////gAAP/////8AAB/////+AAAP/////gAAB/////4AAAPh///+AAAAA////AAAAAf///4AAAAP///8AAAAH////AAAAD////4AAAB////8AAAAP////AAAAB////wAAAAP///8AAAAB////gAAAAP///wAAAAB///4AAAAAP//8AAAAAB//4AAAAAAP/wAAAAAAB/gAAAAAAAPAAAAAAAAGAA"],"f_eatery/base/main/kuaican/0":[29,44,"AAADwAAAf4AAD/4AAf/wAD//gAf//AD//+Af//8D///wf///j////f///+////9////7////3////v////f///+////9////7////3////v////f///+////9////7////3////v////f///+////9////7////H///4P///Af//4A///AB//4AD//AAH/4AAP/AAAf4AAAfAAAAMAAAAA=="],"f_eatery/base/main/kuaican/6":[29,44,"PAAAB/gAAD/wAAH/4AAP/8AAf/+AA///AB///gD///wH///4P///8f///+////////////////////////////////////////////////////////////////////////////////////////////////8////4f///wP///gH///AD//+AB//8AA//4AAf/wAAP/gAAH/AAAD4AAABAA=="],"f_eatery/base/main/noodle/0":[29,44,"AAADwAAAf4AAD/4AAf/wAD//gAf//AD//+Af//8D///wf///j////f///+////9////7////3////v////f///+////9////7////3////v////f///+////9////7////3////v////f///+////9////7////H///4P///Af//4A///AB//4AD//AAH/4AAP/AAAf4AAAfAAAAMAAAAA=="],"f_eatery/base/main/noodle/6":[29,44,"PAAAB/gAAD/wAAH/4AAP/8AAf/+AA///AB///gD///wH///4P///8f///+////////////////////////////////////////////////////////////////////////////////////////////////8////4f///wP///gH///AD//+AB//8AA//4AAf/wAAP/gAAH/AAAD4AAABAA=="],"f_eatery/base/main/tea/0":[29,44,"AAADwAAAf4AAD/4AAf/wAD//gAf//AD//+Af//8D///wf///j////f///+////9////7///v3//8fv//g/f/8B+//gD9/+AH7/8AP3/4Afv/4A/f/8H+//+/////////////////////f///+////9////7////n///8P///gf//8A///gB//8AD//gAH/8AAP/gAAf8AAAfAAAAMAAAAA=="],"f_eatery/base/main/tea/6":[29,44,"PAAAB/gAAD/wAAH/4AAP/8AAf/+AA///AB///gD///wH///4P///8f///+//////////9////4////wf///gP///AH//+AD//8AH//4AP//4A///8H///+////////////////////////////////////8////4f///wP///gH///AD//+AB//8AA//4AAf/wAAP/gAAH/AAAD4AAABAA=="],"p_metro_entry/base/roof/open/0":[68,39,"AAAA8AAAAAAAAAA/wAAAAAAAAA/+AAAAAAAAA//4AAAAAAAA///gAAAAAAA///+AAAAAAA////wAAAAAA/////AAAAAA/////8AAAAA//////gAAAA//////+AAAA///////4AAA////////gAAP///////8AAB////////wAA/////////AAP////////4AD/////////gAP////////+AA/////////4AD/////////gAP////////+AA/////////4AD/////////AAP////////wAA////////8AAD///////8AAAP//////8AAAA//////8AAAAD/////8AAAAAP////8AAAAAA////8AAAAAAD///8AAAAAAAP//8AAAAAAAA//8AAAAAAAAD/8AAAAAAAAAP8AAAAAAAAAA8AAAAAAAAAAMAAAAA="],"p_metro_entry/base/roof/open/6":[68,39,"AAAAAAHwAAAAAAAAAD/AAAAAAAAAD/8AAAAAAAAD//wAAAAAAAD///AAAAAAAB///8AAAAAAB////wAAAAAB/////AAAAAA/////8AAAAA//////wAAAA///////AAAA///////8AAAf///////gAAf///////8AAf///////+AAP///////+gAP///////+8AP/////////AP/////////AH/////////AH/////////AH/////////AH/////////AD/////////AA/////////AAP////////AAB////////AAAH///////AAAAf//////AAAAB//////AAAAAH/////AAAAAAf////AAAAAAB////AAAAAAAH///AAAAAAAAf//AAAAAAAAB//AAAAAAAAAH/AAAAAAAAAAfAAAAAAAAAABgAAAAAAA="],"p_metro_entry/base/roof/shut/0":[68,39,"AAAA8AAAAAAAAAA/wAAAAAAAAA/+AAAAAAAAA//4AAAAAAAA///gAAAAAAA///+AAAAAAA////wAAAAAA/////AAAAAA/////8AAAAA//////gAAAA//////+AAAA///////4AAA////////gAAP///////8AAB////////wAA/////////AAP////////4AD/////////gAP////////+AA/////////4AD/////////gAP////////+AA/////////4AD/////////AAP////////wAA////////8AAD///////8AAAP//////8AAAA//////8AAAAD/////8AAAAAP////8AAAAAA////8AAAAAAD///8AAAAAAAP//8AAAAAAAA//8AAAAAAAAD/8AAAAAAAAAP8AAAAAAAAAA8AAAAAAAAAAMAAAAA="],"p_metro_entry/base/roof/shut/6":[68,39,"AAAAAAHwAAAAAAAAAD/AAAAAAAAAD/8AAAAAAAAD//wAAAAAAAD///AAAAAAAB///8AAAAAAB////wAAAAAB/////AAAAAA/////8AAAAA//////wAAAA///////AAAA///////8AAAf///////gAAf///////8AAf///////+AAP///////+gAP///////+8AP/////////AP/////////AH/////////AH/////////AH/////////AH/////////AD/////////AA/////////AAP////////AAB////////AAAH///////AAAAf//////AAAAB//////AAAAAH/////AAAAAAf////AAAAAAB////AAAAAAAH///AAAAAAAAf//AAAAAAAAB//AAAAAAAAAH/AAAAAAAAAAfAAAAAAAAAABgAAAAAAA="],"f_eatery/base/main/shut/0":[28,38,"AAADwAYAPwHgA/B+AD8f4A/3/gP//+D///4////v//////////////////////////////////////////////////////////////////////////////////////////j///4P//+A///gD//4AP/+AA//gAD/4AAP+AAA/gAAA8AAAA=="],"f_eatery/base/main/shut/6":[28,38,"PAAAD8AGAPwAeA/AB+D/AH+P/Af+//B////H////f/////////////////////////////////////////////////////////////////////////////////////H///8H///wH///AH//8AH//wAH//AAH/8AAH/wAAH/AAAH8AAAPA=="],"i_flight/base/main/up/0":[55,37,"AAAff+AAAAAA//+AAAAAB//RAAAAAD//4gAAAAH///QAAAAP///4AAAAf///8AAAA////+AAAB/////gAAD/////8AAD/////+AAB//////gAA//////4AAP/////8AAB//////gAAP/////4AAB/////8AAAP/////gAAB/////4AAAAD///8AAAAB////AAAAA////wAAAAf///4AAAAP////AAAAH////wAAAB////4AAAAP////AAAAB////gAAAAP///8AAAAB////AAAAAP///gAAAAB///wAAAAAP//wAAAAAB//gAAAAAAP/AAAAAAAB+AAAAAAAAcAA"],"i_door/base/main/open/0":[12,34,"AeB+H+f+/+/+/+/+/+/+/+/+/+//////////////////////////////////////D/AP"],"i_door/wood/main/open/0":[12,34,"AeB+H+f+/+/+/+/+/+/+/+/+/+//////////////////////////////////////D/AP"],"i_balfront/base/main/glass/0":[15,34,"ADwB+A/wf+P+3/G/w32G4w2GGww2Gew/2Hmzw3+G8w2GGww2GGww2Gew/+H+z/3/+//3/+//H/g/wH4A8ACAAA=="],"i_balfront/base/main/glass/6":[15,34,"8AH4A/wD/gT/CH+Q/6GfQwyGGQwzmGfwyeGQ8yH+QzyGGQwyGGQw3mG/w3+G/83/+//3//P/wf+A/wB+ADwAEA=="],"i_window/base/main/dado/0":[14,34,"ADwD8D/D/z////////////3/5/6f+n/p/6f+n/p/6f+v/v/////////////////////z/w/wPwDwAQAA"],"i_window/base/main/dado/6":[14,34,"8APwD/A/8P/z/////////8//P/zf83/N/zf83/N/zf/3/9///////////////////z/8P/A/wD8APAAg"],"i_window/base/main/plain/0":[14,34,"ADwD8D/D/z////////////3/5/6f+n/p/6f+n/p/6f+v/v/////////////////////z/w/wPwDwAQAA"],"i_window/base/main/plain/6":[14,34,"8APwD/A/8P/z/////////8//P/zf83/N/zf83/N/zf/3/9///////////////////z/8P/A/wD8APAAg"],"i_window/base/main/tile/0":[14,34,"ADwD8D/D/z////////////3/5/6f+n/p/6f+n/p/6f+v/v/////////////////////z/w/wPwDwAQAA"],"i_window/base/main/tile/6":[14,34,"8APwD/A/8P/z/////////8//P/zf83/N/zf83/N/zf/3/9///////////////////z/8P/A/wD8APAAg"],"i_door/base/main/open/6":[15,33,"HgA/AH+A/8H/4//H/4//H/5//f/////////////////////////////////////////////f/g/4B+AHgAA="],"i_door/wood/main/open/6":[15,33,"HgA/AH+A/8H/4//H/4//H/5//f/////////////////////////////////////////////f/g/4B+AHgAA="],"i_door/base/main/closed/0":[11,32,"AeD8f7//////////////////////////////////////////////+fw+BwA="],"i_door/base/main/closed/6":[11,32,"4B8D+H/P///////////////////////////////////////////z/h/A+Ac="],"i_door/wood/main/closed/0":[11,32,"AeD8f7//////////////////////////////////////////////+fw+BwA="],"i_door/wood/main/closed/6":[11,32,"4B8D+H/P///////////////////////////////////////////z/h/A+Ac="],"i_wall/base/main/dado/0":[10,32,"A8Pz////////////////////////////////////////////Pw8BAA=="],"i_wall/base/main/dado/6":[10,32,"4D4P4/7///////////////////////////////////////9/x/B8Bg=="],"i_wall/base/main/dado_ads/0":[10,32,"A8Pz////////////////////////////////////////////Pw8BAA=="],"i_wall/base/main/dado_ads/6":[10,32,"4D4P4/7///////////////////////////////////////9/x/B8Bg=="],"i_wall/base/main/plain/0":[10,32,"A8Pz////////////////////////////////////////////Pw8BAA=="],"i_wall/base/main/plain/6":[10,32,"4D4P4/7///////////////////////////////////////9/x/B8Bg=="],"i_wall/base/main/poster/0":[10,32,"A8Pz////////////////////////////////////////////Pw8BAA=="],"i_wall/base/main/poster/6":[10,32,"4D4P4/7///////////////////////////////////////9/x/B8Bg=="],"i_wall/base/main/tile/0":[10,32,"A8Pz////////////////////////////////////////////Pw8BAA=="],"i_wall/base/main/tile/6":[10,32,"4D4P4/7///////////////////////////////////////9/x/B8Bg=="],"f_kitchen/base/main/cooking/0":[21,31,"AA+AAf4AP/AH/4D//B//4///H//4//8H//g//8H//g//+H//8//////+///3//+///3//+///3//+///3//+///n//w//4H/8A/+AD/AAHgAAA=="],"f_kitchen/base/main/off/0":[21,31,"AA+AAf4AP/AH/4D//B//4///H//4//8H//g//8H//g//+H//8//////+///3//+///3//+///3//+///3//+///n//w//4H/8A/+AD/AAHgAAA=="],"s_cooler/base/main/full/0":[21,31,"AA+AAf8AP/4H//D//5/////////////////////////////////////////////////////////////////////n//w//4H/8Af+AA/AABgAAA=="],"s_cooler/base/main/full/2":[21,31,"DwAB/gA//AH/+A//8H//4///3///////////////////////////////////////////////////////////P//4f//A//4B//AD/wAH4AAMAA=="],"s_cooler/base/main/full/6":[21,31,"DwAB/gA//AH/+A//8H//4///3///////////////////////////////////////////////////////////P//4f//A//4B//AD/wAH4AAMAA=="],"s_cooler/base/main/low/0":[21,31,"AA+AAf8AP/4H//D//5/////////////////////////////////////////////////////////////////////n//w//4H/8Af+AA/AABgAAA=="],"s_cooler/base/main/low/2":[21,31,"DwAB/gA//AH/+A//8H//4///3///////////////////////////////////////////////////////////P//4f//A//4B//AD/wAH4AAMAA=="],"s_cooler/base/main/low/6":[21,31,"DwAB/gA//AH/+A//8H//4///3///////////////////////////////////////////////////////////P//4f//A//4B//AD/wAH4AAMAA=="],"f_kitchen/base/main/cooking/2":[21,30,"eAAH8AA/4AH/wA//gH//A//+H//4///H//4///H//4///H//4//+H//g///H//+//////+///3//+///z//+H//wP/+Af/wA/+AB/gADwA=="],"f_kitchen/base/main/off/2":[21,30,"eAAH8AA/4AH/wA//gH//A//+H//4///H//4///H//4///H//4//+H//g///H//+//////+///3//+///z//+H//wP/+Af/wA/+AB/gADwA=="],"i_flight/base/main/down/0":[46,30,"AAADgAAAAAB+AAAGAAfgAAAeAH4AAAB+B+AAAAGefgAAAAY/4AAAABj/gAAAAGf/gAAAAf//gAAAB///gAAAP///gAAA////gAAA///+AAAA///+AAAA///+AAAA///+AAAA///+AAAA///+AAAA///+AAAA///4AAAA///gAAAA//8AAAAA//4BAAAA///8AAAA///AAAAA//wAAAAA/8AAAAAA/AAAAAAA4AA="],"i_side/base/main/dado/0":[6,30,"4+//////////////////////////fGA="],"i_side/base/main/dado/6":[6,30,"P///////////////////////////8QA="],"i_side/base/main/plain/0":[6,30,"4+//////////////////////////fGA="],"i_side/base/main/plain/6":[6,30,"P///////////////////////////8QA="],"i_side/base/main/tile/0":[6,30,"4+//////////////////////////fGA="],"i_side/base/main/tile/6":[6,30,"P///////////////////////////8QA="],"f_wardrobe/base/main/closed/0":[14,28,"AeAf4f/f//////////////////////////////////////////////////H/AfABAA=="],"f_wardrobe/base/main/closed/2":[14,28,"HgH+D/4//v//////////////////////////////////////////////P/w/4D4AIA=="],"f_wardrobe/base/main/closed/6":[14,28,"HgH+D/4//v//////////////////////////////////////////////P/w/4D4AIA=="],"f_wardrobe/base/main/open/0":[14,28,"AeAf4f/f//////////////////////////////////////////////////H/AfABAA=="],"f_wardrobe/base/main/open/2":[14,28,"HgH+D/4//v//////////////////////////////////////////////P/w/4D4AIA=="],"f_wardrobe/base/main/open/6":[14,28,"HgH+D/4//v//////////////////////////////////////////////P/w/4D4AIA=="],"f_shower/base/main/dry/0":[15,27,"A4AHAA4GEH8j394/8H/g/8H/g/8H/g/8H/g/8H/g/8H/g/8H/g//H/+/////f/g/wB4A"],"f_shower/base/main/running/0":[15,27,"A4AHAA4GEH8j/9//////////////////////////////////////////////f/g/wB4A"],"i_meter/base/main/default/0":[9,26,"MDgcDgdz/f/////////n8bgcDgcDgcDgcDgcDgYA"],"s_gondola/base/main/full/0":[20,25,"AAOAAH4AH/Af/wH/8H//P//////////////////////////////////////////P//D//A//AP/AA/AADAAA"],"s_gondola/base/main/full/2":[20,25,"HAAH8AD/gA/+AP/+D//g///v////////////////////////////////////P//w//8D//AP/wA/8AD8AAMA"],"s_gondola/base/main/low/0":[20,25,"AAOAAP4AP/AH/wP/8D//H//////////////////////////////////////////P//D//A//AP/AA/AADAAA"],"s_gondola/base/main/low/2":[20,25,"HgAH8AD/AA/4AP/4D/+A//+P////////////////////////////////////P//w//8D//AP/wA/8AD8AAMA"],"s_counter/base/main/default/0":[22,24,"AAPAAB8AAHwAAfgAD/gA//AP/8D//z///f////////////////////////////P//w//8D//AP/wA/8AA/AAAwAA"],"i_mailbox/base/main/default/0":[13,23,"AeA/B/j/z/5/8/+f/P/n/z/h/A+AMAAAAAAAAAMAfgPwH4D8B4A="],"s_bar/base/main/bento/4":[23,22,"AAB4AAP8AB/4AP/gB/7AP/GB/4MP/AZ/+A3/MBv4YDPAwGGBgMMDAAYGAAwMABgYADAAAGAAAMAAAYAAAwAAAA=="],"s_bar/base/main/default/4":[23,22,"AAB4AAP8AB/4AP/gB/7AP/GB/4MP/AZ/+A3/MBv4YDPAwGGBgMMDAAYGAAwMABgYADAAAGAAAMAAAYAAAwAAAA=="],"f_shelf/base/main/default/0":[10,21,"D4/////////////////////////////j4DAA"],"f_shelf/base/main/default/2":[10,21,"+D+P+/////////////////////////P8PwMA"],"s_counter/base/main/default/4":[22,21,"AA/wBv/ge//D//8P//w///P////////////////////////////P//w//8D//AP/wA/8AA/AAAwAAA=="],"s_bar/base/main/bento/0":[23,21,"AAB4AAP8AB/4AP/gB/8AP/YB/4wP/Bh/4DH/wGP5gMfDAYwGABgMADAYAGAwAMAAAYAAAwAABgAABAAAAA=="],"s_bar/base/main/default/0":[23,21,"AAB4AAP8AB/4AP/gB/8AP/YB/4wP/Bh/4DH/wGP5gMfDAYwGABgMADAYAGAwAMAAAYAAAwAABgAABAAAAA=="],"i_balfront/base/main/default/0":[15,20,"ADwB+A8weOP3/n+x/2/+//3/+//3/+//3/+//n/w/4H8A+AHAAA="],"i_balfront/base/main/default/6":[15,20,"cAD4ATwDHg+fH+e/43/2//3//////+//3/+f/w/+B/wD+AHwAOA="],"f_sign_kc/base/main/default/6":[25,20,"wAAAeAAAPwAAH+AAD/wAB/+AA//wAP/+AB//wAP/+AB//wAP/+AB//AAP/gAB/wAAP4AAB8AAAOAAAAAAAAA"],"f_sign_noodle/base/main/default/6":[25,20,"wAAAeAAAPwAAH+AAD/wAB/+AA//wAP/+AB//wAP/+AB//wAP/+AB//AAP/gAB/wAAP4AAB8AAAOAAAAAAAAA"],"f_sign_tea/base/main/default/6":[25,20,"wAAAeAAAPwAAH+AAD/wAB/+AA//wAP/+AB//wAP/+AB//wAP/+AB//AAP/gAB/wAAP4AAB8AAAOAAAAAAAAA"],"f_basin/base/main/default/0":[8,19,"OPj+/v7+/uC8fv/+eDg4ODg4OA=="],"f_fridge/base/main/closed/0":[10,19,"Hh/v////////////////////////3+Hg"],"f_fridge/base/main/open/0":[12,19,"D4P+f/f/f/f/f////////////////////+P8BwA="],"f_sign_kc/base/main/default/0":[25,18,"AAADgAAHwAAP4AAf8AA/+AB//AD//AH/+AP/8Af/4A//wB//gAf/AAP+AAH8AAD4AADwAAAgAAAA"],"f_sign_noodle/base/main/default/0":[25,18,"AAADgAAHwAAP4AAf8AA/+AB//AD//AH/+AP/8Af/4A//wB//gAf/AAP+AAH8AAD4AADwAAAgAAAA"],"f_sign_tea/base/main/default/0":[25,18,"AAADgAAHwAAP4AAf8AA/+AB//AD//AH/+AP/8Af/4A//wB//gAf/AAP+AAH8AAD4AADwAAAgAAAA"],"s_oden/base/main/full/0":[11,18,"DgfD+H+//////////////////////n8DgA=="],"s_oden/base/main/low/0":[11,18,"DgfD+H+//////////////////////n8DgA=="],"f_bed/base/main/made/0":[25,18,"AAPAAAf4AA//GB//7z///////////////////////////5///w///gf//AH/+AA/8AAH4AAAwAAA"],"f_bed/base/main/messy/0":[25,17,"AAHgAAP8AAf/nA///5///////////////////////////////8///gf//AD/+AAf8AAD4AAA"],"f_desk/base/main/off/0":[15,17,"AHAD4B/Af+D/5//////////+//H/4f/A/4A/AD4AHAA="],"f_desk/base/main/on/0":[15,17,"AHAD4B/Af+D/5//////////+//H/4f/A/4A/AD4AHAA="],"i_dryrack/base/main/default/0":[23,17,"AAAYAAAwAABgAADAAAGAAAcAAD+AAdwgDuBAdwCDuAEdwALuAAdwAD+AAFwAACAAAA=="],"s_micro/base/main/off/0":[10,16,"Hx/v+/7////////////////38HA="],"s_micro/base/main/off/6":[10,16,"PD/P+/7/v//////////////z+Dg="],"s_micro/base/main/on/0":[10,16,"Hx/v+/7////////////////38HA="],"s_micro/base/main/on/6":[10,16,"PD/P+/7/v//////////////z+Dg="],"f_desk/base/main/off/4":[15,15,"AfAH+H/5///////////////+//j/4M/AD4AHAAA="],"f_desk/base/main/on/4":[15,15,"AfAH+H/5///////////////+//j/4M/AD4AHAAA="],"i_crank/base/main/default/0":[3,14,"SSSSS3/A"],"f_washer/base/main/done/0":[10,14,"Hh/v///////////////+PgIA"],"f_washer/base/main/idle/0":[10,14,"Hh/v///////////////+PgIA"],"f_washer/base/main/running/0":[10,14,"Hh/v///////////////+PgIA"],"i_clutter/base/main/broom/0":[7,13,"QIECBAgQbv/////A"],"f_nightstand/base/main/off/0":[8,13,"ODg8PP////////9+GA=="],"f_nightstand/base/main/on/0":[8,13,"ODg8PP////////9+GA=="],"f_chair/base/main/default/0":[8,13,"cPDw8Pj+//44PHx2EA=="],"i_clutter/base/main/boxes/0":[8,12,"DA4efv7+/v7//v54"],"f_toilet/base/main/default/0":[8,12,"ePj4+Pz+/z4+Pj4c"],"f_chair/base/main/default/4":[8,11,"Dh4ePv7/fBh8fHg="],"i_notice/base/main/default/0":[9,11,"A4fP///////8+HAgAA=="],"s_barstool/base/main/default/0":[5,10,"//5Hfd//wA=="],"f_table/base/main/default/0":[11,10,"D4f/////9/z2HsCYAwA="],"f_table/base/main/meal/0":[11,10,"D4f/////9/z2HsCYAwA="],"i_ac/base/main/on/0":[11,10,"A8H8/3/v////9/j8BgA="],"i_ac/base/main/on/6":[11,10,"+B/D/n//////+f8PwGA="],"i_clutter/base/main/shoes/0":[8,10,"Hn////////9+CA=="],"i_cut/base/main/dado/0":[10,10,"A8Pz///////z8PAQAA=="],"i_cut/base/main/dado/6":[10,10,"4D4P4/7///f8fwfAYA=="],"i_cut/base/main/plain/0":[10,10,"A8Pz///////z8PAQAA=="],"i_cut/base/main/plain/6":[10,10,"4D4P4/7///f8fwfAYA=="],"i_cut/base/main/tile/0":[10,10,"A8Pz///////z8PAQAA=="],"i_cut/base/main/tile/6":[10,10,"4D4P4/7///f8fwfAYA=="],"i_ac/base/main/off/0":[11,9,"A8H8/3/v//+/x+DwAA=="],"i_ac/base/main/off/2":[11,9,"8B+D/H/v//+P8H8DwA=="],"i_ac/base/main/off/4":[11,9,"A8H8//////+/x+BwAA=="],"i_ac/base/main/off/6":[11,9,"8B+D/H/v///P+H8DwA=="],"i_ac/base/main/on/2":[11,9,"8B+D/H/v//+P+H8DwA=="],"i_ac/base/main/on/4":[11,9,"AeD8f7////+/x+BwAA=="],"i_clutter/base/main/jars/0":[7,8,"OPv3/9++MA=="],"i_clutter/base/main/veg/0":[8,7,"Dn/////8cA=="],"f_stool/base/main/default/0":[4,7,"////cA=="],"i_pendant/base/main/off/0":[6,4,"e//+"],"i_pendant/base/main/on/0":[6,4,"e//+"]},"pieces":{"d_mat":{"layer":"decal","catcher":null,"states":["default"],"origin":"center","interior":true,"geo":{"default":{"main":[-0.4,-0.25,0.0,0.4,0.25,0.01]}},"rots":[0],"parts":["main"],"variants":["base"]},"d_rug":{"layer":"decal","catcher":null,"states":["default"],"origin":"center","interior":true,"geo":{"default":{"main":[-0.8,-0.5,0.0,0.8,0.5,0.01]}},"rots":[0],"parts":["main"],"variants":["base"]},"f_basin":{"layer":"sorted","catcher":"ground","origin":"center","interior":true,"states":["default"],"footprint":[[-0.25,-0.15,0.25,0.2]],"fadeable":false,"geo":{"default":{"main":[-0.25,-0.18,0.0,0.45,0.2,1.7]}},"rots":[0],"parts":["main"],"variants":["base"]},"f_bed":{"layer":"sorted","catcher":"ground","origin":"center","interior":true,"states":["made","messy"],"footprint":[[-1.0,-0.5,1.0,0.5]],"fadeable":false,"geo":{"made":{"main":[-1.0,-0.5,0.0,1.0,0.5,0.95]},"messy":{"main":[-1.0,-0.62,0.0,1.0,0.5,0.95]}},"rots":[0],"parts":["main"],"variants":["base"]},"f_chair":{"layer":"sorted","catcher":"ground","origin":"center","interior":true,"states":["default"],"rots":[0,4],"footprint":[[-0.22,-0.22,0.22,0.22]],"fadeable":false,"geo":{"default":{"main":[-0.22,-0.2,0.0,0.22,0.22,0.95]}},"parts":["main"],"variants":["base"]},"f_desk":{"layer":"sorted","catcher":"ground","origin":"center","interior":true,"states":["off","on"],"rots":[0,4],"footprint":[[-0.6,-0.3,0.6,0.3]],"fadeable":false,"geo":{"off":{"main":[-0.6,-0.3,0.0,0.6,0.3,1.121]},"on":{"main":[-0.6,-0.3,0.0,0.6,0.3,1.121]}},"parts":["main"],"variants":["base"]},"f_eatery":{"catcher":"wall","states":["noodle","kuaican","tea","shut"],"layer":"sorted","origin":"bay-bottom-left","sort_line":[[0,0],[3,0]],"fadeable":true,"rots":[0,6],"z_order":1,"sort_box":[0,-0.12,3,0.4],"footprint":[[0,0,3,0.4]],"clip_face":[0,3,0,3.0,-0.16,0.4],"geo":{"noodle":{"main":[0.0,-0.3,0.0,3.0,1.9,3.0]},"kuaican":{"main":[0.0,-0.3,0.0,3.0,1.9,3.0]},"tea":{"main":[0.0,-0.36,0.0,3.0,1.9,3.0]},"shut":{"main":[0.0,-0.12,0.0,3.0,1.9,2.45]}},"parts":["main"],"variants":["base"]},"f_fridge":{"layer":"sorted","catcher":"ground","origin":"center","interior":true,"states":["closed","open"],"footprint":[[-0.3,-0.3,0.3,0.3]],"fadeable":true,"geo":{"closed":{"main":[-0.3,-0.33,0.0,0.3,0.3,1.42]},"open":{"main":[-0.455,-0.32,0.0,0.3,0.3,1.42]}},"rots":[0],"parts":["main"],"variants":["base"]},"f_kitchen":{"layer":"sorted","catcher":"ground","origin":"center","interior":true,"states":["off","cooking"],"rots":[0,2],"footprint":[[-0.9,-0.3,0.9,0.3]],"fadeable":true,"light":[0.35,0,0.95],"geo":{"off":{"main":[-0.92,-0.32,0.0,0.92,0.3,2.15]},"cooking":{"main":[-0.92,-0.32,0.0,0.92,0.3,2.15]}},"parts":["main"],"variants":["base"]},"f_nightstand":{"layer":"sorted","catcher":"ground","origin":"center","interior":true,"states":["off","on"],"footprint":[[-0.23,-0.2,0.23,0.2]],"fadeable":false,"light":[0.0,0.05,0.9],"geo":{"off":{"main":[-0.24,-0.215,0.0,0.24,0.21,0.98]},"on":{"main":[-0.24,-0.215,0.0,0.24,0.21,0.98]}},"rots":[0],"parts":["main"],"variants":["base"]},"f_shelf":{"layer":"sorted","catcher":"ground","origin":"center","interior":true,"states":["default"],"rots":[0,2],"footprint":[[-0.4,-0.15,0.4,0.15]],"fadeable":true,"geo":{"default":{"main":[-0.4,-0.15,0.0,0.4,0.15,1.6]}},"parts":["main"],"variants":["base"]},"f_shower":{"layer":"sorted","catcher":"ground","origin":"center","interior":true,"states":["dry","running"],"footprint":[[-0.42,-0.42,0.42,0.42]],"fadeable":true,"geo":{"dry":{"main":[-0.44,-0.45,0.0,0.42,0.42,2.06]},"running":{"main":[-0.44,-0.45,0.0,0.42,0.42,2.06]}},"rots":[0],"parts":["main"],"variants":["base"]},"f_sign_kc":{"layer":"sorted","catcher":"wall","states":["default"],"origin":"mount-center","z_order":3,"rots":[0,6],"sort_box":[-1.4,-0.2,1.4,0],"sort_line":[[-1.4,0],[1.4,0]],"fadeable":true,"text":"\u5feb\u9910","text_board":"sign_yellow","text_ink":"shop_ink","sort_z":[0,0.5],"geo":{"default":{"main":[-1.42,-0.2,0.0,1.42,-0.15,0.52]}},"parts":["main"],"variants":["base"]},"f_sign_noodle":{"layer":"sorted","catcher":"wall","states":["default"],"origin":"mount-center","z_order":3,"rots":[0,6],"sort_box":[-1.4,-0.2,1.4,0],"sort_line":[[-1.4,0],[1.4,0]],"fadeable":true,"text":"\u725b\u8089\u9762","text_board":"sign_red","text_ink":"shop_ink","sort_z":[0,0.5],"geo":{"default":{"main":[-1.42,-0.2,0.0,1.42,-0.15,0.52]}},"parts":["main"],"variants":["base"]},"f_sign_tea":{"layer":"sorted","catcher":"wall","states":["default"],"origin":"mount-center","z_order":3,"rots":[0,6],"sort_box":[-1.4,-0.2,1.4,0],"sort_line":[[-1.4,0],[1.4,0]],"fadeable":true,"text":"\u5976\u8336","text_board":"sign_pink","text_ink":"shop_ink","sort_z":[0,0.5],"geo":{"default":{"main":[-1.42,-0.2,0.0,1.42,-0.15,0.52]}},"parts":["main"],"variants":["base"]},"f_stool":{"layer":"sorted","catcher":"ground","origin":"center","interior":true,"states":["default"],"footprint":[[-0.16,-0.16,0.16,0.16]],"fadeable":false,"geo":{"default":{"main":[-0.16,-0.16,-0.001,0.16,0.16,0.46]}},"rots":[0],"parts":["main"],"variants":["base"]},"f_table":{"layer":"sorted","catcher":"ground","origin":"center","interior":true,"states":["default","meal"],"footprint":[[-0.4,-0.25,0.4,0.25]],"fadeable":false,"geo":{"default":{"main":[-0.4,-0.25,0.0,0.4,0.25,0.58]},"meal":{"main":[-0.4,-0.25,0.0,0.4,0.25,0.525]}},"rots":[0],"parts":["main"],"variants":["base"]},"f_toilet":{"layer":"sorted","catcher":"ground","origin":"center","interior":true,"states":["default"],"footprint":[[-0.2,-0.3,0.2,0.35]],"fadeable":false,"geo":{"default":{"main":[-0.195,-0.28,0.0,0.195,0.32,0.8]}},"rots":[0],"parts":["main"],"variants":["base"]},"f_wardrobe":{"layer":"sorted","catcher":"ground","origin":"center","interior":true,"states":["closed","open"],"rots":[0,2,6],"footprint":[[-0.5,-0.3,0.5,0.3]],"fadeable":true,"geo":{"closed":{"main":[-0.52,-0.32,0.0,0.52,0.32,2.05]},"open":{"main":[-0.587,-0.32,0.0,0.587,0.32,2.05]}},"parts":["main"],"variants":["base"]},"f_washer":{"layer":"sorted","catcher":"ground","origin":"center","interior":true,"states":["idle","running","done"],"footprint":[[-0.3,-0.3,0.3,0.3]],"fadeable":true,"light":[0.18,-0.31,0.78],"geo":{"idle":{"main":[-0.3,-0.31,0.0,0.3,0.3,0.85]},"running":{"main":[-0.3,-0.36,0.0,0.3,0.3,0.85]},"done":{"main":[-0.3,-0.363,0.0,0.3,0.3,0.85]}},"rots":[0],"parts":["main"],"variants":["base"]},"g_terrazzo":{"states":["default"],"layer":"ground","catcher":null,"origin":"sw-corner (bottom vertex)","interior":true,"geo":{"default":{"main":[0.0,0.0,0.0,2.0,2.0,0.0]}},"rots":[0],"parts":["main"],"variants":["base"]},"g_tile":{"states":["default"],"layer":"ground","catcher":null,"origin":"sw-corner (bottom vertex)","interior":true,"geo":{"default":{"main":[0.0,0.0,0.0,2.0,2.0,0.0]}},"rots":[0],"parts":["main"],"variants":["base"]},"g_wood":{"states":["a","b"],"layer":"ground","catcher":null,"origin":"sw-corner (bottom vertex)","interior":true,"geo":{"a":{"main":[0.0,0.0,0.0,2.0,2.0,0.0]},"b":{"main":[0.0,0.08,0.0,2.0,2.08,0.0]}},"rots":[0],"parts":["main"],"variants":["base"]},"i_ac":{"layer":"sorted","catcher":null,"interior":true,"states":["off","on"],"origin":"center","sort_line":[[-0.5,0],[0.5,0]],"fadeable":true,"z_order":5,"rots":[0,2,4,6],"geo":{"off":{"main":[-0.5,-0.248,2.0,0.5,0.0,2.36]},"on":{"main":[-0.5,-0.36,1.97,0.5,0.0,2.36]}},"parts":["main"],"variants":["base"]},"i_balfront":{"layer":"sorted","catcher":null,"interior":true,"states":["default","glass"],"rots":[0,6],"origin":"bay-bottom-left","sort_line":[[0,0],[1.5,0]],"fadeable":true,"z_order":0,"glass":[0.04,1.46,0.58,2.52],"geo":{"default":{"main":[-0.02,-0.06,0.0,1.52,0.17,1.37]},"glass":{"main":[-0.02,-0.06,0.0,1.52,0.17,2.72]}},"parts":["main"],"variants":["base"]},"i_clutter":{"layer":"sorted","catcher":"ground","states":["shoes","boxes","jars","broom","veg"],"origin":"center","footprint":[[-0.3,-0.18,0.3,0.18]],"fadeable":false,"geo":{"shoes":{"main":[-0.3,-0.3,0.0,0.3,0.15,0.5]},"boxes":{"main":[-0.3,-0.165,-0.003,0.3,0.16,0.853]},"jars":{"main":[-0.304,-0.13,0.0,0.326,0.13,0.46]},"broom":{"main":[-0.279,-0.16,-0.003,0.272,0.2,1.201]},"veg":{"main":[-0.29,-0.14,0.0,0.31,0.14,0.36]}},"rots":[0],"parts":["main"],"variants":["base"]},"i_crank":{"layer":"sorted","catcher":"wall","origin":"mount-center","z_order":2,"fadeable":true,"interior":true,"states":["default"],"sort_line":[[-0.08,0],[0.08,0]],"geo":{"default":{"main":[-0.07,-0.14,-0.04,0.07,0.0,1.25]}},"rots":[0],"parts":["main"],"variants":["base"]},"i_cut":{"layer":"sorted","catcher":null,"interior":true,"rots":[0,6],"states":["plain","dado","tile"],"origin":"bay-bottom-left","sort_line":[[0,0],[1,0]],"fadeable":true,"z_order":0,"geo":{"plain":{"main":[0.0,0.0,0.0,1.0,0.15,0.47]},"dado":{"main":[0.0,0.0,0.0,1.0,0.15,0.47]},"tile":{"main":[0.0,0.0,0.0,1.0,0.15,0.47]}},"parts":["main"],"variants":["base"]},"i_door":{"layer":"sorted","catcher":null,"interior":true,"rots":[0,6],"states":["closed","open"],"origin":"bay-bottom-left","sort_line":[[0,0],[1.2,0]],"fadeable":true,"z_order":0,"vars":["wood"],"geo":{"closed":{"main":[0.0,-0.03,0.0,1.2,0.15,2.72]},"open":{"main":[0.0,-0.835,0.0,1.2,0.15,2.72]}},"geo_var":{"wood":{"closed":{"main":[0.0,-0.03,0.0,1.2,0.15,2.72]},"open":{"main":[0.0,-0.835,0.0,1.2,0.15,2.72]}}},"parts":["main"],"variants":["base","wood"]},"i_dryrack":{"layer":"sorted","catcher":null,"interior":true,"states":["default"],"origin":"center","sort_line":[[-1.2,0],[1.2,0]],"fadeable":true,"z_order":5,"geo":{"default":{"main":[-1.25,-0.16,2.06,1.25,0.16,2.72]}},"rots":[0],"parts":["main"],"variants":["base"]},"i_flight":{"layer":"sorted","catcher":"ground","interior":true,"states":["up","up_roof","down"],"origin":"flight SW corner","footprint":[[0,0,1.16,2.9]],"sort_box":[-1.4,0,1.28,4.2],"sort_z":[0,2.35],"fadeable":true,"geo":{"up":{"main":[-1.4,-0.013,0.0,1.28,4.2,3.201]},"up_roof":{"main":[-1.4,-0.013,0.0,1.28,4.2,3.201]},"down":{"main":[-0.2,-0.1,-3.08,2.7,4.34,0.948]}},"rots":[0],"parts":["main"],"variants":["base"]},"i_mailbox":{"layer":"sorted","catcher":"wall","origin":"mount-center","z_order":2,"fadeable":true,"interior":true,"states":["default"],"sort_line":[[-0.55,0],[0.55,0]],"geo":{"default":{"main":[-0.55,-0.5,-1.1,0.55,0.0,0.8]}},"rots":[0],"parts":["main"],"variants":["base"]},"i_meter":{"layer":"sorted","catcher":"wall","origin":"mount-center","z_order":2,"fadeable":true,"interior":true,"states":["default"],"sort_line":[[-0.4,0],[0.4,0]],"geo":{"default":{"main":[-0.4,-0.195,-1.4,0.4,0.0,1.251]}},"rots":[0],"parts":["main"],"variants":["base"]},"i_notice":{"layer":"sorted","catcher":"wall","origin":"mount-center","z_order":2,"fadeable":true,"interior":true,"states":["default"],"sort_line":[[-0.45,0],[0.45,0]],"geo":{"default":{"main":[-0.45,-0.052,0.0,0.45,0.0,0.6]}},"rots":[0],"parts":["main"],"variants":["base"]},"i_pendant":{"layer":"sorted","catcher":null,"interior":true,"states":["off","on"],"origin":"center","sort_line":[[-0.2,0],[0.2,0]],"fadeable":true,"z_order":5,"geo":{"off":{"main":[-0.22,-0.214,2.09,0.22,0.214,2.7]},"on":{"main":[-0.22,-0.214,2.09,0.22,0.214,2.7]}},"rots":[0],"parts":["main"],"variants":["base"]},"i_side":{"layer":"sorted","catcher":null,"interior":true,"rots":[0,6],"states":["plain","dado","tile"],"origin":"center","footprint":[[-0.08,-0.25,0.08,0.25]],"fadeable":true,"geo":{"plain":{"main":[-0.075,-0.25,0.0,0.075,0.25,2.72]},"dado":{"main":[-0.075,-0.25,0.0,0.075,0.25,2.72]},"tile":{"main":[-0.075,-0.25,0.0,0.075,0.25,2.72]}},"parts":["main"],"variants":["base"]},"i_track":{"layer":"decal","catcher":null,"states":["default"],"rots":[0,2],"origin":"center","interior":true,"geo":{"default":{"main":[-0.7,-0.06,0.0,0.7,0.06,0.012]}},"parts":["main"],"variants":["base"]},"i_wall":{"layer":"sorted","catcher":null,"interior":true,"rots":[0,6],"states":["plain","poster","dado","dado_ads","tile"],"origin":"bay-bottom-left","sort_line":[[0,0],[1,0]],"fadeable":true,"z_order":0,"geo":{"plain":{"main":[0.0,0.0,0.0,1.0,0.15,2.72]},"poster":{"main":[0.0,-0.012,0.0,1.0,0.15,2.72]},"dado":{"main":[0.0,0.0,0.0,1.0,0.15,2.72]},"dado_ads":{"main":[0.0,0.0,0.0,1.0,0.15,2.72]},"tile":{"main":[0.0,0.0,0.0,1.0,0.15,2.72]}},"parts":["main"],"variants":["base"]},"i_window":{"layer":"sorted","catcher":null,"interior":true,"rots":[0,6],"states":["plain","dado","tile"],"origin":"bay-bottom-left","sort_line":[[0,0],[1.5,0]],"fadeable":true,"z_order":0,"view":[0.25,1.25,0.95,2.15],"geo":{"plain":{"main":[0.0,-0.12,0.0,1.5,0.15,2.72]},"dado":{"main":[0.0,-0.12,0.0,1.5,0.15,2.72]},"tile":{"main":[0.0,-0.12,0.0,1.5,0.15,2.72]}},"parts":["main"],"variants":["base"]},"p_metro_entry":{"layer":"sorted","catcher":"ground","states":["open","shut"],"origin":"center","rots":[0,6],"parts":["base","roof"],"fade_parts":["roof"],"footprint":[[-1.45,-2.2,-1.1,2.6],[1.1,-2.2,1.45,2.6],[-1.1,-1.5,1.1,2.6],[-2.0,-2.4,-1.6,-2.0]],"text":"\u4e95\u69d0\u91cc\u7ad9","text_board":"metro_board","text_ink":"shop_ink","fadeable":true,"geo":{"open":{"base":[-2.0,-2.4,-2.2,1.45,2.6,3.2],"roof":[-1.62,-2.42,2.94,1.62,2.7,3.41]},"shut":{"base":[-2.0,-2.4,-2.2,1.45,2.6,3.2],"roof":[-1.62,-2.42,2.94,1.62,2.7,3.41]}},"variants":["base"]},"s_bar":{"layer":"sorted","catcher":"ground","origin":"center","interior":true,"states":["default","bento"],"rots":[0,4],"footprint":[[-1.2,-0.2,1.2,0.2]],"fadeable":false,"geo":{"default":{"main":[-1.2,-0.2,0.0,1.2,0.2,1.04]},"bento":{"main":[-1.2,-0.2,0.0,1.2,0.2,1.09]}},"parts":["main"],"variants":["base"]},"s_barstool":{"layer":"sorted","catcher":"ground","origin":"center","interior":true,"states":["default"],"footprint":[[-0.16,-0.16,0.16,0.16]],"fadeable":false,"geo":{"default":{"main":[-0.19,-0.2,0.0,0.19,0.2,0.77]}},"rots":[0],"parts":["main"],"variants":["base"]},"s_cooler":{"layer":"sorted","catcher":"ground","origin":"center","interior":true,"states":["full","low"],"rots":[0,2,6],"footprint":[[-0.9,-0.35,0.9,0.35]],"fadeable":true,"light":[0,-0.4,1.4],"geo":{"full":{"main":[-0.9,-0.37,0.0,0.9,0.35,2.05]},"low":{"main":[-0.9,-0.37,0.0,0.9,0.35,2.05]}},"parts":["main"],"variants":["base"]},"s_counter":{"layer":"sorted","catcher":"ground","origin":"center","interior":true,"states":["default"],"rots":[0,4],"footprint":[[-1.0,-0.3,1.0,0.3]],"fadeable":false,"light":[0.55,0,1.05],"geo":{"default":{"main":[-1.02,-0.32,0.0,1.02,0.32,1.5]}},"parts":["main"],"variants":["base"]},"s_gondola":{"layer":"sorted","catcher":"ground","origin":"center","interior":true,"states":["full","low"],"rots":[0,2],"footprint":[[-0.9,-0.3,0.9,0.3]],"fadeable":true,"geo":{"full":{"main":[-0.9,-0.305,0.0,0.9,0.3,1.45]},"low":{"main":[-0.9,-0.305,0.0,0.9,0.3,1.45]}},"parts":["main"],"variants":["base"]},"s_micro":{"layer":"sorted","catcher":"ground","origin":"center","interior":true,"states":["off","on"],"rots":[0,6],"footprint":[[-0.3,-0.25,0.3,0.25]],"fadeable":false,"light":[0,-0.2,1.05],"geo":{"off":{"main":[-0.3,-0.255,0.0,0.3,0.25,1.15]},"on":{"main":[-0.3,-0.255,0.0,0.3,0.25,1.15]}},"parts":["main"],"variants":["base"]},"s_oden":{"layer":"sorted","catcher":"ground","origin":"center","interior":true,"states":["full","low"],"rots":[0],"footprint":[[-0.35,-0.28,0.35,0.28]],"fadeable":false,"light":[0,0,1.0],"geo":{"full":{"main":[-0.35,-0.29,0.0,0.35,0.28,1.25]},"low":{"main":[-0.35,-0.29,0.0,0.35,0.28,1.25]}},"parts":["main"],"variants":["base"]}},"fx":{"fire_frames":8,"fire_fps":12,"smoke_sizes":3}}
+{
+  "version": 1,
+  "doc": "frame key = piece/variant/part/state/rot ; frames[key] = [x, y, w, h, anchorX, anchorY] in kit_atlas.png (anchor = pixel of the piece origin); key#shadow = ground shadow frame; emit[] = keys with pixels in kit_emit.png; masks[key] = [cols, rows, base64 packbits] opaque 4px cells for occluder fade tests. Units: metres, x east, y north, z up.",
+  "projection": {
+    "view": "dimetric-2:1",
+    "yaw_deg": 45,
+    "pitch_deg": 30,
+    "px_per_m": 45.2548,
+    "px_x_per_m": 32,
+    "px_y_per_m": 16,
+    "px_z_per_m": 39.1918,
+    "chunk_m": 2,
+    "chunk_px": [
+      128,
+      64
+    ],
+    "grid_m": 0.5,
+    "grid_px": [
+      16,
+      8
+    ],
+    "sun_cam": [
+      0.5,
+      -0.62,
+      0.75
+    ],
+    "sun_world": [
+      -0.0776,
+      -0.7239,
+      0.6855
+    ],
+    "screen": "sx = (x - y) * 32 ; sy = -((x + y) * 16 + z * px_z_per_m)  (y down)"
+  },
+  "atlas": "kit_atlas.png",
+  "emit_atlas": "kit_emit.png",
+  "atlas_size": [
+    2048,
+    1012
+  ],
+  "mask_cell": 4,
+  "frames": {
+    "p_metro_entry/base/base/open/0": [
+      0,
+      0,
+      280,
+      331,
+      145,
+      181
+    ],
+    "p_metro_entry/base/base/open/6": [
+      281,
+      0,
+      293,
+      331,
+      148,
+      181
+    ],
+    "p_metro_entry/base/base/shut/0": [
+      575,
+      0,
+      280,
+      331,
+      145,
+      181
+    ],
+    "p_metro_entry/base/base/shut/6": [
+      856,
+      0,
+      293,
+      331,
+      148,
+      181
+    ],
+    "i_flight/base/main/up_roof/0": [
+      1150,
+      0,
+      220,
+      202,
+      180,
+      199
+    ],
+    "f_eatery/base/main/kuaican/0": [
+      1371,
+      0,
+      114,
+      173,
+      13,
+      172
+    ],
+    "f_eatery/base/main/kuaican/6": [
+      1486,
+      0,
+      114,
+      173,
+      5,
+      124
+    ],
+    "f_eatery/base/main/noodle/0": [
+      1601,
+      0,
+      114,
+      173,
+      13,
+      172
+    ],
+    "f_eatery/base/main/noodle/6": [
+      1716,
+      0,
+      114,
+      173,
+      5,
+      124
+    ],
+    "f_eatery/base/main/tea/0": [
+      1831,
+      0,
+      114,
+      173,
+      13,
+      172
+    ],
+    "f_eatery/base/main/tea/6": [
+      0,
+      332,
+      114,
+      173,
+      5,
+      124
+    ],
+    "p_metro_entry/base/roof/open/0": [
+      115,
+      332,
+      276,
+      158,
+      142,
+      206
+    ],
+    "p_metro_entry/base/roof/open/6": [
+      392,
+      332,
+      277,
+      158,
+      134,
+      206
+    ],
+    "p_metro_entry/base/roof/shut/0": [
+      670,
+      332,
+      276,
+      158,
+      142,
+      206
+    ],
+    "p_metro_entry/base/roof/shut/6": [
+      947,
+      332,
+      277,
+      158,
+      134,
+      206
+    ],
+    "f_eatery/base/main/shut/0": [
+      1225,
+      332,
+      112,
+      151,
+      13,
+      150
+    ],
+    "f_eatery/base/main/shut/6": [
+      1338,
+      332,
+      112,
+      151,
+      3,
+      102
+    ],
+    "fx/soot": [
+      1451,
+      332,
+      93,
+      150,
+      49,
+      149
+    ],
+    "i_flight/base/main/up/0": [
+      1545,
+      332,
+      220,
+      148,
+      180,
+      145
+    ],
+    "i_flight/base/main/up_roof/0#shadow": [
+      1766,
+      332,
+      253,
+      136,
+      259,
+      135
+    ],
+    "i_door/base/main/open/0": [
+      0,
+      506,
+      45,
+      135,
+      5,
+      128
+    ],
+    "i_door/wood/main/open/0": [
+      46,
+      506,
+      45,
+      135,
+      5,
+      128
+    ],
+    "i_balfront/base/main/glass/0": [
+      92,
+      506,
+      57,
+      133,
+      6,
+      133
+    ],
+    "i_balfront/base/main/glass/6": [
+      150,
+      506,
+      57,
+      133,
+      3,
+      109
+    ],
+    "i_window/base/main/dado/0": [
+      208,
+      506,
+      55,
+      133,
+      5,
+      133
+    ],
+    "i_window/base/main/dado/6": [
+      264,
+      506,
+      55,
+      133,
+      2,
+      109
+    ],
+    "i_window/base/main/plain/0": [
+      320,
+      506,
+      55,
+      133,
+      5,
+      133
+    ],
+    "i_window/base/main/plain/6": [
+      376,
+      506,
+      55,
+      133,
+      2,
+      109
+    ],
+    "i_window/base/main/tile/0": [
+      432,
+      506,
+      55,
+      133,
+      5,
+      133
+    ],
+    "i_window/base/main/tile/6": [
+      488,
+      506,
+      55,
+      133,
+      2,
+      109
+    ],
+    "i_door/base/main/open/6": [
+      544,
+      506,
+      58,
+      129,
+      15,
+      109
+    ],
+    "i_door/wood/main/open/6": [
+      603,
+      506,
+      58,
+      129,
+      15,
+      109
+    ],
+    "i_door/base/main/closed/0": [
+      662,
+      506,
+      44,
+      128,
+      5,
+      128
+    ],
+    "i_door/base/main/closed/6": [
+      707,
+      506,
+      43,
+      128,
+      0,
+      109
+    ],
+    "i_door/wood/main/closed/0": [
+      751,
+      506,
+      44,
+      128,
+      5,
+      128
+    ],
+    "i_door/wood/main/closed/6": [
+      796,
+      506,
+      43,
+      128,
+      0,
+      109
+    ],
+    "i_wall/base/main/dado/0": [
+      840,
+      506,
+      37,
+      125,
+      5,
+      125
+    ],
+    "i_wall/base/main/dado/6": [
+      878,
+      506,
+      37,
+      125,
+      0,
+      109
+    ],
+    "i_wall/base/main/dado_ads/0": [
+      916,
+      506,
+      37,
+      125,
+      5,
+      125
+    ],
+    "i_wall/base/main/dado_ads/6": [
+      954,
+      506,
+      37,
+      125,
+      0,
+      109
+    ],
+    "i_wall/base/main/plain/0": [
+      992,
+      506,
+      37,
+      125,
+      5,
+      125
+    ],
+    "i_wall/base/main/plain/6": [
+      1030,
+      506,
+      37,
+      125,
+      0,
+      109
+    ],
+    "i_wall/base/main/poster/0": [
+      1068,
+      506,
+      37,
+      125,
+      5,
+      125
+    ],
+    "i_wall/base/main/poster/6": [
+      1106,
+      506,
+      37,
+      125,
+      0,
+      109
+    ],
+    "i_wall/base/main/tile/0": [
+      1144,
+      506,
+      37,
+      125,
+      5,
+      125
+    ],
+    "i_wall/base/main/tile/6": [
+      1182,
+      506,
+      37,
+      125,
+      0,
+      109
+    ],
+    "f_kitchen/base/main/cooking/0": [
+      1220,
+      506,
+      81,
+      124,
+      40,
+      104
+    ],
+    "f_kitchen/base/main/off/0": [
+      1302,
+      506,
+      81,
+      124,
+      40,
+      104
+    ],
+    "s_cooler/base/main/full/0": [
+      1384,
+      506,
+      83,
+      122,
+      41,
+      101
+    ],
+    "s_cooler/base/main/full/2": [
+      1468,
+      506,
+      83,
+      122,
+      41,
+      101
+    ],
+    "s_cooler/base/main/full/6": [
+      1552,
+      506,
+      83,
+      122,
+      42,
+      101
+    ],
+    "s_cooler/base/main/low/0": [
+      1636,
+      506,
+      83,
+      122,
+      41,
+      101
+    ],
+    "s_cooler/base/main/low/2": [
+      1720,
+      506,
+      83,
+      122,
+      41,
+      101
+    ],
+    "s_cooler/base/main/low/6": [
+      1804,
+      506,
+      83,
+      122,
+      42,
+      101
+    ],
+    "f_kitchen/base/main/cooking/2": [
+      1888,
+      506,
+      81,
+      120,
+      40,
+      100
+    ],
+    "f_kitchen/base/main/off/2": [
+      0,
+      642,
+      81,
+      120,
+      40,
+      100
+    ],
+    "i_flight/base/main/down/0": [
+      82,
+      642,
+      183,
+      118,
+      146,
+      114
+    ],
+    "i_side/base/main/dado/0": [
+      266,
+      642,
+      22,
+      117,
+      11,
+      112
+    ],
+    "i_side/base/main/dado/6": [
+      289,
+      642,
+      22,
+      117,
+      11,
+      112
+    ],
+    "i_side/base/main/plain/0": [
+      312,
+      642,
+      22,
+      117,
+      11,
+      112
+    ],
+    "i_side/base/main/plain/6": [
+      335,
+      642,
+      22,
+      117,
+      11,
+      112
+    ],
+    "i_side/base/main/tile/0": [
+      358,
+      642,
+      22,
+      117,
+      11,
+      112
+    ],
+    "i_side/base/main/tile/6": [
+      381,
+      642,
+      22,
+      117,
+      11,
+      112
+    ],
+    "f_wardrobe/base/main/closed/0": [
+      404,
+      642,
+      56,
+      109,
+      28,
+      95
+    ],
+    "f_wardrobe/base/main/closed/2": [
+      461,
+      642,
+      56,
+      109,
+      28,
+      95
+    ],
+    "f_wardrobe/base/main/closed/6": [
+      518,
+      642,
+      56,
+      109,
+      28,
+      95
+    ],
+    "f_wardrobe/base/main/open/0": [
+      575,
+      642,
+      56,
+      109,
+      28,
+      95
+    ],
+    "f_wardrobe/base/main/open/2": [
+      632,
+      642,
+      56,
+      109,
+      28,
+      95
+    ],
+    "f_wardrobe/base/main/open/6": [
+      689,
+      642,
+      56,
+      109,
+      28,
+      95
+    ],
+    "f_shower/base/main/dry/0": [
+      746,
+      642,
+      58,
+      107,
+      29,
+      93
+    ],
+    "f_shower/base/main/running/0": [
+      805,
+      642,
+      58,
+      107,
+      29,
+      93
+    ],
+    "i_meter/base/main/default/0": [
+      864,
+      642,
+      33,
+      104,
+      14,
+      48
+    ],
+    "s_gondola/base/main/full/0": [
+      898,
+      642,
+      80,
+      97,
+      40,
+      77
+    ],
+    "s_gondola/base/main/full/2": [
+      979,
+      642,
+      80,
+      97,
+      40,
+      77
+    ],
+    "s_gondola/base/main/low/0": [
+      1060,
+      642,
+      80,
+      97,
+      40,
+      77
+    ],
+    "s_gondola/base/main/low/2": [
+      1141,
+      642,
+      80,
+      97,
+      40,
+      77
+    ],
+    "i_flight/base/main/up/0#shadow": [
+      1222,
+      642,
+      216,
+      95,
+      222,
+      94
+    ],
+    "s_counter/base/main/default/0": [
+      1439,
+      642,
+      88,
+      94,
+      44,
+      72
+    ],
+    "i_mailbox/base/main/default/0": [
+      1528,
+      642,
+      50,
+      91,
+      18,
+      41
+    ],
+    "s_bar/base/main/bento/4": [
+      1579,
+      642,
+      90,
+      85,
+      45,
+      64
+    ],
+    "s_bar/base/main/default/4": [
+      1670,
+      642,
+      90,
+      85,
+      45,
+      64
+    ],
+    "f_shelf/base/main/default/0": [
+      1761,
+      642,
+      38,
+      82,
+      19,
+      72
+    ],
+    "f_shelf/base/main/default/2": [
+      1800,
+      642,
+      38,
+      82,
+      19,
+      72
+    ],
+    "s_counter/base/main/default/4": [
+      1839,
+      642,
+      88,
+      82,
+      44,
+      60
+    ],
+    "s_bar/base/main/bento/0": [
+      1928,
+      642,
+      90,
+      81,
+      45,
+      64
+    ],
+    "s_bar/base/main/default/0": [
+      0,
+      763,
+      90,
+      81,
+      45,
+      64
+    ],
+    "i_balfront/base/main/default/0": [
+      91,
+      763,
+      57,
+      79,
+      6,
+      79
+    ],
+    "i_balfront/base/main/default/6": [
+      149,
+      763,
+      57,
+      79,
+      3,
+      55
+    ],
+    "f_sign_kc/base/main/default/6": [
+      207,
+      763,
+      97,
+      78,
+      53,
+      44
+    ],
+    "f_sign_noodle/base/main/default/6": [
+      305,
+      763,
+      97,
+      78,
+      53,
+      44
+    ],
+    "f_sign_tea/base/main/default/6": [
+      403,
+      763,
+      97,
+      78,
+      53,
+      44
+    ],
+    "f_basin/base/main/default/0": [
+      501,
+      763,
+      29,
+      76,
+      15,
+      74
+    ],
+    "f_fridge/base/main/closed/0": [
+      531,
+      763,
+      40,
+      75,
+      20,
+      65
+    ],
+    "f_fridge/base/main/open/0": [
+      572,
+      763,
+      45,
+      75,
+      25,
+      65
+    ],
+    "f_sign_kc/base/main/default/0": [
+      618,
+      763,
+      98,
+      71,
+      45,
+      42
+    ],
+    "f_sign_noodle/base/main/default/0": [
+      717,
+      763,
+      98,
+      71,
+      45,
+      42
+    ],
+    "f_sign_tea/base/main/default/0": [
+      816,
+      763,
+      98,
+      71,
+      45,
+      42
+    ],
+    "s_oden/base/main/full/0": [
+      915,
+      763,
+      43,
+      71,
+      21,
+      60
+    ],
+    "s_oden/base/main/low/0": [
+      959,
+      763,
+      43,
+      71,
+      21,
+      60
+    ],
+    "f_bed/base/main/made/0": [
+      1003,
+      763,
+      98,
+      69,
+      49,
+      45
+    ],
+    "f_bed/base/main/messy/0": [
+      1102,
+      763,
+      99,
+      68,
+      49,
+      44
+    ],
+    "f_desk/base/main/off/0": [
+      1202,
+      763,
+      60,
+      68,
+      30,
+      54
+    ],
+    "f_desk/base/main/on/0": [
+      1263,
+      763,
+      60,
+      68,
+      30,
+      54
+    ],
+    "f_kitchen/base/main/cooking/0#shadow": [
+      1324,
+      763,
+      63,
+      67,
+      103,
+      59
+    ],
+    "f_kitchen/base/main/off/0#shadow": [
+      1388,
+      763,
+      63,
+      67,
+      103,
+      59
+    ],
+    "s_cooler/base/main/full/0#shadow": [
+      1452,
+      763,
+      60,
+      66,
+      101,
+      58
+    ],
+    "s_cooler/base/main/low/0#shadow": [
+      1513,
+      763,
+      60,
+      66,
+      101,
+      58
+    ],
+    "i_dryrack/base/main/default/0": [
+      1574,
+      763,
+      90,
+      65,
+      45,
+      124
+    ],
+    "g_terrazzo/base/main/default/0": [
+      1665,
+      763,
+      128,
+      64,
+      64,
+      64
+    ],
+    "g_tile/base/main/default/0": [
+      1794,
+      763,
+      128,
+      64,
+      64,
+      64
+    ],
+    "g_wood/base/main/a/0": [
+      0,
+      845,
+      128,
+      64,
+      64,
+      64
+    ],
+    "g_wood/base/main/b/0": [
+      129,
+      845,
+      128,
+      64,
+      64,
+      64
+    ],
+    "s_micro/base/main/off/0": [
+      258,
+      845,
+      38,
+      63,
+      19,
+      53
+    ],
+    "s_micro/base/main/off/6": [
+      297,
+      845,
+      38,
+      63,
+      19,
+      53
+    ],
+    "s_micro/base/main/on/0": [
+      336,
+      845,
+      38,
+      63,
+      19,
+      53
+    ],
+    "s_micro/base/main/on/6": [
+      375,
+      845,
+      38,
+      63,
+      19,
+      53
+    ],
+    "f_desk/base/main/off/4": [
+      414,
+      845,
+      60,
+      60,
+      30,
+      46
+    ],
+    "f_desk/base/main/on/4": [
+      475,
+      845,
+      60,
+      60,
+      30,
+      46
+    ],
+    "f_wardrobe/base/main/open/0#shadow": [
+      536,
+      845,
+      67,
+      59,
+      88,
+      52
+    ],
+    "fx/fire/0": [
+      604,
+      845,
+      40,
+      58,
+      20,
+      56
+    ],
+    "fx/fire/1": [
+      645,
+      845,
+      40,
+      58,
+      20,
+      56
+    ],
+    "fx/fire/2": [
+      686,
+      845,
+      39,
+      58,
+      20,
+      56
+    ],
+    "fx/fire/3": [
+      726,
+      845,
+      40,
+      58,
+      20,
+      56
+    ],
+    "fx/fire/4": [
+      767,
+      845,
+      40,
+      58,
+      20,
+      56
+    ],
+    "fx/fire/5": [
+      808,
+      845,
+      37,
+      58,
+      18,
+      56
+    ],
+    "fx/fire/6": [
+      846,
+      845,
+      39,
+      58,
+      20,
+      56
+    ],
+    "fx/fire/7": [
+      886,
+      845,
+      38,
+      58,
+      19,
+      56
+    ],
+    "i_crank/base/main/default/0": [
+      925,
+      845,
+      9,
+      56,
+      3,
+      50
+    ],
+    "s_bar/base/main/bento/4#shadow": [
+      935,
+      845,
+      112,
+      56,
+      75,
+      37
+    ],
+    "s_bar/base/main/default/4#shadow": [
+      1048,
+      845,
+      112,
+      56,
+      75,
+      37
+    ],
+    "f_wardrobe/base/main/closed/0#shadow": [
+      1161,
+      845,
+      62,
+      54,
+      88,
+      52
+    ],
+    "f_washer/base/main/done/0": [
+      1224,
+      845,
+      40,
+      53,
+      20,
+      43
+    ],
+    "f_washer/base/main/idle/0": [
+      1265,
+      845,
+      40,
+      53,
+      20,
+      43
+    ],
+    "f_washer/base/main/running/0": [
+      1306,
+      845,
+      40,
+      53,
+      20,
+      43
+    ],
+    "i_clutter/base/main/broom/0": [
+      1347,
+      845,
+      27,
+      52,
+      15,
+      48
+    ],
+    "s_bar/base/main/bento/0#shadow": [
+      1375,
+      845,
+      102,
+      51,
+      75,
+      37
+    ],
+    "s_bar/base/main/default/0#shadow": [
+      1478,
+      845,
+      102,
+      51,
+      75,
+      37
+    ],
+    "s_counter/base/main/default/0#shadow": [
+      1581,
+      845,
+      50,
+      51,
+      71,
+      41
+    ],
+    "f_nightstand/base/main/off/0": [
+      1632,
+      845,
+      32,
+      50,
+      16,
+      42
+    ],
+    "f_nightstand/base/main/on/0": [
+      1665,
+      845,
+      32,
+      50,
+      16,
+      42
+    ],
+    "f_chair/base/main/default/0": [
+      1698,
+      845,
+      29,
+      49,
+      15,
+      44
+    ],
+    "f_shower/base/main/dry/0#shadow": [
+      1728,
+      845,
+      65,
+      49,
+      88,
+      50
+    ],
+    "f_shower/base/main/running/0#shadow": [
+      1794,
+      845,
+      65,
+      49,
+      88,
+      50
+    ],
+    "s_cooler/base/main/full/6#shadow": [
+      1860,
+      845,
+      60,
+      49,
+      101,
+      58
+    ],
+    "s_cooler/base/main/low/6#shadow": [
+      1921,
+      845,
+      60,
+      49,
+      101,
+      58
+    ],
+    "i_clutter/base/main/boxes/0": [
+      1982,
+      845,
+      29,
+      48,
+      16,
+      40
+    ],
+    "s_cooler/base/main/full/2#shadow": [
+      0,
+      910,
+      60,
+      48,
+      101,
+      58
+    ],
+    "s_cooler/base/main/low/2#shadow": [
+      61,
+      910,
+      60,
+      48,
+      101,
+      58
+    ],
+    "f_wardrobe/base/main/closed/2#shadow": [
+      122,
+      910,
+      62,
+      47,
+      88,
+      52
+    ],
+    "f_wardrobe/base/main/closed/6#shadow": [
+      185,
+      910,
+      62,
+      47,
+      88,
+      52
+    ],
+    "f_wardrobe/base/main/open/2#shadow": [
+      248,
+      910,
+      62,
+      47,
+      88,
+      52
+    ],
+    "f_wardrobe/base/main/open/6#shadow": [
+      311,
+      910,
+      62,
+      47,
+      88,
+      52
+    ],
+    "f_toilet/base/main/default/0": [
+      374,
+      910,
+      29,
+      45,
+      16,
+      40
+    ],
+    "s_gondola/base/main/low/0#shadow": [
+      404,
+      910,
+      42,
+      44,
+      82,
+      36
+    ],
+    "f_chair/base/main/default/4": [
+      447,
+      910,
+      29,
+      43,
+      14,
+      38
+    ],
+    "f_kitchen/base/main/cooking/2#shadow": [
+      477,
+      910,
+      63,
+      43,
+      103,
+      54
+    ],
+    "f_kitchen/base/main/off/2#shadow": [
+      541,
+      910,
+      63,
+      43,
+      103,
+      54
+    ],
+    "d_rug/base/main/default/0": [
+      605,
+      910,
+      82,
+      42,
+      41,
+      21
+    ],
+    "f_fridge/base/main/open/0#shadow": [
+      688,
+      910,
+      54,
+      42,
+      61,
+      35
+    ],
+    "f_shelf/base/main/default/0#shadow": [
+      743,
+      910,
+      46,
+      42,
+      65,
+      39
+    ],
+    "s_gondola/base/main/full/0#shadow": [
+      790,
+      910,
+      42,
+      42,
+      82,
+      34
+    ],
+    "i_notice/base/main/default/0": [
+      833,
+      910,
+      33,
+      41,
+      16,
+      32
+    ],
+    "fx/umbrella/0": [
+      867,
+      910,
+      37,
+      40,
+      18,
+      39
+    ],
+    "fx/umbrella/1": [
+      905,
+      910,
+      37,
+      40,
+      18,
+      39
+    ],
+    "fx/umbrella/2": [
+      943,
+      910,
+      37,
+      40,
+      18,
+      39
+    ],
+    "fx/umbrella/3": [
+      981,
+      910,
+      37,
+      40,
+      18,
+      39
+    ],
+    "s_barstool/base/main/default/0": [
+      1019,
+      910,
+      20,
+      40,
+      10,
+      35
+    ],
+    "f_table/base/main/default/0": [
+      1040,
+      910,
+      43,
+      39,
+      21,
+      29
+    ],
+    "f_table/base/main/meal/0": [
+      1084,
+      910,
+      43,
+      39,
+      21,
+      29
+    ],
+    "f_basin/base/main/default/0#shadow": [
+      1128,
+      910,
+      59,
+      38,
+      65,
+      39
+    ],
+    "fx/leaves/0": [
+      1188,
+      910,
+      73,
+      37,
+      39,
+      19
+    ],
+    "fx/leaves/2": [
+      1262,
+      910,
+      70,
+      37,
+      37,
+      20
+    ],
+    "i_ac/base/main/on/0": [
+      1333,
+      910,
+      42,
+      37,
+      16,
+      101
+    ],
+    "i_ac/base/main/on/6": [
+      1376,
+      910,
+      42,
+      37,
+      26,
+      101
+    ],
+    "i_clutter/base/main/shoes/0": [
+      1419,
+      910,
+      32,
+      37,
+      16,
+      28
+    ],
+    "i_cut/base/main/dado/0": [
+      1452,
+      910,
+      37,
+      37,
+      5,
+      37
+    ],
+    "i_cut/base/main/dado/6": [
+      1490,
+      910,
+      37,
+      37,
+      0,
+      21
+    ],
+    "i_cut/base/main/plain/0": [
+      1528,
+      910,
+      37,
+      37,
+      5,
+      37
+    ],
+    "i_cut/base/main/plain/6": [
+      1566,
+      910,
+      37,
+      37,
+      0,
+      21
+    ],
+    "i_cut/base/main/tile/0": [
+      1604,
+      910,
+      37,
+      37,
+      5,
+      37
+    ],
+    "i_cut/base/main/tile/6": [
+      1642,
+      910,
+      37,
+      37,
+      0,
+      21
+    ],
+    "fx/leaves/1": [
+      1680,
+      910,
+      74,
+      36,
+      37,
+      18
+    ],
+    "f_fridge/base/main/closed/0#shadow": [
+      1755,
+      910,
+      42,
+      35,
+      61,
+      35
+    ],
+    "i_ac/base/main/off/0": [
+      1798,
+      910,
+      41,
+      35,
+      16,
+      101
+    ],
+    "i_ac/base/main/off/2": [
+      1840,
+      910,
+      41,
+      35,
+      16,
+      105
+    ],
+    "i_ac/base/main/off/4": [
+      1882,
+      910,
+      41,
+      35,
+      25,
+      105
+    ],
+    "i_ac/base/main/off/6": [
+      1924,
+      910,
+      41,
+      35,
+      25,
+      101
+    ],
+    "i_ac/base/main/on/2": [
+      1966,
+      910,
+      43,
+      35,
+      16,
+      105
+    ],
+    "i_ac/base/main/on/4": [
+      0,
+      959,
+      43,
+      35,
+      27,
+      105
+    ],
+    "s_gondola/base/main/full/2#shadow": [
+      44,
+      959,
+      42,
+      35,
+      82,
+      46
+    ],
+    "s_gondola/base/main/low/2#shadow": [
+      87,
+      959,
+      42,
+      35,
+      82,
+      46
+    ],
+    "f_shelf/base/main/default/2#shadow": [
+      130,
+      959,
+      46,
+      34,
+      65,
+      39
+    ],
+    "fx/petals/1": [
+      177,
+      959,
+      74,
+      34,
+      39,
+      17
+    ],
+    "f_desk/base/main/off/0#shadow": [
+      252,
+      959,
+      59,
+      33,
+      51,
+      30
+    ],
+    "f_desk/base/main/on/0#shadow": [
+      312,
+      959,
+      59,
+      33,
+      51,
+      30
+    ],
+    "fx/petals/0": [
+      372,
+      959,
+      72,
+      33,
+      35,
+      18
+    ],
+    "s_oden/base/main/full/0#shadow": [
+      445,
+      959,
+      36,
+      33,
+      57,
+      33
+    ],
+    "s_oden/base/main/low/0#shadow": [
+      482,
+      959,
+      36,
+      33,
+      57,
+      33
+    ],
+    "s_counter/base/main/default/4#shadow": [
+      519,
+      959,
+      28,
+      32,
+      71,
+      22
+    ],
+    "fx/crash_decal": [
+      548,
+      959,
+      125,
+      31,
+      63,
+      17
+    ],
+    "i_clutter/base/main/jars/0": [
+      674,
+      959,
+      25,
+      29,
+      13,
+      22
+    ],
+    "s_micro/base/main/off/0#shadow": [
+      700,
+      959,
+      30,
+      29,
+      49,
+      29
+    ],
+    "s_micro/base/main/on/0#shadow": [
+      731,
+      959,
+      30,
+      29,
+      49,
+      29
+    ],
+    "i_clutter/base/main/veg/0": [
+      762,
+      959,
+      31,
+      27,
+      15,
+      19
+    ],
+    "s_micro/base/main/off/6#shadow": [
+      794,
+      959,
+      30,
+      27,
+      49,
+      29
+    ],
+    "s_micro/base/main/on/6#shadow": [
+      825,
+      959,
+      30,
+      27,
+      49,
+      29
+    ],
+    "f_stool/base/main/default/0": [
+      856,
+      959,
+      16,
+      26,
+      8,
+      23
+    ],
+    "f_washer/base/main/done/0#shadow": [
+      873,
+      959,
+      24,
+      25,
+      43,
+      25
+    ],
+    "f_washer/base/main/idle/0#shadow": [
+      898,
+      959,
+      24,
+      25,
+      43,
+      25
+    ],
+    "f_washer/base/main/running/0#shadow": [
+      923,
+      959,
+      24,
+      25,
+      43,
+      25
+    ],
+    "fx/smoke/2": [
+      948,
+      959,
+      26,
+      25,
+      13,
+      12
+    ],
+    "i_track/base/main/default/0": [
+      975,
+      959,
+      48,
+      25,
+      24,
+      13
+    ],
+    "i_track/base/main/default/2": [
+      1024,
+      959,
+      48,
+      25,
+      24,
+      13
+    ],
+    "f_chair/base/main/default/0#shadow": [
+      1073,
+      959,
+      40,
+      24,
+      41,
+      24
+    ],
+    "f_desk/base/main/off/4#shadow": [
+      1114,
+      959,
+      59,
+      24,
+      51,
+      21
+    ],
+    "f_desk/base/main/on/4#shadow": [
+      1174,
+      959,
+      59,
+      24,
+      51,
+      21
+    ],
+    "fx/scorch": [
+      1234,
+      959,
+      96,
+      24,
+      48,
+      12
+    ],
+    "f_toilet/base/main/default/0#shadow": [
+      1331,
+      959,
+      33,
+      23,
+      39,
+      22
+    ],
+    "i_clutter/base/main/broom/0#shadow": [
+      1365,
+      959,
+      43,
+      23,
+      46,
+      23
+    ],
+    "i_clutter/base/main/boxes/0#shadow": [
+      1409,
+      959,
+      41,
+      22,
+      30,
+      21
+    ],
+    "d_mat/base/main/default/0": [
+      1451,
+      959,
+      41,
+      21,
+      20,
+      11
+    ],
+    "fx/skid": [
+      1493,
+      959,
+      170,
+      21,
+      0,
+      7
+    ],
+    "f_nightstand/base/main/off/0#shadow": [
+      1664,
+      959,
+      19,
+      20,
+      34,
+      21
+    ],
+    "f_nightstand/base/main/on/0#shadow": [
+      1684,
+      959,
+      19,
+      20,
+      34,
+      21
+    ],
+    "f_table/base/main/default/0#shadow": [
+      1704,
+      959,
+      49,
+      20,
+      33,
+      13
+    ],
+    "f_table/base/main/meal/0#shadow": [
+      1754,
+      959,
+      49,
+      20,
+      33,
+      13
+    ],
+    "fx/litter": [
+      1804,
+      959,
+      78,
+      20,
+      40,
+      11
+    ],
+    "f_bed/base/main/made/0#shadow": [
+      1883,
+      959,
+      27,
+      18,
+      76,
+      11
+    ],
+    "f_bed/base/main/messy/0#shadow": [
+      1911,
+      959,
+      27,
+      18,
+      76,
+      11
+    ],
+    "fx/smoke/1": [
+      1939,
+      959,
+      17,
+      18,
+      8,
+      9
+    ],
+    "fx/glass_decal": [
+      1957,
+      959,
+      70,
+      17,
+      35,
+      10
+    ],
+    "fx/leafpile/0": [
+      0,
+      995,
+      34,
+      17,
+      17,
+      13
+    ],
+    "fx/leafpile/1": [
+      35,
+      995,
+      32,
+      17,
+      15,
+      13
+    ],
+    "f_chair/base/main/default/4#shadow": [
+      68,
+      995,
+      27,
+      16,
+      28,
+      17
+    ],
+    "i_pendant/base/main/off/0": [
+      96,
+      995,
+      22,
+      16,
+      11,
+      93
+    ],
+    "i_pendant/base/main/on/0": [
+      119,
+      995,
+      22,
+      16,
+      11,
+      93
+    ],
+    "i_clutter/base/main/shoes/0#shadow": [
+      142,
+      995,
+      13,
+      14,
+      29,
+      13
+    ],
+    "f_stool/base/main/default/0#shadow": [
+      156,
+      995,
+      24,
+      13,
+      21,
+      12
+    ],
+    "fx/triangle": [
+      181,
+      995,
+      15,
+      13,
+      7,
+      12
+    ],
+    "i_clutter/base/main/jars/0#shadow": [
+      197,
+      995,
+      9,
+      13,
+      21,
+      11
+    ],
+    "fx/smoke/0": [
+      207,
+      995,
+      12,
+      12,
+      6,
+      6
+    ],
+    "fx/can": [
+      220,
+      995,
+      4,
+      6,
+      2,
+      5
+    ],
+    "i_clutter/base/main/veg/0#shadow": [
+      225,
+      995,
+      5,
+      6,
+      20,
+      5
+    ],
+    "fx/shard/0": [
+      231,
+      995,
+      3,
+      3,
+      1,
+      1
+    ],
+    "fx/shard/1": [
+      235,
+      995,
+      3,
+      3,
+      1,
+      1
+    ],
+    "fx/bit/0": [
+      239,
+      995,
+      2,
+      2,
+      1,
+      1
+    ],
+    "fx/bit/1": [
+      242,
+      995,
+      3,
+      2,
+      1,
+      1
+    ],
+    "fx/bit/2": [
+      246,
+      995,
+      2,
+      2,
+      1,
+      1
+    ],
+    "fx/shard/2": [
+      249,
+      995,
+      2,
+      2,
+      1,
+      1
+    ]
+  },
+  "emit": [
+    "p_metro_entry/base/base/open/0",
+    "p_metro_entry/base/base/open/6",
+    "p_metro_entry/base/base/shut/0",
+    "p_metro_entry/base/base/shut/6",
+    "f_eatery/base/main/kuaican/0",
+    "f_eatery/base/main/kuaican/6",
+    "f_eatery/base/main/noodle/0",
+    "f_eatery/base/main/noodle/6",
+    "f_eatery/base/main/tea/0",
+    "f_eatery/base/main/tea/6",
+    "f_eatery/base/main/shut/0",
+    "f_eatery/base/main/shut/6",
+    "f_kitchen/base/main/cooking/0",
+    "f_kitchen/base/main/off/0",
+    "s_cooler/base/main/full/0",
+    "s_cooler/base/main/full/2",
+    "s_cooler/base/main/full/6",
+    "s_cooler/base/main/low/0",
+    "s_cooler/base/main/low/2",
+    "s_cooler/base/main/low/6",
+    "s_gondola/base/main/full/0",
+    "s_gondola/base/main/full/2",
+    "s_gondola/base/main/low/0",
+    "s_gondola/base/main/low/2",
+    "s_counter/base/main/default/0",
+    "s_counter/base/main/default/4",
+    "f_sign_kc/base/main/default/6",
+    "f_sign_noodle/base/main/default/6",
+    "f_sign_tea/base/main/default/6",
+    "f_fridge/base/main/open/0",
+    "f_sign_kc/base/main/default/0",
+    "f_sign_noodle/base/main/default/0",
+    "f_sign_tea/base/main/default/0",
+    "s_oden/base/main/full/0",
+    "s_oden/base/main/low/0",
+    "f_desk/base/main/on/0",
+    "s_micro/base/main/off/0",
+    "s_micro/base/main/off/6",
+    "s_micro/base/main/on/0",
+    "s_micro/base/main/on/6",
+    "f_desk/base/main/on/4",
+    "f_washer/base/main/done/0",
+    "f_washer/base/main/idle/0",
+    "f_washer/base/main/running/0",
+    "f_nightstand/base/main/on/0",
+    "i_ac/base/main/on/0",
+    "i_ac/base/main/on/6",
+    "i_pendant/base/main/on/0"
+  ],
+  "snow_atlas": "kit_snow.png",
+  "snow": {
+    "p_metro_entry/base/base/open/0": [
+      0,
+      0,
+      1,
+      1,
+      278,
+      316,
+      0
+    ],
+    "p_metro_entry/base/base/open/6": [
+      837,
+      0,
+      1,
+      1,
+      291,
+      316,
+      0
+    ],
+    "p_metro_entry/base/roof/open/0": [
+      0,
+      317,
+      1,
+      1,
+      273,
+      150,
+      0
+    ],
+    "p_metro_entry/base/roof/open/6": [
+      822,
+      317,
+      2,
+      1,
+      273,
+      150,
+      0
+    ],
+    "i_flight/base/main/up/0": [
+      0,
+      468,
+      1,
+      1,
+      217,
+      138,
+      0
+    ],
+    "f_eatery/base/main/noodle/0": [
+      654,
+      468,
+      22,
+      44,
+      82,
+      116,
+      0
+    ],
+    "f_eatery/base/main/noodle/6": [
+      903,
+      468,
+      10,
+      44,
+      82,
+      116,
+      0
+    ],
+    "f_shower/base/main/dry/0": [
+      1152,
+      468,
+      1,
+      1,
+      56,
+      102,
+      0
+    ],
+    "i_window/base/main/plain/0": [
+      1323,
+      468,
+      1,
+      0,
+      54,
+      95,
+      0
+    ],
+    "i_window/base/main/plain/6": [
+      1488,
+      468,
+      0,
+      0,
+      54,
+      94,
+      0
+    ],
+    "s_gondola/base/main/full/0": [
+      1653,
+      468,
+      2,
+      1,
+      76,
+      90,
+      0
+    ],
+    "s_gondola/base/main/full/2": [
+      0,
+      607,
+      2,
+      1,
+      76,
+      90,
+      0
+    ],
+    "f_kitchen/base/main/off/0": [
+      231,
+      607,
+      1,
+      1,
+      79,
+      87,
+      0
+    ],
+    "f_kitchen/base/main/off/2": [
+      471,
+      607,
+      1,
+      1,
+      78,
+      82,
+      0
+    ],
+    "i_door/base/main/closed/6": [
+      708,
+      607,
+      0,
+      0,
+      43,
+      82,
+      0
+    ],
+    "i_door/wood/main/closed/6": [
+      840,
+      607,
+      0,
+      0,
+      43,
+      82,
+      0
+    ],
+    "i_mailbox/base/main/default/0": [
+      972,
+      607,
+      1,
+      1,
+      48,
+      80,
+      0
+    ],
+    "f_shelf/base/main/default/0": [
+      1119,
+      607,
+      2,
+      1,
+      34,
+      76,
+      0
+    ],
+    "i_door/base/main/closed/0": [
+      1224,
+      607,
+      1,
+      0,
+      42,
+      71,
+      0
+    ],
+    "i_door/wood/main/closed/0": [
+      1353,
+      607,
+      1,
+      0,
+      42,
+      71,
+      0
+    ],
+    "f_sign_kc/base/main/default/0": [
+      1482,
+      607,
+      4,
+      1,
+      93,
+      66,
+      0
+    ],
+    "f_sign_kc/base/main/default/6": [
+      1764,
+      607,
+      1,
+      3,
+      93,
+      66,
+      0
+    ],
+    "f_sign_noodle/base/main/default/0": [
+      0,
+      698,
+      4,
+      1,
+      93,
+      66,
+      0
+    ],
+    "f_sign_noodle/base/main/default/6": [
+      282,
+      698,
+      1,
+      3,
+      93,
+      66,
+      0
+    ],
+    "f_sign_tea/base/main/default/0": [
+      564,
+      698,
+      4,
+      1,
+      93,
+      66,
+      0
+    ],
+    "f_sign_tea/base/main/default/6": [
+      846,
+      698,
+      1,
+      3,
+      93,
+      66,
+      0
+    ],
+    "i_meter/base/main/default/0": [
+      1128,
+      698,
+      2,
+      1,
+      30,
+      63,
+      0
+    ],
+    "s_counter/base/main/default/0": [
+      1221,
+      698,
+      1,
+      1,
+      86,
+      55,
+      0
+    ],
+    "f_bed/base/main/made/0": [
+      1482,
+      698,
+      1,
+      1,
+      96,
+      54,
+      0
+    ],
+    "f_basin/base/main/default/0": [
+      1773,
+      698,
+      2,
+      1,
+      26,
+      47,
+      0
+    ],
+    "i_crank/base/main/default/0": [
+      1854,
+      698,
+      1,
+      1,
+      6,
+      47,
+      0
+    ],
+    "f_chair/base/main/default/0": [
+      1875,
+      698,
+      1,
+      1,
+      27,
+      45,
+      0
+    ],
+    "s_bar/base/main/default/0": [
+      0,
+      765,
+      1,
+      1,
+      88,
+      45,
+      0
+    ],
+    "s_bar/base/main/default/4": [
+      267,
+      765,
+      1,
+      1,
+      88,
+      45,
+      0
+    ],
+    "i_dryrack/base/main/default/0": [
+      534,
+      765,
+      1,
+      20,
+      89,
+      44,
+      0
+    ],
+    "s_counter/base/main/default/4": [
+      804,
+      765,
+      1,
+      1,
+      86,
+      43,
+      0
+    ],
+    "i_balfront/base/main/default/0": [
+      1065,
+      765,
+      0,
+      0,
+      56,
+      42,
+      0
+    ],
+    "i_balfront/base/main/default/6": [
+      1236,
+      765,
+      1,
+      0,
+      56,
+      42,
+      0
+    ],
+    "f_chair/base/main/default/4": [
+      1407,
+      765,
+      1,
+      1,
+      27,
+      39,
+      0
+    ],
+    "f_desk/base/main/off/0": [
+      1491,
+      765,
+      2,
+      1,
+      57,
+      38,
+      0
+    ],
+    "f_nightstand/base/main/off/0": [
+      1665,
+      765,
+      2,
+      1,
+      28,
+      38,
+      0
+    ],
+    "s_barstool/base/main/default/0": [
+      1752,
+      765,
+      1,
+      1,
+      18,
+      37,
+      0
+    ],
+    "i_clutter/base/main/shoes/0": [
+      1809,
+      765,
+      2,
+      1,
+      28,
+      33,
+      0
+    ],
+    "f_fridge/base/main/closed/0": [
+      1896,
+      765,
+      1,
+      1,
+      38,
+      31,
+      0
+    ],
+    "f_toilet/base/main/default/0": [
+      0,
+      811,
+      1,
+      1,
+      27,
+      31,
+      0
+    ],
+    "f_desk/base/main/off/4": [
+      84,
+      811,
+      2,
+      1,
+      57,
+      30,
+      0
+    ],
+    "f_washer/base/main/idle/0": [
+      258,
+      811,
+      1,
+      1,
+      37,
+      30,
+      0
+    ],
+    "f_wardrobe/base/main/closed/0": [
+      372,
+      811,
+      2,
+      1,
+      53,
+      27,
+      0
+    ],
+    "f_wardrobe/base/main/closed/2": [
+      534,
+      811,
+      1,
+      1,
+      53,
+      27,
+      0
+    ],
+    "f_wardrobe/base/main/closed/6": [
+      696,
+      811,
+      1,
+      1,
+      53,
+      27,
+      0
+    ],
+    "s_micro/base/main/off/0": [
+      858,
+      811,
+      2,
+      1,
+      34,
+      27,
+      0
+    ],
+    "s_micro/base/main/off/6": [
+      963,
+      811,
+      2,
+      1,
+      34,
+      27,
+      0
+    ],
+    "s_oden/base/main/full/0": [
+      1068,
+      811,
+      1,
+      13,
+      40,
+      24,
+      0
+    ],
+    "f_table/base/main/default/0": [
+      1191,
+      811,
+      1,
+      1,
+      40,
+      20,
+      0
+    ],
+    "i_ac/base/main/off/2": [
+      1314,
+      811,
+      1,
+      1,
+      38,
+      20,
+      0
+    ],
+    "i_ac/base/main/off/4": [
+      1431,
+      811,
+      2,
+      1,
+      38,
+      20,
+      0
+    ],
+    "i_ac/base/main/off/0": [
+      1548,
+      811,
+      1,
+      1,
+      38,
+      19,
+      0
+    ],
+    "i_ac/base/main/off/6": [
+      1665,
+      811,
+      2,
+      1,
+      38,
+      19,
+      0
+    ],
+    "i_cut/base/main/plain/0": [
+      1782,
+      811,
+      0,
+      0,
+      37,
+      18,
+      0
+    ],
+    "i_cut/base/main/plain/6": [
+      1896,
+      811,
+      0,
+      0,
+      37,
+      18,
+      0
+    ],
+    "i_wall/base/main/plain/0": [
+      0,
+      843,
+      1,
+      0,
+      36,
+      18,
+      0
+    ],
+    "i_wall/base/main/plain/6": [
+      111,
+      843,
+      0,
+      0,
+      36,
+      18,
+      0
+    ],
+    "f_shelf/base/main/default/2": [
+      222,
+      843,
+      2,
+      1,
+      34,
+      17,
+      0
+    ],
+    "i_notice/base/main/default/0": [
+      327,
+      843,
+      2,
+      1,
+      29,
+      15,
+      0
+    ],
+    "i_pendant/base/main/off/0": [
+      417,
+      843,
+      1,
+      2,
+      20,
+      13,
+      0
+    ],
+    "f_stool/base/main/default/0": [
+      480,
+      843,
+      1,
+      1,
+      14,
+      11,
+      0
+    ],
+    "i_side/base/main/plain/0": [
+      525,
+      843,
+      1,
+      0,
+      20,
+      10,
+      0
+    ],
+    "i_side/base/main/plain/6": [
+      588,
+      843,
+      1,
+      0,
+      20,
+      10,
+      0
+    ]
+  },
+  "masks": {
+    "p_metro_entry/base/base/open/0": [
+      70,
+      83,
+      "AAAAOAAAAAAAAAAA4AAAAAAAAAADgAAAAAAAAAAOAAAAAAAAAAA4AAAAAAAAAADgAAAAAAAAAAOAAAAAAAAAAA4AAAAAAAAAADgAAAAAAAAAAOAAAAAAAGAAA4AAAAAAA4AADgAAAAAADgAAOAAAAAAAOAAA4AAAAAAA4AADgAAAAAADgAAOAAAAAAAOAAA4AAAAAAA4AAHgAAAAAADgAA/AAAAAHAOAAH/AAAAAcA4AB//AAAABwDgAf//AAAAPAOAH///AAAD8A4B////AAA/wDgf////AAP/AOH/////AD/8A5//////A//wD///////P//Af/////////8B/////////9wP/////////HA/////////wcD/////////BwP/////////HA//////////cD//////////wP//////////A//////////+D//////////4f//////////j//////////+P//////////4P//////////gP/////////+AP/////////4AP/////////gA//////////AD//////////AP/////////8A//////////wD/////////8AP/////////AA/////////wAD////////+AAP////////4AA/////////gAD////////+AAP////////4AA/////////gAD////////+AAP////////4AA/////////gAD////////+AAP////////4AA/////////gAB////////+AAB////////4AAB////////gAAB///////+AAAB///////4AAAB///////gAAAB//////+AAAAB//////4AAAAB//////gAAAAB/////+AAAAAB/////gAAAAAB////4AAAAAAB///+AAAAAAAB///gAAAAAAAB//4AAAAAAAAB/+AAAAAAAAAB/gAAAAAAAAAB4AAAAA=="
+    ],
+    "p_metro_entry/base/base/open/6": [
+      74,
+      83,
+      "AAAAAAAOAAAAAAAAAAADgAAAAAAAAAAA4AAAAAAAAAAAOAAAAAAAAAAADgAAAAAAAAAAA4AAAAAAAAAAAOAAAAAAAAAAADgAAAAAAAAAAA4AAAAAAAAAAAOAAAAAAAAAAADgAAEAAAAAAAA4AADgAAAAAAAOAAA4AAAAAAADgAAOA8AAAAAA4AADgfgAAAAAOAAA4H8AAAAADgAAOD/AAAAAA8AADg/8AAAAAPgAA4P/AAAAAP+AAOD/wAAAAP/4ADg//AAAAP//gA4H/8AAAP//+AOB//wAAP///4Dgf//AAP////g4H//8AP////+OB///wP/////7gfv//P//////4H7//////////B+z/////////4fsP////////+H7A/////////h+wP////////4fsP////////+H7P/////////h+//////////4fv/////////+H///////////h///////////4f///////////H///////////9///////////+f///////////H///////////B///////////Af//////////AP//////////wD//////////8Af//////////AB//////////wAH/////////8AAf/////////AAB/////////wAAP////////8AAD/////////AAA/////////wAAP////////8AAD/////////AAA/////////wAAP////////8AAD/////////AAA/////////wAAP////////8AAD/////////AAA/////////wAAP////////wAAD////////wAAA////////wAAAP///////wAAAD///////wAAAA///////wAAAAP//////wAAAAD//////wAAAAA//////wAAAAAH/////wAAAAAAf////wAAAAAAB////wAAAAAAAH///wAAAAAAAAf//wAAAAAAAAB//wAAAAAAAAAH/wAAAAAAAAAAfwAAAAAAAAAABwAAAAAAA"
+    ],
+    "p_metro_entry/base/base/shut/0": [
+      70,
+      83,
+      "AAAAOAAAAAAAAAAA4AAAAAAAAAADgAAAAAAAAAAOAAAAAAAAAAA4AAAAAAAAAADgAAAAAAAAAAOAAAAAAAAAAA4AAAAAAAAAADgAAAAAAAAAAOAAAAAAAGAAA4AAAAAAA4AADgAAAAAADgAAOAAAAAAAOAAA4AAAAAAA4AADgAAAAAADgAAOAAAAAAAOAAA4AAAAAAA4AAHgAAAAAADgAA/AAAAAHAOAAH/AAAAAcA4AB//AAAABwDgAf//AAAAPAOAH///AAAD8A4B////AAA/wDgf////AAP/AOH/////AD/8A5//////A//wD///////P//Af/////////8B//////////wP//////////A//////////8D//////////wP//////////A//////////8D//////////wP//////////A//////////+D//////////4f//////////j//////////+P//////////4P//////////gP/////////+AP/////////4AP/////////gA//////////AD//////////AP/////////8A//////////wD/////////8AP/////////AA/////////wAD////////+AAP////////4AA/////////gAD////////+AAP////////4AA/////////gAD////////+AAP////////4AA/////////gAD////////+AAP////////4AA/////////gAB////////+AAB////////4AAB////////gAAB///////+AAAB///////4AAAB///////gAAAB//////+AAAAB//////4AAAAB//////gAAAAB/////+AAAAAB/////gAAAAAB////4AAAAAAB///+AAAAAAAB///gAAAAAAAB//4AAAAAAAAB/+AAAAAAAAAB/gAAAAAAAAAB4AAAAA=="
+    ],
+    "p_metro_entry/base/base/shut/6": [
+      74,
+      83,
+      "AAAAAAAOAAAAAAAAAAADgAAAAAAAAAAA4AAAAAAAAAAAOAAAAAAAAAAADgAAAAAAAAAAA4AAAAAAAAAAAOAAAAAAAAAAADgAAAAAAAAAAA4AAAAAAAAAAAOAAAAAAAAAAADgAAEAAAAAAAA4AADgAAAAAAAOAAA4AAAAAAADgAAOA8AAAAAA4AADgfgAAAAAOAAA4H8AAAAADgAAOD/AAAAAA8AADg/8AAAAAPgAA4P/AAAAAP+AAOD/wAAAAP/4ADg//AAAAP//gA4H/8AAAP//+AOB//wAAP///4Dgf//AAP////g4H//8AP////+OB///wP/////7gfv//P//////4H7//////////B+//////////4fv/////////+H7//////////h+//////////4fv/////////+H7//////////h+//////////4fv/////////+H///////////h///////////4f///////////H///////////9///////////+f///////////H///////////B///////////Af//////////AP//////////wD//////////8Af//////////AB//////////wAH/////////8AAf/////////AAB/////////wAAP////////8AAD/////////AAA/////////wAAP////////8AAD/////////AAA/////////wAAP////////8AAD/////////AAA/////////wAAP////////8AAD/////////AAA/////////wAAP////////wAAD////////wAAA////////wAAAP///////wAAAD///////wAAAA///////wAAAAP//////wAAAAD//////wAAAAA//////wAAAAAH/////wAAAAAAf////wAAAAAAB////wAAAAAAAH///wAAAAAAAAf//wAAAAAAAAB//wAAAAAAAAAH/wAAAAAAAAAAfwAAAAAAAAAABwAAAAAAA"
+    ],
+    "i_flight/base/main/up_roof/0": [
+      55,
+      51,
+      "AAOAAAAAAAAfAAAAAAAA/gAAAAAAB/wAAAAAAD/4AAAAAAH/8AAAAAAH/+AAAAAAD//AAAAAAB//gAAAAAA//wAAAAAAf/4AAAAAAP/8AAAAAAH/+AAAAAAD//HA/AAAB//v//gAAA////4gAAAf///8QAAAP////IAAAH////8AAAD////+AAAB/////AAAA/////gAAA/////8AAB//////AAA//////gAAf/////8AAP/////+AAB//////gAAP/////8AAB/////+AAAP/////gAAB/////4AAAPh///+AAAAA////AAAAAf///4AAAAP///8AAAAH////AAAAD////4AAAB////8AAAAP////AAAAB////wAAAAP///8AAAAB////gAAAAP///wAAAAB///4AAAAAP//8AAAAAB//4AAAAAAP/wAAAAAAB/gAAAAAAAPAAAAAAAAGAA"
+    ],
+    "f_eatery/base/main/kuaican/0": [
+      29,
+      44,
+      "AAADwAAAf4AAD/4AAf/wAD//gAf//AD//+Af//8D///wf///j////f///+////9////7////3////v////f///+////9////7////3////v////f///+////9////7////3////v////f///+////9////7////H///4P///Af//4A///AB//4AD//AAH/4AAP/AAAf4AAAfAAAAMAAAAA=="
+    ],
+    "f_eatery/base/main/kuaican/6": [
+      29,
+      44,
+      "PAAAB/gAAD/wAAH/4AAP/8AAf/+AA///AB///gD///wH///4P///8f///+////////////////////////////////////////////////////////////////////////////////////////////////8////4f///wP///gH///AD//+AB//8AA//4AAf/wAAP/gAAH/AAAD4AAABAA=="
+    ],
+    "f_eatery/base/main/noodle/0": [
+      29,
+      44,
+      "AAADwAAAf4AAD/4AAf/wAD//gAf//AD//+Af//8D///wf///j////f///+////9////7////3////v////f///+////9////7////3////v////f///+////9////7////3////v////f///+////9////7////H///4P///Af//4A///AB//4AD//AAH/4AAP/AAAf4AAAfAAAAMAAAAA=="
+    ],
+    "f_eatery/base/main/noodle/6": [
+      29,
+      44,
+      "PAAAB/gAAD/wAAH/4AAP/8AAf/+AA///AB///gD///wH///4P///8f///+////////////////////////////////////////////////////////////////////////////////////////////////8////4f///wP///gH///AD//+AB//8AA//4AAf/wAAP/gAAH/AAAD4AAABAA=="
+    ],
+    "f_eatery/base/main/tea/0": [
+      29,
+      44,
+      "AAADwAAAf4AAD/4AAf/wAD//gAf//AD//+Af//8D///wf///j////f///+////9////7///v3//8fv//g/f/8B+//gD9/+AH7/8AP3/4Afv/4A/f/8H+//+/////////////////////f///+////9////7////n///8P///gf//8A///gB//8AD//gAH/8AAP/gAAf8AAAfAAAAMAAAAA=="
+    ],
+    "f_eatery/base/main/tea/6": [
+      29,
+      44,
+      "PAAAB/gAAD/wAAH/4AAP/8AAf/+AA///AB///gD///wH///4P///8f///+//////////9////4////wf///gP///AH//+AD//8AH//4AP//4A///8H///+////////////////////////////////////8////4f///wP///gH///AD//+AB//8AA//4AAf/wAAP/gAAH/AAAD4AAABAA=="
+    ],
+    "p_metro_entry/base/roof/open/0": [
+      69,
+      40,
+      "AAAA+AAAAAAAAAAf4AAAAAAAAAP/wAAAAAAAAH//gAAAAAAAD//+AAAAAAAB///8AAAAAAA////4AAAAAAf////wAAAAAP/////AAAAAH/////+AAAAD//////8AAAB///////wAAA////////gAAH////////AAA////////8AAD////////4AA/////////wAH/////////gA/////////+AB/////////8AD/////////4AH/////////wAP/////////gAf/////////AA/////////4AB/////////AAD////////4AAH///////8AAAP//////+AAAAf//////AAAAA//////gAAAAB/////wAAAAAD////4AAAAAAH///8AAAAAAAP//+AAAAAAAAf//AAAAAAAAA//gAAAAAAAAB/wAAAAAAAAAD4AAAAAAAAAAMAAAA"
+    ],
+    "p_metro_entry/base/roof/open/6": [
+      70,
+      40,
+      "AAAAAAD4AAAAAAAAAAf4AAAAAAAAAH/4AAAAAAAAB//4AAAAAAAAP//4AAAAAAAD///4AAAAAAA////4AAAAAAP////4AAAAAB/////4AAAAAf/////4AAAAH//////4AAAA///////4AAAP///////4AAD////////gAAf///////+AAH////////wAB////////9wAf////////fAD////////34A/////////+AP/////////gD/////////4A/////////+AP/////////gA/////////4AD////////+AAP////////gAAP///////4AAAP//////+AAAAP//////gAAAAP/////4AAAAAP////+AAAAAAP////gAAAAAAP///4AAAAAAAP//+AAAAAAAAP//gAAAAAAAAP/4AAAAAAAAAP+AAAAAAAAAAPgAAAAAAAAAAMAAAAAAA="
+    ],
+    "p_metro_entry/base/roof/shut/0": [
+      69,
+      40,
+      "AAAA+AAAAAAAAAAf4AAAAAAAAAP/wAAAAAAAAH//gAAAAAAAD//+AAAAAAAB///8AAAAAAA////4AAAAAAf////wAAAAAP/////AAAAAH/////+AAAAD//////8AAAB///////wAAA////////gAAH////////AAA////////8AAD////////4AA/////////wAH/////////gA/////////+AB/////////8AD/////////4AH/////////wAP/////////gAf/////////AA/////////4AB/////////AAD////////4AAH///////8AAAP//////+AAAAf//////AAAAA//////gAAAAB/////wAAAAAD////4AAAAAAH///8AAAAAAAP//+AAAAAAAAf//AAAAAAAAA//gAAAAAAAAB/wAAAAAAAAAD4AAAAAAAAAAMAAAA"
+    ],
+    "p_metro_entry/base/roof/shut/6": [
+      70,
+      40,
+      "AAAAAAD4AAAAAAAAAAf4AAAAAAAAAH/4AAAAAAAAB//4AAAAAAAAP//4AAAAAAAD///4AAAAAAA////4AAAAAAP////4AAAAAB/////4AAAAAf/////4AAAAH//////4AAAA///////4AAAP///////4AAD////////gAAf///////+AAH////////wAB////////9wAf////////fAD////////34A/////////+AP/////////gD/////////4A/////////+AP/////////gA/////////4AD////////+AAP////////gAAP///////4AAAP//////+AAAAP//////gAAAAP/////4AAAAAP////+AAAAAAP////gAAAAAAP///4AAAAAAAP//+AAAAAAAAP//gAAAAAAAAP/4AAAAAAAAAP+AAAAAAAAAAPgAAAAAAAAAAMAAAAAAA="
+    ],
+    "f_eatery/base/main/shut/0": [
+      28,
+      38,
+      "AAADwAYAPwHgA/B+AD8f4A/3/gP//+D///4////v//////////////////////////////////////////////////////////////////////////////////////////j///4P//+A///gD//4AP/+AA//gAD/4AAP+AAA/gAAA8AAAA=="
+    ],
+    "f_eatery/base/main/shut/6": [
+      28,
+      38,
+      "PAAAD8AGAPwAeA/AB+D/AH+P/Af+//B////H////f/////////////////////////////////////////////////////////////////////////////////////H///8H///wH///AH//8AH//wAH//AAH/8AAH/wAAH/AAAH8AAAPA=="
+    ],
+    "i_flight/base/main/up/0": [
+      55,
+      37,
+      "AAAff+AAAAAA//+AAAAAB//RAAAAAD//4gAAAAH///QAAAAP///4AAAAf///8AAAA////+AAAB/////gAAD/////8AAD/////+AAB//////gAA//////4AAP/////8AAB//////gAAP/////4AAB/////8AAAP/////gAAB/////4AAAAD///8AAAAB////AAAAA////wAAAAf///4AAAAP////AAAAH////wAAAB////4AAAAP////AAAAB////gAAAAP///8AAAAB////AAAAAP///gAAAAB///wAAAAAP//wAAAAAB//gAAAAAAP/AAAAAAAB+AAAAAAAAcAA"
+    ],
+    "i_door/base/main/open/0": [
+      12,
+      34,
+      "AeB+H+f+/+/+/+/+/+/+/+/+/+//////////////////////////////////////D/AP"
+    ],
+    "i_door/wood/main/open/0": [
+      12,
+      34,
+      "AeB+H+f+/+/+/+/+/+/+/+/+/+//////////////////////////////////////D/AP"
+    ],
+    "i_balfront/base/main/glass/0": [
+      15,
+      34,
+      "ADwB+A/wf+P+3/G/w32G4w2GGww2Gew/2Hmzw3+G8w2GGww2GGww2Gew/+H+z/3/+//3/+//H/g/wH4A8ACAAA=="
+    ],
+    "i_balfront/base/main/glass/6": [
+      15,
+      34,
+      "8AH4A/wD/gT/CH+Q/6GfQwyGGQwzmGfwyeGQ8yH+QzyGGQwyGGQw3mG/w3+G/83/+//3//P/wf+A/wB+ADwAEA=="
+    ],
+    "i_window/base/main/dado/0": [
+      14,
+      34,
+      "ADwD8D/D/z////////////3/5/6f+n/p/6f+n/p/6f+v/v/////////////////////z/w/wPwDwAQAA"
+    ],
+    "i_window/base/main/dado/6": [
+      14,
+      34,
+      "8APwD/A/8P/z/////////8//P/zf83/N/zf83/N/zf/3/9///////////////////z/8P/A/wD8APAAg"
+    ],
+    "i_window/base/main/plain/0": [
+      14,
+      34,
+      "ADwD8D/D/z////////////3/5/6f+n/p/6f+n/p/6f+v/v/////////////////////z/w/wPwDwAQAA"
+    ],
+    "i_window/base/main/plain/6": [
+      14,
+      34,
+      "8APwD/A/8P/z/////////8//P/zf83/N/zf83/N/zf/3/9///////////////////z/8P/A/wD8APAAg"
+    ],
+    "i_window/base/main/tile/0": [
+      14,
+      34,
+      "ADwD8D/D/z////////////3/5/6f+n/p/6f+n/p/6f+v/v/////////////////////z/w/wPwDwAQAA"
+    ],
+    "i_window/base/main/tile/6": [
+      14,
+      34,
+      "8APwD/A/8P/z/////////8//P/zf83/N/zf83/N/zf/3/9///////////////////z/8P/A/wD8APAAg"
+    ],
+    "i_door/base/main/open/6": [
+      15,
+      33,
+      "HgA/AH+A/8H/4//H/4//H/5//f/////////////////////////////////////////////f/g/4B+AHgAA="
+    ],
+    "i_door/wood/main/open/6": [
+      15,
+      33,
+      "HgA/AH+A/8H/4//H/4//H/5//f/////////////////////////////////////////////f/g/4B+AHgAA="
+    ],
+    "i_door/base/main/closed/0": [
+      11,
+      32,
+      "AeD8f7//////////////////////////////////////////////+fw+BwA="
+    ],
+    "i_door/base/main/closed/6": [
+      11,
+      32,
+      "4B8D+H/P///////////////////////////////////////////z/h/A+Ac="
+    ],
+    "i_door/wood/main/closed/0": [
+      11,
+      32,
+      "AeD8f7//////////////////////////////////////////////+fw+BwA="
+    ],
+    "i_door/wood/main/closed/6": [
+      11,
+      32,
+      "4B8D+H/P///////////////////////////////////////////z/h/A+Ac="
+    ],
+    "i_wall/base/main/dado/0": [
+      10,
+      32,
+      "A8Pz////////////////////////////////////////////Pw8BAA=="
+    ],
+    "i_wall/base/main/dado/6": [
+      10,
+      32,
+      "4D4P4/7///////////////////////////////////////9/x/B8Bg=="
+    ],
+    "i_wall/base/main/dado_ads/0": [
+      10,
+      32,
+      "A8Pz////////////////////////////////////////////Pw8BAA=="
+    ],
+    "i_wall/base/main/dado_ads/6": [
+      10,
+      32,
+      "4D4P4/7///////////////////////////////////////9/x/B8Bg=="
+    ],
+    "i_wall/base/main/plain/0": [
+      10,
+      32,
+      "A8Pz////////////////////////////////////////////Pw8BAA=="
+    ],
+    "i_wall/base/main/plain/6": [
+      10,
+      32,
+      "4D4P4/7///////////////////////////////////////9/x/B8Bg=="
+    ],
+    "i_wall/base/main/poster/0": [
+      10,
+      32,
+      "A8Pz////////////////////////////////////////////Pw8BAA=="
+    ],
+    "i_wall/base/main/poster/6": [
+      10,
+      32,
+      "4D4P4/7///////////////////////////////////////9/x/B8Bg=="
+    ],
+    "i_wall/base/main/tile/0": [
+      10,
+      32,
+      "A8Pz////////////////////////////////////////////Pw8BAA=="
+    ],
+    "i_wall/base/main/tile/6": [
+      10,
+      32,
+      "4D4P4/7///////////////////////////////////////9/x/B8Bg=="
+    ],
+    "f_kitchen/base/main/cooking/0": [
+      21,
+      31,
+      "AA+AAf4AP/AH/4D//B//4///H//4//8H//g//8H//g//+H//8//////+///3//+///3//+///3//+///3//+///n//w//4H/8A/+AD/AAHgAAA=="
+    ],
+    "f_kitchen/base/main/off/0": [
+      21,
+      31,
+      "AA+AAf4AP/AH/4D//B//4///H//4//8H//g//8H//g//+H//8//////+///3//+///3//+///3//+///3//+///n//w//4H/8A/+AD/AAHgAAA=="
+    ],
+    "s_cooler/base/main/full/0": [
+      21,
+      31,
+      "AA+AAf8AP/4H//D//5/////////////////////////////////////////////////////////////////////n//w//4H/8Af+AA/AABgAAA=="
+    ],
+    "s_cooler/base/main/full/2": [
+      21,
+      31,
+      "DwAB/gA//AH/+A//8H//4///3///////////////////////////////////////////////////////////P//4f//A//4B//AD/wAH4AAMAA=="
+    ],
+    "s_cooler/base/main/full/6": [
+      21,
+      31,
+      "DwAB/gA//AH/+A//8H//4///3///////////////////////////////////////////////////////////P//4f//A//4B//AD/wAH4AAMAA=="
+    ],
+    "s_cooler/base/main/low/0": [
+      21,
+      31,
+      "AA+AAf8AP/4H//D//5/////////////////////////////////////////////////////////////////////n//w//4H/8Af+AA/AABgAAA=="
+    ],
+    "s_cooler/base/main/low/2": [
+      21,
+      31,
+      "DwAB/gA//AH/+A//8H//4///3///////////////////////////////////////////////////////////P//4f//A//4B//AD/wAH4AAMAA=="
+    ],
+    "s_cooler/base/main/low/6": [
+      21,
+      31,
+      "DwAB/gA//AH/+A//8H//4///3///////////////////////////////////////////////////////////P//4f//A//4B//AD/wAH4AAMAA=="
+    ],
+    "f_kitchen/base/main/cooking/2": [
+      21,
+      30,
+      "eAAH8AA/4AH/wA//gH//A//+H//4///H//4///H//4///H//4//+H//g///H//+//////+///3//+///z//+H//wP/+Af/wA/+AB/gADwA=="
+    ],
+    "f_kitchen/base/main/off/2": [
+      21,
+      30,
+      "eAAH8AA/4AH/wA//gH//A//+H//4///H//4///H//4///H//4//+H//g///H//+//////+///3//+///z//+H//wP/+Af/wA/+AB/gADwA=="
+    ],
+    "i_flight/base/main/down/0": [
+      46,
+      30,
+      "AAADgAAAAAB+AAAGAAfgAAAeAH4AAAB+B+AAAAGefgAAAAY/4AAAABj/gAAAAGf/gAAAAf//gAAAB///gAAAP///gAAA////gAAA///+AAAA///+AAAA///+AAAA///+AAAA///+AAAA///+AAAA///+AAAA///4AAAA///gAAAA//8AAAAA//4BAAAA///8AAAA///AAAAA//wAAAAA/8AAAAAA/AAAAAAA4AA="
+    ],
+    "i_side/base/main/dado/0": [
+      6,
+      30,
+      "4+//////////////////////////fGA="
+    ],
+    "i_side/base/main/dado/6": [
+      6,
+      30,
+      "P///////////////////////////8QA="
+    ],
+    "i_side/base/main/plain/0": [
+      6,
+      30,
+      "4+//////////////////////////fGA="
+    ],
+    "i_side/base/main/plain/6": [
+      6,
+      30,
+      "P///////////////////////////8QA="
+    ],
+    "i_side/base/main/tile/0": [
+      6,
+      30,
+      "4+//////////////////////////fGA="
+    ],
+    "i_side/base/main/tile/6": [
+      6,
+      30,
+      "P///////////////////////////8QA="
+    ],
+    "f_wardrobe/base/main/closed/0": [
+      14,
+      28,
+      "AeAf4f/f//////////////////////////////////////////////////H/AfABAA=="
+    ],
+    "f_wardrobe/base/main/closed/2": [
+      14,
+      28,
+      "HgH+D/4//v//////////////////////////////////////////////P/w/4D4AIA=="
+    ],
+    "f_wardrobe/base/main/closed/6": [
+      14,
+      28,
+      "HgH+D/4//v//////////////////////////////////////////////P/w/4D4AIA=="
+    ],
+    "f_wardrobe/base/main/open/0": [
+      14,
+      28,
+      "AeAf4f/f//////////////////////////////////////////////////H/AfABAA=="
+    ],
+    "f_wardrobe/base/main/open/2": [
+      14,
+      28,
+      "HgH+D/4//v//////////////////////////////////////////////P/w/4D4AIA=="
+    ],
+    "f_wardrobe/base/main/open/6": [
+      14,
+      28,
+      "HgH+D/4//v//////////////////////////////////////////////P/w/4D4AIA=="
+    ],
+    "f_shower/base/main/dry/0": [
+      15,
+      27,
+      "A4AHAA4GEH8j394/8H/g/8H/g/8H/g/8H/g/8H/g/8H/g/8H/g//H/+/////f/g/wB4A"
+    ],
+    "f_shower/base/main/running/0": [
+      15,
+      27,
+      "A4AHAA4GEH8j/9//////////////////////////////////////////////f/g/wB4A"
+    ],
+    "i_meter/base/main/default/0": [
+      9,
+      26,
+      "MDgcDgdz/f/////////n8bgcDgcDgcDgcDgcDgYA"
+    ],
+    "s_gondola/base/main/full/0": [
+      20,
+      25,
+      "AAOAAH4AH/Af/wH/8H//P//////////////////////////////////////////P//D//A//AP/AA/AADAAA"
+    ],
+    "s_gondola/base/main/full/2": [
+      20,
+      25,
+      "HAAH8AD/gA/+AP/+D//g///v////////////////////////////////////P//w//8D//AP/wA/8AD8AAMA"
+    ],
+    "s_gondola/base/main/low/0": [
+      20,
+      25,
+      "AAOAAP4AP/AH/wP/8D//H//////////////////////////////////////////P//D//A//AP/AA/AADAAA"
+    ],
+    "s_gondola/base/main/low/2": [
+      20,
+      25,
+      "HgAH8AD/AA/4AP/4D/+A//+P////////////////////////////////////P//w//8D//AP/wA/8AD8AAMA"
+    ],
+    "s_counter/base/main/default/0": [
+      22,
+      24,
+      "AAPAAB8AAHwAAfgAD/gA//AP/8D//z///f////////////////////////////P//w//8D//AP/wA/8AA/AAAwAA"
+    ],
+    "i_mailbox/base/main/default/0": [
+      13,
+      23,
+      "AeA/B/j/z/5/8/+f/P/n/z/h/A+AMAAAAAAAAAMAfgPwH4D8B4A="
+    ],
+    "s_bar/base/main/bento/4": [
+      23,
+      22,
+      "AAB4AAP8AB/4AP/gB/7AP/GB/4MP/AZ/+A3/MBv4YDPAwGGBgMMDAAYGAAwMABgYADAAAGAAAMAAAYAAAwAAAA=="
+    ],
+    "s_bar/base/main/default/4": [
+      23,
+      22,
+      "AAB4AAP8AB/4AP/gB/7AP/GB/4MP/AZ/+A3/MBv4YDPAwGGBgMMDAAYGAAwMABgYADAAAGAAAMAAAYAAAwAAAA=="
+    ],
+    "f_shelf/base/main/default/0": [
+      10,
+      21,
+      "D4/////////////////////////////j4DAA"
+    ],
+    "f_shelf/base/main/default/2": [
+      10,
+      21,
+      "+D+P+/////////////////////////P8PwMA"
+    ],
+    "s_counter/base/main/default/4": [
+      22,
+      21,
+      "AA/wBv/ge//D//8P//w///P////////////////////////////P//w//8D//AP/wA/8AA/AAAwAAA=="
+    ],
+    "s_bar/base/main/bento/0": [
+      23,
+      21,
+      "AAB4AAP8AB/4AP/gB/8AP/YB/4wP/Bh/4DH/wGP5gMfDAYwGABgMADAYAGAwAMAAAYAAAwAABgAABAAAAA=="
+    ],
+    "s_bar/base/main/default/0": [
+      23,
+      21,
+      "AAB4AAP8AB/4AP/gB/8AP/YB/4wP/Bh/4DH/wGP5gMfDAYwGABgMADAYAGAwAMAAAYAAAwAABgAABAAAAA=="
+    ],
+    "i_balfront/base/main/default/0": [
+      15,
+      20,
+      "ADwB+A8weOP3/n+x/2/+//3/+//3/+//3/+//n/w/4H8A+AHAAA="
+    ],
+    "i_balfront/base/main/default/6": [
+      15,
+      20,
+      "cAD4ATwDHg+fH+e/43/2//3//////+//3/+f/w/+B/wD+AHwAOA="
+    ],
+    "f_sign_kc/base/main/default/6": [
+      25,
+      20,
+      "wAAAeAAAPwAAH+AAD/wAB/+AA//wAP/+AB//wAP/+AB//wAP/+AB//AAP/gAB/wAAP4AAB8AAAOAAAAAAAAA"
+    ],
+    "f_sign_noodle/base/main/default/6": [
+      25,
+      20,
+      "wAAAeAAAPwAAH+AAD/wAB/+AA//wAP/+AB//wAP/+AB//wAP/+AB//AAP/gAB/wAAP4AAB8AAAOAAAAAAAAA"
+    ],
+    "f_sign_tea/base/main/default/6": [
+      25,
+      20,
+      "wAAAeAAAPwAAH+AAD/wAB/+AA//wAP/+AB//wAP/+AB//wAP/+AB//AAP/gAB/wAAP4AAB8AAAOAAAAAAAAA"
+    ],
+    "f_basin/base/main/default/0": [
+      8,
+      19,
+      "OPj+/v7+/uC8fv/+eDg4ODg4OA=="
+    ],
+    "f_fridge/base/main/closed/0": [
+      10,
+      19,
+      "Hh/v////////////////////////3+Hg"
+    ],
+    "f_fridge/base/main/open/0": [
+      12,
+      19,
+      "D4P+f/f/f/f/f////////////////////+P8BwA="
+    ],
+    "f_sign_kc/base/main/default/0": [
+      25,
+      18,
+      "AAADgAAHwAAP4AAf8AA/+AB//AD//AH/+AP/8Af/4A//wB//gAf/AAP+AAH8AAD4AADwAAAgAAAA"
+    ],
+    "f_sign_noodle/base/main/default/0": [
+      25,
+      18,
+      "AAADgAAHwAAP4AAf8AA/+AB//AD//AH/+AP/8Af/4A//wB//gAf/AAP+AAH8AAD4AADwAAAgAAAA"
+    ],
+    "f_sign_tea/base/main/default/0": [
+      25,
+      18,
+      "AAADgAAHwAAP4AAf8AA/+AB//AD//AH/+AP/8Af/4A//wB//gAf/AAP+AAH8AAD4AADwAAAgAAAA"
+    ],
+    "s_oden/base/main/full/0": [
+      11,
+      18,
+      "DgfD+H+//////////////////////n8DgA=="
+    ],
+    "s_oden/base/main/low/0": [
+      11,
+      18,
+      "DgfD+H+//////////////////////n8DgA=="
+    ],
+    "f_bed/base/main/made/0": [
+      25,
+      18,
+      "AAPAAAf4AA//GB//7z///////////////////////////5///w///gf//AH/+AA/8AAH4AAAwAAA"
+    ],
+    "f_bed/base/main/messy/0": [
+      25,
+      17,
+      "AAHgAAP8AAf/nA///5///////////////////////////////8///gf//AD/+AAf8AAD4AAA"
+    ],
+    "f_desk/base/main/off/0": [
+      15,
+      17,
+      "AHAD4B/Af+D/5//////////+//H/4f/A/4A/AD4AHAA="
+    ],
+    "f_desk/base/main/on/0": [
+      15,
+      17,
+      "AHAD4B/Af+D/5//////////+//H/4f/A/4A/AD4AHAA="
+    ],
+    "i_dryrack/base/main/default/0": [
+      23,
+      17,
+      "AAAYAAAwAABgAADAAAGAAAcAAD+AAdwgDuBAdwCDuAEdwALuAAdwAD+AAFwAACAAAA=="
+    ],
+    "s_micro/base/main/off/0": [
+      10,
+      16,
+      "Hx/v+/7////////////////38HA="
+    ],
+    "s_micro/base/main/off/6": [
+      10,
+      16,
+      "PD/P+/7/v//////////////z+Dg="
+    ],
+    "s_micro/base/main/on/0": [
+      10,
+      16,
+      "Hx/v+/7////////////////38HA="
+    ],
+    "s_micro/base/main/on/6": [
+      10,
+      16,
+      "PD/P+/7/v//////////////z+Dg="
+    ],
+    "f_desk/base/main/off/4": [
+      15,
+      15,
+      "AfAH+H/5///////////////+//j/4M/AD4AHAAA="
+    ],
+    "f_desk/base/main/on/4": [
+      15,
+      15,
+      "AfAH+H/5///////////////+//j/4M/AD4AHAAA="
+    ],
+    "i_crank/base/main/default/0": [
+      3,
+      14,
+      "SSSSS3/A"
+    ],
+    "f_washer/base/main/done/0": [
+      10,
+      14,
+      "Hh/v///////////////+PgIA"
+    ],
+    "f_washer/base/main/idle/0": [
+      10,
+      14,
+      "Hh/v///////////////+PgIA"
+    ],
+    "f_washer/base/main/running/0": [
+      10,
+      14,
+      "Hh/v///////////////+PgIA"
+    ],
+    "i_clutter/base/main/broom/0": [
+      7,
+      13,
+      "QIECBAgQbv/////A"
+    ],
+    "f_nightstand/base/main/off/0": [
+      8,
+      13,
+      "ODg8PP////////9+GA=="
+    ],
+    "f_nightstand/base/main/on/0": [
+      8,
+      13,
+      "ODg8PP////////9+GA=="
+    ],
+    "f_chair/base/main/default/0": [
+      8,
+      13,
+      "cPDw8Pj+//44PHx2EA=="
+    ],
+    "i_clutter/base/main/boxes/0": [
+      8,
+      12,
+      "DA4efv7+/v7//v54"
+    ],
+    "f_toilet/base/main/default/0": [
+      8,
+      12,
+      "ePj4+Pz+/z4+Pj4c"
+    ],
+    "f_chair/base/main/default/4": [
+      8,
+      11,
+      "Dh4ePv7/fBh8fHg="
+    ],
+    "i_notice/base/main/default/0": [
+      9,
+      11,
+      "A4fP///////8+HAgAA=="
+    ],
+    "s_barstool/base/main/default/0": [
+      5,
+      10,
+      "//5Hfd//wA=="
+    ],
+    "f_table/base/main/default/0": [
+      11,
+      10,
+      "D4f/////9/z2HsCYAwA="
+    ],
+    "f_table/base/main/meal/0": [
+      11,
+      10,
+      "D4f/////9/z2HsCYAwA="
+    ],
+    "i_ac/base/main/on/0": [
+      11,
+      10,
+      "A8H8/3/v////9/j8BgA="
+    ],
+    "i_ac/base/main/on/6": [
+      11,
+      10,
+      "+B/D/n//////+f8PwGA="
+    ],
+    "i_clutter/base/main/shoes/0": [
+      8,
+      10,
+      "Hn////////9+CA=="
+    ],
+    "i_cut/base/main/dado/0": [
+      10,
+      10,
+      "A8Pz///////z8PAQAA=="
+    ],
+    "i_cut/base/main/dado/6": [
+      10,
+      10,
+      "4D4P4/7///f8fwfAYA=="
+    ],
+    "i_cut/base/main/plain/0": [
+      10,
+      10,
+      "A8Pz///////z8PAQAA=="
+    ],
+    "i_cut/base/main/plain/6": [
+      10,
+      10,
+      "4D4P4/7///f8fwfAYA=="
+    ],
+    "i_cut/base/main/tile/0": [
+      10,
+      10,
+      "A8Pz///////z8PAQAA=="
+    ],
+    "i_cut/base/main/tile/6": [
+      10,
+      10,
+      "4D4P4/7///f8fwfAYA=="
+    ],
+    "i_ac/base/main/off/0": [
+      11,
+      9,
+      "A8H8/3/v//+/x+DwAA=="
+    ],
+    "i_ac/base/main/off/2": [
+      11,
+      9,
+      "8B+D/H/v//+P8H8DwA=="
+    ],
+    "i_ac/base/main/off/4": [
+      11,
+      9,
+      "A8H8//////+/x+BwAA=="
+    ],
+    "i_ac/base/main/off/6": [
+      11,
+      9,
+      "8B+D/H/v///P+H8DwA=="
+    ],
+    "i_ac/base/main/on/2": [
+      11,
+      9,
+      "8B+D/H/v//+P+H8DwA=="
+    ],
+    "i_ac/base/main/on/4": [
+      11,
+      9,
+      "AeD8f7////+/x+BwAA=="
+    ],
+    "i_clutter/base/main/jars/0": [
+      7,
+      8,
+      "OPv3/9++MA=="
+    ],
+    "i_clutter/base/main/veg/0": [
+      8,
+      7,
+      "Dn/////8cA=="
+    ],
+    "f_stool/base/main/default/0": [
+      4,
+      7,
+      "////cA=="
+    ],
+    "i_pendant/base/main/off/0": [
+      6,
+      4,
+      "e//+"
+    ],
+    "i_pendant/base/main/on/0": [
+      6,
+      4,
+      "e//+"
+    ]
+  },
+  "pieces": {
+    "d_mat": {
+      "layer": "decal",
+      "catcher": null,
+      "states": [
+        "default"
+      ],
+      "origin": "center",
+      "interior": true,
+      "geo": {
+        "default": {
+          "main": [
+            -0.4,
+            -0.25,
+            0.0,
+            0.4,
+            0.25,
+            0.01
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "d_rug": {
+      "layer": "decal",
+      "catcher": null,
+      "states": [
+        "default"
+      ],
+      "origin": "center",
+      "interior": true,
+      "geo": {
+        "default": {
+          "main": [
+            -0.8,
+            -0.5,
+            0.0,
+            0.8,
+            0.5,
+            0.01
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_basin": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "origin": "center",
+      "interior": true,
+      "states": [
+        "default"
+      ],
+      "footprint": [
+        [
+          -0.25,
+          -0.15,
+          0.25,
+          0.2
+        ]
+      ],
+      "fadeable": false,
+      "geo": {
+        "default": {
+          "main": [
+            -0.25,
+            -0.18,
+            0.0,
+            0.45,
+            0.2,
+            1.7
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_bed": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "origin": "center",
+      "interior": true,
+      "states": [
+        "made",
+        "messy"
+      ],
+      "footprint": [
+        [
+          -1.0,
+          -0.5,
+          1.0,
+          0.5
+        ]
+      ],
+      "fadeable": false,
+      "geo": {
+        "made": {
+          "main": [
+            -1.0,
+            -0.5,
+            0.0,
+            1.0,
+            0.5,
+            0.95
+          ]
+        },
+        "messy": {
+          "main": [
+            -1.0,
+            -0.62,
+            0.0,
+            1.0,
+            0.5,
+            0.95
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_chair": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "origin": "center",
+      "interior": true,
+      "states": [
+        "default"
+      ],
+      "rots": [
+        0,
+        4
+      ],
+      "footprint": [
+        [
+          -0.22,
+          -0.22,
+          0.22,
+          0.22
+        ]
+      ],
+      "fadeable": false,
+      "geo": {
+        "default": {
+          "main": [
+            -0.22,
+            -0.2,
+            0.0,
+            0.22,
+            0.22,
+            0.95
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_desk": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "origin": "center",
+      "interior": true,
+      "states": [
+        "off",
+        "on"
+      ],
+      "rots": [
+        0,
+        4
+      ],
+      "footprint": [
+        [
+          -0.6,
+          -0.3,
+          0.6,
+          0.3
+        ]
+      ],
+      "fadeable": false,
+      "geo": {
+        "off": {
+          "main": [
+            -0.6,
+            -0.3,
+            0.0,
+            0.6,
+            0.3,
+            1.121
+          ]
+        },
+        "on": {
+          "main": [
+            -0.6,
+            -0.3,
+            0.0,
+            0.6,
+            0.3,
+            1.121
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_eatery": {
+      "catcher": "wall",
+      "states": [
+        "noodle",
+        "kuaican",
+        "tea",
+        "shut"
+      ],
+      "layer": "sorted",
+      "origin": "bay-bottom-left",
+      "sort_line": [
+        [
+          0,
+          0
+        ],
+        [
+          3,
+          0
+        ]
+      ],
+      "fadeable": true,
+      "rots": [
+        0,
+        6
+      ],
+      "z_order": 1,
+      "sort_box": [
+        0,
+        -0.12,
+        3,
+        0.4
+      ],
+      "footprint": [
+        [
+          0,
+          0,
+          3,
+          0.4
+        ]
+      ],
+      "clip_face": [
+        0,
+        3,
+        0,
+        3.0,
+        -0.16,
+        0.4
+      ],
+      "geo": {
+        "noodle": {
+          "main": [
+            0.0,
+            -0.3,
+            0.0,
+            3.0,
+            1.9,
+            3.0
+          ]
+        },
+        "kuaican": {
+          "main": [
+            0.0,
+            -0.3,
+            0.0,
+            3.0,
+            1.9,
+            3.0
+          ]
+        },
+        "tea": {
+          "main": [
+            0.0,
+            -0.36,
+            0.0,
+            3.0,
+            1.9,
+            3.0
+          ]
+        },
+        "shut": {
+          "main": [
+            0.0,
+            -0.12,
+            0.0,
+            3.0,
+            1.9,
+            2.45
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_fridge": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "origin": "center",
+      "interior": true,
+      "states": [
+        "closed",
+        "open"
+      ],
+      "footprint": [
+        [
+          -0.3,
+          -0.3,
+          0.3,
+          0.3
+        ]
+      ],
+      "fadeable": true,
+      "geo": {
+        "closed": {
+          "main": [
+            -0.3,
+            -0.33,
+            0.0,
+            0.3,
+            0.3,
+            1.42
+          ]
+        },
+        "open": {
+          "main": [
+            -0.455,
+            -0.32,
+            0.0,
+            0.3,
+            0.3,
+            1.42
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_kitchen": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "origin": "center",
+      "interior": true,
+      "states": [
+        "off",
+        "cooking"
+      ],
+      "rots": [
+        0,
+        2
+      ],
+      "footprint": [
+        [
+          -0.9,
+          -0.3,
+          0.9,
+          0.3
+        ]
+      ],
+      "fadeable": true,
+      "light": [
+        0.35,
+        0,
+        0.95
+      ],
+      "geo": {
+        "off": {
+          "main": [
+            -0.92,
+            -0.32,
+            0.0,
+            0.92,
+            0.3,
+            2.15
+          ]
+        },
+        "cooking": {
+          "main": [
+            -0.92,
+            -0.32,
+            0.0,
+            0.92,
+            0.3,
+            2.15
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_nightstand": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "origin": "center",
+      "interior": true,
+      "states": [
+        "off",
+        "on"
+      ],
+      "footprint": [
+        [
+          -0.23,
+          -0.2,
+          0.23,
+          0.2
+        ]
+      ],
+      "fadeable": false,
+      "light": [
+        0.0,
+        0.05,
+        0.9
+      ],
+      "geo": {
+        "off": {
+          "main": [
+            -0.24,
+            -0.215,
+            0.0,
+            0.24,
+            0.21,
+            0.98
+          ]
+        },
+        "on": {
+          "main": [
+            -0.24,
+            -0.215,
+            0.0,
+            0.24,
+            0.21,
+            0.98
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_shelf": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "origin": "center",
+      "interior": true,
+      "states": [
+        "default"
+      ],
+      "rots": [
+        0,
+        2
+      ],
+      "footprint": [
+        [
+          -0.4,
+          -0.15,
+          0.4,
+          0.15
+        ]
+      ],
+      "fadeable": true,
+      "geo": {
+        "default": {
+          "main": [
+            -0.4,
+            -0.15,
+            0.0,
+            0.4,
+            0.15,
+            1.6
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_shower": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "origin": "center",
+      "interior": true,
+      "states": [
+        "dry",
+        "running"
+      ],
+      "footprint": [
+        [
+          -0.42,
+          -0.42,
+          0.42,
+          0.42
+        ]
+      ],
+      "fadeable": true,
+      "geo": {
+        "dry": {
+          "main": [
+            -0.44,
+            -0.45,
+            0.0,
+            0.42,
+            0.42,
+            2.06
+          ]
+        },
+        "running": {
+          "main": [
+            -0.44,
+            -0.45,
+            0.0,
+            0.42,
+            0.42,
+            2.06
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_sign_kc": {
+      "layer": "sorted",
+      "catcher": "wall",
+      "states": [
+        "default"
+      ],
+      "origin": "mount-center",
+      "z_order": 3,
+      "rots": [
+        0,
+        6
+      ],
+      "sort_box": [
+        -1.4,
+        -0.2,
+        1.4,
+        0
+      ],
+      "sort_line": [
+        [
+          -1.4,
+          0
+        ],
+        [
+          1.4,
+          0
+        ]
+      ],
+      "fadeable": true,
+      "text": "快餐",
+      "text_board": "sign_yellow",
+      "text_ink": "shop_ink",
+      "sort_z": [
+        0,
+        0.5
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            -1.42,
+            -0.2,
+            0.0,
+            1.42,
+            -0.15,
+            0.52
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_sign_noodle": {
+      "layer": "sorted",
+      "catcher": "wall",
+      "states": [
+        "default"
+      ],
+      "origin": "mount-center",
+      "z_order": 3,
+      "rots": [
+        0,
+        6
+      ],
+      "sort_box": [
+        -1.4,
+        -0.2,
+        1.4,
+        0
+      ],
+      "sort_line": [
+        [
+          -1.4,
+          0
+        ],
+        [
+          1.4,
+          0
+        ]
+      ],
+      "fadeable": true,
+      "text": "牛肉面",
+      "text_board": "sign_red",
+      "text_ink": "shop_ink",
+      "sort_z": [
+        0,
+        0.5
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            -1.42,
+            -0.2,
+            0.0,
+            1.42,
+            -0.15,
+            0.52
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_sign_tea": {
+      "layer": "sorted",
+      "catcher": "wall",
+      "states": [
+        "default"
+      ],
+      "origin": "mount-center",
+      "z_order": 3,
+      "rots": [
+        0,
+        6
+      ],
+      "sort_box": [
+        -1.4,
+        -0.2,
+        1.4,
+        0
+      ],
+      "sort_line": [
+        [
+          -1.4,
+          0
+        ],
+        [
+          1.4,
+          0
+        ]
+      ],
+      "fadeable": true,
+      "text": "奶茶",
+      "text_board": "sign_pink",
+      "text_ink": "shop_ink",
+      "sort_z": [
+        0,
+        0.5
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            -1.42,
+            -0.2,
+            0.0,
+            1.42,
+            -0.15,
+            0.52
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_stool": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "origin": "center",
+      "interior": true,
+      "states": [
+        "default"
+      ],
+      "footprint": [
+        [
+          -0.16,
+          -0.16,
+          0.16,
+          0.16
+        ]
+      ],
+      "fadeable": false,
+      "geo": {
+        "default": {
+          "main": [
+            -0.16,
+            -0.16,
+            -0.001,
+            0.16,
+            0.16,
+            0.46
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_table": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "origin": "center",
+      "interior": true,
+      "states": [
+        "default",
+        "meal"
+      ],
+      "footprint": [
+        [
+          -0.4,
+          -0.25,
+          0.4,
+          0.25
+        ]
+      ],
+      "fadeable": false,
+      "geo": {
+        "default": {
+          "main": [
+            -0.4,
+            -0.25,
+            0.0,
+            0.4,
+            0.25,
+            0.58
+          ]
+        },
+        "meal": {
+          "main": [
+            -0.4,
+            -0.25,
+            0.0,
+            0.4,
+            0.25,
+            0.525
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_toilet": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "origin": "center",
+      "interior": true,
+      "states": [
+        "default"
+      ],
+      "footprint": [
+        [
+          -0.2,
+          -0.3,
+          0.2,
+          0.35
+        ]
+      ],
+      "fadeable": false,
+      "geo": {
+        "default": {
+          "main": [
+            -0.195,
+            -0.28,
+            0.0,
+            0.195,
+            0.32,
+            0.8
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_wardrobe": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "origin": "center",
+      "interior": true,
+      "states": [
+        "closed",
+        "open"
+      ],
+      "rots": [
+        0,
+        2,
+        6
+      ],
+      "footprint": [
+        [
+          -0.5,
+          -0.3,
+          0.5,
+          0.3
+        ]
+      ],
+      "fadeable": true,
+      "geo": {
+        "closed": {
+          "main": [
+            -0.52,
+            -0.32,
+            0.0,
+            0.52,
+            0.32,
+            2.05
+          ]
+        },
+        "open": {
+          "main": [
+            -0.587,
+            -0.32,
+            0.0,
+            0.587,
+            0.32,
+            2.05
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_washer": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "origin": "center",
+      "interior": true,
+      "states": [
+        "idle",
+        "running",
+        "done"
+      ],
+      "footprint": [
+        [
+          -0.3,
+          -0.3,
+          0.3,
+          0.3
+        ]
+      ],
+      "fadeable": true,
+      "light": [
+        0.18,
+        -0.31,
+        0.78
+      ],
+      "geo": {
+        "idle": {
+          "main": [
+            -0.3,
+            -0.31,
+            0.0,
+            0.3,
+            0.3,
+            0.85
+          ]
+        },
+        "running": {
+          "main": [
+            -0.3,
+            -0.36,
+            0.0,
+            0.3,
+            0.3,
+            0.85
+          ]
+        },
+        "done": {
+          "main": [
+            -0.3,
+            -0.363,
+            0.0,
+            0.3,
+            0.3,
+            0.85
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "g_terrazzo": {
+      "states": [
+        "default"
+      ],
+      "layer": "ground",
+      "catcher": null,
+      "origin": "sw-corner (bottom vertex)",
+      "interior": true,
+      "geo": {
+        "default": {
+          "main": [
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            0.0
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "g_tile": {
+      "states": [
+        "default"
+      ],
+      "layer": "ground",
+      "catcher": null,
+      "origin": "sw-corner (bottom vertex)",
+      "interior": true,
+      "geo": {
+        "default": {
+          "main": [
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            0.0
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "g_wood": {
+      "states": [
+        "a",
+        "b"
+      ],
+      "layer": "ground",
+      "catcher": null,
+      "origin": "sw-corner (bottom vertex)",
+      "interior": true,
+      "geo": {
+        "a": {
+          "main": [
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            0.0
+          ]
+        },
+        "b": {
+          "main": [
+            0.0,
+            0.08,
+            0.0,
+            2.0,
+            2.08,
+            0.0
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "i_ac": {
+      "layer": "sorted",
+      "catcher": null,
+      "interior": true,
+      "states": [
+        "off",
+        "on"
+      ],
+      "origin": "center",
+      "sort_line": [
+        [
+          -0.5,
+          0
+        ],
+        [
+          0.5,
+          0
+        ]
+      ],
+      "fadeable": true,
+      "z_order": 5,
+      "rots": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "geo": {
+        "off": {
+          "main": [
+            -0.5,
+            -0.248,
+            2.0,
+            0.5,
+            0.0,
+            2.36
+          ]
+        },
+        "on": {
+          "main": [
+            -0.5,
+            -0.36,
+            1.97,
+            0.5,
+            0.0,
+            2.36
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "i_balfront": {
+      "layer": "sorted",
+      "catcher": null,
+      "interior": true,
+      "states": [
+        "default",
+        "glass"
+      ],
+      "rots": [
+        0,
+        6
+      ],
+      "origin": "bay-bottom-left",
+      "sort_line": [
+        [
+          0,
+          0
+        ],
+        [
+          1.5,
+          0
+        ]
+      ],
+      "fadeable": true,
+      "z_order": 0,
+      "glass": [
+        0.04,
+        1.46,
+        0.58,
+        2.52
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            -0.02,
+            -0.06,
+            0.0,
+            1.52,
+            0.17,
+            1.37
+          ]
+        },
+        "glass": {
+          "main": [
+            -0.02,
+            -0.06,
+            0.0,
+            1.52,
+            0.17,
+            2.72
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "i_clutter": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "shoes",
+        "boxes",
+        "jars",
+        "broom",
+        "veg"
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -0.3,
+          -0.18,
+          0.3,
+          0.18
+        ]
+      ],
+      "fadeable": false,
+      "geo": {
+        "shoes": {
+          "main": [
+            -0.3,
+            -0.3,
+            0.0,
+            0.3,
+            0.15,
+            0.5
+          ]
+        },
+        "boxes": {
+          "main": [
+            -0.3,
+            -0.165,
+            -0.003,
+            0.3,
+            0.16,
+            0.853
+          ]
+        },
+        "jars": {
+          "main": [
+            -0.304,
+            -0.13,
+            0.0,
+            0.326,
+            0.13,
+            0.46
+          ]
+        },
+        "broom": {
+          "main": [
+            -0.279,
+            -0.16,
+            -0.003,
+            0.272,
+            0.2,
+            1.201
+          ]
+        },
+        "veg": {
+          "main": [
+            -0.29,
+            -0.14,
+            0.0,
+            0.31,
+            0.14,
+            0.36
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "i_crank": {
+      "layer": "sorted",
+      "catcher": "wall",
+      "origin": "mount-center",
+      "z_order": 2,
+      "fadeable": true,
+      "interior": true,
+      "states": [
+        "default"
+      ],
+      "sort_line": [
+        [
+          -0.08,
+          0
+        ],
+        [
+          0.08,
+          0
+        ]
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            -0.07,
+            -0.14,
+            -0.04,
+            0.07,
+            0.0,
+            1.25
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "i_cut": {
+      "layer": "sorted",
+      "catcher": null,
+      "interior": true,
+      "rots": [
+        0,
+        6
+      ],
+      "states": [
+        "plain",
+        "dado",
+        "tile"
+      ],
+      "origin": "bay-bottom-left",
+      "sort_line": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "fadeable": true,
+      "z_order": 0,
+      "geo": {
+        "plain": {
+          "main": [
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.15,
+            0.47
+          ]
+        },
+        "dado": {
+          "main": [
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.15,
+            0.47
+          ]
+        },
+        "tile": {
+          "main": [
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.15,
+            0.47
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "i_door": {
+      "layer": "sorted",
+      "catcher": null,
+      "interior": true,
+      "rots": [
+        0,
+        6
+      ],
+      "states": [
+        "closed",
+        "open"
+      ],
+      "origin": "bay-bottom-left",
+      "sort_line": [
+        [
+          0,
+          0
+        ],
+        [
+          1.2,
+          0
+        ]
+      ],
+      "fadeable": true,
+      "z_order": 0,
+      "vars": [
+        "wood"
+      ],
+      "geo": {
+        "closed": {
+          "main": [
+            0.0,
+            -0.03,
+            0.0,
+            1.2,
+            0.15,
+            2.72
+          ]
+        },
+        "open": {
+          "main": [
+            0.0,
+            -0.835,
+            0.0,
+            1.2,
+            0.15,
+            2.72
+          ]
+        }
+      },
+      "geo_var": {
+        "wood": {
+          "closed": {
+            "main": [
+              0.0,
+              -0.03,
+              0.0,
+              1.2,
+              0.15,
+              2.72
+            ]
+          },
+          "open": {
+            "main": [
+              0.0,
+              -0.835,
+              0.0,
+              1.2,
+              0.15,
+              2.72
+            ]
+          }
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base",
+        "wood"
+      ]
+    },
+    "i_dryrack": {
+      "layer": "sorted",
+      "catcher": null,
+      "interior": true,
+      "states": [
+        "default"
+      ],
+      "origin": "center",
+      "sort_line": [
+        [
+          -1.2,
+          0
+        ],
+        [
+          1.2,
+          0
+        ]
+      ],
+      "fadeable": true,
+      "z_order": 5,
+      "geo": {
+        "default": {
+          "main": [
+            -1.25,
+            -0.16,
+            2.06,
+            1.25,
+            0.16,
+            2.72
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "i_flight": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "interior": true,
+      "states": [
+        "up",
+        "up_roof",
+        "down"
+      ],
+      "origin": "flight SW corner",
+      "footprint": [
+        [
+          0,
+          0,
+          1.16,
+          2.9
+        ]
+      ],
+      "sort_box": [
+        -1.4,
+        0,
+        1.28,
+        4.2
+      ],
+      "sort_z": [
+        0,
+        2.35
+      ],
+      "fadeable": true,
+      "geo": {
+        "up": {
+          "main": [
+            -1.4,
+            -0.013,
+            0.0,
+            1.28,
+            4.2,
+            3.201
+          ]
+        },
+        "up_roof": {
+          "main": [
+            -1.4,
+            -0.013,
+            0.0,
+            1.28,
+            4.2,
+            3.201
+          ]
+        },
+        "down": {
+          "main": [
+            -0.2,
+            -0.1,
+            -3.08,
+            2.7,
+            4.34,
+            0.948
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "i_mailbox": {
+      "layer": "sorted",
+      "catcher": "wall",
+      "origin": "mount-center",
+      "z_order": 2,
+      "fadeable": true,
+      "interior": true,
+      "states": [
+        "default"
+      ],
+      "sort_line": [
+        [
+          -0.55,
+          0
+        ],
+        [
+          0.55,
+          0
+        ]
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            -0.55,
+            -0.5,
+            -1.1,
+            0.55,
+            0.0,
+            0.8
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "i_meter": {
+      "layer": "sorted",
+      "catcher": "wall",
+      "origin": "mount-center",
+      "z_order": 2,
+      "fadeable": true,
+      "interior": true,
+      "states": [
+        "default"
+      ],
+      "sort_line": [
+        [
+          -0.4,
+          0
+        ],
+        [
+          0.4,
+          0
+        ]
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            -0.4,
+            -0.195,
+            -1.4,
+            0.4,
+            0.0,
+            1.251
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "i_notice": {
+      "layer": "sorted",
+      "catcher": "wall",
+      "origin": "mount-center",
+      "z_order": 2,
+      "fadeable": true,
+      "interior": true,
+      "states": [
+        "default"
+      ],
+      "sort_line": [
+        [
+          -0.45,
+          0
+        ],
+        [
+          0.45,
+          0
+        ]
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            -0.45,
+            -0.052,
+            0.0,
+            0.45,
+            0.0,
+            0.6
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "i_pendant": {
+      "layer": "sorted",
+      "catcher": null,
+      "interior": true,
+      "states": [
+        "off",
+        "on"
+      ],
+      "origin": "center",
+      "sort_line": [
+        [
+          -0.2,
+          0
+        ],
+        [
+          0.2,
+          0
+        ]
+      ],
+      "fadeable": true,
+      "z_order": 5,
+      "geo": {
+        "off": {
+          "main": [
+            -0.22,
+            -0.214,
+            2.09,
+            0.22,
+            0.214,
+            2.7
+          ]
+        },
+        "on": {
+          "main": [
+            -0.22,
+            -0.214,
+            2.09,
+            0.22,
+            0.214,
+            2.7
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "i_side": {
+      "layer": "sorted",
+      "catcher": null,
+      "interior": true,
+      "rots": [
+        0,
+        6
+      ],
+      "states": [
+        "plain",
+        "dado",
+        "tile"
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -0.08,
+          -0.25,
+          0.08,
+          0.25
+        ]
+      ],
+      "fadeable": true,
+      "geo": {
+        "plain": {
+          "main": [
+            -0.075,
+            -0.25,
+            0.0,
+            0.075,
+            0.25,
+            2.72
+          ]
+        },
+        "dado": {
+          "main": [
+            -0.075,
+            -0.25,
+            0.0,
+            0.075,
+            0.25,
+            2.72
+          ]
+        },
+        "tile": {
+          "main": [
+            -0.075,
+            -0.25,
+            0.0,
+            0.075,
+            0.25,
+            2.72
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "i_track": {
+      "layer": "decal",
+      "catcher": null,
+      "states": [
+        "default"
+      ],
+      "rots": [
+        0,
+        2
+      ],
+      "origin": "center",
+      "interior": true,
+      "geo": {
+        "default": {
+          "main": [
+            -0.7,
+            -0.06,
+            0.0,
+            0.7,
+            0.06,
+            0.012
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "i_wall": {
+      "layer": "sorted",
+      "catcher": null,
+      "interior": true,
+      "rots": [
+        0,
+        6
+      ],
+      "states": [
+        "plain",
+        "poster",
+        "dado",
+        "dado_ads",
+        "tile"
+      ],
+      "origin": "bay-bottom-left",
+      "sort_line": [
+        [
+          0,
+          0
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "fadeable": true,
+      "z_order": 0,
+      "geo": {
+        "plain": {
+          "main": [
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.15,
+            2.72
+          ]
+        },
+        "poster": {
+          "main": [
+            0.0,
+            -0.012,
+            0.0,
+            1.0,
+            0.15,
+            2.72
+          ]
+        },
+        "dado": {
+          "main": [
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.15,
+            2.72
+          ]
+        },
+        "dado_ads": {
+          "main": [
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.15,
+            2.72
+          ]
+        },
+        "tile": {
+          "main": [
+            0.0,
+            0.0,
+            0.0,
+            1.0,
+            0.15,
+            2.72
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "i_window": {
+      "layer": "sorted",
+      "catcher": null,
+      "interior": true,
+      "rots": [
+        0,
+        6
+      ],
+      "states": [
+        "plain",
+        "dado",
+        "tile"
+      ],
+      "origin": "bay-bottom-left",
+      "sort_line": [
+        [
+          0,
+          0
+        ],
+        [
+          1.5,
+          0
+        ]
+      ],
+      "fadeable": true,
+      "z_order": 0,
+      "view": [
+        0.25,
+        1.25,
+        0.95,
+        2.15
+      ],
+      "geo": {
+        "plain": {
+          "main": [
+            0.0,
+            -0.12,
+            0.0,
+            1.5,
+            0.15,
+            2.72
+          ]
+        },
+        "dado": {
+          "main": [
+            0.0,
+            -0.12,
+            0.0,
+            1.5,
+            0.15,
+            2.72
+          ]
+        },
+        "tile": {
+          "main": [
+            0.0,
+            -0.12,
+            0.0,
+            1.5,
+            0.15,
+            2.72
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "p_metro_entry": {
+      "layer": "sorted",
+      "catcher": null,
+      "states": [
+        "open",
+        "shut"
+      ],
+      "origin": "center",
+      "rots": [
+        0,
+        6
+      ],
+      "parts": [
+        "base",
+        "roof"
+      ],
+      "fade_parts": [
+        "roof"
+      ],
+      "footprint": [
+        [
+          -1.55,
+          -2.35,
+          -1.05,
+          2.7
+        ],
+        [
+          1.05,
+          -2.35,
+          1.55,
+          2.7
+        ],
+        [
+          -1.05,
+          -2.35,
+          1.05,
+          2.7
+        ],
+        [
+          -2.05,
+          -2.45,
+          -1.55,
+          -1.95
+        ]
+      ],
+      "text": "井槐里站",
+      "text_board": "metro_board",
+      "text_ink": "shop_ink",
+      "fadeable": false,
+      "geo": {
+        "open": {
+          "base": [
+            -2.1,
+            -2.5,
+            -2.45,
+            1.7,
+            2.8,
+            3.2
+          ],
+          "roof": [
+            -1.67,
+            -2.47,
+            2.94,
+            1.67,
+            2.75,
+            3.44
+          ]
+        },
+        "shut": {
+          "base": [
+            -2.1,
+            -2.5,
+            -2.45,
+            1.7,
+            2.8,
+            3.2
+          ],
+          "roof": [
+            -1.67,
+            -2.47,
+            2.94,
+            1.67,
+            2.75,
+            3.44
+          ]
+        }
+      },
+      "variants": [
+        "base"
+      ]
+    },
+    "s_bar": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "origin": "center",
+      "interior": true,
+      "states": [
+        "default",
+        "bento"
+      ],
+      "rots": [
+        0,
+        4
+      ],
+      "footprint": [
+        [
+          -1.2,
+          -0.2,
+          1.2,
+          0.2
+        ]
+      ],
+      "fadeable": false,
+      "geo": {
+        "default": {
+          "main": [
+            -1.2,
+            -0.2,
+            0.0,
+            1.2,
+            0.2,
+            1.04
+          ]
+        },
+        "bento": {
+          "main": [
+            -1.2,
+            -0.2,
+            0.0,
+            1.2,
+            0.2,
+            1.09
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "s_barstool": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "origin": "center",
+      "interior": true,
+      "states": [
+        "default"
+      ],
+      "footprint": [
+        [
+          -0.16,
+          -0.16,
+          0.16,
+          0.16
+        ]
+      ],
+      "fadeable": false,
+      "geo": {
+        "default": {
+          "main": [
+            -0.19,
+            -0.2,
+            0.0,
+            0.19,
+            0.2,
+            0.77
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "s_cooler": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "origin": "center",
+      "interior": true,
+      "states": [
+        "full",
+        "low"
+      ],
+      "rots": [
+        0,
+        2,
+        6
+      ],
+      "footprint": [
+        [
+          -0.9,
+          -0.35,
+          0.9,
+          0.35
+        ]
+      ],
+      "fadeable": true,
+      "light": [
+        0,
+        -0.4,
+        1.4
+      ],
+      "geo": {
+        "full": {
+          "main": [
+            -0.9,
+            -0.37,
+            0.0,
+            0.9,
+            0.35,
+            2.05
+          ]
+        },
+        "low": {
+          "main": [
+            -0.9,
+            -0.37,
+            0.0,
+            0.9,
+            0.35,
+            2.05
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "s_counter": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "origin": "center",
+      "interior": true,
+      "states": [
+        "default"
+      ],
+      "rots": [
+        0,
+        4
+      ],
+      "footprint": [
+        [
+          -1.0,
+          -0.3,
+          1.0,
+          0.3
+        ]
+      ],
+      "fadeable": false,
+      "light": [
+        0.55,
+        0,
+        1.05
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            -1.02,
+            -0.32,
+            0.0,
+            1.02,
+            0.32,
+            1.5
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "s_gondola": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "origin": "center",
+      "interior": true,
+      "states": [
+        "full",
+        "low"
+      ],
+      "rots": [
+        0,
+        2
+      ],
+      "footprint": [
+        [
+          -0.9,
+          -0.3,
+          0.9,
+          0.3
+        ]
+      ],
+      "fadeable": true,
+      "geo": {
+        "full": {
+          "main": [
+            -0.9,
+            -0.305,
+            0.0,
+            0.9,
+            0.3,
+            1.45
+          ]
+        },
+        "low": {
+          "main": [
+            -0.9,
+            -0.305,
+            0.0,
+            0.9,
+            0.3,
+            1.45
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "s_micro": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "origin": "center",
+      "interior": true,
+      "states": [
+        "off",
+        "on"
+      ],
+      "rots": [
+        0,
+        6
+      ],
+      "footprint": [
+        [
+          -0.3,
+          -0.25,
+          0.3,
+          0.25
+        ]
+      ],
+      "fadeable": false,
+      "light": [
+        0,
+        -0.2,
+        1.05
+      ],
+      "geo": {
+        "off": {
+          "main": [
+            -0.3,
+            -0.255,
+            0.0,
+            0.3,
+            0.25,
+            1.15
+          ]
+        },
+        "on": {
+          "main": [
+            -0.3,
+            -0.255,
+            0.0,
+            0.3,
+            0.25,
+            1.15
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "s_oden": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "origin": "center",
+      "interior": true,
+      "states": [
+        "full",
+        "low"
+      ],
+      "rots": [
+        0
+      ],
+      "footprint": [
+        [
+          -0.35,
+          -0.28,
+          0.35,
+          0.28
+        ]
+      ],
+      "fadeable": false,
+      "light": [
+        0,
+        0,
+        1.0
+      ],
+      "geo": {
+        "full": {
+          "main": [
+            -0.35,
+            -0.29,
+            0.0,
+            0.35,
+            0.28,
+            1.25
+          ]
+        },
+        "low": {
+          "main": [
+            -0.35,
+            -0.29,
+            0.0,
+            0.35,
+            0.28,
+            1.25
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    }
+  },
+  "fx": {
+    "fire_frames": 8,
+    "fire_fps": 12,
+    "smoke_sizes": 3
+  }
+}

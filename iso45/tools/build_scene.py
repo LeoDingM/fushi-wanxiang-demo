@@ -38,6 +38,8 @@ def ground_at(x, y):
     if -12 <= x < 16 and 4 <= y < 34: return "C"                       # the 12号 courtyard
     if -16 <= x < -12 and 4 <= y < 34: return "S"                      # alley west of the courtyard wall
     if x < -12 and 4 <= y < 6: return "S"
+    if 39.5 <= x < 44.5 and -14.5 <= y < -10.0: return "A"           # dark asphalt pit under the metro stair mouth (reads as hole)
+    if 36 <= x < 48 and -16 <= y < -8: return "S"                     # plaza around 井槐里站 entrance (stairs, not lawn)
     if -16 <= y < -10: return "G" if grng.random() < 0.8 else "K"      # green belt south of the main road
     return "G" if grng.random() < 0.18 else "K"                        # back yards / concrete lots
 rows = ["".join(ground_at(X0 + 2 * c, Y0 + 2 * r) for c in range(COLS)) for r in range(ROWS)]
@@ -213,7 +215,7 @@ for (tx, ty) in TREEPITS:
     # bus / canopy / lamp-pole order is decided by the footprints (the taller t2 canopy made a bus-canopy-pole sort cycle)
     add("p_tree", tx + 1.0, ty + 1.0, id_=f"tree_{tx}_{ty}", variant="t2" if (tx + ty) % 4 and ty != 0 else "base")
 add("p_tree", 31.0, 11.0, id_="tree_far", variant="t2")
-for i, x in enumerate((-40.0, -31.0, -22.0, -13.0, -4.0, 5.0, 23.0, 35.0, 44.0, 55.0)):        # green belt south of the road
+for i, x in enumerate((-40.0, -31.0, -22.0, -13.0, -4.0, 5.0, 23.0, 35.0, 55.0)):            # green belt (skip 44 — sits on the metro entrance)
     add("p_tree", x, -14.0 + (i % 2) * 1.2, id_=f"tree_belt{i}", variant="base" if i % 3 else "t2")
 add("p_pole", -3.0, 0.5, id_="pole_w"); add("p_pole", 17.5, 0.5, id_="pole_e"); add("p_pole", 21.5, 12.0, rot=2, id_="pole_n")
 add("p_tree", 61.0, 13.0, id_="tree_alley", variant="t2"); add("p_tree", 78.0, 1.0, id_="tree_e4"); add("p_pole", 62.5, 0.5, id_="pole_e4")

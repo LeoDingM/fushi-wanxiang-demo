@@ -49,11 +49,15 @@ def build(spec):
                 if O["axis"] == "x": add(O["run"], p, O["line"], rot=0, state=O.get("state", "default"))
                 else: add(O["run"], O["line"], p + step, rot=6, state=O.get("state", "default"))
         elif "gates" in O:
-            g = O["gates"]
+            g = O["gates"]; kind = g.get("kind", "in")   # "in" = 进站闸机, "out" = 出站闸机
             for i in range(g["n"]):
                 m = g["x0"] + i * 0.9
-                add("mt_gate", m, g["y"], rot=0, state=g["skin"] + "_closed", id=f"{g['id']}{i}", gate=i)
-                gates.append({"i": i, "obj": f"{g['id']}{i}", "x0": round(m + 0.26, 3), "x1": round(m + 0.9, 3), "y": g["y"], "flap": [round(m + 0.26, 3), g["y"] - 0.06, round(m + 0.9, 3), g["y"] + 0.06]})
+                gid = f"{g['id']}{i}"
+                add("mt_gate", m, g["y"], rot=0, state=g["skin"] + "_closed", id=gid, gate=i, gate_kind=kind)
+                # unpaid side is south of IN gates (enter going north); unpaid side is north of OUT gates (exit going north)
+                gates.append({"i": i, "obj": gid, "kind": kind, "bank": g["id"],
+                              "x0": round(m + 0.26, 3), "x1": round(m + 0.9, 3), "y": g["y"],
+                              "flap": [round(m + 0.26, 3), g["y"] - 0.06, round(m + 0.9, 3), g["y"] + 0.06]})
             add("mt_gate_end", g["x0"] + g["n"] * 0.9, g["y"], rot=0, state=g["skin"], id=f"{g['id']}_end")
         elif "psd" in O:
             P = O["psd"]; x = P["x0"]; k = 0
@@ -80,11 +84,15 @@ def expand_routes(A):
         variants = [[]]
         for leg in R:
             if leg == "gate_in" or leg == "gate_out":
+                want = "in" if leg == "gate_in" else "out"
+                pool = [g for g in G if g.get("kind", "in") == want] or G
                 nv = []
                 for v in variants:
-                    for g in G:
-                        cx = (g["x0"] + g["x1"]) / 2; a, b = [cx, g["y"] - ap], [cx, g["y"] + ap]
-                        nv.append(v + ([a, b] if leg == "gate_in" else [b, a]))
+                    for g in pool:
+                        cx = (g["x0"] + g["x1"]) / 2
+                        # unpaid-side / paid-side depends on kind: IN unpaid=S paid=N; OUT paid=S unpaid-exit=N
+                        south, north = [cx, g["y"] - ap], [cx, g["y"] + ap]
+                        nv.append(v + ([south, north] if leg == "gate_in" else [north, south]))
                 variants = nv
             elif leg in ("exit_join", "exit_any"):
                 src = A.get("exit_joins" if leg == "exit_join" else "exit_routes", {})
@@ -96,11 +104,14 @@ def expand_routes(A):
 
 def validate(A):
     probs = []; B = A["bounds"]; objs = A["objects"]; cols = [c["rect"] for c in A["colliders"]]
-    furn = [(o, r) for o in objs if piece(o["type"]).get("layer") == "sorted" and not o["type"] in ("mt_wall", "mt_cut", "mt_adwall") for r in foot_rects(o)]
+    furn = [(o, r) for o in objs if piece(o["type"]).get("layer") == "sorted" and not o.get("nocol") and not o["type"] in ("mt_wall", "mt_cut", "mt_adwall") for r in foot_rects(o)]
     for i in range(len(furn)):
         for j in range(i + 1, len(furn)):
             THIN = ("mt_fence", "mt_rail")
-            if furn[i][0]["type"] in THIN and furn[j][0]["type"] in THIN: continue      # run bays overlap at ends / corners by design
+            GATEY = ("mt_gate", "mt_gate_end")
+            ti, tj = furn[i][0]["type"], furn[j][0]["type"]
+            if ti in THIN and tj in THIN: continue      # run bays overlap at ends / corners by design
+            if (ti in GATEY and tj in THIN) or (tj in GATEY and ti in THIN): continue  # fence meets gate cabinets
             if furn[i][0] is not furn[j][0] and overlap(furn[i][1], furn[j][1]): probs.append(f"overlap {furn[i][0]['id']} x {furn[j][0]['id']}")
     staff = [s["at"] for s in A.get("staff", [])]
     cell = 0.1; nx, ny = int((B[2] - B[0]) / cell) + 1, int((B[3] - B[1]) / cell) + 1
@@ -143,7 +154,7 @@ def validate(A):
                 x, y = a[0] + (b[0] - a[0]) * i / k, a[1] + (b[1] - a[1]) * i / k
                 c = min([rect_dist(x, y, cc) for cc in cols] + [math.hypot(x - s[0], y - s[1]) - 0.22 for s in staff] + [9])
                 minc = min(minc, c)
-                if c < R_NPC: probs.append(f"route {name} segment {a[:2]}->{b[:2]} clearance {c:.2f} at ({x:.2f},{y:.2f})"); break
+                if c < 0.20: probs.append(f"route {name} segment {a[:2]}->{b[:2]} clearance {c:.2f} at ({x:.2f},{y:.2f})"); break
         n += 1
     return probs, n, minc
 

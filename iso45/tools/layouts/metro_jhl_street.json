@@ -3,8 +3,8 @@
  "station": "jinghuaili",
  "skin": "old",
  "kind": "street",
- "name": "井槐里站 · 地面入口（井槐里路）",
- "_doc": "street level: sidewalk slice with the metro entrance (canopy, lit name band, stairs down) + station sign post. South edge = back to the street (core). Built by tools/build_metro.py.",
+ "name": "井槐里站 · (调试用地面)（井槐里路）",
+ "_doc": "DEPRECATED intermediate facade — core + preview enter the concourse directly. Kept only for art debug (?area=). Do not use in play flow.",
  "bounds": [
   0.3,
   0.3,

@@ -4,7 +4,7 @@
  "skin": "cbd",
  "kind": "street",
  "name": "中央商务区站 · 地面出口",
- "_doc": "CBD street stub: modern exit canopy (exit letter + destination drawn on the band) + sign post. South edge = exit to the CBD module (id 'cbd'); stairs = back down to the concourse (to the exit you came up).",
+ "_doc": "DEPRECATED intermediate facade — core + preview enter the concourse directly. Kept only for art debug (?area=). Do not use in play flow.",
  "bounds": [
   0.3,
   0.3,

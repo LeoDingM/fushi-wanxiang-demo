@@ -4,68 +4,52 @@
  "skin": "old",
  "kind": "platform",
  "name": "井槐里站 · 站台（B2，岛式）",
- "_doc": "island platform y 3.1..8.9 between two rows of platform screen doors. North track (y 9.15..11.95) = trains toward 科技园 (eastbound), south track = toward 槐北新村 (westbound). Car doors line up with the PSD door bays at x 2,6,10,14,18 (+2 m). Stairs up to the concourse in the middle. Trains, PSD states, countdown boards and boarding are run by js/metro.js from rules.metro.",
+ "_doc": "Widened island platform — 井槐里 modest but comfortable. Clear standing room, screen doors kept, NPC waits spread along the platform.",
  "bounds": [
   0.25,
-  3.1,
-  24.0,
-  8.9
+  1.6,
+  26.0,
+  10.4
  ],
  "ground": {
   "origin": [
    0,
-   -1
+   1
   ],
   "legend": {
-   "T": "mg_floor:track",
-   "P": "mg_floor:old"
+   "O": "mg_floor:old"
   },
   "rows_south_to_north": [
-   "TTTTTTTTTTTT",
-   "TTTTTTTTTTTT",
-   "PPPPPPPPPPPP",
-   "PPPPPPPPPPPP",
-   "PPPPPPPPPPPP",
-   "TTTTTTTTTTTT",
-   "TTTTTTTTTTTT"
+   "OOOOOOOOOOOOO",
+   "OOOOOOOOOOOOO",
+   "OOOOOOOOOOOOO",
+   "OOOOOOOOOOOOO",
+   "OOOOOOOOOOOOO"
   ]
  },
  "walls": [
   {
    "side": "N",
-   "line": 13.0,
-   "from": 0,
-   "to": 24,
-   "state": "old",
-   "bays": {
-    "3": "old_ad",
-    "8": "old_ad",
-    "15": "old_ad",
-    "20": "old_ad"
-   }
-  },
-  {
-   "side": "E",
-   "line": 24.0,
-   "from": 3,
-   "to": 9,
+   "line": 10.1,
+   "from": 0.25,
+   "to": 26.0,
    "state": "old"
   },
   {
-   "side": "W",
-   "line": 0.0,
-   "from": 3,
-   "to": 9,
+   "side": "S",
+   "line": 1.9000000000000001,
+   "from": 0.25,
+   "to": 26.0,
    "state": "old"
   }
  ],
  "objects": [
   {
    "psd": {
-    "y": 9.0,
+    "y": 10.7,
     "rot": 0,
     "x0": 0,
-    "x1": 24,
+    "x1": 26,
     "doors": [
      2,
      6,
@@ -79,10 +63,10 @@
   },
   {
    "psd": {
-    "y": 3.0,
+    "y": 1.3,
     "rot": 4,
     "x0": 0,
-    "x1": 24,
+    "x1": 26,
     "doors": [
      2,
      6,
@@ -96,11 +80,12 @@
   },
   {
    "type": "mt_up",
-   "x": 10.0,
+   "x": 12.0,
    "y": 6.0,
-   "rot": 6,
+   "rot": 0,
    "state": "old",
-   "id": "up_concourse"
+   "id": "up_stairs",
+   "nocol": true
   },
   {
    "type": "mt_pillar",
@@ -110,136 +95,124 @@
   },
   {
    "type": "mt_pillar",
-   "x": 17.5,
+   "x": 18.0,
    "y": 6.0,
    "state": "old"
   },
   {
    "type": "mt_bench",
-   "x": 3.2,
+   "x": 3.5,
    "y": 6.0,
    "state": "old"
   },
   {
    "type": "mt_bench",
-   "x": 21.2,
+   "x": 21.5,
    "y": 6.0,
    "state": "old"
   },
   {
    "type": "mt_bin",
-   "x": 15.6,
+   "x": 15.0,
    "y": 6.0,
    "state": "old"
   },
   {
    "type": "mt_board",
    "x": 6.0,
-   "y": 8.1,
+   "y": 9.8,
    "state": "old",
-   "id": "board1",
-   "board": true
+   "id": "bd_ne"
   },
   {
    "type": "mt_board",
    "x": 18.0,
-   "y": 8.1,
+   "y": 9.8,
    "state": "old",
-   "id": "board2",
-   "board": true
+   "id": "bd_nw"
   },
   {
    "type": "mt_board",
    "x": 19.0,
-   "y": 3.9,
+   "y": 2.2,
    "state": "old",
-   "id": "board3",
-   "board": true
+   "id": "bd_s"
   },
   {
    "type": "mt_hangsign",
-   "x": 8.4,
+   "x": 10.5,
    "y": 6.0,
-   "rot": 6,
-   "state": "old_yellow",
+   "state": "old",
    "id": "hs_exit"
   }
  ],
  "signs": [
   {
-   "obj": "board1",
-   "kind": "countdown",
-   "at": [
-    5.22,
-    8.015,
-    2.45
-   ],
-   "axis": "x",
-   "w": 1.56,
-   "h": 0.38
-  },
-  {
-   "obj": "board2",
-   "kind": "countdown",
-   "at": [
-    17.22,
-    8.015,
-    2.45
-   ],
-   "axis": "x",
-   "w": 1.56,
-   "h": 0.38
-  },
-  {
-   "obj": "board3",
-   "kind": "countdown",
-   "at": [
-    18.22,
-    3.815,
-    2.45
-   ],
-   "axis": "x",
-   "w": 1.56,
-   "h": 0.38
-  },
-  {
    "obj": "hs_exit",
    "at": [
-    8.335,
-    6.75,
+    9.75,
+    5.635,
     2.54
    ],
-   "axis": "-y",
+   "axis": "x",
    "w": 1.5,
    "h": 0.3,
    "lines": [
     "出口 · 站厅 ↑"
    ],
-   "ink": "#1b1a14"
+   "ink": "#ffffff"
   },
   {
-   "obj": "_wallN",
-   "kind": "stationname",
+   "obj": "bd_ne",
    "at": [
-    9.6,
-    12.98,
-    1.5
+    5.0,
+    9.7,
+    2.2
    ],
    "axis": "x",
-   "w": 4.8,
-   "h": 0.7,
+   "w": 2.0,
+   "h": 0.35,
    "lines": [
-    "井槐里站"
+    "3号线 · 往科技园"
    ],
-   "ink": "#2a2420",
-   "bg": "#e6d9bf"
+   "ink": "#ffe8c0"
+  },
+  {
+   "obj": "bd_nw",
+   "at": [
+    17.0,
+    9.7,
+    2.2
+   ],
+   "axis": "x",
+   "w": 2.0,
+   "h": 0.35,
+   "lines": [
+    "下一班"
+   ],
+   "ink": "#ffe8c0"
+  },
+  {
+   "obj": "bd_s",
+   "at": [
+    18.0,
+    2.1,
+    2.2
+   ],
+   "axis": "x",
+   "w": 2.0,
+   "h": 0.35,
+   "lines": [
+    "3号线 · 往槐北新村"
+   ],
+   "ink": "#ffe8c0"
   }
  ],
  "tracks": [
   {
    "id": "N",
    "dir": "east",
-   "y": 9.0,
+   "y": 10.7,
    "rot": 0,
    "cars": [
     2,
@@ -249,26 +222,26 @@
     18
    ],
    "cab_e": [
-    22,
-    9.0,
+    24,
+    10.7,
     0
    ],
    "cab_w": [
     2,
-    12.1,
+    13.799999999999999,
     4
    ],
    "rails": [
-    9.83,
-    11.27
+    10.53,
+    11.97
    ],
-   "door_y": 8.55,
+   "door_y": 10.25,
    "skin": "old"
   },
   {
    "id": "S",
    "dir": "west",
-   "y": 3.0,
+   "y": 1.3,
    "rot": 4,
    "cars": [
     4,
@@ -278,20 +251,20 @@
     20
    ],
    "cab_e": [
-    20,
-    -0.1,
+    22,
+    -1.8,
     0
    ],
    "cab_w": [
     0,
-    3.0,
+    1.3,
     4
    ],
    "rails": [
-    0.73,
-    2.17
+    0.53,
+    1.97
    ],
-   "door_y": 3.45,
+   "door_y": 1.75,
    "skin": "old"
   }
  ],
@@ -299,15 +272,15 @@
   {
    "id": "up",
    "rect": [
-    9.3,
-    4.6,
-    10.25,
-    7.4
+    10.9,
+    4.5,
+    13.1,
+    7.5
    ],
    "to": "jhl_concourse",
    "spawn": [
-    16.18,
-    7.8,
+    14.0,
+    13.5,
     "S"
    ],
    "label": "上楼去站厅",
@@ -315,194 +288,189 @@
   }
  ],
  "spawn": [
-  8.9,
+  12.0,
   6.0,
-  "W"
+  "S"
  ],
  "waits": [
   [
+   2.4,
+   9.55,
+   "N"
+  ],
+  [
+   4.8,
+   9.55,
+   "N"
+  ],
+  [
+   7.199999999999999,
+   9.55,
+   "N"
+  ],
+  [
+   9.6,
+   9.55,
+   "N"
+  ],
+  [
+   12.0,
+   9.55,
+   "N"
+  ],
+  [
+   14.4,
+   9.55,
+   "N"
+  ],
+  [
+   16.799999999999997,
+   9.55,
+   "N"
+  ],
+  [
+   3.0,
+   8.9,
+   "N"
+  ],
+  [
+   5.4,
+   8.9,
+   "N"
+  ],
+  [
+   7.8,
+   8.9,
+   "N"
+  ],
+  [
+   10.2,
+   8.9,
+   "N"
+  ],
+  [
+   12.6,
+   8.9,
+   "N"
+  ],
+  [
+   3.0,
    2.45,
-   8.25,
-   "N"
+   "S"
   ],
   [
-   3.55,
-   8.25,
-   "N"
-  ],
-  [
+   5.4,
    2.45,
-   7.65,
-   "N"
+   "S"
   ],
   [
-   3.55,
-   7.65,
-   "N"
-  ],
-  [
+   7.8,
    2.45,
-   3.75,
    "S"
   ],
   [
-   3.55,
-   3.75,
+   10.2,
+   2.45,
    "S"
   ],
   [
-   6.45,
-   8.25,
-   "N"
-  ],
-  [
-   7.55,
-   8.25,
-   "N"
-  ],
-  [
-   6.45,
-   7.65,
-   "N"
-  ],
-  [
-   7.55,
-   7.65,
-   "N"
-  ],
-  [
-   6.45,
-   3.75,
+   12.6,
+   2.45,
    "S"
   ],
   [
-   7.55,
-   3.75,
+   15.0,
+   2.45,
    "S"
   ],
   [
-   10.45,
-   8.25,
-   "N"
-  ],
-  [
-   11.55,
-   8.25,
-   "N"
-  ],
-  [
-   10.45,
-   3.75,
+   17.4,
+   2.45,
    "S"
   ],
   [
-   11.55,
-   3.75,
+   3.0,
+   3.1,
    "S"
   ],
   [
-   14.45,
-   8.25,
-   "N"
-  ],
-  [
-   15.55,
-   8.25,
-   "N"
-  ],
-  [
-   14.45,
-   7.65,
-   "N"
-  ],
-  [
-   15.55,
-   7.65,
-   "N"
-  ],
-  [
-   14.45,
-   3.75,
+   5.4,
+   3.1,
    "S"
   ],
   [
-   15.55,
-   3.75,
+   7.8,
+   3.1,
    "S"
   ],
   [
-   18.45,
-   8.25,
-   "N"
-  ],
-  [
-   19.55,
-   8.25,
-   "N"
-  ],
-  [
-   18.45,
-   7.65,
-   "N"
-  ],
-  [
-   19.55,
-   7.65,
-   "N"
-  ],
-  [
-   18.45,
-   3.75,
+   10.2,
+   3.1,
    "S"
   ],
   [
-   19.55,
-   3.75,
+   12.6,
+   3.1,
    "S"
   ]
  ],
- "lights": {
-  "ambient": [
-   196,
-   214,
-   226
-  ],
-  "tubes": [
-   [
-    1,
-    4.5,
-    23,
-    4.5
-   ],
-   [
-    1,
-    7.5,
-    23,
-    7.5
+ "lights": [
+  {
+   "x": 8,
+   "y": 6.0,
+   "r": 6,
+   "c": [
+    210,
+    225,
+    240
    ]
-  ],
-  "tint": [
-   200,
-   230,
-   255
-  ]
- },
+  },
+  {
+   "x": 18,
+   "y": 6.0,
+   "r": 6,
+   "c": [
+    210,
+    225,
+    240
+   ]
+  }
+ ],
  "routes": {
-  "to_wait": [
+  "wait_n": [
    [
-    9.0,
+    12.0,
     6.0
    ],
    [
     8.0,
+    9.0
+   ],
+   [
+    16.0,
+    9.0
+   ],
+   [
+    12.0,
     6.0
    ]
   ],
-  "from_door": [
+  "wait_s": [
    [
-    8.6,
-    6.0,
-    "end"
+    12.0,
+    6.0
+   ],
+   [
+    8.0,
+    3.0
+   ],
+   [
+    16.0,
+    3.0
+   ],
+   [
+    12.0,
+    6.0
    ]
   ]
  }

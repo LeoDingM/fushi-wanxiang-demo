@@ -49,9 +49,12 @@ def run(c, log):
        kn["home"] and "没人应" not in kn["home"] and ("没人" in kn["out"] or "不在" in kn["out"] or kn["out"]) and kn["last"] == kn["real"], kn)
     # metro
     E("SP.game.switchScene('street'); SP.clock.setTimeName('afternoon', true); SP.actions.idle(0.5)")
-    m = J("""(() => { const W = SP.world, o = W.byId.metro_jhl; const hrs = o.hours.join('-'); SP.game.use(o); SP.actions.idle(0.3);
-      const a = SP.metroActive, vis = document.getElementById('metro').style.display;
-      window.FushiMetro.core.leave('cbd', { exit: 'B' }); return JSON.stringify({ hrs, a, vis }); })()""")
+    E("SP.game.use(SP.world.byId.metro_jhl)")
+    time.sleep(0.8)
+    m = J("""(() => { const A = FushiMetro.core && FushiMetro.core.s && FushiMetro.core.s.W && FushiMetro.core.s.W.A; const o = SP.world.byId.metro_jhl;
+      return JSON.stringify({ hrs: o.hours.join('-'), a: !!SP.metroActive, vis: document.getElementById('metro').style.display, name: A && A.name, id: A && A.id, kind: A && A.kind }); })()""")
+    ok("metro: street → B1 站厅 directly (no 地面入口)", m["a"] and m["vis"] == "block" and m["kind"] == "concourse" and "地面" not in (m.get("name") or "") and "B1" in (m.get("name") or ""), m)
+    E("FushiMetro.core.leave('cbd', { exit: 'B' })")
     time.sleep(0.3)
     for _ in range(80):
         if E("!!(SP.cbd && SP.cbd.active && SP.cbd.ready)"): break

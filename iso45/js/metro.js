@@ -202,12 +202,19 @@
       o = o || {};
       let id = where;
       if (stById[where]) { id = stById[where].area; if (where === "cbd" && o.exit) S.exitLetter = o.exit; }
-      return ready.then(() => { I.active = true; S.running || startLoop(); goArea(id, o.spawn); if (o.exit) S.exitLetter = o.exit; });
+      return ready.then(() => {
+        I.active = true; S.running || startLoop();
+        if (o.exit) S.exitLetter = o.exit;
+        let sp = o.spawn;
+        // CBD re-entry at a specific exit letter lands in unpaid near that exit (no street facade)
+        if (!sp && o.exit && DATA.areas[id] && DATA.areas[id].exit_spawns) sp = DATA.areas[id].exit_spawns[o.exit];
+        goArea(id, sp);
+      });
     };
     function goArea(id, spawn) {
       const prevKind = S.W && S.W.A.kind;
       S.W = buildArea(id); const A = S.W.A;
-      if (A.kind === "street") { S.secured = false; S.bag = null; }
+      if (A.kind === "street" || (A.kind === "concourse" && !MS.entry)) { S.secured = false; S.bag = null; }
       if (!S.player) S.player = new Actor({ id: "limo", set: "li_mo", speed: 1.75, r: 0.22, isPlayer: true });
       const p = S.player;
       let sp = spawn;
@@ -234,9 +241,13 @@
       const letter = extra && extra.letter || pick(["A", "B", "C", "D"]);
       for (const leg of R0) {
         if (leg === "gate_in" || leg === "gate_out") {
-          gate = pick(S.W.gates); const cx = (gate.x0 + gate.x1) / 2 + (rnd() - 0.5) * 0.08;
+          const want = leg === "gate_in" ? "in" : "out";
+          const pool = S.W.gates.filter((g) => (g.kind || "in") === want);
+          gate = pick(pool.length ? pool : S.W.gates); const cx = (gate.x0 + gate.x1) / 2 + (rnd() - 0.5) * 0.08;
           const a = [cx, gate.y - ap], b = [cx, gate.y + ap];
-          if (leg === "gate_in") out.push(a, Object.assign([cx, gate.y], { gate }), b); else out.push(b, Object.assign([cx, gate.y], { gate }), a);
+          // IN: unpaid S -> paid N; OUT: paid N -> unpaid S
+          if (leg === "gate_in") out.push(a, Object.assign([cx, gate.y], { gate }), b);
+          else out.push(b, Object.assign([cx, gate.y], { gate }), a);
         } else if (leg === "exit_join") out.push(...A.exit_joins[letter].map((p) => p.slice()));
         else if (leg === "exit_any") out.push(...A.exit_routes[letter].map((p) => p.slice()));
         else if (leg === "exit_spawn") {}
@@ -401,8 +412,13 @@
       const p = S.player, out = [], A = S.W.A;
       for (const o of S.W.objs) if (o.interact) { const q = o.reach || [o.x, o.y], d = Math.hypot(q[0] - p.x, q[1] - p.y); if (d < 0.95) out.push({ d, label: o.label, kind: o.interact, o }); }
       for (const g of S.W.gates) {
-        if (p.x > g.x0 - 0.12 && p.x < g.x1 + 0.12 && Math.abs(p.y - g.y) < 1.3) {
-          const inSide = p.y < g.y; out.push({ d: Math.abs(p.y - g.y) * 0.5, label: inSide ? "进站：扫码 / 刷单程票 / 刷交通卡" : "出站（刷卡/扫码/投票）", kind: "gate", g, inSide });
+        if (p.x > g.x0 - 0.12 && p.x < g.x1 + 0.12 && Math.abs(p.y - g.y) < 1.35) {
+          const south = p.y < g.y, gk = g.kind || "in";
+          if (gk === "in" && !south) continue;   // IN only from unpaid (south)
+          if (gk === "out" && south) continue;   // OUT only from paid (north)
+          out.push({ d: Math.abs(p.y - g.y) * 0.5,
+            label: gk === "in" ? "进站：扫码 / 刷单程票 / 刷交通卡" : "出站（刷卡/扫码/投票）",
+            kind: "gate", g, inSide: gk === "in" });
         }
       }
       for (const T of A.tracks || []) { const st = S.trains[T.id]; if (st && st.doors) for (const q of doorPts(T)) { const d = Math.hypot(q[0] - p.x, q[1] - p.y); if (d < 0.95) out.push({ d, label: `上车 · ${dirLabel(T.dir)}`, kind: "board", T }); } }
@@ -459,7 +475,7 @@
         if (!E) toast("（无进站记录）站务员帮你开了闸，下次记得刷卡");
         else if (!E.rode) { toast(E.method === "token" ? "同站进出 · 单程票退回" : "同站进出 · 不扣费", 2.4); if (E.method === "token") MS.tokens.push(E.token); }
         else toast(E.method === "token" ? `单程票已回收 · 出站（${stById[E.station].name}→${stById[E.to].name}）` : `出站 · 本次 ¥${E.fare}（${E.method === "qr" ? "乘车码" : "交通卡 余额 ¥" + MS.card}）`, 2.8);
-        MS.entry = null; openGate(g);
+        MS.entry = null; S.secured = false; openGate(g);
       }
     }
     function doBoard(c) {
@@ -488,7 +504,9 @@
         else if (E.method === "card") { if (MS.card >= fare) { MS.card -= fare; msg = `交通卡扣费 ¥${fare} · 余额 ¥${MS.card}`; } else { const sh = fare - MS.card; MS.card = 0; host.spend(sh, "地铁补票"); msg = `交通卡余额不足，补票 ¥${sh}`; } }
         else { const d = fare - E.token.fare; if (d > 0) { host.spend(d, "地铁补票"); msg = `单程票超程，补票 ¥${d}`; } else msg = `单程票 ¥${E.token.fare}`; }
         E.rode = true; E.to = dest; E.fare = fare; log(`地铁 ${stById[here].name}→${stById[dest].name} ${mins}分钟 · ${msg}`);
-        goArea(platformOf(dest), [15.0, T.id === "N" ? 8.2 : 3.8, T.id === "N" ? "S" : "N"]);
+        const plat = DATA.areas[platformOf(dest)], dyN = (plat.tracks.find((t) => t.id === "N") || {}).door_y || 8.2;
+        const dyS = (plat.tracks.find((t) => t.id === "S") || {}).door_y || 3.8;
+        goArea(platformOf(dest), [15.0, T.id === "N" ? dyN - 0.35 : dyS + 0.35, T.id === "N" ? "S" : "N"]);
         S.override = { area: S.W.A.id, track: T.id, t: host.now() - 0.12 }; S.hold = {};
         trainTick(0);
         toast(`到达 ${stById[dest].name}站 · ${msg}`, 3.5);
@@ -1006,7 +1024,8 @@
     function toStreet() {                                    // back on 井槐里路 next to the entrance (its reach point)
       if (W.sceneId && W.sceneId !== "street" && SP.place) SP.place.enter("street");
       const o = (W.byId && W.byId.metro_jhl) || fromObj, P = SP.player;
-      if (o && o.reach) { P.x = o.reach[0]; P.y = o.reach[1]; P.dir = "W"; }
+      if (o && o.reach) { P.x = o.reach[0]; P.y = o.reach[1]; P.dir = "S"; }
+      else if (o) { P.x = o.x; P.y = o.y + 1.8; P.dir = "S"; }
       if (G) { G.armed = false; G.lastXY = [P.x, P.y]; }
     }
     function toCbd(info) {                                   // CBD module id 'cbd': hand over the exit letter
@@ -1018,7 +1037,7 @@
     window.addEventListener("keydown", (e) => { if (saved && M) { M._kd(e); e.stopImmediatePropagation(); } }, true);
     window.addEventListener("keyup", (e) => { if (saved && M) { M._ku(e); e.stopImmediatePropagation(); } }, true);
     SP.places = SP.places || {};
-    SP.places.metro_jhl = { _fm: true, enter: (o) => { fromObj = o || null; show(); getM().enter("jinghuaili"); return null; } };
+    SP.places.metro_jhl = { _fm: true, enter: (o) => { fromObj = o || null; show(); getM().enter("jhl_concourse"); return null; } };  // street → B1 directly (no 地面入口 place)
     SP.places.metro_cbd = { _fm: true, enter: (o) => { show(); getM().enter("cbd", { exit: (o && (o.link || o.exit)) || "A" }); return null; } };
     return SP.places.metro_jhl;
   };

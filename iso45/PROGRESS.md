@@ -37,3 +37,6 @@
 20:10 · [主线] CBD：按 Leo 改版要求暂缓接入，保留 stub「即将开放」+ main.js 宿主胶水（待新 CBD_READY.md）；旧 CBD_READY 不计
 20:10 · [CBD] Leo反馈：天际线限高/疏密+顶15独特轮廓；云麓花园富人小区；中央湖扩大+码头；云汇天地中庭商场重做；规则表与C1–C7已更新 · -
 20:11 · [CBD] 云麓花园挪开汇潮塔重叠；C5/C7重拍；CBD_READY 已按 Leo 限高/疏密/轮廓/小区/湖/商场重写 · -
+20:15 · [主线] 接入改版云汇CBD：index 换 js/cbd.js（替 stub）；地铁 B 出口落地臻品街/云汇天地，C 口回地铁；宿主驱动 frame+时钟+规则；含 kit_cbd / cbd_scene / js/cbd/*；smoke 4/4 · stage6 12/12 · screenshots/u9-cbd-arrival-phone.png
+20:25 · [地铁] 读完 Leo 三张截图：街面入口落在草地上无双进门地面入口要删；站厅单排闸机+客服堵路 · 开始重建布局 · -
+20:35 · [主线] 地铁街口：重建 p_metro_entry（catcher 取消以免草坪透出；可见楼梯+扶梯；口下沥青坑；周边改铺装），进站直达 B1 站厅（去掉「地面入口」中间层，站厅上楼 portal→exit:street）；METRO_READY 改版未到，站厅内部仍待地铁组 · screenshots/u10-metro-stairs.png

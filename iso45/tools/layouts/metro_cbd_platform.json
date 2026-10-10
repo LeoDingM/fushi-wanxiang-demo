@@ -4,72 +4,53 @@
  "skin": "cbd",
  "kind": "platform",
  "name": "中央商务区站 · 站台（B2，岛式）",
- "_doc": "island platform y 3.1..8.9 between two rows of platform screen doors. North track (y 9.15..11.95) = trains toward 科技园 (eastbound), south track = toward 槐北新村 (westbound). Car doors line up with the PSD door bays at x 2,6,10,14,18 (+2 m). Stairs up to the concourse in the middle. Trains, PSD states, countdown boards and boarding are run by js/metro.js from rules.metro.",
+ "_doc": "Widened island platform — CBD grand. Clear standing room, screen doors kept, NPC waits spread along the platform.",
  "bounds": [
   0.25,
-  3.1,
-  24.0,
-  8.9
+  0.8,
+  28.0,
+  12.2
  ],
  "ground": {
   "origin": [
    0,
-   -1
+   0
   ],
   "legend": {
-   "T": "mg_floor:track",
-   "P": "mg_floor:cbd"
+   "C": "mg_floor:cbd"
   },
   "rows_south_to_north": [
-   "TTTTTTTTTTTT",
-   "TTTTTTTTTTTT",
-   "PPPPPPPPPPPP",
-   "PPPPPPPPPPPP",
-   "PPPPPPPPPPPP",
-   "TTTTTTTTTTTT",
-   "TTTTTTTTTTTT"
+   "CCCCCCCCCCCCCC",
+   "CCCCCCCCCCCCCC",
+   "CCCCCCCCCCCCCC",
+   "CCCCCCCCCCCCCC",
+   "CCCCCCCCCCCCCC",
+   "CCCCCCCCCCCCCC"
   ]
  },
  "walls": [
   {
    "side": "N",
-   "line": 13.0,
-   "from": 0,
-   "to": 24,
-   "state": "cbd",
-   "bays": {
-    "2": "cbd_ad",
-    "3": "cbd_ad",
-    "7": "cbd_ad",
-    "8": "cbd_ad",
-    "13": "cbd_ad",
-    "14": "cbd_ad",
-    "19": "cbd_ad",
-    "20": "cbd_ad"
-   }
-  },
-  {
-   "side": "E",
-   "line": 24.0,
-   "from": 3,
-   "to": 9,
+   "line": 11.899999999999999,
+   "from": 0.25,
+   "to": 28.0,
    "state": "cbd"
   },
   {
-   "side": "W",
-   "line": 0.0,
-   "from": 3,
-   "to": 9,
+   "side": "S",
+   "line": 1.1,
+   "from": 0.25,
+   "to": 28.0,
    "state": "cbd"
   }
  ],
  "objects": [
   {
    "psd": {
-    "y": 9.0,
+    "y": 12.5,
     "rot": 0,
     "x0": 0,
-    "x1": 24,
+    "x1": 28,
     "doors": [
      2,
      6,
@@ -83,10 +64,10 @@
   },
   {
    "psd": {
-    "y": 3.0,
+    "y": 0.5,
     "rot": 4,
     "x0": 0,
-    "x1": 24,
+    "x1": 28,
     "doors": [
      2,
      6,
@@ -100,150 +81,159 @@
   },
   {
    "type": "mt_up",
-   "x": 10.0,
-   "y": 6.0,
-   "rot": 6,
+   "x": 14.0,
+   "y": 6.5,
+   "rot": 0,
    "state": "cbd",
-   "id": "up_concourse"
+   "id": "up_stairs",
+   "nocol": true
   },
   {
    "type": "mt_pillar",
    "x": 6.0,
-   "y": 6.0,
+   "y": 6.5,
    "state": "cbd"
   },
   {
    "type": "mt_pillar",
-   "x": 17.5,
-   "y": 6.0,
+   "x": 18.0,
+   "y": 6.5,
    "state": "cbd"
   },
   {
    "type": "mt_bench",
-   "x": 3.2,
-   "y": 6.0,
-   "state": "cbd"
-  },
-  {
-   "type": "mt_bench",
-   "x": 21.2,
-   "y": 6.0,
+   "x": 3.5,
+   "y": 6.5,
    "state": "cbd"
   },
   {
    "type": "mt_bin",
-   "x": 15.6,
-   "y": 6.0,
+   "x": 15.0,
+   "y": 6.5,
    "state": "cbd"
   },
   {
    "type": "mt_board",
    "x": 6.0,
-   "y": 8.1,
+   "y": 11.600000000000001,
    "state": "cbd",
-   "id": "board1",
-   "board": true
+   "id": "bd_ne"
   },
   {
    "type": "mt_board",
    "x": 18.0,
-   "y": 8.1,
+   "y": 11.600000000000001,
    "state": "cbd",
-   "id": "board2",
-   "board": true
+   "id": "bd_nw"
   },
   {
    "type": "mt_board",
    "x": 19.0,
-   "y": 3.9,
+   "y": 1.4,
    "state": "cbd",
-   "id": "board3",
-   "board": true
+   "id": "bd_s"
   },
   {
    "type": "mt_hangsign",
-   "x": 8.4,
-   "y": 6.0,
-   "rot": 6,
-   "state": "yellow",
+   "x": 12.5,
+   "y": 6.5,
+   "state": "cbd",
    "id": "hs_exit"
+  },
+  {
+   "type": "mt_pillar",
+   "x": 12.0,
+   "y": 6.5,
+   "state": "cbd"
+  },
+  {
+   "type": "mt_adwall",
+   "x": 1.0,
+   "y": 6.5,
+   "rot": 6,
+   "state": "default",
+   "id": "ad_p"
+  },
+  {
+   "type": "mt_bench",
+   "x": 9.0,
+   "y": 6.5,
+   "state": "cbd"
+  },
+  {
+   "type": "mt_bench",
+   "x": 24.5,
+   "y": 6.5,
+   "state": "cbd"
   }
  ],
  "signs": [
   {
-   "obj": "board1",
-   "kind": "countdown",
-   "at": [
-    5.22,
-    8.015,
-    2.45
-   ],
-   "axis": "x",
-   "w": 1.56,
-   "h": 0.38
-  },
-  {
-   "obj": "board2",
-   "kind": "countdown",
-   "at": [
-    17.22,
-    8.015,
-    2.45
-   ],
-   "axis": "x",
-   "w": 1.56,
-   "h": 0.38
-  },
-  {
-   "obj": "board3",
-   "kind": "countdown",
-   "at": [
-    18.22,
-    3.815,
-    2.45
-   ],
-   "axis": "x",
-   "w": 1.56,
-   "h": 0.38
-  },
-  {
    "obj": "hs_exit",
    "at": [
-    8.335,
-    6.75,
+    11.75,
+    6.135,
     2.54
    ],
-   "axis": "-y",
+   "axis": "x",
    "w": 1.5,
    "h": 0.3,
    "lines": [
     "出口 · 站厅 ↑"
    ],
-   "ink": "#1b1a14"
+   "ink": "#ffffff"
   },
   {
-   "obj": "_wallN",
-   "kind": "stationname",
+   "obj": "bd_ne",
    "at": [
-    9.6,
-    12.98,
-    1.5
+    5.0,
+    11.5,
+    2.2
    ],
    "axis": "x",
-   "w": 4.8,
-   "h": 0.7,
+   "w": 2.0,
+   "h": 0.35,
    "lines": [
-    "中央商务区站"
+    "3号线 · 往科技园"
    ],
-   "ink": "#f4f4f0",
-   "bg": "#2c3a48"
+   "ink": "#ffe8c0"
+  },
+  {
+   "obj": "bd_nw",
+   "at": [
+    17.0,
+    11.5,
+    2.2
+   ],
+   "axis": "x",
+   "w": 2.0,
+   "h": 0.35,
+   "lines": [
+    "下一班"
+   ],
+   "ink": "#ffe8c0"
+  },
+  {
+   "obj": "bd_s",
+   "at": [
+    18.0,
+    1.2999999999999998,
+    2.2
+   ],
+   "axis": "x",
+   "w": 2.0,
+   "h": 0.35,
+   "lines": [
+    "3号线 · 往槐北新村"
+   ],
+   "ink": "#ffe8c0"
   }
  ],
  "tracks": [
   {
    "id": "N",
    "dir": "east",
-   "y": 9.0,
+   "y": 12.5,
    "rot": 0,
    "cars": [
     2,
@@ -253,26 +243,26 @@
     18
    ],
    "cab_e": [
-    22,
-    9.0,
+    26,
+    12.5,
     0
    ],
    "cab_w": [
     2,
-    12.1,
+    15.6,
     4
    ],
    "rails": [
-    9.83,
-    11.27
+    12.33,
+    13.77
    ],
-   "door_y": 8.55,
+   "door_y": 12.05,
    "skin": "cbd"
   },
   {
    "id": "S",
    "dir": "west",
-   "y": 3.0,
+   "y": 0.5,
    "rot": 4,
    "cars": [
     4,
@@ -282,20 +272,20 @@
     20
    ],
    "cab_e": [
-    20,
-    -0.1,
+    24,
+    -2.6,
     0
    ],
    "cab_w": [
     0,
-    3.0,
+    0.5,
     4
    ],
    "rails": [
-    0.73,
-    2.17
+    -0.27,
+    1.17
    ],
-   "door_y": 3.45,
+   "door_y": 0.95,
    "skin": "cbd"
   }
  ],
@@ -303,15 +293,15 @@
   {
    "id": "up",
    "rect": [
-    9.3,
-    4.6,
-    10.25,
-    7.4
+    12.8,
+    4.8,
+    15.2,
+    8.2
    ],
    "to": "cbd_concourse",
    "spawn": [
-    14.0,
-    10.3,
+    18.0,
+    17.5,
     "S"
    ],
    "label": "上楼去站厅",
@@ -319,194 +309,209 @@
   }
  ],
  "spawn": [
-  8.9,
-  6.0,
-  "W"
+  14.0,
+  6.5,
+  "S"
  ],
  "waits": [
   [
-   2.45,
-   8.25,
+   2.5,
+   11.3,
    "N"
   ],
   [
-   3.55,
-   8.25,
+   4.7,
+   11.3,
    "N"
   ],
   [
-   2.45,
-   7.65,
+   6.9,
+   11.3,
    "N"
   ],
   [
-   3.55,
-   7.65,
+   9.100000000000001,
+   11.3,
    "N"
   ],
   [
-   2.45,
-   3.75,
+   11.3,
+   11.3,
+   "N"
+  ],
+  [
+   13.5,
+   11.3,
+   "N"
+  ],
+  [
+   15.700000000000001,
+   11.3,
+   "N"
+  ],
+  [
+   17.900000000000002,
+   11.3,
+   "N"
+  ],
+  [
+   2.5,
+   10.6,
+   "N"
+  ],
+  [
+   4.7,
+   10.6,
+   "N"
+  ],
+  [
+   6.9,
+   10.6,
+   "N"
+  ],
+  [
+   9.100000000000001,
+   10.6,
+   "N"
+  ],
+  [
+   11.3,
+   10.6,
+   "N"
+  ],
+  [
+   13.5,
+   10.6,
+   "N"
+  ],
+  [
+   3.0,
+   1.7,
    "S"
   ],
   [
-   3.55,
-   3.75,
+   5.2,
+   1.7,
    "S"
   ],
   [
-   6.45,
-   8.25,
-   "N"
-  ],
-  [
-   7.55,
-   8.25,
-   "N"
-  ],
-  [
-   6.45,
-   7.65,
-   "N"
-  ],
-  [
-   7.55,
-   7.65,
-   "N"
-  ],
-  [
-   6.45,
-   3.75,
+   7.4,
+   1.7,
    "S"
   ],
   [
-   7.55,
-   3.75,
+   9.600000000000001,
+   1.7,
    "S"
   ],
   [
-   10.45,
-   8.25,
-   "N"
-  ],
-  [
-   11.55,
-   8.25,
-   "N"
-  ],
-  [
-   10.45,
-   3.75,
+   11.8,
+   1.7,
    "S"
   ],
   [
-   11.55,
-   3.75,
+   14.0,
+   1.7,
    "S"
   ],
   [
-   14.45,
-   8.25,
-   "N"
-  ],
-  [
-   15.55,
-   8.25,
-   "N"
-  ],
-  [
-   14.45,
-   7.65,
-   "N"
-  ],
-  [
-   15.55,
-   7.65,
-   "N"
-  ],
-  [
-   14.45,
-   3.75,
+   16.200000000000003,
+   1.7,
    "S"
   ],
   [
-   15.55,
-   3.75,
+   18.400000000000002,
+   1.7,
    "S"
   ],
   [
-   18.45,
-   8.25,
-   "N"
-  ],
-  [
-   19.55,
-   8.25,
-   "N"
-  ],
-  [
-   18.45,
-   7.65,
-   "N"
-  ],
-  [
-   19.55,
-   7.65,
-   "N"
-  ],
-  [
-   18.45,
-   3.75,
+   3.0,
+   2.4,
    "S"
   ],
   [
-   19.55,
-   3.75,
+   5.2,
+   2.4,
+   "S"
+  ],
+  [
+   7.4,
+   2.4,
+   "S"
+  ],
+  [
+   9.600000000000001,
+   2.4,
+   "S"
+  ],
+  [
+   11.8,
+   2.4,
+   "S"
+  ],
+  [
+   14.0,
+   2.4,
    "S"
   ]
  ],
- "lights": {
-  "ambient": [
-   246,
-   244,
-   238
-  ],
-  "tubes": [
-   [
-    1,
-    4.5,
-    23,
-    4.5
-   ],
-   [
-    1,
-    7.5,
-    23,
-    7.5
+ "lights": [
+  {
+   "x": 8,
+   "y": 6.5,
+   "r": 6,
+   "c": [
+    235,
+    245,
+    255
    ]
-  ],
-  "tint": [
-   255,
-   244,
-   225
-  ]
- },
+  },
+  {
+   "x": 18,
+   "y": 6.5,
+   "r": 6,
+   "c": [
+    235,
+    245,
+    255
+   ]
+  }
+ ],
  "routes": {
-  "to_wait": [
+  "wait_n": [
    [
-    9.0,
-    6.0
+    14.0,
+    6.5
    ],
    [
     8.0,
-    6.0
+    10.5
+   ],
+   [
+    20.0,
+    10.5
+   ],
+   [
+    14.0,
+    6.5
    ]
   ],
-  "from_door": [
+  "wait_s": [
    [
-    8.6,
-    6.0,
-    "end"
+    14.0,
+    6.5
+   ],
+   [
+    8.0,
+    2.5
+   ],
+   [
+    20.0,
+    2.5
+   ],
+   [
+    14.0,
+    6.5
    ]
   ]
  }

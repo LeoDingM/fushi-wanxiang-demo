@@ -3,13 +3,13 @@
  "station": "jinghuaili",
  "skin": "old",
  "kind": "concourse",
- "name": "井槐里站 · 站厅（B1）",
- "_doc": "older peripheral concourse: terrazzo, cool tile walls, fluorescent light. West: stairs up to the street, security (queue lane -> X-ray + walk-through arch, exit lane beside it guarded). Middle: 3 ticket machines (east wall), service counter (top up). Fare gate line y=6.6 (5 aisles, every aisle takes QR / token / card). Paid area north with the stairs down to the island platform.",
+ "name": "井槐里站 · 站厅 (B1)",
+ "_doc": "Rebuilt: wide unpaid hall (≥3 m plaza), security west with roomy queue, TVMs+counter on east wall (not in choke), parallel IN (west) / OUT (east) gate banks with fence divider, paid north → platform stairs. Street portal = exit:street (no intermediate 地面入口).",
  "bounds": [
   0.25,
   0.25,
-  20.0,
-  12.0
+  28.0,
+  16.0
  ],
  "ground": {
   "origin": [
@@ -20,329 +20,297 @@
    "O": "mg_floor:old"
   },
   "rows_south_to_north": [
-   "OOOOOOOOOO",
-   "OOOOOOOOOO",
-   "OOOOOOOOOO",
-   "OOOOOOOOOO",
-   "OOOOOOOOOO",
-   "OOOOOOOOOO"
+   "OOOOOOOOOOOOOO",
+   "OOOOOOOOOOOOOO",
+   "OOOOOOOOOOOOOO",
+   "OOOOOOOOOOOOOO",
+   "OOOOOOOOOOOOOO",
+   "OOOOOOOOOOOOOO",
+   "OOOOOOOOOOOOOO",
+   "OOOOOOOOOOOOOO"
   ]
  },
  "walls": [
   {
    "side": "N",
-   "line": 12.0,
-   "from": 0,
-   "to": 20,
-   "state": "old",
-   "bays": {
-    "6": "old_ad",
-    "7": "old_ad",
-    "10": "old_map",
-    "17": "old_ad"
-   }
-  },
-  {
-   "side": "E",
-   "line": 20.0,
-   "from": 0,
-   "to": 12,
-   "state": "old",
-   "bays": {
-    "6": "old_ad",
-    "9": "old_ad"
-   }
+   "line": 15.7,
+   "from": 0.25,
+   "to": 28.0,
+   "state": "old"
   },
   {
    "side": "S",
-   "line": 0.0,
-   "from": 0,
-   "to": 20,
+   "line": 0.55,
+   "from": 0.25,
+   "to": 28.0,
    "state": "old"
   },
   {
    "side": "W",
-   "line": 0.0,
-   "from": 0,
-   "to": 12,
+   "line": 0.55,
+   "from": 0.25,
+   "to": 16.0,
    "state": "old"
+  },
+  {
+   "side": "E",
+   "line": 27.4,
+   "from": 0.25,
+   "to": 16.0,
+   "state": "old",
+   "bays": {
+    "2": "old_map",
+    "8": "old_ad",
+    "12": "old"
+   }
   }
  ],
  "objects": [
   {
    "type": "mt_up",
-   "x": 2.5,
-   "y": 7.8,
+   "x": 4.0,
+   "y": 0.55,
+   "rot": 4,
    "state": "old",
-   "id": "up_street"
+   "id": "street_stairs",
+   "nocol": true
+  },
+  {
+   "type": "mt_pillar",
+   "x": 11.5,
+   "y": 2.0,
+   "state": "old"
+  },
+  {
+   "type": "mt_pillar",
+   "x": 17.0,
+   "y": 3.2,
+   "state": "old"
+  },
+  {
+   "type": "mt_pillar",
+   "x": 5.2,
+   "y": 12.2,
+   "state": "old"
+  },
+  {
+   "type": "mt_pillar",
+   "x": 19.5,
+   "y": 12.2,
+   "state": "old"
   },
   {
    "type": "mt_xray",
-   "x": 9.0,
-   "y": 4.0,
-   "state": "idle",
+   "x": 4.6,
+   "y": 5.0,
    "id": "xray",
    "interact": "xray",
    "reach": [
-    7.6,
-    5.0
+    4.6,
+    4.15
    ],
    "label": "放包过安检"
   },
   {
    "type": "mt_arch",
-   "x": 9.0,
-   "y": 5.1,
-   "state": "idle",
+   "x": 7.5,
+   "y": 5.0,
    "id": "arch"
   },
   {
    "run": "mt_rail",
    "axis": "x",
-   "line": 4.55,
-   "from": 4.6,
-   "to": 8.6,
+   "line": 4.2,
+   "from": 2.2,
+   "to": 7.0,
    "step": 2
   },
   {
    "run": "mt_rail",
    "axis": "x",
-   "line": 5.65,
-   "from": 4.6,
-   "to": 8.6,
+   "line": 5.85,
+   "from": 2.2,
+   "to": 7.0,
    "step": 2
   },
   {
-   "run": "mt_fence",
-   "axis": "y",
-   "line": 9.0,
-   "from": 0.25,
-   "to": 1.4,
-   "state": "old"
-  },
-  {
-   "run": "mt_fence",
-   "axis": "y",
-   "line": 9.0,
-   "from": 2.56,
-   "to": 3.56,
-   "state": "old"
-  },
-  {
-   "run": "mt_fence",
-   "axis": "y",
-   "line": 9.0,
-   "from": 5.72,
-   "to": 12.0,
-   "state": "old"
+   "type": "mt_tvm",
+   "x": 23.0,
+   "y": 4.8,
+   "rot": 6,
+   "state": "old",
+   "id": "tvm0",
+   "interact": "tvm",
+   "reach": [
+    22.15,
+    4.8
+   ],
+   "label": "买单程票"
   },
   {
    "type": "mt_tvm",
-   "x": 19.55,
-   "y": 1.5,
+   "x": 23.0,
+   "y": 6.0,
    "rot": 6,
    "state": "old",
    "id": "tvm1",
    "interact": "tvm",
    "reach": [
-    18.85,
-    1.5
+    22.15,
+    6.0
    ],
-   "label": "自助购票（单程票）"
+   "label": "买单程票"
   },
   {
    "type": "mt_tvm",
-   "x": 19.55,
-   "y": 2.6,
+   "x": 23.0,
+   "y": 7.2,
    "rot": 6,
    "state": "old",
    "id": "tvm2",
    "interact": "tvm",
    "reach": [
-    18.85,
-    2.6
+    22.15,
+    7.2
    ],
-   "label": "自助购票（单程票）"
-  },
-  {
-   "type": "mt_tvm",
-   "x": 19.55,
-   "y": 3.7,
-   "rot": 6,
-   "state": "old",
-   "id": "tvm3",
-   "interact": "tvm",
-   "reach": [
-    18.85,
-    3.7
-   ],
-   "label": "自助购票（单程票）"
+   "label": "买单程票"
   },
   {
    "type": "mt_counter",
-   "x": 14.5,
-   "y": 2.0,
+   "x": 24.8,
+   "y": 2.9,
    "state": "old",
    "id": "counter",
    "interact": "counter",
    "reach": [
-    14.5,
-    0.8
+    23.4,
+    2.9
    ],
-   "label": "客服中心（交通卡充值）"
-  },
-  {
-   "gates": {
-    "x0": 12.0,
-    "y": 6.6,
-    "n": 5,
-    "skin": "old",
-    "id": "gate"
-   }
-  },
-  {
-   "run": "mt_fence",
-   "axis": "x",
-   "line": 6.6,
-   "from": 9.05,
-   "to": 12.0,
-   "state": "old"
-  },
-  {
-   "run": "mt_fence",
-   "axis": "x",
-   "line": 6.6,
-   "from": 16.76,
-   "to": 20.0,
-   "state": "old"
-  },
-  {
-   "type": "mt_down",
-   "x": 16.0,
-   "y": 8.0,
-   "state": "old",
-   "id": "down_platform",
-   "nocol": true
-  },
-  {
-   "run": "mt_fence",
-   "axis": "y",
-   "line": 14.35,
-   "from": 8.25,
-   "to": 12.0,
-   "state": "old"
-  },
-  {
-   "run": "mt_fence",
-   "axis": "y",
-   "line": 17.7,
-   "from": 8.25,
-   "to": 12.0,
-   "state": "old"
-  },
-  {
-   "type": "mt_pillar",
-   "x": 5.5,
-   "y": 9.6,
-   "state": "old"
-  },
-  {
-   "type": "mt_pillar",
-   "x": 12.0,
-   "y": 9.8,
-   "state": "old"
-  },
-  {
-   "type": "mt_pillar",
-   "x": 6.0,
-   "y": 1.0,
-   "state": "old"
+   "label": "客服中心 · 充值"
   },
   {
    "type": "mt_mapboard",
-   "x": 11.0,
-   "y": 4.7,
+   "x": 19.0,
+   "y": 1.15,
    "state": "old",
    "id": "map",
    "interact": "map",
    "reach": [
-    11.0,
-    4.1
+    19.0,
+    1.95
    ],
-   "label": "看线路图"
+   "label": "线路图"
   },
   {
-   "type": "mt_bench",
-   "x": 6.8,
-   "y": 11.0,
+   "type": "mt_bin",
+   "x": 12.5,
+   "y": 2.8,
    "state": "old"
   },
   {
    "type": "mt_bin",
-   "x": 4.6,
-   "y": 11.4,
+   "x": 20.5,
+   "y": 7.8,
    "state": "old"
   },
   {
-   "type": "mt_bin",
-   "x": 18.8,
-   "y": 5.6,
-   "state": "old"
+   "gates": {
+    "id": "gin",
+    "kind": "in",
+    "x0": 4.5,
+    "y": 9.0,
+    "n": 5,
+    "skin": "old"
+   }
   },
   {
-   "type": "mt_board",
-   "x": 11.8,
-   "y": 8.4,
+   "gates": {
+    "id": "gout",
+    "kind": "out",
+    "x0": 15.5,
+    "y": 9.0,
+    "n": 5,
+    "skin": "old"
+   }
+  },
+  {
+   "type": "mt_down",
+   "x": 14.0,
+   "y": 12.5,
+   "rot": 0,
    "state": "old",
-   "id": "board1",
-   "board": true
+   "id": "plat_stairs",
+   "nocol": true
   },
   {
    "type": "mt_hangsign",
-   "x": 14.4,
-   "y": 5.4,
-   "state": "green",
+   "x": 6.8,
+   "y": 9.55,
+   "state": "old",
    "id": "hs_in"
   },
   {
    "type": "mt_hangsign",
-   "x": 3.0,
-   "y": 6.3,
-   "state": "old_yellow",
-   "id": "hs_exit"
+   "x": 17.8,
+   "y": 9.55,
+   "state": "old",
+   "id": "hs_out"
   },
   {
-   "type": "mt_hangsign",
-   "x": 6.2,
-   "y": 6.4,
-   "state": "green",
-   "id": "hs_sec"
-  }
- ],
- "colliders": [
-  {
-   "rect": [
-    12.9,
-    1.25,
-    13.0,
-    2.75
-   ]
+   "type": "mt_board",
+   "x": 12.5,
+   "y": 15.15,
+   "state": "old",
+   "id": "board_n"
   },
   {
-   "rect": [
-    16.0,
-    1.25,
-    16.1,
-    2.75
-   ]
+   "run": "mt_fence",
+   "axis": "y",
+   "line": 4.0,
+   "from": 9.25,
+   "to": 15.5,
+   "state": "old"
+  },
+  {
+   "run": "mt_fence",
+   "axis": "y",
+   "line": 20.8,
+   "from": 9.25,
+   "to": 15.5,
+   "state": "old"
+  },
+  {
+   "run": "mt_fence",
+   "axis": "x",
+   "line": 9.15,
+   "from": 9.1,
+   "to": 15.4,
+   "state": "old"
+  },
+  {
+   "run": "mt_fence",
+   "axis": "y",
+   "line": 12.2,
+   "from": 9.25,
+   "to": 11.5,
+   "state": "old"
+  },
+  {
+   "run": "mt_fence",
+   "axis": "y",
+   "line": 13.3,
+   "from": 9.25,
+   "to": 11.5,
+   "state": "old"
   }
  ],
+ "colliders": [],
  "signs": [
   {
    "obj": "counter",
    "at": [
-    13.0,
-    1.445,
+    23.3,
+    2.145,
     2.39
    ],
    "axis": "x",
@@ -356,108 +324,79 @@
   {
    "obj": "hs_in",
    "at": [
-    13.65,
-    5.335,
+    6.05,
+    9.235,
     2.54
    ],
    "axis": "x",
    "w": 1.5,
    "h": 0.3,
    "lines": [
-    "进站 ↑ 3号线 站台"
+    "入站闸机 ↑"
    ],
    "ink": "#ffffff"
   },
   {
-   "obj": "hs_exit",
+   "obj": "hs_out",
    "at": [
-    2.35,
-    6.235,
-    2.54
-   ],
-   "axis": "x",
-   "w": 1.3,
-   "h": 0.3,
-   "lines": [
-    "出口 ↑ 井槐里路"
-   ],
-   "ink": "#1b1a14"
-  },
-  {
-   "obj": "hs_sec",
-   "at": [
-    5.45,
-    6.335,
+    17.05,
+    9.235,
     2.54
    ],
    "axis": "x",
    "w": 1.5,
    "h": 0.3,
    "lines": [
-    "安检 → 购票 → 进站"
+    "出站闸机 ↓"
    ],
    "ink": "#ffffff"
   },
   {
-   "obj": "map",
-   "kind": "linemap",
+   "obj": "board_n",
    "at": [
-    10.47,
-    4.615,
-    0.77
+    11.0,
+    15.05,
+    2.2
    ],
    "axis": "x",
-   "w": 1.06,
-   "h": 1.16
-  },
-  {
-   "obj": "board1",
-   "kind": "countdown",
-   "at": [
-    11.02,
-    8.315,
-    2.45
+   "w": 3.0,
+   "h": 0.35,
+   "lines": [
+    "付费区 · 往站台"
    ],
-   "axis": "x",
-   "w": 1.56,
-   "h": 0.38
+   "ink": "#ffe8c0"
   }
  ],
  "portals": [
   {
-   "id": "up",
+   "id": "street",
    "rect": [
-    1.2,
-    7.25,
-    3.8,
-    7.92
+    2.2,
+    0.4,
+    5.8,
+    1.4
    ],
-   "to": "jhl_street",
-   "spawn": [
-    7.0,
-    3.1,
-    "S"
-   ],
-   "label": "上楼出站",
+   "to": "exit:street",
+   "label": "出站上街",
    "auto": true
   },
   {
    "id": "down",
    "rect": [
-    14.65,
-    9.2,
-    17.4,
-    10.0
+    12.2,
+    13.8,
+    15.8,
+    14.9
    ],
    "to": "jhl_platform",
    "spawn": [
-    8.9,
+    12.5,
     6.0,
-    "W"
+    "N"
    ],
-   "label": "下楼去站台",
+   "label": "下楼往站台",
    "auto": true,
-   "paid": true
+   "hours": true
   }
  ],
  "zones": [
@@ -465,30 +404,20 @@
    "id": "arch",
    "kind": "arch",
    "rect": [
-    8.65,
-    4.62,
-    9.35,
-    5.58
-   ]
-  },
-  {
-   "id": "exitlane",
-   "kind": "exitlane",
-   "rect": [
-    8.7,
-    1.4,
-    9.3,
-    2.56
+    7.1,
+    4.5,
+    7.9,
+    5.5
    ]
   },
   {
    "id": "paid",
    "kind": "paid",
    "rect": [
-    9.05,
-    6.65,
-    20.0,
-    12.0
+    4.3,
+    9.35,
+    20.4,
+    15.5
    ]
   }
  ],
@@ -497,8 +426,8 @@
    "id": "guard",
    "sprite": "office",
    "at": [
-    9.9,
-    6.0
+    8.8,
+    6.6
    ],
    "dir": "SW",
    "name": "安检员"
@@ -507,8 +436,8 @@
    "id": "op",
    "sprite": "uncle",
    "at": [
-    10.4,
-    3.25
+    3.2,
+    3.3
    ],
    "dir": "N",
    "name": "安检机操作员"
@@ -517,8 +446,8 @@
    "id": "clerk",
    "sprite": "student",
    "at": [
-    14.5,
-    2.05
+    24.8,
+    3.9
    ],
    "dir": "S",
    "name": "客服"
@@ -527,184 +456,145 @@
    "id": "gatestaff",
    "sprite": "office",
    "at": [
-    17.6,
-    5.4
+    13.0,
+    8.2
    ],
-   "dir": "SW",
+   "dir": "S",
    "name": "站务员"
   }
  ],
  "spawn": [
+  4.0,
   2.5,
-  7.0,
-  "S"
+  "N"
  ],
- "lights": {
-  "ambient": [
-   196,
-   214,
-   226
-  ],
-  "tubes": [
-   [
-    2,
-    3,
-    18,
-    3
-   ],
-   [
-    2,
-    6,
-    18,
-    6
-   ],
-   [
-    2,
-    9.5,
-    18,
-    9.5
+ "gate_approach": 1.3,
+ "lights": [
+  {
+   "x": 6,
+   "y": 5,
+   "r": 5.5,
+   "c": [
+    200,
+    215,
+    230
    ]
-  ],
-  "tint": [
-   200,
-   230,
-   255
-  ]
- },
+  },
+  {
+   "x": 14,
+   "y": 5,
+   "r": 5.5,
+   "c": [
+    200,
+    215,
+    230
+   ]
+  },
+  {
+   "x": 22,
+   "y": 4,
+   "r": 5,
+   "c": [
+    200,
+    215,
+    230
+   ]
+  },
+  {
+   "x": 12,
+   "y": 12,
+   "r": 6,
+   "c": [
+    195,
+    210,
+    225
+   ]
+  }
+ ],
  "routes": {
   "in": [
    [
-    2.5,
-    7.0
+    4.0,
+    2.5
    ],
    [
-    3.8,
-    5.1
+    7.0,
+    2.8
    ],
    [
-    4.4,
-    5.1
+    9.5,
+    4.0
    ],
    [
-    8.4,
-    5.1,
-    "queue"
-   ],
-   [
-    9.0,
-    5.1,
-    "arch"
-   ],
-   [
-    10.0,
-    5.3
-   ],
-   [
-    12.0,
-    5.35
+    9.5,
+    7.5
    ],
    "gate_in",
    [
-    16.0,
-    7.7
+    6.5,
+    11.5
    ],
    [
-    16.0,
-    9.6,
-    "end"
+    8.0,
+    14.2
+   ],
+   [
+    15.5,
+    14.2
    ]
   ],
   "out": [
    [
-    16.0,
-    9.0
+    15.5,
+    14.2
    ],
    [
-    16.0,
-    7.7
+    18.0,
+    12.5
    ],
    "gate_out",
    [
-    11.4,
+    19.0,
+    6.5
+   ],
+   [
+    18.0,
+    4.0
+   ],
+   [
+    14.0,
+    3.5
+   ],
+   [
+    8.0,
     3.0
    ],
    [
-    9.6,
-    1.9
-   ],
-   [
-    8.2,
-    2.0
-   ],
-   [
-    4.2,
-    3.2
-   ],
-   [
-    3.0,
-    6.0
-   ],
-   [
-    2.5,
-    7.4,
-    "end"
+    4.0,
+    2.5
    ]
   ],
   "tvm": [
    [
-    2.5,
-    7.0
-   ],
-   [
-    3.8,
-    5.1
-   ],
-   [
-    4.4,
-    5.1
-   ],
-   [
-    8.4,
-    5.1,
-    "queue"
-   ],
-   [
-    9.0,
-    5.1,
-    "arch"
-   ],
-   [
-    10.0,
-    5.3
-   ],
-   [
-    12.0,
-    5.35
-   ],
-   [
-    17.5,
-    4.2
-   ],
-   [
-    18.5,
-    2.6,
-    "wait4"
-   ],
-   [
-    16.8,
-    5.0
-   ],
-   "gate_in",
-   [
     16.0,
-    7.7
+    4.0
+   ],
+   [
+    19.5,
+    5.5
+   ],
+   [
+    21.8,
+    5.5
+   ],
+   [
+    19.5,
+    5.5
    ],
    [
     16.0,
-    9.6,
-    "end"
+    4.0
    ]
   ]
- },
- "gate_approach": 1.15
+ }
 }
