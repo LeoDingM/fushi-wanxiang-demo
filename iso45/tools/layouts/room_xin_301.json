@@ -1,0 +1,307 @@
+{
+ "id": "room_xin_301",
+ "name": "馨园3-01 · 一房一厅 · 月租¥1200",
+ "_doc": "Stage A: slightly newer 公寓 一房一厅 — living + bedroom + kitchen + bath via room-layout",
+ "bounds": [
+  0.15,
+  0.15,
+  8.85,
+  6.85
+ ],
+ "ground": {
+  "origin": [
+   0,
+   0
+  ],
+  "chunk": 2,
+  "cols": 5,
+  "rows": 4,
+  "legend": {
+   "W": "g_wood:a",
+   "T": "g_tile",
+   "K": "g_tile"
+  },
+  "data_south_to_north": [
+   "WWWW.",
+   "WWWW.",
+   "WWKK.",
+   "..TT."
+  ]
+ },
+ "walls": [
+  {
+   "side": "N",
+   "line": 5.0,
+   "from": 0.0,
+   "to": 5.5,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "window",
+     "at": 1.2,
+     "interact": "window_in",
+     "id": "liv_win",
+     "reach": [
+      1.95,
+      3.6
+     ]
+    },
+    {
+     "kind": "door",
+     "at": 3.6,
+     "w": 1.1,
+     "id": "bed_door",
+     "interact": "door",
+     "state": "open",
+     "reach": [
+      4.1,
+      4.4
+     ]
+    }
+   ]
+  },
+  {
+   "side": "N",
+   "line": 5.0,
+   "from": 5.5,
+   "to": 9.0,
+   "finish": "tile"
+  },
+  {
+   "side": "N",
+   "line": 7.0,
+   "from": 0.0,
+   "to": 5.5,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "window",
+     "at": 1.5,
+     "interact": "window_in",
+     "id": "bed_win",
+     "reach": [
+      2.25,
+      5.8
+     ]
+    }
+   ]
+  },
+  {
+   "side": "E",
+   "line": 9.0,
+   "from": 0.0,
+   "to": 5.0,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "door",
+     "at": 0.25,
+     "id": "room_door",
+     "interact": "portal",
+     "to": "stair_xin_1f",
+     "spawn": [
+      3.5,
+      1.2,
+      "N"
+     ],
+     "label": "出门",
+     "reach": [
+      8.4,
+      0.9
+     ]
+    }
+   ]
+  },
+  {
+   "side": "E",
+   "line": 9.0,
+   "from": 5.0,
+   "to": 7.0,
+   "finish": "plain"
+  },
+  {
+   "side": "S",
+   "line": 0.0,
+   "from": 0.0,
+   "to": 9.0,
+   "finish": "plain"
+  },
+  {
+   "side": "W",
+   "line": 0.0,
+   "from": 0.0,
+   "to": 7.0,
+   "finish": "plain"
+  },
+  {
+   "side": "P",
+   "axis": "y",
+   "line": 5.5,
+   "from": 0.0,
+   "to": 5.0,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "gap",
+     "at": 1.5,
+     "w": 1.4
+    }
+   ]
+  },
+  {
+   "side": "P",
+   "axis": "x",
+   "line": 3.2,
+   "from": 5.5,
+   "to": 9.0,
+   "finish": "tile",
+   "openings": [
+    {
+     "kind": "door",
+     "at": 6.4,
+     "w": 1.0,
+     "id": "bath_door",
+     "interact": "door",
+     "state": "closed",
+     "reach": [
+      6.9,
+      2.7
+     ]
+    }
+   ]
+  }
+ ],
+ "furniture": [
+  {
+   "type": "f_table",
+   "x": 2.2,
+   "y": 2.4,
+   "id": "table"
+  },
+  {
+   "type": "f_stool",
+   "x": 1.5,
+   "y": 2.0,
+   "interact": "sit",
+   "id": "stool",
+   "reach": [
+    1.5,
+    1.6
+   ]
+  },
+  {
+   "type": "f_stool",
+   "x": 2.9,
+   "y": 2.0,
+   "id": "stool2"
+  },
+  {
+   "type": "f_fridge",
+   "x": 6.2,
+   "y": 1.0,
+   "id": "fridge",
+   "interact": "fridge"
+  },
+  {
+   "type": "f_kitchen",
+   "x": 7.2,
+   "y": 0.7,
+   "id": "stove",
+   "interact": "stove",
+   "state": "idle"
+  },
+  {
+   "type": "f_bed",
+   "x": 2.0,
+   "y": 5.9,
+   "state": "made",
+   "interact": "bed",
+   "id": "bed",
+   "reach": [
+    2.4,
+    5.2
+   ]
+  },
+  {
+   "type": "f_nightstand",
+   "x": 0.8,
+   "y": 5.9,
+   "state": "off",
+   "interact": "bedlamp",
+   "id": "nightstand"
+  },
+  {
+   "type": "f_wardrobe",
+   "x": 4.2,
+   "y": 6.4,
+   "id": "wardrobe",
+   "interact": "wardrobe"
+  },
+  {
+   "type": "f_desk",
+   "x": 3.8,
+   "y": 5.5,
+   "state": "off",
+   "interact": "pc",
+   "id": "desk"
+  },
+  {
+   "type": "f_chair",
+   "x": 3.8,
+   "y": 4.9,
+   "id": "chair"
+  },
+  {
+   "type": "f_toilet",
+   "x": 6.2,
+   "y": 4.2,
+   "id": "toilet",
+   "interact": "toilet"
+  },
+  {
+   "type": "f_basin",
+   "x": 7.5,
+   "y": 3.5,
+   "id": "basin",
+   "interact": "basin"
+  },
+  {
+   "type": "f_shower",
+   "x": 8.2,
+   "y": 4.5,
+   "id": "shower",
+   "interact": "shower"
+  },
+  {
+   "type": "f_washer",
+   "x": 5.9,
+   "y": 4.6,
+   "state": "idle",
+   "interact": "washer",
+   "id": "washer"
+  },
+  {
+   "type": "i_pendant",
+   "x": 2.5,
+   "y": 2.8,
+   "state": "off",
+   "interact": "light",
+   "id": "room_light"
+  },
+  {
+   "type": "i_ac",
+   "x": 0.4,
+   "y": 3.5,
+   "z": 2.2,
+   "state": "off",
+   "interact": "ac",
+   "id": "ac",
+   "rot": 6
+  }
+ ],
+ "spawn": [
+  7.8,
+  1.2,
+  "W"
+ ]
+}

@@ -121,6 +121,8 @@
       case "mailbox": return kind === "use" ? { label: "看信箱", do: "game" } : null;
       case "notice": return kind === "use" ? { label: "看公告", do: "game" } : null;
       case "door": return kind === "use" && o.id === "unit_door" ? { label: "进单元楼（12号）", do: "game" } : undefined;
+      case "civic": return kind === "use" ? { label: (o.to === "stair_xin_1f" ? "进入" : "进入") + (o.name ? ` · ${o.name}` : ""), do: "game" } : null;
+      case "bus_stop": return kind === "use" ? { label: `坐公交（${o.name || "站台"}）`, do: "game" } : null;
       case "idoor": return kind === "use" ? { label: (o.state === "open" ? "关上" : "打开") + (o.name || "门"), do: "game" } : null;
       case "bedlamp": return kind === "use" ? { label: o.state === "on" ? "关台灯" : "开台灯", do: "game" } : null;
       case "ac": return kind === "use" ? { label: o.state === "on" ? "关空调" : "开空调（1 kW）", do: "game" } : null;
@@ -177,6 +179,16 @@
       case "ac": W.setState(o, o.state === "on" ? "off" : "on"); G.syncPower(); return o.state === "on" ? "空调「嘀」一声开了，出风口慢慢吹出风" : "空调关了";
       case "meter": G.meterCard(); return null;
       case "door": G.go({ to: "stair_1f", spawn: SP.scenes.stair_1f.spawn, door: "unit_door" }); return null;
+      case "civic": {
+        if (o.hours && o.to !== "stair_xin_1f") {
+          const m = (SP.clock.abs() % 1440), [a,b] = o.hours.map(h => { const [H,M]=h.split(":").map(Number); return H*60+M; });
+          const open = a <= b ? m >= a && m < b : m >= a || m < b;
+          if (!open) return `${o.name}现在关门了（${o.hours.join("–")}）`;
+        }
+        if (!SP.scenes[o.to]) return `${o.name || "这里"}还在布置中`;
+        G.go({ to: o.to, spawn: SP.scenes[o.to].spawn || o.spawn, door: o.id }); return null;
+      }
+      case "bus_stop": if (SP.stageA) SP.stageA.boardBus(o); return null;
       case "table": if (o.state === "meal") return G.start("eat_home", o); return "一张折叠小饭桌，旁边一张红色小圆凳";
     }
     return null;

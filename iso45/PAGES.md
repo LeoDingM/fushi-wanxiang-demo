@@ -1,11 +1,14 @@
 # Pages handoff
 
-更新时间：2026-10-10 21:24（Asia/Shanghai）
+更新时间：2026-10-10 22:39（Asia/Shanghai）
 
-## 本包内容
-- CBD 风格板改造：象牙/米色住宅 + `roof_slate` 深灰石板顶、`res_amber` 幼儿园、别墅院落/泳池、河/桥/球场、开花乔木
-- 既有：云麓暖色四代住宅、深圳灵感异形塔、全透明遮挡、湖涟漪、户灯；天台车灯隔离；疲倦白天可整觉；2F-02 南立面玻璃阳台
+## Stage A（老街区扩展；CBD 暂停不动）
+1. **街道**：派出所 / 社区医院 / 消防站外立面+可进大厅；馨园公寓（稍新）一房一厅 `room_xin_301`；立面窗变体更多
+2. **上帝模式**：中文面板（P 旁「上帝」/ F1）— 金钱、四维需求、时刻、解锁全部、传送回家
+3. **住房**：可租馨园一房一厅（押一付一），切换住所 / 退租；可保留 2F-02
+4. **公交**：井槐里 ↔ 东街，站牌互动上车，跳过车程+扣费（prices.bus_fare=¥2）
+5. **手机**（P）：微信消息、银行余额/转账、地图步行/公交耗时、租房页；外卖/打车等占位
 
 ## 产物
 - `scene-proto-45.zip` / `scene-proto-45-play.zip`
-- CBD 截图：`screenshots/C1-park.png` … `C7-wealthy-compound.png`
+- 截图：`screenshots/a1-hospital-street.png` `a2-phone-wechat.png` `a3-god-mode.png` `a4-1ldk-xin.png` `a5-police-lobby.png`

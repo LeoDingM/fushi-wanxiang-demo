@@ -213,6 +213,12 @@ block("nb_w5", -43.0, 20.0, 4, 3, 3, "old", seed=55, roofvar="c")
 for i, x0 in enumerate((-42.0, -27.0, -10.0, 5.0, 31.0, 46.0)):
     block(f"nb_s{i}", x0, -29.0, 4, 3, 2, ("old", "brick", "plaster")[i % 3], seed=60 + i, roofvar="c" if i % 2 else "base")
 
+# Stage A: civic exteriors (enterable lobbies) + slightly newer 馨园公寓
+block("civic_police", -40.0, -10.0, 4, 3, 2, "plaster", seed=71, door=("S", 1), roofvar="c")
+block("civic_hospital", 16.0, -10.0, 4, 3, 3, "plaster", seed=72, door=("S", 1), roofvar="c")
+block("civic_fire", 52.0, -10.0, 4, 3, 2, "brick", seed=73, door=("S", 1), roofvar="c")
+block("apt_xin", 79.0, 17.0, 4, 3, 5, "plaster", seed=74, door=("S", 1), roofvar="c")  # newer 公寓
+
 # ---------------- props
 add("p_tree", -7.0, 1.0, id_="tree_sw"); add("p_tree", 13.0, 1.0, id_="tree_se"); add("p_tree", 19.0, 15.0, id_="tree_side", variant="t2")
 add("p_tree", -9.0, 9.0, id_="tree_west"); add("p_tree", 12.5, 19.5, id_="tree_court", variant="t2")
@@ -252,10 +258,29 @@ add("p_hydrant", 9.6, 1.0, id_="hydrant", interact="hydrant")
 add("p_post", -7.6, 7.0, id_="post_1"); add("p_post", -3.4, 7.0, id_="post_2")
 colliders.append({"id": "laundry_1", "rect": [-7.5, 6.9, -3.5, 7.1]})            # the laundry line: no walking through the sheets
 BUS_STOP_X = -20.0
-add("p_busstop", BUS_STOP_X, 2.4, id_="bus_stop")
+add("p_busstop", BUS_STOP_X, 2.4, id_="bus_stop", interact="bus_stop", name="公交站 · 井槐里")
+BUS_STOP_E_X = 74.5
+add("p_busstop", BUS_STOP_E_X, 1.0, id_="bus_stop_e", interact="bus_stop", name="公交站 · 东街")
 
 INTERACTIONS = json.loads(r'''{"_doc": "per interact kind (ported from scene-proto): use (E / 互动) and kick (F / 踢) actions by current state; repair / grow = state -> state after N in-game hours", "lamp": {"name": "路灯", "use": {"ok": {"label": "拍拍灯杆", "toast": "路灯：天黑自动亮"}, "broken": {"label": "拍拍灯杆", "toast": "灯泡一闪一闪的……"}}, "kick": {"ok": {"label": "踢灯杆", "to": "broken", "fx": "glass", "hazard": 0.8, "log": "{name}被踢坏，灯头歪了，一闪一闪"}}, "repair": {"broken": {"to": "ok", "after_h": 6, "log": "电工修好了{name}"}}}, "trashbin": {"name": "垃圾桶", "use": {"knocked": {"label": "扶起并收拾", "to": "upright", "clear_decals": true, "log": "李默扶起垃圾桶、把垃圾收拾干净"}, "upright": {"label": "看看", "toast": "可回收 / 其他垃圾"}}, "kick": {"upright": {"label": "踢翻", "to": "knocked", "decal": "fx/litter", "decal_dy": -0.55, "log": "垃圾桶被踢翻，垃圾撒了一地"}}, "repair": {"knocked": {"to": "upright", "after_h": 2, "clear_decals": true, "log": "环卫工把翻倒的垃圾桶收拾好了"}}}, "bike": {"name": "共享单车", "use": {"parked": {"label": "扫码推车", "do": "push_bike"}, "knocked": {"label": "扶起来", "to": "parked", "log": "李默把倒地的单车扶了起来"}}, "kick": {"parked": {"label": "推倒", "to": "knocked", "log": "一辆共享单车被推倒在人行道上"}}, "repair": {"knocked": {"to": "parked", "after_h": 3, "log": "单车调度员把倒地的单车扶正了"}}}, "vending": {"name": "自动售货机", "use": {"ok": {"label": "买饮料 ¥3", "do": "buy_drink", "toast": "咣当——买了一瓶冰红茶（¥3）"}, "broken": {"label": "看看", "toast": "暂停服务 · 维修中"}}, "kick": {"ok": {"label": "踹一脚", "to": "broken", "fx": "glass", "hazard": 0.9, "log": "售货机被踹坏，玻璃碎了，显示「暂停服务」"}}, "repair": {"broken": {"to": "ok", "after_h": 8, "log": "售货机维修完毕，恢复营业"}}}, "shop": {"name": "小店", "use": {"open": {"label": "进店看看", "toast": "{name}：营业中（{hours}）"}, "closed": {"label": "看看", "toast": "{name}已打烊，卷帘门拉下了（{hours}）"}}}, "poster": {"name": "墙上海报", "use": {"poster": {"label": "看海报", "toast": "寻猫启事：橘猫「大黄」，酬谢"}, "torn": {"label": "看看", "toast": "只剩几片纸屑和胶痕"}}, "kick": {"poster": {"label": "撕海报", "to": "torn", "fx": "paper", "log": "围墙上的海报被撕掉了"}}, "repair": {"torn": {"to": "poster", "after_h": 24, "log": "有人在围墙上贴了新海报"}}}, "window": {"name": "一楼窗户", "use": {"intact": {"label": "敲敲窗", "toast": "屋里没人应"}, "boarded": {"label": "看看", "toast": "木板临时钉住了"}}, "kick": {"intact": {"label": "砸窗", "to": "broken", "fx": "glass_window", "hazard_at": [1.5, -0.9], "hazard": 1.0, "log": "一楼窗户被砸碎，碎玻璃落了一地"}}, "repair": {"broken": {"to": "boarded", "after_h": 2, "clear_hazard": true, "log": "物业用木板把破窗钉上了"}, "boarded": {"to": "intact", "after_h": 10, "log": "玻璃师傅换好了新窗玻璃"}}}, "pot": {"name": "盆栽", "use": {"small": {"label": "浇水", "do": "water", "toast": "浇了水，过一会儿会长大"}, "grown": {"label": "浇水", "do": "water", "toast": "长得很茂盛"}, "broken": {"label": "看看", "toast": "花盆碎了，土撒了一地"}}, "kick": {"small": {"label": "踢翻", "to": "broken", "fx": "pot", "log": "盆栽被踢碎了"}, "grown": {"label": "踢翻", "to": "broken", "fx": "pot", "log": "盆栽被踢碎了"}}, "grow": {"small": {"to": "grown", "after_h": 1}}, "repair": {"broken": {"to": "small", "after_h": 12, "log": "邻居换了新花盆，重新种上小苗"}}}, "hydrant": {"name": "消防栓", "use": {"ok": {"label": "拧开 / 关上阀门", "do": "toggle_spray"}, "broken": {"label": "看看", "toast": "消防栓被撞断，水柱冲天！"}}, "repair": {"broken": {"to": "ok", "after_h": 3, "log": "市政抢修，消防栓修好了"}}}, "car": {"name": "停着的车", "use": {"normal": {"label": "按喇叭", "do": "honk"}}, "kick": {"normal": {"label": "踢轮胎", "do": "alarm", "log": "停着的车被踢了一脚，警报大作"}}}, "gate": {"name": "铁门"}, "door": {"name": "单元门"}, "stall": {"name": "早点摊"}, "locker": {"name": "快递柜"}, "laundry": {"name": "晾衣绳", "use": {"hung": {"label": "摸摸衣服", "toast": "{dry}"}, "fallen": {"label": "捡起来挂好", "to": "hung", "clear_decals": true, "log": "李默把掉在地上的衣服捡起来重新晾好"}, "taken": {"label": "看看", "toast": "下雨了，邻居把衣服收回家了"}}, "kick": {"hung": {"label": "扯晾衣绳", "to": "fallen", "fx": "cloth", "decal": "fx/litter", "decal_dy": -0.4, "log": "晾衣绳被扯断，衣服掉了一地"}}, "repair": {"fallen": {"to": "hung", "after_h": 2, "clear_decals": true, "log": "邻居把晾衣绳重新系好、衣服挂回去了"}}}, "puddle": {"name": "水坑"}, "leafpile": {"name": "落叶堆"}}''')
 bounds = {"x0": -24.0, "y0": -11.5, "x1": 46.0, "y1": 34.0}
+
+# Stage A door retarget: civic + 馨园 enterable
+CIVIC_MAP = {
+    "civic_police_S1F_1_door": ("civic_police", "井槐里派出所", [-36.0, -6.5, "N"]),
+    "civic_hospital_S1F_1_door": ("civic_hospital", "井槐社区卫生中心", [22.0, -6.5, "N"]),
+    "civic_fire_S1F_1_door": ("civic_fire", "井槐消防站", [58.0, -6.5, "N"]),
+    "apt_xin_S1F_1_door": ("stair_xin_1f", "馨园公寓", [82.0, 15.5, "N"]),
+}
+for o in objs:
+    if o["id"] in CIVIC_MAP:
+        dest, label, sp = CIVIC_MAP[o["id"]]
+        o.update({"interact": "civic", "to": dest, "spawn": sp, "name": label, "hours": ["08:00", "20:00"] if "hospital" in o["id"] else ["09:00", "17:00"] if "police" in o["id"] else ["00:00", "24:00"]})
+    # more facade variety on older neighbours: sprinkle balcony / window variants already random; bump a few states
+    if o.get("type") == "f_window" and o.get("id", "").startswith("nb_") and "S2F" in o["id"] and hash(o["id"]) % 5 == 0:
+        o["variant"] = ["base", "w1", "w2"][hash(o["id"]) % 3]
+        o["night_lit"] = True
+
 BOUNDS_EAST = {"x0": -24.0, "y0": -11.5, "x1": 92.0, "y1": 34.0}     # walkable once the east chunk is streamed in
 
 # ---------------- NPC routes (waypoint loops / ping-pong) + build-time clearance check

@@ -6295,5 +6295,4381 @@
    "problems": []
   },
   "bg_view": true
+ },
+ "stair_xin_1f": {
+  "format": "fushi-scene",
+  "version": 2,
+  "id": "stair_xin_1f",
+  "name": "馨园公寓 · 1F 门厅",
+  "interior": true,
+  "units": "m",
+  "grid_m": 0.5,
+  "objects": [
+   {
+    "id": "i_wall_000",
+    "type": "i_wall",
+    "x": 1.5,
+    "y": 4.0,
+    "z": 0,
+    "state": "dado"
+   },
+   {
+    "id": "i_wall_001",
+    "type": "i_wall",
+    "x": 2.5,
+    "y": 4.0,
+    "z": 0,
+    "state": "dado"
+   },
+   {
+    "id": "door_xin_301",
+    "type": "i_door",
+    "x": 3.5,
+    "y": 4.0,
+    "z": 0,
+    "state": "closed",
+    "interact": "portal",
+    "name": "3-01",
+    "to": "room_xin_301",
+    "spawn": [
+     7.8,
+     1.2,
+     "W"
+    ],
+    "label": "进 3-01（一房一厅）",
+    "reach": [
+     4.1,
+     3.55
+    ]
+   },
+   {
+    "id": "i_wall_003",
+    "type": "i_wall",
+    "x": 5.0,
+    "y": 4.0,
+    "z": 0,
+    "state": "dado"
+   },
+   {
+    "id": "i_wall_004",
+    "type": "i_wall",
+    "x": 6.0,
+    "y": 4.0,
+    "z": 0,
+    "state": "dado"
+   },
+   {
+    "id": "xin_notice",
+    "type": "i_notice",
+    "x": 2.0,
+    "y": 3.98,
+    "z": 1.2,
+    "interact": "notice",
+    "note": "馨园公寓：一房一厅起租 · 中介链居 · 看房请预约"
+   },
+   {
+    "id": "xin_light",
+    "type": "i_pendant",
+    "x": 3.0,
+    "y": 2.0,
+    "z": 0,
+    "state": "on"
+   },
+   {
+    "id": "i_wall_007",
+    "type": "i_wall",
+    "x": 7.7,
+    "y": 4.5,
+    "z": 0,
+    "rot": 6,
+    "state": "dado"
+   },
+   {
+    "id": "i_wall_008",
+    "type": "i_wall",
+    "x": 7.7,
+    "y": 3.5,
+    "z": 0,
+    "rot": 6,
+    "state": "dado"
+   },
+   {
+    "id": "i_wall_009",
+    "type": "i_wall",
+    "x": 7.7,
+    "y": 2.5,
+    "z": 0,
+    "rot": 6,
+    "state": "dado"
+   },
+   {
+    "id": "i_wall_010",
+    "type": "i_wall",
+    "x": 7.7,
+    "y": 1.5,
+    "z": 0,
+    "rot": 6,
+    "state": "dado"
+   },
+   {
+    "id": "i_wall_011",
+    "type": "i_wall",
+    "x": 7.7,
+    "y": 0.5,
+    "z": 0,
+    "rot": 6,
+    "state": "dado"
+   },
+   {
+    "id": "i_cut_012",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0,
+    "state": "dado"
+   },
+   {
+    "id": "i_cut_013",
+    "type": "i_cut",
+    "x": 1.0,
+    "y": 0.0,
+    "z": 0,
+    "state": "dado"
+   },
+   {
+    "id": "i_cut_014",
+    "type": "i_cut",
+    "x": 2.0,
+    "y": 0.0,
+    "z": 0,
+    "state": "dado"
+   },
+   {
+    "id": "i_cut_015",
+    "type": "i_cut",
+    "x": 5.0,
+    "y": 0.0,
+    "z": 0,
+    "state": "dado"
+   },
+   {
+    "id": "i_cut_016",
+    "type": "i_cut",
+    "x": 6.0,
+    "y": 0.0,
+    "z": 0,
+    "state": "dado"
+   },
+   {
+    "id": "i_cut_017",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 4.0,
+    "z": 0,
+    "rot": 6,
+    "state": "dado"
+   },
+   {
+    "id": "i_cut_018",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 3.0,
+    "z": 0,
+    "rot": 6,
+    "state": "dado"
+   },
+   {
+    "id": "i_cut_019",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 2.0,
+    "z": 0,
+    "rot": 6,
+    "state": "dado"
+   },
+   {
+    "id": "i_cut_020",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 1.0,
+    "z": 0,
+    "rot": 6,
+    "state": "dado"
+   }
+  ],
+  "colliders": [
+   {
+    "id": "north",
+    "rect": [
+     -1,
+     3.95,
+     8,
+     5
+    ]
+   },
+   {
+    "id": "east",
+    "rect": [
+     6.85,
+     -1,
+     9,
+     5
+    ]
+   },
+   {
+    "id": "west",
+    "rect": [
+     -1,
+     -1,
+     0.15,
+     5
+    ]
+   },
+   {
+    "id": "south_a",
+    "rect": [
+     -1,
+     -1,
+     2.8,
+     0.15
+    ]
+   },
+   {
+    "id": "south_b",
+    "rect": [
+     4.2,
+     -1,
+     9,
+     0.15
+    ]
+   }
+  ],
+  "portals": [
+   {
+    "id": "exit_street",
+    "rect": [
+     2.8,
+     0.15,
+     4.2,
+     0.5
+    ],
+    "dir": "S",
+    "to": "street",
+    "spawn": [
+     82.0,
+     15.5,
+     "S"
+    ],
+    "label": "出门",
+    "door": "apt_xin_door"
+   }
+  ],
+  "laundry": [],
+  "puddles": [],
+  "leaf_piles": [],
+  "wires": [],
+  "npcs": [],
+  "events": {},
+  "interactions": {
+   "_doc": "per interact kind (ported from scene-proto): use (E / 互动) and kick (F / 踢) actions by current state; repair / grow = state -> state after N in-game hours",
+   "lamp": {
+    "name": "路灯",
+    "use": {
+     "ok": {
+      "label": "拍拍灯杆",
+      "toast": "路灯：天黑自动亮"
+     },
+     "broken": {
+      "label": "拍拍灯杆",
+      "toast": "灯泡一闪一闪的……"
+     }
+    },
+    "kick": {
+     "ok": {
+      "label": "踢灯杆",
+      "to": "broken",
+      "fx": "glass",
+      "hazard": 0.8,
+      "log": "{name}被踢坏，灯头歪了，一闪一闪"
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "ok",
+      "after_h": 6,
+      "log": "电工修好了{name}"
+     }
+    }
+   },
+   "trashbin": {
+    "name": "垃圾桶",
+    "use": {
+     "knocked": {
+      "label": "扶起并收拾",
+      "to": "upright",
+      "clear_decals": true,
+      "log": "李默扶起垃圾桶、把垃圾收拾干净"
+     },
+     "upright": {
+      "label": "看看",
+      "toast": "可回收 / 其他垃圾"
+     }
+    },
+    "kick": {
+     "upright": {
+      "label": "踢翻",
+      "to": "knocked",
+      "decal": "fx/litter",
+      "decal_dy": -0.55,
+      "log": "垃圾桶被踢翻，垃圾撒了一地"
+     }
+    },
+    "repair": {
+     "knocked": {
+      "to": "upright",
+      "after_h": 2,
+      "clear_decals": true,
+      "log": "环卫工把翻倒的垃圾桶收拾好了"
+     }
+    }
+   },
+   "bike": {
+    "name": "共享单车",
+    "use": {
+     "parked": {
+      "label": "扫码推车",
+      "do": "push_bike"
+     },
+     "knocked": {
+      "label": "扶起来",
+      "to": "parked",
+      "log": "李默把倒地的单车扶了起来"
+     }
+    },
+    "kick": {
+     "parked": {
+      "label": "推倒",
+      "to": "knocked",
+      "log": "一辆共享单车被推倒在人行道上"
+     }
+    },
+    "repair": {
+     "knocked": {
+      "to": "parked",
+      "after_h": 3,
+      "log": "单车调度员把倒地的单车扶正了"
+     }
+    }
+   },
+   "vending": {
+    "name": "自动售货机",
+    "use": {
+     "ok": {
+      "label": "买饮料 ¥3",
+      "do": "buy_drink",
+      "toast": "咣当——买了一瓶冰红茶（¥3）"
+     },
+     "broken": {
+      "label": "看看",
+      "toast": "暂停服务 · 维修中"
+     }
+    },
+    "kick": {
+     "ok": {
+      "label": "踹一脚",
+      "to": "broken",
+      "fx": "glass",
+      "hazard": 0.9,
+      "log": "售货机被踹坏，玻璃碎了，显示「暂停服务」"
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "ok",
+      "after_h": 8,
+      "log": "售货机维修完毕，恢复营业"
+     }
+    }
+   },
+   "shop": {
+    "name": "小店",
+    "use": {
+     "open": {
+      "label": "进店看看",
+      "toast": "{name}：营业中（{hours}）"
+     },
+     "closed": {
+      "label": "看看",
+      "toast": "{name}已打烊，卷帘门拉下了（{hours}）"
+     }
+    }
+   },
+   "poster": {
+    "name": "墙上海报",
+    "use": {
+     "poster": {
+      "label": "看海报",
+      "toast": "寻猫启事：橘猫「大黄」，酬谢"
+     },
+     "torn": {
+      "label": "看看",
+      "toast": "只剩几片纸屑和胶痕"
+     }
+    },
+    "kick": {
+     "poster": {
+      "label": "撕海报",
+      "to": "torn",
+      "fx": "paper",
+      "log": "围墙上的海报被撕掉了"
+     }
+    },
+    "repair": {
+     "torn": {
+      "to": "poster",
+      "after_h": 24,
+      "log": "有人在围墙上贴了新海报"
+     }
+    }
+   },
+   "window": {
+    "name": "一楼窗户",
+    "use": {
+     "intact": {
+      "label": "敲敲窗",
+      "toast": "屋里没人应"
+     },
+     "boarded": {
+      "label": "看看",
+      "toast": "木板临时钉住了"
+     }
+    },
+    "kick": {
+     "intact": {
+      "label": "砸窗",
+      "to": "broken",
+      "fx": "glass_window",
+      "hazard_at": [
+       1.5,
+       -0.9
+      ],
+      "hazard": 1.0,
+      "log": "一楼窗户被砸碎，碎玻璃落了一地"
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "boarded",
+      "after_h": 2,
+      "clear_hazard": true,
+      "log": "物业用木板把破窗钉上了"
+     },
+     "boarded": {
+      "to": "intact",
+      "after_h": 10,
+      "log": "玻璃师傅换好了新窗玻璃"
+     }
+    }
+   },
+   "pot": {
+    "name": "盆栽",
+    "use": {
+     "small": {
+      "label": "浇水",
+      "do": "water",
+      "toast": "浇了水，过一会儿会长大"
+     },
+     "grown": {
+      "label": "浇水",
+      "do": "water",
+      "toast": "长得很茂盛"
+     },
+     "broken": {
+      "label": "看看",
+      "toast": "花盆碎了，土撒了一地"
+     }
+    },
+    "kick": {
+     "small": {
+      "label": "踢翻",
+      "to": "broken",
+      "fx": "pot",
+      "log": "盆栽被踢碎了"
+     },
+     "grown": {
+      "label": "踢翻",
+      "to": "broken",
+      "fx": "pot",
+      "log": "盆栽被踢碎了"
+     }
+    },
+    "grow": {
+     "small": {
+      "to": "grown",
+      "after_h": 1
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "small",
+      "after_h": 12,
+      "log": "邻居换了新花盆，重新种上小苗"
+     }
+    }
+   },
+   "hydrant": {
+    "name": "消防栓",
+    "use": {
+     "ok": {
+      "label": "拧开 / 关上阀门",
+      "do": "toggle_spray"
+     },
+     "broken": {
+      "label": "看看",
+      "toast": "消防栓被撞断，水柱冲天！"
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "ok",
+      "after_h": 3,
+      "log": "市政抢修，消防栓修好了"
+     }
+    }
+   },
+   "car": {
+    "name": "停着的车",
+    "use": {
+     "normal": {
+      "label": "按喇叭",
+      "do": "honk"
+     }
+    },
+    "kick": {
+     "normal": {
+      "label": "踢轮胎",
+      "do": "alarm",
+      "log": "停着的车被踢了一脚，警报大作"
+     }
+    }
+   },
+   "gate": {
+    "name": "铁门"
+   },
+   "door": {
+    "name": "单元门"
+   },
+   "stall": {
+    "name": "早点摊"
+   },
+   "locker": {
+    "name": "快递柜"
+   },
+   "laundry": {
+    "name": "晾衣绳",
+    "use": {
+     "hung": {
+      "label": "摸摸衣服",
+      "toast": "{dry}"
+     },
+     "fallen": {
+      "label": "捡起来挂好",
+      "to": "hung",
+      "clear_decals": true,
+      "log": "李默把掉在地上的衣服捡起来重新晾好"
+     },
+     "taken": {
+      "label": "看看",
+      "toast": "下雨了，邻居把衣服收回家了"
+     }
+    },
+    "kick": {
+     "hung": {
+      "label": "扯晾衣绳",
+      "to": "fallen",
+      "fx": "cloth",
+      "decal": "fx/litter",
+      "decal_dy": -0.4,
+      "log": "晾衣绳被扯断，衣服掉了一地"
+     }
+    },
+    "repair": {
+     "fallen": {
+      "to": "hung",
+      "after_h": 2,
+      "clear_decals": true,
+      "log": "邻居把晾衣绳重新系好、衣服挂回去了"
+     }
+    }
+   },
+   "puddle": {
+    "name": "水坑"
+   },
+   "leafpile": {
+    "name": "落叶堆"
+   }
+  },
+  "calendar": {
+   "start": [
+    2026,
+    3,
+    21
+   ],
+   "days_per_season": 5,
+   "season_order": [
+    "spring",
+    "summer",
+    "autumn",
+    "winter"
+   ],
+   "season_start": {
+    "spring": [
+     3,
+     21
+    ],
+    "summer": [
+     6,
+     21
+    ],
+    "autumn": [
+     9,
+     23
+    ],
+    "winter": [
+     12,
+     21
+    ]
+   },
+   "start_clock": "16:50",
+   "start_day": 5
+  },
+  "weather": {
+   "chances": {
+    "spring": {
+     "clear": 0.55,
+     "rain": 0.3,
+     "fog": 0.15
+    },
+    "summer": {
+     "clear": 0.55,
+     "rain": 0.4,
+     "fog": 0.05
+    },
+    "autumn": {
+     "clear": 0.6,
+     "rain": 0.25,
+     "fog": 0.15
+    },
+    "winter": {
+     "clear": 0.35,
+     "snow": 0.5,
+     "fog": 0.15
+    }
+   },
+   "wet_rise_min": 12,
+   "dry_min": 180,
+   "snow_full_min": 45,
+   "melt_min": {
+    "spring": 60,
+    "summer": 20,
+    "autumn": 90,
+    "winter": 900
+   },
+   "start_weather": "clear"
+  },
+  "repair_hours_scale": 1.0,
+  "floor": 1,
+  "bounds": {
+   "x0": 0.15,
+   "y0": 0.15,
+   "x1": 6.9,
+   "y1": 3.85
+  },
+  "ground": {
+   "origin": [
+    0,
+    0
+   ],
+   "chunk": 2,
+   "cols": 4,
+   "rows": 2,
+   "legend": {
+    "T": "g_terrazzo"
+   },
+   "data_south_to_north": [
+    "TTTT",
+    "TTTT"
+   ]
+  },
+  "spawn": [
+   3.5,
+   1.0,
+   "N"
+  ],
+  "bg_view": true
+ },
+ "room_xin_301": {
+  "format": "fushi-scene",
+  "version": 2,
+  "id": "room_xin_301",
+  "name": "馨园3-01 · 一房一厅 · 月租¥1200",
+  "interior": true,
+  "units": "m",
+  "grid_m": 0.5,
+  "objects": [
+   {
+    "id": "liv_win",
+    "type": "i_window",
+    "x": 1.2,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "interact": "window_in",
+    "reach": [
+     1.95,
+     3.6
+    ],
+    "state": "plain"
+   },
+   {
+    "id": "bed_door",
+    "type": "i_door",
+    "x": 3.6,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "interact": "door",
+    "state": "open",
+    "reach": [
+     4.1,
+     4.4
+    ]
+   },
+   {
+    "id": "i_wall_002",
+    "type": "i_wall",
+    "x": 0.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_003",
+    "type": "i_wall",
+    "x": 0.2,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_004",
+    "type": "i_wall",
+    "x": 2.7,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_005",
+    "type": "i_wall",
+    "x": 4.7,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_006",
+    "type": "i_wall",
+    "x": 5.5,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "state": "tile"
+   },
+   {
+    "id": "i_wall_007",
+    "type": "i_wall",
+    "x": 6.5,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "state": "tile"
+   },
+   {
+    "id": "i_wall_008",
+    "type": "i_wall",
+    "x": 7.5,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "state": "tile"
+   },
+   {
+    "id": "i_wall_009",
+    "type": "i_wall",
+    "x": 8.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "state": "tile"
+   },
+   {
+    "id": "bed_win",
+    "type": "i_window",
+    "x": 1.5,
+    "y": 7.0,
+    "z": 0,
+    "rot": 0,
+    "interact": "window_in",
+    "reach": [
+     2.25,
+     5.8
+    ],
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_011",
+    "type": "i_wall",
+    "x": 0.0,
+    "y": 7.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_012",
+    "type": "i_wall",
+    "x": 0.5,
+    "y": 7.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_013",
+    "type": "i_wall",
+    "x": 3.0,
+    "y": 7.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_014",
+    "type": "i_wall",
+    "x": 4.0,
+    "y": 7.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_015",
+    "type": "i_wall",
+    "x": 4.5,
+    "y": 7.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "room_door",
+    "type": "i_door",
+    "x": 9.0,
+    "y": 1.45,
+    "z": 0,
+    "rot": 6,
+    "interact": "portal",
+    "to": "stair_xin_1f",
+    "spawn": [
+     3.5,
+     1.2,
+     "N"
+    ],
+    "label": "出门",
+    "reach": [
+     8.4,
+     0.9
+    ],
+    "state": "closed"
+   },
+   {
+    "id": "i_wall_017",
+    "type": "i_wall",
+    "x": 9.0,
+    "y": 1.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_018",
+    "type": "i_wall",
+    "x": 9.0,
+    "y": 2.45,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_019",
+    "type": "i_wall",
+    "x": 9.0,
+    "y": 3.45,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_020",
+    "type": "i_wall",
+    "x": 9.0,
+    "y": 4.45,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_021",
+    "type": "i_wall",
+    "x": 9.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_022",
+    "type": "i_wall",
+    "x": 9.0,
+    "y": 6.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_023",
+    "type": "i_wall",
+    "x": 9.0,
+    "y": 7.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_024",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_025",
+    "type": "i_cut",
+    "x": 1.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_026",
+    "type": "i_cut",
+    "x": 2.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_027",
+    "type": "i_cut",
+    "x": 3.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_028",
+    "type": "i_cut",
+    "x": 4.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_029",
+    "type": "i_cut",
+    "x": 5.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_030",
+    "type": "i_cut",
+    "x": 6.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_031",
+    "type": "i_cut",
+    "x": 7.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_032",
+    "type": "i_cut",
+    "x": 8.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_033",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 1.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_034",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 2.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_035",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 3.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_036",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 4.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_037",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_038",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 6.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_039",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 7.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_040",
+    "type": "i_wall",
+    "x": 5.5,
+    "y": 1.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_041",
+    "type": "i_wall",
+    "x": 5.5,
+    "y": 1.5,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_042",
+    "type": "i_wall",
+    "x": 5.5,
+    "y": 3.9,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_043",
+    "type": "i_wall",
+    "x": 5.5,
+    "y": 4.9,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_044",
+    "type": "i_wall",
+    "x": 5.5,
+    "y": 5.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "bath_door",
+    "type": "i_door",
+    "x": 6.4,
+    "y": 3.2,
+    "z": 0,
+    "rot": 0,
+    "interact": "door",
+    "state": "closed",
+    "reach": [
+     6.9,
+     2.7
+    ],
+    "block": [
+     6.4,
+     3.2,
+     7.4,
+     3.35
+    ]
+   },
+   {
+    "id": "i_wall_046",
+    "type": "i_wall",
+    "x": 5.5,
+    "y": 3.2,
+    "z": 0,
+    "rot": 0,
+    "state": "tile"
+   },
+   {
+    "id": "i_wall_047",
+    "type": "i_wall",
+    "x": 7.4,
+    "y": 3.2,
+    "z": 0,
+    "rot": 0,
+    "state": "tile"
+   },
+   {
+    "id": "i_wall_048",
+    "type": "i_wall",
+    "x": 8.0,
+    "y": 3.2,
+    "z": 0,
+    "rot": 0,
+    "state": "tile"
+   },
+   {
+    "id": "table",
+    "type": "f_table",
+    "x": 2.2,
+    "y": 2.4,
+    "z": 0
+   },
+   {
+    "id": "stool",
+    "type": "f_stool",
+    "x": 1.5,
+    "y": 2.0,
+    "z": 0,
+    "interact": "sit",
+    "reach": [
+     1.5,
+     1.6
+    ]
+   },
+   {
+    "id": "stool2",
+    "type": "f_stool",
+    "x": 2.9,
+    "y": 2.0,
+    "z": 0
+   },
+   {
+    "id": "fridge",
+    "type": "f_fridge",
+    "x": 6.2,
+    "y": 1.0,
+    "z": 0,
+    "interact": "fridge"
+   },
+   {
+    "id": "stove",
+    "type": "f_kitchen",
+    "x": 7.2,
+    "y": 0.7,
+    "z": 0,
+    "interact": "stove",
+    "state": "idle"
+   },
+   {
+    "id": "bed",
+    "type": "f_bed",
+    "x": 2.0,
+    "y": 5.9,
+    "z": 0,
+    "state": "made",
+    "interact": "bed",
+    "reach": [
+     2.4,
+     5.2
+    ]
+   },
+   {
+    "id": "nightstand",
+    "type": "f_nightstand",
+    "x": 0.8,
+    "y": 5.9,
+    "z": 0,
+    "state": "off",
+    "interact": "bedlamp"
+   },
+   {
+    "id": "wardrobe",
+    "type": "f_wardrobe",
+    "x": 4.2,
+    "y": 6.4,
+    "z": 0,
+    "interact": "wardrobe"
+   },
+   {
+    "id": "desk",
+    "type": "f_desk",
+    "x": 3.8,
+    "y": 5.5,
+    "z": 0,
+    "state": "off",
+    "interact": "pc"
+   },
+   {
+    "id": "chair",
+    "type": "f_chair",
+    "x": 3.8,
+    "y": 4.9,
+    "z": 0
+   },
+   {
+    "id": "toilet",
+    "type": "f_toilet",
+    "x": 6.2,
+    "y": 4.2,
+    "z": 0,
+    "interact": "toilet"
+   },
+   {
+    "id": "basin",
+    "type": "f_basin",
+    "x": 7.5,
+    "y": 3.5,
+    "z": 0,
+    "interact": "basin"
+   },
+   {
+    "id": "shower",
+    "type": "f_shower",
+    "x": 8.2,
+    "y": 4.5,
+    "z": 0,
+    "interact": "shower"
+   },
+   {
+    "id": "washer",
+    "type": "f_washer",
+    "x": 5.9,
+    "y": 4.6,
+    "z": 0,
+    "state": "idle",
+    "interact": "washer"
+   },
+   {
+    "id": "room_light",
+    "type": "i_pendant",
+    "x": 2.5,
+    "y": 2.8,
+    "z": 0,
+    "state": "off",
+    "interact": "light"
+   },
+   {
+    "id": "ac",
+    "type": "i_ac",
+    "x": 0.4,
+    "y": 3.5,
+    "z": 2.2,
+    "state": "off",
+    "interact": "ac",
+    "rot": 6
+   }
+  ],
+  "colliders": [
+   {
+    "id": "wall0_0",
+    "rect": [
+     0.0,
+     5.0,
+     1.2,
+     5.6
+    ]
+   },
+   {
+    "id": "wall0_1",
+    "rect": [
+     2.7,
+     5.0,
+     3.6,
+     5.6
+    ]
+   },
+   {
+    "id": "wall0_2",
+    "rect": [
+     4.7,
+     5.0,
+     5.5,
+     5.6
+    ]
+   },
+   {
+    "id": "wall1_3",
+    "rect": [
+     5.5,
+     5.0,
+     9.0,
+     5.6
+    ]
+   },
+   {
+    "id": "wall2_4",
+    "rect": [
+     0.0,
+     7.0,
+     1.5,
+     7.6
+    ]
+   },
+   {
+    "id": "wall2_5",
+    "rect": [
+     3.0,
+     7.0,
+     5.5,
+     7.6
+    ]
+   },
+   {
+    "id": "wall3_6",
+    "rect": [
+     9.0,
+     0.0,
+     9.6,
+     0.25
+    ]
+   },
+   {
+    "id": "wall3_7",
+    "rect": [
+     9.0,
+     1.45,
+     9.6,
+     5.0
+    ]
+   },
+   {
+    "id": "wall4_8",
+    "rect": [
+     9.0,
+     5.0,
+     9.6,
+     7.0
+    ]
+   },
+   {
+    "id": "wall5_9",
+    "rect": [
+     0.0,
+     -0.6,
+     9.0,
+     0.15
+    ]
+   },
+   {
+    "id": "wall6_10",
+    "rect": [
+     -0.6,
+     0.0,
+     0.15,
+     7.0
+    ]
+   },
+   {
+    "id": "wall7_11",
+    "rect": [
+     5.5,
+     0.0,
+     5.65,
+     1.5
+    ]
+   },
+   {
+    "id": "wall7_12",
+    "rect": [
+     5.5,
+     2.9,
+     5.65,
+     5.0
+    ]
+   },
+   {
+    "id": "wall8_13",
+    "rect": [
+     5.5,
+     3.2,
+     6.4,
+     3.35
+    ]
+   },
+   {
+    "id": "wall8_14",
+    "rect": [
+     7.4,
+     3.2,
+     9.0,
+     3.35
+    ]
+   }
+  ],
+  "portals": [],
+  "laundry": [],
+  "puddles": [],
+  "leaf_piles": [],
+  "wires": [],
+  "npcs": [],
+  "events": {},
+  "interactions": {
+   "_doc": "per interact kind (ported from scene-proto): use (E / 互动) and kick (F / 踢) actions by current state; repair / grow = state -> state after N in-game hours",
+   "lamp": {
+    "name": "路灯",
+    "use": {
+     "ok": {
+      "label": "拍拍灯杆",
+      "toast": "路灯：天黑自动亮"
+     },
+     "broken": {
+      "label": "拍拍灯杆",
+      "toast": "灯泡一闪一闪的……"
+     }
+    },
+    "kick": {
+     "ok": {
+      "label": "踢灯杆",
+      "to": "broken",
+      "fx": "glass",
+      "hazard": 0.8,
+      "log": "{name}被踢坏，灯头歪了，一闪一闪"
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "ok",
+      "after_h": 6,
+      "log": "电工修好了{name}"
+     }
+    }
+   },
+   "trashbin": {
+    "name": "垃圾桶",
+    "use": {
+     "knocked": {
+      "label": "扶起并收拾",
+      "to": "upright",
+      "clear_decals": true,
+      "log": "李默扶起垃圾桶、把垃圾收拾干净"
+     },
+     "upright": {
+      "label": "看看",
+      "toast": "可回收 / 其他垃圾"
+     }
+    },
+    "kick": {
+     "upright": {
+      "label": "踢翻",
+      "to": "knocked",
+      "decal": "fx/litter",
+      "decal_dy": -0.55,
+      "log": "垃圾桶被踢翻，垃圾撒了一地"
+     }
+    },
+    "repair": {
+     "knocked": {
+      "to": "upright",
+      "after_h": 2,
+      "clear_decals": true,
+      "log": "环卫工把翻倒的垃圾桶收拾好了"
+     }
+    }
+   },
+   "bike": {
+    "name": "共享单车",
+    "use": {
+     "parked": {
+      "label": "扫码推车",
+      "do": "push_bike"
+     },
+     "knocked": {
+      "label": "扶起来",
+      "to": "parked",
+      "log": "李默把倒地的单车扶了起来"
+     }
+    },
+    "kick": {
+     "parked": {
+      "label": "推倒",
+      "to": "knocked",
+      "log": "一辆共享单车被推倒在人行道上"
+     }
+    },
+    "repair": {
+     "knocked": {
+      "to": "parked",
+      "after_h": 3,
+      "log": "单车调度员把倒地的单车扶正了"
+     }
+    }
+   },
+   "vending": {
+    "name": "自动售货机",
+    "use": {
+     "ok": {
+      "label": "买饮料 ¥3",
+      "do": "buy_drink",
+      "toast": "咣当——买了一瓶冰红茶（¥3）"
+     },
+     "broken": {
+      "label": "看看",
+      "toast": "暂停服务 · 维修中"
+     }
+    },
+    "kick": {
+     "ok": {
+      "label": "踹一脚",
+      "to": "broken",
+      "fx": "glass",
+      "hazard": 0.9,
+      "log": "售货机被踹坏，玻璃碎了，显示「暂停服务」"
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "ok",
+      "after_h": 8,
+      "log": "售货机维修完毕，恢复营业"
+     }
+    }
+   },
+   "shop": {
+    "name": "小店",
+    "use": {
+     "open": {
+      "label": "进店看看",
+      "toast": "{name}：营业中（{hours}）"
+     },
+     "closed": {
+      "label": "看看",
+      "toast": "{name}已打烊，卷帘门拉下了（{hours}）"
+     }
+    }
+   },
+   "poster": {
+    "name": "墙上海报",
+    "use": {
+     "poster": {
+      "label": "看海报",
+      "toast": "寻猫启事：橘猫「大黄」，酬谢"
+     },
+     "torn": {
+      "label": "看看",
+      "toast": "只剩几片纸屑和胶痕"
+     }
+    },
+    "kick": {
+     "poster": {
+      "label": "撕海报",
+      "to": "torn",
+      "fx": "paper",
+      "log": "围墙上的海报被撕掉了"
+     }
+    },
+    "repair": {
+     "torn": {
+      "to": "poster",
+      "after_h": 24,
+      "log": "有人在围墙上贴了新海报"
+     }
+    }
+   },
+   "window": {
+    "name": "一楼窗户",
+    "use": {
+     "intact": {
+      "label": "敲敲窗",
+      "toast": "屋里没人应"
+     },
+     "boarded": {
+      "label": "看看",
+      "toast": "木板临时钉住了"
+     }
+    },
+    "kick": {
+     "intact": {
+      "label": "砸窗",
+      "to": "broken",
+      "fx": "glass_window",
+      "hazard_at": [
+       1.5,
+       -0.9
+      ],
+      "hazard": 1.0,
+      "log": "一楼窗户被砸碎，碎玻璃落了一地"
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "boarded",
+      "after_h": 2,
+      "clear_hazard": true,
+      "log": "物业用木板把破窗钉上了"
+     },
+     "boarded": {
+      "to": "intact",
+      "after_h": 10,
+      "log": "玻璃师傅换好了新窗玻璃"
+     }
+    }
+   },
+   "pot": {
+    "name": "盆栽",
+    "use": {
+     "small": {
+      "label": "浇水",
+      "do": "water",
+      "toast": "浇了水，过一会儿会长大"
+     },
+     "grown": {
+      "label": "浇水",
+      "do": "water",
+      "toast": "长得很茂盛"
+     },
+     "broken": {
+      "label": "看看",
+      "toast": "花盆碎了，土撒了一地"
+     }
+    },
+    "kick": {
+     "small": {
+      "label": "踢翻",
+      "to": "broken",
+      "fx": "pot",
+      "log": "盆栽被踢碎了"
+     },
+     "grown": {
+      "label": "踢翻",
+      "to": "broken",
+      "fx": "pot",
+      "log": "盆栽被踢碎了"
+     }
+    },
+    "grow": {
+     "small": {
+      "to": "grown",
+      "after_h": 1
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "small",
+      "after_h": 12,
+      "log": "邻居换了新花盆，重新种上小苗"
+     }
+    }
+   },
+   "hydrant": {
+    "name": "消防栓",
+    "use": {
+     "ok": {
+      "label": "拧开 / 关上阀门",
+      "do": "toggle_spray"
+     },
+     "broken": {
+      "label": "看看",
+      "toast": "消防栓被撞断，水柱冲天！"
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "ok",
+      "after_h": 3,
+      "log": "市政抢修，消防栓修好了"
+     }
+    }
+   },
+   "car": {
+    "name": "停着的车",
+    "use": {
+     "normal": {
+      "label": "按喇叭",
+      "do": "honk"
+     }
+    },
+    "kick": {
+     "normal": {
+      "label": "踢轮胎",
+      "do": "alarm",
+      "log": "停着的车被踢了一脚，警报大作"
+     }
+    }
+   },
+   "gate": {
+    "name": "铁门"
+   },
+   "door": {
+    "name": "单元门"
+   },
+   "stall": {
+    "name": "早点摊"
+   },
+   "locker": {
+    "name": "快递柜"
+   },
+   "laundry": {
+    "name": "晾衣绳",
+    "use": {
+     "hung": {
+      "label": "摸摸衣服",
+      "toast": "{dry}"
+     },
+     "fallen": {
+      "label": "捡起来挂好",
+      "to": "hung",
+      "clear_decals": true,
+      "log": "李默把掉在地上的衣服捡起来重新晾好"
+     },
+     "taken": {
+      "label": "看看",
+      "toast": "下雨了，邻居把衣服收回家了"
+     }
+    },
+    "kick": {
+     "hung": {
+      "label": "扯晾衣绳",
+      "to": "fallen",
+      "fx": "cloth",
+      "decal": "fx/litter",
+      "decal_dy": -0.4,
+      "log": "晾衣绳被扯断，衣服掉了一地"
+     }
+    },
+    "repair": {
+     "fallen": {
+      "to": "hung",
+      "after_h": 2,
+      "clear_decals": true,
+      "log": "邻居把晾衣绳重新系好、衣服挂回去了"
+     }
+    }
+   },
+   "puddle": {
+    "name": "水坑"
+   },
+   "leafpile": {
+    "name": "落叶堆"
+   }
+  },
+  "calendar": {
+   "start": [
+    2026,
+    3,
+    21
+   ],
+   "days_per_season": 5,
+   "season_order": [
+    "spring",
+    "summer",
+    "autumn",
+    "winter"
+   ],
+   "season_start": {
+    "spring": [
+     3,
+     21
+    ],
+    "summer": [
+     6,
+     21
+    ],
+    "autumn": [
+     9,
+     23
+    ],
+    "winter": [
+     12,
+     21
+    ]
+   },
+   "start_clock": "16:50",
+   "start_day": 5
+  },
+  "weather": {
+   "chances": {
+    "spring": {
+     "clear": 0.55,
+     "rain": 0.3,
+     "fog": 0.15
+    },
+    "summer": {
+     "clear": 0.55,
+     "rain": 0.4,
+     "fog": 0.05
+    },
+    "autumn": {
+     "clear": 0.6,
+     "rain": 0.25,
+     "fog": 0.15
+    },
+    "winter": {
+     "clear": 0.35,
+     "snow": 0.5,
+     "fog": 0.15
+    }
+   },
+   "wet_rise_min": 12,
+   "dry_min": 180,
+   "snow_full_min": 45,
+   "melt_min": {
+    "spring": 60,
+    "summer": 20,
+    "autumn": 90,
+    "winter": 900
+   },
+   "start_weather": "clear"
+  },
+  "repair_hours_scale": 1.0,
+  "_doc": "Stage A: slightly newer 公寓 一房一厅 — living + bedroom + kitchen + bath via room-layout",
+  "bounds": {
+   "x0": 0.15,
+   "y0": 0.15,
+   "x1": 8.85,
+   "y1": 6.85
+  },
+  "ground": {
+   "origin": [
+    0,
+    0
+   ],
+   "chunk": 2,
+   "cols": 5,
+   "rows": 4,
+   "legend": {
+    "W": "g_wood:a",
+    "T": "g_tile",
+    "K": "g_tile"
+   },
+   "data_south_to_north": [
+    "WWWW.",
+    "WWWW.",
+    "WWKK.",
+    "..TT."
+   ]
+  },
+  "spawn": [
+   7.8,
+   1.2,
+   "W"
+  ],
+  "bg_view": true
+ },
+ "civic_police": {
+  "format": "fushi-scene",
+  "version": 2,
+  "id": "civic_police",
+  "name": "井槐里派出所 · 大厅",
+  "interior": true,
+  "units": "m",
+  "grid_m": 0.5,
+  "objects": [
+   {
+    "id": "w1",
+    "type": "i_window",
+    "x": 1.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "interact": "window_in",
+    "reach": [
+     1.75,
+     3.8
+    ],
+    "state": "plain"
+   },
+   {
+    "id": "w2",
+    "type": "i_window",
+    "x": 4.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "interact": "window_in",
+    "reach": [
+     4.75,
+     3.8
+    ],
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_002",
+    "type": "i_wall",
+    "x": 0.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_003",
+    "type": "i_wall",
+    "x": 2.5,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_004",
+    "type": "i_wall",
+    "x": 3.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_005",
+    "type": "i_wall",
+    "x": 5.5,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_006",
+    "type": "i_wall",
+    "x": 6.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "exit",
+    "type": "i_door",
+    "x": 7.0,
+    "y": 1.5,
+    "z": 0,
+    "rot": 6,
+    "interact": "portal",
+    "to": "street",
+    "spawn": [
+     -36,
+     -6.5,
+     "N"
+    ],
+    "label": "出门",
+    "reach": [
+     6.4,
+     0.9
+    ],
+    "state": "closed"
+   },
+   {
+    "id": "i_wall_008",
+    "type": "i_wall",
+    "x": 7.0,
+    "y": 1.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_009",
+    "type": "i_wall",
+    "x": 7.0,
+    "y": 2.5,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_010",
+    "type": "i_wall",
+    "x": 7.0,
+    "y": 3.5,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_011",
+    "type": "i_wall",
+    "x": 7.0,
+    "y": 4.5,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_012",
+    "type": "i_wall",
+    "x": 7.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_013",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_014",
+    "type": "i_cut",
+    "x": 1.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_015",
+    "type": "i_cut",
+    "x": 2.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_016",
+    "type": "i_cut",
+    "x": 3.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_017",
+    "type": "i_cut",
+    "x": 4.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_018",
+    "type": "i_cut",
+    "x": 5.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_019",
+    "type": "i_cut",
+    "x": 6.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_020",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 1.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_021",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 2.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_022",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 3.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_023",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 4.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_024",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "desk",
+    "type": "f_table",
+    "x": 2.2,
+    "y": 2.8,
+    "z": 0
+   },
+   {
+    "id": "chair",
+    "type": "f_chair",
+    "x": 2.2,
+    "y": 2.1,
+    "z": 0
+   },
+   {
+    "id": "shelf",
+    "type": "f_shelf",
+    "x": 1.2,
+    "y": 4.3,
+    "z": 0,
+    "interact": "notice",
+    "note": "派出所：户政 / 报案 · 09:00–17:00"
+   },
+   {
+    "id": "light",
+    "type": "i_pendant",
+    "x": 3.2,
+    "y": 2.5,
+    "z": 0,
+    "state": "on"
+   }
+  ],
+  "colliders": [
+   {
+    "id": "wall0_0",
+    "rect": [
+     0.0,
+     5.0,
+     1.0,
+     5.6
+    ]
+   },
+   {
+    "id": "wall0_1",
+    "rect": [
+     2.5,
+     5.0,
+     4.0,
+     5.6
+    ]
+   },
+   {
+    "id": "wall0_2",
+    "rect": [
+     5.5,
+     5.0,
+     7.0,
+     5.6
+    ]
+   },
+   {
+    "id": "wall1_3",
+    "rect": [
+     7.0,
+     0.0,
+     7.6,
+     0.3
+    ]
+   },
+   {
+    "id": "wall1_4",
+    "rect": [
+     7.0,
+     1.5,
+     7.6,
+     5.0
+    ]
+   },
+   {
+    "id": "wall2_5",
+    "rect": [
+     0.0,
+     -0.6,
+     7.0,
+     0.15
+    ]
+   },
+   {
+    "id": "wall3_6",
+    "rect": [
+     -0.6,
+     0.0,
+     0.15,
+     5.0
+    ]
+   }
+  ],
+  "portals": [
+   {
+    "id": "to_street",
+    "rect": [
+     6.3,
+     0.2,
+     6.9,
+     1.5
+    ],
+    "dir": "E",
+    "to": "street",
+    "spawn": [
+     -36,
+     -6.5,
+     "N"
+    ],
+    "label": "出门"
+   }
+  ],
+  "laundry": [],
+  "puddles": [],
+  "leaf_piles": [],
+  "wires": [],
+  "npcs": [],
+  "events": {},
+  "interactions": {
+   "_doc": "per interact kind (ported from scene-proto): use (E / 互动) and kick (F / 踢) actions by current state; repair / grow = state -> state after N in-game hours",
+   "lamp": {
+    "name": "路灯",
+    "use": {
+     "ok": {
+      "label": "拍拍灯杆",
+      "toast": "路灯：天黑自动亮"
+     },
+     "broken": {
+      "label": "拍拍灯杆",
+      "toast": "灯泡一闪一闪的……"
+     }
+    },
+    "kick": {
+     "ok": {
+      "label": "踢灯杆",
+      "to": "broken",
+      "fx": "glass",
+      "hazard": 0.8,
+      "log": "{name}被踢坏，灯头歪了，一闪一闪"
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "ok",
+      "after_h": 6,
+      "log": "电工修好了{name}"
+     }
+    }
+   },
+   "trashbin": {
+    "name": "垃圾桶",
+    "use": {
+     "knocked": {
+      "label": "扶起并收拾",
+      "to": "upright",
+      "clear_decals": true,
+      "log": "李默扶起垃圾桶、把垃圾收拾干净"
+     },
+     "upright": {
+      "label": "看看",
+      "toast": "可回收 / 其他垃圾"
+     }
+    },
+    "kick": {
+     "upright": {
+      "label": "踢翻",
+      "to": "knocked",
+      "decal": "fx/litter",
+      "decal_dy": -0.55,
+      "log": "垃圾桶被踢翻，垃圾撒了一地"
+     }
+    },
+    "repair": {
+     "knocked": {
+      "to": "upright",
+      "after_h": 2,
+      "clear_decals": true,
+      "log": "环卫工把翻倒的垃圾桶收拾好了"
+     }
+    }
+   },
+   "bike": {
+    "name": "共享单车",
+    "use": {
+     "parked": {
+      "label": "扫码推车",
+      "do": "push_bike"
+     },
+     "knocked": {
+      "label": "扶起来",
+      "to": "parked",
+      "log": "李默把倒地的单车扶了起来"
+     }
+    },
+    "kick": {
+     "parked": {
+      "label": "推倒",
+      "to": "knocked",
+      "log": "一辆共享单车被推倒在人行道上"
+     }
+    },
+    "repair": {
+     "knocked": {
+      "to": "parked",
+      "after_h": 3,
+      "log": "单车调度员把倒地的单车扶正了"
+     }
+    }
+   },
+   "vending": {
+    "name": "自动售货机",
+    "use": {
+     "ok": {
+      "label": "买饮料 ¥3",
+      "do": "buy_drink",
+      "toast": "咣当——买了一瓶冰红茶（¥3）"
+     },
+     "broken": {
+      "label": "看看",
+      "toast": "暂停服务 · 维修中"
+     }
+    },
+    "kick": {
+     "ok": {
+      "label": "踹一脚",
+      "to": "broken",
+      "fx": "glass",
+      "hazard": 0.9,
+      "log": "售货机被踹坏，玻璃碎了，显示「暂停服务」"
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "ok",
+      "after_h": 8,
+      "log": "售货机维修完毕，恢复营业"
+     }
+    }
+   },
+   "shop": {
+    "name": "小店",
+    "use": {
+     "open": {
+      "label": "进店看看",
+      "toast": "{name}：营业中（{hours}）"
+     },
+     "closed": {
+      "label": "看看",
+      "toast": "{name}已打烊，卷帘门拉下了（{hours}）"
+     }
+    }
+   },
+   "poster": {
+    "name": "墙上海报",
+    "use": {
+     "poster": {
+      "label": "看海报",
+      "toast": "寻猫启事：橘猫「大黄」，酬谢"
+     },
+     "torn": {
+      "label": "看看",
+      "toast": "只剩几片纸屑和胶痕"
+     }
+    },
+    "kick": {
+     "poster": {
+      "label": "撕海报",
+      "to": "torn",
+      "fx": "paper",
+      "log": "围墙上的海报被撕掉了"
+     }
+    },
+    "repair": {
+     "torn": {
+      "to": "poster",
+      "after_h": 24,
+      "log": "有人在围墙上贴了新海报"
+     }
+    }
+   },
+   "window": {
+    "name": "一楼窗户",
+    "use": {
+     "intact": {
+      "label": "敲敲窗",
+      "toast": "屋里没人应"
+     },
+     "boarded": {
+      "label": "看看",
+      "toast": "木板临时钉住了"
+     }
+    },
+    "kick": {
+     "intact": {
+      "label": "砸窗",
+      "to": "broken",
+      "fx": "glass_window",
+      "hazard_at": [
+       1.5,
+       -0.9
+      ],
+      "hazard": 1.0,
+      "log": "一楼窗户被砸碎，碎玻璃落了一地"
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "boarded",
+      "after_h": 2,
+      "clear_hazard": true,
+      "log": "物业用木板把破窗钉上了"
+     },
+     "boarded": {
+      "to": "intact",
+      "after_h": 10,
+      "log": "玻璃师傅换好了新窗玻璃"
+     }
+    }
+   },
+   "pot": {
+    "name": "盆栽",
+    "use": {
+     "small": {
+      "label": "浇水",
+      "do": "water",
+      "toast": "浇了水，过一会儿会长大"
+     },
+     "grown": {
+      "label": "浇水",
+      "do": "water",
+      "toast": "长得很茂盛"
+     },
+     "broken": {
+      "label": "看看",
+      "toast": "花盆碎了，土撒了一地"
+     }
+    },
+    "kick": {
+     "small": {
+      "label": "踢翻",
+      "to": "broken",
+      "fx": "pot",
+      "log": "盆栽被踢碎了"
+     },
+     "grown": {
+      "label": "踢翻",
+      "to": "broken",
+      "fx": "pot",
+      "log": "盆栽被踢碎了"
+     }
+    },
+    "grow": {
+     "small": {
+      "to": "grown",
+      "after_h": 1
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "small",
+      "after_h": 12,
+      "log": "邻居换了新花盆，重新种上小苗"
+     }
+    }
+   },
+   "hydrant": {
+    "name": "消防栓",
+    "use": {
+     "ok": {
+      "label": "拧开 / 关上阀门",
+      "do": "toggle_spray"
+     },
+     "broken": {
+      "label": "看看",
+      "toast": "消防栓被撞断，水柱冲天！"
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "ok",
+      "after_h": 3,
+      "log": "市政抢修，消防栓修好了"
+     }
+    }
+   },
+   "car": {
+    "name": "停着的车",
+    "use": {
+     "normal": {
+      "label": "按喇叭",
+      "do": "honk"
+     }
+    },
+    "kick": {
+     "normal": {
+      "label": "踢轮胎",
+      "do": "alarm",
+      "log": "停着的车被踢了一脚，警报大作"
+     }
+    }
+   },
+   "gate": {
+    "name": "铁门"
+   },
+   "door": {
+    "name": "单元门"
+   },
+   "stall": {
+    "name": "早点摊"
+   },
+   "locker": {
+    "name": "快递柜"
+   },
+   "laundry": {
+    "name": "晾衣绳",
+    "use": {
+     "hung": {
+      "label": "摸摸衣服",
+      "toast": "{dry}"
+     },
+     "fallen": {
+      "label": "捡起来挂好",
+      "to": "hung",
+      "clear_decals": true,
+      "log": "李默把掉在地上的衣服捡起来重新晾好"
+     },
+     "taken": {
+      "label": "看看",
+      "toast": "下雨了，邻居把衣服收回家了"
+     }
+    },
+    "kick": {
+     "hung": {
+      "label": "扯晾衣绳",
+      "to": "fallen",
+      "fx": "cloth",
+      "decal": "fx/litter",
+      "decal_dy": -0.4,
+      "log": "晾衣绳被扯断，衣服掉了一地"
+     }
+    },
+    "repair": {
+     "fallen": {
+      "to": "hung",
+      "after_h": 2,
+      "clear_decals": true,
+      "log": "邻居把晾衣绳重新系好、衣服挂回去了"
+     }
+    }
+   },
+   "puddle": {
+    "name": "水坑"
+   },
+   "leafpile": {
+    "name": "落叶堆"
+   }
+  },
+  "calendar": {
+   "start": [
+    2026,
+    3,
+    21
+   ],
+   "days_per_season": 5,
+   "season_order": [
+    "spring",
+    "summer",
+    "autumn",
+    "winter"
+   ],
+   "season_start": {
+    "spring": [
+     3,
+     21
+    ],
+    "summer": [
+     6,
+     21
+    ],
+    "autumn": [
+     9,
+     23
+    ],
+    "winter": [
+     12,
+     21
+    ]
+   },
+   "start_clock": "16:50",
+   "start_day": 5
+  },
+  "weather": {
+   "chances": {
+    "spring": {
+     "clear": 0.55,
+     "rain": 0.3,
+     "fog": 0.15
+    },
+    "summer": {
+     "clear": 0.55,
+     "rain": 0.4,
+     "fog": 0.05
+    },
+    "autumn": {
+     "clear": 0.6,
+     "rain": 0.25,
+     "fog": 0.15
+    },
+    "winter": {
+     "clear": 0.35,
+     "snow": 0.5,
+     "fog": 0.15
+    }
+   },
+   "wet_rise_min": 12,
+   "dry_min": 180,
+   "snow_full_min": 45,
+   "melt_min": {
+    "spring": 60,
+    "summer": 20,
+    "autumn": 90,
+    "winter": 900
+   },
+   "start_weather": "clear"
+  },
+  "repair_hours_scale": 1.0,
+  "bounds": {
+   "x0": 0.15,
+   "y0": 0.15,
+   "x1": 6.85,
+   "y1": 4.85
+  },
+  "ground": {
+   "origin": [
+    0,
+    0
+   ],
+   "chunk": 2,
+   "cols": 4,
+   "rows": 3,
+   "legend": {
+    "T": "g_tile"
+   },
+   "data_south_to_north": [
+    "TTTT",
+    "TTTT",
+    "TT.."
+   ]
+  },
+  "spawn": [
+   5.8,
+   1.1,
+   "W"
+  ],
+  "bg_view": true
+ },
+ "civic_hospital": {
+  "format": "fushi-scene",
+  "version": 2,
+  "id": "civic_hospital",
+  "name": "井槐社区卫生中心 · 大厅",
+  "interior": true,
+  "units": "m",
+  "grid_m": 0.5,
+  "objects": [
+   {
+    "id": "w1",
+    "type": "i_window",
+    "x": 1.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "interact": "window_in",
+    "reach": [
+     1.75,
+     3.8
+    ],
+    "state": "plain"
+   },
+   {
+    "id": "w2",
+    "type": "i_window",
+    "x": 4.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "interact": "window_in",
+    "reach": [
+     4.75,
+     3.8
+    ],
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_002",
+    "type": "i_wall",
+    "x": 0.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_003",
+    "type": "i_wall",
+    "x": 2.5,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_004",
+    "type": "i_wall",
+    "x": 3.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_005",
+    "type": "i_wall",
+    "x": 5.5,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_006",
+    "type": "i_wall",
+    "x": 6.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "exit",
+    "type": "i_door",
+    "x": 7.0,
+    "y": 1.5,
+    "z": 0,
+    "rot": 6,
+    "interact": "portal",
+    "to": "street",
+    "spawn": [
+     22,
+     -6.5,
+     "N"
+    ],
+    "label": "出门",
+    "reach": [
+     6.4,
+     0.9
+    ],
+    "state": "closed"
+   },
+   {
+    "id": "i_wall_008",
+    "type": "i_wall",
+    "x": 7.0,
+    "y": 1.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_009",
+    "type": "i_wall",
+    "x": 7.0,
+    "y": 2.5,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_010",
+    "type": "i_wall",
+    "x": 7.0,
+    "y": 3.5,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_011",
+    "type": "i_wall",
+    "x": 7.0,
+    "y": 4.5,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_012",
+    "type": "i_wall",
+    "x": 7.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_013",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_014",
+    "type": "i_cut",
+    "x": 1.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_015",
+    "type": "i_cut",
+    "x": 2.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_016",
+    "type": "i_cut",
+    "x": 3.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_017",
+    "type": "i_cut",
+    "x": 4.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_018",
+    "type": "i_cut",
+    "x": 5.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_019",
+    "type": "i_cut",
+    "x": 6.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_020",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 1.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_021",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 2.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_022",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 3.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_023",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 4.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_024",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "desk",
+    "type": "f_table",
+    "x": 2.2,
+    "y": 2.8,
+    "z": 0
+   },
+   {
+    "id": "chair",
+    "type": "f_chair",
+    "x": 2.2,
+    "y": 2.1,
+    "z": 0
+   },
+   {
+    "id": "shelf",
+    "type": "f_shelf",
+    "x": 1.2,
+    "y": 4.3,
+    "z": 0,
+    "interact": "notice",
+    "note": "社区医院：挂号输液 · 08:00–20:00"
+   },
+   {
+    "id": "light",
+    "type": "i_pendant",
+    "x": 3.2,
+    "y": 2.5,
+    "z": 0,
+    "state": "on"
+   }
+  ],
+  "colliders": [
+   {
+    "id": "wall0_0",
+    "rect": [
+     0.0,
+     5.0,
+     1.0,
+     5.6
+    ]
+   },
+   {
+    "id": "wall0_1",
+    "rect": [
+     2.5,
+     5.0,
+     4.0,
+     5.6
+    ]
+   },
+   {
+    "id": "wall0_2",
+    "rect": [
+     5.5,
+     5.0,
+     7.0,
+     5.6
+    ]
+   },
+   {
+    "id": "wall1_3",
+    "rect": [
+     7.0,
+     0.0,
+     7.6,
+     0.3
+    ]
+   },
+   {
+    "id": "wall1_4",
+    "rect": [
+     7.0,
+     1.5,
+     7.6,
+     5.0
+    ]
+   },
+   {
+    "id": "wall2_5",
+    "rect": [
+     0.0,
+     -0.6,
+     7.0,
+     0.15
+    ]
+   },
+   {
+    "id": "wall3_6",
+    "rect": [
+     -0.6,
+     0.0,
+     0.15,
+     5.0
+    ]
+   }
+  ],
+  "portals": [
+   {
+    "id": "to_street",
+    "rect": [
+     6.3,
+     0.2,
+     6.9,
+     1.5
+    ],
+    "dir": "E",
+    "to": "street",
+    "spawn": [
+     22,
+     -6.5,
+     "N"
+    ],
+    "label": "出门"
+   }
+  ],
+  "laundry": [],
+  "puddles": [],
+  "leaf_piles": [],
+  "wires": [],
+  "npcs": [],
+  "events": {},
+  "interactions": {
+   "_doc": "per interact kind (ported from scene-proto): use (E / 互动) and kick (F / 踢) actions by current state; repair / grow = state -> state after N in-game hours",
+   "lamp": {
+    "name": "路灯",
+    "use": {
+     "ok": {
+      "label": "拍拍灯杆",
+      "toast": "路灯：天黑自动亮"
+     },
+     "broken": {
+      "label": "拍拍灯杆",
+      "toast": "灯泡一闪一闪的……"
+     }
+    },
+    "kick": {
+     "ok": {
+      "label": "踢灯杆",
+      "to": "broken",
+      "fx": "glass",
+      "hazard": 0.8,
+      "log": "{name}被踢坏，灯头歪了，一闪一闪"
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "ok",
+      "after_h": 6,
+      "log": "电工修好了{name}"
+     }
+    }
+   },
+   "trashbin": {
+    "name": "垃圾桶",
+    "use": {
+     "knocked": {
+      "label": "扶起并收拾",
+      "to": "upright",
+      "clear_decals": true,
+      "log": "李默扶起垃圾桶、把垃圾收拾干净"
+     },
+     "upright": {
+      "label": "看看",
+      "toast": "可回收 / 其他垃圾"
+     }
+    },
+    "kick": {
+     "upright": {
+      "label": "踢翻",
+      "to": "knocked",
+      "decal": "fx/litter",
+      "decal_dy": -0.55,
+      "log": "垃圾桶被踢翻，垃圾撒了一地"
+     }
+    },
+    "repair": {
+     "knocked": {
+      "to": "upright",
+      "after_h": 2,
+      "clear_decals": true,
+      "log": "环卫工把翻倒的垃圾桶收拾好了"
+     }
+    }
+   },
+   "bike": {
+    "name": "共享单车",
+    "use": {
+     "parked": {
+      "label": "扫码推车",
+      "do": "push_bike"
+     },
+     "knocked": {
+      "label": "扶起来",
+      "to": "parked",
+      "log": "李默把倒地的单车扶了起来"
+     }
+    },
+    "kick": {
+     "parked": {
+      "label": "推倒",
+      "to": "knocked",
+      "log": "一辆共享单车被推倒在人行道上"
+     }
+    },
+    "repair": {
+     "knocked": {
+      "to": "parked",
+      "after_h": 3,
+      "log": "单车调度员把倒地的单车扶正了"
+     }
+    }
+   },
+   "vending": {
+    "name": "自动售货机",
+    "use": {
+     "ok": {
+      "label": "买饮料 ¥3",
+      "do": "buy_drink",
+      "toast": "咣当——买了一瓶冰红茶（¥3）"
+     },
+     "broken": {
+      "label": "看看",
+      "toast": "暂停服务 · 维修中"
+     }
+    },
+    "kick": {
+     "ok": {
+      "label": "踹一脚",
+      "to": "broken",
+      "fx": "glass",
+      "hazard": 0.9,
+      "log": "售货机被踹坏，玻璃碎了，显示「暂停服务」"
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "ok",
+      "after_h": 8,
+      "log": "售货机维修完毕，恢复营业"
+     }
+    }
+   },
+   "shop": {
+    "name": "小店",
+    "use": {
+     "open": {
+      "label": "进店看看",
+      "toast": "{name}：营业中（{hours}）"
+     },
+     "closed": {
+      "label": "看看",
+      "toast": "{name}已打烊，卷帘门拉下了（{hours}）"
+     }
+    }
+   },
+   "poster": {
+    "name": "墙上海报",
+    "use": {
+     "poster": {
+      "label": "看海报",
+      "toast": "寻猫启事：橘猫「大黄」，酬谢"
+     },
+     "torn": {
+      "label": "看看",
+      "toast": "只剩几片纸屑和胶痕"
+     }
+    },
+    "kick": {
+     "poster": {
+      "label": "撕海报",
+      "to": "torn",
+      "fx": "paper",
+      "log": "围墙上的海报被撕掉了"
+     }
+    },
+    "repair": {
+     "torn": {
+      "to": "poster",
+      "after_h": 24,
+      "log": "有人在围墙上贴了新海报"
+     }
+    }
+   },
+   "window": {
+    "name": "一楼窗户",
+    "use": {
+     "intact": {
+      "label": "敲敲窗",
+      "toast": "屋里没人应"
+     },
+     "boarded": {
+      "label": "看看",
+      "toast": "木板临时钉住了"
+     }
+    },
+    "kick": {
+     "intact": {
+      "label": "砸窗",
+      "to": "broken",
+      "fx": "glass_window",
+      "hazard_at": [
+       1.5,
+       -0.9
+      ],
+      "hazard": 1.0,
+      "log": "一楼窗户被砸碎，碎玻璃落了一地"
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "boarded",
+      "after_h": 2,
+      "clear_hazard": true,
+      "log": "物业用木板把破窗钉上了"
+     },
+     "boarded": {
+      "to": "intact",
+      "after_h": 10,
+      "log": "玻璃师傅换好了新窗玻璃"
+     }
+    }
+   },
+   "pot": {
+    "name": "盆栽",
+    "use": {
+     "small": {
+      "label": "浇水",
+      "do": "water",
+      "toast": "浇了水，过一会儿会长大"
+     },
+     "grown": {
+      "label": "浇水",
+      "do": "water",
+      "toast": "长得很茂盛"
+     },
+     "broken": {
+      "label": "看看",
+      "toast": "花盆碎了，土撒了一地"
+     }
+    },
+    "kick": {
+     "small": {
+      "label": "踢翻",
+      "to": "broken",
+      "fx": "pot",
+      "log": "盆栽被踢碎了"
+     },
+     "grown": {
+      "label": "踢翻",
+      "to": "broken",
+      "fx": "pot",
+      "log": "盆栽被踢碎了"
+     }
+    },
+    "grow": {
+     "small": {
+      "to": "grown",
+      "after_h": 1
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "small",
+      "after_h": 12,
+      "log": "邻居换了新花盆，重新种上小苗"
+     }
+    }
+   },
+   "hydrant": {
+    "name": "消防栓",
+    "use": {
+     "ok": {
+      "label": "拧开 / 关上阀门",
+      "do": "toggle_spray"
+     },
+     "broken": {
+      "label": "看看",
+      "toast": "消防栓被撞断，水柱冲天！"
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "ok",
+      "after_h": 3,
+      "log": "市政抢修，消防栓修好了"
+     }
+    }
+   },
+   "car": {
+    "name": "停着的车",
+    "use": {
+     "normal": {
+      "label": "按喇叭",
+      "do": "honk"
+     }
+    },
+    "kick": {
+     "normal": {
+      "label": "踢轮胎",
+      "do": "alarm",
+      "log": "停着的车被踢了一脚，警报大作"
+     }
+    }
+   },
+   "gate": {
+    "name": "铁门"
+   },
+   "door": {
+    "name": "单元门"
+   },
+   "stall": {
+    "name": "早点摊"
+   },
+   "locker": {
+    "name": "快递柜"
+   },
+   "laundry": {
+    "name": "晾衣绳",
+    "use": {
+     "hung": {
+      "label": "摸摸衣服",
+      "toast": "{dry}"
+     },
+     "fallen": {
+      "label": "捡起来挂好",
+      "to": "hung",
+      "clear_decals": true,
+      "log": "李默把掉在地上的衣服捡起来重新晾好"
+     },
+     "taken": {
+      "label": "看看",
+      "toast": "下雨了，邻居把衣服收回家了"
+     }
+    },
+    "kick": {
+     "hung": {
+      "label": "扯晾衣绳",
+      "to": "fallen",
+      "fx": "cloth",
+      "decal": "fx/litter",
+      "decal_dy": -0.4,
+      "log": "晾衣绳被扯断，衣服掉了一地"
+     }
+    },
+    "repair": {
+     "fallen": {
+      "to": "hung",
+      "after_h": 2,
+      "clear_decals": true,
+      "log": "邻居把晾衣绳重新系好、衣服挂回去了"
+     }
+    }
+   },
+   "puddle": {
+    "name": "水坑"
+   },
+   "leafpile": {
+    "name": "落叶堆"
+   }
+  },
+  "calendar": {
+   "start": [
+    2026,
+    3,
+    21
+   ],
+   "days_per_season": 5,
+   "season_order": [
+    "spring",
+    "summer",
+    "autumn",
+    "winter"
+   ],
+   "season_start": {
+    "spring": [
+     3,
+     21
+    ],
+    "summer": [
+     6,
+     21
+    ],
+    "autumn": [
+     9,
+     23
+    ],
+    "winter": [
+     12,
+     21
+    ]
+   },
+   "start_clock": "16:50",
+   "start_day": 5
+  },
+  "weather": {
+   "chances": {
+    "spring": {
+     "clear": 0.55,
+     "rain": 0.3,
+     "fog": 0.15
+    },
+    "summer": {
+     "clear": 0.55,
+     "rain": 0.4,
+     "fog": 0.05
+    },
+    "autumn": {
+     "clear": 0.6,
+     "rain": 0.25,
+     "fog": 0.15
+    },
+    "winter": {
+     "clear": 0.35,
+     "snow": 0.5,
+     "fog": 0.15
+    }
+   },
+   "wet_rise_min": 12,
+   "dry_min": 180,
+   "snow_full_min": 45,
+   "melt_min": {
+    "spring": 60,
+    "summer": 20,
+    "autumn": 90,
+    "winter": 900
+   },
+   "start_weather": "clear"
+  },
+  "repair_hours_scale": 1.0,
+  "bounds": {
+   "x0": 0.15,
+   "y0": 0.15,
+   "x1": 6.85,
+   "y1": 4.85
+  },
+  "ground": {
+   "origin": [
+    0,
+    0
+   ],
+   "chunk": 2,
+   "cols": 4,
+   "rows": 3,
+   "legend": {
+    "T": "g_tile"
+   },
+   "data_south_to_north": [
+    "TTTT",
+    "TTTT",
+    "TT.."
+   ]
+  },
+  "spawn": [
+   5.8,
+   1.1,
+   "W"
+  ],
+  "bg_view": true
+ },
+ "civic_fire": {
+  "format": "fushi-scene",
+  "version": 2,
+  "id": "civic_fire",
+  "name": "井槐消防站 · 执勤室",
+  "interior": true,
+  "units": "m",
+  "grid_m": 0.5,
+  "objects": [
+   {
+    "id": "w1",
+    "type": "i_window",
+    "x": 1.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "interact": "window_in",
+    "reach": [
+     1.75,
+     3.8
+    ],
+    "state": "plain"
+   },
+   {
+    "id": "w2",
+    "type": "i_window",
+    "x": 4.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "interact": "window_in",
+    "reach": [
+     4.75,
+     3.8
+    ],
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_002",
+    "type": "i_wall",
+    "x": 0.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_003",
+    "type": "i_wall",
+    "x": 2.5,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_004",
+    "type": "i_wall",
+    "x": 3.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_005",
+    "type": "i_wall",
+    "x": 5.5,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_006",
+    "type": "i_wall",
+    "x": 6.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "exit",
+    "type": "i_door",
+    "x": 7.0,
+    "y": 1.5,
+    "z": 0,
+    "rot": 6,
+    "interact": "portal",
+    "to": "street",
+    "spawn": [
+     58,
+     -6.5,
+     "N"
+    ],
+    "label": "出门",
+    "reach": [
+     6.4,
+     0.9
+    ],
+    "state": "closed"
+   },
+   {
+    "id": "i_wall_008",
+    "type": "i_wall",
+    "x": 7.0,
+    "y": 1.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_009",
+    "type": "i_wall",
+    "x": 7.0,
+    "y": 2.5,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_010",
+    "type": "i_wall",
+    "x": 7.0,
+    "y": 3.5,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_011",
+    "type": "i_wall",
+    "x": 7.0,
+    "y": 4.5,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_012",
+    "type": "i_wall",
+    "x": 7.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_013",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_014",
+    "type": "i_cut",
+    "x": 1.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_015",
+    "type": "i_cut",
+    "x": 2.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_016",
+    "type": "i_cut",
+    "x": 3.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_017",
+    "type": "i_cut",
+    "x": 4.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_018",
+    "type": "i_cut",
+    "x": 5.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_019",
+    "type": "i_cut",
+    "x": 6.0,
+    "y": 0.0,
+    "z": 0,
+    "rot": 0,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_020",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 1.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_021",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 2.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_022",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 3.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_023",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 4.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "i_cut_024",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 5.0,
+    "z": 0,
+    "rot": 6,
+    "state": "plain"
+   },
+   {
+    "id": "desk",
+    "type": "f_table",
+    "x": 2.2,
+    "y": 2.8,
+    "z": 0
+   },
+   {
+    "id": "chair",
+    "type": "f_chair",
+    "x": 2.2,
+    "y": 2.1,
+    "z": 0
+   },
+   {
+    "id": "shelf",
+    "type": "f_shelf",
+    "x": 1.2,
+    "y": 4.3,
+    "z": 0,
+    "interact": "notice",
+    "note": "消防站执勤室 · 非紧急请勿打扰"
+   },
+   {
+    "id": "light",
+    "type": "i_pendant",
+    "x": 3.2,
+    "y": 2.5,
+    "z": 0,
+    "state": "on"
+   }
+  ],
+  "colliders": [
+   {
+    "id": "wall0_0",
+    "rect": [
+     0.0,
+     5.0,
+     1.0,
+     5.6
+    ]
+   },
+   {
+    "id": "wall0_1",
+    "rect": [
+     2.5,
+     5.0,
+     4.0,
+     5.6
+    ]
+   },
+   {
+    "id": "wall0_2",
+    "rect": [
+     5.5,
+     5.0,
+     7.0,
+     5.6
+    ]
+   },
+   {
+    "id": "wall1_3",
+    "rect": [
+     7.0,
+     0.0,
+     7.6,
+     0.3
+    ]
+   },
+   {
+    "id": "wall1_4",
+    "rect": [
+     7.0,
+     1.5,
+     7.6,
+     5.0
+    ]
+   },
+   {
+    "id": "wall2_5",
+    "rect": [
+     0.0,
+     -0.6,
+     7.0,
+     0.15
+    ]
+   },
+   {
+    "id": "wall3_6",
+    "rect": [
+     -0.6,
+     0.0,
+     0.15,
+     5.0
+    ]
+   }
+  ],
+  "portals": [
+   {
+    "id": "to_street",
+    "rect": [
+     6.3,
+     0.2,
+     6.9,
+     1.5
+    ],
+    "dir": "E",
+    "to": "street",
+    "spawn": [
+     58,
+     -6.5,
+     "N"
+    ],
+    "label": "出门"
+   }
+  ],
+  "laundry": [],
+  "puddles": [],
+  "leaf_piles": [],
+  "wires": [],
+  "npcs": [],
+  "events": {},
+  "interactions": {
+   "_doc": "per interact kind (ported from scene-proto): use (E / 互动) and kick (F / 踢) actions by current state; repair / grow = state -> state after N in-game hours",
+   "lamp": {
+    "name": "路灯",
+    "use": {
+     "ok": {
+      "label": "拍拍灯杆",
+      "toast": "路灯：天黑自动亮"
+     },
+     "broken": {
+      "label": "拍拍灯杆",
+      "toast": "灯泡一闪一闪的……"
+     }
+    },
+    "kick": {
+     "ok": {
+      "label": "踢灯杆",
+      "to": "broken",
+      "fx": "glass",
+      "hazard": 0.8,
+      "log": "{name}被踢坏，灯头歪了，一闪一闪"
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "ok",
+      "after_h": 6,
+      "log": "电工修好了{name}"
+     }
+    }
+   },
+   "trashbin": {
+    "name": "垃圾桶",
+    "use": {
+     "knocked": {
+      "label": "扶起并收拾",
+      "to": "upright",
+      "clear_decals": true,
+      "log": "李默扶起垃圾桶、把垃圾收拾干净"
+     },
+     "upright": {
+      "label": "看看",
+      "toast": "可回收 / 其他垃圾"
+     }
+    },
+    "kick": {
+     "upright": {
+      "label": "踢翻",
+      "to": "knocked",
+      "decal": "fx/litter",
+      "decal_dy": -0.55,
+      "log": "垃圾桶被踢翻，垃圾撒了一地"
+     }
+    },
+    "repair": {
+     "knocked": {
+      "to": "upright",
+      "after_h": 2,
+      "clear_decals": true,
+      "log": "环卫工把翻倒的垃圾桶收拾好了"
+     }
+    }
+   },
+   "bike": {
+    "name": "共享单车",
+    "use": {
+     "parked": {
+      "label": "扫码推车",
+      "do": "push_bike"
+     },
+     "knocked": {
+      "label": "扶起来",
+      "to": "parked",
+      "log": "李默把倒地的单车扶了起来"
+     }
+    },
+    "kick": {
+     "parked": {
+      "label": "推倒",
+      "to": "knocked",
+      "log": "一辆共享单车被推倒在人行道上"
+     }
+    },
+    "repair": {
+     "knocked": {
+      "to": "parked",
+      "after_h": 3,
+      "log": "单车调度员把倒地的单车扶正了"
+     }
+    }
+   },
+   "vending": {
+    "name": "自动售货机",
+    "use": {
+     "ok": {
+      "label": "买饮料 ¥3",
+      "do": "buy_drink",
+      "toast": "咣当——买了一瓶冰红茶（¥3）"
+     },
+     "broken": {
+      "label": "看看",
+      "toast": "暂停服务 · 维修中"
+     }
+    },
+    "kick": {
+     "ok": {
+      "label": "踹一脚",
+      "to": "broken",
+      "fx": "glass",
+      "hazard": 0.9,
+      "log": "售货机被踹坏，玻璃碎了，显示「暂停服务」"
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "ok",
+      "after_h": 8,
+      "log": "售货机维修完毕，恢复营业"
+     }
+    }
+   },
+   "shop": {
+    "name": "小店",
+    "use": {
+     "open": {
+      "label": "进店看看",
+      "toast": "{name}：营业中（{hours}）"
+     },
+     "closed": {
+      "label": "看看",
+      "toast": "{name}已打烊，卷帘门拉下了（{hours}）"
+     }
+    }
+   },
+   "poster": {
+    "name": "墙上海报",
+    "use": {
+     "poster": {
+      "label": "看海报",
+      "toast": "寻猫启事：橘猫「大黄」，酬谢"
+     },
+     "torn": {
+      "label": "看看",
+      "toast": "只剩几片纸屑和胶痕"
+     }
+    },
+    "kick": {
+     "poster": {
+      "label": "撕海报",
+      "to": "torn",
+      "fx": "paper",
+      "log": "围墙上的海报被撕掉了"
+     }
+    },
+    "repair": {
+     "torn": {
+      "to": "poster",
+      "after_h": 24,
+      "log": "有人在围墙上贴了新海报"
+     }
+    }
+   },
+   "window": {
+    "name": "一楼窗户",
+    "use": {
+     "intact": {
+      "label": "敲敲窗",
+      "toast": "屋里没人应"
+     },
+     "boarded": {
+      "label": "看看",
+      "toast": "木板临时钉住了"
+     }
+    },
+    "kick": {
+     "intact": {
+      "label": "砸窗",
+      "to": "broken",
+      "fx": "glass_window",
+      "hazard_at": [
+       1.5,
+       -0.9
+      ],
+      "hazard": 1.0,
+      "log": "一楼窗户被砸碎，碎玻璃落了一地"
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "boarded",
+      "after_h": 2,
+      "clear_hazard": true,
+      "log": "物业用木板把破窗钉上了"
+     },
+     "boarded": {
+      "to": "intact",
+      "after_h": 10,
+      "log": "玻璃师傅换好了新窗玻璃"
+     }
+    }
+   },
+   "pot": {
+    "name": "盆栽",
+    "use": {
+     "small": {
+      "label": "浇水",
+      "do": "water",
+      "toast": "浇了水，过一会儿会长大"
+     },
+     "grown": {
+      "label": "浇水",
+      "do": "water",
+      "toast": "长得很茂盛"
+     },
+     "broken": {
+      "label": "看看",
+      "toast": "花盆碎了，土撒了一地"
+     }
+    },
+    "kick": {
+     "small": {
+      "label": "踢翻",
+      "to": "broken",
+      "fx": "pot",
+      "log": "盆栽被踢碎了"
+     },
+     "grown": {
+      "label": "踢翻",
+      "to": "broken",
+      "fx": "pot",
+      "log": "盆栽被踢碎了"
+     }
+    },
+    "grow": {
+     "small": {
+      "to": "grown",
+      "after_h": 1
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "small",
+      "after_h": 12,
+      "log": "邻居换了新花盆，重新种上小苗"
+     }
+    }
+   },
+   "hydrant": {
+    "name": "消防栓",
+    "use": {
+     "ok": {
+      "label": "拧开 / 关上阀门",
+      "do": "toggle_spray"
+     },
+     "broken": {
+      "label": "看看",
+      "toast": "消防栓被撞断，水柱冲天！"
+     }
+    },
+    "repair": {
+     "broken": {
+      "to": "ok",
+      "after_h": 3,
+      "log": "市政抢修，消防栓修好了"
+     }
+    }
+   },
+   "car": {
+    "name": "停着的车",
+    "use": {
+     "normal": {
+      "label": "按喇叭",
+      "do": "honk"
+     }
+    },
+    "kick": {
+     "normal": {
+      "label": "踢轮胎",
+      "do": "alarm",
+      "log": "停着的车被踢了一脚，警报大作"
+     }
+    }
+   },
+   "gate": {
+    "name": "铁门"
+   },
+   "door": {
+    "name": "单元门"
+   },
+   "stall": {
+    "name": "早点摊"
+   },
+   "locker": {
+    "name": "快递柜"
+   },
+   "laundry": {
+    "name": "晾衣绳",
+    "use": {
+     "hung": {
+      "label": "摸摸衣服",
+      "toast": "{dry}"
+     },
+     "fallen": {
+      "label": "捡起来挂好",
+      "to": "hung",
+      "clear_decals": true,
+      "log": "李默把掉在地上的衣服捡起来重新晾好"
+     },
+     "taken": {
+      "label": "看看",
+      "toast": "下雨了，邻居把衣服收回家了"
+     }
+    },
+    "kick": {
+     "hung": {
+      "label": "扯晾衣绳",
+      "to": "fallen",
+      "fx": "cloth",
+      "decal": "fx/litter",
+      "decal_dy": -0.4,
+      "log": "晾衣绳被扯断，衣服掉了一地"
+     }
+    },
+    "repair": {
+     "fallen": {
+      "to": "hung",
+      "after_h": 2,
+      "clear_decals": true,
+      "log": "邻居把晾衣绳重新系好、衣服挂回去了"
+     }
+    }
+   },
+   "puddle": {
+    "name": "水坑"
+   },
+   "leafpile": {
+    "name": "落叶堆"
+   }
+  },
+  "calendar": {
+   "start": [
+    2026,
+    3,
+    21
+   ],
+   "days_per_season": 5,
+   "season_order": [
+    "spring",
+    "summer",
+    "autumn",
+    "winter"
+   ],
+   "season_start": {
+    "spring": [
+     3,
+     21
+    ],
+    "summer": [
+     6,
+     21
+    ],
+    "autumn": [
+     9,
+     23
+    ],
+    "winter": [
+     12,
+     21
+    ]
+   },
+   "start_clock": "16:50",
+   "start_day": 5
+  },
+  "weather": {
+   "chances": {
+    "spring": {
+     "clear": 0.55,
+     "rain": 0.3,
+     "fog": 0.15
+    },
+    "summer": {
+     "clear": 0.55,
+     "rain": 0.4,
+     "fog": 0.05
+    },
+    "autumn": {
+     "clear": 0.6,
+     "rain": 0.25,
+     "fog": 0.15
+    },
+    "winter": {
+     "clear": 0.35,
+     "snow": 0.5,
+     "fog": 0.15
+    }
+   },
+   "wet_rise_min": 12,
+   "dry_min": 180,
+   "snow_full_min": 45,
+   "melt_min": {
+    "spring": 60,
+    "summer": 20,
+    "autumn": 90,
+    "winter": 900
+   },
+   "start_weather": "clear"
+  },
+  "repair_hours_scale": 1.0,
+  "bounds": {
+   "x0": 0.15,
+   "y0": 0.15,
+   "x1": 6.85,
+   "y1": 4.85
+  },
+  "ground": {
+   "origin": [
+    0,
+    0
+   ],
+   "chunk": 2,
+   "cols": 4,
+   "rows": 3,
+   "legend": {
+    "T": "g_tile"
+   },
+   "data_south_to_north": [
+    "TTTT",
+    "TTTT",
+    "TT.."
+   ]
+  },
+  "spawn": [
+   5.8,
+   1.1,
+   "W"
+  ],
+  "bg_view": true
  }
 }

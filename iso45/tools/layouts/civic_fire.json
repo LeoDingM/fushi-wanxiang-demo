@@ -1,0 +1,151 @@
+{
+ "id": "civic_fire",
+ "name": "井槐消防站 · 执勤室",
+ "bounds": [
+  0.15,
+  0.15,
+  6.85,
+  4.85
+ ],
+ "ground": {
+  "origin": [
+   0,
+   0
+  ],
+  "chunk": 2,
+  "cols": 4,
+  "rows": 3,
+  "legend": {
+   "T": "g_tile"
+  },
+  "data_south_to_north": [
+   "TTTT",
+   "TTTT",
+   "TT.."
+  ]
+ },
+ "walls": [
+  {
+   "side": "N",
+   "line": 5.0,
+   "from": 0.0,
+   "to": 7.0,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "window",
+     "at": 1.0,
+     "interact": "window_in",
+     "id": "w1",
+     "reach": [
+      1.75,
+      3.8
+     ]
+    },
+    {
+     "kind": "window",
+     "at": 4.0,
+     "interact": "window_in",
+     "id": "w2",
+     "reach": [
+      4.75,
+      3.8
+     ]
+    }
+   ]
+  },
+  {
+   "side": "E",
+   "line": 7.0,
+   "from": 0.0,
+   "to": 5.0,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "door",
+     "at": 0.3,
+     "id": "exit",
+     "interact": "portal",
+     "to": "street",
+     "spawn": [
+      58,
+      -6.5,
+      "N"
+     ],
+     "label": "出门",
+     "reach": [
+      6.4,
+      0.9
+     ]
+    }
+   ]
+  },
+  {
+   "side": "S",
+   "line": 0.0,
+   "from": 0.0,
+   "to": 7.0,
+   "finish": "plain"
+  },
+  {
+   "side": "W",
+   "line": 0.0,
+   "from": 0.0,
+   "to": 5.0,
+   "finish": "plain"
+  }
+ ],
+ "furniture": [
+  {
+   "type": "f_table",
+   "x": 2.2,
+   "y": 2.8,
+   "id": "desk"
+  },
+  {
+   "type": "f_chair",
+   "x": 2.2,
+   "y": 2.1,
+   "id": "chair"
+  },
+  {
+   "type": "f_shelf",
+   "x": 1.2,
+   "y": 4.3,
+   "id": "shelf",
+   "interact": "notice",
+   "note": "消防站执勤室 · 非紧急请勿打扰"
+  },
+  {
+   "type": "i_pendant",
+   "x": 3.2,
+   "y": 2.5,
+   "state": "on",
+   "id": "light"
+  }
+ ],
+ "spawn": [
+  5.8,
+  1.1,
+  "W"
+ ],
+ "portals": [
+  {
+   "id": "to_street",
+   "rect": [
+    6.3,
+    0.2,
+    6.9,
+    1.5
+   ],
+   "dir": "E",
+   "to": "street",
+   "spawn": [
+    58,
+    -6.5,
+    "N"
+   ],
+   "label": "出门"
+  }
+ ]
+}

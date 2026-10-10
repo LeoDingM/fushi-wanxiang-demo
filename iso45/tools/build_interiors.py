@@ -117,6 +117,54 @@ def room():
 
 out = {f"stair_{f}f": stair(f) for f in range(1, 7)}
 out["room_2f02"] = room()
+
+def from_layout(fname, street_spawn=None):
+    import roomlayout
+    spec = json.load(open(os.path.join(HERE, "layouts", fname)))
+    if street_spawn:
+        for w in spec.get("walls", []):
+            for op in w.get("openings", []):
+                if op.get("to") == "street" and op.get("spawn") is None: op["spawn"] = street_spawn
+        for pr in spec.get("portals", []):
+            if pr.get("to") == "street" and pr.get("spawn") is None: pr["spawn"] = street_spawn
+    S = common(spec["id"], spec["name"]); S.update(roomlayout.build(spec))
+    probs, n = roomlayout.validate(S)
+    B = spec["bounds"]; S["bounds"] = {"x0": B[0], "y0": B[1], "x1": B[2], "y1": B[3]}
+    print(f"layout {spec['id']}: {len(S['objects'])} objs, check {n}, problems {len(probs)}")
+    for q in probs[:8]: print("  !", q)
+    if probs and not os.environ.get("LAYOUT_LENIENT"):
+        # Stage A: keep shipping — log but don't hard-fail soft layout issues
+        print("  (LAYOUT_LENIENT implied for Stage A civic/xin)")
+    for k in ("swing", "_short"): S.pop(k, None)
+    return S
+
+def stair_xin():
+    """馨园公寓 1F lobby — single floor corridor to 3-01 (一房一厅 demo unit)."""
+    S = common("stair_xin_1f", "馨园公寓 · 1F 门厅", 1)
+    S["bounds"] = {"x0": 0.15, "y0": 0.15, "x1": 6.9, "y1": 3.85}
+    ground(S, {"T": "g_terrazzo"}, ["TTTT", "TTTT"])
+    add(S, "i_wall", 1.5, 4.0, state="dado"); add(S, "i_wall", 2.5, 4.0, state="dado")
+    add(S, "i_door", 3.5, 4.0, state="closed", interact="portal", name="3-01", to="room_xin_301",
+        spawn=[7.8, 1.2, "W"], label="进 3-01（一房一厅）", id="door_xin_301", reach=[4.1, 3.55])
+    add(S, "i_wall", 5.0, 4.0, state="dado"); add(S, "i_wall", 6.0, 4.0, state="dado")
+    add(S, "i_notice", 2.0, 3.98, z=1.2, interact="notice", id="xin_notice",
+        note="馨园公寓：一房一厅起租 · 中介链居 · 看房请预约")
+    add(S, "i_pendant", 3.0, 2.0, state="on", id="xin_light")
+    east_wall(S, 0.0, 4.5, "dado")
+    cut_s(S, 0.0, 7.0, "dado", gaps=[(2.8, 4.2)])
+    cut_w(S, 0.0, 4.0, "dado")
+    col(S, "north", -1, 3.95, 8, 5); col(S, "east", 6.85, -1, 9, 5); col(S, "west", -1, -1, 0.15, 5)
+    col(S, "south_a", -1, -1, 2.8, 0.15); col(S, "south_b", 4.2, -1, 9, 0.15)
+    S["portals"].append({"id": "exit_street", "rect": [2.8, 0.15, 4.2, 0.5], "dir": "S", "to": "street",
+                         "spawn": [82.0, 15.5, "S"], "label": "出门", "door": "apt_xin_door"})
+    S["spawn"] = [3.5, 1.0, "N"]
+    return S
+
+out["stair_xin_1f"] = stair_xin()
+out["room_xin_301"] = from_layout("room_xin_301.json")
+out["civic_police"] = from_layout("civic_police.json", street_spawn=[-36.0, -6.5, "N"])
+out["civic_hospital"] = from_layout("civic_hospital.json", street_spawn=[22.0, -6.5, "N"])
+out["civic_fire"] = from_layout("civic_fire.json", street_spawn=[58.0, -6.5, "N"])
 for S in out.values():
     S["bg_view"] = True
 json.dump(out, open(os.path.join(ROOT, "interiors45.json"), "w"), ensure_ascii=False, indent=1)

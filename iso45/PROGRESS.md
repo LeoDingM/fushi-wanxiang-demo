@@ -1,3 +1,4 @@
+22:39 · [主线] Stage A 街区扩展：警局/医院/消防可进厅、馨园一房一厅、上帝模式中文面板、可租多套房切换住所、公交井槐里↔东街、手机（微信/银行/地图/租房）；CBD 暂停；smoke+stage6；双 zip · screenshots/a2-phone-wechat.png
 21:24 · [主线] CBD 风格板 READY 已接入：象牙/米色墙+深灰石板屋顶、琥珀幼儿园、别墅院落/泳池、河桥球场、开花乔木；smoke+stage6+cbd_capture 过；双 zip 已打 · screenshots/C7-wealthy-compound.png
 21:25 · [CBD] 风格板：象牙白石材+深灰石板瓦屋顶、垂直森林阳台、别墅院落；对照参考重拍 C5/C6/C7 · screenshots/C7-wealthy-compound.png
 21:20 · [CBD] 对照参考图：垂直森林阳台、大门喷泉、泳池球场幼儿园、别墅花树、滨江桥、天际线切面尖顶鳍板；重拍 C5/C6/C7 · screenshots/C7-wealthy-compound.png
