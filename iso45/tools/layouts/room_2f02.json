@@ -1,17 +1,17 @@
 {
  "id": "room_2f02",
  "name": "2F-02 · 我的出租屋 · 月租¥850",
- "_doc": "room-layout data (tools/roomlayout.py). Main room 3.85 x 4 m (15 m²) + bathroom 2.05 x 2 m (enclosed: partitions + door) + entry strip + 4 x 1.5 m enclosed glass balcony. · hotfix: decluttered (no rug, wardrobe moved to the far partition, desk low on the camera side), bed reachable from its open long side, balcony glass always half see-through",
+ "_doc": "room-layout data (tools/roomlayout.py). Main room 3.85 x 4 m (15 m²) + bathroom 2.05 x 2 m (enclosed: partitions + door) + entry strip + 4 x 1.5 m enclosed glass balcony. · hotfix: decluttered (no rug, wardrobe moved to the far partition, desk low on the camera side), bed reachable from its open long side, balcony glass always half see-through · v3: enclosed glass balcony moved to the FAR (north) side behind the bed wall, reached through a sliding glass door; wardrobe against the bathroom partition; nothing tall on the camera side",
  "bounds": [
   0.15,
-  -1.35,
+  0.15,
   6.05,
-  4.0
+  5.85
  ],
  "ground": {
   "origin": [
    0,
-   -2
+   0
   ],
   "chunk": 2,
   "cols": 4,
@@ -21,9 +21,9 @@
    "T": "g_tile"
   },
   "data_south_to_north": [
-   "TT..",
    "WWW.",
-   "WWT."
+   "WWT.",
+   "TT.."
   ]
  },
  "walls": [
@@ -38,14 +38,19 @@
      "kind": "window",
      "at": 1.0,
      "interact": "window_in",
-     "view": true,
      "id": "room_win",
      "reach": [
       1.75,
       2.6
      ]
+    },
+    {
+     "kind": "gap",
+     "at": 2.5,
+     "w": 1.35
     }
-   ]
+   ],
+   "_doc": "room / balcony divider: window over the bed + the sliding balcony door (gap); the balcony lies north so the collider is the wall body only"
   },
   {
    "side": "N",
@@ -82,19 +87,7 @@
    "line": 0.0,
    "from": 0.0,
    "to": 6.05,
-   "finish": "plain",
-   "openings": [
-    {
-     "kind": "gap",
-     "at": 1.0,
-     "w": 1.4
-    }
-   ],
-   "th": [
-    0.0,
-    0.15
-   ],
-   "_doc": "room/balcony divider: the balcony lies south, so the collider is the wall body only"
+   "finish": "plain"
   },
   {
    "side": "W",
@@ -105,10 +98,11 @@
   },
   {
    "side": "E",
-   "line": 4.0,
-   "from": -1.5,
-   "to": 0.0,
-   "finish": "tile"
+   "line": 3.85,
+   "from": 4.0,
+   "to": 6.0,
+   "finish": "tile",
+   "_doc": "balcony east end"
   },
   {
    "side": "P",
@@ -160,26 +154,26 @@
   },
   {
    "type": "f_bed",
-   "x": 1.15,
+   "x": 1.66,
    "y": 3.42,
    "state": "made",
    "interact": "bed",
    "id": "bed",
    "reach": [
     [
-     0.8,
+     1.3,
      2.62
     ],
     [
-     1.6,
+     2.1,
      2.62
     ]
    ]
   },
   {
    "type": "f_nightstand",
-   "x": 2.45,
-   "y": 3.75,
+   "x": 0.4,
+   "y": 3.68,
    "state": "on",
    "interact": "bedlamp",
    "id": "nightstand",
@@ -206,12 +200,12 @@
   {
    "type": "f_wardrobe",
    "x": 3.55,
-   "y": 3.45,
+   "y": 2.62,
    "state": "closed",
    "interact": "wardrobe",
    "id": "wardrobe",
    "rot": 6,
-   "_doc": "against the bathroom partition (far side), facing the room — no tall piece on the camera side"
+   "_doc": "against the bathroom partition (far side), doors facing the room, clear of the balcony door"
   },
   {
    "type": "f_table",
@@ -270,57 +264,58 @@
   },
   {
    "type": "i_track",
-   "x": 1.7,
-   "y": 0.07,
-   "id": "track"
+   "x": 3.17,
+   "y": 4.07,
+   "id": "track",
+   "_doc": "sliding glass balcony door track"
   },
   {
    "type": "f_washer",
-   "x": 3.55,
-   "y": -0.75,
+   "x": 0.5,
+   "y": 5.4,
    "state": "idle",
    "interact": "washer",
    "id": "washer"
   },
   {
    "type": "i_dryrack",
-   "x": 1.9,
-   "y": -0.75,
+   "x": 2.2,
+   "y": 5.0,
    "interact": "rack",
    "id": "rack",
    "reach": [
-    1.9,
-    -0.75
+    2.2,
+    4.7
    ]
   },
   {
    "type": "i_balfront",
    "x": 0.0,
-   "y": -1.5,
+   "y": 6.0,
    "state": "glass",
    "id": "balfront_0",
-   "ghost": 0.38
+   "view": true
   },
   {
    "type": "i_balfront",
    "x": 1.5,
-   "y": -1.5,
+   "y": 6.0,
    "state": "glass",
    "id": "balfront_1",
-   "ghost": 0.38
+   "view": true
   },
   {
    "type": "i_balfront",
-   "x": 2.5,
-   "y": -1.5,
+   "x": 2.35,
+   "y": 6.0,
    "state": "glass",
    "id": "balfront_2",
-   "ghost": 0.38
+   "view": true
   },
   {
    "type": "i_balfront",
    "x": 0.0,
-   "y": 0.0,
+   "y": 6.0,
    "rot": 6,
    "state": "glass",
    "id": "balfront_w",
@@ -329,30 +324,30 @@
  ],
  "colliders": [
   {
-   "id": "bal_s",
+   "id": "bal_n",
    "rect": [
     -1,
-    -3,
+    5.85,
     7,
-    -1.35
+    8
    ]
   },
   {
    "id": "bal_w",
    "rect": [
     -1,
-    -1.6,
+    3.8,
     0.15,
-    0.0
+    6.2
    ]
   },
   {
    "id": "bal_e",
    "rect": [
+    3.85,
     4.0,
-    -3,
     7,
-    0.0
+    8
    ]
   }
  ],
@@ -360,10 +355,10 @@
   {
    "id": "bal_pole0",
    "pts": [
-    0.7,
-    -0.88,
-    3.1,
-    -0.88
+    1.1,
+    5.12,
+    3.5,
+    5.12
    ],
    "z": 2.06,
    "rack": "balcony",
@@ -376,10 +371,10 @@
   {
    "id": "bal_pole1",
    "pts": [
-    0.7,
-    -0.62,
-    3.1,
-    -0.62
+    1.1,
+    5.38,
+    3.5,
+    5.38
    ],
    "z": 2.06,
    "rack": "balcony",

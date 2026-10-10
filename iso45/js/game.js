@@ -97,8 +97,14 @@
   };
 
   // ---------- interactions offered by the gameplay layer (world.actionFor asks here first) ----------
+  const shutMsg = (o) => `${o.name}打烊了（营业 ${o.hours.join("–")}）`;
+  /** Stage 5 integration hook: modules (store / metro / cbd) register SP.places[id] = { enter(o) } or an interior scene SP.scenes[id] */
+  SP.places = SP.places || {};
+  const placeReady = (id) => !!(id && (SP.places[id] || (SP.scenes[id] && SP.scenes[id].interior)));
   G.actionFor = function (o, kind) {
-    const k = o.interact, place = PLACE[k];
+    const k = o.interact, place = PLACE[k] || (k === "eatery" ? o.place : null);
+    if (k === "eatery" && o.state === "shut") return kind === "use" ? { label: shutMsg(o), do: "game" } : null;
+    if (k === "metro") return kind !== "use" ? null : o.state === "shut" ? { label: `${o.name}：已收车（运营 ${o.hours.join("–")}）`, do: "game" } : { label: placeReady(o.to) ? `进站 · ${o.name}` : `${o.name}（地铁 · 即将开通）`, do: "game" };
     if (place) {
       if (kind !== "use") return null;
       const opts = R.actionsAt(G.ps, place, G.ctx()).filter((a) => a.ok || a.reason !== "not here");
@@ -123,7 +129,14 @@
     return undefined;
   };
   G.use = function (o) {
-    const k = o.interact, place = PLACE[k];
+    const k = o.interact, place = PLACE[k] || (k === "eatery" ? o.place : null);
+    if (k === "eatery" && o.state === "shut") return shutMsg(o);
+    if (k === "metro") {
+      if (o.state === "shut") return `${o.name}已收车，明早 ${o.hours[0]} 首班`;
+      if (SP.places[o.to]) return SP.places[o.to].enter(o) || null;
+      if (placeReady(o.to)) { G.go({ to: o.to, spawn: SP.scenes[o.to].spawn, door: o.id }); return null; }
+      return "井槐里站还在做最后的调试，围挡上写着「即将开通」";
+    }
     if (place) {
       const opts = R.actionsAt(G.ps, place, G.ctx()).filter((a) => a.ok || a.reason !== "not here");
       if (opts.length === 1) return G.start(opts[0].id, o);

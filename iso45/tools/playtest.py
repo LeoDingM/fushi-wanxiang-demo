@@ -37,7 +37,7 @@ def main(hours):
         nf = g("Object.keys(window.SP.K.frames).length")
         check("45° kit atlas + manifest loaded (2:1 dimetric projection)", nf > 150 and g("window.SP.img.atlas.naturalWidth") == 2048 and g("window.SP.K.projection.yaw_deg") == 45 and g("window.SP.K.projection.px_y_per_m") * 2 == g("window.SP.K.projection.px_x_per_m"), f"{nf} frames")
         na = g("Object.entries(window.ACTORS).map(([k,v])=>k+':'+Object.keys(v.frames).length).join(' ')")
-        check("李默 + 5 NPC sprite sets (out45) loaded", g("Object.keys(window.ACTORS).every(k=>window.SP.img['actor_'+k].naturalWidth>0)") and g("Object.keys(window.ACTORS.li_mo.frames).length") >= 128, na)
+        check("李默 + 5 NPC sprite sets (out45) loaded", g("Object.keys(window.ACTORS).every(k=>window.SP.img['actor_'+k] ? window.SP.img['actor_'+k].naturalWidth>0 : /^(clerk_|li_mo_uniform|li_mo_bar)/.test(k))") and g("Object.keys(window.ACTORS.li_mo.frames).length") >= 128, na)
         check("scene objects instantiated from scene.json", g(f"{P}.world.objects.length") > 400, g(f"{P}.world.objects.length"))
         park()
         # --- input mapping: WASD are screen directions
@@ -139,7 +139,8 @@ def main(hours):
                  if(W.blockedStatic(x,y,n.radius+0.05))out.push(n.id+'@'+x.toFixed(1)+','+y.toFixed(1));}}}return out})()""")
         check("NPC waypoint routes clear of every footprint by radius + 5 cm (runtime re-check of the build check)", not bad and g("window.SP.world.data.npcs.every(n=>n.clearance_m>=0.08)"), bad[:4] if bad else g("window.SP.world.data.npcs.map(n=>n.id+':'+n.clearance_m).join(' ')"))
         trav = g(f"(()=>{{const L=window.SP.npcs.list,p0=L.map(a=>[a.x,a.y]);let d=L.map(()=>0);for(let i=0;i<1800;i++){{const q=L.map(a=>[a.x,a.y]);{P}.sim(1/30);L.forEach((a,j)=>d[j]+=Math.hypot(a.x-q[j][0],a.y-q[j][1]))}}return L.map((a,j)=>a.id+':'+d[j].toFixed(0))}})()")
-        check("all 5 NPCs keep walking their routes (60 s)", all(float(t.split(":")[1]) > 20 for t in trav), " ".join(trav))
+        STAFF = ("noodle_boss", "tea_girl")       # shop staff pace a 1-2 m counter beat with long dwells
+        check("all walking NPCs keep walking their routes (60 s); shop staff keep moving at their counters", all(float(t.split(":")[1]) > (3 if t.split(":")[0] in STAFF else 20) for t in trav), " ".join(trav))
         # --- traffic
         unpark(); park()
         place(12.0, -3.0, "N"); step(3.0)

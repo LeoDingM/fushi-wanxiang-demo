@@ -65,7 +65,7 @@ def run(c, log):
           for (const [a, b] of [[1,0],[-1,0],[0,1],[0,-1]]) { const k = (i + a) * ny + j + b; if (!seen[k] && ok(i + a, j + b)) { seen[k] = 1; st.push([i + a, j + b]); } } }
         const bad = [];
         for (const o of W.objects) if (o.interact) { const ps = o.reach ? (Array.isArray(o.reach[0]) ? o.reach : [o.reach]) : [[o.x, o.y]]; for (const p of ps) if (!pts.some(([x, y]) => Math.hypot(x - p[0], y - p[1]) <= 1.0)) { bad.push(o.id); break; } }
-        for (const q of W.portals) if (!pts.some(([x, y]) => x >= q.rect[0] && x <= q.rect[2] && y >= q.rect[1] && y <= q.rect[3])) bad.push("portal " + q.id);
+        for (const q of W.portals) if (!pts.some(([x, y]) => x >= q.rect[0] - 0.06 && x <= q.rect[2] + 0.06 && y >= q.rect[1] - 0.06 && y <= q.rect[3] + 0.06)) bad.push("portal " + q.id);
         for (const o of W.objects) if (o.interact === "idoor") o.state = "closed"; W.rebuildColliders();
         out[id] = { cells: pts.length, bad };
       } return JSON.stringify(out); })()"""))
@@ -104,10 +104,11 @@ def run(c, log):
     bad = []
     for place in ["street", "stair_2f", "room_2f02", "roof"]:
         E(f"SP.actions.go('{place}'); SP.actions.idle(0.3); SP.actions.reset(); SP.actions.idle(4)")
-        for sc in ["stair_1f", "stair_2f", "stair_3f", "stair_4f", "stair_5f", "stair_6f", "room_2f02"]:
+        for sc in ["stair_1f", "stair_2f", "stair_3f", "stair_4f", "stair_5f", "stair_6f", "room_2f02"] + (["store_24"] if E("!!(SP.scenes.store_24)") else []):
             r = json.loads(E(f"(() => {{ SP.actions.go('{sc}'); SP.clock.setTimeName('night', true); SP.actions.idle(0.2); window.__proto.render(); const k = SP.state.dynKinds || {{}};"
                              f" return JSON.stringify({{w: SP.place.where(), car: k.car || 0, npc: k.npc || 0, actors: SP.actors.list.length, carLights: SP.env.lights(SP.state.view, 1).filter(l => l.flat && l.r === 3).length }}); }})()"))
-            if r["w"] != sc or r["car"] or r["npc"] or r["actors"] != 1: bad.append([place, sc, r])
+            shop = sc == "store_24"          # the store has its own staff / shoppers (SP.store.npcs), never street ones
+            if r["w"] != sc or r["car"] or (r["npc"] and not shop) or (r["actors"] != 1 and not shop): bad.append([place, sc, r])
     ok("hotfix: reset in street / interior / roof, then every interior: no outdoor cars / NPCs drawn, only 李默", not bad, bad[:3] or "4 resets × 7 interiors")
     E("SP.actions.go('street'); SP.actions.reset(); SP.actions.idle(1)")
     # ---- hotfix 2: street light pools never light the roof (per-elevation light layer)

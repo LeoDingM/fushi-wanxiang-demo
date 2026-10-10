@@ -18,12 +18,19 @@
   /** atlas set: umbrella (李默), + winter wear (puffer + scarf) when it is cold; winter atlases load lazily */
   A.prototype.atlasName = function () {
     if (this.homeClip && SP.img.actor_li_mo_home) return "li_mo_home";     // indoor poses (sit at the PC, lie in bed, cook)
-    const b = this.umbrella && this.isPlayer ? "li_mo_umb" : this.set;
+    let b = this.umbrella && this.isPlayer ? "li_mo_umb" : this.set;
+    for (const h of SP.outfitHooks) { const o = h(this); if (o) { b = o; break; } }      // modules (store uniform ...) pick an outfit here
+    if (!SP.img["actor_" + b]) {                    // sheet not loaded yet (lazy module sprites): load it, draw the fallback meanwhile
+      if (window.ACTORS[b]) SP.ensureActor(b);
+      b = this.isPlayer ? (this.baseSet || "li_mo") : (this.sprite_fallback && SP.img["actor_" + this.sprite_fallback] ? this.sprite_fallback : this.sprite || b);
+    }
     if (SP.winterWear && window.ACTORS[b + "_w"]) { if (SP.img["actor_" + b + "_w"]) return b + "_w"; SP.ensureActor(b + "_w"); }
     return b;
   };
   A.prototype.data = function () { return window.ACTORS[this.atlasName()]; };
+  SP.outfitHooks = SP.outfitHooks || [];   // [(actor) => set name | null]: first non-null wins (core API for outfit modules)
   SP.ensureActor = function (name) {
+    if (!window.ACTORS[name]) return;
     if (SP.img["actor_" + name] || (SP._actLoading || (SP._actLoading = {}))[name]) return;
     SP._actLoading[name] = true; const im = new Image(); im.onload = () => { SP.img["actor_" + name] = im; if (SP.tintedActors) SP.tintedActors[name] = im; }; im.src = window.ACTORS[name].img;
   };
@@ -130,6 +137,7 @@
   A.prototype.bodyRect = function () { const [X, Y] = this.screen(); return { x0: X - 12, x1: X + 12, y0: Y - 76, y1: Y - 4 }; };
   A.prototype.draw = function (ctx, raw, erase) {
     const [X0, Y] = this.screen(), D = this.data(), src = raw ? SP.img["actor_" + this.atlasName()] : (SP.tintedActors[this.atlasName()] || SP.img["actor_" + this.atlasName()]);
+    if (!src || !D) return;                     // sheet still loading (lazy module sprite): skip this frame rather than throw
     let X = X0;
     if (this.kickT > 0) { const v = SP.dirVec[this.dir]; X += Math.round((v[0] - v[1]) * 2); }
     let bikeAfter = false, g = null;

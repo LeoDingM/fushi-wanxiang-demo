@@ -17,7 +17,7 @@
     W.puddles = (data.puddles || []).map((p) => Object.assign({}, p));
     W.leafPiles = (data.leaf_piles || []).map((p) => Object.assign({ state: "pile", since: -1e9 }, p));
     W.laundry = (data.laundry || []).map((L) => Object.assign({ state: "hung", since: 0, wet: 0 }, L));
-    for (const o of W.objects) { o.since = 0; if (o.interact === "shop") o.open_state = o.open_state || o.state; }
+    for (const o of W.objects) { o.since = 0; if (o.interact === "shop" || o.interact === "eatery" || o.interact === "metro") o.open_state = o.open_state || o.state; }
     W.lastRuleMin = -1;
   };
   W.logEvent = function (text) {
@@ -57,10 +57,10 @@
     for (const o of W.objects) {
       if (!o.interact) continue;
       const d = W.defs[o.interact];
-      if (o.interact === "shop") {
+      if (o.interact === "shop" || o.interact === "eatery" || (o.interact === "metro" && o.hours)) {
         const [a, b] = o.hours.map(SP.hm), open = c.min >= a && c.min < b;
         const want = open ? o.open_state : "shut";
-        if (o.state !== want) { W.setState(o, want, true); W.logEvent(open ? `${o.name}开门营业` : `${o.name}拉下卷帘门打烊`); }
+        if (o.state !== want) { W.setState(o, want, true); W.logEvent(o.interact === "metro" ? (open ? `${o.name}开站` : `${o.name}末班车已过，拉上闸门`) : open ? `${o.name}开门营业` : `${o.name}拉下卷帘门打烊`); }
         continue;
       }
       if (!d) continue;
@@ -112,7 +112,7 @@
     if (o.reach) return o.reach;
     if (o.type === "f_door") return W.local(o, 1.5, -0.9, 0);
     if (o.interact === "gate") return W.local(o, o.type === "w_gate_l" ? 0.85 : -0.85, 0, 0);
-    if (o.interact === "window" || o.interact === "shop") return W.local(o, 1.5, -0.6, 0);
+    if (o.interact === "window" || o.interact === "shop" || o.interact === "eatery") return W.local(o, 1.5, -0.6, 0);
     if (o.interact === "poster") return W.local(o, -0.3, -0.45, 0);
     const fp = W.footprints(o); if (fp.length) { const b = SP.polyBox(fp[0]); return [(b[0] + b[2]) / 2, (b[1] + b[3]) / 2]; }
     return [o.x, o.y];

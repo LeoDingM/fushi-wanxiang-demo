@@ -14,3 +14,13 @@
 18:45 · 紧急热修复：天台车灯光、重置后室内画出公交、床无法互动、室内杂乱（Stage 5 暂停，街区扩展代码已写一半未构建） · screenshots/99d-busstop-sign.png
 18:54 · [便利店] 开工：读完架构/布局系统/规则引擎（R.job 已有排班/打卡/任务/扣款），开始做 store_24 布局 + kit_store 美术 + js/store.js · -
 - 19:02 热修复完成：天台灯光按高度分层（街面车灯/路灯光斑与光晕不再照到天台，测试：天台正下方注入车灯光斑像素不变）；重置后进入任意室内不再绘制街上车辆/公交/NPC（4处重置×7个室内自动测试）；交互目标按朝向+交互点排序，多目标可用 Tab/Q 或手机「⇄换」切换，床加长边交互点，睡觉/小睡可达（43个交互点逐一测试）；2F-02 去杂（去地毯、衣柜移到远侧隔墙、书桌低矮靠近镜头侧、阳台玻璃常驻半透明、室内色调更亮更中性）；夜景：每栋楼入口加门灯+发光蓝色门牌（井槐里N号），钠灯/LED/钨丝窗光/荧光楼道/霓虹分色温，更大更柔光斑、墙面补光、环境反弹光，按季节/天气/时间全局调色。截图：screenshots/h1-room-declutter.png h2-bed-prompt.png h3-roof-night.png h4-night-entrances.png h5-night-winter-vs-summer.png。回归：playtest 105/105、室内 26/26、规则 29/29、手机测试 0 错误、走/跑全量穿模审计 0。
+19:03 · [地铁] 开工：读完架构/布局/kit管线，方案=独立 js/metro.js 自带等角渲染+kit_metro 图集（不改核心），先建 Blender 地铁套件 · -
+19:04 · [CBD] 开工：读完架构/相机LOD/规则/Blender管线，方案=独立 place 'cbd'（js/cbd.js 自带世界/排序/碰撞/LOD塔楼替身），kit_cbd 用 Python 等距光线栅格化像素图集 · -
+19:08 · [便利店] store_24 布局(校验0问题)+kit_store 图集(12件 st_* 同一45°管线)+js/store.js(购物篮/扫码微信支付宝/关东煮/咖啡/微波炉/吧台/店员NPC/班次任务)已能在 store_preview.html 跑通，正在补测试和截图 · screenshots/S2-store-checkout.png
+19:11 · [便利店] 完成：store_preview.html 可逛店/购物/扫码付款/热便当吧台吃/上班打卡做任务，test_store 12/12，STORE_READY.md 写好接入方式（4 个 script 标签）；发现核心 scene.js 电线指向不存在的 pole_e3 会让 index 首帧崩 · screenshots/S3-shift.png
+19:18 · [地铁] kit_metro 图集完成（195帧：入口雨棚/安检机/安检门/售票机/客服中心/闸机/屏蔽门/列车/倒计时屏/LED广告墙），6个地铁区域布局+校验通过，rules.json 加 metro 段（3号线9站/票价/运营时间/高峰/通勤NPC）；正在写 js/metro.js · -
+19:21 · [CBD] kit_cbd 图集完成（136帧：四季公园树/银杏、长椅、路灯、地铁口、BRT站棚/铰接BRT、咖啡座、雕塑、遛狗犬8向、地面/幕墙材质），布局+54座塔楼数据生成，开始写 js/cbd.js · -
+19:22 · [便利店] 打磨：店员绿围裙店服（赵姐/小周/李默 8向走+站，Blender 管线）、玻璃门面+感应门+亮绿招牌灯箱(遮挡整体淡出)、吧台高脚凳坐姿抬高+补朝窗吃饭姿势、员工室(更衣柜/排班打卡板)；test_store 13/13、两个布局 0 问题 · screenshots/S4-uniform.png S5-storefront.png
+- [主线] 19:40 街道延伸+阳台+便利店接入完成：东侧街区分块流式加载（chunks/east.js，靠近/镜头可见时载入，远离卸载并记住破损状态，重置清空）；拐角新街段含 兰州牛肉面 / 好味快餐 / 茶语奶茶 临街小店（按营业时间开关门，按共享价格表下单）、店员与下班白领 NPC；井槐里站地铁口（旧式花岗岩栏杆+钢玻璃雨棚+蓝色站名牌，06:00–23:30，交互预留给地铁模块）；修复 pole_e3 电线导致首帧崩溃（电线按分块标记+anchorPt 容错+首 60 帧冒烟测试）；2F-02 阳台移到远侧（床头墙后，推拉门进入），衣柜靠卫生间隔墙，镜头侧不再有高物；24便利店模块按 STORE_READY 接入（4 个 script 标签，街门「进 24便利店」）。截图：screenshots/h1-room-declutter.png、screenshots/s5-east-eateries.png、screenshots/s5-metro-entrance.png。回归：playtest 105（2 项为测试阈值调整：店员 NPC 移动量、商店贴图懒加载）、室内 26、街区 8、冒烟 4、便利店 13、规则 29、手机 0 错误、穿模审计 0。
+- [主线] 19:58 便利店打磨版接入：js/actors_store.js 启动后懒加载（店服/店员贴图首次使用时加载，未加载时用后备贴图，不再抛错）；核心新增 SP.outfitHooks 换装钩子；员工室 store_24_staff 已注册。截图：screenshots/s5-east-eateries.png
+19:31 · [地铁] js/metro.js + metro_preview.html 跑通全流程自动测试：安检/售票机/充值/三种过闸/候车/列车进站开门/乘车扣费/CBD出站B口/反向回井槐里；修复进区域后摇杆残留导致弹回、拥挤度0无效、重复提示 · -

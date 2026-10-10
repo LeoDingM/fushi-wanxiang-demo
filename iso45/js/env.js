@@ -203,6 +203,8 @@
           P(h[0], h[1], h[2], 2.6, [255, 226, 186], 0.7, false, true); P(g[0], g[1], 0, 4.2, [255, 222, 180], 0.6, true); P(sg[0], sg[1], sg[2], 2.4, cl, 0.6, false, true); } break;
         case "f_sign_noodle": case "f_sign_kc": case "f_sign_tea": { const h = W.local(o, 0, -0.4, 0.3); P(h[0], h[1], h[2], 2.4, NEON[o.type], 0.55, false, true); } break;
         case "f_shop": if (o.state !== "shut") { const h = W.local(o, 1.5, -0.6, 1.4); P(h[0], h[1], h[2], 2.8, LED, 0.8, false, true); const g = W.local(o, 1.5, -1.8, 0); P(g[0], g[1], 0, 4.6, LED, 0.7, true); } break;
+        case "p_metro_entry": { const k = o.state === "open" ? 1 : 0.35, h = W.local(o, 0, 0.2, 2.2), g = W.local(o, 0, -3.0, 0), sg = W.local(o, 0, -2.4, 2.6);
+          P(h[0], h[1], h[2], 2.6, LED, 0.45 * k, false, true); P(g[0], g[1], 0, 4.4, LED, 0.7 * k, true); P(sg[0], sg[1], sg[2], 2.2, [120, 160, 255], 0.6, false, true); } break;
         case "f_shopsign": { const h = W.local(o, 1.5, -0.4, 0.3); P(h[0], h[1], h[2], 2.2, SIGN, 0.45, false, true); } break;
         case "p_car": out.cars.push(o); break;
       }

@@ -17,6 +17,7 @@
   const W = (SP.world = { objects: [], byId: {}, decals: [], colliders: [], groundCanvas: null, groundOrigin: [0, 0], log: [] });
   const FADE_ALPHA = 0.35, FADE_RATE = 7, EPS = 1e-3;
   function piece(o) { return K.pieces[o.type]; }
+  SP.piece = piece;
   W.piece = piece;
   /** atlas variant of an object: its geometry variant (weathering / shape), + the season recolour for trees */
   W.variant = function (o) {
@@ -33,7 +34,7 @@
     return o.state;
   };
   W.load = function (data) {
-    W.data = data; W.objects = []; W.byId = {}; W.decals = []; W.log = W.log || []; W.timers = [];
+    W.data = data; W.objects = []; W.byId = {}; W.chunkCols = []; W.chunksIn = {}; W.decals = []; W.log = W.log || []; W.timers = [];
     for (const src of data.objects) {
       const o = Object.assign({ z: 0, rot: 0, variant: "base" }, src);
       const P = piece(o);
@@ -64,7 +65,7 @@
     }
     // interior doors (room-layout system): the door bay blocks while closed; open = walk through
     for (const o of W.objects) if (o.block && o.state !== "open") { const [x0, y0, x1, y1] = o.block; C.push({ poly: [[x0, y0], [x1, y0], [x1, y1], [x0, y1]], box: o.block, id: o.id }); }
-    for (const c of W.data.colliders || []) {
+    for (const c of (W.data.colliders || []).concat(W.chunkCols || [])) {
       const [x0, y0, x1, y1] = c.rect;
       C.push({ poly: [[x0, y0], [x1, y0], [x1, y1], [x0, y1]], box: c.rect, id: c.id });
     }

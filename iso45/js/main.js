@@ -257,7 +257,7 @@
     if (player.kickT > 0) player.kickT = Math.max(0, player.kickT - dt);
     { const v = inputVec(); st.inputOn = !!v; st.inputW = v ? SP.screenToWorldDir(v[0], v[1]) : null; }                                   // stick / keys held (trigger re-arm needs a real release)
     if (!(G && G.busy())) movePlayer(dt); else { player.moving = false; player.runK = 0; player.running = false; }
-    if (!inside) { SP.npcs.update(dt); W.updateEvents(dt); SP.traffic.update(dt); }        // the street pauses while 李默 is indoors
+    if (!inside) { SP.npcs.update(dt); W.updateEvents(dt); SP.traffic.update(dt); if (SP.chunks) SP.chunks.tick(dt); }        // the street pauses while 李默 is indoors
     if (G) G.update(dt, gm);
     SP.actors.resolve(4);
     SP.fx.update(dt);
@@ -341,7 +341,7 @@
     ctx = mainCtx;
     const z = cam.zoom, cx = Math.round(cam.x * z) / z, cy = Math.round(cam.y * z) / z;
     const view = { x0: cx - 8, y0: cy - 8, x1: cx + canvas.width / z + 8, y1: cy + canvas.height / z + 8 };
-    st.view = view;
+    st.view = view; st.viewT = SP.now;
     const E = SP.env;
     const R = SP.layers.render({ canvas, ctx, z, cx, cy, view, player, actorDrawable, dt: st.lastDt || 1 / 60, shadowDyn });
     st.playerIndex = R.pi; st.dynCount = R.dyn.length;
@@ -398,14 +398,17 @@
   }
   function anchorPt(spec) {
     if (typeof spec[0] === "number") return SP.scr(spec[0], spec[1], spec[2]);
-    const o = W.byId[spec[0]], a = W.piece(o).wire_anchors[spec[1]], p = SP.rotPt(a, o.rot);
+    const o = W.byId[spec[0]], P = o && W.piece(o), a = P && P.wire_anchors && P.wire_anchors[spec[1]];
+    if (!a) { if (!anchorPt.warned) { anchorPt.warned = true; console.warn("wire anchor missing", spec); } return null; }
+    const p = SP.rotPt(a, o.rot);
     return SP.scr(o.x + p[0], o.y + p[1], p[2]);
   }
   function drawWires() {
     ctx.save(); ctx.strokeStyle = SP.tint.night > 0.5 ? "rgba(20,20,30,0.9)" : "rgba(34,32,36,0.85)"; ctx.lineWidth = 1;
     const V = st.view;
     for (const w of W.data.wires || []) {
-      const a = anchorPt(w.from), b = anchorPt(w.to);
+      if (w.chunk && !(W.chunksIn && W.chunksIn[w.chunk])) continue;          // anchored to a pole in a chunk that is not streamed in
+      const a = anchorPt(w.from), b = anchorPt(w.to); if (!a || !b) continue;
       if (V && (Math.max(a[0], b[0]) < V.x0 || Math.min(a[0], b[0]) > V.x1 || Math.min(a[1], b[1]) > V.y1 + 200 || Math.max(a[1], b[1]) < V.y0)) continue;
       const n = w.n || 1, sag = w.sag || 0.06;              // bundles: n wires, each a little lower / slacker
       for (let i = 0; i < n; i++) {
@@ -590,6 +593,8 @@
                pixels: () => SP.audit.checkPixels(buildList(SP.actors.list.map((a) => a.spriteRect())), null) },
     };
     window.__protoReady = true;
+    // lazy module sprites (store uniforms / clerks): fetched after boot so the first frame is not delayed
+    if (!window.ACTORS.li_mo_uniform && !document.querySelector('script[src="js/actors_store.js"]')) { const sc = document.createElement("script"); sc.src = "js/actors_store.js"; document.head.appendChild(sc); }
     if (!st.manual) requestAnimationFrame(frame); else step(1 / 60);
   });
 })(window.SP);

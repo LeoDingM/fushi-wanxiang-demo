@@ -1831,5 +1831,254 @@
    "uniform_note": "打卡时换上店服（员工室）"
   },
   "_wage_note": "⚠ 店员时薪 = prices.wage_per_h（默认 ¥15/h，游戏性取值，让钱紧一点）。现实中一线城市非全日制最低小时工资更高（2025–26 约 ¥24–28/h：北京约 ¥27.7、上海约 ¥25、深圳约 ¥23.7，以当地最新公告为准），全日制月最低工资约 ¥2500–2700。想更真实就调高 prices.wage_per_h。"
+ },
+ "metro": {
+  "_doc": "地铁 metro (js/metro.js). Times in game minutes of the day, money in yuan. Fare by distance (km between stations), deducted on arrival (= tapping out). Built scenes: station.area (multi-area scenes in metro45.js); other stations are on the line but have no scene yet.",
+  "line": {
+   "id": "L3",
+   "name": "3号线",
+   "alias": "槐江线",
+   "color": "#E07F2D",
+   "east_terminal": "kejiyuan",
+   "west_terminal": "huaibei"
+  },
+  "hours": {
+   "open": 360,
+   "close": 1380,
+   "first_train": 365,
+   "last_train": 1370,
+   "label": "06:00–23:00"
+  },
+  "stations": [
+   {
+    "id": "huaibei",
+    "name": "槐北新村",
+    "km": 0.0,
+    "min": 0,
+    "area": null,
+    "zone": "外围"
+   },
+   {
+    "id": "jinghuaili",
+    "name": "井槐里",
+    "km": 2.1,
+    "min": 3,
+    "area": "jhl_street",
+    "zone": "外围老城区"
+   },
+   {
+    "id": "huaiyin",
+    "name": "槐荫路",
+    "km": 4.0,
+    "min": 6,
+    "area": null,
+    "zone": "外围"
+   },
+   {
+    "id": "fangzhi",
+    "name": "纺织城",
+    "km": 6.9,
+    "min": 10,
+    "area": null,
+    "zone": "外围"
+   },
+   {
+    "id": "xiguan",
+    "name": "西关",
+    "km": 9.8,
+    "min": 14,
+    "area": null,
+    "zone": "内环"
+   },
+   {
+    "id": "renmin",
+    "name": "人民广场",
+    "km": 13.0,
+    "min": 18,
+    "area": null,
+    "zone": "内环"
+   },
+   {
+    "id": "jiangbin",
+    "name": "江滨",
+    "km": 16.4,
+    "min": 23,
+    "area": null,
+    "zone": "内环"
+   },
+   {
+    "id": "cbd",
+    "name": "中央商务区",
+    "km": 19.3,
+    "min": 28,
+    "area": "cbd_street",
+    "zone": "CBD"
+   },
+   {
+    "id": "kejiyuan",
+    "name": "科技园",
+    "km": 23.5,
+    "min": 33,
+    "area": null,
+    "zone": "CBD 东"
+   }
+  ],
+  "fare": {
+   "_doc": "km travelled -> yuan (first band whose limit >= km)",
+   "bands": [
+    [
+     6,
+     3
+    ],
+    [
+     12,
+     4
+    ],
+    [
+     22,
+     5
+    ],
+    [
+     99,
+     6
+    ]
+   ],
+   "card_discount": 1.0,
+   "qr_discount": 1.0
+  },
+  "token": {
+   "label": "单程票",
+   "price_by_fare": true
+  },
+  "card": {
+   "label": "交通卡",
+   "start_balance": 12,
+   "topups": [
+    20,
+    50,
+    100
+   ],
+   "min_to_enter": 3
+  },
+  "qr": {
+   "label": "乘车码",
+   "app": "城市地铁 App",
+   "min_money": 3
+  },
+  "pay_methods_tvm": [
+   "微信",
+   "支付宝",
+   "现金"
+  ],
+  "headway_min": {
+   "peak": 3,
+   "normal": 6,
+   "late": 10,
+   "_doc": "minutes between trains per direction; peak = weekday peak windows, late = after late_after"
+  },
+  "peak": [
+   [
+    420,
+    570
+   ],
+   [
+    1050,
+    1170
+   ]
+  ],
+  "late_after": 1260,
+  "dwell_min": 1.2,
+  "approach_min": 0.5,
+  "clock_scale": 0.1,
+  "_clock_doc": "inside stations the clock runs at clock_scale game minutes per real second (6 game s per s; the street runs 1 min/s), so walking a station costs ~8-12 game minutes and a 1.2 min dwell is ~12 s to board",
+  "crowd": {
+   "_doc": "waiting / walking NPCs per area = round(base * by_hour[h] * (weekend ? weekend_mul : 1)), capped at max",
+   "base": 9,
+   "max": 26,
+   "weekend_mul": 0.55,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0.5,
+    1.6,
+    2.6,
+    1.6,
+    0.8,
+    0.7,
+    0.9,
+    0.8,
+    0.7,
+    0.8,
+    1.0,
+    1.6,
+    2.6,
+    1.8,
+    1.0,
+    0.8,
+    0.5,
+    0.2
+   ]
+  },
+  "commuters": [
+   {
+    "id": "xiaozhou",
+    "name": "小周（程序员）",
+    "sprite": "office",
+    "home": "jinghuaili",
+    "work": "cbd",
+    "leave": 485,
+    "back": 1140,
+    "days": "workday"
+   },
+   {
+    "id": "linjie",
+    "name": "林姐（会计）",
+    "sprite": "office",
+    "home": "jinghuaili",
+    "work": "cbd",
+    "leave": 470,
+    "back": 1090,
+    "days": "workday"
+   },
+   {
+    "id": "xiaoyu",
+    "name": "小雨（实习生）",
+    "sprite": "student",
+    "home": "jinghuaili",
+    "work": "cbd",
+    "leave": 500,
+    "back": 1180,
+    "days": "workday"
+   },
+   {
+    "id": "laozhang",
+    "name": "老张（保安）",
+    "sprite": "uncle",
+    "home": "jinghuaili",
+    "work": "renmin",
+    "leave": 420,
+    "back": 1230,
+    "days": "all"
+   },
+   {
+    "id": "ading",
+    "name": "阿丁（外卖站长）",
+    "sprite": "uncle",
+    "home": "huaibei",
+    "work": "cbd",
+    "leave": 600,
+    "back": 1300,
+    "days": "all"
+   }
+  ],
+  "security": {
+   "scan_min": 0.6,
+   "_doc": "安检: bag through the X-ray + walk-through arch; skipping it is refused by staff"
+  },
+  "depart_min": 0.45
  }
 }

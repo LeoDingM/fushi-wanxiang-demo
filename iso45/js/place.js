@@ -10,7 +10,7 @@
   SP.scenes = Object.assign({}, window.INTERIORS45 || {});
   SP.scenes.roof = { id: "roof", floor: 7, roof: true, name: "12号天台" };
   const KEEP = ["data", "objects", "byId", "decals", "timers", "defs", "hazards", "puddles", "leafPiles", "laundry", "colliders", "cgrid",
-                "groundItems", "groundIdx", "groundRect", "groundTiles", "lastRuleMin"];
+                "groundItems", "groundIdx", "groundRect", "groundTiles", "lastRuleMin", "chunkCols", "chunksIn"];
   const ZS = [0.67, 1, 1.5, 2, 3];
   function fitZoom() {
     const c = document.getElementById("game");
@@ -81,7 +81,7 @@
     const C = SP.clock, amb = C.ambient, n = SP.env.night, w = C.intensity > 0.2 ? C.weather : "clear", sky = SKY[w] || SKY.clear;
     const mul = (c, k) => `rgb(${Math.round(c[0] * amb[0] / 255 * k)},${Math.round(c[1] * amb[1] / 255 * k)},${Math.round(c[2] * amb[2] / 255 * k)})`;
     for (const o of W.objects) {
-      const V = W.piece(o).view; if (!V || !o.view) continue;
+      const V = W.piece(o).view || (o.state === "glass" && W.piece(o).glass); if (!V || !o.view) continue;   // far-side balcony glass: live outside behind it too
       const [x0, x1, z0, z1] = V, q = (u, v) => { const p = W.local(o, x0 + (x1 - x0) * u, 0.16, z0 + (z1 - z0) * v); return SP.scr(p[0], p[1], p[2]); };
       const quad = (u0, v0, u1, v1) => { const a = q(u0, v0), b = q(u1, v0), c = q(u1, v1), d = q(u0, v1); ctx.beginPath(); ctx.moveTo(a[0], a[1]); ctx.lineTo(b[0], b[1]); ctx.lineTo(c[0], c[1]); ctx.lineTo(d[0], d[1]); ctx.closePath(); };
       const r = SP.frameRect(SP.frameKey(o.type, o.variant, "main", o.state, o.rot) || "", SP.sx(o.x, o.y), SP.sy(o.x, o.y, o.z)); if (r && !SP.rectsOverlap(r, view)) continue;

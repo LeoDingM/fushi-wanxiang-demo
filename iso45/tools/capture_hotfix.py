@@ -10,6 +10,8 @@ J = {
  "h2": (S + "h2-bed-prompt.png", "?touch=1&manual=1&time=night", 1500, ROOM + "P.x=0.8; P.y=2.62; P.setDir('N'); SP.actions.idle(0.3);" + R),
  "h3": (S + "h3-roof-night.png", "?touch=1&manual=1&time=night", 1500, "SP.actions.go('roof'); SP.actions.idle(3);" + R),
  "h4": (S + "h4-night-entrances.png", "?manual=1&time=night&zoom=1.1", 1500, "SP.player.x=1.5; SP.player.y=10.2; SP.player.setDir('S'); SP.actions.idle(1);" + R),
+ "e1": (S + "s5-east-eateries.png", "?manual=1&time=dusk&zoom=1", 1500, "SP.player.x=55; SP.player.y=2.2; SP.actions.idle(1.5); SP.chunks.loadAll();" + R),
+ "e2": (S + "s5-metro-entrance.png", "?manual=1&time=night&zoom=1.4", 1500, "SP.player.x=38.1; SP.player.y=-12.2; SP.player.setDir('E'); SP.actions.idle(1.5);" + R),
  "w": ("/tmp/s45/h_w.png", "?manual=1&time=night&season=winter&weather=snow", 1500, "SP.player.x=1.5; SP.player.y=10.2; SP.cam.zoom=1.2; SP.actions.idle(1);" + R),
  "s": ("/tmp/s45/h_s.png", "?manual=1&time=night&season=summer&weather=clear", 1500, "SP.player.x=1.5; SP.player.y=10.2; SP.cam.zoom=1.2; SP.actions.idle(1);" + R),
 }
