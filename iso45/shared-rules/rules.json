@@ -2456,7 +2456,7 @@
   }
  },
  "cbd": {
-  "_doc": "云汇CBD (place 'cbd'). towers skyline density (Leo): ONLY 1 tower ≥600 m (天枢), 2 at 500–600 m, 5 at 400–500 m, 7 at 300–400 m; ALL other buildings ≤200 m (avg ~150 m), spaced with plazas. Top 15 have unique original silhouettes. Also: 云麓花园 concentric gated compound (outer 四代住宅 high-rises, mid ring, luxury villas, resort pool, kindergarten, park), Central-Park-style lake, atrium mall 云汇天地. metro_exits A–D → place metro_cbd.",
+  "_doc": "云汇CBD (place 'cbd'). towers skyline density (Leo): ONLY 1 tower ≥600 m (天枢), 2 at 500–600 m, 5 at 400–500 m, 7 at 300–400 m; ALL other buildings ≤200 m (avg ~150 m), spaced with plazas. Top 15 have unique original silhouettes. Also: 云麓花园 vertical-forest compound (cream 四代住宅 + green balconies, villas+花树, grand gate/fountain, pool, basketball/soccer, kindergarten), riverside far N, atrium mall, Central-Park lake. metro_exits A–D → place metro_cbd.",
   "district": {
    "name": "云汇CBD",
    "en": "Yunhui CBD",

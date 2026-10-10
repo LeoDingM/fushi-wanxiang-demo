@@ -1,6 +1,6 @@
 # 云汇CBD (place `cbd`) — ready for integration
 
-> Leo pass (2026-10-10): height caps kept; 云麓花园 warm residential (cream/sand/terra, balconies+greenery+bay windows, 四代住宅 plans) — not office glass; top CBD towers distinct Shenzhen-inspired originals (no clone cylinders). Occlusion / lake / household lights as before. Re-capture C5/C6/C7.
+> Leo ref-art pass (2026-10-10): match vertical-forest compound + Shenzhen CBD look (originals). 云麓花园: cream 四代住宅 with staggered green balconies, villas+花树, grand gate+fountain, central garden water, big pool, basketball+soccer, kindergarten; far-N river/bridge; distinct faceted/tapered/fin skyline. Caps kept. Re-capture C5/C6/C7.
 
 Standalone preview: `cbd_preview.html` (desktop + phone; `?touch=1`). Smoke + captures: `python3 tools/cbd_capture.py all` (0 JS errors).
 
@@ -74,7 +74,9 @@ Walkable-map anchors (lobbies): 天枢塔 (310,360) · 鲲鹏 · 星澜 (430,260
 - **臻品街**: boutiques / cafés, planters, evening buskers.
 - **云汇天地**: modern atrium mall — curved glass curtain + stone podium, glazed roof lantern, west atrium hall, LED canopy, outdoor plaza + LED screens.
 - **云汇体育中心**: arena exterior (bowl + roof ring).
-- **云麓花园**: concentric gated community — outer/mid **warm residential** towers (res_cream/sand/terra/sage/ivory; balconies with greenery, bay windows, sky gardens, slab/L/U plans — Shenzhen 四代住宅 inspired, original), innermost luxury villas (warm stone+cream courtyards); resort pool deck, private 云麓幼儿园, central garden park, promenade green belts, dense vegetation; street-front facade + anti-climb perimeter + gatehouse/CCTV/patrol; residential night lights use shared-rules household schedules (weekends/holidays).
+- **云麓花园**: vertical-forest gated community (ref-inspired, original) — outer/mid ivory/beige **第四代住宅** with staggered overflowing green balconies + dark slate crowns + sky gardens; innermost villas among flowering `tree_bloom`; grand gatehouse + circular fountain forecourt; central garden water; large resort pool; basketball + soccer; private kindergarten; dense promenade greenery; street facade + anti-climb + CCTV/patrol; household night lights.
+
+- **滨江**: far-north river band + bridge deck (skyline backdrop).
 - Roads / BRT / taxis / rush-hour crowds as before.
 
 ## LOD / occlusion / night lights

@@ -75,7 +75,7 @@ def shots(P):
     w, h = halves[0].size; out = Image.new("RGB", (w, h * 2)); out.paste(halves[0], (0, 0)); out.paste(halves[1], (0, h)); out.save(os.path.join(OUT, "C3-mall-stadium.png")); print("shot C3-mall-stadium.png (2 frames)")
     print("C5", P.open("time=day&x=186&y=186&zoom=0.016&shot=1&test=1")); P.frames(90); time.sleep(0.5); P.shot("C5-skyline-far.png")
     print("C6", P.open("time=21:30&x=186&y=186&zoom=0.016&touch=1&shot=1&test=1", phone=True)); P.frames(90); time.sleep(0.5); P.shot("C6-night-skyline.png")
-    print("C7", P.open("time=16:40&x=310&y=245&dir=S&zoom=0.14&pan=0,-160&shot=1&test=1")); P.frames(120); time.sleep(0.5); P.shot("C7-wealthy-compound.png")
+    print("C7", P.open("time=16:40&x=300&y=230&dir=S&zoom=0.12&pan=0,-180&shot=1&test=1")); P.frames(130); time.sleep(0.5); P.shot("C7-wealthy-compound.png")
     print(P.ev(STATE))
 
 if __name__ == "__main__":

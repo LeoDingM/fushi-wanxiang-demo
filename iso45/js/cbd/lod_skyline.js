@@ -72,7 +72,7 @@
   }
   /** emissive layer of one part (night): lit windows / shop fronts / crown + spire lighting. returns true if it emitted */
   X.emitPart = function (ex, d, z, nk) {
-    const p = d.p, style = p.style; if (style === "canopy") return false;
+    const p = d.p, style = p.style; if (style === "canopy" || style === "roof_slate") return false;
     if (p.crown === "lantern" || p.crown === "ring" || p.crown === "fin" || p.spire) {
       const hue = ((C.t || 0) * 18 + shash(d.b.id) % 360) % 360, col = d.b.id === "tianshu" ? `hsl(${hue},85%,66%)` : p.spire ? "#fff4d8" : "#bfe8ff";
       for (const f of d.faces) { X.facePath(ex, f, d.z0, d.z1); ex.globalAlpha = nk * (p.crown === "lantern" ? 0.85 : 0.6); ex.fillStyle = col; ex.fill(); }

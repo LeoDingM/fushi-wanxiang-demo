@@ -1,3 +1,6 @@
+21:24 · [主线] CBD 风格板 READY 已接入：象牙/米色墙+深灰石板屋顶、琥珀幼儿园、别墅院落/泳池、河桥球场、开花乔木；smoke+stage6+cbd_capture 过；双 zip 已打 · screenshots/C7-wealthy-compound.png
+21:25 · [CBD] 风格板：象牙白石材+深灰石板瓦屋顶、垂直森林阳台、别墅院落；对照参考重拍 C5/C6/C7 · screenshots/C7-wealthy-compound.png
+21:20 · [CBD] 对照参考图：垂直森林阳台、大门喷泉、泳池球场幼儿园、别墅花树、滨江桥、天际线切面尖顶鳍板；重拍 C5/C6/C7 · screenshots/C7-wealthy-compound.png
 21:07 · [主线] CBD 建筑改造 READY 已接入：云麓暖色住宅（cream/sand/terra）+ 深圳灵感异形塔（无重复圆柱）；smoke+stage6+cbd_capture 过；双 zip 已打 · screenshots/C7-wealthy-compound.png
 21:05 · [CBD] 云麓花园改暖色住宅立面（阳台绿化/飘窗/四代平面），天际线去掉重复圆柱、重做原创轮廓；重拍 C5/C6/C7 · screenshots/C7-wealthy-compound.png
 20:53 · [主线] CBD Leo最新（全透明遮挡/湖涟漪/云麓同心+户灯）已接入；天台车灯不再照屋顶（像素A/B）；疲倦白天可整觉（夜班）；2F-02南立面凸出玻璃阳台；smoke+stage6+CBD capture过；双zip已打 · screenshots/C7-wealthy-compound.png
