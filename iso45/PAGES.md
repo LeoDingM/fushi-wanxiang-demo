@@ -1,56 +1,50 @@
-# 浮世万象 · scene-proto-45 · Stage L 交接
+# 浮世万象 · scene-proto-45 · Stage M 交接
 
-旧街区；**CBD 暂停**。Stage L：门岗核验合并、天气穿衣、服药打卡、登记导出物业微信、日程周视图+待办优先级。
+旧街区；**CBD 暂停**。Stage M：门岗工单、漏服惩罚、天气软推荐衣柜、周视图时段条、门禁归档/长图。
 
-**CRITICAL：** Char-A2 正在 Blender 重渲警察/消防/护士立绘——**勿改** `appearance.js` / `gen_character.py` / civic actor atlases / `NPC_SPEC`。本轨仅 `js/stageL.js`。
+**勿改：** `appearance.js` / `gen_character.py` / civic atlases / `NPC_SPEC`（Char-A2 管制服立绘）。本轨仅 `js/stageM.js`。
 
 ## 交付
 
 | 目标 | 落地 |
 |------|------|
-| 门岗核验合并 | 压制 G `maybeGateFollowup` + K `maybeGateScanQuiz`；统一 `maybeUnifiedGateQuiz`（双因可「一并说明」） |
-| 天气穿衣 | 收衣换装建议 toast + 菜单「听天气穿衣建议」 |
-| 服药打卡 | `ps.rxCourse`；药房开疗程；日程/背包「今日服药」；阿姨微信提醒 |
-| 登记导出 | 摘要→物业微信；菜单/门禁 App 按钮 |
-| 周视图+优先级 | 日程「本周/按日」；待办 P 排序（gate_unified > access > rx_dose …） |
+| 门岗→物业工单 | 核验选项后 `fileGateTicket` → 物业微信（已结案/待跟进） |
+| 漏服惩罚 | 日切未打卡：mood−6 energy−5 hygiene−2 + 阿姨微信 |
+| 天气软推荐 | 只读 `PLAYER_LOOKS`；收衣菜单「天气软推荐」；可调用 `openWardrobe` |
+| 时段条 | 本周视图 6–22 小时条，点选看当日该时段 dayLog |
+| 归档/长图 | `scanArchive`；canvas PNG dataURL；手机长图预览 |
 
 ## 关键文件
 
-- `js/stageL.js`
-- `index.html`（接在 stageK 后）
-- `tools/stageL_test.py` · `tools/capture_stageL.py`
+- `js/stageM.js`
+- `index.html`（接在 stageL 后）
+- `tools/stageM_test.py` · `tools/capture_stageM.py`
 
 ## 截图
 
-- `l1-unified-gate.png` — 合并门岗核验  
-- `l2-weather-outfit.png` — 雨天换装建议  
-- `l3-rx-dose.png` — 服药打卡  
-- `l4-scan-export-wx.png` — 导出物业微信  
-- `l5-week-view.png` — 日程本周  
-- `l6-todo-priority.png` — 待办优先级  
+- `m1-gate-ticket-wx.png` — 物业工单微信  
+- `m2-missed-dose.png` — 漏服惩罚  
+- `m3-soft-wardrobe.png` — 雪天软推荐  
+- `m4-hour-strip.png` — 时段条  
+- `m5-scan-archive.png` — 归档  
+- `m6-long-image.png` — 长图导出  
 
 ## 玩法速查
 
-1. 夜间未接派出所来电 **且/或** 昨夜未扫码 → 白天门岗一次核验菜单。  
-2. 收干衣后看天气穿衣建议。  
-3. 药房取药后每日手机打卡服药。  
-4. 门禁 App「导出摘要到物业微信」。  
-5. 日程切「本周」；待办按优先级排列。  
+1. 门岗核验任意选项 → 物业微信出现工单号。  
+2. 服药疗程隔夜未打卡 → 心情/精力下降。  
+3. 收衣后看「天气软推荐」，可打开衣柜（不改外观文件）。  
+4. 日程本周点小时看明细。  
+5. 门禁 App：归档 / 生成长图。  
 
-## 外观并行轨（严禁抢改）
+## 建议 Stage N
 
-- `js/appearance.js` · `tools/gen_character.py`（若存在）  
-- civic actor atlases / Char-A2 Blender 警察·消防·护士  
-- `js/stageD.js` · `NPC_SPEC`
-
-## 建议 Stage M
-
-- 门岗核验结果写入物业微信工单线程  
-- 服药漏打惩罚（mood/energy）与疗程延长  
-- 天气换装与 Char wardrobe 标签软推荐（只读 look labels，不改 atlas）  
-- 日程周视图拖到具体小时条  
-- 登记簿按月归档 + 导出 PDF/长图（演示）
+- 物业工单回访（待跟进→结案）与门禁续期联动  
+- 漏服连续惩罚升级 + 医院复诊待办  
+- 软推荐一键试穿（仍只调 `setOutfitId`，不改 atlas）  
+- 时段条拖到跳转 POI  
+- 长图分享到微信好友（演示）
 
 ## 质量
 
-- stageL_test **13/13** · smoke **4/4** · stage6 **12/12**
+- stageM_test **12/12** · smoke **4/4** · stage6 **12/12**

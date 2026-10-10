@@ -1,3 +1,4 @@
+23:35 · [外观] Stage Char-A2 hotfix：Blender 正渲 police/firefighter/nurse（police_cap/fire_helmet/nurse_cap）；弃用重着色矩形帽；actors_civic 重打包；Char-B 学校暂停；screenshots/char-a2b-*；play zip
 23:25 · [外观] Stage Char-A/Civic-look：police/firefighter/nurse 重着色图集+NPC_SPEC；civic 一楼 f_shop 玻璃门脸+文字招牌；appearance schema/衣柜/child×0.72；街面 extras×4；docs/APPEARANCE.md+CHAR_READY；appearance_test 12/12；smoke 4/4；双 zip · screenshots/char-a1…a8
 23:12 · [主线] Stage E：背包（报案回执/处方/药品/消防卡片）+微信物业房东联动；公交车程动画+可跳过；馨园1-02南向飘窗阳台 validate 0；夜间派出所来电/急诊迷你事件可跳过；stageE 15/15；smoke 4/4；stage6 PASS；双 zip · screenshots/e1-bag-receipt.png
 23:07 · [主线] Stage D：civic 玩法环（派出所报案/盖章/罚款、医院挂号→就诊→取药回血、消防参观/灭火器知识）；手机地图点选标记+前往；公交跳过车程/等班；馨园走廊信报箱+楼层索引；civic NPC 日夜值班；layout validate 0；stageD 18/18；smoke 4/4；stage6 PASS；双 zip · screenshots/d1-police-report.png
@@ -104,3 +105,10 @@
 23:55 · [Stage L] 门禁登记摘要导出到物业微信；登记簿菜单 + 手机门禁按钮
 23:55 · [Stage L] 日程本周视图 + 待办优先级排序（门岗/门禁/服药优先）
 23:55 · [Stage L] 质量：stageL_test 13/13 · smoke 4/4 · stage6 12/12 · 截图 l1–l6 · 未改 appearance/NPC_SPEC/civic atlas
+
+00:05 · [Stage M] 门岗核验结果→物业微信工单（已结案/待跟进）· js/stageM.js，未改 appearance/NPC_SPEC/civic atlas
+00:05 · [Stage M] 漏服惩罚：日切未打卡 → 心情/精力/卫生下降 + 阿姨微信
+00:05 · [Stage M] 天气软推荐衣柜（只读 PLAYER_LOOKS 标签；可选 openWardrobe）
+00:05 · [Stage M] 日程本周视图加 6–22 时段条，可点小时看明细
+00:05 · [Stage M] 门禁归档 + canvas 长图导出演示（手机 UI）
+00:05 · [Stage M] 质量：stageM_test 12/12 · smoke 4/4 · stage6 12/12 · 截图 m1–m6

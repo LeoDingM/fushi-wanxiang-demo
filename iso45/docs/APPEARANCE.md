@@ -1,6 +1,6 @@
 # 外观系统 · APPEARANCE（Stage Char-A 起步）
 
-面向 Leo 长期角色管线：多职业 NPC、童/成年体型、衣柜换装、理发店发型、分层服装。本阶段只落地 **schema + 随机组合 + civic 制服重着色 + 衣柜桩**，完整美术后补。
+面向 Leo 长期角色管线：多职业 NPC、童/成年体型、衣柜换装、理发店发型、分层服装。Char-A 落地 schema/随机/衣柜桩；**Char-A2** 用 Blender 正渲替换 civic 制服（`police_cap`/`fire_helmet`/`nurse_cap`）。完整美术后补。
 
 ## 当前 API（`js/appearance.js`）
 
@@ -45,11 +45,12 @@ SP.appearance.setOutfitId('casual'|'uniform'|'winter')  // 写入 ps.flags.outfi
 
 | 职业 | atlas | 来源 | 做法 |
 |------|-------|------|------|
-| 警察 | `police` | uncle 重着色 | 藏青制服 + 帽檐/领口提示 |
-| 消防员 | `firefighter` | office 重着色 | 橙红防护服 + 盔/反光条 |
-| 医护 | `nurse` | student 重着色 | 白/浅蓝 + 护士帽红十字 |
+| 警察 | `police` | Blender `police.json` + `police_cap` | 藏青执勤服 + 大盖警帽（前檐+帽徽） |
+| 消防员 | `firefighter` | Blender `firefighter.json` + `fire_helmet` | 橙夹克 + 黄盔（圆顶/后檐/短前檐） |
+| 医护 | `nurse` | Blender `nurse.json` + `nurse_cap` | 浅蓝护士服 + 折翼白帽 + 发髻 |
 
-生成：`tools/recolor_civic_actors.py` → `img/actors/{police,firefighter,nurse}.png` + `js/actors_civic.js`  
+生成（Char-A2）：`art-pack/sprites3d/{police,firefighter,nurse}.json` → `build45.sh` → `out45/` → pack → `img/actors/{police,firefighter,nurse}.png` + `js/actors_civic.js`
+`tools/recolor_civic_actors.py` 已弃用（Leo 拒收矩形帽重着色）  
 接线：`stageD.NPC_SPEC` + `js/civic_look.js`（运行时再保险）
 
 ## 市政外立面
@@ -60,7 +61,7 @@ SP.appearance.setOutfitId('casual'|'uniform'|'winter')  // 写入 ps.flags.outfi
 
 ## 分层服装美术管线（路线图）
 
-1. **Char-A（本阶段）**：整套 atlas 回退 + layers 字段占位 + 重着色制服  
+1. **Char-A / Char-A2**：schema + 衣柜桩；civic 制服改为 Blender 45° 正渲（非重着色）  
 2. **Char-B**：学校占位（小学/初中/高中楼 + 学生/教师 NPC 类）；更多 top/bottom 换色层；试做 1 套 true child mesh  
 3. **Char-C**：理发店改 `hairId`；外套/裙装独立图层合成；男女体型骨架差  
 4. **Char-D**：职业套装库（保安/快递员/厨师…）与天气 outer 自动层
