@@ -47,9 +47,9 @@
 
   // ---------- 2) Modernize civic exteriors (runtime — glass shop GF already rebuilt; add sign overlays) ----------
   CL.SIGNS = [
-    { group: "civic_police", label: "井槐里派出所", sub: "POLICE STATION", color: "#1a4a9c", x: -36.0, y: -10.0, z: 2.55 },
-    { group: "civic_hospital", label: "井槐社区医院", sub: "COMMUNITY HOSPITAL", color: "#0d8a6a", x: 22.0, y: -10.0, z: 2.55 },
-    { group: "civic_fire", label: "井槐消防站", sub: "FIRE STATION", color: "#c43c12", x: 58.0, y: -10.0, z: 2.55 }
+    { group: "civic_police", label: "井槐里派出所", sub: "POLICE STATION", color: "#1a4a9c", x: -36.0, y: -19.0, z: 2.55 },
+    { group: "civic_hospital", label: "井槐社区医院", sub: "COMMUNITY HOSPITAL", color: "#0d8a6a", x: 13.0, y: -19.0, z: 2.55 },
+    { group: "civic_fire", label: "井槐消防站", sub: "FIRE STATION", color: "#c43c12", x: 58.0, y: -19.0, z: 2.55 }
   ];
 
   CL.patchSceneData = function () {
@@ -59,8 +59,8 @@
     const map = {
       civic_police_S1F_1_shop: ["civic_police", "井槐里派出所", [-36.0, -6.5, "N"], ["09:00", "17:00"]],
       civic_police_S1F_1_door: ["civic_police", "井槐里派出所", [-36.0, -6.5, "N"], ["09:00", "17:00"]],
-      civic_hospital_S1F_1_shop: ["civic_hospital", "井槐社区卫生中心", [22.0, -6.5, "N"], ["08:00", "20:00"]],
-      civic_hospital_S1F_1_door: ["civic_hospital", "井槐社区卫生中心", [22.0, -6.5, "N"], ["08:00", "20:00"]],
+      civic_hospital_S1F_1_shop: ["civic_hospital", "井槐社区卫生中心", [13.0, -6.5, "N"], ["08:00", "20:00"]],
+      civic_hospital_S1F_1_door: ["civic_hospital", "井槐社区卫生中心", [13.0, -6.5, "N"], ["08:00", "20:00"]],
       civic_fire_S1F_1_shop: ["civic_fire", "井槐消防站", [58.0, -6.5, "N"], ["00:00", "24:00"]],
       civic_fire_S1F_1_door: ["civic_fire", "井槐消防站", [58.0, -6.5, "N"], ["00:00", "24:00"]],
       school_pri_S1F_1_shop: ["school_pri", "井槐社区小学", [68.0, -6.5, "N"], ["07:30", "17:30"]],

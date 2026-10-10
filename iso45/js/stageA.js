@@ -70,7 +70,7 @@
   A.spawnAt = function (key) {
     const map = {
       police: { to: "civic_police", street: [-36, -6.5, "N"] },
-      hospital: { to: "civic_hospital", street: [22, -6.5, "N"] },
+      hospital: { to: "civic_hospital", street: [13, -6.5, "N"] },
       fire: { to: "civic_fire", street: [58, -6.5, "N"] },
       xin: { to: "stair_xin_1f", street: [82, 15.5, "N"] },
       home12: { to: "stair_1f", street: [1.5, 12, "N"] }
@@ -83,7 +83,7 @@
   // ---------- bus ----------
   A.busStops = [
     { id: "bus_stop", name: "井槐里", x: -20, y: 2.4 },
-    { id: "bus_stop_m", name: "卫生中心", x: 22, y: 1.0 },
+    { id: "bus_stop_m", name: "卫生中心", x: 20.5, y: 1.0 },
     { id: "bus_stop_e", name: "东街", x: 74.5, y: 1.0 }
   ];
   A.busTimetable = function () {

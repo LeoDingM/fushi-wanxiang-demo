@@ -77,7 +77,7 @@
       ground: tiles(W, D),
       objects: w.objects.concat(furn), colliders: w.colliders,
       spawn: [4.0, 1.1, "N"],
-      portals: [{ id: "exit_street", rect: [gap.at, 0.1, gap.at + gap.w, 0.55], dir: "S", to: "street", spawn: [22.0, 0.95, "S"], label: "出门" }],
+      portals: [{ id: "exit_street", rect: [gap.at, 0.1, gap.at + gap.w, 0.55], dir: "S", to: "street", spawn: [18.2, 0.95, "S"], label: "出门" }],
       _amenity: true, _civic: true
     };
   }
@@ -106,17 +106,17 @@
   // Street stubs — VARIETY: different kit mixes / spacing (not three identical stalls)
   // East old-block → midtown approach (clear of market −13..−9 / 15.2 and props 10.2 / −16.8 / 4.8 / −5.6)
   const STREET_STUBS = [
-    // 食堂：宽檐摊位 + 花箱 + 告示（横向组合）
-    { id: "civic_canteen_a", type: "p_planter", x: 20.6, y: 1.7, z: 0, rot: 0, state: "default", name: "食堂花箱" },
-    { id: "civic_canteen_gate", type: "p_stall", x: 22.0, y: 1.95, z: 0, rot: 0, state: "default",
+    // 食堂：北人行道、侧路以西（勿占 x22..28 侧路沥青）
+    { id: "civic_canteen_a", type: "p_planter", x: 17.0, y: 1.7, z: 0, rot: 0, state: "default", name: "食堂花箱" },
+    { id: "civic_canteen_gate", type: "p_stall", x: 18.2, y: 1.95, z: 0, rot: 0, state: "default",
       interact: "civic_canteen", name: "井槐社区食堂", to: CANTEEN, _civic: "canteen" },
-    { id: "civic_canteen_b", type: "p_notice", x: 23.5, y: 1.75, z: 0, rot: 0, state: "default",
+    { id: "civic_canteen_b", type: "p_notice", x: 19.5, y: 1.75, z: 0, rot: 0, state: "default",
       interact: "civic_canteen_menu", name: "食堂菜牌" },
-    // 幼儿园：绿篱 + 接送告示 + 花坛（竖向/庭院感，无入园门厅）
-    { id: "civic_kinder_hedge", type: "p_hedge", x: 25.4, y: 2.1, z: 0, rot: 0, state: "default", name: "幼儿园绿篱" },
-    { id: "civic_kinder_gate", type: "p_notice", x: 26.5, y: 1.9, z: 0, rot: 0, state: "default",
+    // 幼儿园：侧路以东人行道（勿占侧路）
+    { id: "civic_kinder_hedge", type: "p_hedge", x: 34.4, y: 2.1, z: 0, rot: 0, state: "default", name: "幼儿园绿篱" },
+    { id: "civic_kinder_gate", type: "p_notice", x: 35.5, y: 1.9, z: 0, rot: 0, state: "default",
       interact: "civic_kinder", name: "井槐幼儿园·接送点", _civic: "kindergarten" },
-    { id: "civic_kinder_pot", type: "p_planter", x: 27.6, y: 2.05, z: 0, rot: 6, state: "default", name: "接送区花坛" },
+    { id: "civic_kinder_pot", type: "p_planter", x: 36.6, y: 2.05, z: 0, rot: 6, state: "default", name: "接送区花坛" },
     // 物业：门柱感 post + 窄告示 + 东侧矮摊（办公门脸，非食堂摊）
     { id: "civic_prop_post", type: "p_post", x: 30.4, y: 3.55, z: 0, rot: 0, state: "default", name: "物业门牌柱" },
     { id: "civic_prop_gate", type: "p_notice", x: 31.5, y: 3.4, z: 0, rot: 0, state: "default",
@@ -128,8 +128,8 @@
   AC.PROP = PROP;
 
   const SIGNS = [
-    { id: "canteen", x: 22.0, y: 1.95, z: 2.55, img: "img/amenities/civic/canteen_sign.png" },
-    { id: "kindergarten", x: 26.5, y: 1.9, z: 2.45, img: "img/amenities/civic/kinder_sign.png" },
+    { id: "canteen", x: 18.2, y: 1.95, z: 2.55, img: "img/amenities/civic/canteen_sign.png" },
+    { id: "kindergarten", x: 35.5, y: 1.9, z: 2.45, img: "img/amenities/civic/kinder_sign.png" },
     { id: "property", x: 31.5, y: 3.4, z: 2.5, img: "img/amenities/civic/property_sign.png" }
   ];
   AC.SIGNS = SIGNS;

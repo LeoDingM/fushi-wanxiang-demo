@@ -20,12 +20,12 @@
   }, AM.SLIDE_EAST || {});
 
   AI.POIS = {
-    bank:        { x: -10.0, y: -10.0, label: "井槐银行网点" },
-    toilet:      { x: 10.0,  y: -10.0, label: "公共卫生间" },
-    garage:      { x: 23.5,  y: 8.2,   label: "地下车库入口" },
-    dryclean:    { x: 48.0,  y: -10.0, label: "净衣坊·干洗" },
-    post:        { x: -22.0, y: -10.0, label: "井槐邮政·通讯" },
-    activity:    { x: 2.0,   y: -10.0, label: "社区活动中心·书屋" },
+    bank:        { x: -10.0, y: -19.0, label: "井槐银行网点" },
+    toilet:      { x: 39.5,  y: -19.0, label: "公共卫生间" },
+    garage:      { x: 29.8,  y: 8.2,   label: "地下车库入口" },
+    dryclean:    { x: 42.0,  y: -19.0, label: "净衣坊·干洗" },
+    post:        { x: -22.0, y: -19.0, label: "井槐邮政·通讯" },
+    activity:    { x: 2.0,   y: -19.0, label: "社区活动中心·书屋" },
     bike_repair: { x: -13.5, y: 2.2,   label: "路边修车摊" },
     locksmith:   { x: -11.0, y: 2.35,  label: "修锁配钥匙" },
     animal_rescue: { x: 7.8, y: 33.0, label: "爱心屋·流浪救助" },
@@ -113,7 +113,7 @@
     objs.push({ id: "infra_toilet_S1F_0", type: "f_shop", x: tx, y: ty, state: "window", fade_group: tfg });
     objs.push({
       id: "infra_toilet_door", type: "f_shop", x: tx + 3, y: ty, state: "door", fade_group: tfg,
-      interact: "civic", to: "amenity_toilet", spawn: [12.5, -6.5, "N"],
+      interact: "civic", to: "amenity_toilet", spawn: [41.0, -6.5, "N"],
       name: "公共卫生间", hours: ["06:00", "22:00"]
     });
     objs.push({ id: "infra_toilet_pipe", type: "f_pipe", x: tx + 5.85, y: ty, fade_group: tfg });
@@ -229,11 +229,11 @@
 
   AI.streetColliders = function () {
     return [
-      { id: "infra_bank", rect: [-13.3, -10.3, -4.0, -1.0], _amenity: true, _infra: true },
-      { id: "infra_toilet", rect: [8.2, -10.3, 14.5, -4.0], _amenity: true, _infra: true },
-      { id: "infra_dry", rect: [46.2, -10.3, 54.5, -4.0], _amenity: true, _infra: true },
-      { id: "infra_post", rect: [-25.3, -10.3, -16.0, -1.0], _amenity: true, _infra: true },
-      { id: "infra_act", rect: [-1.3, -10.3, 8.0, -1.0], _amenity: true, _infra: true }
+      { id: "infra_bank", rect: [-13.3, -19.3, -4.0, -10.0], _amenity: true, _infra: true },
+      { id: "infra_toilet", rect: [37.7, -19.3, 44.0, -13.0], _amenity: true, _infra: true },
+      { id: "infra_dry", rect: [40.2, -19.3, 48.5, -13.0], _amenity: true, _infra: true },
+      { id: "infra_post", rect: [-25.3, -19.3, -16.0, -10.0], _amenity: true, _infra: true },
+      { id: "infra_act", rect: [-1.3, -19.3, 8.0, -13.0], _amenity: true, _infra: true }
       // garage + stalls intentionally open (walkable)
     ];
   };
