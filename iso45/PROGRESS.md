@@ -59,3 +59,10 @@
 20:41 · [主线] 修 12号铁门 NPC 抽搐：开扇 footprint_states 改为内开，不再用关闭态挡路口；playtest 增 30s 抽搐检测；闸口测 flips=0 · —
 20:41 · [主线] 街面地铁口改玻璃亭（铝框玻璃墙+灯箱红标+可见楼梯+图腾柱），进站仍直达 B1 · screenshots/u13-metro-glass-pavilion.png
 20:42 · [地铁] 街面入口已换成玻璃亭（雨棚+灯箱+可见楼梯/扶梯+铺装树池）；一进直达B1；入/出闸机分行+加宽站厅站台；flow PASS；截图 M1–M5+M1b 已重拍；METRO_READY 已更新 · -
+
+23:20 · [Stage F] 出示证件：背包回执/处方/消防卡可出示给门岗/房东邻居敲门/物业信箱公告/派出所·医院·消防窗口，接受/拒收/已出示过三种结果，写入 ps.shownTo + dayLog · js/stageF.js
+23:20 · [Stage F] 公交打磨：报站叮声 +「下一站/到站请从后门下车」toast，保留 Stage E 车程动画与跳过 · dayLog 记到站
+23:20 · [Stage F] 馨园1-02：南向飘窗玻璃碰撞条 + 室内晾衣杆对接 laundry 系统（validate 0）· room_xin_102.json
+23:20 · [Stage F] 夜间事件→日程日志：忽略/处理写入 dayLog；次日晨间心情 ±（双忽略−8 / 单忽略−4 / 处理过+5）；手机「日程」页
+23:20 · [Stage F] 质量：stageF_test 17/17 · smoke 4/4 · stage6 12/12 · 截图 f1–f6 · 中文 UI · layout xin_102 problems 0
+23:20 · [并行备注] 派出所/消防员立绘与市政立面「不像一线城市」— 本轨不改外观，见 PAGES.md「外观并行轨」文件路径清单

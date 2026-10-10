@@ -11157,7 +11157,7 @@
     "interact": "rack",
     "reach": [
      1.15,
-     0.9
+     0.95
     ]
    },
    {
@@ -11167,7 +11167,7 @@
     "y": 0.15,
     "z": 1.15,
     "interact": "notice",
-    "note": "馨园1-02：南向飘窗可小件晾衣 · 比 1-01 采光更好 · 月租¥1180",
+    "note": "馨园1-02 南向飘窗阳台：可晾衣（对接洗衣系统）· 玻璃外沿请勿翻越 · 月租¥1180",
     "reach": [
      4.0,
      0.7
@@ -11176,7 +11176,16 @@
   ],
   "colliders": [
    {
-    "id": "wall0_0",
+    "id": "bay_glass_col",
+    "rect": [
+     0.9,
+     -0.05,
+     3.6,
+     0.22
+    ]
+   },
+   {
+    "id": "wall0_1",
     "rect": [
      0.0,
      5.5,
@@ -11185,7 +11194,7 @@
     ]
    },
    {
-    "id": "wall0_1",
+    "id": "wall0_2",
     "rect": [
      2.5,
      5.5,
@@ -11194,7 +11203,7 @@
     ]
    },
    {
-    "id": "wall1_2",
+    "id": "wall1_3",
     "rect": [
      4.0,
      5.5,
@@ -11203,7 +11212,7 @@
     ]
    },
    {
-    "id": "wall2_3",
+    "id": "wall2_4",
     "rect": [
      7.0,
      0.0,
@@ -11212,7 +11221,7 @@
     ]
    },
    {
-    "id": "wall2_4",
+    "id": "wall2_5",
     "rect": [
      7.0,
      1.4,
@@ -11221,7 +11230,7 @@
     ]
    },
    {
-    "id": "wall3_5",
+    "id": "wall3_6",
     "rect": [
      7.0,
      3.0,
@@ -11230,7 +11239,7 @@
     ]
    },
    {
-    "id": "wall4_6",
+    "id": "wall4_7",
     "rect": [
      0.0,
      -0.6,
@@ -11239,7 +11248,7 @@
     ]
    },
    {
-    "id": "wall4_7",
+    "id": "wall4_8",
     "rect": [
      3.5,
      -0.6,
@@ -11248,7 +11257,7 @@
     ]
    },
    {
-    "id": "wall5_8",
+    "id": "wall5_9",
     "rect": [
      -0.6,
      0.0,
@@ -11257,7 +11266,7 @@
     ]
    },
    {
-    "id": "wall6_9",
+    "id": "wall6_10",
     "rect": [
      0.0,
      3.0,
@@ -11266,7 +11275,7 @@
     ]
    },
    {
-    "id": "wall6_10",
+    "id": "wall6_11",
     "rect": [
      2.7,
      3.0,
@@ -11275,7 +11284,7 @@
     ]
    },
    {
-    "id": "wall7_11",
+    "id": "wall7_12",
     "rect": [
      4.0,
      3.0,
@@ -11284,7 +11293,7 @@
     ]
    },
    {
-    "id": "wall8_12",
+    "id": "wall8_13",
     "rect": [
      4.0,
      3.0,
@@ -11293,7 +11302,7 @@
     ]
    },
    {
-    "id": "wall8_13",
+    "id": "wall8_14",
     "rect": [
      4.0,
      4.35,
@@ -11303,7 +11312,40 @@
    }
   ],
   "portals": [],
-  "laundry": [],
+  "laundry": [
+   {
+    "id": "bay_pole0",
+    "pts": [
+     0.5,
+     0.62,
+     2.2,
+     0.62
+    ],
+    "z": 2.0,
+    "rack": "balcony",
+    "max": 3,
+    "items": [],
+    "indoor": true,
+    "mine": true,
+    "half": 0
+   },
+   {
+    "id": "bay_pole1",
+    "pts": [
+     0.5,
+     0.78,
+     2.2,
+     0.78
+    ],
+    "z": 2.0,
+    "rack": "balcony",
+    "max": 3,
+    "items": [],
+    "indoor": true,
+    "mine": true,
+    "half": 1
+   }
+  ],
   "puddles": [],
   "leaf_piles": [],
   "wires": [],
@@ -11717,7 +11759,7 @@
    "start_weather": "clear"
   },
   "repair_hours_scale": 1.0,
-  "_doc": "Stage E: identical validated shell to 1-01 + south bay glass/dryrack extras; notes/rent differ.",
+  "_doc": "Stage F: 1-01 twin + south bay glass with colliders + indoor laundry poles on dryrack; validate 0.",
   "bounds": {
    "x0": 0.15,
    "y0": 0.15,

@@ -215,6 +215,7 @@
     if (player.carry) { if (W.parkBike(player)) toast("停好车、锁上"); else toast("这里停不下（会挡路或压到东西）"); return; }
     const o = st.near; if (!o) return;
     if (o.interact === "gate") {
+      if (SP.presentAtGate && SP.presentAtGate(o)) return;
       const open = o.state !== "open", gates = W.objects.filter((g) => g.interact === "gate");
       gates.forEach((g) => (g.state = open ? "open" : "closed")); W.rebuildColliders();
       // a gate leaf may never swing into a character
