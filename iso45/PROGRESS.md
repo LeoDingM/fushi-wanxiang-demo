@@ -134,3 +134,10 @@
 00:35 · [Stage P] 软行程写入 dayLog itin_replay + 今日路线回放
 00:35 · [Stage P] 长图 QR 深链 fushi://app/scanlog → 门禁 App
 00:35 · [Stage P] 质量：stageP_test 8/8 · smoke 4/4 · stage6 12/12 · 截图 p1–p6 · 未改外观/学校
+
+00:45 · [Stage Q] 物业上门预约时间槽（今/明）+ 到点履约对话 · js/stageQ.js
+00:45 · [Stage Q] 手机「健康」页可视化 careSM + 疗程/漏服
+00:45 · [Stage Q] 试穿多步撤销栈（↩×n HUD）
+00:45 · [Stage Q] 今日路线回放分享微信小结（阿凯/阿姨）
+00:45 · [Stage Q] 深链扩展 daylog / ticket / scanlog
+00:45 · [Stage Q] 质量：stageQ_test 8/8 · smoke 4/4 · stage6 12/12 · 截图 q1–q6 · 未改外观/学校

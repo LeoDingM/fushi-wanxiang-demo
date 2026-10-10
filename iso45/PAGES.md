@@ -1,42 +1,42 @@
-# 浮世万象 · scene-proto-45 · Stage P 交接
+# 浮世万象 · scene-proto-45 · Stage Q 交接
 
-旧街区；**CBD 暂停**。Stage P：物业上门结案、医护状态机、试穿还原、行程回放、QR 深链门禁。
+旧街区；**CBD 暂停**。Stage Q：上门预约槽、健康页、试穿撤销栈、路线微信小结、深链 daylog/ticket。
 
-**勿改：** `appearance.js` / `gen_character.py` / civic atlases / `NPC_SPEC` / 学校场景。仅 `js/stageP.js`。
+**勿改：** `appearance.js` / `gen_character.py` / civic atlases / `NPC_SPEC` / 学校场景。仅 `js/stageQ.js`。
 
 ## 交付
 
 | 目标 | 落地 |
 |------|------|
-| 物业上门 | 逾期工单靠近馨园或微信触发菜单：结案 / 结案续期 / 改约 |
-| 医护 SM | `ps.careSM.phase`：revisit_needed→registering→consulting→pharmacy→course→done |
-| 试穿还原 | HUD 徽章点击 → `setOutfitId(prevId)` |
-| 行程回放 | `itinReplay` + dayLog `itin_replay`；日程页「今日路线回放」 |
-| QR 深链 | `fushi://app/scanlog`；长图页「扫描→打开门禁」 |
+| 预约时间槽 | `openVisitBooking` / `visitAppt`；到点 `maybeFulfillAppt` → 上门对话 |
+| 健康页 | 手机 App「健康」· careSM 步骤条 + 疗程 + 打卡 |
+| 试穿栈 | `tryOnStack`；HUD `↩×n` 逐步撤销 |
+| 路线微信 | `shareRouteSummary` → 阿凯/阿姨 |
+| 深链扩展 | `fushi://app/daylog` · `ticket` · `scanlog` |
 
 ## 关键文件
 
-- `js/stageP.js`
-- `index.html`（接在 stageO 后）
-- `tools/stageP_test.py` · `tools/capture_stageP.py`
+- `js/stageQ.js`
+- `index.html`（接在 stageP 后）
+- `tools/stageQ_test.py` · `tools/capture_stageQ.py`
 
 ## 截图
 
-- `p1-property-visit.png` — 物业上门  
-- `p2-care-sm.png` — 药房医护进度  
-- `p3-tryon-restore.png` — 试穿可还原  
-- `p4-itin-replay.png` — 路线回放  
-- `p5-qr-deeplink.png` — 深链按钮  
-- `p6-deeplink-scanlog.png` — 打开门禁  
+- `q1-visit-slots.png` — 预约时段  
+- `q2-health-page.png` — 健康页  
+- `q3-tryon-stack.png` — 撤销栈  
+- `q4-route-wx.png` — 路线微信  
+- `q5-deeplink-daylog.png` — 深链日程  
+- `q6-deeplink-ticket.png` — 深链工单按钮  
 
-## 建议 Stage Q
+## 建议 Stage R
 
-- 上门对话冷却/预约时间槽  
-- careSM 手机健康页可视化  
-- 还原试穿撤销栈（多步）  
-- 路线回放生成「今日小结」微信发给阿凯  
-- 深链支持 `fushi://app/daylog` / `ticket`
+- 预约改期/爽约惩罚与物业评分  
+- 健康页周报（服药依从性）  
+- 试穿栈与衣柜收藏夹  
+- 路线小结生成「周常通勤」模板  
+- 深链统一路由器 + 通知栏捷径
 
 ## 质量
 
-- stageP_test **8/8** · smoke **4/4** · stage6 **12/12**
+- stageQ_test **8/8** · smoke **4/4** · stage6 **12/12**
