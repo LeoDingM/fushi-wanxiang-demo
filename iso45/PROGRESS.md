@@ -1,3 +1,7 @@
+00:05 · [主线] Midtown-A：东向近市中心条带 + 景秀苑8F/云阶12F/城南16F（异质立面：转型砖灰/玻璃幕/塔楼退台）；>7F电梯+步梯+消防；MIDTOWN_READY；midtown_test 10/10；mt-a1…a6；zip scene-proto-45-midtown-a-play.zip
+00:05 · [并行·Civic配套] 社区食堂堂食/打包·幼儿园接送点(无NPC)·物业缴费/报修工单 · js/amenities_civic.js · 异形门脸非克隆盒；AMENITIES_CIVIC.md；civ1–4；zip scene-proto-45-civic-amen-play.zip
+23:56 · [并行·Midtown-B] 云栖里门禁小区庭院+现代大堂+A-101一室一厅~48㎡；js/midtown_estate.js+estate45；layout validate 0；rent_table ¥1200/¥1980；screenshots/mt-b1…mt-b6；ESTATE_READY.md；zip scene-proto-45-estate-play.zip
+00:00 · [并行·Props] 快递驿站/药店(创可贴)/充电桩/垃圾分类 · js/amenities_props.js + img/amenities/props · 无NPC生成；AMENITIES_PROPS.md；screenshots/prop1–4；zip scene-proto-45-props-play.zip
 23:55 · [外观] Stage Char-B：东缘社区小学/初中/高中外立面+招牌+校内学生/教师NPC（小学child）；剪艺理发 hairId UI；layerx 服装变体；community clinic stub 跳过（挡校）；charB_test 14/14 · appearance 12/12 · smoke 4/4；screenshots/char-b1…b6；zip scene-proto-45-charb-play.zip + 常规 play/full
 23:55 · [并行·NPC日程] midtown/east 路点：office+walker_e→[46,2.2]；学校偏 school_high；好感+HUD；npc_schedule 测试；zip scene-proto-45-npc-sch-play.zip
 23:55 · [并行·NPC日程] 街坊≥4人日夜日程(home→通勤/上班|学校→晚归) + 打招呼好感 toast/HUD；js/npc_schedule.js（wrap npc.update/interact，未改 stageR/charB/appearance）；NPC_SCHEDULE.md；screenshots/npc-sch1…4；zip scene-proto-45-npc-sch-play.zip

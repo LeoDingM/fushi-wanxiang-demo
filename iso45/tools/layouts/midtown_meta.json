@@ -1,0 +1,25 @@
+{
+  "axis": "east",
+  "buildings": [
+    {
+      "key": "jx",
+      "name": "景秀苑",
+      "floors": 8,
+      "door_x": 110.0
+    },
+    {
+      "key": "yj",
+      "name": "云阶公馆",
+      "floors": 12,
+      "door_x": 124.0
+    },
+    {
+      "key": "cn",
+      "name": "城南一号",
+      "floors": 16,
+      "door_x": 138.5
+    }
+  ],
+  "chunk_objects": 521,
+  "scenes": 72
+}

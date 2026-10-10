@@ -39,7 +39,7 @@
     { id: "school_pri", x: 68.0, y: -10.0, z: 2.6, img: "img/signs/school_pri.png" },
     { id: "school_mid", x: 80.0, y: -10.0, z: 2.6, img: "img/signs/school_mid.png" },
     { id: "school_high", x: 92.0, y: -10.0, z: 2.6, img: "img/signs/school_high.png" },
-    { id: "barber", x: 48.5, y: 4.2, z: 2.4, img: "img/signs/barber.png" }
+    { id: "barber", x: 48.5, y: 6.2, z: 2.4, img: "img/signs/barber.png" }
   ];
   B._signImgs = {};
 
@@ -330,7 +330,7 @@
         school_pri: { to: "school_pri", street: [68, -6.5, "N"] },
         school_mid: { to: "school_mid", street: [80, -6.5, "N"] },
         school_high: { to: "school_high", street: [92, -6.5, "N"] },
-        barber: { to: "shop_barber", street: [48.5, 3.2, "N"] }
+        barber: { to: "shop_barber", street: [48.5, 5.2, "N"] }
       };
       if (map[key]) {
         const m = map[key];

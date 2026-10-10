@@ -999,8 +999,8 @@
     ],
     "to": "street",
     "spawn": [
-     48.0,
-     8.0,
+     116.0,
+     3.0,
      "S"
     ],
     "dir": "S",
@@ -1574,8 +1574,8 @@
     "interact": "portal",
     "to": "room_midtown_a101",
     "spawn": [
-     7.2,
-     1.6,
+     7.4,
+     2.4,
      "W"
     ],
     "label": "A-101",
@@ -1614,16 +1614,7 @@
     "state": "plain"
    },
    {
-    "id": "i_wall_011",
-    "type": "i_wall",
-    "x": 8.0,
-    "y": 6.0,
-    "z": 0,
-    "rot": 6,
-    "state": "plain"
-   },
-   {
-    "id": "i_cut_012",
+    "id": "i_cut_011",
     "type": "i_cut",
     "x": 0.0,
     "y": 0.0,
@@ -1632,7 +1623,7 @@
     "state": "plain"
    },
    {
-    "id": "i_cut_013",
+    "id": "i_cut_012",
     "type": "i_cut",
     "x": 1.0,
     "y": 0.0,
@@ -1641,7 +1632,7 @@
     "state": "plain"
    },
    {
-    "id": "i_cut_014",
+    "id": "i_cut_013",
     "type": "i_cut",
     "x": 1.5,
     "y": 0.0,
@@ -1650,7 +1641,7 @@
     "state": "plain"
    },
    {
-    "id": "i_cut_015",
+    "id": "i_cut_014",
     "type": "i_cut",
     "x": 5.5,
     "y": 0.0,
@@ -1659,7 +1650,7 @@
     "state": "plain"
    },
    {
-    "id": "i_cut_016",
+    "id": "i_cut_015",
     "type": "i_cut",
     "x": 6.5,
     "y": 0.0,
@@ -1668,7 +1659,7 @@
     "state": "plain"
    },
    {
-    "id": "i_cut_017",
+    "id": "i_cut_016",
     "type": "i_cut",
     "x": 7.0,
     "y": 0.0,
@@ -1677,7 +1668,7 @@
     "state": "plain"
    },
    {
-    "id": "i_cut_018",
+    "id": "i_cut_017",
     "type": "i_cut",
     "x": 0.0,
     "y": 1.0,
@@ -1686,7 +1677,7 @@
     "state": "plain"
    },
    {
-    "id": "i_cut_019",
+    "id": "i_cut_018",
     "type": "i_cut",
     "x": 0.0,
     "y": 2.0,
@@ -1695,7 +1686,7 @@
     "state": "plain"
    },
    {
-    "id": "i_cut_020",
+    "id": "i_cut_019",
     "type": "i_cut",
     "x": 0.0,
     "y": 3.0,
@@ -1704,7 +1695,7 @@
     "state": "plain"
    },
    {
-    "id": "i_cut_021",
+    "id": "i_cut_020",
     "type": "i_cut",
     "x": 0.0,
     "y": 4.0,
@@ -1713,7 +1704,7 @@
     "state": "plain"
    },
    {
-    "id": "i_cut_022",
+    "id": "i_cut_021",
     "type": "i_cut",
     "x": 0.0,
     "y": 5.0,
@@ -1722,7 +1713,7 @@
     "state": "plain"
    },
    {
-    "id": "i_cut_023",
+    "id": "i_cut_022",
     "type": "i_cut",
     "x": 0.0,
     "y": 5.5,
@@ -1739,15 +1730,15 @@
     "interact": "notice",
     "note": "前台 · 云栖里物业（演示）",
     "reach": [
-     3.5,
-     3.1
+     2.7,
+     3.8
     ]
    },
    {
     "id": "recv_stool",
     "type": "f_stool",
-    "x": 3.5,
-    "y": 3.05,
+    "x": 2.9,
+    "y": 3.8,
     "z": 0
    },
    {
@@ -1805,14 +1796,14 @@
    {
     "id": "lobby_board",
     "type": "i_notice",
-    "x": 1.3,
+    "x": 2.2,
     "y": 5.35,
     "z": 1.2,
     "interact": "notice",
     "note": "云栖里公告：门禁 24h · 访客登记 · 租金见表 rent_table",
     "reach": [
-     1.3,
-     4.7
+     2.2,
+     4.6
     ]
    },
    {
@@ -1838,8 +1829,8 @@
    {
     "id": "plant2",
     "type": "p_planter",
-    "x": 1.3,
-    "y": 4.3,
+    "x": 0.9,
+    "y": 3.6,
     "z": 0,
     "rot": 6
    }
@@ -1891,16 +1882,7 @@
     ]
    },
    {
-    "id": "wall1_5",
-    "rect": [
-     8.0,
-     5.0,
-     8.6,
-     5.5
-    ]
-   },
-   {
-    "id": "wall2_6",
+    "id": "wall2_5",
     "rect": [
      0.0,
      -0.6,
@@ -1909,7 +1891,7 @@
     ]
    },
    {
-    "id": "wall2_7",
+    "id": "wall2_6",
     "rect": [
      5.5,
      -0.6,
@@ -1918,7 +1900,7 @@
     ]
    },
    {
-    "id": "wall3_8",
+    "id": "wall3_7",
     "rect": [
      -0.6,
      0.0,
@@ -2403,15 +2385,9 @@
     "back": null
    }
   ],
-  "_short": [
-   "wall 1 (E) segment 5.00-5.50 shorter than a 1 m bay (overhangs a neighbour)"
-  ],
+  "_short": [],
   "layout_check": {
-   "problems": [
-    "wall 1 (E) segment 5.00-5.50 shorter than a 1 m bay (overhangs a neighbour)",
-    "interactable reception (notice) approach [3.5, 3.1] not reachable on foot",
-    "interactable lobby_board (notice) approach [1.3, 4.7] not reachable on foot"
-   ],
+   "problems": [],
    "checks": 12
   },
   "_estate_meta": {
@@ -3669,8 +3645,8 @@
    ]
   },
   "spawn": [
-   7.2,
-   1.6,
+   7.4,
+   2.4,
    "W"
   ],
   "swing": [
@@ -3713,15 +3689,78 @@
   ],
   "_short": [],
   "layout_check": {
-   "problems": [
-    "spawn [7.2, 1.6, 'W'] is not free"
-   ],
-   "checks": 0
+   "problems": [],
+   "checks": 23
   },
   "_estate_meta": {
    "walkable_m2": 50.8,
    "source": "room_midtown_a101.json",
    "fade": "partitions + tagged fade_group reuse world.js occluder fade (read-only)"
   }
+ },
+ "_street": {
+  "chunk_id": "estate",
+  "rect": [
+   147.0,
+   -40.0,
+   210.0,
+   64.0
+  ],
+  "variety": {
+   "rules": {
+    "_doc": "Each 云栖里 outer-block building must differ on ≥3 axes: height, wall finish, roof, balcony density. Lean CBD/云麓 cream–glass high-end, not identical brick boxes.",
+    "axes": {
+     "height": "floors (club 4 / cream 11 / masonry 14 / glass 18)",
+     "wall": "plaster p1 · warm w2 masonry strip · glass_strip (window-dominant w1) · glass_podium (shop+glass G)",
+     "roof": "b_roof_deck (flat modern) · b_roof_a (soft) · b_roof_b (slab)",
+     "balcony": "none/sparse · mid every-2F · dense every-F · laundry_alt",
+     "ac_pipes": "none · rare · mid — high-end prefers cleaner facades"
+    },
+    "avoid": "Same floors + same wall variant + same roof + same balcony rhythm as a neighbour within 30 m."
+   },
+   "buildings": [
+    {
+     "key": "yq_club",
+     "name": "云栖会所",
+     "floors": 4,
+     "wall": "glass_podium",
+     "roof": "b_roof_deck",
+     "balcony": "sparse",
+     "door_x": 156.0,
+     "blurb": "低层会所 · 玻璃门厅+粉刷上层 · 平屋顶"
+    },
+    {
+     "key": "yq_cream",
+     "name": "云栖暖石",
+     "floors": 11,
+     "wall": "plaster",
+     "roof": "b_roof_a",
+     "balcony": "mid",
+     "door_x": 168.0,
+     "blurb": "中高层象牙白粉刷 · 疏阳台 · 软顶"
+    },
+    {
+     "key": "yq_mason",
+     "name": "云栖砖影",
+     "floors": 14,
+     "wall": "warm_masonry",
+     "roof": "b_roof_b",
+     "balcony": "laundry_alt",
+     "door_x": 182.0,
+     "blurb": "暖色砖纹条带 · 晾衣阳台交错 · 板式屋顶"
+    },
+    {
+     "key": "yq_glass",
+     "name": "云栖璃湾",
+     "floors": 18,
+     "wall": "glass_strip",
+     "roof": "b_roof_deck",
+     "balcony": "dense",
+     "door_x": 196.0,
+     "blurb": "高层玻璃竖条 · 密阳台 · 平屋顶 · 无外机噪音"
+    }
+   ]
+  },
+  "object_count": 605
  }
 }

@@ -61,10 +61,10 @@ def run(c, log):
     ok(log, "nurse NPC uses nurse atlas", nu and (nu.get("set") == "nurse" or nu.get("atlas") == "nurse"), nu)
 
     # street extras + modern facade portal
-    c.eval("SP.place.enter('street', [-36, -5, 'N']); SP.civicLook && SP.civicLook.spawnExtras && SP.civicLook.spawnExtras();")
+    c.eval("SP.place.enter('street', [-36, -5, 'N']); if(SP.charC){SP.charC._forceRespawn=true;SP.charC.spawnStreetCrowd();} else if(SP.civicLook&&SP.civicLook.spawnExtras) SP.civicLook.spawnExtras();")
     time.sleep(0.5)
     ex = c.eval("SP.actors.list.filter(a=>a.extraNpc).length")
-    ok(log, "street extras spawned (2-4)", isinstance(ex, int) and 2 <= ex <= 6, ex)
+    ok(log, "street extras spawned (2+)", isinstance(ex, int) and ex >= 2, ex)  # Char-C expands female crowd
 
     shop = c.eval("""
       (() => {

@@ -77,6 +77,10 @@ The st_* pieces **supersede the older kit_int s_gondola / s_cooler / s_counter /
 * Shoppers are simple waypoint walkers (no steering / backoff). If you block a route they wait, and after 4 s they skip a waypoint.
 * `R.job` has a single job id (`store_clerk`), so this store and any other job share one employment.
 
+
+### Store-D wrap (2026-10-10 23:52)
+Shipped & frozen for parallel Amenities-Market track. Zip: `/workspace/fushi-wanxiang/scene-proto-45-store-d-play.zip`. Screenshots `store-d1…d4` kept. Next amenities: see `MARKET_READY.md` (菜市场 + 小超市).
+
 ## Store-D deepen (shift loop · props · night light · wage slip) — 2026-10-10
 
 Self-contained deepen of the clerk job. **Only store-owned files touched** (`js/store.js`, tests/capture under `tools/`, this doc, `screenshots/store-d*`). No stage*/charB/env.js/index.html edits.

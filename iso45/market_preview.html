@@ -194,7 +194,7 @@
     document.querySelectorAll("[data-st]").forEach((b) => b.addEventListener("click", () => { act[b.dataset.st] && act[b.dataset.st](); b.blur(); }));
     const t = setInterval(() => {
       if (!window.__protoReady) return; clearInterval(t);
-      if (window.SP.amenities) window.SP.amenities.install();
+      if (window.SP.amenities && !window.SP.amenities.installed) window.SP.amenities.install();
       if (Q.get("smkt") === "1") act.smkt();
       else if (Q.get("market") === "1" || Q.get("inside") === "1") act.market();
       else window.__proto.place(-12.5, 0.95, "N");

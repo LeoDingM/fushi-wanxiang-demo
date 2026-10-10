@@ -1,4 +1,4 @@
-"""Amenities-Market screenshots: market1–4 (菜市场) + smkt1–2 (小超市). Phone 390×844.
+"""Amenities-Market screenshots: market1–4 + smkt1–2. Phone 390×844.
    python3 tools/capture_market.py [outdir]"""
 import sys, os, time, json, base64
 sys.path.insert(0, os.path.dirname(__file__)); import cdp
@@ -15,50 +15,67 @@ def run(query, steps, tag):
                screenOrientation={"type": "portraitPrimary", "angle": 0})
         c.call("Emulation.setTouchEmulationEnabled", enabled=True, maxTouchPoints=5)
         c.call("Page.navigate", url=URL + query)
-        for _ in range(180):
+        for _ in range(200):
             time.sleep(0.1)
-            if c.eval("!!(window.__protoReady && SP.amenities && SP.amenities.installed)"): break
-        time.sleep(2.0)
+            if c.eval("!!(window.__protoReady && window.SP && SP.amenities)"): break
+        # force install
+        c.eval("""(function(){ if (SP.amenities && !SP.amenities.installed) SP.amenities.install();
+          if (SP.amenities && !SP.amenities.installed) { SP.amenities.installed=false; SP.amenities.install(); }
+          return !!(SP.amenities && SP.amenities.installed && SP.scenes.market_jhl); })()""")
+        time.sleep(1.5)
         def ev(js):
             r = c.call("Runtime.evaluate", expression=js, awaitPromise=True, returnByValue=True)
-            if r.get("exceptionDetails"): print("EXC", json.dumps(r["exceptionDetails"])[:500])
+            if r.get("exceptionDetails"): print("EXC", json.dumps(r["exceptionDetails"])[:400])
             return r.get("result", {}).get("value")
         def shot(name):
             d = c.call("Page.captureScreenshot", format="png")["data"]
             open(os.path.join(OUT, name), "wb").write(base64.b64decode(d)); print("shot", name)
-        print("===", tag, "scene", ev("SP.world.sceneId"), "amenity", ev("!!SP.amenities.installed"))
+        print("===", tag, "ready", ev("JSON.stringify({inst:!!SP.amenities.installed, mkt:!!SP.scenes.market_jhl, smkt:!!SP.scenes.smkt_jhl, goto:typeof SP.amenities.devGoto, scene:SP.world&&SP.world.sceneId})"))
         steps(ev, shot)
     finally:
         p.kill()
 
+GO_MKT = "SP.game.go({to:'market_jhl', spawn: SP.scenes.market_jhl.spawn, door:null})"
+GO_SMKT = "SP.game.go({to:'smkt_jhl', spawn: SP.scenes.smkt_jhl.spawn, door:null})"
+
 def market_shots(ev, shot):
-    # ensure inside market
-    ev("SP.amenities.devGoto('market')"); time.sleep(1.2)
-    print("in", ev("SP.world.sceneId"), "objs", ev("SP.world.objects.length"))
-    ev("__proto.place(4.0, 2.8, 'N'); __proto.zoom(1.5); __proto.sim(0.4)"); time.sleep(1.0)
+    print("enter", ev(GO_MKT)); time.sleep(1.4)
+    print("in", ev("SP.world.sceneId"), "n", ev("SP.world.objects.length"))
+    ev("window.__proto.place(4.0, 2.8, 'N'); window.__proto.zoom(1.5); window.__proto.sim(0.4)"); time.sleep(1.0)
     shot("market1-hall.png")
-    # buy veg at stall
-    ev("__proto.place(2.2, 3.5, 'N'); __proto.sim(0.2); SP.game.use(SP.world.byId.stall_veg); const m=SP.game.menu; if(m) SP.game.pick(0)"); time.sleep(1.2)
-    print("bag", ev("JSON.stringify(SP.game.ps.amenity && SP.game.ps.amenity.bag)"))
+    # buy veg
+    print("buy veg", ev("""(function(){
+      window.__proto.place(2.2, 3.5, 'N'); window.__proto.sim(0.2);
+      const o=SP.world.byId.stall_veg; if(!o) return 'no stall';
+      SP.game.use(o); const m=SP.game.menu; if(m){ const i=m.opts.findIndex(x=>x.ok); SP.game.pick(i>=0?i:0); }
+      return JSON.stringify(SP.game.ps.amenity && SP.game.ps.amenity.bag);
+    })()""")); time.sleep(1.2)
     shot("market2-buy-veg.png")
-    # egg stall
-    ev("__proto.place(5.0, 3.5, 'N'); __proto.sim(0.2); SP.game.use(SP.world.byId.stall_egg); const m=SP.game.menu; if(m) SP.game.pick(0)"); time.sleep(1.0)
+    print("buy egg", ev("""(function(){
+      window.__proto.place(5.0, 3.5, 'N'); window.__proto.sim(0.2);
+      const o=SP.world.byId.stall_egg; if(!o) return 'no stall';
+      SP.game.use(o); const m=SP.game.menu; if(m){ const i=m.opts.findIndex(x=>x.ok); SP.game.pick(i>=0?i:0); }
+      return JSON.stringify({bag:SP.game.ps.amenity&&SP.game.ps.amenity.bag, egg:SP.game.ps.items.egg, veg:SP.game.ps.items.veg});
+    })()""")); time.sleep(1.0)
     shot("market3-buy-egg.png")
-    # exterior street stubs
-    ev("SP.game.go({to:'street', spawn:[-12.5, 0.95, 'N'], door:null})"); time.sleep(1.4)
-    ev("__proto.place(-12.5, 0.95, 'N'); __proto.zoom(1.4); __proto.sim(0.5)"); time.sleep(1.0)
-    print("stubs", ev("JSON.stringify(['mkt_jhl_gate','mkt_jhl_a','smkt_jhl_gate'].map(id=>({id, ok:!!SP.world.byId[id], x:SP.world.byId[id]&&SP.world.byId[id].x})))"))
+    print("street", ev("SP.game.go({to:'street', spawn:[-12.5, 0.95, 'N'], door:null})")); time.sleep(1.5)
+    ev("window.__proto.place(-12.5, 0.95, 'N'); window.__proto.zoom(1.35); window.__proto.sim(0.5)"); time.sleep(1.0)
+    print("stubs", ev("JSON.stringify(['mkt_jhl_gate','mkt_jhl_a','smkt_jhl_gate'].map(id=>({id, ok:!!SP.world.byId[id]})))"))
     shot("market4-exterior.png")
 
 def smkt_shots(ev, shot):
-    ev("SP.amenities.devGoto('smkt')"); time.sleep(1.2)
-    print("in", ev("SP.world.sceneId"))
-    ev("__proto.place(3.5, 2.6, 'N'); __proto.zoom(1.55); __proto.sim(0.4)"); time.sleep(1.0)
+    print("enter", ev(GO_SMKT)); time.sleep(1.4)
+    print("in", ev("SP.world.sceneId"), "n", ev("SP.world.objects.length"))
+    ev("window.__proto.place(3.5, 2.6, 'N'); window.__proto.zoom(1.55); window.__proto.sim(0.4)"); time.sleep(1.0)
     shot("smkt1-aisles.png")
-    ev("__proto.place(2.4, 2.6, 'N'); __proto.sim(0.2); SP.game.use(SP.world.byId.aisle_a); const m=SP.game.menu; if(m) SP.game.pick(0)"); time.sleep(1.2)
-    print("bag", ev("JSON.stringify({amenity: SP.game.ps.amenity && SP.game.ps.amenity.bag, noodles: SP.game.ps.items.noodles, bread: SP.game.ps.items.bread})"))
+    print("buy", ev("""(function(){
+      window.__proto.place(2.4, 2.6, 'N'); window.__proto.sim(0.2);
+      const o=SP.world.byId.aisle_a; if(!o) return 'no aisle';
+      SP.game.use(o); const m=SP.game.menu; if(m){ const i=m.opts.findIndex(x=>x.ok); SP.game.pick(i>=0?i:0); }
+      return JSON.stringify({bag:SP.game.ps.amenity&&SP.game.ps.amenity.bag, noodles:SP.game.ps.items.noodles});
+    })()""")); time.sleep(1.2)
     shot("smkt2-buy.png")
 
-run("?time=09:30&touch=1&market=1", market_shots, "market")
-run("?time=18:00&touch=1&smkt=1", smkt_shots, "smkt")
+run("?time=09:30&touch=1", market_shots, "market")
+run("?time=18:00&touch=1", smkt_shots, "smkt")
 print("MARKET capture done")

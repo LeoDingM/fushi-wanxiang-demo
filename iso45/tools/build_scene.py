@@ -197,7 +197,7 @@ add("f_shopsign", SX0, SY0 + 4.5, 2.47, rot=6, id_="shop24_sign_w", fade_group="
 block("nb_n1", 32.5, 17.0, 4, 3, 5, "brick", seed=31, door=("S", 1))
 block("nb_n2", 32.5, 30.0, 4, 3, 4, "old", seed=32, roofvar="c")
 # Char-B: barbershop takes the old nb_e1 footprint; keep noodle/kuaican on adjacent bays
-block("shop_barber", 47.0, 4.5, 4, 3, 3, "plaster", seed=88, door=None,
+block("shop_barber", 47.0, 6.5, 4, 3, 3, "plaster", seed=88, door=None,
       shop=(("S", 0), ("S", 3)), roofvar="c", eatery={("S", 1): "kuaican", ("S", 2): "noodle"})
 # Stage 5 street extension (east chunk): past the alley around the corner, another block with the milk-tea shop
 block("nb_e4", 64.0, 4.5, 4, 3, 4, "brick", seed=36, door=("W", 1), eatery={("S", 1): "tea"})
@@ -295,7 +295,7 @@ CIVIC_MAP = {
     "school_pri_S1F_1_shop": ("school_pri", "井槐社区小学", [68.0, -6.5, "N"]),
     "school_mid_S1F_1_shop": ("school_mid", "井槐社区初中", [80.0, -6.5, "N"]),
     "school_high_S1F_1_shop": ("school_high", "井槐社区高中", [92.0, -6.5, "N"]),
-    "shop_barber_S1F_0_shop": ("shop_barber", "剪艺理发", [48.5, 3.2, "N"]),
+    "shop_barber_S1F_0_shop": ("shop_barber", "剪艺理发", [48.5, 5.2, "N"]),
 }
 for o in objs:
     if o["id"] in CIVIC_MAP:

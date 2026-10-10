@@ -124,7 +124,7 @@
         const o = Object.assign({ z: 0, rot: 0, variant: "base", overlays: [], alpha: {} }, src);
         W.objects.push(o); W.byId[o.id] = o;
       }
-      if (W.rebuildColliders) W.rebuildColliders();
+      try { if (W.data && W.rebuildColliders) W.rebuildColliders(); } catch (e) {}
     }
   }
   AM.injectStreet = injectStreet;
@@ -144,9 +144,9 @@
   // ---------- install ----------
   AM.installed = false;
   AM.install = function () {
-    if (AM.installed) return; AM.installed = true;
+    if (AM.installed) return;
     const G = SP.game, W = SP.world, C = SP.clock;
-    if (!G || !W) { console.warn("amenities_market: need game+world"); AM.installed = false; return; }
+    if (!G || !W) { console.warn("amenities_market: need game+world"); return; }
     const R = G.rules;
     SP.scenes[MKT] = buildMarket();
     SP.scenes[SMKT] = buildSmkt();
@@ -274,6 +274,7 @@ body:not(.mobile) #amenityhud{top:64px}`;
       if (which === "smkt" || which === SMKT) return enter(SMKT);
       return enter(MKT);
     };
+    AM.installed = true;
   };
 
   if (SP.game && SP.world) AM.install();

@@ -66,7 +66,7 @@
       school_pri_S1F_1_shop: ["school_pri", "井槐社区小学", [68.0, -6.5, "N"], ["07:30", "17:30"]],
       school_mid_S1F_1_shop: ["school_mid", "井槐社区初中", [80.0, -6.5, "N"], ["07:30", "17:30"]],
       school_high_S1F_1_shop: ["school_high", "井槐社区高中", [92.0, -6.5, "N"], ["07:30", "17:30"]],
-      shop_barber_S1F_0_shop: ["shop_barber", "剪艺理发", [48.5, 3.2, "N"], ["10:00", "21:00"]]
+      shop_barber_S1F_0_shop: ["shop_barber", "剪艺理发", [48.5, 5.2, "N"], ["10:00", "21:00"]]
     };
     for (const o of data.objects) {
       const m = map[o.id];
