@@ -88,6 +88,44 @@ Housing phone: `wrapHousing` →「近市中心 Midtown · 精选在租」block 
 - Screenshots `mt-a3-1`…`mt-a3-6`
 - Lite zip `scene-proto-45-midtown-a3-play.zip`
 
+
+
+## Midtown polish (post-A3) — occupied → facade
+
+Uses existing hooks only (no new atlases; estate courtyard alone):
+
+- **Night glow:** wrap `SP.households.windowLit` for `mt_*` units; occupied featured rentals light facade windows at night (style odds: glass 0.9 / tower 0.7 / transitional 0.55).
+- **Laundry hint:** occupied transitional/tower balconies → `f_balcony` state `laundry`; glass stays clean.
+- **Street door labels:** `mt_*_door.plate` =「名 · 精选在租N套」.
+- `chunks/midtown.js` preloaded in `index.html` (same pattern as estate) so chunk apply is not async-racy.
+
+### Polish verify
+- `tools/midtown_a4_test.py` **7/7**
+- Screenshots `mt-a4-1`…`mt-a4-4`
+- Lite zip `scene-proto-45-midtown-a4-play.zip`
+
+
+
+## Midtown unit plans (spatial variety)
+
+Four data-driven layouts (`tools/layouts/room_mt_plan_{a,b,c,d}.json`), each **roomlayout validate 0**, with enclosed glass balcony + washer + dryrack:
+
+| Plan | id | Concept | Size |
+|------|-----|---------|------|
+| **A** | `room_mt_plan_a` | 窗边床 + 开放L厨 + 南向封闭阳台 | ~36㎡ |
+| **B** | `room_mt_plan_b` | 独立餐区（入户侧）+ 客厅 + 阳台 | ~36㎡ |
+| **C** | `room_mt_plan_c` | 大客厅优先 + 宽阳台（3×玻璃） | ~48㎡ |
+| **D** | `room_mt_plan_d` | 紧凑高效（无餐桌/脚凳）+ 阳台 | ~32㎡ |
+
+### Tower assignment
+- **景秀苑 (jx):** A/D alternate by `(floor+slot)%2`
+- **云阶公馆 (yj):** C when `slot==1 && floor>=6`, else B
+- **城南一号 (cn):** A→B→C→D rotate `(floor+slot)%4`
+
+Counts (build): jx A8/D8 · yj B17/C7 · cn A8/B8/C8/D8. Style palette (transitional/glass/tower) still overlays walls/bed/ground.
+
+Rent featured rows note 方案 + ㎡. Screenshots `mt-plan-a`…`d`, `mt-plan-c-balcony`, `mt-plan-housing-sizes`. Test `midtown_plans_test.py` 7/7. Zip `scene-proto-45-midtown-plans-play.zip`.
+
 ## Midtown-B handoff (小区 compound)
 Suggested next (estate track already stubbed):
 1. Gated **compound grounds** behind midtown strip (courtyard, gate mark, property booth).

@@ -151,7 +151,8 @@
     ctx.restore();
   }
   /** lit blue doorplates (门牌) over building entrances: crisp, glow at night, within 14 m (12号 always a bit larger) */
-  const PLATE_NO = { unit_door: "井槐里 12号", nb_n1: "井槐里 14号", nb_e1: "井槐里 16号", nb_w1: "井槐里 8号", nb_e4: "井槐里 20号" };
+  const PLATE_NO = { nb_n1: "井槐里 14号", nb_e1: "井槐里 16号", nb_w1: "井槐里 8号", nb_e4: "井槐里 20号" };
+  const PLATE_B12 = "井槐里 12号";
   /** 2F-02's AC: outdoor unit fan spins on the street facade while it runs; indoors a faint cool-air flow under the flap */
   function drawAcFx(z, cx, cy) {
     const G = SP.game, on = G && G.ps && G.ps.power && G.ps.power.on.ac; if (!on || z < 0.3) return;
@@ -181,10 +182,18 @@
     const n = SP.tint.night || 0, kk = canvas.width / Math.max(1, canvas.getBoundingClientRect().width || canvas.width);
     for (const o of W.objects) {
       if (o.type !== "f_door") continue;
-      const tag = o.id === "unit_door" ? "unit_door" : o.id.split("_").slice(0, 2).join("_"), txt = o.plate || PLATE_NO[tag]; if (!txt) continue;
+      // 井槐里12号 ONLY on real Building 12 unit_door — never midtown/estate/amenity doors
+      let txt, main = false;
+      if (o.id === "unit_door") { txt = o.plate || PLATE_B12; main = true; }
+      else {
+        const tag = o.id.split("_").slice(0, 2).join("_");
+        txt = o.plate || PLATE_NO[tag];
+        if (!txt || txt === PLATE_B12 || /井槐里\s*12/.test(String(txt))) continue;
+      }
+      if (!txt) continue;
       const p = W.local(o, 1.5, -0.1, 2.75), d = Math.hypot(player.x - p[0], player.y - p[1]); if (d > 14) continue;
       const X = Math.round((SP.sx(p[0], p[1]) - cx) * z), Y = Math.round((SP.sy(p[0], p[1], p[2]) - cy) * z);
-      const main = tag === "unit_door", k = Math.max(0.8, Math.min(1.6, z * 1.3)) * kk * (main ? 1.15 : 0.9);
+      const k = Math.max(0.8, Math.min(1.6, z * 1.3)) * kk * (main ? 1.15 : 0.9);
       const w = Math.round(78 * k), h = Math.round(20 * k);
       ctx.save(); ctx.globalAlpha = Math.min(1, (14 - d) / 4);
       if (n > 0.2) { ctx.shadowColor = "rgba(160,200,255,0.9)"; ctx.shadowBlur = 10 * k * n; }

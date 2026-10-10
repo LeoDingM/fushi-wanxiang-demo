@@ -460,5 +460,1773 @@
       }
     ],
     "_short": []
+  },
+  "amenity_toilet": {
+    "id": "amenity_toilet",
+    "name": "井槐公厕 · 厕位",
+    "_doc": "Amenities-Infra: public toilet with simple stalls (not hospital).",
+    "interior": true,
+    "bounds": [
+      0.15,
+      0.15,
+      5.85,
+      4.85
+    ],
+    "ground": {
+      "origin": [
+        0,
+        0
+      ],
+      "chunk": 2,
+      "cols": 3,
+      "rows": 3,
+      "legend": {
+        "T": "g_tile"
+      },
+      "data_south_to_north": [
+        "TTT",
+        "TTT",
+        "TTT"
+      ]
+    },
+    "spawn": [
+      4.8,
+      1.3,
+      "N"
+    ],
+    "objects": [
+      {
+        "id": "tw1",
+        "type": "i_window",
+        "x": 2.5,
+        "y": 5.0,
+        "z": 0,
+        "rot": 0,
+        "interact": "window_in",
+        "reach": [
+          3.0,
+          4.2
+        ],
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_001",
+        "type": "i_wall",
+        "x": 0,
+        "y": 5.0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_002",
+        "type": "i_wall",
+        "x": 1.0,
+        "y": 5.0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_003",
+        "type": "i_wall",
+        "x": 1.5,
+        "y": 5.0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_004",
+        "type": "i_wall",
+        "x": 4.0,
+        "y": 5.0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_005",
+        "type": "i_wall",
+        "x": 5.0,
+        "y": 5.0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "exit",
+        "type": "i_door",
+        "x": 6,
+        "y": 2.7,
+        "z": 0,
+        "rot": 6,
+        "interact": "portal",
+        "to": "street",
+        "spawn": [
+          12.5,
+          -6.5,
+          "N"
+        ],
+        "label": "出门",
+        "block": false,
+        "reach": [
+          5.3,
+          2.2
+        ],
+        "state": "closed"
+      },
+      {
+        "id": "i_wall_007",
+        "type": "i_wall",
+        "x": 6,
+        "y": 1.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_008",
+        "type": "i_wall",
+        "x": 6,
+        "y": 1.5,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_009",
+        "type": "i_wall",
+        "x": 6,
+        "y": 3.7,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_010",
+        "type": "i_wall",
+        "x": 6,
+        "y": 4.7,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_011",
+        "type": "i_wall",
+        "x": 6,
+        "y": 5.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_012",
+        "type": "i_cut",
+        "x": 0,
+        "y": 1.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_013",
+        "type": "i_cut",
+        "x": 0,
+        "y": 2.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_014",
+        "type": "i_cut",
+        "x": 0,
+        "y": 3.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_015",
+        "type": "i_cut",
+        "x": 0,
+        "y": 4.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_016",
+        "type": "i_cut",
+        "x": 0,
+        "y": 5.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_017",
+        "type": "i_cut",
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_018",
+        "type": "i_cut",
+        "x": 1.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_019",
+        "type": "i_cut",
+        "x": 2.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_020",
+        "type": "i_cut",
+        "x": 3.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_021",
+        "type": "i_cut",
+        "x": 4.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_022",
+        "type": "i_cut",
+        "x": 5.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "wc_a",
+        "type": "f_toilet",
+        "x": 1.5,
+        "y": 3.5,
+        "z": 0,
+        "interact": "amenity_wc",
+        "name": "厕位 A"
+      },
+      {
+        "id": "wc_b",
+        "type": "f_toilet",
+        "x": 3.5,
+        "y": 3.5,
+        "z": 0,
+        "interact": "amenity_wc",
+        "name": "厕位 B"
+      },
+      {
+        "id": "wc_c",
+        "type": "f_toilet",
+        "x": 5.0,
+        "y": 3.5,
+        "z": 0,
+        "interact": "amenity_wc",
+        "name": "厕位 C"
+      },
+      {
+        "id": "sink",
+        "type": "f_basin",
+        "x": 1.3,
+        "y": 1.5,
+        "z": 0,
+        "interact": "basin",
+        "name": "洗手池"
+      },
+      {
+        "id": "wc_notice",
+        "type": "i_notice",
+        "x": 4.2,
+        "y": 4.6,
+        "z": 1.3,
+        "interact": "notice",
+        "note": "公厕须知：文明如厕 · 节约用水。厕位三间（示意）。"
+      }
+    ],
+    "colliders": [
+      {
+        "id": "wall0_0",
+        "rect": [
+          0,
+          5.0,
+          2.5,
+          5.6
+        ]
+      },
+      {
+        "id": "wall0_1",
+        "rect": [
+          4.0,
+          5.0,
+          6,
+          5.6
+        ]
+      },
+      {
+        "id": "wall1_2",
+        "rect": [
+          6.0,
+          0,
+          6.6,
+          1.5
+        ]
+      },
+      {
+        "id": "wall1_3",
+        "rect": [
+          6.0,
+          2.7,
+          6.6,
+          5
+        ]
+      },
+      {
+        "id": "wall2_4",
+        "rect": [
+          -0.6,
+          0,
+          0.15,
+          5
+        ]
+      },
+      {
+        "id": "wall3_5",
+        "rect": [
+          0,
+          -0.6,
+          6,
+          0.15
+        ]
+      }
+    ],
+    "swing": [
+      {
+        "door": "exit",
+        "rect": [
+          5.14,
+          1.5,
+          6,
+          2.7
+        ],
+        "back": null
+      }
+    ],
+    "_short": []
+  },
+  "amenity_bank": {
+    "id": "amenity_bank",
+    "name": "井槐银行 · 营业厅",
+    "_doc": "Amenities-Infra: small bank lobby + ATM (not full branch).",
+    "interior": true,
+    "bounds": [
+      0.15,
+      0.15,
+      7.85,
+      5.35
+    ],
+    "ground": {
+      "origin": [
+        0,
+        0
+      ],
+      "chunk": 2,
+      "cols": 4,
+      "rows": 3,
+      "legend": {
+        "T": "g_tile"
+      },
+      "data_south_to_north": [
+        "TTTT",
+        "TTTT",
+        "TTTT"
+      ]
+    },
+    "spawn": [
+      6.5,
+      1.4,
+      "N"
+    ],
+    "objects": [
+      {
+        "id": "bw1",
+        "type": "i_window",
+        "x": 1.5,
+        "y": 5.5,
+        "z": 0,
+        "rot": 0,
+        "interact": "window_in",
+        "reach": [
+          2.2,
+          4.8
+        ],
+        "state": "tile"
+      },
+      {
+        "id": "bw2",
+        "type": "i_window",
+        "x": 5.5,
+        "y": 5.5,
+        "z": 0,
+        "rot": 0,
+        "interact": "window_in",
+        "reach": [
+          6.2,
+          4.8
+        ],
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_002",
+        "type": "i_wall",
+        "x": 0,
+        "y": 5.5,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_003",
+        "type": "i_wall",
+        "x": 0.5,
+        "y": 5.5,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_004",
+        "type": "i_wall",
+        "x": 3.0,
+        "y": 5.5,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_005",
+        "type": "i_wall",
+        "x": 4.0,
+        "y": 5.5,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_006",
+        "type": "i_wall",
+        "x": 4.5,
+        "y": 5.5,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_007",
+        "type": "i_wall",
+        "x": 7.0,
+        "y": 5.5,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "exit",
+        "type": "i_door",
+        "x": 8,
+        "y": 2.4,
+        "z": 0,
+        "rot": 6,
+        "interact": "portal",
+        "to": "street",
+        "spawn": [
+          -8.5,
+          -6.5,
+          "N"
+        ],
+        "label": "出门",
+        "block": false,
+        "reach": [
+          7.3,
+          2.0
+        ],
+        "state": "closed"
+      },
+      {
+        "id": "i_wall_009",
+        "type": "i_wall",
+        "x": 8,
+        "y": 1.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_010",
+        "type": "i_wall",
+        "x": 8,
+        "y": 1.2,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_011",
+        "type": "i_wall",
+        "x": 8,
+        "y": 3.4,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_012",
+        "type": "i_wall",
+        "x": 8,
+        "y": 4.4,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_013",
+        "type": "i_wall",
+        "x": 8,
+        "y": 5.4,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_014",
+        "type": "i_wall",
+        "x": 8,
+        "y": 5.5,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_015",
+        "type": "i_cut",
+        "x": 0,
+        "y": 1.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_016",
+        "type": "i_cut",
+        "x": 0,
+        "y": 2.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_017",
+        "type": "i_cut",
+        "x": 0,
+        "y": 3.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_018",
+        "type": "i_cut",
+        "x": 0,
+        "y": 4.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_019",
+        "type": "i_cut",
+        "x": 0,
+        "y": 5.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_020",
+        "type": "i_cut",
+        "x": 0,
+        "y": 5.5,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_021",
+        "type": "i_cut",
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_022",
+        "type": "i_cut",
+        "x": 1.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_023",
+        "type": "i_cut",
+        "x": 2.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_024",
+        "type": "i_cut",
+        "x": 3.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_025",
+        "type": "i_cut",
+        "x": 4.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_026",
+        "type": "i_cut",
+        "x": 5.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_027",
+        "type": "i_cut",
+        "x": 6.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_028",
+        "type": "i_cut",
+        "x": 7.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "bank_desk",
+        "type": "s_counter",
+        "x": 2.5,
+        "y": 4.2,
+        "z": 0,
+        "interact": "amenity_bank_desk",
+        "name": "综合柜面"
+      },
+      {
+        "id": "bank_atm",
+        "type": "s_cooler",
+        "x": 5.5,
+        "y": 4.0,
+        "z": 0,
+        "rot": 0,
+        "state": "empty",
+        "interact": "amenity_atm",
+        "name": "ATM 取款机"
+      },
+      {
+        "id": "wait_a",
+        "type": "f_chair",
+        "x": 1.5,
+        "y": 2.0,
+        "z": 0,
+        "interact": "amenity_bank_wait",
+        "name": "等候椅"
+      },
+      {
+        "id": "wait_b",
+        "type": "f_chair",
+        "x": 2.7,
+        "y": 2.0,
+        "z": 0,
+        "interact": "amenity_bank_wait",
+        "name": "等候椅"
+      },
+      {
+        "id": "wait_c",
+        "type": "f_chair",
+        "x": 4.0,
+        "y": 2.0,
+        "z": 0,
+        "interact": "amenity_bank_wait",
+        "name": "等候椅"
+      },
+      {
+        "id": "bank_notice",
+        "type": "i_notice",
+        "x": 6.5,
+        "y": 5.0,
+        "z": 1.4,
+        "interact": "notice",
+        "note": "井槐银行：个人业务 09:00–17:00 · ATM 24 小时。取款单笔限额 ¥2000（示意）。"
+      }
+    ],
+    "colliders": [
+      {
+        "id": "wall0_0",
+        "rect": [
+          0,
+          5.5,
+          1.5,
+          6.1
+        ]
+      },
+      {
+        "id": "wall0_1",
+        "rect": [
+          3.0,
+          5.5,
+          5.5,
+          6.1
+        ]
+      },
+      {
+        "id": "wall0_2",
+        "rect": [
+          7.0,
+          5.5,
+          8,
+          6.1
+        ]
+      },
+      {
+        "id": "wall1_3",
+        "rect": [
+          8.0,
+          0,
+          8.6,
+          1.2
+        ]
+      },
+      {
+        "id": "wall1_4",
+        "rect": [
+          8.0,
+          2.4,
+          8.6,
+          5.5
+        ]
+      },
+      {
+        "id": "wall2_5",
+        "rect": [
+          -0.6,
+          0,
+          0.15,
+          5.5
+        ]
+      },
+      {
+        "id": "wall3_6",
+        "rect": [
+          0,
+          -0.6,
+          8,
+          0.15
+        ]
+      }
+    ],
+    "swing": [
+      {
+        "door": "exit",
+        "rect": [
+          7.14,
+          1.2,
+          8,
+          2.4
+        ],
+        "back": null
+      }
+    ],
+    "_short": []
+  },
+  "amenity_post": {
+    "id": "amenity_post",
+    "name": "井槐邮政·通讯营业厅",
+    "_doc": "Amenities-Infra: post + telecom counter (not bank clone).",
+    "interior": true,
+    "bounds": [
+      0.15,
+      0.15,
+      7.85,
+      5.35
+    ],
+    "ground": {
+      "origin": [
+        0,
+        0
+      ],
+      "chunk": 2,
+      "cols": 4,
+      "rows": 3,
+      "legend": {
+        "T": "g_tile"
+      },
+      "data_south_to_north": [
+        "TTTT",
+        "TTTT",
+        "TTTT"
+      ]
+    },
+    "spawn": [
+      6.5,
+      1.4,
+      "N"
+    ],
+    "objects": [
+      {
+        "id": "pw1",
+        "type": "i_window",
+        "x": 1.5,
+        "y": 5.5,
+        "z": 0,
+        "rot": 0,
+        "interact": "window_in",
+        "reach": [
+          2.2,
+          4.8
+        ],
+        "state": "tile"
+      },
+      {
+        "id": "pw2",
+        "type": "i_window",
+        "x": 5.0,
+        "y": 5.5,
+        "z": 0,
+        "rot": 0,
+        "interact": "window_in",
+        "reach": [
+          5.8,
+          4.8
+        ],
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_002",
+        "type": "i_wall",
+        "x": 0,
+        "y": 5.5,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_003",
+        "type": "i_wall",
+        "x": 0.5,
+        "y": 5.5,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_004",
+        "type": "i_wall",
+        "x": 3.0,
+        "y": 5.5,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_005",
+        "type": "i_wall",
+        "x": 4.0,
+        "y": 5.5,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_006",
+        "type": "i_wall",
+        "x": 6.5,
+        "y": 5.5,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_007",
+        "type": "i_wall",
+        "x": 7.0,
+        "y": 5.5,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "exit",
+        "type": "i_door",
+        "x": 8,
+        "y": 2.4,
+        "z": 0,
+        "rot": 6,
+        "interact": "portal",
+        "to": "street",
+        "spawn": [
+          -20.5,
+          -6.5,
+          "N"
+        ],
+        "label": "出门",
+        "block": false,
+        "reach": [
+          7.3,
+          2.0
+        ],
+        "state": "closed"
+      },
+      {
+        "id": "i_wall_009",
+        "type": "i_wall",
+        "x": 8,
+        "y": 1.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_010",
+        "type": "i_wall",
+        "x": 8,
+        "y": 1.2,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_011",
+        "type": "i_wall",
+        "x": 8,
+        "y": 3.4,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_012",
+        "type": "i_wall",
+        "x": 8,
+        "y": 4.4,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_013",
+        "type": "i_wall",
+        "x": 8,
+        "y": 5.4,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_014",
+        "type": "i_wall",
+        "x": 8,
+        "y": 5.5,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_015",
+        "type": "i_cut",
+        "x": 0,
+        "y": 1.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_016",
+        "type": "i_cut",
+        "x": 0,
+        "y": 2.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_017",
+        "type": "i_cut",
+        "x": 0,
+        "y": 3.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_018",
+        "type": "i_cut",
+        "x": 0,
+        "y": 4.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_019",
+        "type": "i_cut",
+        "x": 0,
+        "y": 5.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_020",
+        "type": "i_cut",
+        "x": 0,
+        "y": 5.5,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_021",
+        "type": "i_cut",
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_022",
+        "type": "i_cut",
+        "x": 1.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_023",
+        "type": "i_cut",
+        "x": 2.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_024",
+        "type": "i_cut",
+        "x": 3.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_025",
+        "type": "i_cut",
+        "x": 4.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_026",
+        "type": "i_cut",
+        "x": 5.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_027",
+        "type": "i_cut",
+        "x": 6.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_028",
+        "type": "i_cut",
+        "x": 7.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "post_mail",
+        "type": "s_counter",
+        "x": 2.2,
+        "y": 4.2,
+        "z": 0,
+        "interact": "amenity_post_mail",
+        "name": "寄件窗口"
+      },
+      {
+        "id": "post_tel",
+        "type": "s_counter",
+        "x": 5.0,
+        "y": 4.2,
+        "z": 0,
+        "interact": "amenity_post_tel",
+        "name": "通讯/话费台"
+      },
+      {
+        "id": "post_shelf",
+        "type": "f_shelf",
+        "x": 1.2,
+        "y": 2.2,
+        "z": 0,
+        "name": "信封/纸箱架"
+      },
+      {
+        "id": "post_wait",
+        "type": "f_chair",
+        "x": 3.5,
+        "y": 2.0,
+        "z": 0,
+        "interact": "amenity_post_wait",
+        "name": "等候椅"
+      },
+      {
+        "id": "post_wait2",
+        "type": "f_chair",
+        "x": 4.8,
+        "y": 2.0,
+        "z": 0,
+        "interact": "amenity_post_wait",
+        "name": "等候椅"
+      },
+      {
+        "id": "post_notice",
+        "type": "i_notice",
+        "x": 6.6,
+        "y": 5.0,
+        "z": 1.4,
+        "interact": "notice",
+        "note": "邮政·通讯：寄件/取件 08:30–18:00 · 话费充值 · 简讯卡。大件请走驿站。"
+      }
+    ],
+    "colliders": [
+      {
+        "id": "wall0_0",
+        "rect": [
+          0,
+          5.5,
+          1.5,
+          6.1
+        ]
+      },
+      {
+        "id": "wall0_1",
+        "rect": [
+          3.0,
+          5.5,
+          5.0,
+          6.1
+        ]
+      },
+      {
+        "id": "wall0_2",
+        "rect": [
+          6.5,
+          5.5,
+          8,
+          6.1
+        ]
+      },
+      {
+        "id": "wall1_3",
+        "rect": [
+          8.0,
+          0,
+          8.6,
+          1.2
+        ]
+      },
+      {
+        "id": "wall1_4",
+        "rect": [
+          8.0,
+          2.4,
+          8.6,
+          5.5
+        ]
+      },
+      {
+        "id": "wall2_5",
+        "rect": [
+          -0.6,
+          0,
+          0.15,
+          5.5
+        ]
+      },
+      {
+        "id": "wall3_6",
+        "rect": [
+          0,
+          -0.6,
+          8,
+          0.15
+        ]
+      }
+    ],
+    "swing": [
+      {
+        "door": "exit",
+        "rect": [
+          7.14,
+          1.2,
+          8,
+          2.4
+        ],
+        "back": null
+      }
+    ],
+    "_short": []
+  },
+  "amenity_activity": {
+    "id": "amenity_activity",
+    "name": "井槐社区活动中心·书屋",
+    "_doc": "Amenities-Infra: reading room / activity hall stub.",
+    "interior": true,
+    "bounds": [
+      0.15,
+      0.15,
+      8.85,
+      5.85
+    ],
+    "ground": {
+      "origin": [
+        0,
+        0
+      ],
+      "chunk": 2,
+      "cols": 5,
+      "rows": 3,
+      "legend": {
+        "T": "g_tile"
+      },
+      "data_south_to_north": [
+        "TTTTT",
+        "TTTTT",
+        "TTTTT"
+      ]
+    },
+    "spawn": [
+      7.5,
+      1.5,
+      "N"
+    ],
+    "objects": [
+      {
+        "id": "aw1",
+        "type": "i_window",
+        "x": 2.0,
+        "y": 6.0,
+        "z": 0,
+        "rot": 0,
+        "interact": "window_in",
+        "reach": [
+          2.8,
+          5.2
+        ],
+        "state": "tile"
+      },
+      {
+        "id": "aw2",
+        "type": "i_window",
+        "x": 6.0,
+        "y": 6.0,
+        "z": 0,
+        "rot": 0,
+        "interact": "window_in",
+        "reach": [
+          6.8,
+          5.2
+        ],
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_002",
+        "type": "i_wall",
+        "x": 0,
+        "y": 6.0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_003",
+        "type": "i_wall",
+        "x": 1.0,
+        "y": 6.0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_004",
+        "type": "i_wall",
+        "x": 3.5,
+        "y": 6.0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_005",
+        "type": "i_wall",
+        "x": 4.5,
+        "y": 6.0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_006",
+        "type": "i_wall",
+        "x": 5.0,
+        "y": 6.0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_007",
+        "type": "i_wall",
+        "x": 7.5,
+        "y": 6.0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_008",
+        "type": "i_wall",
+        "x": 8.0,
+        "y": 6.0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "exit",
+        "type": "i_door",
+        "x": 9,
+        "y": 2.7,
+        "z": 0,
+        "rot": 6,
+        "interact": "portal",
+        "to": "street",
+        "spawn": [
+          4.0,
+          -6.5,
+          "N"
+        ],
+        "label": "出门",
+        "block": false,
+        "reach": [
+          8.3,
+          2.2
+        ],
+        "state": "closed"
+      },
+      {
+        "id": "i_wall_010",
+        "type": "i_wall",
+        "x": 9,
+        "y": 1.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_011",
+        "type": "i_wall",
+        "x": 9,
+        "y": 1.5,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_012",
+        "type": "i_wall",
+        "x": 9,
+        "y": 3.7,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_013",
+        "type": "i_wall",
+        "x": 9,
+        "y": 4.7,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_014",
+        "type": "i_wall",
+        "x": 9,
+        "y": 5.7,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_wall_015",
+        "type": "i_wall",
+        "x": 9,
+        "y": 6.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_016",
+        "type": "i_cut",
+        "x": 0,
+        "y": 1.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_017",
+        "type": "i_cut",
+        "x": 0,
+        "y": 2.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_018",
+        "type": "i_cut",
+        "x": 0,
+        "y": 3.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_019",
+        "type": "i_cut",
+        "x": 0,
+        "y": 4.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_020",
+        "type": "i_cut",
+        "x": 0,
+        "y": 5.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_021",
+        "type": "i_cut",
+        "x": 0,
+        "y": 6.0,
+        "z": 0,
+        "rot": 6,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_022",
+        "type": "i_cut",
+        "x": 0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_023",
+        "type": "i_cut",
+        "x": 1.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_024",
+        "type": "i_cut",
+        "x": 2.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_025",
+        "type": "i_cut",
+        "x": 3.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_026",
+        "type": "i_cut",
+        "x": 4.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_027",
+        "type": "i_cut",
+        "x": 5.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_028",
+        "type": "i_cut",
+        "x": 6.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_029",
+        "type": "i_cut",
+        "x": 7.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "i_cut_030",
+        "type": "i_cut",
+        "x": 8.0,
+        "y": 0,
+        "z": 0,
+        "rot": 0,
+        "state": "tile"
+      },
+      {
+        "id": "book_a",
+        "type": "f_shelf",
+        "x": 1.5,
+        "y": 4.5,
+        "z": 0,
+        "interact": "amenity_book",
+        "name": "书架·文学"
+      },
+      {
+        "id": "book_b",
+        "type": "f_shelf",
+        "x": 3.2,
+        "y": 4.5,
+        "z": 0,
+        "interact": "amenity_book",
+        "name": "书架·生活"
+      },
+      {
+        "id": "book_c",
+        "type": "f_shelf",
+        "x": 5.0,
+        "y": 4.5,
+        "z": 0,
+        "interact": "amenity_book",
+        "name": "书架·社区报"
+      },
+      {
+        "id": "read_table",
+        "type": "f_table",
+        "x": 2.5,
+        "y": 2.4,
+        "z": 0,
+        "interact": "amenity_read",
+        "name": "阅览桌"
+      },
+      {
+        "id": "read_ch1",
+        "type": "f_chair",
+        "x": 1.6,
+        "y": 2.4,
+        "z": 0,
+        "interact": "amenity_read",
+        "name": "阅览椅"
+      },
+      {
+        "id": "read_ch2",
+        "type": "f_chair",
+        "x": 3.4,
+        "y": 2.4,
+        "z": 0,
+        "interact": "amenity_read",
+        "name": "阅览椅"
+      },
+      {
+        "id": "act_desk",
+        "type": "s_counter",
+        "x": 7.2,
+        "y": 4.5,
+        "z": 0,
+        "interact": "amenity_activity_desk",
+        "name": "活动报名台"
+      },
+      {
+        "id": "act_notice",
+        "type": "i_notice",
+        "x": 7.5,
+        "y": 5.5,
+        "z": 1.4,
+        "interact": "notice",
+        "note": "本周活动：周三晚书法 · 周六亲子绘本 · 书屋免费阅览，勿外带。"
+      }
+    ],
+    "colliders": [
+      {
+        "id": "wall0_0",
+        "rect": [
+          0,
+          6.0,
+          2.0,
+          6.6
+        ]
+      },
+      {
+        "id": "wall0_1",
+        "rect": [
+          3.5,
+          6.0,
+          6.0,
+          6.6
+        ]
+      },
+      {
+        "id": "wall0_2",
+        "rect": [
+          7.5,
+          6.0,
+          9,
+          6.6
+        ]
+      },
+      {
+        "id": "wall1_3",
+        "rect": [
+          9.0,
+          0,
+          9.6,
+          1.5
+        ]
+      },
+      {
+        "id": "wall1_4",
+        "rect": [
+          9.0,
+          2.7,
+          9.6,
+          6
+        ]
+      },
+      {
+        "id": "wall2_5",
+        "rect": [
+          -0.6,
+          0,
+          0.15,
+          6
+        ]
+      },
+      {
+        "id": "wall3_6",
+        "rect": [
+          0,
+          -0.6,
+          9,
+          0.15
+        ]
+      }
+    ],
+    "swing": [
+      {
+        "door": "exit",
+        "rect": [
+          8.14,
+          1.5,
+          9,
+          2.7
+        ],
+        "back": null
+      }
+    ],
+    "_short": []
   }
 }

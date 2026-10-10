@@ -44,10 +44,13 @@
     if (SP.chunks && SP.chunks.loadAll) {
       try { SP.chunks.loadAll(); } catch (e) {}
     }
-    // force midtown apply if script already injected
     const list = (SP.chunks && SP.chunks.list && SP.chunks.list()) || [];
     const c = list.find((x) => x.id === "midtown");
     if (c && SP.chunks.apply) {
+      try { SP.chunks.apply(c); } catch (e) {}
+    }
+    // if script preloaded (index.html) but apply raced, retry once data is present
+    if (!(SP.world && SP.world.chunksIn && SP.world.chunksIn.midtown) && window.SCENE_CHUNKS && window.SCENE_CHUNKS.midtown && c && SP.chunks.apply) {
       try { SP.chunks.apply(c); } catch (e) {}
     }
     return !!(SP.world && SP.world.chunksIn && SP.world.chunksIn.midtown);
@@ -228,6 +231,170 @@
     M._wrapUnits = true;
   };
 
+
+  /** Parse featured rent id mt-jx-101 → {key, fl, slot, facadeUnit} */
+  M.parseRentId = function (id) {
+    const m = /^mt-(jx|yj|cn)-(\d+)0([12])$/.exec(String(id || ""));
+    if (!m) return null;
+    const key = m[1], fl = +m[2], slot = +m[3];
+    return { key: key, fl: fl, slot: slot, facadeUnit: "mt_" + key + "_" + fl + "F-0" + slot, scene: "room_mt_" + key + "_" + fl + "0" + slot };
+  };
+
+  M.occupiedRentIds = function () {
+    const H = SP.stageA && SP.stageA.ensureHousing && SP.stageA.ensureHousing();
+    const owned = (H && H.owned) || [];
+    return owned.filter(M.isMidtownRentId);
+  };
+
+  M.occupiedFacadeSet = function () {
+    const set = {};
+    M.occupiedRentIds().forEach((id) => {
+      const p = M.parseRentId(id);
+      if (p) set[p.facadeUnit] = p;
+    });
+    return set;
+  };
+
+  /** Per-style night glow odds when unit occupied (households.windowLit override). */
+  M.styleGlow = { transitional: 0.55, glass: 0.9, tower: 0.7 };
+  M.styleLaundry = { transitional: true, glass: false, tower: true };
+
+  M.buildingStyle = function (key) {
+    const b = (M.BUILDINGS || []).find((x) => x.key === key);
+    return (b && b.style) || "transitional";
+  };
+
+  M.bayInSlot = function (bay, slot) {
+    return slot === 1 ? bay < 2 : bay >= 2;
+  };
+
+  M.wrapHouseholds = function () {
+    if (M._wrapHH || !SP.households || !SP.households.windowLit) return;
+    const H = SP.households;
+    const _lit = H.windowLit.bind(H);
+    H.windowLit = function (o) {
+      const u = H.unitOf(o);
+      if (u && String(u).indexOf("mt_") === 0) {
+        const occ = M.occupiedFacadeSet();
+        if (!occ[u]) return false; // vacant midtown sample → dark at night via household path
+        const key = u.split("_")[1];
+        const style = M.buildingStyle(key);
+        const p = M.styleGlow[style] || 0.6;
+        const slot = Math.floor((SP.clock && SP.clock.abs ? SP.clock.abs() : 0) / 120);
+        return SP.hash(slot, SP.strHash(o.id || u)) < p;
+      }
+      return _lit(o);
+    };
+    M._wrapHH = true;
+  };
+
+  /** Tag midtown windows with night_lit; sync balcony laundry from occupied featured units. */
+  M.syncFacadeOccupied = function () {
+    const W = SP.world;
+    if (!W || !W.objects) return false;
+    const occ = M.occupiedFacadeSet();
+    const street = (!W.interior && W.byId) || (SP.place && SP.place.street && SP.place.street.byId);
+    const worlds = [W.objects];
+    if (W.interior && SP.place && SP.place.street && SP.place.street.objects) worlds.push(SP.place.street.objects);
+
+    for (const objs of worlds) {
+      for (const o of objs) {
+        const fg = o.fade_group || "";
+        if (fg.indexOf("mt_") !== 0 && String(o.id || "").indexOf("mt_") !== 0) continue;
+
+        if (o.type === "f_window") {
+          // ensure household unitOf pattern works; prefer explicit occupancy glow via night_lit fallback
+          const u = SP.households && SP.households.unitOf(o);
+          const owned = !!(u && occ[u]);
+          o.night_lit = owned || !!o.night_lit; // keep style base lit; owned forces eligible
+          if (owned) o._mt_occ = true;
+          else delete o._mt_occ;
+        }
+
+        if (o.type === "f_balcony") {
+          // id: mt_jx_S5F_2_balc
+          const m = /^mt_(jx|yj|cn)_S(\d+)F_(\d+)_balc$/.exec(o.id || "");
+          if (!m) continue;
+          const key = m[1], fl = +m[2], bay = +m[3];
+          let want = false;
+          Object.keys(occ).forEach((uid) => {
+            const p = occ[uid];
+            if (p.key === key && p.fl === fl && M.bayInSlot(bay, p.slot)) {
+              if (M.styleLaundry[M.buildingStyle(key)]) want = true;
+            }
+          });
+          const st = want ? "laundry" : (o.state === "laundry" && o._mt_laundry ? "default" : o.state);
+          if (want) {
+            o._mt_laundry = true;
+            if (o.state !== "laundry") {
+              if (W.setState && objs === W.objects && !W.interior) W.setState(o, "laundry");
+              else o.state = "laundry";
+            }
+          } else if (o._mt_laundry) {
+            o._mt_laundry = false;
+            if (o.state === "laundry") {
+              if (W.setState && objs === W.objects && !W.interior) W.setState(o, "default");
+              else o.state = "default";
+            }
+          }
+        }
+      }
+    }
+    if (SP.households && SP.households.invalidate) SP.households.invalidate();
+    if (SP.layers && SP.layers.invalidate) SP.layers.invalidate();
+    return true;
+  };
+
+  /** Street door plates: featured rental hint per tower (optional polish). */
+  M.labelStreetDoors = function () {
+    const cat = window.MIDTOWN_RENT || M.RENT || {};
+    const byKey = { jx: [], yj: [], cn: [] };
+    Object.keys(cat).forEach((id) => {
+      const p = M.parseRentId(id);
+      if (p && byKey[p.key]) byKey[p.key].push(cat[id].label || id);
+    });
+    const W = SP.world;
+    const lists = [];
+    if (W && W.byId) lists.push(W.byId);
+    if (SP.place && SP.place.street && SP.place.street.byId) lists.push(SP.place.street.byId);
+    // also chunk objects before byId ready
+    if (W && W.objects) {
+      for (const o of W.objects) {
+        if (o.type === "f_door" && /^mt_(jx|yj|cn)_door$/.test(o.id || "")) {
+          const key = o.id.split("_")[1];
+          const labels = byKey[key] || [];
+          const n = labels.length;
+          o.plate = n ? (o.name || key) + " · 精选在租" + n + "套" : (o.name || key);
+          o._mt_label = o.plate;
+        }
+      }
+    }
+    lists.forEach((byId) => {
+      ["jx", "yj", "cn"].forEach((key) => {
+        const o = byId["mt_" + key + "_door"];
+        if (!o) return;
+        const n = (byKey[key] || []).length;
+        o.plate = n ? (o.name || key) + " · 精选在租" + n + "套" : (o.name || key);
+      });
+    });
+  };
+
+  M.wrapRentHooks = function () {
+    if (M._wrapRent || !SP.stageA) return;
+    const A = SP.stageA;
+    ["rentUnit", "leaveUnit", "setHome"].forEach((fn) => {
+      if (!A[fn] || A[fn]._mt) return;
+      const orig = A[fn].bind(A);
+      A[fn] = function () {
+        const r = orig.apply(A, arguments);
+        try { M.syncFacadeOccupied(); M.labelStreetDoors(); } catch (e) {}
+        return r;
+      };
+      A[fn]._mt = true;
+    });
+    M._wrapRent = true;
+  };
+
   M.install = function () {
     if (M._in) return;
     M._in = true;
@@ -236,8 +403,19 @@
     M.wireRent();
     M.wrapUnits();
     M.wrapHousing();
+    M.wrapHouseholds();
+    M.wrapRentHooks();
+    M.labelStreetDoors();
+    M.syncFacadeOccupied();
     if (SP.midtownElev && SP.midtownElev.install) SP.midtownElev.install();
-    setTimeout(function () { M.wireRent(); M.wrapUnits(); M.wrapHousing(); }, 400);
+    setTimeout(function () {
+      M.wireRent(); M.wrapUnits(); M.wrapHousing();
+      M.wrapHouseholds(); M.wrapRentHooks();
+      M.labelStreetDoors(); M.syncFacadeOccupied();
+    }, 400);
+    setInterval(function () {
+      try { if (!SP.world || SP.world.interior) return; M.syncFacadeOccupied(); } catch (e) {}
+    }, 2000);
 
     // tick HUD
     const _raf = SP.main && SP.main.tick;

@@ -1,0 +1,86 @@
+{
+  "checks": [
+    {
+      "name": "east_wall split S/M/N",
+      "pass": true,
+      "detail": "east_wall_s,east_wall_n"
+    },
+    {
+      "name": "no stray 井槐里12号 door plates",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "unit_door has 12号 plate",
+      "pass": true,
+      "detail": null
+    },
+    {
+      "name": "midtown seam not f_sign",
+      "pass": true,
+      "detail": "f_shopsign:往城南 / 近市中心 →"
+    },
+    {
+      "name": "park outside b12",
+      "pass": true,
+      "detail": "{\"x\":4.5,\"y\":31.5,\"label\":\"井槐社区小公园\"}"
+    },
+    {
+      "name": "court outside b12",
+      "pass": true,
+      "detail": "{\"x\":11.5,\"y\":30.8,\"label\":\"井槐里 · 运动场\"}"
+    },
+    {
+      "name": "garage east of east_wall",
+      "pass": true,
+      "detail": "{\"x\":23.5,\"y\":8.2,\"label\":\"地下车库入口\"}"
+    },
+    {
+      "name": "elev on south sidewalk",
+      "pass": true,
+      "detail": "{\"x\":9.2,\"y\":2.15,\"label\":\"电梯加装公示\"}"
+    },
+    {
+      "name": "animal north of b12",
+      "pass": true,
+      "detail": "{\"x\":7.8,\"y\":33,\"label\":\"爱心屋·流浪救助\"}"
+    },
+    {
+      "name": "park view does not fade b12",
+      "pass": true,
+      "detail": []
+    },
+    {
+      "name": "behind b12 south wall still fades",
+      "pass": true,
+      "detail": [
+        "b12",
+        "wall_S1F_2/main",
+        "wall_S2F_2/main",
+        "unit_door/main",
+        "wall_S1F_1/main",
+        "wall_S2F_1/main",
+        "win_S1F_1/main",
+        "balc_S2F_1/main"
+      ]
+    },
+    {
+      "name": "only Building12 uses f_sign",
+      "pass": false,
+      "detail": [
+        "sign_12",
+        "es_seam_sign"
+      ]
+    }
+  ],
+  "fails": [
+    {
+      "name": "only Building12 uses f_sign",
+      "pass": false,
+      "detail": [
+        "sign_12",
+        "es_seam_sign"
+      ]
+    }
+  ]
+}

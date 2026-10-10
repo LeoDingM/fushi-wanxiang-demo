@@ -326,24 +326,50 @@
       }
     return out;
   };
-  /** occluder fading: anything drawn after the player whose opaque cells cover his body fades (by fade_group) */
+  /** occluder fading: walls drawn after the player that cover his body fade.
+   *  fade_group applies only when the player is *behind* that group (farther from camera than the hit
+   *  wall) AND the object is local to the player — prevents courtyard east/west runs from ghosting
+   *  parks / amenities half a block away. */
+  const FADE_LOCAL_R = 8;    // metres: only fade group members near the player
   W.updateFade = function (list, playerIdx, body, dt) {
     const hit = new Set();
+    const hitPts = [];   // {fg, x, y} of pieces that actually occlude the player
     W.fading = [];
+    const px = SP.player ? SP.player.x : 0, py = SP.player ? SP.player.y : 0;
     for (let i = playerIdx + 1; i < list.length; i++) {
       const d = list[i];
       if (!d.fadeable) continue;
       if (SP.player && SP.player.level === "roof" && d.box && d.box.z1 <= SP.player.z + 0.6) continue;   // the building under his feet
+      // Ignore tall far facades whose sprites overlap the player on screen but are not local
+      // (that was ghosting 社区小公园 / 运动场 through Building 12 from the north courtyard).
+      const ox = d.o.x || 0, oy = d.o.y || 0;
+      if (Math.hypot(ox - px, oy - py) > FADE_LOCAL_R + 4) continue;
       const f = SP.frame(d.key), dx = Math.round(d.X) - f[4], dy = Math.round(d.Y) - f[5];
       if (body.x1 < dx || body.x0 > dx + f[2] || body.y1 < dy || body.y0 > dy + f[3]) continue;
-      if (SP.maskHits(d.key, dx, dy, body) >= 3) { hit.add(d.o.fade_group || d.o.id + "/" + d.part); W.fading.push(d.o.id + "/" + d.part); }
+      if (SP.maskHits(d.key, dx, dy, body) >= 3) {
+        const fg = d.o.fade_group || d.o.id + "/" + d.part;
+        // Player must be behind the wall relative to camera (SW dimetric: higher x+y = farther).
+        const playerDepth = px + py, wallDepth = ox + oy;
+        if (playerDepth + 0.35 < wallDepth) continue;   // player is in front of wall → do not fade
+        hit.add(fg);
+        hit.add(d.o.id + "/" + d.part);   // exact occluder always fades
+        hitPts.push({ fg, x: ox, y: oy });
+        W.fading.push(d.o.id + "/" + d.part);
+      }
     }
     const k = Math.min(1, dt * FADE_RATE), q = (a) => (a > 0.985 ? 1 : Math.round(a * 8) / 8), ch = (W.fadeChanged = []);
+    const nearHit = (o, fg) => {
+      // Group fade only for members near the PLAYER (not near the hit piece —
+      // otherwise a tall far facade that overlaps the sprite ghosts the whole block).
+      if (!fg || !hit.has(fg)) return false;
+      return Math.hypot((o.x || 0) - px, (o.y || 0) - py) <= FADE_LOCAL_R;
+    };
     for (const o of W.objects) {
       const P = piece(o);
       if (P.layer !== "sorted" || !(P.fadeable || P.fade_parts)) continue;
       for (const part of P.parts) {
-        const on = hit.has(o.fade_group) || hit.has(o.id + "/" + part);
+        const idHit = hit.has(o.id + "/" + part);
+        const on = idHit || nearHit(o, o.fade_group);
         const fadeable = P.fadeable || (P.fade_parts && P.fade_parts.includes(part));
         const target = Math.min(on && fadeable ? FADE_ALPHA : 1, o.ghost || 1);   // ghost: always half see-through (balcony glass)
         const a = o.alpha[part] == null ? 1 : o.alpha[part];

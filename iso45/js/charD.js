@@ -57,6 +57,7 @@
     if (!atlas) return false;
     actor.set = atlas;
     actor.sprite = atlas;
+    if (actor.isPlayer || actor === SP.player) actor.baseSet = atlas;
     actor.hairId = hairId;
     actor.useHairAtlas = true;
     actor.hairShape = null; // suppress silhouette
@@ -75,16 +76,16 @@
     A.resolveAtlas = function (npc) {
       const ap = npc && (npc.appearance || (npc.job ? npc : null));
       if (ap && ap.job !== "police" && ap.job !== "firefighter" && ap.job !== "nurse") {
-        // explicit hair-atlas outfitSet
+        // explicit hair-atlas outfitSet wins
         if (ap.outfitSet && D.isHairAtlas(ap.outfitSet)) return ap.outfitSet;
-        // prefer hair atlas when hairId maps
+        // keep any explicit non-hair outfit (fit_*, office_skirt, student_*, …)
+        if (ap.outfitSet && !D.isHairAtlas(ap.outfitSet) && !ap.forceHairAtlas) {
+          return prev(npc);
+        }
+        // no outfit / forceHairAtlas → real hair atlas
         const atlas = D.atlasForHair(ap.hairId, ap.gender);
-        if (atlas && ap.preferHairAtlas !== false) {
-          // street NPCs: use hair atlas ~70%; keep fit_* when outfitSet already colorful fit_
-          if (!ap.outfitSet || D.isHairAtlas(ap.outfitSet) || String(ap.outfitSet).indexOf("fit_") !== 0) {
-            return atlas;
-          }
-          if (ap.forceHairAtlas) return atlas;
+        if (atlas && (ap.forceHairAtlas || !ap.outfitSet) && ap.preferHairAtlas !== false) {
+          return atlas;
         }
       }
       return prev(npc);
@@ -161,15 +162,17 @@
         CC._charDExtrasMerged = true;
       }
       prev();
-      // after spawn: any actor with hair atlas outfit should flag useHairAtlas
       if (!SP.actors) return;
       for (const a of SP.actors.list) {
         if (!a || !(a.extraNpc || a.layerExtra)) continue;
-        if (D.isHairAtlas(a.set)) {
+        if (D.isHairAtlas(a.set) || (a.appearance && D.isHairAtlas(a.appearance.outfitSet))) {
+          if (a.appearance && D.isHairAtlas(a.appearance.outfitSet)) {
+            a.set = a.appearance.outfitSet;
+            a.sprite = a.set;
+          }
           a.useHairAtlas = true;
           a.hairShape = null;
-        } else if (a.hairId && a.appearance && a.appearance.gender) {
-          // optional upgrade fit_* → hair atlas if same gender and random was low — leave fit_* for color variety
+          if (SP.ensureActor) SP.ensureActor(a.set);
         }
       }
     };
@@ -197,14 +200,20 @@
       const ok = prevSet(id);
       const CC = C();
       const nid = CC && CC.normalize ? CC.normalize(id) : id;
-      const gender = (SP.player && SP.player.appearance && SP.player.appearance.gender)
-        || (String(nid).indexOf("f_") === 0 || ["bob","ponytail","long","pixie","twin_tails","wave","bun","braid"].indexOf(nid) >= 0 ? "female" : "male");
+      const FEM = ["bob","ponytail","long","pixie","twin_tails","wave","bun","braid"];
+      const MAL = ["short_black","short_brown","bald","grey","undercut","buzz","messy","mullet"];
+      let gender;
+      if (String(nid).indexOf("f_") === 0 || FEM.indexOf(nid) >= 0) gender = "female";
+      else if (String(nid).indexOf("m_") === 0 || MAL.indexOf(nid) >= 0) gender = "male";
+      else gender = (SP.player && SP.player.appearance && SP.player.appearance.gender) || "male";
       if (SP.player) {
         const atlas = D.atlasForHair(nid, gender);
         if (atlas) {
           SP.player.appearance = SP.player.appearance || {};
           SP.player.appearance.gender = gender;
           SP.player.appearance.hairId = nid;
+          SP.player.appearance.outfitSet = atlas;
+          SP.player.appearance.forceHairAtlas = true;
           D.applyHairAtlas(SP.player, nid, gender);
           if (SP.toast) SP.toast("发型/造型：「" + ((CC && CC.spec && CC.spec(nid).label) || nid) + "」· 真图集", 2200);
         } else {
@@ -245,11 +254,17 @@
     A.setOutfitId = function (id) {
       const r = prevSet(id);
       const look = A.PLAYER_LOOKS.find((l) => l.id === id);
-      if (r && SP.player && look && D.isHairAtlas(look.set)) {
-        SP.player.useHairAtlas = true;
-        SP.player.hairShape = null;
-      } else if (SP.player && look && !D.isHairAtlas(look.set)) {
-        SP.player.useHairAtlas = false;
+      if (r && SP.player && look) {
+        if (D.isHairAtlas(look.set) || look.set === "office_skirt" || String(look.set).indexOf("fit_") === 0) {
+          SP.player.set = look.set;
+          SP.player.sprite = look.set;
+          SP.player.baseSet = look.set;
+          SP.player.useHairAtlas = D.isHairAtlas(look.set);
+          if (D.isHairAtlas(look.set)) SP.player.hairShape = null;
+          if (SP.ensureActor) SP.ensureActor(look.set);
+        } else if (!D.isHairAtlas(look.set)) {
+          SP.player.useHairAtlas = false;
+        }
       }
       return r;
     };

@@ -93,7 +93,12 @@
     { id: "fit_cargo", label: "工装裤", set: "fit_cargo" },
     { id: "fit_work", label: "轻商务", set: "fit_work" },
     { id: "student_long", label: "长袖校服风", set: "student_long" },
-    { id: "office_short", label: "短袖办公", set: "office_short" }
+    { id: "office_short", label: "短袖办公", set: "office_short" },
+    { id: "fit_tee_sky", label: "天蓝短袖", set: "fit_tee_sky" },
+    { id: "fit_hoodie_lime", label: "荧光绿帽衫", set: "fit_hoodie_lime" },
+    { id: "fit_jeans_black", label: "黑牛仔裤", set: "fit_jeans_black" },
+    { id: "fit_jacket_olive", label: "橄榄夹克", set: "fit_jacket_olive" },
+    { id: "fit_knit_purple", label: "紫色针织", set: "fit_knit_purple" }
   ];
   C.OUTFITS_F = [
     { id: "fit_dress", label: "连衣裙", set: "fit_dress" },
@@ -107,7 +112,12 @@
     { id: "fit_shirt", label: "衬衫", set: "fit_shirt" },
     { id: "fit_jacket", label: "短外套", set: "fit_jacket" },
     { id: "office_short", label: "夏日办公", set: "office_short" },
-    { id: "fit_tee_red", label: "红色短袖", set: "fit_tee_red" }
+    { id: "fit_tee_red", label: "红色短袖", set: "fit_tee_red" },
+    { id: "office_skirt", label: "办公裙装", set: "office_skirt" },
+    { id: "fit_skirt_coral", label: "珊瑚裙", set: "fit_skirt_coral" },
+    { id: "fit_dress_mint", label: "薄荷连衣裙", set: "fit_dress_mint" },
+    { id: "fit_knit_purple", label: "紫色针织", set: "fit_knit_purple" },
+    { id: "fit_hoodie_lime", label: "荧光绿帽衫", set: "fit_hoodie_lime" }
   ];
 
   C.pickOutfit = function (rng, gender, job, ageBand) {

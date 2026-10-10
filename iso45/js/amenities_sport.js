@@ -9,10 +9,11 @@
   const toast = (t, ms) => SP.toast && SP.toast(t, ms || 2600);
   const log = (t) => SP.world && SP.world.logEvent && SP.world.logEvent(t);
 
-  AM.VERSION = "2026-10-10-amenities-sport";
+  AM.VERSION = "2026-10-11-amenities-sport-integrity";
   AM.POIS = {
-    court:   { x: 13.2, y: 18.6, label: "井槐里 · 运动场" },
-    park:    { x: 6.0,  y: 28.5, label: "井槐社区小公园" },
+    // Clear courtyard north of b12 (y≤25) / south of nb_c* (y≥35.5), west of east_wall (x≤16.6)
+    court:   { x: 11.5, y: 30.8, label: "井槐里 · 运动场" },
+    park:    { x: 4.5,  y: 31.5, label: "井槐社区小公园" },
     stadium: { x: 70.0, y: -28.0, label: "井槐社区体育场" },
     clinic:  { x: 31.0, y: -10.0, label: "井槐社区诊所" },
   };
@@ -37,22 +38,22 @@
   AM.streetObjects = function () {
     const P = AM.POIS;
     const objs = [];
-    // --- 运动场 stub (courtyard NE strip): fence posts + interact marker ---
-    objs.push({ id: "am_court_post_a", type: "p_post", x: 11.0, y: 17.2 });
-    objs.push({ id: "am_court_post_b", type: "p_post", x: 15.2, y: 17.2 });
-    objs.push({ id: "am_court_post_c", type: "p_post", x: 11.0, y: 20.6 });
-    objs.push({ id: "am_court_post_d", type: "p_post", x: 15.2, y: 20.6 });
-    objs.push({ id: "am_court_hedge", type: "p_hedge", x: 13.2, y: 21.2, rot: 0 });
+    // --- 运动场 stub (clear N courtyard pad, not inside b12 / east_wall footprint) ---
+    objs.push({ id: "am_court_post_a", type: "p_post", x: P.court.x - 2.2, y: P.court.y - 1.4 });
+    objs.push({ id: "am_court_post_b", type: "p_post", x: P.court.x + 2.2, y: P.court.y - 1.4 });
+    objs.push({ id: "am_court_post_c", type: "p_post", x: P.court.x - 2.2, y: P.court.y + 1.6 });
+    objs.push({ id: "am_court_post_d", type: "p_post", x: P.court.x + 2.2, y: P.court.y + 1.6 });
+    objs.push({ id: "am_court_hedge", type: "p_hedge", x: P.court.x, y: P.court.y + 2.2, rot: 0 });
     objs.push({
       id: "am_court", type: "p_planter", x: P.court.x, y: P.court.y,
       interact: "amenity_court", name: "运动场", fadeable: false
     });
-    // --- 社区小公园 (north of 12号) ---
-    objs.push({ id: "am_park_tree_a", type: "p_tree", x: 3.5, y: 27.5, variant: "t2" });
-    objs.push({ id: "am_park_tree_b", type: "p_tree", x: 8.5, y: 29.5, variant: "base" });
-    objs.push({ id: "am_park_planter_a", type: "p_planter", x: 4.5, y: 29.0 });
-    objs.push({ id: "am_park_planter_b", type: "p_planter", x: 7.5, y: 27.8 });
-    objs.push({ id: "am_park_pot", type: "p_pot", x: 5.5, y: 30.2, state: "grown" });
+    // --- 社区小公园 (clear pad north of 12号, south of nb_c*) ---
+    objs.push({ id: "am_park_tree_a", type: "p_tree", x: P.park.x - 1.5, y: P.park.y - 1.2, variant: "t2" });
+    objs.push({ id: "am_park_tree_b", type: "p_tree", x: P.park.x + 2.8, y: P.park.y + 0.8, variant: "base" });
+    objs.push({ id: "am_park_planter_a", type: "p_planter", x: P.park.x - 0.8, y: P.park.y + 1.0 });
+    objs.push({ id: "am_park_planter_b", type: "p_planter", x: P.park.x + 1.8, y: P.park.y - 0.9 });
+    objs.push({ id: "am_park_pot", type: "p_pot", x: P.park.x + 0.6, y: P.park.y + 1.5, state: "grown" });
     objs.push({
       id: "am_park_bench", type: "p_planter", x: P.park.x, y: P.park.y,
       interact: "amenity_park", name: "社区小公园 · 长椅"
@@ -162,6 +163,7 @@
   AM.markLabel = function (ctx, x, y, zw, text, bg) {
     const zcam = AM._cam().z;
     if (zcam < 0.35) return;
+    const pl = SP.player; if (pl && Math.hypot((pl.x || 0) - x, (pl.y || 0) - y) > 9) return;
     const [X, Y] = AM.scr(x, y, zw || 2.2);
     ctx.save();
     ctx.globalAlpha = 0.92;
@@ -175,8 +177,14 @@
     ctx.restore();
   };
 
+  /** Overlay art/labels skip when far — prevents HUD-layer floats through foreground facades. */
+  AM.canOverlay = function (x, y, r) {
+    const pl = SP.player; if (!pl) return false;
+    return Math.hypot((pl.x || 0) - x, (pl.y || 0) - y) <= (r == null ? 8 : r);
+  };
+
   AM.drawCourtFallback = function (ctx) {
-    const pts = [[11.2, 17.4], [15.2, 17.4], [15.2, 20.5], [11.2, 20.5]];
+    const C = AM.POIS.court; const pts = [[C.x-2.0, C.y-1.4], [C.x+2.0, C.y-1.4], [C.x+2.0, C.y+1.5], [C.x-2.0, C.y+1.5]];
     ctx.save(); ctx.strokeStyle = "rgba(255,255,255,0.9)"; ctx.lineWidth = 2.5;
     ctx.beginPath();
     pts.forEach((p, i) => {
@@ -202,20 +210,17 @@
     const sid = SP.world.sceneId;
     ctx.save();
     if (!interior) {
-      AM.drawCourtFallback(ctx);
-      AM.drawWorldImg(ctx, "court_decal", 13.2, 18.8, 0.02, 0.55, 0, 8);
-      AM.drawWorldImg(ctx, "pingpong", 12.0, 17.6, 0.55, 0.7);
-      AM.drawWorldImg(ctx, "court", 13.2, 18.6, 2.2, 0.85);
-      AM.markLabel(ctx, 13.2, 18.6, 2.4, "运动场", "#c86a28");
-      AM.drawWorldImg(ctx, "park_decal", 6.0, 28.6, 0.02, 0.6, 0, 6);
-      AM.drawWorldImg(ctx, "park", 6.0, 28.5, 2.0, 0.85);
-      AM.markLabel(ctx, 6.0, 28.5, 2.2, "社区小公园", "#32803c");
-      AM.drawWorldImg(ctx, "clinic", 31.0, -10.0, 2.55, 0.9);
-      AM.markLabel(ctx, 31.0, -10.0, 2.8, "社区诊所", "#288a72");
-      AM.drawWorldImg(ctx, "stadium_facade", 73.0, -27.5, 4.5, 0.95, 0, -20);
-      AM.drawWorldImg(ctx, "stadium", 73.0, -28.0, 3.2, 0.9);
-      AM.markLabel(ctx, 73.0, -28.0, 3.5, "社区体育场", "#1e5aa0");
-      // bonus props
+      // park/court: NO HUD-layer art/labels (they floated through b12 facades). World kit props + E-prompt only.
+      const Cl = AM.POIS.clinic, St = AM.POIS.stadium;
+      if (AM.canOverlay(Cl.x, Cl.y, 14)) {
+        AM.drawWorldImg(ctx, "clinic", Cl.x, Cl.y, 2.55, 0.9);
+        AM.markLabel(ctx, Cl.x, Cl.y, 2.8, "社区诊所", "#288a72");
+      }
+      if (AM.canOverlay(St.x, St.y, 18)) {
+        AM.drawWorldImg(ctx, "stadium_facade", St.x + 3, St.y + 0.5, 4.5, 0.95, 0, -20);
+        AM.drawWorldImg(ctx, "stadium", St.x + 3, St.y, 3.2, 0.9);
+        AM.markLabel(ctx, St.x + 3, St.y, 3.5, "社区体育场", "#1e5aa0");
+      }
     } else if (sid === "amenity_clinic") {
       // waiting-room cue banner
       ctx.globalAlpha = 0.92;
@@ -348,7 +353,11 @@
       { id: "toilet", name: "公厕", status: "owned_by_amenities_infra" },
       { id: "garage", name: "地下车库入口", status: "owned_by_amenities_infra" },
       { id: "laundry_shop", name: "干洗店/洗衣店", status: "owned_by_amenities_infra" },
-      { id: "post", name: "邮政/通讯营业厅", status: "missing" },
+      { id: "post", name: "邮政/通讯营业厅", status: "owned_by_amenities_infra" },
+      { id: "activity", name: "社区活动中心/书屋", status: "owned_by_amenities_infra" },
+      { id: "bike_repair", name: "修车摊/修锁点", status: "owned_by_amenities_infra" },
+      { id: "animal_rescue", name: "流浪动物救助点/爱心屋", status: "owned_by_amenities_infra" },
+      { id: "elev_notice", name: "电梯加装公示点", status: "owned_by_amenities_infra" },
       { id: "market", name: "菜市场", status: "owned_by_amenities_market" },
       { id: "smkt", name: "小超市", status: "owned_by_amenities_market" },
       { id: "express", name: "快递驿站", status: "owned_by_amenities_props" },

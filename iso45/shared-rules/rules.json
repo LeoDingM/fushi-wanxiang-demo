@@ -1794,7 +1794,7 @@
       "mt-jx-101": {
         "district": "inner",
         "rent": 1350,
-        "type": "转型简装一房一厅 ~36㎡",
+        "type": "方案A 窗边床+阳台 · ~36㎡",
         "scene": "room_mt_jx_101",
         "door": "mt_jx_1f",
         "stair": "mt_jx_1f",
@@ -1803,8 +1803,8 @@
       },
       "mt-jx-502": {
         "district": "inner",
-        "rent": 1450,
-        "type": "转型简装 · 景秀中层",
+        "rent": 1420,
+        "type": "方案D 紧凑高效+阳台 · ~32㎡",
         "scene": "room_mt_jx_502",
         "door": "mt_jx_1f",
         "stair": "mt_jx_1f",
@@ -1813,8 +1813,8 @@
       },
       "mt-yj-601": {
         "district": "inner",
-        "rent": 1680,
-        "type": "玻璃幕精装一房一厅",
+        "rent": 1880,
+        "type": "方案C 大客厅~48㎡+宽阳台",
         "scene": "room_mt_yj_601",
         "door": "mt_yj_1f",
         "stair": "mt_yj_1f",
@@ -1823,8 +1823,8 @@
       },
       "mt-yj-1201": {
         "district": "inner",
-        "rent": 1850,
-        "type": "玻璃幕精装 · 高层段",
+        "rent": 1950,
+        "type": "方案C 高层大客厅+宽阳台",
         "scene": "room_mt_yj_1201",
         "door": "mt_yj_1f",
         "stair": "mt_yj_1f",
@@ -1833,8 +1833,8 @@
       },
       "mt-cn-801": {
         "district": "inner",
-        "rent": 1750,
-        "type": "高层塔配一房一厅",
+        "rent": 1720,
+        "type": "方案B 独立餐区+阳台 · ~36㎡",
         "scene": "room_mt_cn_801",
         "door": "mt_cn_1f",
         "stair": "mt_cn_1f",
@@ -1843,8 +1843,8 @@
       },
       "mt-cn-1601": {
         "district": "inner",
-        "rent": 2100,
-        "type": "高层塔配 · 城南顶段",
+        "rent": 2050,
+        "type": "方案A 窗边床+阳台 · 高层",
         "scene": "room_mt_cn_1601",
         "door": "mt_cn_1f",
         "stair": "mt_cn_1f",
