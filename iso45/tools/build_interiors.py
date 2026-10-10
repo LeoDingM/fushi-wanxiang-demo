@@ -139,25 +139,29 @@ def from_layout(fname, street_spawn=None):
     return S
 
 def stair_xin(f):
-    """馨园公寓 corridor floors 1–3 (Stage B): more rentable 一房一厅 units."""
+    """馨园公寓 corridor floors 1–4 (Stage C): more rentable 一房一厅 units."""
     S = common(f"stair_xin_{f}f", f"馨园公寓 · {f}F 走廊", f)
     S["bounds"] = {"x0": 0.15, "y0": 0.15, "x1": 6.9, "y1": 3.85}
     ground(S, {"T": "g_terrazzo"}, ["TTTT", "TTTT"])
     add(S, "i_wall", 1.2, 4.0, state="dado")
-    # unit doors per floor
-    units = {1: [], 2: [("room_xin_201", "2-01", "进 2-01")], 3: [("room_xin_301", "3-01", "进 3-01"), ("room_xin_302", "3-02", "进 3-02")]}[f]
+    units = {
+        1: [("room_xin_101", "1-01", "进 1-01")],
+        2: [("room_xin_201", "2-01", "进 2-01"), ("room_xin_202", "2-02", "进 2-02")],
+        3: [("room_xin_301", "3-01", "进 3-01"), ("room_xin_302", "3-02", "进 3-02")],
+        4: [("room_xin_401", "4-01", "进 4-01")],
+    }[f]
     if f == 1:
-        add(S, "i_door", 2.5, 4.0, state="closed", interact="notice", name="信报箱", note="馨园公寓信报箱 · 快递柜在一层门外", id="xin_mail", reach=[3.1, 3.55])
-        add(S, "i_notice", 4.2, 3.98, z=1.2, interact="notice", id="xin_notice",
-            note="馨园公寓：2F/3F 一房一厅在租 · 链居中介 · 看房请预约")
-    xdoor = 2.2
+        add(S, "i_door", 0.4, 4.0, state="closed", interact="notice", name="信报箱",
+            note="馨园公寓信报箱 · 快递柜在一层门外", id="xin_mail", reach=[1.0, 3.55])
+        add(S, "i_notice", 5.2, 3.98, z=1.2, interact="notice", id="xin_notice",
+            note="馨园公寓：1–4F 一房一厅在租 · 链居中介 · 看房请预约")
+    xdoor = 1.6
     for sid, label, lab in units:
         add(S, "i_door", xdoor, 4.0, state="closed", interact="portal", name=label, to=sid,
-            spawn=[7.8, 1.2, "W"], label=lab + "（一房一厅）", id=f"door_{sid}", reach=[xdoor + 0.6, 3.55])
-        xdoor += 2.2
+            spawn=[6.2, 0.85, "W"], label=lab + "（一房一厅）", id=f"door_{sid}", reach=[xdoor + 0.6, 3.55])
+        xdoor += 2.0
     add(S, "i_pendant", 3.0, 2.0, state="on", id=f"xin_light_{f}")
-    # stairs between floors (simple portals)
-    if f < 3:
+    if f < 4:
         add(S, "i_flight", 5.5, 1.0, state="up", id=f"xin_up_{f}", interact="portal", to=f"stair_xin_{f+1}f",
             spawn=[5.9, 0.5, "S"], label="上楼", reach=[5.9, 0.7])
     if f > 1:
@@ -173,7 +177,7 @@ def stair_xin(f):
                              "spawn": [82.0, 15.5, "S"], "label": "出门", "door": "apt_xin_S1F_1_door"})
     else:
         col(S, "south", -1, -1, 9, 0.15)
-    if f < 3:
+    if f < 4:
         S["portals"].append({"id": f"up_{f+1}", "rect": [5.2, 0.5, 6.5, 1.0], "dir": "N", "to": f"stair_xin_{f+1}f",
                              "spawn": [5.9, 0.4, "S"], "label": "上楼"})
     if f > 1:
@@ -182,9 +186,10 @@ def stair_xin(f):
     S["spawn"] = [3.5, 1.0, "N"]
     return S
 
-for f in (1, 2, 3):
+for f in (1, 2, 3, 4):
     out[f"stair_xin_{f}f"] = stair_xin(f)
-for fname in ("room_xin_201.json", "room_xin_301.json", "room_xin_302.json"):
+for fname in ("room_xin_101.json", "room_xin_201.json", "room_xin_202.json",
+              "room_xin_301.json", "room_xin_302.json", "room_xin_401.json"):
     out[fname.replace('.json','')] = from_layout(fname)
 out["civic_police"] = from_layout("civic_police.json", street_spawn=[-36.0, -6.5, "N"])
 out["civic_hospital"] = from_layout("civic_hospital.json", street_spawn=[22.0, -6.5, "N"])

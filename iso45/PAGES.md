@@ -1,13 +1,14 @@
 # Pages handoff
 
-更新时间：2026-10-10 22:51（Asia/Shanghai）
+更新时间：2026-10-10 22:58（Asia/Shanghai）
 
-## Stage B hotfix（在 Stage A 之上；CBD 仍暂停）
-1. **馨园一房一厅** `room_xin_301`（及 201/302）：客厅+卧室+厨房+卫生间；门墙不裁家具；S/W 半墙淡出；walkable；`roomlayout.validate` **0 problems**
-2. **手机 UX**：iPhone 造型主屏幕（App 图标网格+Dock）；点图标进各 App；底条回主屏
-3. **微信**：会话列表 → 气泡聊天（绿泡己方）；NPC 回复多句随机；脚本文案可接 `SP.phone.aiChat`（默认 stub 不调外部 API）
-4. **其余 Stage B**：civic 深厅、招聘/公交时刻、上帝租约/传送等保持
+## Stage C（老街区；CBD 仍暂停）
+1. **Civic 深厅**：派出所（报案台+询问室+档案）、卫生中心（候诊+分诊+药房+诊室）、消防站（车库+执勤室+装备柜）；layout validate 0
+2. **馨园**：新增可租 `1-01` / `2-02` / `4-01`，走廊扩至 4F
+3. **银行/微信房租**：确认转账、流水、成功后同步房东微信；微信也可付租
+4. **NPC 对话**：扩写 + 新增物业小吴 / 赵姐 / 快递小刘
+5. **LLM 钩子文档**：`docs/PHONE_AI.md`（`SP.phone.aiChat` 本地 Ollama / 云端示例；默认不外呼）
 
 ## 产物
 - `scene-proto-45.zip` / `scene-proto-45-play.zip`
-- 截图：`screenshots/a4-1ldk-xin.png` `a2-phone-wechat.png` `b4-xin-living.png` `b5-phone-wechat.png`
+- 截图：`c1-police-interview.png` `c2-hospital-consult.png` `c3-fire-duty.png` `c4-xin-101.png` `c5-phone-bank.png` `c6-phone-wechat-pool.png`

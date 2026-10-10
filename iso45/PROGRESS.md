@@ -1,3 +1,4 @@
+22:58 · [主线] Stage C：civic 深厅（派出所询问室/医院诊室/消防执勤装备）validate 0；馨园增 1-01/2-02/4-01+4F 走廊；银行转账流水+微信同步；NPC 对话池扩物业/赵姐/快递；docs/PHONE_AI.md；smoke+stage6；双 zip · screenshots/c1-police-interview.png
 22:51 · [主线] Stage B hotfix：馨园一房一厅 room_xin_301 重排（客卧厨卫、门墙不穿模、layout validate 0）；手机改为 iPhone 主屏图标进 App、微信会话列表+气泡聊天、NPC 回复多样化、SP.phone.aiChat 桩；smoke+stage6；双 zip · screenshots/a4-1ldk-xin.png
 22:39 · [主线] Stage A 街区扩展：警局/医院/消防可进厅、馨园一房一厅、上帝模式中文面板、可租多套房切换住所、公交井槐里↔东街、手机（微信/银行/地图/租房）；CBD 暂停；smoke+stage6；双 zip · screenshots/a2-phone-wechat.png
 21:24 · [主线] CBD 风格板 READY 已接入：象牙/米色墙+深灰石板屋顶、琥珀幼儿园、别墅院落/泳池、河桥球场、开花乔木；smoke+stage6+cbd_capture 过；双 zip 已打 · screenshots/C7-wealthy-compound.png

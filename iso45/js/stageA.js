@@ -23,9 +23,12 @@
     const rt = R().data.rent_table || {}, u = Object.assign({}, rt.units || {});
     const defaults = {
       "2F-02": { district: "peripheral", rent: 850, type: "小单间 ~14㎡", scene: "room_2f02", door: "stair_2f", label: "井槐里12号 2F-02" },
+      "1F-xin": { district: "inner", rent: 1050, type: "一房一厅 ~35㎡", scene: "room_xin_101", door: "stair_xin_1f", label: "馨园公寓 1-01", stair: "stair_xin_1f" },
       "2F-xin": { district: "inner", rent: 1100, type: "一房一厅 ~35㎡", scene: "room_xin_201", door: "stair_xin_2f", label: "馨园公寓 2-01", stair: "stair_xin_1f" },
+      "2F-xin-b": { district: "inner", rent: 1150, type: "一房一厅 ~35㎡", scene: "room_xin_202", door: "stair_xin_2f", label: "馨园公寓 2-02", stair: "stair_xin_1f" },
       "3F-xin": { district: "inner", rent: 1200, type: "一房一厅精装 ~35㎡", scene: "room_xin_301", door: "stair_xin_3f", label: "馨园公寓 3-01", stair: "stair_xin_1f" },
-      "3F-xin-b": { district: "inner", rent: 1250, type: "一房一厅 ~35㎡", scene: "room_xin_302", door: "stair_xin_3f", label: "馨园公寓 3-02", stair: "stair_xin_1f" }
+      "3F-xin-b": { district: "inner", rent: 1250, type: "一房一厅 ~35㎡", scene: "room_xin_302", door: "stair_xin_3f", label: "馨园公寓 3-02", stair: "stair_xin_1f" },
+      "4F-xin": { district: "inner", rent: 1300, type: "一房一厅精装 ~35㎡", scene: "room_xin_401", door: "stair_xin_4f", label: "馨园公寓 4-01", stair: "stair_xin_1f" }
     };
     for (const id of Object.keys(defaults)) u[id] = Object.assign({}, defaults[id], u[id] || {});
     return u;
@@ -225,23 +228,88 @@
         { who: "them", text: A._pick([
           "默子，周末来不来打球？老地方。",
           "看到你朋友圈搬新家了？恭喜啊。",
-          "最近加班疯了，晚上要不要语音吐槽两句。"
+          "最近加班疯了，晚上要不要语音吐槽两句。",
+          "听说井槐里开了家新面馆，敢不敢拼一顿。"
         ]) }
       ], replies: [
         { id: "ball", label: "来！几点？", them: [
           "周六下午四点，我占场。别迟到哈。",
           "周日上午十点，完事一起吃拉面。",
-          "看天气，晴就下午，阴就改室内。"
+          "看天气，晴就下午，阴就改室内。",
+          "周五晚七点 indor，我带球。"
         ]},
         { id: "busy", label: "这周太累了，下次吧", them: [
           "行，那你休息。别老熬夜打游戏。",
           "理解，等你缓过来喊我。",
-          "那我找别人凑局，你欠我一顿。"
+          "那我找别人凑局，你欠我一顿。",
+          "好，那房租交了记得请我喝奶茶哈哈。"
         ]},
         { id: "askjob", label: "你那边还在招人吗？", them: [
           "物流仓还能塞个临时工，要的话我内推。",
           "我们组暂时满了，我帮你问问隔壁。",
-          "你可以先看手机里招聘页，有对口的我帮你留意。"
+          "你可以先看手机里招聘页，有对口的我帮你留意。",
+          "安保夜班听说馨园在招，你手机招聘页有。"
+        ]}
+      ]},
+      property: { title: "馨园物业·小吴", tag: "物业", av: "物", avClass: "t4", msgs: [
+        { who: "them", text: A._pick([
+          "温馨提示：本周五上午清洗水箱，可能短暂停水。",
+          "楼道堆物请尽快清理，消防通道不能堵。",
+          "快递柜满了会短信提醒，超时件挪到门岗。"
+        ]) }
+      ], replies: [
+        { id: "ok", label: "收到，谢谢", them: ["好的，有问题随时联系物业值班室。", "嗯，祝生活愉快。", "收到。停水公告也贴在一楼了。"] },
+        { id: "water", label: "大概停多久？", them: [
+          "计划 9:00–11:30，完成就恢复。",
+          "一般两小时内，若延期会再通知。",
+          "建议提前备一壶水，谢谢配合。"
+        ]},
+        { id: "card", label: "门禁卡丢了怎么补？", them: [
+          "带身份证来物业办，工本费 ¥20。",
+          "一楼值班室工作日都能办，现场拍照录入。",
+          "先用临时通行证，补卡后旧卡自动作废。"
+        ]}
+      ]},
+      clerk: { title: "便利店·赵姐", tag: "店长", av: "赵", avClass: "t3", msgs: [
+        { who: "them", text: A._pick([
+          "小李，晚班还缺人，有空来顶一会儿？时薪照旧。",
+          "新到一批关东煮，下班来喝碗汤。",
+          "你排班表我改了一下，手机里也能看。"
+        ]) }
+      ], replies: [
+        { id: "shift", label: "今晚可以，几点到？", them: [
+          "六点半来就行，换好工服打卡。",
+          "七点到九点，人不太多。",
+          "你过来我把货架也指给你。"
+        ]},
+        { id: "later", label: "这周先不了，下回说", them: [
+          "行，那我再问问别人。",
+          "没事，你忙你的。",
+          "好，有固定班我再喊你。"
+        ]},
+        { id: "food", label: "关东煮留一碗！", them: [
+          "好，萝卜＋鱼丸，晚点来取。",
+          "辣汤还是清汤？我按清汤给你盛。",
+          "行，放后厨保温，别太晚哈。"
+        ]}
+      ]},
+      courier: { title: "快递站·小刘", tag: "快递", av: "递", avClass: "", msgs: [
+        { who: "them", text: A._pick([
+          "您的包裹到柜了：芳香柜 12门，取件码已短信。",
+          "有一件生鲜到门岗了，请尽快来取。",
+          "驿站今晚八点关门，超时件明日再取。"
+        ]) }
+      ], replies: [
+        { id: "got", label: "好的，我一会去取", them: ["好，柜门有时会卡一下，多拍一次码。", "行，取到记得确认。", "生鲜那件别压太久哈。"] },
+        { id: "delay", label: "今晚可能晚，能帮我留一下吗？", them: [
+          "可以放到门岗，明天中午前都行。",
+          "行，我备注一下「夜间自取」。",
+          "最晚放冷藏到明天上午十点。"
+        ]},
+        { id: "addr", label: "下次改送到馨园门禁里吧", them: [
+          "成，我改备注「馨园门岗代收」。",
+          "行，你手机号还是这个？",
+          "好，大件我电话你再上楼。"
         ]}
       ]}
     };
@@ -279,14 +347,12 @@
     };
     if (r.act === "pay_rent") {
       const owed = G().ps.owed || 0;
-      if (owed > 0 && G().ps.money >= owed) {
-        const res = R().perform(G().ps, "pay_rent", G().ctx());
-        finish(res.ok
-          ? A._pick(["收到 ¥" + owed + "，谢谢～", "到账 ¥" + owed + "，记账了。", "好的，这个月清啦，辛苦～"])
-          : A._pick(["转账好像没成功，你查下余额。", "没收到款，是不是网络闪了一下？", "银行那边显示失败，再试一次？"]));
-      } else finish(owed > 0
-        ? A._pick(["余额不够呀，先凑凑？", "还差一点，你看看银行卡。", "钱不太够，要不要我宽限两天？"])
-        : A._pick(["这个月房租已经结清啦。", "不用转啦，本月已收。", "账上是平的，谢谢提醒。"]));
+      if (!owed) { finish(A._pick(["这个月房租已经结清啦。", "不用转啦，本月已收。", "账上是平的，谢谢提醒。"])); return; }
+      if (G().ps.money < owed) { finish(A._pick(["余额不够呀，先凑凑？", "还差一点，你看看银行卡。", "钱不太够，要不要我宽限两天？"])); return; }
+      const res = A.payRentTransfer("微信");
+      // payRentTransfer already appended mirror msgs; only add landlord ack if transfer failed path didn't
+      if (!res.ok) finish(A._pick(["转账好像没成功，你查下余额。", "没收到款，是不是网络闪了一下？", "银行那边显示失败，再试一次？"]));
+      else A.openPhone("wechat", tid);
       return;
     }
     const scripted = A._pick(r.them);
@@ -299,7 +365,83 @@
     }
   };
 
+  // ---------- bank / rent transfer ----------
+  A.ensureBank = function () {
+    const ps = G().ps; if (!ps.bankLog) ps.bankLog = [];
+    return ps.bankLog;
+  };
+  A.clockStamp = function () {
+    try { return (C().clockLabel && C().clockLabel()) || ""; } catch (e) { return ""; }
+  };
+  A.payRentTransfer = function (src) {
+    const ps = G().ps, owed = ps.owed || 0, log = A.ensureBank();
+    const L = (R().data.lease || {}).landlord || "房东刘姐";
+    if (!owed) { toast("当前不欠房租"); return { ok: false, reason: "clear" }; }
+    if (ps.money < owed) { toast("余额不足，无法转账"); return { ok: false, reason: "funds" }; }
+    const before = owed;
+    const r = R().perform(ps, "pay_rent", G().ctx());
+    if (r && r.ok) {
+      log.unshift({ t: A.clockStamp(), kind: "rent", to: L, amount: before, via: src || "银行", ok: true });
+      if (log.length > 20) log.length = 20;
+      toast(`已转账房租 ¥${before} → ${L}`);
+      // mirror into WeChat landlord thread
+      try {
+        const chat = A.threads(), th = chat.landlord;
+        if (th) {
+          th.msgs.push({ who: "me", text: `（通过${src || "银行"}转账房租 ¥${before}）` });
+          th.msgs.push({ who: "them", text: A._pick([
+            `收到 ¥${before}，谢谢～账上平了。`,
+            `到账 ¥${before}，这个月清啦。`,
+            `好的，微信也看到转账了，辛苦～`
+          ]) });
+        }
+      } catch (e) {}
+      return { ok: true, amount: before };
+    }
+    log.unshift({ t: A.clockStamp(), kind: "rent", to: L, amount: owed, via: src || "银行", ok: false });
+    toast("转账失败，请稍后再试");
+    return { ok: false, reason: "fail" };
+  };
+
   // ---------- god mode ----------
+  // ---------- bank / rent transfer ----------
+  A.ensureBank = function () {
+    const ps = G().ps; if (!ps.bankLog) ps.bankLog = [];
+    return ps.bankLog;
+  };
+  A.clockStamp = function () {
+    try { return (C().clockLabel && C().clockLabel()) || ""; } catch (e) { return ""; }
+  };
+  A.payRentTransfer = function (src) {
+    const ps = G().ps, owed = ps.owed || 0, log = A.ensureBank();
+    const L = (R().data.lease || {}).landlord || "房东刘姐";
+    if (!owed) { toast("当前不欠房租"); return { ok: false, reason: "clear" }; }
+    if (ps.money < owed) { toast("余额不足，无法转账"); return { ok: false, reason: "funds" }; }
+    const before = owed;
+    const r = R().perform(ps, "pay_rent", G().ctx());
+    if (r && r.ok) {
+      log.unshift({ t: A.clockStamp(), kind: "rent", to: L, amount: before, via: src || "银行", ok: true });
+      if (log.length > 20) log.length = 20;
+      toast(`已转账房租 ¥${before} → ${L}`);
+      // mirror into WeChat landlord thread
+      try {
+        const chat = A.threads(), th = chat.landlord;
+        if (th) {
+          th.msgs.push({ who: "me", text: `（通过${src || "银行"}转账房租 ¥${before}）` });
+          th.msgs.push({ who: "them", text: A._pick([
+            `收到 ¥${before}，谢谢～账上平了。`,
+            `到账 ¥${before}，这个月清啦。`,
+            `好的，微信也看到转账了，辛苦～`
+          ]) });
+        }
+      } catch (e) {}
+      return { ok: true, amount: before };
+    }
+    log.unshift({ t: A.clockStamp(), kind: "rent", to: L, amount: owed, via: src || "银行", ok: false });
+    toast("转账失败，请稍后再试");
+    return { ok: false, reason: "fail" };
+  };
+
   // ---------- god mode ----------
   A.openGod = function () {
     A.ensureHousing();
@@ -418,12 +560,25 @@
           }).join("")}</div>`;
         }
       } else if (tab === "bank") {
-        const ps = G().ps, owed = ps.owed || 0;
-        body = `<div class="pbank"><div class="bal">¥${ps.money | 0}</div>
-          <p>应付房租欠款：¥${owed}</p>
-          <button data-tx="landlord">转账房租给房东</button>
-          <button data-tx="self">演示充值 +¥200</button>
-          <p class="hint">转房租走 shared-rules pay_rent；微信里也可回复房东直接付。</p></div>`;
+        const ps = G().ps, owed = ps.owed || 0, L = (R().data.lease || {}).landlord || "房东刘姐";
+        const log = A.ensureBank();
+        const due = ps.rent_due_label || (owed ? "已到期／欠费中" : "本月已结清");
+        const hist = log.slice(0, 6).map((e) =>
+          `<div class="prow"><b>${e.ok ? "✓" : "✗"} ¥${e.amount}</b><span>${e.t || ""} · ${e.via} → ${e.to}</span></div>`
+        ).join("") || `<p class="hint">暂无转账记录</p>`;
+        body = `<div class="pbank">
+          <div class="bal">¥${ps.money | 0}</div>
+          <p>收款人：<b>${L}</b></p>
+          <p>房租欠款：<b style="color:${owed ? "#ff6b6b" : "#6ddf8a"}">¥${owed}</b> · ${due}</p>
+          <div class="row" style="gap:8px;margin:10px 0">
+            <button data-tx="landlord" ${owed ? "" : "disabled"}>确认转账房租</button>
+            <button data-tx="self">充值 +¥200</button>
+            <button data-tx="wx">打开微信·房东</button>
+          </div>
+          <p class="hint">转账走 shared-rules <code>pay_rent</code>；成功后写入银行流水并同步微信会话。</p>
+          <div class="sec" style="margin-top:12px;font-weight:700">最近流水</div>
+          ${hist}
+        </div>`;
       } else if (tab === "map") {
         const places = [
           { name: "井槐里12号", x: 1.5, y: 12, mark: "住" },
@@ -491,11 +646,14 @@
     const gh = el.querySelector("[data-gohome]"); if (gh) gh.onclick = () => { el.classList.add("hidden"); A.goHome(); };
     const god = el.querySelector("[data-god]"); if (god) god.onclick = () => { el.classList.add("hidden"); A.openGod(); };
     el.querySelectorAll("[data-tx]").forEach((b) => b.onclick = () => {
-      if (b.dataset.tx === "self") { G().ps.money += 200; toast("演示充值 +¥200"); A.openPhone("bank"); }
-      else {
-        const owed = G().ps.owed || 0; if (!owed) return toast("当前不欠房租");
-        if (G().ps.money < owed) return toast("余额不足");
-        const r = R().perform(G().ps, "pay_rent", G().ctx()); if (r.ok) toast(`已付房租 ¥${owed}`);
+      const kind = b.dataset.tx;
+      if (kind === "self") {
+        G().ps.money += 200; A.ensureBank().unshift({ t: A.clockStamp(), kind: "topup", to: "本人", amount: 200, via: "演示", ok: true });
+        toast("演示充值 +¥200"); A.openPhone("bank");
+      } else if (kind === "wx") {
+        A.openPhone("wechat", "landlord");
+      } else {
+        A.payRentTransfer("银行 App");
         A.openPhone("bank");
       }
     });

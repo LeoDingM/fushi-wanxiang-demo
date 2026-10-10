@@ -1,7 +1,7 @@
 {
  "id": "civic_fire",
- "name": "井槐消防站 · 车库／执勤",
- "_doc": "Stage B: garage + truck",
+ "name": "消防救援站 · 车库／执勤",
+ "_doc": "Stage C: apparatus bay, duty desk, gear lockers.",
  "bounds": [
   0.15,
   0.15,
@@ -17,7 +17,8 @@
   "cols": 6,
   "rows": 4,
   "legend": {
-   "T": "g_tile"
+   "T": "g_tile",
+   "C": "g_tile"
   },
   "data_south_to_north": [
    "TTTTTT",
@@ -29,7 +30,7 @@
  "walls": [
   {
    "side": "N",
-   "line": 8,
+   "line": 8.0,
    "from": 0,
    "to": 12,
    "finish": "plain",
@@ -41,22 +42,7 @@
      "id": "fw1",
      "reach": [
       2.25,
-      6.2
-     ]
-    },
-    {
-     "kind": "gap",
-     "at": 4.5,
-     "w": 4.0
-    },
-    {
-     "kind": "window",
-     "at": 9.0,
-     "interact": "window_in",
-     "id": "fw2",
-     "reach": [
-      9.75,
-      6.2
+      7.0
      ]
     }
    ]
@@ -70,7 +56,7 @@
    "openings": [
     {
      "kind": "door",
-     "at": 0.3,
+     "at": 0.2,
      "id": "exit",
      "interact": "portal",
      "to": "street",
@@ -80,6 +66,7 @@
       "N"
      ],
      "label": "出门",
+     "block": false,
      "reach": [
       11.3,
       0.9
@@ -107,19 +94,49 @@
    "from": 0,
    "to": 8,
    "finish": "plain"
+  },
+  {
+   "side": "P",
+   "axis": "y",
+   "line": 4.0,
+   "from": 5.0,
+   "to": 8.0,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "door",
+     "at": 5.15,
+     "id": "duty_door",
+     "interact": "idoor",
+     "name": "执勤室",
+     "state": "open"
+    }
+   ]
+  },
+  {
+   "side": "P",
+   "axis": "x",
+   "line": 5.0,
+   "from": 0.0,
+   "to": 4.0,
+   "finish": "plain"
   }
  ],
  "furniture": [
   {
    "type": "p_car",
-   "x": 6.0,
-   "y": 4.0,
+   "x": 7.5,
+   "y": 3.2,
    "rot": 0,
    "state": "normal",
    "variant": "red",
    "id": "fire_truck",
    "interact": "notice",
-   "note": "执勤消防车（演示用轿车模型占位）· 非紧急请勿攀爬。"
+   "note": "执勤消防车（演示轿车模型占位）· 非紧急请勿攀爬。",
+   "reach": [
+    5.5,
+    3.2
+   ]
   },
   {
    "type": "f_table",
@@ -127,36 +144,85 @@
    "y": 6.5,
    "id": "duty",
    "interact": "notice",
-   "note": "执勤室：接警电话 · 出勤登记本。今日值班班组：一班。"
+   "note": "执勤室：接警电话 · 出勤登记。今日值班：一班。",
+   "reach": [
+    1.8,
+    5.5
+   ]
   },
   {
    "type": "f_chair",
-   "x": 1.8,
-   "y": 5.8,
+   "x": 2.6,
+   "y": 6.5,
    "id": "duty_c"
   },
   {
    "type": "f_shelf",
-   "x": 0.6,
-   "y": 7.3,
+   "x": 0.55,
+   "y": 7.2,
    "id": "gear",
    "interact": "notice",
-   "note": "装备架：水带／接口／消防斧（示意）。"
+   "note": "装备架：水带／接口／消防斧（示意）。",
+   "reach": [
+    1.3,
+    7.2
+   ]
+  },
+  {
+   "type": "f_wardrobe",
+   "x": 3.2,
+   "y": 7.2,
+   "rot": 4,
+   "state": "closed",
+   "id": "locker",
+   "interact": "notice",
+   "note": "战斗服更衣柜：头盔／防护服。",
+   "reach": [
+    3.2,
+    6.5
+   ]
   },
   {
    "type": "f_stool",
    "x": 10.0,
-   "y": 2.5,
-   "id": "bench"
+   "y": 1.8,
+   "id": "bench",
+   "interact": "sit",
+   "reach": [
+    10.0,
+    2.4
+   ]
+  },
+  {
+   "type": "f_stool",
+   "x": 10.8,
+   "y": 1.8,
+   "id": "bench2"
+  },
+  {
+   "type": "f_table",
+   "x": 10.2,
+   "y": 5.5,
+   "id": "hose_t",
+   "interact": "notice",
+   "note": "水带整理台：出动后归位检查。",
+   "reach": [
+    10.2,
+    4.8
+   ]
   },
   {
    "type": "i_notice",
-   "x": 2.5,
+   "x": 5.5,
    "y": 7.85,
    "z": 1.2,
    "interact": "notice",
    "id": "fboard",
-   "note": "消防救援站：参观请登记 · 火警请拨 119"
+   "note": "消防救援站：参观请登记 · 火警请拨 119",
+   "reach": [
+    5.5,
+    7.2
+   ]
   },
   {
    "type": "i_pendant",

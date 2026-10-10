@@ -1,7 +1,7 @@
 {
  "id": "civic_police",
  "name": "井槐里派出所 · 办事大厅",
- "_doc": "Stage B: report desk + filing",
+ "_doc": "Stage C: report desk, waiting, interview room, filing.",
  "bounds": [
   0.15,
   0.15,
@@ -17,13 +17,14 @@
   "cols": 5,
   "rows": 4,
   "legend": {
-   "T": "g_tile"
+   "T": "g_tile",
+   "W": "g_wood:a"
   },
   "data_south_to_north": [
-   "TTTT.",
-   "TTTT.",
-   "TTTT.",
-   "TTTT."
+   "TTTTT",
+   "TTTTT",
+   "TTTWW",
+   "TTTWW"
   ]
  },
  "walls": [
@@ -41,7 +42,7 @@
      "id": "pw1",
      "reach": [
       2.25,
-      5.5
+      6.2
      ]
     },
     {
@@ -51,7 +52,7 @@
      "id": "pw2",
      "reach": [
       6.25,
-      5.5
+      6.2
      ]
     }
    ]
@@ -65,7 +66,7 @@
    "openings": [
     {
      "kind": "door",
-     "at": 0.3,
+     "at": 0.2,
      "id": "exit",
      "interact": "portal",
      "to": "street",
@@ -75,6 +76,7 @@
       "N"
      ],
      "label": "出门",
+     "block": false,
      "reach": [
       9.3,
       0.9
@@ -99,82 +101,184 @@
   {
    "side": "P",
    "axis": "y",
-   "line": 5.0,
-   "from": 2.5,
-   "to": 7,
+   "line": 4.0,
+   "from": 4.0,
+   "to": 7.0,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "door",
+     "at": 4.15,
+     "id": "interview_door",
+     "interact": "idoor",
+     "name": "询问室",
+     "state": "closed"
+    }
+   ]
+  },
+  {
+   "side": "P",
+   "axis": "x",
+   "line": 4.0,
+   "from": 0.0,
+   "to": 4.0,
    "finish": "plain"
   }
  ],
  "furniture": [
   {
    "type": "f_table",
-   "x": 2.5,
-   "y": 4.2,
+   "x": 2.0,
+   "y": 2.8,
    "id": "report_desk",
    "interact": "notice",
-   "note": "报案／户政窗口：请取号后在此填写《接警登记表》。民警小张值班中。"
+   "note": "报案／户政窗口：请取号后填写《接警登记表》。今日值班：民警小张。",
+   "reach": [
+    3.0,
+    2.8
+   ]
   },
   {
    "type": "f_chair",
-   "x": 2.5,
-   "y": 3.4,
+   "x": 2.0,
+   "y": 1.7,
    "id": "report_chair"
   },
   {
    "type": "f_chair",
-   "x": 1.6,
-   "y": 4.2,
+   "x": 1.15,
+   "y": 2.8,
+   "rot": 2,
    "id": "cop_chair"
   },
   {
-   "type": "f_shelf",
-   "x": 0.6,
-   "y": 6.3,
-   "id": "filing",
+   "type": "f_desk",
+   "x": 6.5,
+   "y": 5.8,
+   "rot": 4,
+   "state": "off",
+   "id": "duty_pc",
    "interact": "notice",
-   "note": "档案柜：户籍卷宗 · 治安案件 · 仅工作人员可取。"
+   "note": "值班电脑：警综平台（演示）。非工作人员勿动。",
+   "reach": [
+    6.5,
+    4.8
+   ]
+  },
+  {
+   "type": "f_chair",
+   "x": 7.2,
+   "y": 5.2,
+   "id": "duty_ch"
   },
   {
    "type": "f_shelf",
-   "x": 1.8,
-   "y": 6.3,
+   "x": 8.8,
+   "y": 5.8,
+   "id": "filing",
+   "interact": "notice",
+   "note": "档案柜：户籍卷宗 · 治安案件。",
+   "reach": [
+    8.8,
+    5.2
+   ]
+  },
+  {
+   "type": "f_shelf",
+   "x": 8.8,
+   "y": 4.8,
    "id": "filing2",
    "interact": "notice",
-   "note": "印章柜／打印区。"
+   "note": "印章柜／打印区。",
+   "reach": [
+    8.8,
+    4.3
+   ]
   },
   {
    "type": "f_table",
-   "x": 7.2,
-   "y": 4.0,
+   "x": 7.5,
+   "y": 2.5,
    "id": "wait_t"
   },
   {
    "type": "f_stool",
-   "x": 6.6,
-   "y": 3.5,
-   "id": "wait1"
+   "x": 6.9,
+   "y": 2.0,
+   "id": "wait1",
+   "interact": "sit",
+   "reach": [
+    6.9,
+    2.6
+   ]
   },
   {
    "type": "f_stool",
-   "x": 7.8,
-   "y": 3.5,
-   "id": "wait2"
+   "x": 8.1,
+   "y": 2.0,
+   "id": "wait2",
+   "interact": "sit",
+   "reach": [
+    8.1,
+    2.6
+   ]
+  },
+  {
+   "type": "f_stool",
+   "x": 7.5,
+   "y": 3.2,
+   "id": "wait3"
+  },
+  {
+   "type": "f_table",
+   "x": 2.0,
+   "y": 5.5,
+   "id": "iv_table",
+   "interact": "notice",
+   "note": "询问室：一侧座椅给当事人，一侧给民警。监控常开。",
+   "reach": [
+    3.2,
+    5.5
+   ]
+  },
+  {
+   "type": "f_chair",
+   "x": 1.2,
+   "y": 5.5,
+   "id": "iv_a"
+  },
+  {
+   "type": "f_chair",
+   "x": 2.8,
+   "y": 5.5,
+   "id": "iv_b"
   },
   {
    "type": "i_notice",
-   "x": 3.5,
+   "x": 5.5,
    "y": 6.85,
    "z": 1.3,
    "interact": "notice",
    "id": "board",
-   "note": "井槐里派出所：报案／户籍／开具证明 · 09:00–17:00（法定节假日值班电话见公示）"
+   "note": "井槐里派出所：报案／户籍／开具证明 · 09:00–17:00（节假日值班电话见公示）",
+   "reach": [
+    5.5,
+    6.2
+   ]
   },
   {
    "type": "i_pendant",
-   "x": 4.5,
+   "x": 3.0,
+   "y": 2.5,
+   "state": "on",
+   "id": "light1"
+  },
+  {
+   "type": "i_pendant",
+   "x": 7.0,
    "y": 3.5,
    "state": "on",
-   "id": "light"
+   "id": "light2"
   }
  ],
  "spawn": [

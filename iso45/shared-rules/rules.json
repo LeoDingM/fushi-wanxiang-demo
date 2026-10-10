@@ -1682,6 +1682,33 @@
     "door": "stair_xin_3f",
     "label": "馨园公寓 3-02",
     "stair": "stair_xin_1f"
+   },
+   "1F-xin": {
+    "district": "inner",
+    "rent": 1050,
+    "type": "一房一厅 ~35㎡",
+    "scene": "room_xin_101",
+    "door": "stair_xin_1f",
+    "label": "馨园公寓 1-01",
+    "stair": "stair_xin_1f"
+   },
+   "2F-xin-b": {
+    "district": "inner",
+    "rent": 1150,
+    "type": "一房一厅 ~35㎡",
+    "scene": "room_xin_202",
+    "door": "stair_xin_2f",
+    "label": "馨园公寓 2-02",
+    "stair": "stair_xin_1f"
+   },
+   "4F-xin": {
+    "district": "inner",
+    "rent": 1300,
+    "type": "一房一厅精装 ~35㎡",
+    "scene": "room_xin_401",
+    "door": "stair_xin_4f",
+    "label": "馨园公寓 4-01",
+    "stair": "stair_xin_1f"
    }
   }
  },
