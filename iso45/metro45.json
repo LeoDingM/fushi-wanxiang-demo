@@ -1,0 +1,9805 @@
+{
+ "areas": {
+  "cbd_concourse": {
+   "id": "cbd_concourse",
+   "station": "cbd",
+   "skin": "cbd",
+   "kind": "concourse",
+   "name": "中央商务区站 · 站厅 (B1)",
+   "_doc": "Grand CBD concourse: polished stone, wide unpaid plaza, roomy security, counter on east wall, parallel IN/OUT gate banks, spacious paid hall, A–D exits to CBD module (exit:cbd, no intermediate street place).",
+   "bounds": [
+    0.25,
+    0.25,
+    36.0,
+    22.0
+   ],
+   "ground": {
+    "origin": [
+     0,
+     0
+    ],
+    "legend": {
+     "C": "mg_floor:cbd"
+    },
+    "rows_south_to_north": [
+     "CCCCCCCCCCCCCCCCCC",
+     "CCCCCCCCCCCCCCCCCC",
+     "CCCCCCCCCCCCCCCCCC",
+     "CCCCCCCCCCCCCCCCCC",
+     "CCCCCCCCCCCCCCCCCC",
+     "CCCCCCCCCCCCCCCCCC",
+     "CCCCCCCCCCCCCCCCCC",
+     "CCCCCCCCCCCCCCCCCC",
+     "CCCCCCCCCCCCCCCCCC",
+     "CCCCCCCCCCCCCCCCCC",
+     "CCCCCCCCCCCCCCCCCC"
+    ]
+   },
+   "colliders": [
+    {
+     "id": "wall0",
+     "rect": [
+      0.25,
+      21.5,
+      36.0,
+      22.1
+     ]
+    },
+    {
+     "id": "wall1",
+     "rect": [
+      0.25,
+      -0.04999999999999993,
+      36.0,
+      0.75
+     ]
+    },
+    {
+     "id": "wall2",
+     "rect": [
+      -0.04999999999999993,
+      0.25,
+      0.75,
+      22.0
+     ]
+    },
+    {
+     "id": "wall3",
+     "rect": [
+      35.4,
+      0.25,
+      36.0,
+      22.0
+     ]
+    },
+    {
+     "id": "mt_pillar_120",
+     "rect": [
+      16.2,
+      8.2,
+      16.8,
+      8.8
+     ]
+    },
+    {
+     "id": "mt_pillar_121",
+     "rect": [
+      21.7,
+      2.7,
+      22.3,
+      3.3
+     ]
+    },
+    {
+     "id": "mt_pillar_122",
+     "rect": [
+      27.7,
+      4.7,
+      28.3,
+      5.3
+     ]
+    },
+    {
+     "id": "mt_pillar_123",
+     "rect": [
+      7.7,
+      15.7,
+      8.3,
+      16.3
+     ]
+    },
+    {
+     "id": "mt_pillar_124",
+     "rect": [
+      23.7,
+      15.7,
+      24.3,
+      16.3
+     ]
+    },
+    {
+     "id": "ad_w",
+     "rect": [
+      1.0,
+      4.0,
+      1.2,
+      8.0
+     ]
+    },
+    {
+     "id": "ad_e",
+     "rect": [
+      34.8,
+      4.0,
+      35.0,
+      8.0
+     ]
+    },
+    {
+     "id": "xray",
+     "rect": [
+      4.65,
+      6.08,
+      7.35,
+      6.92
+     ]
+    },
+    {
+     "id": "arch",
+     "rect": [
+      8.9,
+      5.88,
+      9.5,
+      6.02
+     ]
+    },
+    {
+     "id": "arch",
+     "rect": [
+      8.9,
+      6.98,
+      9.5,
+      7.12
+     ]
+    },
+    {
+     "id": "mt_rail_129",
+     "rect": [
+      3.5,
+      5.5,
+      5.5,
+      5.6
+     ]
+    },
+    {
+     "id": "mt_rail_130",
+     "rect": [
+      5.5,
+      5.5,
+      7.5,
+      5.6
+     ]
+    },
+    {
+     "id": "mt_rail_131",
+     "rect": [
+      6.8,
+      5.5,
+      8.8,
+      5.6
+     ]
+    },
+    {
+     "id": "mt_rail_132",
+     "rect": [
+      3.5,
+      7.4,
+      5.5,
+      7.5
+     ]
+    },
+    {
+     "id": "mt_rail_133",
+     "rect": [
+      5.5,
+      7.4,
+      7.5,
+      7.5
+     ]
+    },
+    {
+     "id": "mt_rail_134",
+     "rect": [
+      6.8,
+      7.4,
+      8.8,
+      7.5
+     ]
+    },
+    {
+     "id": "tvm0",
+     "rect": [
+      29.7,
+      5.05,
+      30.3,
+      5.95
+     ]
+    },
+    {
+     "id": "tvm1",
+     "rect": [
+      29.7,
+      6.25,
+      30.3,
+      7.15
+     ]
+    },
+    {
+     "id": "tvm2",
+     "rect": [
+      29.7,
+      7.45,
+      30.3,
+      8.35
+     ]
+    },
+    {
+     "id": "tvm3",
+     "rect": [
+      29.7,
+      8.65,
+      30.3,
+      9.55
+     ]
+    },
+    {
+     "id": "counter",
+     "rect": [
+      31.0,
+      2.75,
+      34.0,
+      3.1
+     ]
+    },
+    {
+     "id": "counter",
+     "rect": [
+      31.0,
+      3.95,
+      34.0,
+      4.25
+     ]
+    },
+    {
+     "id": "map",
+     "rect": [
+      23.4,
+      1.08,
+      24.6,
+      1.32
+     ]
+    },
+    {
+     "id": "mt_bin_141",
+     "rect": [
+      21.78,
+      8.3,
+      22.22,
+      8.7
+     ]
+    },
+    {
+     "id": "mt_bin_142",
+     "rect": [
+      27.78,
+      10.3,
+      28.22,
+      10.7
+     ]
+    },
+    {
+     "id": "gin0",
+     "rect": [
+      6.0,
+      10.65,
+      6.26,
+      12.35
+     ]
+    },
+    {
+     "id": "gin1",
+     "rect": [
+      6.9,
+      10.65,
+      7.16,
+      12.35
+     ]
+    },
+    {
+     "id": "gin2",
+     "rect": [
+      7.8,
+      10.65,
+      8.06,
+      12.35
+     ]
+    },
+    {
+     "id": "gin3",
+     "rect": [
+      8.7,
+      10.65,
+      8.96,
+      12.35
+     ]
+    },
+    {
+     "id": "gin4",
+     "rect": [
+      9.6,
+      10.65,
+      9.86,
+      12.35
+     ]
+    },
+    {
+     "id": "gin5",
+     "rect": [
+      10.5,
+      10.65,
+      10.76,
+      12.35
+     ]
+    },
+    {
+     "id": "gin6",
+     "rect": [
+      11.4,
+      10.65,
+      11.66,
+      12.35
+     ]
+    },
+    {
+     "id": "gin_end",
+     "rect": [
+      12.3,
+      10.65,
+      12.56,
+      12.35
+     ]
+    },
+    {
+     "id": "gout0",
+     "rect": [
+      20.0,
+      10.65,
+      20.26,
+      12.35
+     ]
+    },
+    {
+     "id": "gout1",
+     "rect": [
+      20.9,
+      10.65,
+      21.16,
+      12.35
+     ]
+    },
+    {
+     "id": "gout2",
+     "rect": [
+      21.8,
+      10.65,
+      22.06,
+      12.35
+     ]
+    },
+    {
+     "id": "gout3",
+     "rect": [
+      22.7,
+      10.65,
+      22.96,
+      12.35
+     ]
+    },
+    {
+     "id": "gout4",
+     "rect": [
+      23.6,
+      10.65,
+      23.86,
+      12.35
+     ]
+    },
+    {
+     "id": "gout5",
+     "rect": [
+      24.5,
+      10.65,
+      24.76,
+      12.35
+     ]
+    },
+    {
+     "id": "gout6",
+     "rect": [
+      25.4,
+      10.65,
+      25.66,
+      12.35
+     ]
+    },
+    {
+     "id": "gout_end",
+     "rect": [
+      26.3,
+      10.65,
+      26.56,
+      12.35
+     ]
+    },
+    {
+     "id": "mt_bench_167",
+     "rect": [
+      13.1,
+      16.28,
+      14.9,
+      16.72
+     ]
+    },
+    {
+     "id": "mt_bench_168",
+     "rect": [
+      17.1,
+      16.28,
+      18.9,
+      16.72
+     ]
+    },
+    {
+     "id": "mt_fence_169",
+     "rect": [
+      5.45,
+      11.8,
+      5.55,
+      12.8
+     ]
+    },
+    {
+     "id": "mt_fence_170",
+     "rect": [
+      5.45,
+      12.8,
+      5.55,
+      13.8
+     ]
+    },
+    {
+     "id": "mt_fence_171",
+     "rect": [
+      5.45,
+      13.8,
+      5.55,
+      14.8
+     ]
+    },
+    {
+     "id": "mt_fence_172",
+     "rect": [
+      5.45,
+      14.8,
+      5.55,
+      15.8
+     ]
+    },
+    {
+     "id": "mt_fence_173",
+     "rect": [
+      5.45,
+      15.8,
+      5.55,
+      16.8
+     ]
+    },
+    {
+     "id": "mt_fence_174",
+     "rect": [
+      5.45,
+      16.8,
+      5.55,
+      17.8
+     ]
+    },
+    {
+     "id": "mt_fence_175",
+     "rect": [
+      5.45,
+      17.8,
+      5.55,
+      18.8
+     ]
+    },
+    {
+     "id": "mt_fence_176",
+     "rect": [
+      5.45,
+      18.8,
+      5.55,
+      19.8
+     ]
+    },
+    {
+     "id": "mt_fence_177",
+     "rect": [
+      5.45,
+      19.8,
+      5.55,
+      20.8
+     ]
+    },
+    {
+     "id": "mt_fence_178",
+     "rect": [
+      5.45,
+      20.2,
+      5.55,
+      21.2
+     ]
+    },
+    {
+     "id": "mt_fence_179",
+     "rect": [
+      26.95,
+      11.8,
+      27.05,
+      12.8
+     ]
+    },
+    {
+     "id": "mt_fence_180",
+     "rect": [
+      26.95,
+      12.8,
+      27.05,
+      13.8
+     ]
+    },
+    {
+     "id": "mt_fence_181",
+     "rect": [
+      26.95,
+      13.8,
+      27.05,
+      14.8
+     ]
+    },
+    {
+     "id": "mt_fence_182",
+     "rect": [
+      26.95,
+      14.8,
+      27.05,
+      15.8
+     ]
+    },
+    {
+     "id": "mt_fence_183",
+     "rect": [
+      26.95,
+      15.8,
+      27.05,
+      16.8
+     ]
+    },
+    {
+     "id": "mt_fence_184",
+     "rect": [
+      26.95,
+      16.8,
+      27.05,
+      17.8
+     ]
+    },
+    {
+     "id": "mt_fence_185",
+     "rect": [
+      26.95,
+      17.8,
+      27.05,
+      18.8
+     ]
+    },
+    {
+     "id": "mt_fence_186",
+     "rect": [
+      26.95,
+      18.8,
+      27.05,
+      19.8
+     ]
+    },
+    {
+     "id": "mt_fence_187",
+     "rect": [
+      26.95,
+      19.8,
+      27.05,
+      20.8
+     ]
+    },
+    {
+     "id": "mt_fence_188",
+     "rect": [
+      26.95,
+      20.2,
+      27.05,
+      21.2
+     ]
+    },
+    {
+     "id": "mt_fence_189",
+     "rect": [
+      12.4,
+      11.6,
+      13.4,
+      11.7
+     ]
+    },
+    {
+     "id": "mt_fence_190",
+     "rect": [
+      13.4,
+      11.6,
+      14.4,
+      11.7
+     ]
+    },
+    {
+     "id": "mt_fence_191",
+     "rect": [
+      14.4,
+      11.6,
+      15.4,
+      11.7
+     ]
+    },
+    {
+     "id": "mt_fence_192",
+     "rect": [
+      15.4,
+      11.6,
+      16.4,
+      11.7
+     ]
+    },
+    {
+     "id": "mt_fence_193",
+     "rect": [
+      16.4,
+      11.6,
+      17.4,
+      11.7
+     ]
+    },
+    {
+     "id": "mt_fence_194",
+     "rect": [
+      17.4,
+      11.6,
+      18.4,
+      11.7
+     ]
+    },
+    {
+     "id": "mt_fence_195",
+     "rect": [
+      18.4,
+      11.6,
+      19.4,
+      11.7
+     ]
+    },
+    {
+     "id": "mt_fence_196",
+     "rect": [
+      18.9,
+      11.6,
+      19.9,
+      11.7
+     ]
+    },
+    {
+     "id": "mt_fence_197",
+     "rect": [
+      16.35,
+      11.8,
+      16.45,
+      12.8
+     ]
+    },
+    {
+     "id": "mt_fence_198",
+     "rect": [
+      16.35,
+      12.8,
+      16.45,
+      13.8
+     ]
+    },
+    {
+     "id": "mt_fence_199",
+     "rect": [
+      16.35,
+      13.0,
+      16.45,
+      14.0
+     ]
+    },
+    {
+     "id": "mt_fence_200",
+     "rect": [
+      17.55,
+      11.8,
+      17.65,
+      12.8
+     ]
+    },
+    {
+     "id": "mt_fence_201",
+     "rect": [
+      17.55,
+      12.8,
+      17.65,
+      13.8
+     ]
+    },
+    {
+     "id": "mt_fence_202",
+     "rect": [
+      17.55,
+      13.0,
+      17.65,
+      14.0
+     ]
+    }
+   ],
+   "signs": [
+    {
+     "obj": "counter",
+     "at": [
+      31.0,
+      2.745,
+      2.39
+     ],
+     "axis": "x",
+     "w": 3.0,
+     "h": 0.3,
+     "lines": [
+      "客服中心 · 充值 · 补票"
+     ],
+     "ink": "#eef6ff"
+    },
+    {
+     "obj": "hs_in",
+     "at": [
+      8.25,
+      11.785,
+      2.54
+     ],
+     "axis": "x",
+     "w": 1.5,
+     "h": 0.3,
+     "lines": [
+      "入站闸机 ↑"
+     ],
+     "ink": "#ffffff"
+    },
+    {
+     "obj": "hs_out",
+     "at": [
+      22.25,
+      11.785,
+      2.54
+     ],
+     "axis": "x",
+     "w": 1.5,
+     "h": 0.3,
+     "lines": [
+      "出站闸机 ↓"
+     ],
+     "ink": "#ffffff"
+    },
+    {
+     "obj": "hs_a",
+     "at": [
+      4.25,
+      1.885,
+      2.54
+     ],
+     "axis": "x",
+     "w": 1.5,
+     "h": 0.3,
+     "lines": [
+      "A 中央公园 ↑"
+     ],
+     "ink": "#ffffff"
+    },
+    {
+     "obj": "hs_b",
+     "at": [
+      30.25,
+      1.885,
+      2.54
+     ],
+     "axis": "x",
+     "w": 1.5,
+     "h": 0.3,
+     "lines": [
+      "B 云汇天地 ↑"
+     ],
+     "ink": "#ffffff"
+    },
+    {
+     "obj": "hs_c",
+     "at": [
+      30.25,
+      19.185,
+      2.54
+     ],
+     "axis": "x",
+     "w": 1.5,
+     "h": 0.3,
+     "lines": [
+      "C 天枢塔 ↑"
+     ],
+     "ink": "#ffffff"
+    },
+    {
+     "obj": "hs_d",
+     "at": [
+      4.25,
+      19.185,
+      2.54
+     ],
+     "axis": "x",
+     "w": 1.5,
+     "h": 0.3,
+     "lines": [
+      "D 云汇体育 ↑"
+     ],
+     "ink": "#ffffff"
+    },
+    {
+     "obj": "board_n",
+     "at": [
+      14.5,
+      20.9,
+      2.2
+     ],
+     "axis": "x",
+     "w": 3.0,
+     "h": 0.35,
+     "lines": [
+      "付费区 · 往站台"
+     ],
+     "ink": "#ffe8c0"
+    },
+    {
+     "obj": "ad_w",
+     "at": [
+      0.85,
+      6.0,
+      1.2
+     ],
+     "axis": "y",
+     "w": 4.0,
+     "h": 1.8,
+     "lines": [
+      "云汇天地",
+      "秋季焕新"
+     ],
+     "ink": "#ffffff"
+    },
+    {
+     "obj": "ad_e",
+     "at": [
+      34.65,
+      6.0,
+      1.2
+     ],
+     "axis": "y",
+     "w": 4.0,
+     "h": 1.8,
+     "lines": [
+      "天枢塔 · 金融城",
+      "招聘季"
+     ],
+     "ink": "#ffffff"
+    }
+   ],
+   "portals": [
+    {
+     "id": "A",
+     "rect": [
+      3.2,
+      0.4,
+      6.8,
+      1.45
+     ],
+     "to": "exit:cbd",
+     "exit": "A",
+     "label": "A 出口 · 中央公园",
+     "auto": true
+    },
+    {
+     "id": "B",
+     "rect": [
+      29.2,
+      0.4,
+      32.8,
+      1.45
+     ],
+     "to": "exit:cbd",
+     "exit": "B",
+     "label": "B 出口 · 云汇天地",
+     "auto": true
+    },
+    {
+     "id": "C",
+     "rect": [
+      29.2,
+      20.3,
+      32.8,
+      21.4
+     ],
+     "to": "exit:cbd",
+     "exit": "C",
+     "label": "C 出口 · 天枢塔",
+     "auto": true
+    },
+    {
+     "id": "D",
+     "rect": [
+      3.2,
+      20.3,
+      6.8,
+      21.4
+     ],
+     "to": "exit:cbd",
+     "exit": "D",
+     "label": "D 出口 · 云汇体育中心",
+     "auto": true
+    },
+    {
+     "id": "down",
+     "rect": [
+      16.2,
+      18.0,
+      19.8,
+      19.2
+     ],
+     "to": "cbd_platform",
+     "spawn": [
+      14.0,
+      6.5,
+      "N"
+     ],
+     "label": "下楼往站台",
+     "auto": true,
+     "hours": true
+    }
+   ],
+   "exit_spawns": {
+    "A": [
+     5.0,
+     2.6,
+     "N"
+    ],
+    "B": [
+     31.0,
+     2.6,
+     "N"
+    ],
+    "C": [
+     31.0,
+     19.2,
+     "S"
+    ],
+    "D": [
+     5.0,
+     19.2,
+     "S"
+    ]
+   },
+   "zones": [
+    {
+     "id": "arch",
+     "kind": "arch",
+     "rect": [
+      8.8,
+      6.0,
+      9.6,
+      7.0
+     ]
+    },
+    {
+     "id": "paid",
+     "kind": "paid",
+     "rect": [
+      5.8,
+      11.85,
+      26.7,
+      21.2
+     ]
+    }
+   ],
+   "staff": [
+    {
+     "id": "guard",
+     "sprite": "office",
+     "at": [
+      10.2,
+      7.8
+     ],
+     "dir": "SW",
+     "name": "安检员"
+    },
+    {
+     "id": "op",
+     "sprite": "uncle",
+     "at": [
+      4.8,
+      5.2
+     ],
+     "dir": "N",
+     "name": "安检机操作员"
+    },
+    {
+     "id": "clerk",
+     "sprite": "student",
+     "at": [
+      32.5,
+      4.5
+     ],
+     "dir": "S",
+     "name": "客服"
+    },
+    {
+     "id": "gatestaff",
+     "sprite": "office",
+     "at": [
+      17.0,
+      10.7
+     ],
+     "dir": "S",
+     "name": "站务员"
+    }
+   ],
+   "spawn": [
+    5.0,
+    2.6,
+    "N"
+   ],
+   "gate_approach": 1.35,
+   "lights": [
+    {
+     "x": 8,
+     "y": 6,
+     "r": 7,
+     "c": [
+      230,
+      240,
+      255
+     ]
+    },
+    {
+     "x": 18,
+     "y": 6,
+     "r": 7,
+     "c": [
+      230,
+      240,
+      255
+     ]
+    },
+    {
+     "x": 28,
+     "y": 5,
+     "r": 6,
+     "c": [
+      230,
+      240,
+      255
+     ]
+    },
+    {
+     "x": 16,
+     "y": 15,
+     "r": 8,
+     "c": [
+      235,
+      245,
+      255
+     ]
+    },
+    {
+     "x": 8,
+     "y": 18,
+     "r": 5,
+     "c": [
+      230,
+      240,
+      255
+     ]
+    },
+    {
+     "x": 28,
+     "y": 18,
+     "r": 5,
+     "c": [
+      230,
+      240,
+      255
+     ]
+    }
+   ],
+   "routes": {
+    "in": [
+     [
+      5.0,
+      2.8
+     ],
+     [
+      8.0,
+      3.2
+     ],
+     [
+      10.0,
+      4.0
+     ],
+     [
+      12.0,
+      5.5
+     ],
+     [
+      12.0,
+      10.0
+     ],
+     "gate_in",
+     [
+      8.5,
+      14.5
+     ],
+     [
+      10.0,
+      18.5
+     ],
+     [
+      20.0,
+      18.5
+     ]
+    ],
+    "out": [
+     [
+      20.0,
+      18.5
+     ],
+     [
+      23.5,
+      15.5
+     ],
+     "gate_out",
+     [
+      27.0,
+      9.0
+     ],
+     [
+      27.0,
+      5.5
+     ],
+     [
+      24.0,
+      4.0
+     ],
+     [
+      16.0,
+      3.2
+     ],
+     [
+      8.0,
+      3.0
+     ],
+     [
+      5.0,
+      2.8
+     ]
+    ],
+    "tvm": [
+     [
+      18.0,
+      5.5
+     ],
+     [
+      24.0,
+      6.5
+     ],
+     [
+      28.8,
+      6.5
+     ],
+     [
+      24.0,
+      6.5
+     ],
+     [
+      18.0,
+      5.5
+     ]
+    ]
+   },
+   "exit_joins": {
+    "A": [
+     [
+      5.0,
+      2.8
+     ]
+    ],
+    "B": [
+     [
+      31.0,
+      2.8
+     ]
+    ],
+    "C": [
+     [
+      31.0,
+      19.0
+     ]
+    ],
+    "D": [
+     [
+      5.0,
+      19.0
+     ]
+    ]
+   },
+   "exit_routes": {
+    "A": [
+     [
+      5.0,
+      2.8
+     ]
+    ],
+    "B": [
+     [
+      31.0,
+      2.8
+     ]
+    ],
+    "C": [
+     [
+      31.0,
+      19.0
+     ]
+    ],
+    "D": [
+     [
+      5.0,
+      19.0
+     ]
+    ]
+   },
+   "objects": [
+    {
+     "id": "mt_wall_000",
+     "type": "mt_wall",
+     "x": 0.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_001",
+     "type": "mt_wall",
+     "x": 1.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_002",
+     "type": "mt_wall",
+     "x": 2.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_003",
+     "type": "mt_wall",
+     "x": 3.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_004",
+     "type": "mt_wall",
+     "x": 4.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_005",
+     "type": "mt_wall",
+     "x": 5.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_006",
+     "type": "mt_wall",
+     "x": 6.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_007",
+     "type": "mt_wall",
+     "x": 7.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_008",
+     "type": "mt_wall",
+     "x": 8.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_009",
+     "type": "mt_wall",
+     "x": 9.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_010",
+     "type": "mt_wall",
+     "x": 10.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_011",
+     "type": "mt_wall",
+     "x": 11.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_012",
+     "type": "mt_wall",
+     "x": 12.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_013",
+     "type": "mt_wall",
+     "x": 13.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_014",
+     "type": "mt_wall",
+     "x": 14.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_015",
+     "type": "mt_wall",
+     "x": 15.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_016",
+     "type": "mt_wall",
+     "x": 16.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_017",
+     "type": "mt_wall",
+     "x": 17.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_018",
+     "type": "mt_wall",
+     "x": 18.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_019",
+     "type": "mt_wall",
+     "x": 19.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_020",
+     "type": "mt_wall",
+     "x": 20.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_021",
+     "type": "mt_wall",
+     "x": 21.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_022",
+     "type": "mt_wall",
+     "x": 22.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_023",
+     "type": "mt_wall",
+     "x": 23.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_024",
+     "type": "mt_wall",
+     "x": 24.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_025",
+     "type": "mt_wall",
+     "x": 25.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_026",
+     "type": "mt_wall",
+     "x": 26.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_027",
+     "type": "mt_wall",
+     "x": 27.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_028",
+     "type": "mt_wall",
+     "x": 28.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_029",
+     "type": "mt_wall",
+     "x": 29.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_030",
+     "type": "mt_wall",
+     "x": 30.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_031",
+     "type": "mt_wall",
+     "x": 31.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_032",
+     "type": "mt_wall",
+     "x": 32.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_033",
+     "type": "mt_wall",
+     "x": 33.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_034",
+     "type": "mt_wall",
+     "x": 34.25,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_035",
+     "type": "mt_wall",
+     "x": 35.0,
+     "y": 21.5,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_cut_036",
+     "type": "mt_cut",
+     "x": 0.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_037",
+     "type": "mt_cut",
+     "x": 1.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_038",
+     "type": "mt_cut",
+     "x": 2.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_039",
+     "type": "mt_cut",
+     "x": 3.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_040",
+     "type": "mt_cut",
+     "x": 4.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_041",
+     "type": "mt_cut",
+     "x": 5.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_042",
+     "type": "mt_cut",
+     "x": 6.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_043",
+     "type": "mt_cut",
+     "x": 7.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_044",
+     "type": "mt_cut",
+     "x": 8.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_045",
+     "type": "mt_cut",
+     "x": 9.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_046",
+     "type": "mt_cut",
+     "x": 10.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_047",
+     "type": "mt_cut",
+     "x": 11.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_048",
+     "type": "mt_cut",
+     "x": 12.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_049",
+     "type": "mt_cut",
+     "x": 13.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_050",
+     "type": "mt_cut",
+     "x": 14.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_051",
+     "type": "mt_cut",
+     "x": 15.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_052",
+     "type": "mt_cut",
+     "x": 16.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_053",
+     "type": "mt_cut",
+     "x": 17.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_054",
+     "type": "mt_cut",
+     "x": 18.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_055",
+     "type": "mt_cut",
+     "x": 19.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_056",
+     "type": "mt_cut",
+     "x": 20.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_057",
+     "type": "mt_cut",
+     "x": 21.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_058",
+     "type": "mt_cut",
+     "x": 22.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_059",
+     "type": "mt_cut",
+     "x": 23.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_060",
+     "type": "mt_cut",
+     "x": 24.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_061",
+     "type": "mt_cut",
+     "x": 25.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_062",
+     "type": "mt_cut",
+     "x": 26.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_063",
+     "type": "mt_cut",
+     "x": 27.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_064",
+     "type": "mt_cut",
+     "x": 28.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_065",
+     "type": "mt_cut",
+     "x": 29.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_066",
+     "type": "mt_cut",
+     "x": 30.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_067",
+     "type": "mt_cut",
+     "x": 31.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_068",
+     "type": "mt_cut",
+     "x": 32.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_069",
+     "type": "mt_cut",
+     "x": 33.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_070",
+     "type": "mt_cut",
+     "x": 34.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_071",
+     "type": "mt_cut",
+     "x": 35.0,
+     "y": 0.55,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_072",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 1.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_073",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 2.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_074",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 3.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_075",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 4.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_076",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 5.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_077",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 6.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_078",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 7.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_079",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 8.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_080",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 9.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_081",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 10.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_082",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 11.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_083",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 12.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_084",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 13.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_085",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 14.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_086",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 15.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_087",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 16.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_088",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 17.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_089",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 18.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_090",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 19.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_091",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 20.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_092",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 21.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_093",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 22.0,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "W"
+    },
+    {
+     "id": "mt_wall_094",
+     "type": "mt_wall",
+     "x": 35.4,
+     "y": 1.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_095",
+     "type": "mt_wall",
+     "x": 35.4,
+     "y": 2.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_096",
+     "type": "mt_wall",
+     "x": 35.4,
+     "y": 3.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_097",
+     "type": "mt_wall",
+     "x": 35.4,
+     "y": 4.25,
+     "rot": 6,
+     "state": "cbd_map",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_098",
+     "type": "mt_wall",
+     "x": 35.4,
+     "y": 5.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_099",
+     "type": "mt_wall",
+     "x": 35.4,
+     "y": 6.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_100",
+     "type": "mt_wall",
+     "x": 35.4,
+     "y": 7.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_101",
+     "type": "mt_wall",
+     "x": 35.4,
+     "y": 8.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_102",
+     "type": "mt_wall",
+     "x": 35.4,
+     "y": 9.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_103",
+     "type": "mt_wall",
+     "x": 35.4,
+     "y": 10.25,
+     "rot": 6,
+     "state": "cbd_ad",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_104",
+     "type": "mt_wall",
+     "x": 35.4,
+     "y": 11.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_105",
+     "type": "mt_wall",
+     "x": 35.4,
+     "y": 12.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_106",
+     "type": "mt_wall",
+     "x": 35.4,
+     "y": 13.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_107",
+     "type": "mt_wall",
+     "x": 35.4,
+     "y": 14.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_108",
+     "type": "mt_wall",
+     "x": 35.4,
+     "y": 15.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_109",
+     "type": "mt_wall",
+     "x": 35.4,
+     "y": 16.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_110",
+     "type": "mt_wall",
+     "x": 35.4,
+     "y": 17.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_111",
+     "type": "mt_wall",
+     "x": 35.4,
+     "y": 18.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_112",
+     "type": "mt_wall",
+     "x": 35.4,
+     "y": 19.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_113",
+     "type": "mt_wall",
+     "x": 35.4,
+     "y": 20.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_114",
+     "type": "mt_wall",
+     "x": 35.4,
+     "y": 21.25,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_115",
+     "type": "mt_wall",
+     "x": 35.4,
+     "y": 22.0,
+     "rot": 6,
+     "state": "cbd",
+     "wall": "E"
+    },
+    {
+     "id": "exit_a",
+     "type": "mt_up",
+     "x": 5.0,
+     "y": 0.55,
+     "rot": 4,
+     "state": "cbd",
+     "nocol": true
+    },
+    {
+     "id": "exit_b",
+     "type": "mt_up",
+     "x": 31.0,
+     "y": 0.55,
+     "rot": 4,
+     "state": "cbd",
+     "nocol": true
+    },
+    {
+     "id": "exit_c",
+     "type": "mt_up",
+     "x": 31.0,
+     "y": 18.5,
+     "rot": 0,
+     "state": "cbd",
+     "nocol": true
+    },
+    {
+     "id": "exit_d",
+     "type": "mt_up",
+     "x": 5.0,
+     "y": 18.5,
+     "rot": 0,
+     "state": "cbd",
+     "nocol": true
+    },
+    {
+     "id": "mt_pillar_120",
+     "type": "mt_pillar",
+     "x": 16.5,
+     "y": 8.5,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_pillar_121",
+     "type": "mt_pillar",
+     "x": 22,
+     "y": 3.0,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_pillar_122",
+     "type": "mt_pillar",
+     "x": 28.0,
+     "y": 5.0,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_pillar_123",
+     "type": "mt_pillar",
+     "x": 8.0,
+     "y": 16.0,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_pillar_124",
+     "type": "mt_pillar",
+     "x": 24.0,
+     "y": 16.0,
+     "state": "cbd"
+    },
+    {
+     "id": "ad_w",
+     "type": "mt_adwall",
+     "x": 1.0,
+     "y": 8.0,
+     "rot": 6,
+     "state": "default"
+    },
+    {
+     "id": "ad_e",
+     "type": "mt_adwall",
+     "x": 34.8,
+     "y": 8.0,
+     "rot": 6,
+     "state": "default"
+    },
+    {
+     "id": "xray",
+     "type": "mt_xray",
+     "x": 6.0,
+     "y": 6.5,
+     "interact": "xray",
+     "reach": [
+      6.0,
+      5.6
+     ],
+     "label": "放包过安检"
+    },
+    {
+     "id": "arch",
+     "type": "mt_arch",
+     "x": 9.2,
+     "y": 6.5
+    },
+    {
+     "id": "mt_rail_129",
+     "type": "mt_rail",
+     "x": 3.5,
+     "y": 5.55,
+     "rot": 0,
+     "state": "default"
+    },
+    {
+     "id": "mt_rail_130",
+     "type": "mt_rail",
+     "x": 5.5,
+     "y": 5.55,
+     "rot": 0,
+     "state": "default"
+    },
+    {
+     "id": "mt_rail_131",
+     "type": "mt_rail",
+     "x": 6.8,
+     "y": 5.55,
+     "rot": 0,
+     "state": "default"
+    },
+    {
+     "id": "mt_rail_132",
+     "type": "mt_rail",
+     "x": 3.5,
+     "y": 7.45,
+     "rot": 0,
+     "state": "default"
+    },
+    {
+     "id": "mt_rail_133",
+     "type": "mt_rail",
+     "x": 5.5,
+     "y": 7.45,
+     "rot": 0,
+     "state": "default"
+    },
+    {
+     "id": "mt_rail_134",
+     "type": "mt_rail",
+     "x": 6.8,
+     "y": 7.45,
+     "rot": 0,
+     "state": "default"
+    },
+    {
+     "id": "tvm0",
+     "type": "mt_tvm",
+     "x": 30.0,
+     "y": 5.5,
+     "rot": 6,
+     "state": "cbd",
+     "interact": "tvm",
+     "reach": [
+      29.1,
+      5.5
+     ],
+     "label": "买单程票"
+    },
+    {
+     "id": "tvm1",
+     "type": "mt_tvm",
+     "x": 30.0,
+     "y": 6.7,
+     "rot": 6,
+     "state": "cbd",
+     "interact": "tvm",
+     "reach": [
+      29.1,
+      6.7
+     ],
+     "label": "买单程票"
+    },
+    {
+     "id": "tvm2",
+     "type": "mt_tvm",
+     "x": 30.0,
+     "y": 7.9,
+     "rot": 6,
+     "state": "cbd",
+     "interact": "tvm",
+     "reach": [
+      29.1,
+      7.9
+     ],
+     "label": "买单程票"
+    },
+    {
+     "id": "tvm3",
+     "type": "mt_tvm",
+     "x": 30.0,
+     "y": 9.1,
+     "rot": 6,
+     "state": "cbd",
+     "interact": "tvm",
+     "reach": [
+      29.1,
+      9.1
+     ],
+     "label": "买单程票"
+    },
+    {
+     "id": "counter",
+     "type": "mt_counter",
+     "x": 32.5,
+     "y": 3.5,
+     "state": "cbd",
+     "interact": "counter",
+     "reach": [
+      31.1,
+      3.5
+     ],
+     "label": "客服中心 · 充值"
+    },
+    {
+     "id": "map",
+     "type": "mt_mapboard",
+     "x": 24.0,
+     "y": 1.2,
+     "state": "cbd",
+     "interact": "map",
+     "reach": [
+      24.0,
+      2.0
+     ],
+     "label": "线路图"
+    },
+    {
+     "id": "mt_bin_141",
+     "type": "mt_bin",
+     "x": 22,
+     "y": 8.5,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_bin_142",
+     "type": "mt_bin",
+     "x": 28,
+     "y": 10.5,
+     "state": "cbd"
+    },
+    {
+     "id": "gin0",
+     "type": "mt_gate",
+     "x": 6.0,
+     "y": 11.5,
+     "rot": 0,
+     "state": "cbd_closed",
+     "gate": 0,
+     "gate_kind": "in"
+    },
+    {
+     "id": "gin1",
+     "type": "mt_gate",
+     "x": 6.9,
+     "y": 11.5,
+     "rot": 0,
+     "state": "cbd_closed",
+     "gate": 1,
+     "gate_kind": "in"
+    },
+    {
+     "id": "gin2",
+     "type": "mt_gate",
+     "x": 7.8,
+     "y": 11.5,
+     "rot": 0,
+     "state": "cbd_closed",
+     "gate": 2,
+     "gate_kind": "in"
+    },
+    {
+     "id": "gin3",
+     "type": "mt_gate",
+     "x": 8.7,
+     "y": 11.5,
+     "rot": 0,
+     "state": "cbd_closed",
+     "gate": 3,
+     "gate_kind": "in"
+    },
+    {
+     "id": "gin4",
+     "type": "mt_gate",
+     "x": 9.6,
+     "y": 11.5,
+     "rot": 0,
+     "state": "cbd_closed",
+     "gate": 4,
+     "gate_kind": "in"
+    },
+    {
+     "id": "gin5",
+     "type": "mt_gate",
+     "x": 10.5,
+     "y": 11.5,
+     "rot": 0,
+     "state": "cbd_closed",
+     "gate": 5,
+     "gate_kind": "in"
+    },
+    {
+     "id": "gin6",
+     "type": "mt_gate",
+     "x": 11.4,
+     "y": 11.5,
+     "rot": 0,
+     "state": "cbd_closed",
+     "gate": 6,
+     "gate_kind": "in"
+    },
+    {
+     "id": "gin_end",
+     "type": "mt_gate_end",
+     "x": 12.3,
+     "y": 11.5,
+     "rot": 0,
+     "state": "cbd"
+    },
+    {
+     "id": "gout0",
+     "type": "mt_gate",
+     "x": 20.0,
+     "y": 11.5,
+     "rot": 0,
+     "state": "cbd_closed",
+     "gate": 0,
+     "gate_kind": "out"
+    },
+    {
+     "id": "gout1",
+     "type": "mt_gate",
+     "x": 20.9,
+     "y": 11.5,
+     "rot": 0,
+     "state": "cbd_closed",
+     "gate": 1,
+     "gate_kind": "out"
+    },
+    {
+     "id": "gout2",
+     "type": "mt_gate",
+     "x": 21.8,
+     "y": 11.5,
+     "rot": 0,
+     "state": "cbd_closed",
+     "gate": 2,
+     "gate_kind": "out"
+    },
+    {
+     "id": "gout3",
+     "type": "mt_gate",
+     "x": 22.7,
+     "y": 11.5,
+     "rot": 0,
+     "state": "cbd_closed",
+     "gate": 3,
+     "gate_kind": "out"
+    },
+    {
+     "id": "gout4",
+     "type": "mt_gate",
+     "x": 23.6,
+     "y": 11.5,
+     "rot": 0,
+     "state": "cbd_closed",
+     "gate": 4,
+     "gate_kind": "out"
+    },
+    {
+     "id": "gout5",
+     "type": "mt_gate",
+     "x": 24.5,
+     "y": 11.5,
+     "rot": 0,
+     "state": "cbd_closed",
+     "gate": 5,
+     "gate_kind": "out"
+    },
+    {
+     "id": "gout6",
+     "type": "mt_gate",
+     "x": 25.4,
+     "y": 11.5,
+     "rot": 0,
+     "state": "cbd_closed",
+     "gate": 6,
+     "gate_kind": "out"
+    },
+    {
+     "id": "gout_end",
+     "type": "mt_gate_end",
+     "x": 26.3,
+     "y": 11.5,
+     "rot": 0,
+     "state": "cbd"
+    },
+    {
+     "id": "plat_stairs",
+     "type": "mt_down",
+     "x": 18.0,
+     "y": 16.0,
+     "rot": 0,
+     "state": "cbd",
+     "nocol": true
+    },
+    {
+     "id": "hs_in",
+     "type": "mt_hangsign",
+     "x": 9.0,
+     "y": 12.1,
+     "state": "cbd"
+    },
+    {
+     "id": "hs_out",
+     "type": "mt_hangsign",
+     "x": 23.0,
+     "y": 12.1,
+     "state": "cbd"
+    },
+    {
+     "id": "hs_a",
+     "type": "mt_hangsign",
+     "x": 5.0,
+     "y": 2.2,
+     "state": "cbd"
+    },
+    {
+     "id": "hs_b",
+     "type": "mt_hangsign",
+     "x": 31.0,
+     "y": 2.2,
+     "state": "cbd"
+    },
+    {
+     "id": "hs_c",
+     "type": "mt_hangsign",
+     "x": 31.0,
+     "y": 19.5,
+     "state": "cbd"
+    },
+    {
+     "id": "hs_d",
+     "type": "mt_hangsign",
+     "x": 5.0,
+     "y": 19.5,
+     "state": "cbd"
+    },
+    {
+     "id": "board_n",
+     "type": "mt_board",
+     "x": 16.0,
+     "y": 21.0,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_bench_167",
+     "type": "mt_bench",
+     "x": 14.0,
+     "y": 16.5,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_bench_168",
+     "type": "mt_bench",
+     "x": 18.0,
+     "y": 16.5,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_169",
+     "type": "mt_fence",
+     "x": 5.5,
+     "y": 12.8,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_170",
+     "type": "mt_fence",
+     "x": 5.5,
+     "y": 13.8,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_171",
+     "type": "mt_fence",
+     "x": 5.5,
+     "y": 14.8,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_172",
+     "type": "mt_fence",
+     "x": 5.5,
+     "y": 15.8,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_173",
+     "type": "mt_fence",
+     "x": 5.5,
+     "y": 16.8,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_174",
+     "type": "mt_fence",
+     "x": 5.5,
+     "y": 17.8,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_175",
+     "type": "mt_fence",
+     "x": 5.5,
+     "y": 18.8,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_176",
+     "type": "mt_fence",
+     "x": 5.5,
+     "y": 19.8,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_177",
+     "type": "mt_fence",
+     "x": 5.5,
+     "y": 20.8,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_178",
+     "type": "mt_fence",
+     "x": 5.5,
+     "y": 21.2,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_179",
+     "type": "mt_fence",
+     "x": 27.0,
+     "y": 12.8,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_180",
+     "type": "mt_fence",
+     "x": 27.0,
+     "y": 13.8,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_181",
+     "type": "mt_fence",
+     "x": 27.0,
+     "y": 14.8,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_182",
+     "type": "mt_fence",
+     "x": 27.0,
+     "y": 15.8,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_183",
+     "type": "mt_fence",
+     "x": 27.0,
+     "y": 16.8,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_184",
+     "type": "mt_fence",
+     "x": 27.0,
+     "y": 17.8,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_185",
+     "type": "mt_fence",
+     "x": 27.0,
+     "y": 18.8,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_186",
+     "type": "mt_fence",
+     "x": 27.0,
+     "y": 19.8,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_187",
+     "type": "mt_fence",
+     "x": 27.0,
+     "y": 20.8,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_188",
+     "type": "mt_fence",
+     "x": 27.0,
+     "y": 21.2,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_189",
+     "type": "mt_fence",
+     "x": 12.4,
+     "y": 11.65,
+     "rot": 0,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_190",
+     "type": "mt_fence",
+     "x": 13.4,
+     "y": 11.65,
+     "rot": 0,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_191",
+     "type": "mt_fence",
+     "x": 14.4,
+     "y": 11.65,
+     "rot": 0,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_192",
+     "type": "mt_fence",
+     "x": 15.4,
+     "y": 11.65,
+     "rot": 0,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_193",
+     "type": "mt_fence",
+     "x": 16.4,
+     "y": 11.65,
+     "rot": 0,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_194",
+     "type": "mt_fence",
+     "x": 17.4,
+     "y": 11.65,
+     "rot": 0,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_195",
+     "type": "mt_fence",
+     "x": 18.4,
+     "y": 11.65,
+     "rot": 0,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_196",
+     "type": "mt_fence",
+     "x": 18.9,
+     "y": 11.65,
+     "rot": 0,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_197",
+     "type": "mt_fence",
+     "x": 16.4,
+     "y": 12.8,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_198",
+     "type": "mt_fence",
+     "x": 16.4,
+     "y": 13.8,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_199",
+     "type": "mt_fence",
+     "x": 16.4,
+     "y": 14.0,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_200",
+     "type": "mt_fence",
+     "x": 17.6,
+     "y": 12.8,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_201",
+     "type": "mt_fence",
+     "x": 17.6,
+     "y": 13.8,
+     "rot": 6,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_fence_202",
+     "type": "mt_fence",
+     "x": 17.6,
+     "y": 14.0,
+     "rot": 6,
+     "state": "cbd"
+    }
+   ],
+   "gates": [
+    {
+     "i": 0,
+     "obj": "gin0",
+     "kind": "in",
+     "bank": "gin",
+     "x0": 6.26,
+     "x1": 6.9,
+     "y": 11.5,
+     "flap": [
+      6.26,
+      11.44,
+      6.9,
+      11.56
+     ]
+    },
+    {
+     "i": 1,
+     "obj": "gin1",
+     "kind": "in",
+     "bank": "gin",
+     "x0": 7.16,
+     "x1": 7.8,
+     "y": 11.5,
+     "flap": [
+      7.16,
+      11.44,
+      7.8,
+      11.56
+     ]
+    },
+    {
+     "i": 2,
+     "obj": "gin2",
+     "kind": "in",
+     "bank": "gin",
+     "x0": 8.06,
+     "x1": 8.7,
+     "y": 11.5,
+     "flap": [
+      8.06,
+      11.44,
+      8.7,
+      11.56
+     ]
+    },
+    {
+     "i": 3,
+     "obj": "gin3",
+     "kind": "in",
+     "bank": "gin",
+     "x0": 8.96,
+     "x1": 9.6,
+     "y": 11.5,
+     "flap": [
+      8.96,
+      11.44,
+      9.6,
+      11.56
+     ]
+    },
+    {
+     "i": 4,
+     "obj": "gin4",
+     "kind": "in",
+     "bank": "gin",
+     "x0": 9.86,
+     "x1": 10.5,
+     "y": 11.5,
+     "flap": [
+      9.86,
+      11.44,
+      10.5,
+      11.56
+     ]
+    },
+    {
+     "i": 5,
+     "obj": "gin5",
+     "kind": "in",
+     "bank": "gin",
+     "x0": 10.76,
+     "x1": 11.4,
+     "y": 11.5,
+     "flap": [
+      10.76,
+      11.44,
+      11.4,
+      11.56
+     ]
+    },
+    {
+     "i": 6,
+     "obj": "gin6",
+     "kind": "in",
+     "bank": "gin",
+     "x0": 11.66,
+     "x1": 12.3,
+     "y": 11.5,
+     "flap": [
+      11.66,
+      11.44,
+      12.3,
+      11.56
+     ]
+    },
+    {
+     "i": 0,
+     "obj": "gout0",
+     "kind": "out",
+     "bank": "gout",
+     "x0": 20.26,
+     "x1": 20.9,
+     "y": 11.5,
+     "flap": [
+      20.26,
+      11.44,
+      20.9,
+      11.56
+     ]
+    },
+    {
+     "i": 1,
+     "obj": "gout1",
+     "kind": "out",
+     "bank": "gout",
+     "x0": 21.16,
+     "x1": 21.8,
+     "y": 11.5,
+     "flap": [
+      21.16,
+      11.44,
+      21.8,
+      11.56
+     ]
+    },
+    {
+     "i": 2,
+     "obj": "gout2",
+     "kind": "out",
+     "bank": "gout",
+     "x0": 22.06,
+     "x1": 22.7,
+     "y": 11.5,
+     "flap": [
+      22.06,
+      11.44,
+      22.7,
+      11.56
+     ]
+    },
+    {
+     "i": 3,
+     "obj": "gout3",
+     "kind": "out",
+     "bank": "gout",
+     "x0": 22.96,
+     "x1": 23.6,
+     "y": 11.5,
+     "flap": [
+      22.96,
+      11.44,
+      23.6,
+      11.56
+     ]
+    },
+    {
+     "i": 4,
+     "obj": "gout4",
+     "kind": "out",
+     "bank": "gout",
+     "x0": 23.86,
+     "x1": 24.5,
+     "y": 11.5,
+     "flap": [
+      23.86,
+      11.44,
+      24.5,
+      11.56
+     ]
+    },
+    {
+     "i": 5,
+     "obj": "gout5",
+     "kind": "out",
+     "bank": "gout",
+     "x0": 24.76,
+     "x1": 25.4,
+     "y": 11.5,
+     "flap": [
+      24.76,
+      11.44,
+      25.4,
+      11.56
+     ]
+    },
+    {
+     "i": 6,
+     "obj": "gout6",
+     "kind": "out",
+     "bank": "gout",
+     "x0": 25.66,
+     "x1": 26.3,
+     "y": 11.5,
+     "flap": [
+      25.66,
+      11.44,
+      26.3,
+      11.56
+     ]
+    }
+   ],
+   "psd": [],
+   "layout_check": {
+    "checked": 41,
+    "problems": [],
+    "min_route_clearance": 0.283
+   }
+  },
+  "cbd_platform": {
+   "id": "cbd_platform",
+   "station": "cbd",
+   "skin": "cbd",
+   "kind": "platform",
+   "name": "中央商务区站 · 站台（B2，岛式）",
+   "_doc": "Widened island platform — CBD grand. Clear standing room, screen doors kept, NPC waits spread along the platform.",
+   "bounds": [
+    0.25,
+    0.8,
+    28.0,
+    12.2
+   ],
+   "ground": {
+    "origin": [
+     0,
+     0
+    ],
+    "legend": {
+     "C": "mg_floor:cbd"
+    },
+    "rows_south_to_north": [
+     "CCCCCCCCCCCCCC",
+     "CCCCCCCCCCCCCC",
+     "CCCCCCCCCCCCCC",
+     "CCCCCCCCCCCCCC",
+     "CCCCCCCCCCCCCC",
+     "CCCCCCCCCCCCCC"
+    ]
+   },
+   "signs": [
+    {
+     "obj": "hs_exit",
+     "at": [
+      11.75,
+      6.135,
+      2.54
+     ],
+     "axis": "x",
+     "w": 1.5,
+     "h": 0.3,
+     "lines": [
+      "出口 · 站厅 ↑"
+     ],
+     "ink": "#ffffff"
+    },
+    {
+     "obj": "bd_ne",
+     "at": [
+      5.0,
+      11.5,
+      2.2
+     ],
+     "axis": "x",
+     "w": 2.0,
+     "h": 0.35,
+     "lines": [
+      "3号线 · 往科技园"
+     ],
+     "ink": "#ffe8c0"
+    },
+    {
+     "obj": "bd_nw",
+     "at": [
+      17.0,
+      11.5,
+      2.2
+     ],
+     "axis": "x",
+     "w": 2.0,
+     "h": 0.35,
+     "lines": [
+      "下一班"
+     ],
+     "ink": "#ffe8c0"
+    },
+    {
+     "obj": "bd_s",
+     "at": [
+      18.0,
+      1.2999999999999998,
+      2.2
+     ],
+     "axis": "x",
+     "w": 2.0,
+     "h": 0.35,
+     "lines": [
+      "3号线 · 往槐北新村"
+     ],
+     "ink": "#ffe8c0"
+    }
+   ],
+   "tracks": [
+    {
+     "id": "N",
+     "dir": "east",
+     "y": 12.5,
+     "rot": 0,
+     "cars": [
+      2,
+      6,
+      10,
+      14,
+      18
+     ],
+     "cab_e": [
+      26,
+      12.5,
+      0
+     ],
+     "cab_w": [
+      2,
+      15.6,
+      4
+     ],
+     "rails": [
+      12.33,
+      13.77
+     ],
+     "door_y": 12.05,
+     "skin": "cbd"
+    },
+    {
+     "id": "S",
+     "dir": "west",
+     "y": 0.5,
+     "rot": 4,
+     "cars": [
+      4,
+      8,
+      12,
+      16,
+      20
+     ],
+     "cab_e": [
+      24,
+      -2.6,
+      0
+     ],
+     "cab_w": [
+      0,
+      0.5,
+      4
+     ],
+     "rails": [
+      -0.27,
+      1.17
+     ],
+     "door_y": 0.95,
+     "skin": "cbd"
+    }
+   ],
+   "portals": [
+    {
+     "id": "up",
+     "rect": [
+      12.8,
+      4.8,
+      15.2,
+      8.2
+     ],
+     "to": "cbd_concourse",
+     "spawn": [
+      18.0,
+      17.5,
+      "S"
+     ],
+     "label": "上楼去站厅",
+     "auto": true
+    }
+   ],
+   "spawn": [
+    14.0,
+    6.5,
+    "S"
+   ],
+   "waits": [
+    [
+     2.5,
+     11.3,
+     "N"
+    ],
+    [
+     4.7,
+     11.3,
+     "N"
+    ],
+    [
+     6.9,
+     11.3,
+     "N"
+    ],
+    [
+     9.100000000000001,
+     11.3,
+     "N"
+    ],
+    [
+     11.3,
+     11.3,
+     "N"
+    ],
+    [
+     13.5,
+     11.3,
+     "N"
+    ],
+    [
+     15.700000000000001,
+     11.3,
+     "N"
+    ],
+    [
+     17.900000000000002,
+     11.3,
+     "N"
+    ],
+    [
+     2.5,
+     10.6,
+     "N"
+    ],
+    [
+     4.7,
+     10.6,
+     "N"
+    ],
+    [
+     6.9,
+     10.6,
+     "N"
+    ],
+    [
+     9.100000000000001,
+     10.6,
+     "N"
+    ],
+    [
+     11.3,
+     10.6,
+     "N"
+    ],
+    [
+     13.5,
+     10.6,
+     "N"
+    ],
+    [
+     3.0,
+     1.7,
+     "S"
+    ],
+    [
+     5.2,
+     1.7,
+     "S"
+    ],
+    [
+     7.4,
+     1.7,
+     "S"
+    ],
+    [
+     9.600000000000001,
+     1.7,
+     "S"
+    ],
+    [
+     11.8,
+     1.7,
+     "S"
+    ],
+    [
+     14.0,
+     1.7,
+     "S"
+    ],
+    [
+     16.200000000000003,
+     1.7,
+     "S"
+    ],
+    [
+     18.400000000000002,
+     1.7,
+     "S"
+    ],
+    [
+     3.0,
+     2.4,
+     "S"
+    ],
+    [
+     5.2,
+     2.4,
+     "S"
+    ],
+    [
+     7.4,
+     2.4,
+     "S"
+    ],
+    [
+     9.600000000000001,
+     2.4,
+     "S"
+    ],
+    [
+     11.8,
+     2.4,
+     "S"
+    ],
+    [
+     14.0,
+     2.4,
+     "S"
+    ]
+   ],
+   "lights": [
+    {
+     "x": 8,
+     "y": 6.5,
+     "r": 6,
+     "c": [
+      235,
+      245,
+      255
+     ]
+    },
+    {
+     "x": 18,
+     "y": 6.5,
+     "r": 6,
+     "c": [
+      235,
+      245,
+      255
+     ]
+    }
+   ],
+   "routes": {
+    "wait_n": [
+     [
+      14.0,
+      6.5
+     ],
+     [
+      8.0,
+      10.5
+     ],
+     [
+      20.0,
+      10.5
+     ],
+     [
+      14.0,
+      6.5
+     ]
+    ],
+    "wait_s": [
+     [
+      14.0,
+      6.5
+     ],
+     [
+      8.0,
+      2.5
+     ],
+     [
+      20.0,
+      2.5
+     ],
+     [
+      14.0,
+      6.5
+     ]
+    ]
+   },
+   "objects": [
+    {
+     "id": "mt_wall_000",
+     "type": "mt_wall",
+     "x": 0.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_001",
+     "type": "mt_wall",
+     "x": 1.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_002",
+     "type": "mt_wall",
+     "x": 2.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_003",
+     "type": "mt_wall",
+     "x": 3.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_004",
+     "type": "mt_wall",
+     "x": 4.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_005",
+     "type": "mt_wall",
+     "x": 5.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_006",
+     "type": "mt_wall",
+     "x": 6.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_007",
+     "type": "mt_wall",
+     "x": 7.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_008",
+     "type": "mt_wall",
+     "x": 8.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_009",
+     "type": "mt_wall",
+     "x": 9.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_010",
+     "type": "mt_wall",
+     "x": 10.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_011",
+     "type": "mt_wall",
+     "x": 11.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_012",
+     "type": "mt_wall",
+     "x": 12.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_013",
+     "type": "mt_wall",
+     "x": 13.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_014",
+     "type": "mt_wall",
+     "x": 14.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_015",
+     "type": "mt_wall",
+     "x": 15.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_016",
+     "type": "mt_wall",
+     "x": 16.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_017",
+     "type": "mt_wall",
+     "x": 17.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_018",
+     "type": "mt_wall",
+     "x": 18.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_019",
+     "type": "mt_wall",
+     "x": 19.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_020",
+     "type": "mt_wall",
+     "x": 20.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_021",
+     "type": "mt_wall",
+     "x": 21.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_022",
+     "type": "mt_wall",
+     "x": 22.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_023",
+     "type": "mt_wall",
+     "x": 23.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_024",
+     "type": "mt_wall",
+     "x": 24.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_025",
+     "type": "mt_wall",
+     "x": 25.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_026",
+     "type": "mt_wall",
+     "x": 26.25,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_027",
+     "type": "mt_wall",
+     "x": 27.0,
+     "y": 11.9,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "N"
+    },
+    {
+     "id": "mt_cut_028",
+     "type": "mt_cut",
+     "x": 0.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_029",
+     "type": "mt_cut",
+     "x": 1.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_030",
+     "type": "mt_cut",
+     "x": 2.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_031",
+     "type": "mt_cut",
+     "x": 3.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_032",
+     "type": "mt_cut",
+     "x": 4.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_033",
+     "type": "mt_cut",
+     "x": 5.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_034",
+     "type": "mt_cut",
+     "x": 6.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_035",
+     "type": "mt_cut",
+     "x": 7.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_036",
+     "type": "mt_cut",
+     "x": 8.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_037",
+     "type": "mt_cut",
+     "x": 9.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_038",
+     "type": "mt_cut",
+     "x": 10.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_039",
+     "type": "mt_cut",
+     "x": 11.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_040",
+     "type": "mt_cut",
+     "x": 12.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_041",
+     "type": "mt_cut",
+     "x": 13.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_042",
+     "type": "mt_cut",
+     "x": 14.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_043",
+     "type": "mt_cut",
+     "x": 15.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_044",
+     "type": "mt_cut",
+     "x": 16.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_045",
+     "type": "mt_cut",
+     "x": 17.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_046",
+     "type": "mt_cut",
+     "x": 18.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_047",
+     "type": "mt_cut",
+     "x": 19.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_048",
+     "type": "mt_cut",
+     "x": 20.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_049",
+     "type": "mt_cut",
+     "x": 21.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_050",
+     "type": "mt_cut",
+     "x": 22.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_051",
+     "type": "mt_cut",
+     "x": 23.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_052",
+     "type": "mt_cut",
+     "x": 24.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_053",
+     "type": "mt_cut",
+     "x": 25.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_054",
+     "type": "mt_cut",
+     "x": 26.25,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_055",
+     "type": "mt_cut",
+     "x": 27.0,
+     "y": 1.1,
+     "rot": 0,
+     "state": "cbd",
+     "wall": "S"
+    },
+    {
+     "id": "psdfN_0",
+     "type": "mt_psd_fix",
+     "x": 0,
+     "y": 12.5,
+     "rot": 0,
+     "state": "cbd"
+    },
+    {
+     "id": "psdN_1",
+     "type": "mt_psd",
+     "x": 2,
+     "y": 12.5,
+     "rot": 0,
+     "state": "cbd_closed",
+     "psd": "N"
+    },
+    {
+     "id": "psdfN_2",
+     "type": "mt_psd_fix",
+     "x": 4,
+     "y": 12.5,
+     "rot": 0,
+     "state": "cbd"
+    },
+    {
+     "id": "psdN_3",
+     "type": "mt_psd",
+     "x": 6,
+     "y": 12.5,
+     "rot": 0,
+     "state": "cbd_closed",
+     "psd": "N"
+    },
+    {
+     "id": "psdfN_4",
+     "type": "mt_psd_fix",
+     "x": 8,
+     "y": 12.5,
+     "rot": 0,
+     "state": "cbd"
+    },
+    {
+     "id": "psdN_5",
+     "type": "mt_psd",
+     "x": 10,
+     "y": 12.5,
+     "rot": 0,
+     "state": "cbd_closed",
+     "psd": "N"
+    },
+    {
+     "id": "psdfN_6",
+     "type": "mt_psd_fix",
+     "x": 12,
+     "y": 12.5,
+     "rot": 0,
+     "state": "cbd"
+    },
+    {
+     "id": "psdN_7",
+     "type": "mt_psd",
+     "x": 14,
+     "y": 12.5,
+     "rot": 0,
+     "state": "cbd_closed",
+     "psd": "N"
+    },
+    {
+     "id": "psdfN_8",
+     "type": "mt_psd_fix",
+     "x": 16,
+     "y": 12.5,
+     "rot": 0,
+     "state": "cbd"
+    },
+    {
+     "id": "psdN_9",
+     "type": "mt_psd",
+     "x": 18,
+     "y": 12.5,
+     "rot": 0,
+     "state": "cbd_closed",
+     "psd": "N"
+    },
+    {
+     "id": "psdfN_10",
+     "type": "mt_psd_fix",
+     "x": 20,
+     "y": 12.5,
+     "rot": 0,
+     "state": "cbd"
+    },
+    {
+     "id": "psdfN_11",
+     "type": "mt_psd_fix",
+     "x": 22,
+     "y": 12.5,
+     "rot": 0,
+     "state": "cbd"
+    },
+    {
+     "id": "psdfN_12",
+     "type": "mt_psd_fix",
+     "x": 24,
+     "y": 12.5,
+     "rot": 0,
+     "state": "cbd"
+    },
+    {
+     "id": "psdfN_13",
+     "type": "mt_psd_fix",
+     "x": 26,
+     "y": 12.5,
+     "rot": 0,
+     "state": "cbd"
+    },
+    {
+     "id": "psdfS_0",
+     "type": "mt_psd_fix",
+     "x": 2,
+     "y": 0.5,
+     "rot": 4,
+     "state": "cbd"
+    },
+    {
+     "id": "psdS_1",
+     "type": "mt_psd",
+     "x": 4,
+     "y": 0.5,
+     "rot": 4,
+     "state": "cbd_closed",
+     "psd": "S"
+    },
+    {
+     "id": "psdfS_2",
+     "type": "mt_psd_fix",
+     "x": 6,
+     "y": 0.5,
+     "rot": 4,
+     "state": "cbd"
+    },
+    {
+     "id": "psdS_3",
+     "type": "mt_psd",
+     "x": 8,
+     "y": 0.5,
+     "rot": 4,
+     "state": "cbd_closed",
+     "psd": "S"
+    },
+    {
+     "id": "psdfS_4",
+     "type": "mt_psd_fix",
+     "x": 10,
+     "y": 0.5,
+     "rot": 4,
+     "state": "cbd"
+    },
+    {
+     "id": "psdS_5",
+     "type": "mt_psd",
+     "x": 12,
+     "y": 0.5,
+     "rot": 4,
+     "state": "cbd_closed",
+     "psd": "S"
+    },
+    {
+     "id": "psdfS_6",
+     "type": "mt_psd_fix",
+     "x": 14,
+     "y": 0.5,
+     "rot": 4,
+     "state": "cbd"
+    },
+    {
+     "id": "psdS_7",
+     "type": "mt_psd",
+     "x": 16,
+     "y": 0.5,
+     "rot": 4,
+     "state": "cbd_closed",
+     "psd": "S"
+    },
+    {
+     "id": "psdfS_8",
+     "type": "mt_psd_fix",
+     "x": 18,
+     "y": 0.5,
+     "rot": 4,
+     "state": "cbd"
+    },
+    {
+     "id": "psdS_9",
+     "type": "mt_psd",
+     "x": 20,
+     "y": 0.5,
+     "rot": 4,
+     "state": "cbd_closed",
+     "psd": "S"
+    },
+    {
+     "id": "psdfS_10",
+     "type": "mt_psd_fix",
+     "x": 22,
+     "y": 0.5,
+     "rot": 4,
+     "state": "cbd"
+    },
+    {
+     "id": "psdfS_11",
+     "type": "mt_psd_fix",
+     "x": 24,
+     "y": 0.5,
+     "rot": 4,
+     "state": "cbd"
+    },
+    {
+     "id": "psdfS_12",
+     "type": "mt_psd_fix",
+     "x": 26,
+     "y": 0.5,
+     "rot": 4,
+     "state": "cbd"
+    },
+    {
+     "id": "psdfS_13",
+     "type": "mt_psd_fix",
+     "x": 28,
+     "y": 0.5,
+     "rot": 4,
+     "state": "cbd"
+    },
+    {
+     "id": "up_stairs",
+     "type": "mt_up",
+     "x": 14.0,
+     "y": 6.5,
+     "rot": 0,
+     "state": "cbd",
+     "nocol": true
+    },
+    {
+     "id": "mt_pillar_085",
+     "type": "mt_pillar",
+     "x": 6.0,
+     "y": 6.5,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_pillar_086",
+     "type": "mt_pillar",
+     "x": 18.0,
+     "y": 6.5,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_bench_087",
+     "type": "mt_bench",
+     "x": 3.5,
+     "y": 6.5,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_bin_088",
+     "type": "mt_bin",
+     "x": 15.0,
+     "y": 6.5,
+     "state": "cbd"
+    },
+    {
+     "id": "bd_ne",
+     "type": "mt_board",
+     "x": 6.0,
+     "y": 11.6,
+     "state": "cbd"
+    },
+    {
+     "id": "bd_nw",
+     "type": "mt_board",
+     "x": 18.0,
+     "y": 11.6,
+     "state": "cbd"
+    },
+    {
+     "id": "bd_s",
+     "type": "mt_board",
+     "x": 19.0,
+     "y": 1.4,
+     "state": "cbd"
+    },
+    {
+     "id": "hs_exit",
+     "type": "mt_hangsign",
+     "x": 12.5,
+     "y": 6.5,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_pillar_093",
+     "type": "mt_pillar",
+     "x": 12.0,
+     "y": 6.5,
+     "state": "cbd"
+    },
+    {
+     "id": "ad_p",
+     "type": "mt_adwall",
+     "x": 1.0,
+     "y": 6.5,
+     "rot": 6,
+     "state": "default"
+    },
+    {
+     "id": "mt_bench_095",
+     "type": "mt_bench",
+     "x": 9.0,
+     "y": 6.5,
+     "state": "cbd"
+    },
+    {
+     "id": "mt_bench_096",
+     "type": "mt_bench",
+     "x": 24.5,
+     "y": 6.5,
+     "state": "cbd"
+    }
+   ],
+   "colliders": [
+    {
+     "id": "wall0",
+     "rect": [
+      0.25,
+      11.899999999999999,
+      28.0,
+      12.499999999999998
+     ]
+    },
+    {
+     "id": "wall1",
+     "rect": [
+      0.25,
+      0.5000000000000001,
+      28.0,
+      1.3
+     ]
+    },
+    {
+     "id": "psdfN_0",
+     "rect": [
+      0.0,
+      12.4,
+      2.0,
+      12.6
+     ]
+    },
+    {
+     "id": "psdN_1",
+     "rect": [
+      2.0,
+      12.4,
+      4.0,
+      12.6
+     ]
+    },
+    {
+     "id": "psdfN_2",
+     "rect": [
+      4.0,
+      12.4,
+      6.0,
+      12.6
+     ]
+    },
+    {
+     "id": "psdN_3",
+     "rect": [
+      6.0,
+      12.4,
+      8.0,
+      12.6
+     ]
+    },
+    {
+     "id": "psdfN_4",
+     "rect": [
+      8.0,
+      12.4,
+      10.0,
+      12.6
+     ]
+    },
+    {
+     "id": "psdN_5",
+     "rect": [
+      10.0,
+      12.4,
+      12.0,
+      12.6
+     ]
+    },
+    {
+     "id": "psdfN_6",
+     "rect": [
+      12.0,
+      12.4,
+      14.0,
+      12.6
+     ]
+    },
+    {
+     "id": "psdN_7",
+     "rect": [
+      14.0,
+      12.4,
+      16.0,
+      12.6
+     ]
+    },
+    {
+     "id": "psdfN_8",
+     "rect": [
+      16.0,
+      12.4,
+      18.0,
+      12.6
+     ]
+    },
+    {
+     "id": "psdN_9",
+     "rect": [
+      18.0,
+      12.4,
+      20.0,
+      12.6
+     ]
+    },
+    {
+     "id": "psdfN_10",
+     "rect": [
+      20.0,
+      12.4,
+      22.0,
+      12.6
+     ]
+    },
+    {
+     "id": "psdfN_11",
+     "rect": [
+      22.0,
+      12.4,
+      24.0,
+      12.6
+     ]
+    },
+    {
+     "id": "psdfN_12",
+     "rect": [
+      24.0,
+      12.4,
+      26.0,
+      12.6
+     ]
+    },
+    {
+     "id": "psdfN_13",
+     "rect": [
+      26.0,
+      12.4,
+      28.0,
+      12.6
+     ]
+    },
+    {
+     "id": "psdfS_0",
+     "rect": [
+      0.0,
+      0.4,
+      2.0,
+      0.6
+     ]
+    },
+    {
+     "id": "psdS_1",
+     "rect": [
+      2.0,
+      0.4,
+      4.0,
+      0.6
+     ]
+    },
+    {
+     "id": "psdfS_2",
+     "rect": [
+      4.0,
+      0.4,
+      6.0,
+      0.6
+     ]
+    },
+    {
+     "id": "psdS_3",
+     "rect": [
+      6.0,
+      0.4,
+      8.0,
+      0.6
+     ]
+    },
+    {
+     "id": "psdfS_4",
+     "rect": [
+      8.0,
+      0.4,
+      10.0,
+      0.6
+     ]
+    },
+    {
+     "id": "psdS_5",
+     "rect": [
+      10.0,
+      0.4,
+      12.0,
+      0.6
+     ]
+    },
+    {
+     "id": "psdfS_6",
+     "rect": [
+      12.0,
+      0.4,
+      14.0,
+      0.6
+     ]
+    },
+    {
+     "id": "psdS_7",
+     "rect": [
+      14.0,
+      0.4,
+      16.0,
+      0.6
+     ]
+    },
+    {
+     "id": "psdfS_8",
+     "rect": [
+      16.0,
+      0.4,
+      18.0,
+      0.6
+     ]
+    },
+    {
+     "id": "psdS_9",
+     "rect": [
+      18.0,
+      0.4,
+      20.0,
+      0.6
+     ]
+    },
+    {
+     "id": "psdfS_10",
+     "rect": [
+      20.0,
+      0.4,
+      22.0,
+      0.6
+     ]
+    },
+    {
+     "id": "psdfS_11",
+     "rect": [
+      22.0,
+      0.4,
+      24.0,
+      0.6
+     ]
+    },
+    {
+     "id": "psdfS_12",
+     "rect": [
+      24.0,
+      0.4,
+      26.0,
+      0.6
+     ]
+    },
+    {
+     "id": "psdfS_13",
+     "rect": [
+      26.0,
+      0.4,
+      28.0,
+      0.6
+     ]
+    },
+    {
+     "id": "mt_pillar_085",
+     "rect": [
+      5.7,
+      6.2,
+      6.3,
+      6.8
+     ]
+    },
+    {
+     "id": "mt_pillar_086",
+     "rect": [
+      17.7,
+      6.2,
+      18.3,
+      6.8
+     ]
+    },
+    {
+     "id": "mt_bench_087",
+     "rect": [
+      2.6,
+      6.28,
+      4.4,
+      6.72
+     ]
+    },
+    {
+     "id": "mt_bin_088",
+     "rect": [
+      14.78,
+      6.3,
+      15.22,
+      6.7
+     ]
+    },
+    {
+     "id": "mt_pillar_093",
+     "rect": [
+      11.7,
+      6.2,
+      12.3,
+      6.8
+     ]
+    },
+    {
+     "id": "ad_p",
+     "rect": [
+      1.0,
+      2.5,
+      1.2,
+      6.5
+     ]
+    },
+    {
+     "id": "mt_bench_095",
+     "rect": [
+      8.1,
+      6.28,
+      9.9,
+      6.72
+     ]
+    },
+    {
+     "id": "mt_bench_096",
+     "rect": [
+      23.6,
+      6.28,
+      25.4,
+      6.72
+     ]
+    }
+   ],
+   "gates": [],
+   "psd": [
+    {
+     "track": "N",
+     "obj": "psdN_1",
+     "x0": 2,
+     "x1": 4,
+     "y": 12.5
+    },
+    {
+     "track": "N",
+     "obj": "psdN_3",
+     "x0": 6,
+     "x1": 8,
+     "y": 12.5
+    },
+    {
+     "track": "N",
+     "obj": "psdN_5",
+     "x0": 10,
+     "x1": 12,
+     "y": 12.5
+    },
+    {
+     "track": "N",
+     "obj": "psdN_7",
+     "x0": 14,
+     "x1": 16,
+     "y": 12.5
+    },
+    {
+     "track": "N",
+     "obj": "psdN_9",
+     "x0": 18,
+     "x1": 20,
+     "y": 12.5
+    },
+    {
+     "track": "S",
+     "obj": "psdS_1",
+     "x0": 2,
+     "x1": 4,
+     "y": 0.5
+    },
+    {
+     "track": "S",
+     "obj": "psdS_3",
+     "x0": 6,
+     "x1": 8,
+     "y": 0.5
+    },
+    {
+     "track": "S",
+     "obj": "psdS_5",
+     "x0": 10,
+     "x1": 12,
+     "y": 0.5
+    },
+    {
+     "track": "S",
+     "obj": "psdS_7",
+     "x0": 14,
+     "x1": 16,
+     "y": 0.5
+    },
+    {
+     "track": "S",
+     "obj": "psdS_9",
+     "x0": 18,
+     "x1": 20,
+     "y": 0.5
+    }
+   ],
+   "layout_check": {
+    "checked": 31,
+    "problems": [],
+    "min_route_clearance": 0.269
+   }
+  },
+  "cbd_street": {
+   "id": "cbd_street",
+   "station": "cbd",
+   "skin": "cbd",
+   "kind": "street",
+   "name": "中央商务区站 · 地面出口",
+   "_doc": "DEPRECATED intermediate facade — core + preview enter the concourse directly. Kept only for art debug (?area=). Do not use in play flow.",
+   "bounds": [
+    0.3,
+    0.3,
+    14.0,
+    10.0
+   ],
+   "ground": {
+    "origin": [
+     0,
+     0
+    ],
+    "legend": {
+     "P": "mg_floor:paving"
+    },
+    "rows_south_to_north": [
+     "PPPPPPP",
+     "PPPPPPP",
+     "PPPPPPP",
+     "PPPPPPP",
+     "PPPPPPP"
+    ]
+   },
+   "backdrop": "cbd_towers",
+   "colliders": [
+    {
+     "id": "c0",
+     "rect": [
+      5.2,
+      1.85,
+      5.36,
+      2.0
+     ]
+    },
+    {
+     "id": "c1",
+     "rect": [
+      8.67,
+      1.85,
+      8.83,
+      2.0
+     ]
+    },
+    {
+     "id": "entrance",
+     "rect": [
+      5.35,
+      2.5,
+      5.65,
+      8.5
+     ]
+    },
+    {
+     "id": "entrance",
+     "rect": [
+      8.35,
+      2.5,
+      8.65,
+      8.5
+     ]
+    },
+    {
+     "id": "entrance",
+     "rect": [
+      5.35,
+      8.25,
+      8.65,
+      8.55
+     ]
+    },
+    {
+     "id": "signpost",
+     "rect": [
+      3.68,
+      2.44,
+      4.12,
+      2.76
+     ]
+    },
+    {
+     "id": "mt_tree_002",
+     "rect": [
+      1.15,
+      7.15,
+      2.05,
+      8.05
+     ]
+    },
+    {
+     "id": "mt_tree_003",
+     "rect": [
+      11.95,
+      7.15,
+      12.85,
+      8.05
+     ]
+    },
+    {
+     "id": "mt_tree_004",
+     "rect": [
+      11.95,
+      2.75,
+      12.85,
+      3.65
+     ]
+    },
+    {
+     "id": "mt_bin_005",
+     "rect": [
+      9.78,
+      2.0,
+      10.22,
+      2.4
+     ]
+    }
+   ],
+   "signs": [
+    {
+     "obj": "entrance",
+     "part": "roof",
+     "at": [
+      5.75,
+      1.84,
+      2.99
+     ],
+     "axis": "x",
+     "w": 3.0,
+     "h": 0.38,
+     "lines": [
+      "中央商务区站 {exit}出口"
+     ],
+     "sub": "CBD · 3号线",
+     "ink": "#f4f4f0"
+    },
+    {
+     "obj": "signpost",
+     "at": [
+      3.66,
+      2.41,
+      2.47
+     ],
+     "axis": "x",
+     "w": 0.48,
+     "h": 0.5,
+     "lines": [
+      "{exit}",
+      "出口"
+     ],
+     "ink": "#1d2a3a"
+    }
+   ],
+   "portals": [
+    {
+     "id": "down",
+     "rect": [
+      5.9,
+      4.25,
+      8.1,
+      5.1
+     ],
+     "to": "cbd_concourse",
+     "spawn": "exit",
+     "label": "下楼进站",
+     "auto": true,
+     "hours": true
+    },
+    {
+     "id": "street",
+     "rect": [
+      0.3,
+      0.3,
+      14.0,
+      0.75
+     ],
+     "to": "exit:cbd",
+     "label": "前往 CBD 街区",
+     "auto": true
+    }
+   ],
+   "spawn": [
+    7.0,
+    1.6,
+    "N"
+   ],
+   "lights": {
+    "lamps": [
+     [
+      7.0,
+      2.2,
+      2.6,
+      3.2
+     ],
+     [
+      3.9,
+      2.2,
+      3.0,
+      2.0
+     ]
+    ]
+   },
+   "routes": {
+    "enter": [
+     [
+      0.6,
+      1.2
+     ],
+     [
+      6.2,
+      1.4
+     ],
+     [
+      7.0,
+      3.0
+     ],
+     [
+      7.0,
+      4.7
+     ]
+    ],
+    "enter2": [
+     [
+      13.6,
+      1.2
+     ],
+     [
+      8.0,
+      1.5
+     ],
+     [
+      7.2,
+      3.0
+     ],
+     [
+      7.2,
+      4.7
+     ]
+    ],
+    "leave": [
+     [
+      6.6,
+      4.6
+     ],
+     [
+      6.4,
+      2.6
+     ],
+     [
+      6.3,
+      1.4
+     ],
+     [
+      0.6,
+      1.0
+     ]
+    ],
+    "leave2": [
+     [
+      7.4,
+      4.6
+     ],
+     [
+      7.6,
+      2.6
+     ],
+     [
+      7.8,
+      1.4
+     ],
+     [
+      13.6,
+      1.0
+     ]
+    ],
+    "pass": [
+     [
+      0.6,
+      0.9
+     ],
+     [
+      13.6,
+      0.9
+     ]
+    ],
+    "pass2": [
+     [
+      13.6,
+      1.3
+     ],
+     [
+      0.6,
+      1.3
+     ]
+    ]
+   },
+   "objects": [
+    {
+     "id": "entrance",
+     "type": "mt_entrance",
+     "x": 7.0,
+     "y": 5.5,
+     "state": "cbd"
+    },
+    {
+     "id": "signpost",
+     "type": "mt_signpost",
+     "x": 3.9,
+     "y": 2.6,
+     "state": "cbd",
+     "interact": "map",
+     "reach": [
+      3.9,
+      1.9
+     ],
+     "label": "看线路图"
+    },
+    {
+     "id": "mt_tree_002",
+     "type": "mt_tree",
+     "x": 1.6,
+     "y": 7.6
+    },
+    {
+     "id": "mt_tree_003",
+     "type": "mt_tree",
+     "x": 12.4,
+     "y": 7.6
+    },
+    {
+     "id": "mt_tree_004",
+     "type": "mt_tree",
+     "x": 12.4,
+     "y": 3.2
+    },
+    {
+     "id": "mt_bin_005",
+     "type": "mt_bin",
+     "x": 10.0,
+     "y": 2.2,
+     "state": "cbd"
+    }
+   ],
+   "gates": [],
+   "psd": [],
+   "layout_check": {
+    "checked": 9,
+    "problems": [],
+    "min_route_clearance": 0.388
+   }
+  },
+  "jhl_concourse": {
+   "id": "jhl_concourse",
+   "station": "jinghuaili",
+   "skin": "old",
+   "kind": "concourse",
+   "name": "井槐里站 · 站厅 (B1)",
+   "_doc": "Rebuilt: wide unpaid hall (≥3 m plaza), security west with roomy queue, TVMs+counter on east wall (not in choke), parallel IN (west) / OUT (east) gate banks with fence divider, paid north → platform stairs. Street portal = exit:street (no intermediate 地面入口).",
+   "bounds": [
+    0.25,
+    0.25,
+    28.0,
+    16.0
+   ],
+   "ground": {
+    "origin": [
+     0,
+     0
+    ],
+    "legend": {
+     "O": "mg_floor:old"
+    },
+    "rows_south_to_north": [
+     "OOOOOOOOOOOOOO",
+     "OOOOOOOOOOOOOO",
+     "OOOOOOOOOOOOOO",
+     "OOOOOOOOOOOOOO",
+     "OOOOOOOOOOOOOO",
+     "OOOOOOOOOOOOOO",
+     "OOOOOOOOOOOOOO",
+     "OOOOOOOOOOOOOO"
+    ]
+   },
+   "colliders": [
+    {
+     "id": "wall0",
+     "rect": [
+      0.25,
+      15.7,
+      28.0,
+      16.3
+     ]
+    },
+    {
+     "id": "wall1",
+     "rect": [
+      0.25,
+      -0.04999999999999993,
+      28.0,
+      0.75
+     ]
+    },
+    {
+     "id": "wall2",
+     "rect": [
+      -0.04999999999999993,
+      0.25,
+      0.75,
+      16.0
+     ]
+    },
+    {
+     "id": "wall3",
+     "rect": [
+      27.4,
+      0.25,
+      28.0,
+      16.0
+     ]
+    },
+    {
+     "id": "mt_pillar_089",
+     "rect": [
+      11.2,
+      1.7,
+      11.8,
+      2.3
+     ]
+    },
+    {
+     "id": "mt_pillar_090",
+     "rect": [
+      16.7,
+      2.9,
+      17.3,
+      3.5
+     ]
+    },
+    {
+     "id": "mt_pillar_091",
+     "rect": [
+      4.9,
+      11.9,
+      5.5,
+      12.5
+     ]
+    },
+    {
+     "id": "mt_pillar_092",
+     "rect": [
+      19.2,
+      11.9,
+      19.8,
+      12.5
+     ]
+    },
+    {
+     "id": "xray",
+     "rect": [
+      3.25,
+      4.58,
+      5.95,
+      5.42
+     ]
+    },
+    {
+     "id": "arch",
+     "rect": [
+      7.2,
+      4.38,
+      7.8,
+      4.52
+     ]
+    },
+    {
+     "id": "arch",
+     "rect": [
+      7.2,
+      5.48,
+      7.8,
+      5.62
+     ]
+    },
+    {
+     "id": "mt_rail_095",
+     "rect": [
+      2.2,
+      4.15,
+      4.2,
+      4.25
+     ]
+    },
+    {
+     "id": "mt_rail_096",
+     "rect": [
+      4.2,
+      4.15,
+      6.2,
+      4.25
+     ]
+    },
+    {
+     "id": "mt_rail_097",
+     "rect": [
+      5.0,
+      4.15,
+      7.0,
+      4.25
+     ]
+    },
+    {
+     "id": "mt_rail_098",
+     "rect": [
+      2.2,
+      5.8,
+      4.2,
+      5.9
+     ]
+    },
+    {
+     "id": "mt_rail_099",
+     "rect": [
+      4.2,
+      5.8,
+      6.2,
+      5.9
+     ]
+    },
+    {
+     "id": "mt_rail_100",
+     "rect": [
+      5.0,
+      5.8,
+      7.0,
+      5.9
+     ]
+    },
+    {
+     "id": "tvm0",
+     "rect": [
+      22.7,
+      4.35,
+      23.3,
+      5.25
+     ]
+    },
+    {
+     "id": "tvm1",
+     "rect": [
+      22.7,
+      5.55,
+      23.3,
+      6.45
+     ]
+    },
+    {
+     "id": "tvm2",
+     "rect": [
+      22.7,
+      6.75,
+      23.3,
+      7.65
+     ]
+    },
+    {
+     "id": "counter",
+     "rect": [
+      23.3,
+      2.15,
+      26.3,
+      2.5
+     ]
+    },
+    {
+     "id": "counter",
+     "rect": [
+      23.3,
+      3.35,
+      26.3,
+      3.65
+     ]
+    },
+    {
+     "id": "map",
+     "rect": [
+      18.4,
+      1.03,
+      19.6,
+      1.27
+     ]
+    },
+    {
+     "id": "mt_bin_106",
+     "rect": [
+      12.28,
+      2.6,
+      12.72,
+      3.0
+     ]
+    },
+    {
+     "id": "mt_bin_107",
+     "rect": [
+      20.28,
+      7.6,
+      20.72,
+      8.0
+     ]
+    },
+    {
+     "id": "gin0",
+     "rect": [
+      4.5,
+      8.15,
+      4.76,
+      9.85
+     ]
+    },
+    {
+     "id": "gin1",
+     "rect": [
+      5.4,
+      8.15,
+      5.66,
+      9.85
+     ]
+    },
+    {
+     "id": "gin2",
+     "rect": [
+      6.3,
+      8.15,
+      6.56,
+      9.85
+     ]
+    },
+    {
+     "id": "gin3",
+     "rect": [
+      7.2,
+      8.15,
+      7.46,
+      9.85
+     ]
+    },
+    {
+     "id": "gin4",
+     "rect": [
+      8.1,
+      8.15,
+      8.36,
+      9.85
+     ]
+    },
+    {
+     "id": "gin_end",
+     "rect": [
+      9.0,
+      8.15,
+      9.26,
+      9.85
+     ]
+    },
+    {
+     "id": "gout0",
+     "rect": [
+      15.5,
+      8.15,
+      15.76,
+      9.85
+     ]
+    },
+    {
+     "id": "gout1",
+     "rect": [
+      16.4,
+      8.15,
+      16.66,
+      9.85
+     ]
+    },
+    {
+     "id": "gout2",
+     "rect": [
+      17.3,
+      8.15,
+      17.56,
+      9.85
+     ]
+    },
+    {
+     "id": "gout3",
+     "rect": [
+      18.2,
+      8.15,
+      18.46,
+      9.85
+     ]
+    },
+    {
+     "id": "gout4",
+     "rect": [
+      19.1,
+      8.15,
+      19.36,
+      9.85
+     ]
+    },
+    {
+     "id": "gout_end",
+     "rect": [
+      20.0,
+      8.15,
+      20.26,
+      9.85
+     ]
+    },
+    {
+     "id": "mt_fence_124",
+     "rect": [
+      3.95,
+      9.25,
+      4.05,
+      10.25
+     ]
+    },
+    {
+     "id": "mt_fence_125",
+     "rect": [
+      3.95,
+      10.25,
+      4.05,
+      11.25
+     ]
+    },
+    {
+     "id": "mt_fence_126",
+     "rect": [
+      3.95,
+      11.25,
+      4.05,
+      12.25
+     ]
+    },
+    {
+     "id": "mt_fence_127",
+     "rect": [
+      3.95,
+      12.25,
+      4.05,
+      13.25
+     ]
+    },
+    {
+     "id": "mt_fence_128",
+     "rect": [
+      3.95,
+      13.25,
+      4.05,
+      14.25
+     ]
+    },
+    {
+     "id": "mt_fence_129",
+     "rect": [
+      3.95,
+      14.25,
+      4.05,
+      15.25
+     ]
+    },
+    {
+     "id": "mt_fence_130",
+     "rect": [
+      3.95,
+      14.5,
+      4.05,
+      15.5
+     ]
+    },
+    {
+     "id": "mt_fence_131",
+     "rect": [
+      20.75,
+      9.25,
+      20.85,
+      10.25
+     ]
+    },
+    {
+     "id": "mt_fence_132",
+     "rect": [
+      20.75,
+      10.25,
+      20.85,
+      11.25
+     ]
+    },
+    {
+     "id": "mt_fence_133",
+     "rect": [
+      20.75,
+      11.25,
+      20.85,
+      12.25
+     ]
+    },
+    {
+     "id": "mt_fence_134",
+     "rect": [
+      20.75,
+      12.25,
+      20.85,
+      13.25
+     ]
+    },
+    {
+     "id": "mt_fence_135",
+     "rect": [
+      20.75,
+      13.25,
+      20.85,
+      14.25
+     ]
+    },
+    {
+     "id": "mt_fence_136",
+     "rect": [
+      20.75,
+      14.25,
+      20.85,
+      15.25
+     ]
+    },
+    {
+     "id": "mt_fence_137",
+     "rect": [
+      20.75,
+      14.5,
+      20.85,
+      15.5
+     ]
+    },
+    {
+     "id": "mt_fence_138",
+     "rect": [
+      9.1,
+      9.1,
+      10.1,
+      9.2
+     ]
+    },
+    {
+     "id": "mt_fence_139",
+     "rect": [
+      10.1,
+      9.1,
+      11.1,
+      9.2
+     ]
+    },
+    {
+     "id": "mt_fence_140",
+     "rect": [
+      11.1,
+      9.1,
+      12.1,
+      9.2
+     ]
+    },
+    {
+     "id": "mt_fence_141",
+     "rect": [
+      12.1,
+      9.1,
+      13.1,
+      9.2
+     ]
+    },
+    {
+     "id": "mt_fence_142",
+     "rect": [
+      13.1,
+      9.1,
+      14.1,
+      9.2
+     ]
+    },
+    {
+     "id": "mt_fence_143",
+     "rect": [
+      14.1,
+      9.1,
+      15.1,
+      9.2
+     ]
+    },
+    {
+     "id": "mt_fence_144",
+     "rect": [
+      14.4,
+      9.1,
+      15.4,
+      9.2
+     ]
+    },
+    {
+     "id": "mt_fence_145",
+     "rect": [
+      12.15,
+      9.25,
+      12.25,
+      10.25
+     ]
+    },
+    {
+     "id": "mt_fence_146",
+     "rect": [
+      12.15,
+      10.25,
+      12.25,
+      11.25
+     ]
+    },
+    {
+     "id": "mt_fence_147",
+     "rect": [
+      12.15,
+      10.5,
+      12.25,
+      11.5
+     ]
+    },
+    {
+     "id": "mt_fence_148",
+     "rect": [
+      13.25,
+      9.25,
+      13.35,
+      10.25
+     ]
+    },
+    {
+     "id": "mt_fence_149",
+     "rect": [
+      13.25,
+      10.25,
+      13.35,
+      11.25
+     ]
+    },
+    {
+     "id": "mt_fence_150",
+     "rect": [
+      13.25,
+      10.5,
+      13.35,
+      11.5
+     ]
+    }
+   ],
+   "signs": [
+    {
+     "obj": "counter",
+     "at": [
+      23.3,
+      2.145,
+      2.39
+     ],
+     "axis": "x",
+     "w": 3.0,
+     "h": 0.3,
+     "lines": [
+      "客服中心 · 充值 · 补票"
+     ],
+     "ink": "#1d2a3a"
+    },
+    {
+     "obj": "hs_in",
+     "at": [
+      6.05,
+      9.235,
+      2.54
+     ],
+     "axis": "x",
+     "w": 1.5,
+     "h": 0.3,
+     "lines": [
+      "入站闸机 ↑"
+     ],
+     "ink": "#ffffff"
+    },
+    {
+     "obj": "hs_out",
+     "at": [
+      17.05,
+      9.235,
+      2.54
+     ],
+     "axis": "x",
+     "w": 1.5,
+     "h": 0.3,
+     "lines": [
+      "出站闸机 ↓"
+     ],
+     "ink": "#ffffff"
+    },
+    {
+     "obj": "board_n",
+     "at": [
+      11.0,
+      15.05,
+      2.2
+     ],
+     "axis": "x",
+     "w": 3.0,
+     "h": 0.35,
+     "lines": [
+      "付费区 · 往站台"
+     ],
+     "ink": "#ffe8c0"
+    }
+   ],
+   "portals": [
+    {
+     "id": "street",
+     "rect": [
+      2.2,
+      0.4,
+      5.8,
+      1.4
+     ],
+     "to": "exit:street",
+     "label": "出站上街",
+     "auto": true
+    },
+    {
+     "id": "down",
+     "rect": [
+      12.2,
+      13.8,
+      15.8,
+      14.9
+     ],
+     "to": "jhl_platform",
+     "spawn": [
+      12.5,
+      6.0,
+      "N"
+     ],
+     "label": "下楼往站台",
+     "auto": true,
+     "hours": true
+    }
+   ],
+   "zones": [
+    {
+     "id": "arch",
+     "kind": "arch",
+     "rect": [
+      7.1,
+      4.5,
+      7.9,
+      5.5
+     ]
+    },
+    {
+     "id": "paid",
+     "kind": "paid",
+     "rect": [
+      4.3,
+      9.35,
+      20.4,
+      15.5
+     ]
+    }
+   ],
+   "staff": [
+    {
+     "id": "guard",
+     "sprite": "office",
+     "at": [
+      8.8,
+      6.6
+     ],
+     "dir": "SW",
+     "name": "安检员"
+    },
+    {
+     "id": "op",
+     "sprite": "uncle",
+     "at": [
+      3.2,
+      3.3
+     ],
+     "dir": "N",
+     "name": "安检机操作员"
+    },
+    {
+     "id": "clerk",
+     "sprite": "student",
+     "at": [
+      24.8,
+      3.9
+     ],
+     "dir": "S",
+     "name": "客服"
+    },
+    {
+     "id": "gatestaff",
+     "sprite": "office",
+     "at": [
+      13.0,
+      8.2
+     ],
+     "dir": "S",
+     "name": "站务员"
+    }
+   ],
+   "spawn": [
+    4.0,
+    2.5,
+    "N"
+   ],
+   "gate_approach": 1.3,
+   "lights": [
+    {
+     "x": 6,
+     "y": 5,
+     "r": 5.5,
+     "c": [
+      200,
+      215,
+      230
+     ]
+    },
+    {
+     "x": 14,
+     "y": 5,
+     "r": 5.5,
+     "c": [
+      200,
+      215,
+      230
+     ]
+    },
+    {
+     "x": 22,
+     "y": 4,
+     "r": 5,
+     "c": [
+      200,
+      215,
+      230
+     ]
+    },
+    {
+     "x": 12,
+     "y": 12,
+     "r": 6,
+     "c": [
+      195,
+      210,
+      225
+     ]
+    }
+   ],
+   "routes": {
+    "in": [
+     [
+      4.0,
+      2.5
+     ],
+     [
+      7.0,
+      2.8
+     ],
+     [
+      9.5,
+      4.0
+     ],
+     [
+      9.5,
+      7.5
+     ],
+     "gate_in",
+     [
+      6.5,
+      11.5
+     ],
+     [
+      8.0,
+      14.2
+     ],
+     [
+      15.5,
+      14.2
+     ]
+    ],
+    "out": [
+     [
+      15.5,
+      14.2
+     ],
+     [
+      18.0,
+      12.5
+     ],
+     "gate_out",
+     [
+      19.0,
+      6.5
+     ],
+     [
+      18.0,
+      4.0
+     ],
+     [
+      14.0,
+      3.5
+     ],
+     [
+      8.0,
+      3.0
+     ],
+     [
+      4.0,
+      2.5
+     ]
+    ],
+    "tvm": [
+     [
+      16.0,
+      4.0
+     ],
+     [
+      19.5,
+      5.5
+     ],
+     [
+      21.8,
+      5.5
+     ],
+     [
+      19.5,
+      5.5
+     ],
+     [
+      16.0,
+      4.0
+     ]
+    ]
+   },
+   "objects": [
+    {
+     "id": "mt_wall_000",
+     "type": "mt_wall",
+     "x": 0.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_001",
+     "type": "mt_wall",
+     "x": 1.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_002",
+     "type": "mt_wall",
+     "x": 2.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_003",
+     "type": "mt_wall",
+     "x": 3.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_004",
+     "type": "mt_wall",
+     "x": 4.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_005",
+     "type": "mt_wall",
+     "x": 5.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_006",
+     "type": "mt_wall",
+     "x": 6.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_007",
+     "type": "mt_wall",
+     "x": 7.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_008",
+     "type": "mt_wall",
+     "x": 8.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_009",
+     "type": "mt_wall",
+     "x": 9.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_010",
+     "type": "mt_wall",
+     "x": 10.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_011",
+     "type": "mt_wall",
+     "x": 11.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_012",
+     "type": "mt_wall",
+     "x": 12.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_013",
+     "type": "mt_wall",
+     "x": 13.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_014",
+     "type": "mt_wall",
+     "x": 14.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_015",
+     "type": "mt_wall",
+     "x": 15.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_016",
+     "type": "mt_wall",
+     "x": 16.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_017",
+     "type": "mt_wall",
+     "x": 17.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_018",
+     "type": "mt_wall",
+     "x": 18.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_019",
+     "type": "mt_wall",
+     "x": 19.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_020",
+     "type": "mt_wall",
+     "x": 20.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_021",
+     "type": "mt_wall",
+     "x": 21.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_022",
+     "type": "mt_wall",
+     "x": 22.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_023",
+     "type": "mt_wall",
+     "x": 23.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_024",
+     "type": "mt_wall",
+     "x": 24.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_025",
+     "type": "mt_wall",
+     "x": 25.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_026",
+     "type": "mt_wall",
+     "x": 26.25,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_027",
+     "type": "mt_wall",
+     "x": 27.0,
+     "y": 15.7,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_cut_028",
+     "type": "mt_cut",
+     "x": 0.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_029",
+     "type": "mt_cut",
+     "x": 1.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_030",
+     "type": "mt_cut",
+     "x": 2.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_031",
+     "type": "mt_cut",
+     "x": 3.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_032",
+     "type": "mt_cut",
+     "x": 4.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_033",
+     "type": "mt_cut",
+     "x": 5.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_034",
+     "type": "mt_cut",
+     "x": 6.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_035",
+     "type": "mt_cut",
+     "x": 7.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_036",
+     "type": "mt_cut",
+     "x": 8.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_037",
+     "type": "mt_cut",
+     "x": 9.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_038",
+     "type": "mt_cut",
+     "x": 10.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_039",
+     "type": "mt_cut",
+     "x": 11.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_040",
+     "type": "mt_cut",
+     "x": 12.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_041",
+     "type": "mt_cut",
+     "x": 13.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_042",
+     "type": "mt_cut",
+     "x": 14.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_043",
+     "type": "mt_cut",
+     "x": 15.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_044",
+     "type": "mt_cut",
+     "x": 16.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_045",
+     "type": "mt_cut",
+     "x": 17.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_046",
+     "type": "mt_cut",
+     "x": 18.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_047",
+     "type": "mt_cut",
+     "x": 19.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_048",
+     "type": "mt_cut",
+     "x": 20.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_049",
+     "type": "mt_cut",
+     "x": 21.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_050",
+     "type": "mt_cut",
+     "x": 22.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_051",
+     "type": "mt_cut",
+     "x": 23.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_052",
+     "type": "mt_cut",
+     "x": 24.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_053",
+     "type": "mt_cut",
+     "x": 25.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_054",
+     "type": "mt_cut",
+     "x": 26.25,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_055",
+     "type": "mt_cut",
+     "x": 27.0,
+     "y": 0.55,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_056",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 1.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_057",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 2.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_058",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 3.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_059",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 4.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_060",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 5.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_061",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 6.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_062",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 7.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_063",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 8.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_064",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 9.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_065",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 10.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_066",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 11.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_067",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 12.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_068",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 13.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_069",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 14.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_070",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 15.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "W"
+    },
+    {
+     "id": "mt_cut_071",
+     "type": "mt_cut",
+     "x": 0.55,
+     "y": 16.0,
+     "rot": 6,
+     "state": "old",
+     "wall": "W"
+    },
+    {
+     "id": "mt_wall_072",
+     "type": "mt_wall",
+     "x": 27.4,
+     "y": 1.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_073",
+     "type": "mt_wall",
+     "x": 27.4,
+     "y": 2.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_074",
+     "type": "mt_wall",
+     "x": 27.4,
+     "y": 3.25,
+     "rot": 6,
+     "state": "old_map",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_075",
+     "type": "mt_wall",
+     "x": 27.4,
+     "y": 4.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_076",
+     "type": "mt_wall",
+     "x": 27.4,
+     "y": 5.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_077",
+     "type": "mt_wall",
+     "x": 27.4,
+     "y": 6.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_078",
+     "type": "mt_wall",
+     "x": 27.4,
+     "y": 7.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_079",
+     "type": "mt_wall",
+     "x": 27.4,
+     "y": 8.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_080",
+     "type": "mt_wall",
+     "x": 27.4,
+     "y": 9.25,
+     "rot": 6,
+     "state": "old_ad",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_081",
+     "type": "mt_wall",
+     "x": 27.4,
+     "y": 10.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_082",
+     "type": "mt_wall",
+     "x": 27.4,
+     "y": 11.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_083",
+     "type": "mt_wall",
+     "x": 27.4,
+     "y": 12.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_084",
+     "type": "mt_wall",
+     "x": 27.4,
+     "y": 13.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_085",
+     "type": "mt_wall",
+     "x": 27.4,
+     "y": 14.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_086",
+     "type": "mt_wall",
+     "x": 27.4,
+     "y": 15.25,
+     "rot": 6,
+     "state": "old",
+     "wall": "E"
+    },
+    {
+     "id": "mt_wall_087",
+     "type": "mt_wall",
+     "x": 27.4,
+     "y": 16.0,
+     "rot": 6,
+     "state": "old",
+     "wall": "E"
+    },
+    {
+     "id": "street_stairs",
+     "type": "mt_up",
+     "x": 4.0,
+     "y": 0.55,
+     "rot": 4,
+     "state": "old",
+     "nocol": true
+    },
+    {
+     "id": "mt_pillar_089",
+     "type": "mt_pillar",
+     "x": 11.5,
+     "y": 2.0,
+     "state": "old"
+    },
+    {
+     "id": "mt_pillar_090",
+     "type": "mt_pillar",
+     "x": 17.0,
+     "y": 3.2,
+     "state": "old"
+    },
+    {
+     "id": "mt_pillar_091",
+     "type": "mt_pillar",
+     "x": 5.2,
+     "y": 12.2,
+     "state": "old"
+    },
+    {
+     "id": "mt_pillar_092",
+     "type": "mt_pillar",
+     "x": 19.5,
+     "y": 12.2,
+     "state": "old"
+    },
+    {
+     "id": "xray",
+     "type": "mt_xray",
+     "x": 4.6,
+     "y": 5.0,
+     "interact": "xray",
+     "reach": [
+      4.6,
+      4.15
+     ],
+     "label": "放包过安检"
+    },
+    {
+     "id": "arch",
+     "type": "mt_arch",
+     "x": 7.5,
+     "y": 5.0
+    },
+    {
+     "id": "mt_rail_095",
+     "type": "mt_rail",
+     "x": 2.2,
+     "y": 4.2,
+     "rot": 0,
+     "state": "default"
+    },
+    {
+     "id": "mt_rail_096",
+     "type": "mt_rail",
+     "x": 4.2,
+     "y": 4.2,
+     "rot": 0,
+     "state": "default"
+    },
+    {
+     "id": "mt_rail_097",
+     "type": "mt_rail",
+     "x": 5.0,
+     "y": 4.2,
+     "rot": 0,
+     "state": "default"
+    },
+    {
+     "id": "mt_rail_098",
+     "type": "mt_rail",
+     "x": 2.2,
+     "y": 5.85,
+     "rot": 0,
+     "state": "default"
+    },
+    {
+     "id": "mt_rail_099",
+     "type": "mt_rail",
+     "x": 4.2,
+     "y": 5.85,
+     "rot": 0,
+     "state": "default"
+    },
+    {
+     "id": "mt_rail_100",
+     "type": "mt_rail",
+     "x": 5.0,
+     "y": 5.85,
+     "rot": 0,
+     "state": "default"
+    },
+    {
+     "id": "tvm0",
+     "type": "mt_tvm",
+     "x": 23.0,
+     "y": 4.8,
+     "rot": 6,
+     "state": "old",
+     "interact": "tvm",
+     "reach": [
+      22.15,
+      4.8
+     ],
+     "label": "买单程票"
+    },
+    {
+     "id": "tvm1",
+     "type": "mt_tvm",
+     "x": 23.0,
+     "y": 6.0,
+     "rot": 6,
+     "state": "old",
+     "interact": "tvm",
+     "reach": [
+      22.15,
+      6.0
+     ],
+     "label": "买单程票"
+    },
+    {
+     "id": "tvm2",
+     "type": "mt_tvm",
+     "x": 23.0,
+     "y": 7.2,
+     "rot": 6,
+     "state": "old",
+     "interact": "tvm",
+     "reach": [
+      22.15,
+      7.2
+     ],
+     "label": "买单程票"
+    },
+    {
+     "id": "counter",
+     "type": "mt_counter",
+     "x": 24.8,
+     "y": 2.9,
+     "state": "old",
+     "interact": "counter",
+     "reach": [
+      23.4,
+      2.9
+     ],
+     "label": "客服中心 · 充值"
+    },
+    {
+     "id": "map",
+     "type": "mt_mapboard",
+     "x": 19.0,
+     "y": 1.15,
+     "state": "old",
+     "interact": "map",
+     "reach": [
+      19.0,
+      1.95
+     ],
+     "label": "线路图"
+    },
+    {
+     "id": "mt_bin_106",
+     "type": "mt_bin",
+     "x": 12.5,
+     "y": 2.8,
+     "state": "old"
+    },
+    {
+     "id": "mt_bin_107",
+     "type": "mt_bin",
+     "x": 20.5,
+     "y": 7.8,
+     "state": "old"
+    },
+    {
+     "id": "gin0",
+     "type": "mt_gate",
+     "x": 4.5,
+     "y": 9.0,
+     "rot": 0,
+     "state": "old_closed",
+     "gate": 0,
+     "gate_kind": "in"
+    },
+    {
+     "id": "gin1",
+     "type": "mt_gate",
+     "x": 5.4,
+     "y": 9.0,
+     "rot": 0,
+     "state": "old_closed",
+     "gate": 1,
+     "gate_kind": "in"
+    },
+    {
+     "id": "gin2",
+     "type": "mt_gate",
+     "x": 6.3,
+     "y": 9.0,
+     "rot": 0,
+     "state": "old_closed",
+     "gate": 2,
+     "gate_kind": "in"
+    },
+    {
+     "id": "gin3",
+     "type": "mt_gate",
+     "x": 7.2,
+     "y": 9.0,
+     "rot": 0,
+     "state": "old_closed",
+     "gate": 3,
+     "gate_kind": "in"
+    },
+    {
+     "id": "gin4",
+     "type": "mt_gate",
+     "x": 8.1,
+     "y": 9.0,
+     "rot": 0,
+     "state": "old_closed",
+     "gate": 4,
+     "gate_kind": "in"
+    },
+    {
+     "id": "gin_end",
+     "type": "mt_gate_end",
+     "x": 9.0,
+     "y": 9.0,
+     "rot": 0,
+     "state": "old"
+    },
+    {
+     "id": "gout0",
+     "type": "mt_gate",
+     "x": 15.5,
+     "y": 9.0,
+     "rot": 0,
+     "state": "old_closed",
+     "gate": 0,
+     "gate_kind": "out"
+    },
+    {
+     "id": "gout1",
+     "type": "mt_gate",
+     "x": 16.4,
+     "y": 9.0,
+     "rot": 0,
+     "state": "old_closed",
+     "gate": 1,
+     "gate_kind": "out"
+    },
+    {
+     "id": "gout2",
+     "type": "mt_gate",
+     "x": 17.3,
+     "y": 9.0,
+     "rot": 0,
+     "state": "old_closed",
+     "gate": 2,
+     "gate_kind": "out"
+    },
+    {
+     "id": "gout3",
+     "type": "mt_gate",
+     "x": 18.2,
+     "y": 9.0,
+     "rot": 0,
+     "state": "old_closed",
+     "gate": 3,
+     "gate_kind": "out"
+    },
+    {
+     "id": "gout4",
+     "type": "mt_gate",
+     "x": 19.1,
+     "y": 9.0,
+     "rot": 0,
+     "state": "old_closed",
+     "gate": 4,
+     "gate_kind": "out"
+    },
+    {
+     "id": "gout_end",
+     "type": "mt_gate_end",
+     "x": 20.0,
+     "y": 9.0,
+     "rot": 0,
+     "state": "old"
+    },
+    {
+     "id": "plat_stairs",
+     "type": "mt_down",
+     "x": 14.0,
+     "y": 12.5,
+     "rot": 0,
+     "state": "old",
+     "nocol": true
+    },
+    {
+     "id": "hs_in",
+     "type": "mt_hangsign",
+     "x": 6.8,
+     "y": 9.55,
+     "state": "old"
+    },
+    {
+     "id": "hs_out",
+     "type": "mt_hangsign",
+     "x": 17.8,
+     "y": 9.55,
+     "state": "old"
+    },
+    {
+     "id": "board_n",
+     "type": "mt_board",
+     "x": 12.5,
+     "y": 15.15,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_124",
+     "type": "mt_fence",
+     "x": 4.0,
+     "y": 10.25,
+     "rot": 6,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_125",
+     "type": "mt_fence",
+     "x": 4.0,
+     "y": 11.25,
+     "rot": 6,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_126",
+     "type": "mt_fence",
+     "x": 4.0,
+     "y": 12.25,
+     "rot": 6,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_127",
+     "type": "mt_fence",
+     "x": 4.0,
+     "y": 13.25,
+     "rot": 6,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_128",
+     "type": "mt_fence",
+     "x": 4.0,
+     "y": 14.25,
+     "rot": 6,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_129",
+     "type": "mt_fence",
+     "x": 4.0,
+     "y": 15.25,
+     "rot": 6,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_130",
+     "type": "mt_fence",
+     "x": 4.0,
+     "y": 15.5,
+     "rot": 6,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_131",
+     "type": "mt_fence",
+     "x": 20.8,
+     "y": 10.25,
+     "rot": 6,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_132",
+     "type": "mt_fence",
+     "x": 20.8,
+     "y": 11.25,
+     "rot": 6,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_133",
+     "type": "mt_fence",
+     "x": 20.8,
+     "y": 12.25,
+     "rot": 6,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_134",
+     "type": "mt_fence",
+     "x": 20.8,
+     "y": 13.25,
+     "rot": 6,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_135",
+     "type": "mt_fence",
+     "x": 20.8,
+     "y": 14.25,
+     "rot": 6,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_136",
+     "type": "mt_fence",
+     "x": 20.8,
+     "y": 15.25,
+     "rot": 6,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_137",
+     "type": "mt_fence",
+     "x": 20.8,
+     "y": 15.5,
+     "rot": 6,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_138",
+     "type": "mt_fence",
+     "x": 9.1,
+     "y": 9.15,
+     "rot": 0,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_139",
+     "type": "mt_fence",
+     "x": 10.1,
+     "y": 9.15,
+     "rot": 0,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_140",
+     "type": "mt_fence",
+     "x": 11.1,
+     "y": 9.15,
+     "rot": 0,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_141",
+     "type": "mt_fence",
+     "x": 12.1,
+     "y": 9.15,
+     "rot": 0,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_142",
+     "type": "mt_fence",
+     "x": 13.1,
+     "y": 9.15,
+     "rot": 0,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_143",
+     "type": "mt_fence",
+     "x": 14.1,
+     "y": 9.15,
+     "rot": 0,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_144",
+     "type": "mt_fence",
+     "x": 14.4,
+     "y": 9.15,
+     "rot": 0,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_145",
+     "type": "mt_fence",
+     "x": 12.2,
+     "y": 10.25,
+     "rot": 6,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_146",
+     "type": "mt_fence",
+     "x": 12.2,
+     "y": 11.25,
+     "rot": 6,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_147",
+     "type": "mt_fence",
+     "x": 12.2,
+     "y": 11.5,
+     "rot": 6,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_148",
+     "type": "mt_fence",
+     "x": 13.3,
+     "y": 10.25,
+     "rot": 6,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_149",
+     "type": "mt_fence",
+     "x": 13.3,
+     "y": 11.25,
+     "rot": 6,
+     "state": "old"
+    },
+    {
+     "id": "mt_fence_150",
+     "type": "mt_fence",
+     "x": 13.3,
+     "y": 11.5,
+     "rot": 6,
+     "state": "old"
+    }
+   ],
+   "gates": [
+    {
+     "i": 0,
+     "obj": "gin0",
+     "kind": "in",
+     "bank": "gin",
+     "x0": 4.76,
+     "x1": 5.4,
+     "y": 9.0,
+     "flap": [
+      4.76,
+      8.94,
+      5.4,
+      9.06
+     ]
+    },
+    {
+     "i": 1,
+     "obj": "gin1",
+     "kind": "in",
+     "bank": "gin",
+     "x0": 5.66,
+     "x1": 6.3,
+     "y": 9.0,
+     "flap": [
+      5.66,
+      8.94,
+      6.3,
+      9.06
+     ]
+    },
+    {
+     "i": 2,
+     "obj": "gin2",
+     "kind": "in",
+     "bank": "gin",
+     "x0": 6.56,
+     "x1": 7.2,
+     "y": 9.0,
+     "flap": [
+      6.56,
+      8.94,
+      7.2,
+      9.06
+     ]
+    },
+    {
+     "i": 3,
+     "obj": "gin3",
+     "kind": "in",
+     "bank": "gin",
+     "x0": 7.46,
+     "x1": 8.1,
+     "y": 9.0,
+     "flap": [
+      7.46,
+      8.94,
+      8.1,
+      9.06
+     ]
+    },
+    {
+     "i": 4,
+     "obj": "gin4",
+     "kind": "in",
+     "bank": "gin",
+     "x0": 8.36,
+     "x1": 9.0,
+     "y": 9.0,
+     "flap": [
+      8.36,
+      8.94,
+      9.0,
+      9.06
+     ]
+    },
+    {
+     "i": 0,
+     "obj": "gout0",
+     "kind": "out",
+     "bank": "gout",
+     "x0": 15.76,
+     "x1": 16.4,
+     "y": 9.0,
+     "flap": [
+      15.76,
+      8.94,
+      16.4,
+      9.06
+     ]
+    },
+    {
+     "i": 1,
+     "obj": "gout1",
+     "kind": "out",
+     "bank": "gout",
+     "x0": 16.66,
+     "x1": 17.3,
+     "y": 9.0,
+     "flap": [
+      16.66,
+      8.94,
+      17.3,
+      9.06
+     ]
+    },
+    {
+     "i": 2,
+     "obj": "gout2",
+     "kind": "out",
+     "bank": "gout",
+     "x0": 17.56,
+     "x1": 18.2,
+     "y": 9.0,
+     "flap": [
+      17.56,
+      8.94,
+      18.2,
+      9.06
+     ]
+    },
+    {
+     "i": 3,
+     "obj": "gout3",
+     "kind": "out",
+     "bank": "gout",
+     "x0": 18.46,
+     "x1": 19.1,
+     "y": 9.0,
+     "flap": [
+      18.46,
+      8.94,
+      19.1,
+      9.06
+     ]
+    },
+    {
+     "i": 4,
+     "obj": "gout4",
+     "kind": "out",
+     "bank": "gout",
+     "x0": 19.36,
+     "x1": 20.0,
+     "y": 9.0,
+     "flap": [
+      19.36,
+      8.94,
+      20.0,
+      9.06
+     ]
+    }
+   ],
+   "psd": [],
+   "layout_check": {
+    "checked": 29,
+    "problems": [],
+    "min_route_clearance": 0.32
+   }
+  },
+  "jhl_platform": {
+   "id": "jhl_platform",
+   "station": "jinghuaili",
+   "skin": "old",
+   "kind": "platform",
+   "name": "井槐里站 · 站台（B2，岛式）",
+   "_doc": "Widened island platform — 井槐里 modest but comfortable. Clear standing room, screen doors kept, NPC waits spread along the platform.",
+   "bounds": [
+    0.25,
+    1.6,
+    26.0,
+    10.4
+   ],
+   "ground": {
+    "origin": [
+     0,
+     1
+    ],
+    "legend": {
+     "O": "mg_floor:old"
+    },
+    "rows_south_to_north": [
+     "OOOOOOOOOOOOO",
+     "OOOOOOOOOOOOO",
+     "OOOOOOOOOOOOO",
+     "OOOOOOOOOOOOO",
+     "OOOOOOOOOOOOO"
+    ]
+   },
+   "signs": [
+    {
+     "obj": "hs_exit",
+     "at": [
+      9.75,
+      5.635,
+      2.54
+     ],
+     "axis": "x",
+     "w": 1.5,
+     "h": 0.3,
+     "lines": [
+      "出口 · 站厅 ↑"
+     ],
+     "ink": "#ffffff"
+    },
+    {
+     "obj": "bd_ne",
+     "at": [
+      5.0,
+      9.7,
+      2.2
+     ],
+     "axis": "x",
+     "w": 2.0,
+     "h": 0.35,
+     "lines": [
+      "3号线 · 往科技园"
+     ],
+     "ink": "#ffe8c0"
+    },
+    {
+     "obj": "bd_nw",
+     "at": [
+      17.0,
+      9.7,
+      2.2
+     ],
+     "axis": "x",
+     "w": 2.0,
+     "h": 0.35,
+     "lines": [
+      "下一班"
+     ],
+     "ink": "#ffe8c0"
+    },
+    {
+     "obj": "bd_s",
+     "at": [
+      18.0,
+      2.1,
+      2.2
+     ],
+     "axis": "x",
+     "w": 2.0,
+     "h": 0.35,
+     "lines": [
+      "3号线 · 往槐北新村"
+     ],
+     "ink": "#ffe8c0"
+    }
+   ],
+   "tracks": [
+    {
+     "id": "N",
+     "dir": "east",
+     "y": 10.7,
+     "rot": 0,
+     "cars": [
+      2,
+      6,
+      10,
+      14,
+      18
+     ],
+     "cab_e": [
+      24,
+      10.7,
+      0
+     ],
+     "cab_w": [
+      2,
+      13.799999999999999,
+      4
+     ],
+     "rails": [
+      10.53,
+      11.97
+     ],
+     "door_y": 10.25,
+     "skin": "old"
+    },
+    {
+     "id": "S",
+     "dir": "west",
+     "y": 1.3,
+     "rot": 4,
+     "cars": [
+      4,
+      8,
+      12,
+      16,
+      20
+     ],
+     "cab_e": [
+      22,
+      -1.8,
+      0
+     ],
+     "cab_w": [
+      0,
+      1.3,
+      4
+     ],
+     "rails": [
+      0.53,
+      1.97
+     ],
+     "door_y": 1.75,
+     "skin": "old"
+    }
+   ],
+   "portals": [
+    {
+     "id": "up",
+     "rect": [
+      10.9,
+      4.5,
+      13.1,
+      7.5
+     ],
+     "to": "jhl_concourse",
+     "spawn": [
+      14.0,
+      13.5,
+      "S"
+     ],
+     "label": "上楼去站厅",
+     "auto": true
+    }
+   ],
+   "spawn": [
+    12.0,
+    6.0,
+    "S"
+   ],
+   "waits": [
+    [
+     2.4,
+     9.55,
+     "N"
+    ],
+    [
+     4.8,
+     9.55,
+     "N"
+    ],
+    [
+     7.199999999999999,
+     9.55,
+     "N"
+    ],
+    [
+     9.6,
+     9.55,
+     "N"
+    ],
+    [
+     12.0,
+     9.55,
+     "N"
+    ],
+    [
+     14.4,
+     9.55,
+     "N"
+    ],
+    [
+     16.799999999999997,
+     9.55,
+     "N"
+    ],
+    [
+     3.0,
+     8.9,
+     "N"
+    ],
+    [
+     5.4,
+     8.9,
+     "N"
+    ],
+    [
+     7.8,
+     8.9,
+     "N"
+    ],
+    [
+     10.2,
+     8.9,
+     "N"
+    ],
+    [
+     12.6,
+     8.9,
+     "N"
+    ],
+    [
+     3.0,
+     2.45,
+     "S"
+    ],
+    [
+     5.4,
+     2.45,
+     "S"
+    ],
+    [
+     7.8,
+     2.45,
+     "S"
+    ],
+    [
+     10.2,
+     2.45,
+     "S"
+    ],
+    [
+     12.6,
+     2.45,
+     "S"
+    ],
+    [
+     15.0,
+     2.45,
+     "S"
+    ],
+    [
+     17.4,
+     2.45,
+     "S"
+    ],
+    [
+     3.0,
+     3.1,
+     "S"
+    ],
+    [
+     5.4,
+     3.1,
+     "S"
+    ],
+    [
+     7.8,
+     3.1,
+     "S"
+    ],
+    [
+     10.2,
+     3.1,
+     "S"
+    ],
+    [
+     12.6,
+     3.1,
+     "S"
+    ]
+   ],
+   "lights": [
+    {
+     "x": 8,
+     "y": 6.0,
+     "r": 6,
+     "c": [
+      210,
+      225,
+      240
+     ]
+    },
+    {
+     "x": 18,
+     "y": 6.0,
+     "r": 6,
+     "c": [
+      210,
+      225,
+      240
+     ]
+    }
+   ],
+   "routes": {
+    "wait_n": [
+     [
+      12.0,
+      6.0
+     ],
+     [
+      8.0,
+      9.0
+     ],
+     [
+      16.0,
+      9.0
+     ],
+     [
+      12.0,
+      6.0
+     ]
+    ],
+    "wait_s": [
+     [
+      12.0,
+      6.0
+     ],
+     [
+      8.0,
+      3.0
+     ],
+     [
+      16.0,
+      3.0
+     ],
+     [
+      12.0,
+      6.0
+     ]
+    ]
+   },
+   "objects": [
+    {
+     "id": "mt_wall_000",
+     "type": "mt_wall",
+     "x": 0.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_001",
+     "type": "mt_wall",
+     "x": 1.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_002",
+     "type": "mt_wall",
+     "x": 2.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_003",
+     "type": "mt_wall",
+     "x": 3.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_004",
+     "type": "mt_wall",
+     "x": 4.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_005",
+     "type": "mt_wall",
+     "x": 5.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_006",
+     "type": "mt_wall",
+     "x": 6.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_007",
+     "type": "mt_wall",
+     "x": 7.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_008",
+     "type": "mt_wall",
+     "x": 8.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_009",
+     "type": "mt_wall",
+     "x": 9.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_010",
+     "type": "mt_wall",
+     "x": 10.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_011",
+     "type": "mt_wall",
+     "x": 11.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_012",
+     "type": "mt_wall",
+     "x": 12.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_013",
+     "type": "mt_wall",
+     "x": 13.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_014",
+     "type": "mt_wall",
+     "x": 14.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_015",
+     "type": "mt_wall",
+     "x": 15.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_016",
+     "type": "mt_wall",
+     "x": 16.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_017",
+     "type": "mt_wall",
+     "x": 17.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_018",
+     "type": "mt_wall",
+     "x": 18.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_019",
+     "type": "mt_wall",
+     "x": 19.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_020",
+     "type": "mt_wall",
+     "x": 20.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_021",
+     "type": "mt_wall",
+     "x": 21.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_022",
+     "type": "mt_wall",
+     "x": 22.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_023",
+     "type": "mt_wall",
+     "x": 23.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_024",
+     "type": "mt_wall",
+     "x": 24.25,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_wall_025",
+     "type": "mt_wall",
+     "x": 25.0,
+     "y": 10.1,
+     "rot": 0,
+     "state": "old",
+     "wall": "N"
+    },
+    {
+     "id": "mt_cut_026",
+     "type": "mt_cut",
+     "x": 0.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_027",
+     "type": "mt_cut",
+     "x": 1.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_028",
+     "type": "mt_cut",
+     "x": 2.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_029",
+     "type": "mt_cut",
+     "x": 3.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_030",
+     "type": "mt_cut",
+     "x": 4.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_031",
+     "type": "mt_cut",
+     "x": 5.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_032",
+     "type": "mt_cut",
+     "x": 6.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_033",
+     "type": "mt_cut",
+     "x": 7.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_034",
+     "type": "mt_cut",
+     "x": 8.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_035",
+     "type": "mt_cut",
+     "x": 9.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_036",
+     "type": "mt_cut",
+     "x": 10.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_037",
+     "type": "mt_cut",
+     "x": 11.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_038",
+     "type": "mt_cut",
+     "x": 12.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_039",
+     "type": "mt_cut",
+     "x": 13.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_040",
+     "type": "mt_cut",
+     "x": 14.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_041",
+     "type": "mt_cut",
+     "x": 15.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_042",
+     "type": "mt_cut",
+     "x": 16.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_043",
+     "type": "mt_cut",
+     "x": 17.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_044",
+     "type": "mt_cut",
+     "x": 18.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_045",
+     "type": "mt_cut",
+     "x": 19.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_046",
+     "type": "mt_cut",
+     "x": 20.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_047",
+     "type": "mt_cut",
+     "x": 21.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_048",
+     "type": "mt_cut",
+     "x": 22.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_049",
+     "type": "mt_cut",
+     "x": 23.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_050",
+     "type": "mt_cut",
+     "x": 24.25,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "mt_cut_051",
+     "type": "mt_cut",
+     "x": 25.0,
+     "y": 1.9,
+     "rot": 0,
+     "state": "old",
+     "wall": "S"
+    },
+    {
+     "id": "psdfN_0",
+     "type": "mt_psd_fix",
+     "x": 0,
+     "y": 10.7,
+     "rot": 0,
+     "state": "old"
+    },
+    {
+     "id": "psdN_1",
+     "type": "mt_psd",
+     "x": 2,
+     "y": 10.7,
+     "rot": 0,
+     "state": "old_closed",
+     "psd": "N"
+    },
+    {
+     "id": "psdfN_2",
+     "type": "mt_psd_fix",
+     "x": 4,
+     "y": 10.7,
+     "rot": 0,
+     "state": "old"
+    },
+    {
+     "id": "psdN_3",
+     "type": "mt_psd",
+     "x": 6,
+     "y": 10.7,
+     "rot": 0,
+     "state": "old_closed",
+     "psd": "N"
+    },
+    {
+     "id": "psdfN_4",
+     "type": "mt_psd_fix",
+     "x": 8,
+     "y": 10.7,
+     "rot": 0,
+     "state": "old"
+    },
+    {
+     "id": "psdN_5",
+     "type": "mt_psd",
+     "x": 10,
+     "y": 10.7,
+     "rot": 0,
+     "state": "old_closed",
+     "psd": "N"
+    },
+    {
+     "id": "psdfN_6",
+     "type": "mt_psd_fix",
+     "x": 12,
+     "y": 10.7,
+     "rot": 0,
+     "state": "old"
+    },
+    {
+     "id": "psdN_7",
+     "type": "mt_psd",
+     "x": 14,
+     "y": 10.7,
+     "rot": 0,
+     "state": "old_closed",
+     "psd": "N"
+    },
+    {
+     "id": "psdfN_8",
+     "type": "mt_psd_fix",
+     "x": 16,
+     "y": 10.7,
+     "rot": 0,
+     "state": "old"
+    },
+    {
+     "id": "psdN_9",
+     "type": "mt_psd",
+     "x": 18,
+     "y": 10.7,
+     "rot": 0,
+     "state": "old_closed",
+     "psd": "N"
+    },
+    {
+     "id": "psdfN_10",
+     "type": "mt_psd_fix",
+     "x": 20,
+     "y": 10.7,
+     "rot": 0,
+     "state": "old"
+    },
+    {
+     "id": "psdfN_11",
+     "type": "mt_psd_fix",
+     "x": 22,
+     "y": 10.7,
+     "rot": 0,
+     "state": "old"
+    },
+    {
+     "id": "psdfN_12",
+     "type": "mt_psd_fix",
+     "x": 24,
+     "y": 10.7,
+     "rot": 0,
+     "state": "old"
+    },
+    {
+     "id": "psdfS_0",
+     "type": "mt_psd_fix",
+     "x": 2,
+     "y": 1.3,
+     "rot": 4,
+     "state": "old"
+    },
+    {
+     "id": "psdS_1",
+     "type": "mt_psd",
+     "x": 4,
+     "y": 1.3,
+     "rot": 4,
+     "state": "old_closed",
+     "psd": "S"
+    },
+    {
+     "id": "psdfS_2",
+     "type": "mt_psd_fix",
+     "x": 6,
+     "y": 1.3,
+     "rot": 4,
+     "state": "old"
+    },
+    {
+     "id": "psdS_3",
+     "type": "mt_psd",
+     "x": 8,
+     "y": 1.3,
+     "rot": 4,
+     "state": "old_closed",
+     "psd": "S"
+    },
+    {
+     "id": "psdfS_4",
+     "type": "mt_psd_fix",
+     "x": 10,
+     "y": 1.3,
+     "rot": 4,
+     "state": "old"
+    },
+    {
+     "id": "psdS_5",
+     "type": "mt_psd",
+     "x": 12,
+     "y": 1.3,
+     "rot": 4,
+     "state": "old_closed",
+     "psd": "S"
+    },
+    {
+     "id": "psdfS_6",
+     "type": "mt_psd_fix",
+     "x": 14,
+     "y": 1.3,
+     "rot": 4,
+     "state": "old"
+    },
+    {
+     "id": "psdS_7",
+     "type": "mt_psd",
+     "x": 16,
+     "y": 1.3,
+     "rot": 4,
+     "state": "old_closed",
+     "psd": "S"
+    },
+    {
+     "id": "psdfS_8",
+     "type": "mt_psd_fix",
+     "x": 18,
+     "y": 1.3,
+     "rot": 4,
+     "state": "old"
+    },
+    {
+     "id": "psdS_9",
+     "type": "mt_psd",
+     "x": 20,
+     "y": 1.3,
+     "rot": 4,
+     "state": "old_closed",
+     "psd": "S"
+    },
+    {
+     "id": "psdfS_10",
+     "type": "mt_psd_fix",
+     "x": 22,
+     "y": 1.3,
+     "rot": 4,
+     "state": "old"
+    },
+    {
+     "id": "psdfS_11",
+     "type": "mt_psd_fix",
+     "x": 24,
+     "y": 1.3,
+     "rot": 4,
+     "state": "old"
+    },
+    {
+     "id": "psdfS_12",
+     "type": "mt_psd_fix",
+     "x": 26,
+     "y": 1.3,
+     "rot": 4,
+     "state": "old"
+    },
+    {
+     "id": "up_stairs",
+     "type": "mt_up",
+     "x": 12.0,
+     "y": 6.0,
+     "rot": 0,
+     "state": "old",
+     "nocol": true
+    },
+    {
+     "id": "mt_pillar_079",
+     "type": "mt_pillar",
+     "x": 6.0,
+     "y": 6.0,
+     "state": "old"
+    },
+    {
+     "id": "mt_pillar_080",
+     "type": "mt_pillar",
+     "x": 18.0,
+     "y": 6.0,
+     "state": "old"
+    },
+    {
+     "id": "mt_bench_081",
+     "type": "mt_bench",
+     "x": 3.5,
+     "y": 6.0,
+     "state": "old"
+    },
+    {
+     "id": "mt_bench_082",
+     "type": "mt_bench",
+     "x": 21.5,
+     "y": 6.0,
+     "state": "old"
+    },
+    {
+     "id": "mt_bin_083",
+     "type": "mt_bin",
+     "x": 15.0,
+     "y": 6.0,
+     "state": "old"
+    },
+    {
+     "id": "bd_ne",
+     "type": "mt_board",
+     "x": 6.0,
+     "y": 9.8,
+     "state": "old"
+    },
+    {
+     "id": "bd_nw",
+     "type": "mt_board",
+     "x": 18.0,
+     "y": 9.8,
+     "state": "old"
+    },
+    {
+     "id": "bd_s",
+     "type": "mt_board",
+     "x": 19.0,
+     "y": 2.2,
+     "state": "old"
+    },
+    {
+     "id": "hs_exit",
+     "type": "mt_hangsign",
+     "x": 10.5,
+     "y": 6.0,
+     "state": "old"
+    }
+   ],
+   "colliders": [
+    {
+     "id": "wall0",
+     "rect": [
+      0.25,
+      10.1,
+      26.0,
+      10.7
+     ]
+    },
+    {
+     "id": "wall1",
+     "rect": [
+      0.25,
+      1.3000000000000003,
+      26.0,
+      2.1
+     ]
+    },
+    {
+     "id": "psdfN_0",
+     "rect": [
+      0.0,
+      10.6,
+      2.0,
+      10.8
+     ]
+    },
+    {
+     "id": "psdN_1",
+     "rect": [
+      2.0,
+      10.6,
+      4.0,
+      10.8
+     ]
+    },
+    {
+     "id": "psdfN_2",
+     "rect": [
+      4.0,
+      10.6,
+      6.0,
+      10.8
+     ]
+    },
+    {
+     "id": "psdN_3",
+     "rect": [
+      6.0,
+      10.6,
+      8.0,
+      10.8
+     ]
+    },
+    {
+     "id": "psdfN_4",
+     "rect": [
+      8.0,
+      10.6,
+      10.0,
+      10.8
+     ]
+    },
+    {
+     "id": "psdN_5",
+     "rect": [
+      10.0,
+      10.6,
+      12.0,
+      10.8
+     ]
+    },
+    {
+     "id": "psdfN_6",
+     "rect": [
+      12.0,
+      10.6,
+      14.0,
+      10.8
+     ]
+    },
+    {
+     "id": "psdN_7",
+     "rect": [
+      14.0,
+      10.6,
+      16.0,
+      10.8
+     ]
+    },
+    {
+     "id": "psdfN_8",
+     "rect": [
+      16.0,
+      10.6,
+      18.0,
+      10.8
+     ]
+    },
+    {
+     "id": "psdN_9",
+     "rect": [
+      18.0,
+      10.6,
+      20.0,
+      10.8
+     ]
+    },
+    {
+     "id": "psdfN_10",
+     "rect": [
+      20.0,
+      10.6,
+      22.0,
+      10.8
+     ]
+    },
+    {
+     "id": "psdfN_11",
+     "rect": [
+      22.0,
+      10.6,
+      24.0,
+      10.8
+     ]
+    },
+    {
+     "id": "psdfN_12",
+     "rect": [
+      24.0,
+      10.6,
+      26.0,
+      10.8
+     ]
+    },
+    {
+     "id": "psdfS_0",
+     "rect": [
+      0.0,
+      1.2,
+      2.0,
+      1.4
+     ]
+    },
+    {
+     "id": "psdS_1",
+     "rect": [
+      2.0,
+      1.2,
+      4.0,
+      1.4
+     ]
+    },
+    {
+     "id": "psdfS_2",
+     "rect": [
+      4.0,
+      1.2,
+      6.0,
+      1.4
+     ]
+    },
+    {
+     "id": "psdS_3",
+     "rect": [
+      6.0,
+      1.2,
+      8.0,
+      1.4
+     ]
+    },
+    {
+     "id": "psdfS_4",
+     "rect": [
+      8.0,
+      1.2,
+      10.0,
+      1.4
+     ]
+    },
+    {
+     "id": "psdS_5",
+     "rect": [
+      10.0,
+      1.2,
+      12.0,
+      1.4
+     ]
+    },
+    {
+     "id": "psdfS_6",
+     "rect": [
+      12.0,
+      1.2,
+      14.0,
+      1.4
+     ]
+    },
+    {
+     "id": "psdS_7",
+     "rect": [
+      14.0,
+      1.2,
+      16.0,
+      1.4
+     ]
+    },
+    {
+     "id": "psdfS_8",
+     "rect": [
+      16.0,
+      1.2,
+      18.0,
+      1.4
+     ]
+    },
+    {
+     "id": "psdS_9",
+     "rect": [
+      18.0,
+      1.2,
+      20.0,
+      1.4
+     ]
+    },
+    {
+     "id": "psdfS_10",
+     "rect": [
+      20.0,
+      1.2,
+      22.0,
+      1.4
+     ]
+    },
+    {
+     "id": "psdfS_11",
+     "rect": [
+      22.0,
+      1.2,
+      24.0,
+      1.4
+     ]
+    },
+    {
+     "id": "psdfS_12",
+     "rect": [
+      24.0,
+      1.2,
+      26.0,
+      1.4
+     ]
+    },
+    {
+     "id": "mt_pillar_079",
+     "rect": [
+      5.7,
+      5.7,
+      6.3,
+      6.3
+     ]
+    },
+    {
+     "id": "mt_pillar_080",
+     "rect": [
+      17.7,
+      5.7,
+      18.3,
+      6.3
+     ]
+    },
+    {
+     "id": "mt_bench_081",
+     "rect": [
+      2.6,
+      5.78,
+      4.4,
+      6.22
+     ]
+    },
+    {
+     "id": "mt_bench_082",
+     "rect": [
+      20.6,
+      5.78,
+      22.4,
+      6.22
+     ]
+    },
+    {
+     "id": "mt_bin_083",
+     "rect": [
+      14.78,
+      5.8,
+      15.22,
+      6.2
+     ]
+    }
+   ],
+   "gates": [],
+   "psd": [
+    {
+     "track": "N",
+     "obj": "psdN_1",
+     "x0": 2,
+     "x1": 4,
+     "y": 10.7
+    },
+    {
+     "track": "N",
+     "obj": "psdN_3",
+     "x0": 6,
+     "x1": 8,
+     "y": 10.7
+    },
+    {
+     "track": "N",
+     "obj": "psdN_5",
+     "x0": 10,
+     "x1": 12,
+     "y": 10.7
+    },
+    {
+     "track": "N",
+     "obj": "psdN_7",
+     "x0": 14,
+     "x1": 16,
+     "y": 10.7
+    },
+    {
+     "track": "N",
+     "obj": "psdN_9",
+     "x0": 18,
+     "x1": 20,
+     "y": 10.7
+    },
+    {
+     "track": "S",
+     "obj": "psdS_1",
+     "x0": 2,
+     "x1": 4,
+     "y": 1.3
+    },
+    {
+     "track": "S",
+     "obj": "psdS_3",
+     "x0": 6,
+     "x1": 8,
+     "y": 1.3
+    },
+    {
+     "track": "S",
+     "obj": "psdS_5",
+     "x0": 10,
+     "x1": 12,
+     "y": 1.3
+    },
+    {
+     "track": "S",
+     "obj": "psdS_7",
+     "x0": 14,
+     "x1": 16,
+     "y": 1.3
+    },
+    {
+     "track": "S",
+     "obj": "psdS_9",
+     "x0": 18,
+     "x1": 20,
+     "y": 1.3
+    }
+   ],
+   "layout_check": {
+    "checked": 27,
+    "problems": [],
+    "min_route_clearance": 0.9
+   }
+  },
+  "jhl_street": {
+   "id": "jhl_street",
+   "station": "jinghuaili",
+   "skin": "old",
+   "kind": "street",
+   "name": "井槐里站 · (调试用地面)（井槐里路）",
+   "_doc": "DEPRECATED intermediate facade — core + preview enter the concourse directly. Kept only for art debug (?area=). Do not use in play flow.",
+   "bounds": [
+    0.3,
+    0.3,
+    14.0,
+    10.0
+   ],
+   "ground": {
+    "origin": [
+     0,
+     0
+    ],
+    "legend": {
+     "P": "mg_floor:paving"
+    },
+    "rows_south_to_north": [
+     "PPPPPPP",
+     "PPPPPPP",
+     "PPPPPPP",
+     "PPPPPPP",
+     "PPPPPPP"
+    ]
+   },
+   "backdrop": "old_street",
+   "colliders": [
+    {
+     "id": "c0",
+     "rect": [
+      5.2,
+      1.85,
+      5.36,
+      2.0
+     ]
+    },
+    {
+     "id": "c1",
+     "rect": [
+      8.67,
+      1.85,
+      8.83,
+      2.0
+     ]
+    },
+    {
+     "id": "entrance",
+     "rect": [
+      5.35,
+      2.5,
+      5.65,
+      8.5
+     ]
+    },
+    {
+     "id": "entrance",
+     "rect": [
+      8.35,
+      2.5,
+      8.65,
+      8.5
+     ]
+    },
+    {
+     "id": "entrance",
+     "rect": [
+      5.35,
+      8.25,
+      8.65,
+      8.55
+     ]
+    },
+    {
+     "id": "signpost",
+     "rect": [
+      3.68,
+      2.44,
+      4.12,
+      2.76
+     ]
+    },
+    {
+     "id": "mt_tree_002",
+     "rect": [
+      1.15,
+      7.15,
+      2.05,
+      8.05
+     ]
+    },
+    {
+     "id": "mt_tree_003",
+     "rect": [
+      11.95,
+      7.15,
+      12.85,
+      8.05
+     ]
+    },
+    {
+     "id": "mt_tree_004",
+     "rect": [
+      11.95,
+      2.75,
+      12.85,
+      3.65
+     ]
+    },
+    {
+     "id": "mt_bin_005",
+     "rect": [
+      9.78,
+      2.0,
+      10.22,
+      2.4
+     ]
+    }
+   ],
+   "signs": [
+    {
+     "obj": "entrance",
+     "part": "roof",
+     "at": [
+      5.75,
+      1.84,
+      2.99
+     ],
+     "axis": "x",
+     "w": 3.0,
+     "h": 0.38,
+     "lines": [
+      "井槐里站"
+     ],
+     "sub": "JINGHUAILI · 3号线",
+     "ink": "#2a2420"
+    },
+    {
+     "obj": "signpost",
+     "at": [
+      3.66,
+      2.41,
+      2.47
+     ],
+     "axis": "x",
+     "w": 0.48,
+     "h": 0.5,
+     "lines": [
+      "井槐里",
+      "站"
+     ],
+     "ink": "#1d2a3a"
+    }
+   ],
+   "portals": [
+    {
+     "id": "down",
+     "rect": [
+      5.9,
+      4.25,
+      8.1,
+      5.1
+     ],
+     "to": "jhl_concourse",
+     "spawn": [
+      2.5,
+      7.0,
+      "S"
+     ],
+     "label": "下楼进站",
+     "auto": true,
+     "hours": true
+    },
+    {
+     "id": "street",
+     "rect": [
+      0.3,
+      0.3,
+      14.0,
+      0.75
+     ],
+     "to": "exit:street",
+     "label": "回到井槐里路",
+     "auto": true
+    }
+   ],
+   "spawn": [
+    7.0,
+    1.6,
+    "N"
+   ],
+   "lights": {
+    "lamps": [
+     [
+      7.0,
+      2.2,
+      2.6,
+      3.2
+     ],
+     [
+      3.9,
+      2.2,
+      3.0,
+      2.0
+     ]
+    ]
+   },
+   "routes": {
+    "enter": [
+     [
+      0.6,
+      1.2
+     ],
+     [
+      6.2,
+      1.4
+     ],
+     [
+      7.0,
+      3.0
+     ],
+     [
+      7.0,
+      4.7
+     ]
+    ],
+    "enter2": [
+     [
+      13.6,
+      1.2
+     ],
+     [
+      8.0,
+      1.5
+     ],
+     [
+      7.2,
+      3.0
+     ],
+     [
+      7.2,
+      4.7
+     ]
+    ],
+    "leave": [
+     [
+      6.6,
+      4.6
+     ],
+     [
+      6.4,
+      2.6
+     ],
+     [
+      6.3,
+      1.4
+     ],
+     [
+      0.6,
+      1.0
+     ]
+    ],
+    "leave2": [
+     [
+      7.4,
+      4.6
+     ],
+     [
+      7.6,
+      2.6
+     ],
+     [
+      7.8,
+      1.4
+     ],
+     [
+      13.6,
+      1.0
+     ]
+    ],
+    "pass": [
+     [
+      0.6,
+      0.9
+     ],
+     [
+      13.6,
+      0.9
+     ]
+    ],
+    "pass2": [
+     [
+      13.6,
+      1.3
+     ],
+     [
+      0.6,
+      1.3
+     ]
+    ]
+   },
+   "objects": [
+    {
+     "id": "entrance",
+     "type": "mt_entrance",
+     "x": 7.0,
+     "y": 5.5,
+     "state": "old"
+    },
+    {
+     "id": "signpost",
+     "type": "mt_signpost",
+     "x": 3.9,
+     "y": 2.6,
+     "state": "old",
+     "interact": "map",
+     "reach": [
+      3.9,
+      1.9
+     ],
+     "label": "看线路图"
+    },
+    {
+     "id": "mt_tree_002",
+     "type": "mt_tree",
+     "x": 1.6,
+     "y": 7.6
+    },
+    {
+     "id": "mt_tree_003",
+     "type": "mt_tree",
+     "x": 12.4,
+     "y": 7.6
+    },
+    {
+     "id": "mt_tree_004",
+     "type": "mt_tree",
+     "x": 12.4,
+     "y": 3.2
+    },
+    {
+     "id": "mt_bin_005",
+     "type": "mt_bin",
+     "x": 10.0,
+     "y": 2.2,
+     "state": "old"
+    }
+   ],
+   "gates": [],
+   "psd": [],
+   "layout_check": {
+    "checked": 9,
+    "problems": [],
+    "min_route_clearance": 0.388
+   }
+  }
+ },
+ "rules": {
+  "_doc": "地铁 metro (js/metro.js). Times in game minutes of the day, money in yuan. Fare by distance (km between stations), deducted on arrival (= tapping out). Built scenes: station.area (multi-area scenes in metro45.js); other stations are on the line but have no scene yet.",
+  "line": {
+   "id": "L3",
+   "name": "3号线",
+   "alias": "槐江线",
+   "color": "#E07F2D",
+   "east_terminal": "kejiyuan",
+   "west_terminal": "huaibei"
+  },
+  "hours": {
+   "open": 360,
+   "close": 1380,
+   "first_train": 365,
+   "last_train": 1370,
+   "label": "06:00–23:00"
+  },
+  "stations": [
+   {
+    "id": "huaibei",
+    "name": "槐北新村",
+    "km": 0.0,
+    "min": 0,
+    "area": null,
+    "zone": "外围"
+   },
+   {
+    "id": "jinghuaili",
+    "name": "井槐里",
+    "km": 2.1,
+    "min": 3,
+    "area": "jhl_concourse",
+    "zone": "外围老城区"
+   },
+   {
+    "id": "huaiyin",
+    "name": "槐荫路",
+    "km": 4.0,
+    "min": 6,
+    "area": null,
+    "zone": "外围"
+   },
+   {
+    "id": "fangzhi",
+    "name": "纺织城",
+    "km": 6.9,
+    "min": 10,
+    "area": null,
+    "zone": "外围"
+   },
+   {
+    "id": "xiguan",
+    "name": "西关",
+    "km": 9.8,
+    "min": 14,
+    "area": null,
+    "zone": "内环"
+   },
+   {
+    "id": "renmin",
+    "name": "人民广场",
+    "km": 13.0,
+    "min": 18,
+    "area": null,
+    "zone": "内环"
+   },
+   {
+    "id": "jiangbin",
+    "name": "江滨",
+    "km": 16.4,
+    "min": 23,
+    "area": null,
+    "zone": "内环"
+   },
+   {
+    "id": "cbd",
+    "name": "中央商务区",
+    "km": 19.3,
+    "min": 28,
+    "area": "cbd_concourse",
+    "zone": "CBD"
+   },
+   {
+    "id": "kejiyuan",
+    "name": "科技园",
+    "km": 23.5,
+    "min": 33,
+    "area": null,
+    "zone": "CBD 东"
+   }
+  ],
+  "fare": {
+   "_doc": "km travelled -> yuan (first band whose limit >= km)",
+   "bands": [
+    [
+     6,
+     3
+    ],
+    [
+     12,
+     4
+    ],
+    [
+     22,
+     5
+    ],
+    [
+     99,
+     6
+    ]
+   ],
+   "card_discount": 1.0,
+   "qr_discount": 1.0
+  },
+  "token": {
+   "label": "单程票",
+   "price_by_fare": true
+  },
+  "card": {
+   "label": "交通卡",
+   "start_balance": 12,
+   "topups": [
+    20,
+    50,
+    100
+   ],
+   "min_to_enter": 3
+  },
+  "qr": {
+   "label": "乘车码",
+   "app": "城市地铁 App",
+   "min_money": 3
+  },
+  "pay_methods_tvm": [
+   "微信",
+   "支付宝",
+   "现金"
+  ],
+  "headway_min": {
+   "peak": 3,
+   "normal": 6,
+   "late": 10,
+   "_doc": "minutes between trains per direction; peak = weekday peak windows, late = after late_after"
+  },
+  "peak": [
+   [
+    420,
+    570
+   ],
+   [
+    1050,
+    1170
+   ]
+  ],
+  "late_after": 1260,
+  "dwell_min": 1.2,
+  "approach_min": 0.5,
+  "clock_scale": 0.1,
+  "_clock_doc": "inside stations the clock runs at clock_scale game minutes per real second (6 game s per s; the street runs 1 min/s), so walking a station costs ~8-12 game minutes and a 1.2 min dwell is ~12 s to board",
+  "crowd": {
+   "_doc": "waiting / walking NPCs per area = round(base * by_hour[h] * (weekend ? weekend_mul : 1)), capped at max. Kept lean so platforms stay walkable.",
+   "base": 5,
+   "max": 14,
+   "weekend_mul": 0.55,
+   "by_hour": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0.5,
+    1.6,
+    2.6,
+    1.6,
+    0.8,
+    0.7,
+    0.9,
+    0.8,
+    0.7,
+    0.8,
+    1.0,
+    1.6,
+    2.6,
+    1.8,
+    1.0,
+    0.8,
+    0.5,
+    0.2
+   ]
+  },
+  "commuters": [
+   {
+    "id": "xiaozhou",
+    "name": "小周（程序员）",
+    "sprite": "office",
+    "home": "jinghuaili",
+    "work": "cbd",
+    "leave": 485,
+    "back": 1140,
+    "days": "workday"
+   },
+   {
+    "id": "linjie",
+    "name": "林姐（会计）",
+    "sprite": "office",
+    "home": "jinghuaili",
+    "work": "cbd",
+    "leave": 470,
+    "back": 1090,
+    "days": "workday"
+   },
+   {
+    "id": "xiaoyu",
+    "name": "小雨（实习生）",
+    "sprite": "student",
+    "home": "jinghuaili",
+    "work": "cbd",
+    "leave": 500,
+    "back": 1180,
+    "days": "workday"
+   },
+   {
+    "id": "laozhang",
+    "name": "老张（保安）",
+    "sprite": "uncle",
+    "home": "jinghuaili",
+    "work": "renmin",
+    "leave": 420,
+    "back": 1230,
+    "days": "all"
+   },
+   {
+    "id": "ading",
+    "name": "阿丁（外卖站长）",
+    "sprite": "uncle",
+    "home": "huaibei",
+    "work": "cbd",
+    "leave": 600,
+    "back": 1300,
+    "days": "all"
+   }
+  ],
+  "security": {
+   "scan_min": 0.6,
+   "_doc": "安检: bag through the X-ray + walk-through arch; skipping it is refused by staff"
+  },
+  "depart_min": 0.45
+ }
+}
