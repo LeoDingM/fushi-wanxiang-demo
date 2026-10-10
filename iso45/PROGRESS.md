@@ -84,3 +84,9 @@
 23:35 · [Stage I] 待办完成自动清除检测 + 心情+3；穿衣磨损分级 toast + HUD「穿n%」
 23:35 · [Stage I] 缴物业费续期入手「物业费缴纳凭证」可出示；出示给物业再续期
 23:35 · [Stage I] 质量：stageI_test 12/12 · smoke 4/4 · stage6 12/12 · 截图 i1–i6（i6 消防立绘回归）· 未改 NPC_SPEC/appearance
+
+23:40 · [Stage J] 门禁登记簿：扫码写入 ps.scanLog；物业/门岗菜单可查；手机「门禁」App · js/stageJ.js
+23:40 · [Stage J] 收干衣→换装建议链：rules change_clothes + Char-A appearance.openWardrobe（只调用不改外观文件）
+23:40 · [Stage J] 脏衣 HUD 提示：点击芯片看 上班/睡觉/季节倍率说明
+23:40 · [Stage J] 物业费凭证同步物业微信 + 会话回复；医院处方出示文案加长 + 微信阿姨
+23:40 · [Stage J] 质量：stageJ_test 13/13 · smoke 4/4 · stage6 12/12 · 截图 j1–j6（含护士回归）

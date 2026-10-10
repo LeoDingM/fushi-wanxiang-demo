@@ -1,46 +1,46 @@
-# 浮世万象 · scene-proto-45 · Stage I 交接
+# 浮世万象 · scene-proto-45 · Stage J 交接
 
-旧街区；**CBD 暂停**。Stage I：馨园扫码门禁反馈、待办完成心情、穿着磨损反馈、物业费回执。外观仍归 Char-A——未改 `NPC_SPEC` / `appearance.js` / actors / civic exteriors。
+旧街区；**CBD 暂停**。Stage J：门禁登记簿、收衣换装链、磨损倍率说明、物业费微信、处方出示打磨。未改 Char-A `appearance.js` / `NPC_SPEC`（仅调用 `openWardrobe`）。
 
 ## 交付
 
 | 目标 | 落地 |
 |------|------|
-| 门禁扫码 | 进入 `stair_xin_*` 时扫码 overlay（住户/临时通行 / 访客演示） |
-| 待办完成 | 待办消失 → 心情 +3 + 日程记一笔 |
-| 磨损反馈 | worn_h 阈值 toast；HUD 芯片显示「穿n%」；下班提示 |
-| 物业费回执 | `renewByFee` → 背包 `property_fee_receipt`；可出示；物业接受再续期 |
-| 民政回归 | i6 消防站（firefighter atlas ready） |
+| 扫码登记簿 | `ps.scanLog`；物业/门岗菜单「查阅」；手机门禁 App |
+| 收衣→换装 | `collect_clothes` 后建议换装；可走 rules 换衣或 `SP.appearance.openWardrobe` |
+| 磨损说明 | HUD 芯片 title + 点击 toast（上班×1.5 / 睡觉×0.3 / 季节系数） |
+| 物业费微信 | 续期缴费后推送物业会话；回复「凭证怎么看」 |
+| 处方+护士 | 医院出示文案加长；护士场景回归截图 |
 
 ## 关键文件
 
-- `js/stageI.js`
-- `index.html`（挂 stageI.js）
-- `tools/stageI_test.py` · `tools/capture_stageI.py`
+- `js/stageJ.js`
+- `index.html`
+- `tools/stageJ_test.py` · `tools/capture_stageJ.py`
 
 ## 截图
 
-- `i1-xin-scan.png` — 馨园扫码  
-- `i2-todo-done.png` — 待办完成 / 日程  
-- `i3-wear-pct.png` — 穿着 % HUD  
-- `i4-fee-receipt.png` — 背包物业费凭证  
-- `i5-present-fee.png` — 出示物业费凭证  
-- `i6-civic-fire-or-hospital.png` — 消防站立绘  
+- `j1-scan-log.png` — 门禁登记簿  
+- `j2-outfit-suggest.png` — 收衣换装建议  
+- `j3-wear-tip.png` — 磨损倍率提示  
+- `j4-fee-property-wx.png` — 物业微信缴费  
+- `j5-rx-hospital.png` — 出示处方  
+- `j6-nurse-or-scan-menu.png` — 护士立绘回归  
 
 ## 玩法速查
 
-1. 走近馨园进楼 → 扫码「嘀」  
-2. 做完待办（收衣/续期/门岗）→ 心情小涨  
-3. 穿太久 HUD 显示穿旧百分比 → 去 1-02 洗衣  
-4. 交物业费续门禁 → 背包凭证 → 可再出示物业  
+1. 进馨园扫码 → 手机「门禁」或物业菜单看登记簿  
+2. 1-02 收干衣 → 弹出换装建议（系统换衣 / 外观衣柜）  
+3. 点 HUD 衣服芯片看磨损倍率  
+4. 交物业费 → 微信物业有凭证对话  
 
-## 建议 Stage J
+## 建议 Stage K
 
-1. 访客扫码登记本（姓名备注，门岗可查）  
-2. 待办完成连环：收衣→自动建议换装  
-3. 磨损与天气/加班倍率 HUD 说明  
-4. 物业费凭证进微信物业会话  
-5. 医院护士立绘回归 + 处方出示联调  
+1. 登记簿按日筛选 + 门岗盘问引用「昨晚未扫码」  
+2. 换装后清除 dirty-wear toast / 心情小 buff  
+3. 雨天/加班磨损倍率动态写进芯片颜色  
+4. 处方过期机制（游戏日）与药房联动  
+5. 门禁 App 与日程待办合并入口  
 
 ## 压缩包
 
