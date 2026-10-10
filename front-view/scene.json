@@ -823,7 +823,8 @@
    "type": "f_wall",
    "x": 7,
    "y": 18.0,
-   "state": "ground"
+   "state": "ground",
+   "variant": "patch"
   },
   {
    "id": "win_1F_7",
@@ -831,6 +832,7 @@
    "x": 7,
    "y": 18.0,
    "state": "intact",
+   "variant": "b",
    "interact": "window",
    "night_lit": true
   },
@@ -839,7 +841,8 @@
    "type": "f_wall",
    "x": 10,
    "y": 18.0,
-   "state": "ground"
+   "state": "ground",
+   "variant": "stain"
   },
   {
    "id": "win_1F_10",
@@ -847,6 +850,7 @@
    "x": 10,
    "y": 18.0,
    "state": "intact",
+   "variant": "b",
    "interact": "window",
    "night_lit": true
   },
@@ -855,7 +859,8 @@
    "type": "f_wall",
    "x": 13,
    "y": 18.0,
-   "state": "ground"
+   "state": "ground",
+   "variant": "stain"
   },
   {
    "id": "unit_door",
@@ -864,14 +869,21 @@
    "y": 18.0,
    "state": "closed",
    "fade_group": "building",
-   "interact": "door"
+   "interact": "door",
+   "to": "stair_1f",
+   "spawn": [
+    4.0,
+    0.3,
+    "N"
+   ]
   },
   {
    "id": "wall_1F_16",
    "type": "f_wall",
    "x": 16,
    "y": 18.0,
-   "state": "ground"
+   "state": "ground",
+   "variant": "stain"
   },
   {
    "id": "win_1F_16",
@@ -921,7 +933,8 @@
    "type": "f_wall",
    "x": 25,
    "y": 18.0,
-   "state": "ground"
+   "state": "ground",
+   "variant": "stain"
   },
   {
    "id": "pipe_0_4.1",
@@ -950,6 +963,7 @@
    "y": 18.0,
    "z": 3.0,
    "state": "intact",
+   "variant": "d",
    "night_lit": true
   },
   {
@@ -965,7 +979,8 @@
    "x": 7,
    "y": 18.0,
    "z": 3.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "stain"
   },
   {
    "id": "balc_2F_7",
@@ -990,6 +1005,7 @@
    "y": 18.0,
    "z": 3.0,
    "state": "intact",
+   "variant": "b",
    "night_lit": true
   },
   {
@@ -998,7 +1014,8 @@
    "x": 13,
    "y": 18.0,
    "z": 3.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "patch"
   },
   {
    "id": "win_2F_13",
@@ -1007,6 +1024,7 @@
    "y": 18.0,
    "z": 3.0,
    "state": "intact",
+   "variant": "d",
    "night_lit": true
   },
   {
@@ -1015,7 +1033,8 @@
    "x": 16,
    "y": 18.0,
    "z": 3.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "stain"
   },
   {
    "id": "win_2F_16",
@@ -1024,6 +1043,7 @@
    "y": 18.0,
    "z": 3.0,
    "state": "intact",
+   "variant": "d",
    "night_lit": true
   },
   {
@@ -1048,6 +1068,7 @@
    "y": 18.0,
    "z": 3.0,
    "state": "intact",
+   "variant": "b",
    "night_lit": true
   },
   {
@@ -1056,7 +1077,8 @@
    "x": 22,
    "y": 18.0,
    "z": 3.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "stain"
   },
   {
    "id": "balc_2F_22",
@@ -1081,6 +1103,7 @@
    "y": 18.0,
    "z": 3.0,
    "state": "intact",
+   "variant": "b",
    "night_lit": true
   },
   {
@@ -1103,7 +1126,8 @@
    "x": 4,
    "y": 18.0,
    "z": 6.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "patch"
   },
   {
    "id": "win_3F_4",
@@ -1112,6 +1136,7 @@
    "y": 18.0,
    "z": 6.0,
    "state": "intact",
+   "variant": "c",
    "night_lit": true
   },
   {
@@ -1120,7 +1145,8 @@
    "x": 7,
    "y": 18.0,
    "z": 6.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "stain"
   },
   {
    "id": "balc_3F_7",
@@ -1145,6 +1171,7 @@
    "y": 18.0,
    "z": 6.0,
    "state": "intact",
+   "variant": "c",
    "night_lit": true
   },
   {
@@ -1152,7 +1179,8 @@
    "type": "f_ac",
    "x": 11.5,
    "y": 18.0,
-   "z": 6.2
+   "z": 6.2,
+   "variant": "rust"
   },
   {
    "id": "wall_3F_13",
@@ -1168,7 +1196,8 @@
    "x": 13,
    "y": 18.0,
    "z": 6.0,
-   "state": "intact"
+   "state": "intact",
+   "variant": "b"
   },
   {
    "id": "wall_3F_16",
@@ -1176,7 +1205,8 @@
    "x": 16,
    "y": 18.0,
    "z": 6.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "stain"
   },
   {
    "id": "win_3F_16",
@@ -1185,6 +1215,7 @@
    "y": 18.0,
    "z": 6.0,
    "state": "intact",
+   "variant": "b",
    "night_lit": true
   },
   {
@@ -1192,7 +1223,8 @@
    "type": "f_ac",
    "x": 17.5,
    "y": 18.0,
-   "z": 6.2
+   "z": 6.2,
+   "variant": "rust"
   },
   {
    "id": "wall_3F_19",
@@ -1200,7 +1232,8 @@
    "x": 19,
    "y": 18.0,
    "z": 6.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "stain"
   },
   {
    "id": "win_3F_19",
@@ -1208,7 +1241,8 @@
    "x": 19,
    "y": 18.0,
    "z": 6.0,
-   "state": "intact"
+   "state": "intact",
+   "variant": "c"
   },
   {
    "id": "ac_3F_19",
@@ -1239,7 +1273,8 @@
    "x": 25,
    "y": 18.0,
    "z": 6.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "patch"
   },
   {
    "id": "win_3F_25",
@@ -1248,6 +1283,7 @@
    "y": 18.0,
    "z": 6.0,
    "state": "intact",
+   "variant": "b",
    "night_lit": true
   },
   {
@@ -1277,7 +1313,8 @@
    "x": 4,
    "y": 18.0,
    "z": 9.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "patch"
   },
   {
    "id": "win_4F_4",
@@ -1286,6 +1323,7 @@
    "y": 18.0,
    "z": 9.0,
    "state": "intact",
+   "variant": "b",
    "night_lit": true
   },
   {
@@ -1294,7 +1332,8 @@
    "x": 7,
    "y": 18.0,
    "z": 9.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "stain"
   },
   {
    "id": "win_4F_7",
@@ -1350,7 +1389,8 @@
    "x": 16,
    "y": 18.0,
    "z": 9.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "patch"
   },
   {
    "id": "win_4F_16",
@@ -1367,7 +1407,8 @@
    "x": 19,
    "y": 18.0,
    "z": 9.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "stain"
   },
   {
    "id": "balc_4F_19",
@@ -1391,7 +1432,8 @@
    "x": 22,
    "y": 18.0,
    "z": 9.0,
-   "state": "intact"
+   "state": "intact",
+   "variant": "b"
   },
   {
    "id": "wall_4F_25",
@@ -1408,6 +1450,7 @@
    "y": 18.0,
    "z": 9.0,
    "state": "intact",
+   "variant": "d",
    "night_lit": true
   },
   {
@@ -1430,7 +1473,8 @@
    "x": 4,
    "y": 18.0,
    "z": 12.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "stain"
   },
   {
    "id": "win_5F_4",
@@ -1439,6 +1483,7 @@
    "y": 18.0,
    "z": 12.0,
    "state": "intact",
+   "variant": "b",
    "night_lit": true
   },
   {
@@ -1463,7 +1508,8 @@
    "x": 10,
    "y": 18.0,
    "z": 12.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "patch"
   },
   {
    "id": "win_5F_10",
@@ -1472,6 +1518,7 @@
    "y": 18.0,
    "z": 12.0,
    "state": "intact",
+   "variant": "d",
    "night_lit": true
   },
   {
@@ -1480,7 +1527,8 @@
    "x": 13,
    "y": 18.0,
    "z": 12.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "stain"
   },
   {
    "id": "win_5F_13",
@@ -1488,7 +1536,8 @@
    "x": 13,
    "y": 18.0,
    "z": 12.0,
-   "state": "intact"
+   "state": "intact",
+   "variant": "c"
   },
   {
    "id": "ac_5F_13",
@@ -1512,6 +1561,7 @@
    "y": 18.0,
    "z": 12.0,
    "state": "intact",
+   "variant": "c",
    "night_lit": true
   },
   {
@@ -1520,7 +1570,8 @@
    "x": 19,
    "y": 18.0,
    "z": 12.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "stain"
   },
   {
    "id": "win_5F_19",
@@ -1529,6 +1580,7 @@
    "y": 18.0,
    "z": 12.0,
    "state": "intact",
+   "variant": "b",
    "night_lit": true
   },
   {
@@ -1537,7 +1589,8 @@
    "x": 22,
    "y": 18.0,
    "z": 12.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "patch"
   },
   {
    "id": "balc_5F_22",
@@ -1562,6 +1615,7 @@
    "y": 18.0,
    "z": 12.0,
    "state": "intact",
+   "variant": "b",
    "night_lit": true
   },
   {
@@ -1607,7 +1661,8 @@
    "x": 7,
    "y": 18.0,
    "z": 15.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "stain"
   },
   {
    "id": "balc_6F_7",
@@ -1632,6 +1687,7 @@
    "y": 18.0,
    "z": 15.0,
    "state": "intact",
+   "variant": "b",
    "night_lit": true
   },
   {
@@ -1647,7 +1703,8 @@
    "x": 13,
    "y": 18.0,
    "z": 15.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "patch"
   },
   {
    "id": "win_6F_13",
@@ -1655,7 +1712,8 @@
    "x": 13,
    "y": 18.0,
    "z": 15.0,
-   "state": "intact"
+   "state": "intact",
+   "variant": "b"
   },
   {
    "id": "wall_6F_16",
@@ -1672,6 +1730,7 @@
    "y": 18.0,
    "z": 15.0,
    "state": "intact",
+   "variant": "b",
    "night_lit": true
   },
   {
@@ -1680,7 +1739,8 @@
    "x": 19,
    "y": 18.0,
    "z": 15.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "patch"
   },
   {
    "id": "win_6F_19",
@@ -1689,6 +1749,7 @@
    "y": 18.0,
    "z": 15.0,
    "state": "intact",
+   "variant": "d",
    "night_lit": true
   },
   {
@@ -1704,7 +1765,8 @@
    "x": 22,
    "y": 18.0,
    "z": 15.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "patch"
   },
   {
    "id": "balc_6F_22",
@@ -1720,7 +1782,8 @@
    "x": 25,
    "y": 18.0,
    "z": 15.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "patch"
   },
   {
    "id": "win_6F_25",
@@ -1729,6 +1792,7 @@
    "y": 18.0,
    "z": 15.0,
    "state": "intact",
+   "variant": "b",
    "night_lit": true
   },
   {
@@ -1763,7 +1827,8 @@
    "type": "f_wall",
    "x": -2,
    "y": 22.0,
-   "state": "ground"
+   "state": "ground",
+   "variant": "base"
   },
   {
    "id": "nb_win_-2_0",
@@ -1771,7 +1836,8 @@
    "x": -2,
    "y": 22.0,
    "state": "intact",
-   "night_lit": false
+   "night_lit": false,
+   "variant": "d"
   },
   {
    "id": "nb_wall_-2_1",
@@ -1779,7 +1845,8 @@
    "x": -2,
    "y": 22.0,
    "z": 3.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "patch"
   },
   {
    "id": "nb_win_-2_1",
@@ -1788,7 +1855,8 @@
    "y": 22.0,
    "z": 3.0,
    "state": "intact",
-   "night_lit": false
+   "night_lit": false,
+   "variant": "d"
   },
   {
    "id": "nb_wall_-2_2",
@@ -1796,7 +1864,8 @@
    "x": -2,
    "y": 22.0,
    "z": 6.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "stain"
   },
   {
    "id": "nb_win_-2_2",
@@ -1805,7 +1874,8 @@
    "y": 22.0,
    "z": 6.0,
    "state": "intact",
-   "night_lit": false
+   "night_lit": false,
+   "variant": "d"
   },
   {
    "id": "nb_wall_-2_3",
@@ -1813,7 +1883,8 @@
    "x": -2,
    "y": 22.0,
    "z": 9.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "stain"
   },
   {
    "id": "nb_win_-2_3",
@@ -1822,7 +1893,8 @@
    "y": 22.0,
    "z": 9.0,
    "state": "intact",
-   "night_lit": false
+   "night_lit": false,
+   "variant": "base"
   },
   {
    "id": "nb_wall_-2_4",
@@ -1830,7 +1902,8 @@
    "x": -2,
    "y": 22.0,
    "z": 12.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "patch"
   },
   {
    "id": "nb_win_-2_4",
@@ -1839,7 +1912,8 @@
    "y": 22.0,
    "z": 12.0,
    "state": "intact",
-   "night_lit": false
+   "night_lit": false,
+   "variant": "d"
   },
   {
    "id": "nb_wall_-2_5",
@@ -1847,7 +1921,8 @@
    "x": -2,
    "y": 22.0,
    "z": 15.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "patch"
   },
   {
    "id": "nb_win_-2_5",
@@ -1856,14 +1931,16 @@
    "y": 22.0,
    "z": 15.0,
    "state": "intact",
-   "night_lit": true
+   "night_lit": true,
+   "variant": "base"
   },
   {
    "id": "nb_wall_1_0",
    "type": "f_wall",
    "x": 1,
    "y": 22.0,
-   "state": "ground"
+   "state": "ground",
+   "variant": "stain"
   },
   {
    "id": "nb_win_1_0",
@@ -1871,7 +1948,8 @@
    "x": 1,
    "y": 22.0,
    "state": "intact",
-   "night_lit": false
+   "night_lit": false,
+   "variant": "d"
   },
   {
    "id": "nb_wall_1_1",
@@ -1879,7 +1957,8 @@
    "x": 1,
    "y": 22.0,
    "z": 3.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "stain"
   },
   {
    "id": "nb_win_1_1",
@@ -1888,7 +1967,8 @@
    "y": 22.0,
    "z": 3.0,
    "state": "intact",
-   "night_lit": false
+   "night_lit": false,
+   "variant": "d"
   },
   {
    "id": "nb_wall_1_2",
@@ -1896,7 +1976,8 @@
    "x": 1,
    "y": 22.0,
    "z": 6.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "base"
   },
   {
    "id": "nb_win_1_2",
@@ -1905,7 +1986,8 @@
    "y": 22.0,
    "z": 6.0,
    "state": "intact",
-   "night_lit": false
+   "night_lit": false,
+   "variant": "base"
   },
   {
    "id": "nb_wall_1_3",
@@ -1913,7 +1995,8 @@
    "x": 1,
    "y": 22.0,
    "z": 9.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "base"
   },
   {
    "id": "nb_win_1_3",
@@ -1922,7 +2005,8 @@
    "y": 22.0,
    "z": 9.0,
    "state": "intact",
-   "night_lit": false
+   "night_lit": false,
+   "variant": "d"
   },
   {
    "id": "nb_wall_1_4",
@@ -1930,7 +2014,8 @@
    "x": 1,
    "y": 22.0,
    "z": 12.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "base"
   },
   {
    "id": "nb_win_1_4",
@@ -1939,7 +2024,8 @@
    "y": 22.0,
    "z": 12.0,
    "state": "intact",
-   "night_lit": true
+   "night_lit": true,
+   "variant": "b"
   },
   {
    "id": "nb_wall_1_5",
@@ -1947,7 +2033,8 @@
    "x": 1,
    "y": 22.0,
    "z": 15.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "stain"
   },
   {
    "id": "nb_win_1_5",
@@ -1956,14 +2043,16 @@
    "y": 22.0,
    "z": 15.0,
    "state": "intact",
-   "night_lit": true
+   "night_lit": true,
+   "variant": "base"
   },
   {
    "id": "nb_wall_28_0",
    "type": "f_wall",
    "x": 28,
    "y": 22.0,
-   "state": "ground"
+   "state": "ground",
+   "variant": "base"
   },
   {
    "id": "nb_win_28_0",
@@ -1971,7 +2060,8 @@
    "x": 28,
    "y": 22.0,
    "state": "intact",
-   "night_lit": false
+   "night_lit": false,
+   "variant": "c"
   },
   {
    "id": "nb_wall_28_1",
@@ -1979,7 +2069,8 @@
    "x": 28,
    "y": 22.0,
    "z": 3.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "patch"
   },
   {
    "id": "nb_win_28_1",
@@ -1988,7 +2079,8 @@
    "y": 22.0,
    "z": 3.0,
    "state": "intact",
-   "night_lit": false
+   "night_lit": false,
+   "variant": "b"
   },
   {
    "id": "nb_wall_28_2",
@@ -1996,7 +2088,8 @@
    "x": 28,
    "y": 22.0,
    "z": 6.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "base"
   },
   {
    "id": "nb_win_28_2",
@@ -2005,7 +2098,8 @@
    "y": 22.0,
    "z": 6.0,
    "state": "intact",
-   "night_lit": true
+   "night_lit": true,
+   "variant": "c"
   },
   {
    "id": "nb_wall_28_3",
@@ -2013,7 +2107,8 @@
    "x": 28,
    "y": 22.0,
    "z": 9.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "stain"
   },
   {
    "id": "nb_win_28_3",
@@ -2022,7 +2117,8 @@
    "y": 22.0,
    "z": 9.0,
    "state": "intact",
-   "night_lit": false
+   "night_lit": false,
+   "variant": "b"
   },
   {
    "id": "nb_wall_28_4",
@@ -2030,7 +2126,8 @@
    "x": 28,
    "y": 22.0,
    "z": 12.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "stain"
   },
   {
    "id": "nb_win_28_4",
@@ -2039,7 +2136,8 @@
    "y": 22.0,
    "z": 12.0,
    "state": "intact",
-   "night_lit": false
+   "night_lit": false,
+   "variant": "d"
   },
   {
    "id": "nb_wall_28_5",
@@ -2047,7 +2145,8 @@
    "x": 28,
    "y": 22.0,
    "z": 15.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "stain"
   },
   {
    "id": "nb_win_28_5",
@@ -2056,14 +2155,16 @@
    "y": 22.0,
    "z": 15.0,
    "state": "intact",
-   "night_lit": false
+   "night_lit": false,
+   "variant": "c"
   },
   {
    "id": "nb_wall_31_0",
    "type": "f_wall",
    "x": 31,
    "y": 22.0,
-   "state": "ground"
+   "state": "ground",
+   "variant": "base"
   },
   {
    "id": "nb_win_31_0",
@@ -2071,7 +2172,8 @@
    "x": 31,
    "y": 22.0,
    "state": "intact",
-   "night_lit": false
+   "night_lit": false,
+   "variant": "d"
   },
   {
    "id": "nb_wall_31_1",
@@ -2079,7 +2181,8 @@
    "x": 31,
    "y": 22.0,
    "z": 3.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "stain"
   },
   {
    "id": "nb_win_31_1",
@@ -2088,7 +2191,8 @@
    "y": 22.0,
    "z": 3.0,
    "state": "intact",
-   "night_lit": false
+   "night_lit": false,
+   "variant": "b"
   },
   {
    "id": "nb_wall_31_2",
@@ -2096,7 +2200,8 @@
    "x": 31,
    "y": 22.0,
    "z": 6.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "patch"
   },
   {
    "id": "nb_win_31_2",
@@ -2105,7 +2210,8 @@
    "y": 22.0,
    "z": 6.0,
    "state": "intact",
-   "night_lit": false
+   "night_lit": false,
+   "variant": "d"
   },
   {
    "id": "nb_wall_31_3",
@@ -2113,7 +2219,8 @@
    "x": 31,
    "y": 22.0,
    "z": 9.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "stain"
   },
   {
    "id": "nb_win_31_3",
@@ -2122,7 +2229,8 @@
    "y": 22.0,
    "z": 9.0,
    "state": "intact",
-   "night_lit": false
+   "night_lit": false,
+   "variant": "b"
   },
   {
    "id": "nb_wall_31_4",
@@ -2130,7 +2238,8 @@
    "x": 31,
    "y": 22.0,
    "z": 12.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "stain"
   },
   {
    "id": "nb_win_31_4",
@@ -2139,7 +2248,8 @@
    "y": 22.0,
    "z": 12.0,
    "state": "intact",
-   "night_lit": true
+   "night_lit": true,
+   "variant": "d"
   },
   {
    "id": "nb_wall_31_5",
@@ -2147,7 +2257,8 @@
    "x": 31,
    "y": 22.0,
    "z": 15.0,
-   "state": "upper"
+   "state": "upper",
+   "variant": "base"
   },
   {
    "id": "nb_win_31_5",
@@ -2156,7 +2267,8 @@
    "y": 22.0,
    "z": 15.0,
    "state": "intact",
-   "night_lit": true
+   "night_lit": true,
+   "variant": "base"
   },
   {
    "id": "tree_sidewalk_w",
@@ -2261,8 +2373,8 @@
    "id": "bike_1",
    "type": "p_bike",
    "x": 20.7,
-   "y": 8.85,
-   "rot": 2,
+   "y": 8.7,
+   "rot": 3,
    "interact": "bike"
   },
   {
@@ -2279,6 +2391,14 @@
    "x": 2.4,
    "y": -0.75,
    "rot": 6,
+   "interact": "bike"
+  },
+  {
+   "id": "bike_4",
+   "type": "p_bike",
+   "x": 3.9,
+   "y": -0.8,
+   "rot": 5,
    "interact": "bike"
   },
   {
@@ -2454,6 +2574,8 @@
   "y": -2.4,
   "dir": "N"
  },
+ "id": "street",
+ "bg_y": 17.9,
  "calendar": {
   "start": [
    2026,
@@ -2485,7 +2607,8 @@
     21
    ]
   },
-  "start_clock": "07:45"
+  "start_clock": "07:45",
+  "start_weekday": 1
  },
  "weather": {
   "chances": {
@@ -2923,6 +3046,9 @@
   },
   "stall": {
    "name": "早点摊"
+  },
+  "portal": {
+   "name": "门"
   },
   "locker": {
    "name": "快递柜"

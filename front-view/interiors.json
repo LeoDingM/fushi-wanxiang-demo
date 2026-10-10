@@ -1,0 +1,1288 @@
+{
+ "stair_1f": {
+  "format": "fushi-scene",
+  "version": 3,
+  "id": "stair_1f",
+  "name": "12号楼 · 一楼楼道",
+  "interior": true,
+  "units": "m",
+  "bounds": {
+   "x0": 0,
+   "y0": -0.9,
+   "x1": 8,
+   "y1": 4
+  },
+  "bg_y": 3.99,
+  "camera": {
+   "top_y": 4,
+   "top_z": 2.95,
+   "bottom_y": -0.9,
+   "fit": true
+  },
+  "ground": {
+   "origin": [
+    0,
+    0
+   ],
+   "chunk": 2,
+   "cols": 4,
+   "rows": 2,
+   "legend": {
+    "F": "g_terrazzo",
+    "T": "g_tile"
+   },
+   "data_south_to_north": [
+    "FFFF",
+    "FFFF"
+   ]
+  },
+  "objects": [
+   {
+    "id": "i_wall_000",
+    "type": "i_wall",
+    "x": 0,
+    "y": 4,
+    "state": "dado_ads"
+   },
+   {
+    "id": "i_wall_001",
+    "type": "i_wall",
+    "x": 1,
+    "y": 4,
+    "state": "dado_ads"
+   },
+   {
+    "id": "i_wall_002",
+    "type": "i_wall",
+    "x": 2,
+    "y": 4,
+    "state": "dado"
+   },
+   {
+    "id": "win_s1",
+    "type": "i_window",
+    "x": 3,
+    "y": 4,
+    "state": "dado",
+    "interact": "window_in",
+    "view": true
+   },
+   {
+    "id": "i_wall_004",
+    "type": "i_wall",
+    "x": 4.5,
+    "y": 4,
+    "state": "dado_ads"
+   },
+   {
+    "id": "i_wall_005",
+    "type": "i_wall",
+    "x": 5.5,
+    "y": 4,
+    "state": "dado"
+   },
+   {
+    "id": "i_wall_006",
+    "type": "i_wall",
+    "x": 6.5,
+    "y": 4,
+    "state": "dado"
+   },
+   {
+    "id": "i_wall_007",
+    "type": "i_wall",
+    "x": 7,
+    "y": 4,
+    "state": "dado"
+   },
+   {
+    "id": "notice_1f",
+    "type": "i_notice",
+    "x": 0.9,
+    "y": 4,
+    "z": 1.25,
+    "interact": "notice"
+   },
+   {
+    "id": "mailbox",
+    "type": "i_mailbox",
+    "x": 2.05,
+    "y": 4,
+    "z": 0.95,
+    "interact": "mailbox"
+   },
+   {
+    "id": "meter_1f",
+    "type": "i_meter",
+    "x": 5.0,
+    "y": 4,
+    "z": 1.55
+   },
+   {
+    "id": "stairs_up_1f",
+    "type": "i_stairs_up",
+    "x": 6.4,
+    "y": 1.0,
+    "interact": "stairs_up"
+   },
+   {
+    "id": "bike_hall",
+    "type": "p_bike",
+    "x": 1.6,
+    "y": 2.9,
+    "rot": 2,
+    "state": "parked"
+   },
+   {
+    "id": "light_1f",
+    "type": "i_pendant",
+    "x": 2.8,
+    "y": 1.1,
+    "interact": "hall_light",
+    "auto_light": true
+   },
+   {
+    "id": "side_w0.25",
+    "type": "i_side",
+    "x": -0.075,
+    "y": 0.25,
+    "state": "dado"
+   },
+   {
+    "id": "side_e0.25",
+    "type": "i_side",
+    "x": 8.075,
+    "y": 0.25,
+    "state": "dado"
+   },
+   {
+    "id": "side_w0.75",
+    "type": "i_side",
+    "x": -0.075,
+    "y": 0.75,
+    "state": "dado"
+   },
+   {
+    "id": "side_e0.75",
+    "type": "i_side",
+    "x": 8.075,
+    "y": 0.75,
+    "state": "dado"
+   },
+   {
+    "id": "side_w1.25",
+    "type": "i_side",
+    "x": -0.075,
+    "y": 1.25,
+    "state": "dado"
+   },
+   {
+    "id": "side_e1.25",
+    "type": "i_side",
+    "x": 8.075,
+    "y": 1.25,
+    "state": "dado"
+   },
+   {
+    "id": "side_w1.75",
+    "type": "i_side",
+    "x": -0.075,
+    "y": 1.75,
+    "state": "dado"
+   },
+   {
+    "id": "side_e1.75",
+    "type": "i_side",
+    "x": 8.075,
+    "y": 1.75,
+    "state": "dado"
+   },
+   {
+    "id": "side_w2.25",
+    "type": "i_side",
+    "x": -0.075,
+    "y": 2.25,
+    "state": "dado"
+   },
+   {
+    "id": "side_e2.25",
+    "type": "i_side",
+    "x": 8.075,
+    "y": 2.25,
+    "state": "dado"
+   },
+   {
+    "id": "side_w2.75",
+    "type": "i_side",
+    "x": -0.075,
+    "y": 2.75,
+    "state": "dado"
+   },
+   {
+    "id": "side_e2.75",
+    "type": "i_side",
+    "x": 8.075,
+    "y": 2.75,
+    "state": "dado"
+   },
+   {
+    "id": "side_w3.25",
+    "type": "i_side",
+    "x": -0.075,
+    "y": 3.25,
+    "state": "dado"
+   },
+   {
+    "id": "side_e3.25",
+    "type": "i_side",
+    "x": 8.075,
+    "y": 3.25,
+    "state": "dado"
+   },
+   {
+    "id": "side_w3.75",
+    "type": "i_side",
+    "x": -0.075,
+    "y": 3.75,
+    "state": "dado"
+   },
+   {
+    "id": "side_e3.75",
+    "type": "i_side",
+    "x": 8.075,
+    "y": 3.75,
+    "state": "dado"
+   },
+   {
+    "id": "cut_0.00",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 0,
+    "state": "dado"
+   },
+   {
+    "id": "cut_1.00",
+    "type": "i_cut",
+    "x": 1.0,
+    "y": 0,
+    "state": "dado"
+   },
+   {
+    "id": "cut_2.00",
+    "type": "i_cut",
+    "x": 2.0,
+    "y": 0,
+    "state": "dado"
+   },
+   {
+    "id": "cut_2.40",
+    "type": "i_cut",
+    "x": 2.4,
+    "y": 0,
+    "state": "dado"
+   },
+   {
+    "id": "cut_4.60",
+    "type": "i_cut",
+    "x": 4.6,
+    "y": 0,
+    "state": "dado"
+   },
+   {
+    "id": "cut_5.60",
+    "type": "i_cut",
+    "x": 5.6,
+    "y": 0,
+    "state": "dado"
+   },
+   {
+    "id": "cut_6.60",
+    "type": "i_cut",
+    "x": 6.6,
+    "y": 0,
+    "state": "dado"
+   },
+   {
+    "id": "cut_7.00",
+    "type": "i_cut",
+    "x": 7,
+    "y": 0,
+    "state": "dado"
+   },
+   {
+    "id": "mat_1f",
+    "type": "d_mat",
+    "x": 4.0,
+    "y": 0.45
+   }
+  ],
+  "colliders": [
+   {
+    "id": "back_wall",
+    "rect": [
+     -1,
+     4,
+     9,
+     5
+    ]
+   },
+   {
+    "id": "side_w",
+    "rect": [
+     -1,
+     -1,
+     0.06,
+     5
+    ]
+   },
+   {
+    "id": "side_e",
+    "rect": [
+     7.94,
+     -1,
+     9,
+     5
+    ]
+   },
+   {
+    "id": "cut_0.0",
+    "rect": [
+     0.0,
+     -0.3,
+     3.4,
+     0.07
+    ]
+   },
+   {
+    "id": "cut_4.6",
+    "rect": [
+     4.6,
+     -0.3,
+     8,
+     0.07
+    ]
+   }
+  ],
+  "portals": [
+   {
+    "id": "exit_street",
+    "rect": [
+     3.4,
+     -0.9,
+     4.6,
+     -0.12
+    ],
+    "dir": "S",
+    "to": "street",
+    "spawn": [
+     14.5,
+     16.95,
+     "S"
+    ],
+    "door": "unit_door",
+    "label": "出门"
+   },
+   {
+    "id": "up_2f",
+    "rect": [
+     5.85,
+     0.42,
+     6.95,
+     0.9
+    ],
+    "dir": "N",
+    "to": "stair_2f",
+    "spawn": [
+     6.4,
+     0.75,
+     "S"
+    ],
+    "label": "上楼"
+   }
+  ],
+  "spawn": [
+   4.0,
+   0.5,
+   "N"
+  ],
+  "events": {}
+ },
+ "stair_2f": {
+  "format": "fushi-scene",
+  "version": 3,
+  "id": "stair_2f",
+  "name": "12号楼 · 二楼楼道",
+  "interior": true,
+  "units": "m",
+  "bounds": {
+   "x0": 0,
+   "y0": -0.9,
+   "x1": 8,
+   "y1": 4
+  },
+  "bg_y": 3.99,
+  "camera": {
+   "top_y": 4,
+   "top_z": 2.95,
+   "bottom_y": -0.9,
+   "fit": true
+  },
+  "ground": {
+   "origin": [
+    0,
+    0
+   ],
+   "chunk": 2,
+   "cols": 4,
+   "rows": 2,
+   "legend": {
+    "F": "g_terrazzo",
+    "T": "g_tile"
+   },
+   "data_south_to_north": [
+    "FFFF",
+    "FFFF"
+   ]
+  },
+  "objects": [
+   {
+    "id": "i_wall_000",
+    "type": "i_wall",
+    "x": 0,
+    "y": 4,
+    "state": "dado_ads"
+   },
+   {
+    "id": "door_2f01",
+    "type": "i_door",
+    "x": 1,
+    "y": 4,
+    "state": "closed",
+    "variant": "wood",
+    "interact": "neighbor_door",
+    "name": "2F-01"
+   },
+   {
+    "id": "win_s2",
+    "type": "i_window",
+    "x": 2.2,
+    "y": 4,
+    "state": "dado",
+    "interact": "window_in",
+    "view": true
+   },
+   {
+    "id": "door_2f02",
+    "type": "i_door",
+    "x": 3.7,
+    "y": 4,
+    "state": "closed",
+    "interact": "portal",
+    "name": "2F-02",
+    "to": "room_2f02",
+    "spawn": [
+     5.5,
+     0.55,
+     "N"
+    ],
+    "label": "回家（2F-02）"
+   },
+   {
+    "id": "i_wall_004",
+    "type": "i_wall",
+    "x": 4.9,
+    "y": 4,
+    "state": "dado"
+   },
+   {
+    "id": "i_wall_005",
+    "type": "i_wall",
+    "x": 5.9,
+    "y": 4,
+    "state": "dado_ads"
+   },
+   {
+    "id": "i_wall_006",
+    "type": "i_wall",
+    "x": 6.9,
+    "y": 4,
+    "state": "dado"
+   },
+   {
+    "id": "i_wall_007",
+    "type": "i_wall",
+    "x": 7.0,
+    "y": 4,
+    "state": "dado"
+   },
+   {
+    "id": "meter_2f",
+    "type": "i_meter",
+    "x": 5.4,
+    "y": 4,
+    "z": 1.6
+   },
+   {
+    "id": "stairs_down_2f",
+    "type": "i_stairs_down",
+    "x": 6.4,
+    "y": 1.4
+   },
+   {
+    "id": "light_2f",
+    "type": "i_pendant",
+    "x": 2.6,
+    "y": 1.1,
+    "interact": "hall_light",
+    "auto_light": true
+   },
+   {
+    "id": "pot_2f",
+    "type": "p_pot",
+    "x": 0.55,
+    "y": 3.6,
+    "state": "grown",
+    "interact": "pot"
+   },
+   {
+    "id": "side_w0.25",
+    "type": "i_side",
+    "x": -0.075,
+    "y": 0.25,
+    "state": "dado"
+   },
+   {
+    "id": "side_e0.25",
+    "type": "i_side",
+    "x": 8.075,
+    "y": 0.25,
+    "state": "dado"
+   },
+   {
+    "id": "side_w0.75",
+    "type": "i_side",
+    "x": -0.075,
+    "y": 0.75,
+    "state": "dado"
+   },
+   {
+    "id": "side_e0.75",
+    "type": "i_side",
+    "x": 8.075,
+    "y": 0.75,
+    "state": "dado"
+   },
+   {
+    "id": "side_w1.25",
+    "type": "i_side",
+    "x": -0.075,
+    "y": 1.25,
+    "state": "dado"
+   },
+   {
+    "id": "side_e1.25",
+    "type": "i_side",
+    "x": 8.075,
+    "y": 1.25,
+    "state": "dado"
+   },
+   {
+    "id": "side_w1.75",
+    "type": "i_side",
+    "x": -0.075,
+    "y": 1.75,
+    "state": "dado"
+   },
+   {
+    "id": "side_e1.75",
+    "type": "i_side",
+    "x": 8.075,
+    "y": 1.75,
+    "state": "dado"
+   },
+   {
+    "id": "side_w2.25",
+    "type": "i_side",
+    "x": -0.075,
+    "y": 2.25,
+    "state": "dado"
+   },
+   {
+    "id": "side_e2.25",
+    "type": "i_side",
+    "x": 8.075,
+    "y": 2.25,
+    "state": "dado"
+   },
+   {
+    "id": "side_w2.75",
+    "type": "i_side",
+    "x": -0.075,
+    "y": 2.75,
+    "state": "dado"
+   },
+   {
+    "id": "side_e2.75",
+    "type": "i_side",
+    "x": 8.075,
+    "y": 2.75,
+    "state": "dado"
+   },
+   {
+    "id": "side_w3.25",
+    "type": "i_side",
+    "x": -0.075,
+    "y": 3.25,
+    "state": "dado"
+   },
+   {
+    "id": "side_e3.25",
+    "type": "i_side",
+    "x": 8.075,
+    "y": 3.25,
+    "state": "dado"
+   },
+   {
+    "id": "side_w3.75",
+    "type": "i_side",
+    "x": -0.075,
+    "y": 3.75,
+    "state": "dado"
+   },
+   {
+    "id": "side_e3.75",
+    "type": "i_side",
+    "x": 8.075,
+    "y": 3.75,
+    "state": "dado"
+   },
+   {
+    "id": "cut_0.00",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 0,
+    "state": "dado"
+   },
+   {
+    "id": "cut_1.00",
+    "type": "i_cut",
+    "x": 1.0,
+    "y": 0,
+    "state": "dado"
+   },
+   {
+    "id": "cut_2.00",
+    "type": "i_cut",
+    "x": 2.0,
+    "y": 0,
+    "state": "dado"
+   },
+   {
+    "id": "cut_3.00",
+    "type": "i_cut",
+    "x": 3.0,
+    "y": 0,
+    "state": "dado"
+   },
+   {
+    "id": "cut_4.00",
+    "type": "i_cut",
+    "x": 4.0,
+    "y": 0,
+    "state": "dado"
+   },
+   {
+    "id": "cut_5.00",
+    "type": "i_cut",
+    "x": 5.0,
+    "y": 0,
+    "state": "dado"
+   },
+   {
+    "id": "cut_6.00",
+    "type": "i_cut",
+    "x": 6.0,
+    "y": 0,
+    "state": "dado"
+   },
+   {
+    "id": "cut_7.00",
+    "type": "i_cut",
+    "x": 7.0,
+    "y": 0,
+    "state": "dado"
+   },
+   {
+    "id": "mat_2f02",
+    "type": "d_mat",
+    "x": 4.3,
+    "y": 3.62
+   }
+  ],
+  "colliders": [
+   {
+    "id": "back_wall",
+    "rect": [
+     -1,
+     4,
+     9,
+     5
+    ]
+   },
+   {
+    "id": "side_w",
+    "rect": [
+     -1,
+     -1,
+     0.06,
+     5
+    ]
+   },
+   {
+    "id": "side_e",
+    "rect": [
+     7.94,
+     -1,
+     9,
+     5
+    ]
+   },
+   {
+    "id": "stair_hole",
+    "rect": [
+     5.78,
+     1.4,
+     7.02,
+     3.82
+    ]
+   },
+   {
+    "id": "cut_0.0",
+    "rect": [
+     0.0,
+     -0.3,
+     8,
+     0.07
+    ]
+   }
+  ],
+  "portals": [
+   {
+    "id": "down_1f",
+    "rect": [
+     5.85,
+     0.95,
+     6.95,
+     1.38
+    ],
+    "dir": "N",
+    "to": "stair_1f",
+    "spawn": [
+     6.4,
+     0.33,
+     "S"
+    ],
+    "label": "下楼"
+   }
+  ],
+  "spawn": [
+   4.3,
+   3.45,
+   "S"
+  ],
+  "events": {}
+ },
+ "room_2f02": {
+  "format": "fushi-scene",
+  "version": 3,
+  "id": "room_2f02",
+  "name": "2F-02 · 李默的出租屋",
+  "interior": true,
+  "units": "m",
+  "bounds": {
+   "x0": 0,
+   "y0": -0.9,
+   "x1": 8,
+   "y1": 4
+  },
+  "bg_y": 3.99,
+  "camera": {
+   "top_y": 4,
+   "top_z": 2.95,
+   "bottom_y": -0.9,
+   "fit": true
+  },
+  "ground": {
+   "origin": [
+    0,
+    0
+   ],
+   "chunk": 2,
+   "cols": 4,
+   "rows": 2,
+   "legend": {
+    "F": "g_wood:a",
+    "T": "g_tile"
+   },
+   "data_south_to_north": [
+    "FFFF",
+    "FFFT"
+   ]
+  },
+  "objects": [
+   {
+    "id": "i_wall_000",
+    "type": "i_wall",
+    "x": 0,
+    "y": 4,
+    "state": "tile"
+   },
+   {
+    "id": "i_wall_001",
+    "type": "i_wall",
+    "x": 1,
+    "y": 4,
+    "state": "tile"
+   },
+   {
+    "id": "i_wall_002",
+    "type": "i_wall",
+    "x": 2,
+    "y": 4,
+    "state": "plain"
+   },
+   {
+    "id": "win_room",
+    "type": "i_window",
+    "x": 2.75,
+    "y": 4,
+    "state": "plain",
+    "interact": "window_in",
+    "view": true
+   },
+   {
+    "id": "wall_poster",
+    "type": "i_wall",
+    "x": 4.25,
+    "y": 4,
+    "state": "poster"
+   },
+   {
+    "id": "i_wall_005",
+    "type": "i_wall",
+    "x": 5.0,
+    "y": 4,
+    "state": "plain"
+   },
+   {
+    "id": "i_wall_006",
+    "type": "i_wall",
+    "x": 6,
+    "y": 4,
+    "state": "tile"
+   },
+   {
+    "id": "i_wall_007",
+    "type": "i_wall",
+    "x": 7,
+    "y": 4,
+    "state": "tile"
+   },
+   {
+    "id": "kitchen",
+    "type": "f_kitchen",
+    "x": 1.0,
+    "y": 3.68,
+    "state": "off",
+    "interact": "stove"
+   },
+   {
+    "id": "fridge",
+    "type": "f_fridge",
+    "x": 2.25,
+    "y": 3.66,
+    "state": "closed",
+    "interact": "fridge"
+   },
+   {
+    "id": "wardrobe",
+    "type": "f_wardrobe",
+    "x": 0.33,
+    "y": 1.55,
+    "rot": 2,
+    "state": "closed",
+    "interact": "wardrobe"
+   },
+   {
+    "id": "shelf",
+    "type": "f_shelf",
+    "x": 0.2,
+    "y": 2.75,
+    "rot": 2,
+    "interact": "shelf"
+   },
+   {
+    "id": "bed",
+    "type": "f_bed",
+    "x": 3.55,
+    "y": 3.45,
+    "state": "made",
+    "interact": "bed"
+   },
+   {
+    "id": "desk",
+    "type": "f_desk",
+    "x": 5.2,
+    "y": 3.68,
+    "state": "off",
+    "interact": "pc"
+   },
+   {
+    "id": "chair",
+    "type": "f_chair",
+    "x": 5.2,
+    "y": 3.02
+   },
+   {
+    "id": "rug",
+    "type": "d_rug",
+    "x": 2.9,
+    "y": 1.5
+   },
+   {
+    "id": "table",
+    "type": "f_table",
+    "x": 2.9,
+    "y": 1.5,
+    "state": "default",
+    "interact": "table"
+   },
+   {
+    "id": "light_room",
+    "type": "i_pendant",
+    "x": 2.05,
+    "y": 1.3,
+    "state": "off",
+    "interact": "light"
+   },
+   {
+    "id": "part_y2.25",
+    "type": "i_side",
+    "x": 6.0,
+    "y": 2.25,
+    "state": "tile"
+   },
+   {
+    "id": "part_y2.75",
+    "type": "i_side",
+    "x": 6.0,
+    "y": 2.75,
+    "state": "tile"
+   },
+   {
+    "id": "part_y3.25",
+    "type": "i_side",
+    "x": 6.0,
+    "y": 3.25,
+    "state": "tile"
+   },
+   {
+    "id": "part_y3.75",
+    "type": "i_side",
+    "x": 6.0,
+    "y": 3.75,
+    "state": "tile"
+   },
+   {
+    "id": "part_x",
+    "type": "i_wall",
+    "x": 7.0,
+    "y": 2.0,
+    "state": "plain",
+    "fade_group": "bath_wall"
+   },
+   {
+    "id": "toilet",
+    "type": "f_toilet",
+    "x": 6.38,
+    "y": 3.6,
+    "interact": "toilet"
+   },
+   {
+    "id": "basin",
+    "type": "f_basin",
+    "x": 6.95,
+    "y": 3.78,
+    "interact": "basin"
+   },
+   {
+    "id": "shower",
+    "type": "f_shower",
+    "x": 7.52,
+    "y": 3.5,
+    "state": "dry",
+    "interact": "shower"
+   },
+   {
+    "id": "side_w0.25",
+    "type": "i_side",
+    "x": -0.075,
+    "y": 0.25,
+    "state": "plain"
+   },
+   {
+    "id": "side_e0.25",
+    "type": "i_side",
+    "x": 8.075,
+    "y": 0.25,
+    "state": "plain"
+   },
+   {
+    "id": "side_w0.75",
+    "type": "i_side",
+    "x": -0.075,
+    "y": 0.75,
+    "state": "plain"
+   },
+   {
+    "id": "side_e0.75",
+    "type": "i_side",
+    "x": 8.075,
+    "y": 0.75,
+    "state": "plain"
+   },
+   {
+    "id": "side_w1.25",
+    "type": "i_side",
+    "x": -0.075,
+    "y": 1.25,
+    "state": "plain"
+   },
+   {
+    "id": "side_e1.25",
+    "type": "i_side",
+    "x": 8.075,
+    "y": 1.25,
+    "state": "plain"
+   },
+   {
+    "id": "side_w1.75",
+    "type": "i_side",
+    "x": -0.075,
+    "y": 1.75,
+    "state": "plain"
+   },
+   {
+    "id": "side_e1.75",
+    "type": "i_side",
+    "x": 8.075,
+    "y": 1.75,
+    "state": "plain"
+   },
+   {
+    "id": "side_w2.25",
+    "type": "i_side",
+    "x": -0.075,
+    "y": 2.25,
+    "state": "plain"
+   },
+   {
+    "id": "side_e2.25",
+    "type": "i_side",
+    "x": 8.075,
+    "y": 2.25,
+    "state": "plain"
+   },
+   {
+    "id": "side_w2.75",
+    "type": "i_side",
+    "x": -0.075,
+    "y": 2.75,
+    "state": "plain"
+   },
+   {
+    "id": "side_e2.75",
+    "type": "i_side",
+    "x": 8.075,
+    "y": 2.75,
+    "state": "plain"
+   },
+   {
+    "id": "side_w3.25",
+    "type": "i_side",
+    "x": -0.075,
+    "y": 3.25,
+    "state": "plain"
+   },
+   {
+    "id": "side_e3.25",
+    "type": "i_side",
+    "x": 8.075,
+    "y": 3.25,
+    "state": "plain"
+   },
+   {
+    "id": "side_w3.75",
+    "type": "i_side",
+    "x": -0.075,
+    "y": 3.75,
+    "state": "plain"
+   },
+   {
+    "id": "side_e3.75",
+    "type": "i_side",
+    "x": 8.075,
+    "y": 3.75,
+    "state": "plain"
+   },
+   {
+    "id": "cut_0.00",
+    "type": "i_cut",
+    "x": 0.0,
+    "y": 0,
+    "state": "plain"
+   },
+   {
+    "id": "cut_1.00",
+    "type": "i_cut",
+    "x": 1.0,
+    "y": 0,
+    "state": "plain"
+   },
+   {
+    "id": "cut_2.00",
+    "type": "i_cut",
+    "x": 2.0,
+    "y": 0,
+    "state": "plain"
+   },
+   {
+    "id": "cut_3.00",
+    "type": "i_cut",
+    "x": 3.0,
+    "y": 0,
+    "state": "plain"
+   },
+   {
+    "id": "cut_4.00",
+    "type": "i_cut",
+    "x": 4.0,
+    "y": 0,
+    "state": "plain"
+   },
+   {
+    "id": "cut_6.00",
+    "type": "i_cut",
+    "x": 6.0,
+    "y": 0,
+    "state": "plain"
+   },
+   {
+    "id": "cut_7.00",
+    "type": "i_cut",
+    "x": 7.0,
+    "y": 0,
+    "state": "plain"
+   },
+   {
+    "id": "mat_room",
+    "type": "d_mat",
+    "x": 5.5,
+    "y": 0.45
+   }
+  ],
+  "colliders": [
+   {
+    "id": "back_wall",
+    "rect": [
+     -1,
+     4,
+     9,
+     5
+    ]
+   },
+   {
+    "id": "side_w",
+    "rect": [
+     -1,
+     -1,
+     0.06,
+     5
+    ]
+   },
+   {
+    "id": "side_e",
+    "rect": [
+     7.94,
+     -1,
+     9,
+     5
+    ]
+   },
+   {
+    "id": "part_x",
+    "rect": [
+     7.0,
+     1.98,
+     8.0,
+     2.16
+    ]
+   },
+   {
+    "id": "cut_0.0",
+    "rect": [
+     0.0,
+     -0.3,
+     5.0,
+     0.07
+    ]
+   },
+   {
+    "id": "cut_6.0",
+    "rect": [
+     6.0,
+     -0.3,
+     8,
+     0.07
+    ]
+   }
+  ],
+  "portals": [
+   {
+    "id": "exit_hall",
+    "rect": [
+     5.0,
+     -0.9,
+     6.0,
+     -0.12
+    ],
+    "dir": "S",
+    "to": "stair_2f",
+    "spawn": [
+     4.3,
+     3.45,
+     "S"
+    ],
+    "door": "door_2f02",
+    "label": "出门"
+   }
+  ],
+  "spawn": [
+   5.5,
+   0.55,
+   "N"
+  ],
+  "events": {},
+  "interactions": {
+   "table": {
+    "name": "小饭桌",
+    "repair": {
+     "meal": {
+      "to": "default",
+      "after_h": 2
+     }
+    }
+   }
+  }
+ }
+}

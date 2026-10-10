@@ -5,8 +5,9 @@
 (function (SP) {
   "use strict";
   const K = SP.K;
-  const W = (SP.world = { objects: [], byId: {}, decals: [], colliders: [], log: [], hazards: [], timers: [] });
-  const FADE_ALPHA = 0.35, FADE_RATE = 7, BG_Y = 17.9;
+  const W = (SP.world = { objects: [], byId: {}, decals: [], colliders: [], log: [], hazards: [], timers: [], stash: {}, sceneId: null });
+  const FADE_ALPHA = 0.35, FADE_RATE = 7;
+  let BG_Y = 17.9;
   function piece(o) { return K.pieces[o.type]; }
   W.piece = piece;
   W.shownState = function (o) {
@@ -23,9 +24,13 @@
     const morning = m > 330 + h * 120 && m < 480;
     return evening || morning;
   };
-  W.load = function (data) {
-    W.data = data; W.objects = []; W.byId = {}; W.decals = []; W.log = []; W.timers = []; W.hazards = [];
-    W.defs = data.interactions || {};
+  /** load a scene's data fresh (keepLog: multi-scene switch keeps the global event log) */
+  W.load = function (data, keepLog) {
+    W.data = data; W.objects = []; W.byId = {}; W.decals = []; W.timers = []; W.hazards = [];
+    if (!keepLog) W.log = [];
+    W.sceneId = data.id || "street"; W.interior = !!data.interior; BG_Y = data.bg_y != null ? data.bg_y : 17.9;
+    W.defs = Object.assign({}, (SP.scenes && SP.scenes.street && SP.scenes.street.interactions) || {}, data.interactions || {});
+    snowBlobs = decor = flatSorted = null;
     for (const src of data.objects) {
       const o = Object.assign({ z: 0, rot: 0, variant: "base" }, src);
       const P = piece(o);
@@ -40,6 +45,21 @@
     classify();
     W.rebuildColliders();
     W.applySeason(true);
+  };
+  // ---------- multi-scene: street <-> stairwell <-> rooms. Leaving a scene stashes its runtime state; coming back
+  // restores it and lets the repair rules catch up on the elapsed game time (everything keys on absolute minutes).
+  const STASH = ["data", "objects", "byId", "decals", "timers", "hazards", "puddles", "leafPiles", "laundry", "defs", "bg", "dyn", "bgSorted", "colliders", "interior"];
+  W.enter = function (id) {
+    const S = SP.scenes[id]; if (!S) return false;
+    if (W.sceneId && W.data) { const st = {}; for (const k of STASH) st[k] = W[k]; st.left = SP.clock.abs(); W.stash[W.sceneId] = st; }
+    const st = W.stash[id];
+    if (st) {
+      for (const k of STASH) W[k] = st[k];
+      W.sceneId = id; BG_Y = W.data.bg_y != null ? W.data.bg_y : 17.9; snowBlobs = decor = flatSorted = null;
+      for (const o of W.objects) { o.alpha = {}; o._dr = null; }
+      W.applySeason(true); W.updateRules();
+    } else W.load(S, true);
+    return true;
   };
   function classify() {
     W.bg = []; W.dyn = [];
@@ -81,6 +101,7 @@
       C.push({ poly, box: c.rect, id: c.id });
     }
     W.colliders = C;
+    W.portals = W.data.portals || [];
   };
   /** static footprints, cars and slice bounds. opts: {hazards: NPCs also avoid broken glass} */
   W.blocked = function (x, y, r, ignoreCars, hazards) {
@@ -126,7 +147,8 @@
   /** draw the ground layer for one screen-px rect (a render chunk): ground tiles, markings, seasonal decor,
       snow cover (low-res blobs, nearest-upscaled -> chunky pixel edges, slush tyre tracks), curbs / steps */
   W.drawGround = function (x, rx, ry, rw, rh, season, sl) {
-    if (!snowBlobs) buildScatter();
+    if (W.interior) { season = "-"; sl = 0; }
+    else if (!snowBlobs) buildScatter();
     const G = W.data.ground, [X0, Y0] = G.origin, ch = G.chunk;
     const hit = (X, Y, f) => f && !(X - f[4] > rx + rw || X - f[4] + f[2] < rx || Y - f[5] > ry + rh || Y - f[5] + f[3] < ry);
     G.data_south_to_north.forEach((row, r) => {
@@ -141,7 +163,7 @@
       flatSorted = W.objects.filter((o) => { const L = piece(o).layer; return L === "decal" || L === "low"; });
       flatSorted.sort((a, b) => (piece(a).layer === "low") - (piece(b).layer === "low") || b.y - a.y);
     }
-    for (const d of decor[season] || []) { const X = SP.sx(d.x), Y = SP.sy(d.y); if (hit(X, Y, SP.frame(d.k))) SP.drawFrame(x, d.k, X, Y, season === "spring" ? 0.85 : 1); }
+    for (const d of (decor && decor[season]) || []) { const X = SP.sx(d.x), Y = SP.sy(d.y); if (hit(X, Y, SP.frame(d.k))) SP.drawFrame(x, d.k, X, Y, season === "spring" ? 0.85 : 1); }
     const drawFlat = (low) => { for (const o of flatSorted) if ((piece(o).layer === "low") === low) {
       const k = SP.frameKey(o.type, o.variant, "main", o.state, o.rot), X = SP.sx(o.x), Y = SP.sy(o.y, o.z);
       if (!hit(X, Y, SP.frame(k))) continue;
@@ -316,13 +338,13 @@
     for (const o of W.objects) {
       if (!o.interact || o.hidden || o.carried) continue;
       let d;
-      if (o.interact === "gate") { const g = W.byId.gate_l, h = W.byId.gate_r; d = Math.hypot(SP.clamp(x, g.x + 0.9, h.x - 0.9) - x, Math.max(0, o.y - 0.45 - y) + Math.max(0, y - (o.y + 0.45))); }
+      if (o.interact === "gate" && W.byId.gate_l) { const g = W.byId.gate_l, h = W.byId.gate_r; d = Math.hypot(SP.clamp(x, g.x + 0.9, h.x - 0.9) - x, Math.max(0, o.y - 0.45 - y) + Math.max(0, y - (o.y + 0.45))); }
       else if (piece(o).sort_line && piece(o).sort_line[1][0] >= 2.9) d = Math.hypot(SP.clamp(x, o.x + 0.3, o.x + 2.7) - x, (o.y - 0.3) - y);
       else { const l = o._line || W.sortLine(o); d = Math.hypot(SP.clamp(x, l[0], l[2]) - x, Math.max(0, l[1] - 0.15 - y) + Math.max(0, y - (o.y + 0.5))); }
       if (o.interact === "window" && (y > o.y || d > 1.5)) continue;
       if (d < bd) { bd = d; best = o; }
     }
-    if (SP.clock.wet > 0.3) for (const p of W.puddles) { const d = Math.hypot((x - p.x) / Math.max(1, p.rx), (y - p.y) / Math.max(0.6, p.ry * 2)); if (d < 1.0 && d < bd) { bd = d; best = { interact: "puddle", p }; } }
+    if (SP.clock.wet > 0.3 && !W.interior) for (const p of W.puddles) { const d = Math.hypot((x - p.x) / Math.max(1, p.rx), (y - p.y) / Math.max(0.6, p.ry * 2)); if (d < 1.0 && d < bd) { bd = d; best = { interact: "puddle", p }; } }
     return best;
   };
   W.actionFor = function (o, kind) {
@@ -330,9 +352,9 @@
     if (o.interact === "puddle") return kind === "use" ? { label: "踩水" } : { label: "跺脚溅水" };
     const d = W.defs[o.interact];
     if (o.interact === "gate") return kind === "use" ? { label: o.state === "open" ? "关上铁门" : "推开铁门" } : null;
-    if (o.interact === "door") return kind === "use" ? { label: o.state === "open" ? "关单元门" : "开单元门" } : null;
-    if (o.interact === "stall") return kind === "use" ? { label: "早点摊" } : null;
+    if (o.interact === "door") return kind === "use" ? { label: "进单元门（回家）" } : null;
     if (o.interact === "locker") return kind === "use" ? { label: "快递柜" } : null;
+    if (SP.game) { const g = SP.game.actionFor(o, kind); if (g !== undefined) return g; }
     return d && d[kind] && d[kind][o.state] || null;
   };
   /** run the use/kick action of an interactable; returns a toast string (or null) */
@@ -367,8 +389,12 @@
         if (SP.player.carry) return "手上已经推着一辆车了";
         SP.player.carry = o; o.carried = true; W.rebuildColliders(); o._dr = null; SP.render && SP.render.invalidateShadow(o);
         W.logEvent("李默扫码解锁了一辆共享单车"); return "扫码成功：推着走（再按 互动 停车）";
-      case "buy_drink":
+      case "buy_drink": {
+        const r = SP.game ? SP.game.perform("buy_drink", o) : { ok: true };
+        if (!r.ok) return `买不了：${r.reason}`;
         SP.fx.pickup(o.x + 0.1, o.y - 0.45, 0.35); W.logEvent("李默在售货机买了一瓶冰红茶"); return undefined;
+      }
+      case "game": return SP.game.use(o, actor);
       case "water":
         SP.fx.water(o.x, o.y - 0.1, 0.9); if (o.state === "small") o.watered = C.abs(); W.logEvent("李默给盆栽浇了水"); return undefined;
       case "toggle_spray":

@@ -1,0 +1,377 @@
+{
+ "version": 1,
+ "_doc": "浮世万象 gameplay rules (engine-agnostic data). Units: game minutes, money in yuan, needs 0..100. Read by rules.js (browser / node / port to GDScript). See README.md.",
+ "calendar": {
+  "start_weekday": 1,
+  "weekday_names": [
+   "日",
+   "一",
+   "二",
+   "三",
+   "四",
+   "五",
+   "六"
+  ]
+ },
+ "needs": {
+  "hunger": {
+   "label": "饱腹",
+   "icon": "🍚",
+   "start": 70,
+   "decay_per_h": 3.5,
+   "sleep_decay_per_h": 1.6,
+   "warn": 25,
+   "critical": 8
+  },
+  "energy": {
+   "label": "精力",
+   "icon": "⚡",
+   "start": 78,
+   "decay_per_h": 3.6,
+   "sleep_decay_per_h": 0,
+   "warn": 22,
+   "critical": 8
+  },
+  "hygiene": {
+   "label": "清洁",
+   "icon": "🚿",
+   "start": 72,
+   "decay_per_h": 2.2,
+   "sleep_decay_per_h": 0.8,
+   "warn": 25,
+   "critical": 10
+  },
+  "mood": {
+   "label": "心情",
+   "icon": "☺",
+   "start": 62,
+   "decay_per_h": 0.6,
+   "sleep_decay_per_h": 0,
+   "warn": 25,
+   "critical": 10
+  }
+ },
+ "conditions": [
+  {
+   "id": "starving",
+   "label": "饿得发慌",
+   "when": {
+    "need": "hunger",
+    "below": 10
+   },
+   "per_h": {
+    "mood": -3,
+    "energy": -2
+   }
+  },
+  {
+   "id": "smelly",
+   "label": "身上有味",
+   "when": {
+    "need": "hygiene",
+    "below": 20
+   },
+   "per_h": {
+    "mood": -1.5
+   }
+  },
+  {
+   "id": "sleepy",
+   "label": "困得睁不开眼",
+   "when": {
+    "need": "energy",
+    "below": 15
+   },
+   "per_h": {
+    "mood": -1
+   },
+   "speed_mul": 0.72
+  },
+  {
+   "id": "tired",
+   "label": "有点累",
+   "when": {
+    "need": "energy",
+    "below": 30
+   },
+   "speed_mul": 0.88
+  },
+  {
+   "id": "wet",
+   "label": "淋了雨",
+   "when": {
+    "weather": "rain",
+    "outdoors": true,
+    "no_umbrella": true
+   },
+   "per_h": {
+    "mood": -2,
+    "hygiene": -4
+   }
+  },
+  {
+   "id": "cold",
+   "label": "冷",
+   "when": {
+    "weather": "snow",
+    "outdoors": true
+   },
+   "per_h": {
+    "energy": -1.5
+   }
+  },
+  {
+   "id": "owing",
+   "label": "欠着房租",
+   "when": {
+    "owing": true
+   },
+   "per_h": {
+    "mood": -0.8
+   }
+  }
+ ],
+ "money": {
+  "start": 820,
+  "currency": "¥"
+ },
+ "items": {
+  "noodles": {
+   "label": "方便面",
+   "price": 5
+  },
+  "egg": {
+   "label": "鸡蛋",
+   "price": 1.5
+  },
+  "veg": {
+   "label": "青菜",
+   "price": 4
+  },
+  "bread": {
+   "label": "面包",
+   "price": 6
+  },
+  "drink": {
+   "label": "冰红茶",
+   "price": 3
+  }
+ },
+ "start_items": {
+  "noodles": 2,
+  "egg": 4,
+  "veg": 1,
+  "bread": 1
+ },
+ "rent": {
+  "label": "房租",
+  "amount": 450,
+  "every_days": 7,
+  "due_weekday": 0,
+  "due_min": 1200,
+  "late_mood": -12,
+  "landlord": "房东刘姐"
+ },
+ "actions": {
+  "sleep": {
+   "label": "睡觉",
+   "place": "bed",
+   "kind": "sleep",
+   "wake_min": 420,
+   "allowed_from": 1260,
+   "allowed_to": 360,
+   "per_h": {
+    "energy": 12.5
+   },
+   "effects": {
+    "mood": 4
+   },
+   "text": "一觉睡到天亮"
+  },
+  "nap": {
+   "label": "小睡一会",
+   "place": "bed",
+   "kind": "sleep",
+   "minutes": 90,
+   "per_h": {
+    "energy": 10
+   },
+   "effects": {
+    "mood": 2
+   },
+   "requires": {
+    "energy_below": 70
+   },
+   "text": "眯了一个半小时"
+  },
+  "make_bed": {
+   "label": "叠被子",
+   "place": "bed",
+   "minutes": 2,
+   "effects": {
+    "mood": 1
+   },
+   "requires": {
+    "flag": "bed_messy"
+   },
+   "text": "被子叠好了"
+  },
+  "cook_noodles": {
+   "label": "煮面加个蛋",
+   "place": "stove",
+   "minutes": 20,
+   "consume": {
+    "noodles": 1,
+    "egg": 1
+   },
+   "effects": {
+    "hunger": 45,
+    "mood": 6
+   },
+   "text": "热乎乎的鸡蛋面"
+  },
+  "cook_veg": {
+   "label": "炒个青菜鸡蛋",
+   "place": "stove",
+   "minutes": 30,
+   "consume": {
+    "veg": 1,
+    "egg": 2
+   },
+   "effects": {
+    "hunger": 55,
+    "mood": 9,
+    "hygiene": -3
+   },
+   "text": "青菜炒蛋，配白开水"
+  },
+  "snack": {
+   "label": "啃个面包",
+   "place": "fridge",
+   "minutes": 5,
+   "consume": {
+    "bread": 1
+   },
+   "effects": {
+    "hunger": 18
+   },
+   "text": "面包有点干"
+  },
+  "drink_fridge": {
+   "label": "喝瓶冰红茶",
+   "place": "fridge",
+   "minutes": 3,
+   "consume": {
+    "drink": 1
+   },
+   "effects": {
+    "hunger": 3,
+    "energy": 6,
+    "mood": 3
+   },
+   "text": "冰镇的"
+  },
+  "shower": {
+   "label": "冲个澡",
+   "place": "shower",
+   "minutes": 15,
+   "set": {
+    "hygiene": 100
+   },
+   "effects": {
+    "mood": 5,
+    "energy": 4
+   },
+   "text": "热水澡，舒服"
+  },
+  "wash": {
+   "label": "洗把脸",
+   "place": "basin",
+   "minutes": 5,
+   "effects": {
+    "hygiene": 12,
+    "energy": 3
+   },
+   "text": "清醒了一点"
+  },
+  "toilet": {
+   "label": "上厕所",
+   "place": "toilet",
+   "minutes": 5,
+   "effects": {
+    "mood": 2
+   },
+   "text": "……"
+  },
+  "change": {
+   "label": "换身衣服",
+   "place": "wardrobe",
+   "minutes": 5,
+   "effects": {
+    "hygiene": 8,
+    "mood": 3
+   },
+   "text": "换了件干净T恤"
+  },
+  "browse": {
+   "label": "上网刷一会",
+   "place": "pc",
+   "minutes": 60,
+   "effects": {
+    "mood": 10,
+    "energy": -4
+   },
+   "text": "刷了一个小时手机网页"
+  },
+  "read": {
+   "label": "翻几页书",
+   "place": "shelf",
+   "minutes": 30,
+   "effects": {
+    "mood": 6,
+    "energy": -2
+   },
+   "text": "看了半小时旧小说"
+  },
+  "look_out": {
+   "label": "看看窗外",
+   "place": "window",
+   "minutes": 2,
+   "effects": {
+    "mood": 2
+   }
+  },
+  "buy_breakfast": {
+   "label": "买早点（¥6）",
+   "place": "stall",
+   "minutes": 4,
+   "cost": 6,
+   "effects": {
+    "hunger": 35,
+    "mood": 4
+   },
+   "requires": {
+    "flag": "vendor_open"
+   },
+   "text": "两个包子一杯豆浆"
+  },
+  "buy_drink": {
+   "label": "买冰红茶（¥3）",
+   "place": "vending",
+   "minutes": 1,
+   "cost": 3,
+   "effects": {
+    "hunger": 3,
+    "energy": 8,
+    "mood": 3
+   },
+   "text": "咣当——冰红茶"
+  },
+  "pay_rent": {
+   "label": "补交房租",
+   "place": "any",
+   "minutes": 1,
+   "kind": "pay_rent"
+  }
+ }
+}

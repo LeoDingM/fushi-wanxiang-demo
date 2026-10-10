@@ -130,7 +130,7 @@
   function collectLights() {
     nL = 0;
     const c = C(), w = W(), dark = c.dark, on = c.lampsOn, nk = SP.clamp((dark - 0.12) / 0.45, 0, 1);
-    if (nk > 0.01) for (const o of w.objects) {
+    if (nk > 0.01 && !w.interior) for (const o of w.objects) {
       switch (o.type) {
         case "p_lamp": {
           if (!on) break;
@@ -150,7 +150,22 @@
         case "p_vending": if (o.state === "ok") { L(o.x, o.y - 0.8, 0, 1.8, 200, 226, 255, 0.75 * nk, true, false, true); L(o.x, o.y - 0.4, 1.4, 1.2, 210, 232, 255, 0.5 * nk, false, true, false); } break;
         case "p_locker": L(o.x, o.y - 0.4, 1.3, 1.4, 120, 200, 255, 0.45 * nk, false, false, false); break;
         case "p_stall": { const v = SP.actors.byId("vendor"); if (v && !v.hidden && v.act === "cook") { L(o.x, o.y - 0.4, 1.95, 2.4, 255, 200, 120, 0.8 * nk, false, true, false); L(o.x, o.y - 0.6, 0, 2.6, 255, 196, 120, 0.6 * nk, true, false, true); } break; }
+        case "i_pendant": break;
         case "p_car": if (o.alarmUntil > SP.now && Math.floor(SP.now * 3) % 2 === 0) { L(o.x - 2.1, o.y, 0.65, 1.4, 255, 170, 40, 0.8, false, true, false); L(o.x + 2.1, o.y, 0.65, 1.4, 255, 170, 40, 0.8, false, true, false); } break;
+      }
+    }
+    if (w.interior) for (const o of w.objects) {
+      if (o.type === "i_pendant" && o.state === "on") {          // warm pool on the floor + glow on the back wall + bulb halo
+        const k = o.auto_light ? 0.8 : 1;
+        L(o.x, o.y + 0.4, 0, 5.2 * k, 255, 222, 172, 0.95, true, false, false); L(o.x, o.y + 0.6, 0, 2.6 * k, 255, 214, 160, 0.55, true, false, false);
+        L(o.x, o.y + 2.2, 1.6, 3.2 * k, 255, 220, 170, 0.5, false, false, false); L(o.x, o.y, 2.15, 0.9, 255, 228, 180, 0.7, false, true, false);
+      }
+      else if (o.type === "f_desk" && o.state === "on") { L(o.x - 0.1, o.y - 0.3, 0.9, 1.3, 150, 200, 255, 0.55, false, false, false); L(o.x + 0.45, o.y - 0.1, 0.8, 1.0, 255, 210, 150, 0.5, true, false, false); }
+      else if (o.type === "f_kitchen" && o.state === "cooking") { const f = 0.8 + 0.2 * Math.sin(SP.now * 23); L(o.x + 0.05, o.y - 0.1, 1.0, 0.9, 255, 140, 70, 0.6 * f, false, true, false); }
+      else if (o.type === "f_fridge" && o.state === "open") L(o.x, o.y - 0.6, 0, 1.2, 230, 240, 255, 0.6, true, false, false);
+      else if (o.type === "i_window" && o.view) {                 // daylight patch on the floor under the window
+        const day = SP.clamp(1 - c.dark * 1.6, 0, 1) * (c.weather === "clear" ? 1 : 1 - 0.5 * c.intensity), a = c.ambient;
+        if (day > 0.02) L(o.x + 0.75, o.y - 1.1, 0, 1.9, a[0], a[1], a[2], 0.42 * day, true, false, false);
       }
     }
     for (const g of SP.traffic.glows()) L(g.x, g.y, g.z, g.r, g.c[0], g.c[1], g.c[2], g.a, !!g.flat || g.z < 0.1, !g.flat && g.r < 1.5, !!g.flat);
@@ -180,25 +195,26 @@
       else if (ch.key !== key || (ch.urgent && !vis)) { if (pass === (vis ? 0 : 1) && budget > 0) { budget--; renderChunk(ch, i, key); } }
     }
     ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.imageSmoothingEnabled = false; ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
-    ctx.fillStyle = "#17181d"; ctx.fillRect(0, 0, cw, chh);
+    ctx.fillStyle = w.interior ? "#0c0c10" : "#17181d"; ctx.fillRect(0, 0, cw, chh);
     const sh = SP.fx.shake > 0 ? Math.round(Math.sin(SP.now * 90) * 2) : 0;
     ctx.setTransform(z, 0, 0, z, (-cx + sh) * z, -cy * z);
+    if (w.interior) for (const o of w.objects) if (o.view) R.drawView(ctx, o);       // live outside view, behind the cached wall
     let nch = 0;
     for (const ch of chunks) if (!(ch.x + CH <= cx || ch.x >= cx + vw || ch.y + CH <= cy || ch.y >= cy + vh)) { if (ch.cv) ctx.drawImage(ch.cv, ch.x, ch.y); nch++; }
     R.stats.chunks = nch;
     // bg overlays (soot above the burnt window)
     for (const o of w.bg) for (const ov of o.overlays) if (ov.type === "soot" && ov.active) SP.drawFrame(ctx, "fx/soot", SP.sx(o.x + 1.5), SP.sy(o.y, o.z + 2.42), Math.min(1, ov.t / 3));
     // ---- ground dynamics ----
-    const gTop = SP.sy(17.95);
-    if (c.snow > 0.08) {
+    const gTop = SP.sy((w.data.bg_y || 17.9) + 0.05), IN = w.interior;
+    if (c.snow > 0.08 && !IN) {
       fadeTrail(dt);
       const sx0 = Math.max(0, cx - R.trailOrigin[0]), sy0 = Math.max(0, cy - R.trailOrigin[1]);
       const sw = Math.min(trail.width - sx0, vw), shh = Math.min(trail.height - sy0, vh);
       if (sw > 0 && shh > 0) ctx.drawImage(trail, sx0, sy0, sw, shh, R.trailOrigin[0] + sx0, R.trailOrigin[1] + sy0, sw, shh);
     }
     for (const d of w.decals) SP.drawFrame(ctx, d.key, SP.sx(d.x), SP.sy(d.y));
-    if (c.season === "autumn") for (const p of w.leafPiles) if (p.state === "pile") SP.drawFrame(ctx, `fx/leafpile/${SP.strHash(p.id) % 2}`, SP.sx(p.x), SP.sy(p.y));
-    const wet = c.wet;
+    if (c.season === "autumn" && !IN) for (const p of w.leafPiles) if (p.state === "pile") SP.drawFrame(ctx, `fx/leafpile/${SP.strHash(p.id) % 2}`, SP.sx(p.x), SP.sy(p.y));
+    const wet = IN ? 0 : c.wet;
     if (wet > 0.02) {
       ctx.globalCompositeOperation = "multiply";
       ctx.fillStyle = `rgb(${255 - 70 * wet | 0},${255 - 64 * wet | 0},${255 - 46 * wet | 0})`;
@@ -206,7 +222,7 @@
       ctx.globalCompositeOperation = "source-over";
     }
     const pf = SP.clamp((wet - 0.25) / 0.5, 0, 1);
-    for (const p of w.puddles) {
+    if (!IN) for (const p of w.puddles) {
       let f = pf;
       if (f <= 0.02) continue;
       const s = puddleSprite(p), X = SP.sx(p.x), Y = SP.sy(p.y);
@@ -237,7 +253,7 @@
       ctx.globalAlpha = 1; ctx.globalCompositeOperation = "source-over";
     }
     // ---- moving shadows (static ones are baked into the chunks) ----
-    ctx.globalAlpha = c.shadow;
+    ctx.globalAlpha = IN ? 0.3 : c.shadow;
     for (const [k, X, Y] of SP.traffic.shadowKeys(al)) SP.drawFrame(ctx, k, X, Y);
     ctx.fillStyle = "#1a1828";
     for (const a of SP.actors.list) {
@@ -251,7 +267,7 @@
     w.collect(list); SP.traffic.drawables(list, al); SP.fx.drawables(list);
     const P = SP.player, [PX, PY] = P.screenAt(al);
     const ppx = P.px + (P.x - P.px) * al, ppy = P.py + (P.y - P.py) * al;
-    pdraw.line[0] = ppx - 0.2; pdraw.line[2] = ppx + 0.2; pdraw.line[1] = pdraw.line[3] = ppy; list.push(pdraw);
+    pdraw.line[0] = ppx - 0.2; pdraw.line[2] = ppx + 0.2; pdraw.line[1] = pdraw.line[3] = ppy; if (!P.hidden) list.push(pdraw);
     for (const a of SP.actors.npcs) {
       if (a.hidden) continue;
       const d = a._d || (a._d = { kind: "npc", a, line: [0, 0, 0, 0], zo: 0, seq: a.seq });
@@ -263,9 +279,10 @@
     }
     for (const L_ of w.laundry) { const a = w.byId[L_.from], b = w.byId[L_.to]; list.push(L_._d || (L_._d = { kind: "laundry", L: L_, a, b, line: [Math.min(a.x, b.x), a.y - 0.01, Math.max(a.x, b.x), b.y - 0.01], zo: 1, seq: 90000 })); }
     list.sort(w.compare);
-    const pi = list.indexOf(pdraw);
+    let pi = list.indexOf(pdraw);
+    if (pi < 0) pi = list.length;
     w.updateFade(list, pi, P.bodyRect(al), dt);
-    const snow = SP.snowAmt, nk = SP.clamp((c.dark - 0.12) / 0.45, 0, 1);
+    const snow = IN ? 0 : SP.snowAmt, nk = IN ? 0.75 : SP.clamp((c.dark - 0.12) / 0.45, 0, 1);
     let drawn = 0;
     const vx0 = cx - 8, vx1 = cx + vw + 8, vy0 = cy - 8, vy1 = cy + vh + 8;
     for (let i = 0; i < list.length; i++) {
@@ -297,7 +314,9 @@
     for (const o of w.objects) if (o.honkT > SP.now) bubble(SP.sx(o.x), SP.sy(o.y, 1.8), "嘀！");
     for (const car of SP.traffic.cars) if (car.honkT > SP.now) bubble(SP.sx(car.x), SP.sy(car.y, 1.8), "嘀嘀！");
     // ---- lightmap (multiply) ----
-    const amb = c.ambient, tinted = amb[0] < 253 || amb[1] < 253 || amb[2] < 253, needL = tinted && (c.dark > 0.06 || nk > 0.01);
+    let amb = c.ambient;
+    if (IN) { amb = ambIn; for (let k = 0; k < 3; k++) ambIn[k] = Math.round(c.ambient[k] * 0.66 + 26); }   // indoors: window light only
+    const tinted = amb[0] < 253 || amb[1] < 253 || amb[2] < 253, needL = IN || tinted && (c.dark > 0.06 || nk > 0.01);
     R.stats.lightmap = needL;
     if (tinted && !needL) {         // daylight colour grade only: one multiply fill, no lightmap
       ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalCompositeOperation = "multiply"; ctx.fillStyle = `rgb(${amb[0]},${amb[1]},${amb[2]})`;
@@ -311,6 +330,11 @@
       lctx.globalCompositeOperation = "lighter";
       lctx.setTransform(z / 2, 0, 0, z / 2, (-cx + sh) * z / 2, -cy * z / 2);
       for (let i = 0; i < nL; i++) drawLight(lctx, LP[i]);
+      if (IN) {                                                     // window openings show the OUTDOOR light level
+        lctx.globalCompositeOperation = "source-over"; const oa = c.ambient; lctx.fillStyle = `rgb(${oa[0]},${oa[1]},${oa[2]})`;
+        for (const o of w.objects) if (o.view && o._vr) { const r = o._vr; lctx.fillRect(r[0], r[1], r[2] - r[0], r[3] - r[1]); }
+        lctx.globalCompositeOperation = "lighter";
+      }
       if (nk > 0.01) {
         for (const o of w.bg) if (o._shown === "lit" || (o.type === "f_shop" && o.state === "open")) {
           const X = SP.sx(o.x), Y = SP.sy(o.y, o.z); if (X > cx + vw || X + 160 < cx || Y < cy || Y - 160 > cy + vh) continue;
@@ -334,11 +358,13 @@
     }
     // ---- weather + fog (screen space) ----
     ctx.setTransform(1, 0, 0, 1, 0, 0);
-    SP.fx.updateWeather(dt, cx, cy, cw, chh);
-    if (z !== 1) ctx.setTransform(z, 0, 0, z, 0, 0);
-    SP.fx.drawWeather(ctx, vw, vh);
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    if (c.fog > 0.02) {
+    if (!IN) {
+      SP.fx.updateWeather(dt, cx, cy, cw, chh);
+      if (z !== 1) ctx.setTransform(z, 0, 0, z, 0, 0);
+      SP.fx.drawWeather(ctx, vw, vh);
+      ctx.setTransform(1, 0, 0, 1, 0, 0);
+    }
+    if (c.fog > 0.02 && !IN) {
       const key = (amb[0] >> 3) + "," + (amb[1] >> 3) + "," + (amb[2] >> 3) + "," + chh;
       if (key !== fogKey) {
         fogKey = key; fogGrad = ctx.createLinearGradient(0, 0, 0, chh);
@@ -347,6 +373,66 @@
       }
       ctx.globalAlpha = c.fog * 0.8; ctx.fillStyle = fogGrad; ctx.fillRect(0, 0, cw, chh); ctx.globalAlpha = 1;
     }
+    if (SP.game) SP.game.drawOverlay(ctx, cw, chh);
+  };
+  const ambIn = [0, 0, 0];
+  // ---------- window view: what you see through an interior window (sky / weather / season / neighbour block) ----------
+  // Pixel-art, procedural, ~50x60 px: drawn every frame into the transparent opening of the cached wall bay.
+  function mul(c, a, f) { return `rgb(${Math.min(255, c[0] * a[0] / 255 * f) | 0},${Math.min(255, c[1] * a[1] / 255 * f) | 0},${Math.min(255, c[2] * a[2] / 255 * f) | 0})`; }
+  const SKY = { clear: [[118, 168, 222], [196, 222, 240]], rain: [[120, 130, 144], [158, 166, 176]], snow: [[186, 192, 204], [218, 222, 230]], fog: [[176, 180, 184], [204, 206, 208]] };
+  const CANOPY = { spring: ["#86ad4c", "#a6cb62", "#f2bfd0"], summer: ["#3f5c2c", "#52713a", "#30472a"], autumn: ["#d39a34", "#e9c24c", "#b4702c"] };
+  R.drawView = function (x, o) {
+    const P = W().piece(o), v = P.view; if (!v) return;
+    const c = C(), X0 = Math.round(SP.sx(o.x + v[0])), X1 = Math.round(SP.sx(o.x + v[1])), Y0 = Math.round(SP.sy(o.y, (o.z || 0) + v[3])), Y1 = Math.round(SP.sy(o.y, (o.z || 0) + v[2]));
+    o._vr = [X0, Y0, X1, Y1];
+    const w = X1 - X0, h = Y1 - Y0, a = [255, 255, 255], wt = c.intensity > 0.2 ? c.weather : "clear";
+    const night = SP.clamp((c.dark - 0.35) / 0.4, 0, 1), sky = SKY[wt] || SKY.clear, amb = c.ambient;
+    x.save(); x.beginPath(); x.rect(X0, Y0, w, h); x.clip();
+    // sky: two bands tinted by the outdoor ambient (dawn / dusk colours come from it), stars at night
+    const top = night > 0.5 ? [40, 48, 86] : sky[0], bot = night > 0.5 ? [70, 76, 116] : sky[1];
+    x.fillStyle = mul(top, a, 1); x.fillRect(X0, Y0, w, h);
+    x.fillStyle = mul(bot, a, 1); x.fillRect(X0, Y0 + (h * 0.45 | 0), w, h);
+    x.fillStyle = mul(SP.lerp(top[0], bot[0], 0.5) > 0 ? [(top[0] + bot[0]) / 2, (top[1] + bot[1]) / 2, (top[2] + bot[2]) / 2] : top, a, 1); x.fillRect(X0, Y0 + (h * 0.32 | 0), w, 3);
+    if (night > 0.6 && wt === "clear") { x.fillStyle = "#e8e8f8"; for (let i = 0; i < 6; i++) x.fillRect(X0 + (SP.hash(i, 5) * w | 0), Y0 + (SP.hash(i, 9) * h * 0.4 | 0), 1, 1); }
+    // neighbour block across the yard: brick with a window grid (lit at night)
+    const bx = X0 - 2, by = Y0 + (h * 0.38 | 0), bw = (w * 0.62) | 0;
+    x.fillStyle = mul([150, 96, 76], [255, 255, 255], 1); x.fillRect(bx, by, bw, h);
+    x.fillStyle = mul([118, 112, 106], a, 1); x.fillRect(bx, by - 2, bw + 1, 2);
+    for (let r = 0; r < 4; r++) for (let k = 0; k < 3; k++) {
+      const wx = bx + 4 + k * 10, wy = by + 5 + r * 11; if (wx + 6 > bx + bw) continue;
+      const lit = night > 0.2 && SP.hash(r * 7 + k, c.day) > 0.45;
+      x.fillStyle = lit ? "#ffd48c" : mul([70, 92, 104], a, 1); x.fillRect(wx, wy, 6, 6);
+      if (c.snow > 0.3 && !lit) { x.fillStyle = "#eef2f8"; x.fillRect(wx - 1, wy - 1, 8, 1); }
+    }
+    if (c.snow > 0.2) { x.fillStyle = "#eef2f8"; x.fillRect(bx, by - 3, bw + 1, c.snow > 0.6 ? 3 : 2); }
+    // tree (国槐) on the right: canopy colours by season, bare branches in winter, snow on top
+    const tx = X0 + (w * 0.78 | 0), ty = Y0 + (h * 0.42 | 0);
+    x.fillStyle = "#4f3e33"; x.fillRect(tx - 1, ty, 3, h);
+    if (c.season === "winter") {
+      x.fillRect(tx - 7, ty - 4, 7, 1); x.fillRect(tx + 1, ty - 8, 7, 1); x.fillRect(tx - 4, ty - 12, 1, 8); x.fillRect(tx + 4, ty - 14, 1, 7); x.fillRect(tx - 10, ty - 9, 1, 5);
+      if (c.snow > 0.2) { x.fillStyle = "#f2f5fa"; x.fillRect(tx - 7, ty - 5, 7, 1); x.fillRect(tx + 1, ty - 9, 7, 1); }
+    } else {
+      const col = CANOPY[c.season]; const sway = Math.round(Math.sin(SP.now * (1.2 + c.wind * 2)) * c.wind * 1.5);
+      const blob = (cx, cy, r, f) => { x.fillStyle = f; x.beginPath(); x.ellipse(cx + sway, cy, r, r * 0.85, 0, 0, 6.283); x.fill(); };
+      blob(tx, ty - 9, 12, col[0]); blob(tx - 7, ty - 4, 8, col[0]); blob(tx + 3, ty - 13, 7, col[1]); blob(tx - 4, ty - 12, 5, col[1]);
+      if (c.season === "spring") { x.fillStyle = col[2]; for (let i = 0; i < 7; i++) x.fillRect(tx - 10 + (SP.hash(i, 2) * 20 | 0) + sway, ty - 18 + (SP.hash(i, 3) * 16 | 0), 1, 1); }
+      if (c.season === "autumn" && wt !== "rain") { x.fillStyle = col[2]; const t = SP.now; for (let i = 0; i < 3; i++) { const ph = (t * 0.3 + i / 3) % 1; x.fillRect(tx - 8 + i * 6 + Math.round(Math.sin(t * 2 + i) * 2), ty - 4 + ph * h * 0.6 | 0, 1, 1); } }
+      if (c.snow > 0.3) { x.fillStyle = "#f2f5fa"; x.fillRect(tx - 9 + sway, ty - 20, 16, 2); }
+    }
+    // weather in the window
+    const t = SP.now;
+    if (c.weather === "rain" && c.intensity > 0.05) {
+      x.fillStyle = "rgba(200,212,230,0.7)"; const n = 8 + c.intensity * 16 | 0;
+      for (let i = 0; i < n; i++) { const ph = (t * 2.6 + SP.hash(i, 1)) % 1; x.fillRect(X0 + ((SP.hash(i, 7) * w + ph * 6) | 0), Y0 + (ph * (h + 8) | 0) - 6, 1, 4); }
+    } else if (c.weather === "snow" && c.intensity > 0.05) {
+      x.fillStyle = "#f4f7fc"; const n = 6 + c.intensity * 14 | 0;
+      for (let i = 0; i < n; i++) { const ph = (t * 0.45 + SP.hash(i, 1)) % 1; x.fillRect(X0 + ((SP.hash(i, 7) * w + Math.sin(t * 1.5 + i) * 3) | 0), Y0 + (ph * h | 0), 1 + (i % 3 === 0), 1 + (i % 3 === 0)); }
+    }
+    if (c.fog > 0.05) { x.globalAlpha = Math.min(0.75, c.fog * 0.8); x.fillStyle = "#c8ccd0"; x.fillRect(X0, Y0, w, h); x.globalAlpha = 1; }
+    // glass: a faint diagonal reflection, raindrops running down when wet
+    x.globalAlpha = 0.16; x.fillStyle = "#ffffff"; for (let i = 0; i < h; i += 1) x.fillRect(X0 + ((i * 0.6) | 0) + 4, Y0 + i, 2, 1); x.globalAlpha = 1;
+    if (c.weather === "rain" && c.intensity > 0.1) { x.fillStyle = "rgba(220,230,245,0.55)"; for (let i = 0; i < 5; i++) { const ph = (t * 0.25 + SP.hash(i, 4)) % 1; x.fillRect(X0 + (SP.hash(i, 8) * w | 0), Y0 + (ph * h | 0), 1, 2); } }
+    x.restore();
   };
   function emitOn(o) {
     const c = C();
@@ -354,6 +440,7 @@
       case "p_lamp": return c.lampsOn && o._lit !== false && (o.state === "ok" || o._lit);
       case "p_vending": return o.state === "ok";
       case "p_locker": return true;
+      case "f_kitchen": return o.state === "cooking";
       default: return true;
     }
   }

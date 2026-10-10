@@ -244,3 +244,39 @@ nothing in the data is web-specific.
 | clock / weather / rules / interactions JSON | `WorldCore` autoload: same JSON, same state machines (engine-agnostic) |
 | NPC brain | `NavigationAgent2D` optional; the graph + schedule state machine ports 1:1 |
 | touch UI | `TouchScreenButton` + virtual joystick scene |
+
+# v4 additions (Stage 2.1 + 2.2: interiors · needs · rent · sleep)
+
+## 15. Multi-scene world (`world.js → W.enter / W.stash`, `main.js → SP.scenes`)
+* `SP.scenes = {street: SCENE_DATA, ...INTERIOR_SCENES}`; every scene has the same format as `scene.json` (objects,
+  colliders, decals, `bounds`, `camera`, `bg_y`) plus `portals[]` and `interior: true`. Interiors omit traffic / NPCs /
+  weather; the systems short-circuit on missing sections.
+* `W.enter(id)` snapshots the current scene (objects + states, decals, hazards, repair timers) into `W.stash[id]`,
+  then loads the target from its stash (or fresh). The clock is global, so repair timers of the street keep running
+  while 李默 is upstairs and are resolved when the street is re-entered.
+* Portals: `{id, rect, to, spawn:[x,y,dir], walk:true|false, door}`. `walk` portals trigger by walking into the rect
+  (stairs, doorways); others via E on an object with `interact:"portal"`. `game.js` fades out (0.25 s), switches,
+  fades in; a portal only re-arms after the player has left the spawn spot or released input (no ping-pong).
+* Camera: `camera.fit` picks the largest integer zoom (≤3) that fits the room bounds; phone portrait uses ×2 and pans.
+
+## 16. Interior kit (`art-pack/scene3d/gen_kit.py`)
+Ground chunks `g_wood / g_tile / g_terrazzo` (2 × 2 m); wall bays `i_wall` (states plain / poster / dado / dado_ads /
+tile), `i_window` (glass opening + `view` rect for the procedural outside), `i_door` (closed / open, looks base / wood),
+`i_side` (N–S partition 0.5 m), `i_cut` (camera-side wall stub, fadeable); furniture `f_bed` (made / messy),
+`f_desk` (off / on), `f_chair`, `f_wardrobe` (closed / open), `f_kitchen` (off / cooking), `f_fridge` (closed / open),
+`f_toilet`, `f_basin`, `f_shower` (dry / running), `f_shelf`, `f_table` (default / meal), `i_pendant` (off / on);
+`i_stairs_up`, `i_stairs_down`, `i_mailbox`, `i_meter`, `i_notice`; decals `d_rug`, `d_mat`. Interior pieces skip
+the snow pass. **Looks** = per-piece geometry variants (`looks=[...]`, object field `variant`) rendered as separate
+frames — used for seeded facade variety (`f_wall` stain / patch, `f_window` b / c / d, `f_ac` rust). The id pass now
+encodes up to 254 materials (B channel = id // 64 × 64), atlas height is a multiple of 16 (not a power of two).
+
+## 17. Gameplay bridge (`js/game.js`) over `shared-rules`
+* State: `G.ps` = shared-rules player state (plain JSON). `G.update(dt)` calls `R.tick` with the game minutes that
+  passed, toasts events (low needs, rent paid / owed), applies `speedMul`, runs activities and transitions.
+* `PLACE` maps an object's `interact` kind to a rules place; `actionsAt` → 1 option starts directly, several open the
+  action menu (DOM, keys 1–9 / tap). `VIS` maps an action to object states during / after (stove cooking → table
+  meal, shower running + 李默 hidden, bed made → messy + screen dark for sleep).
+* Activities lock movement and fast-forward the clock (`minutes` over ~1.5–3 s real time); interrupted by nothing
+  in this stage.
+* Godot mapping: `rules.js` → a `WorldCore` GDScript class with the same functions over a Dictionary state;
+  `game.js` → a `GameBridge` node (signals: `need_low`, `rent_paid`, `rent_owed`, `activity_started/finished`).

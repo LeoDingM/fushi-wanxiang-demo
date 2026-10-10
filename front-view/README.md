@@ -1,4 +1,4 @@
-# scene-proto — front-view modular scene for 浮世万象 (v3: weather · seasons · interactions · NPCs · mobile)
+# scene-proto — front-view modular scene for 浮世万象 (v4 = Stage 2.1+2.2: home interiors · needs · rent · sleep; on top of v3 weather · seasons · interactions · NPCs · mobile)
 
 Plain JS, runs from `file://`: open `index.html` (desktop or phone). Front view (yaw 0°, pitch 27.95°, 48 px/m),
 same camera / sun / pixel ramp as 李默. The 45° line lives in `../scene-proto-45/` (separate worker).
@@ -11,11 +11,43 @@ same camera / sun / pixel ramp as 李默. The 45° line lives in `../scene-proto
 | F | 踢 | kick / break it (bin, lamp, bike, vending machine, pot, window, poster, parked car alarm, puddle stomp) |
 | T · R · Y · N | 时间 · 天气 · 季节 · (事件 sheet) | time fast-forward (smooth 1.6 s skip to next phase) · weather clear→rain→snow→fog · season · next day |
 | 1 2 3 4 5 · 0 | 事件 sheet | broken window · fire · car crash · storm · blizzard · reset |
+| E at the 12号 door / walk into stairs / doors | 互动 | enter the unit → 1F stairwell → stairs → 2F landing → 2F-02 (fade transition; walk south through the doorway to leave) |
+| 1–9 · E · Esc/Q (while a menu is open) | tap an option / 取消 | choose among several actions (stove: noodles / fried greens; bed: sleep / nap / make bed …) |
 | L · G | — | event log on/off · debug overlay (`?debug=1`: fps, cpu ms/frame, chunks, lights, NPC states, footprints, sort lines) |
 
 URL params: `season=spring|summer|autumn|winter`, `weather=clear|rain|snow|fog`, `wi=0..1` (intensity),
 `time=HH:MM|day|dusk|night`, `day=N`, `scale=N` (clock speed, 1 real s = 1 game min × N), `npcs=0`,
-`px=&py=&dir=` (spawn), `zoom=2`, `touch=1` (force phone UI), `debug=1`, `log=0`, `manual=1&shot=1` (test stepping).
+`px=&py=&dir=` (spawn), `scene=stair_1f|stair_2f|room_2f02` (start indoors), `zoom=2`, `touch=1` (force phone UI), `debug=1`, `log=0`, `manual=1&shot=1` (test stepping).
+
+## What's new in v4 (Stage 2, sub-stages 1 + 2)
+* **Interiors as modular scenes** (`tools/build_interiors.py` → `interiors.json/.js`): the 12号 unit door is a portal to
+  the **1F stairwell** (terrazzo, dado with stuck-on ads, mailboxes, electricity meters, notice board, a parked bike,
+  sound-activated light: stamp to light it), the stairs lead to the **2F landing** (neighbour door 2F-01, stair hole
+  with railing, meter, plant) and the door to **2F-02 李默's rental** (8 × 4 m: kitchenette with sink + 2-burner stove,
+  fridge, wardrobe, single bed, desk + PC + lamp, chair, bookshelf, rug, small table, ceiling lamp; 2 × 2 m tiled
+  bathroom NE with toilet, basin, shower). Same rules as the street: footprint collision, depth sort, occluder fading
+  (the bathroom partition and the camera-side cut-away wall stubs fade when 李默 is behind them), chunk cache.
+  Every scene keeps its own state while you are away (`world.stash`) and the street keeps simulating its clock /
+  repairs (a bin knocked over before going upstairs is tidied when you come back hours later).
+* **Window with the live world**: interior windows draw the outside procedurally — sky by time of day + weather,
+  the block opposite (lit windows at night), the street tree in its season (blossom / dense green / orange / bare +
+  snow caps), rain streaks / snowflakes / fog, a glass glint; daylight patch on the floor by day.
+* **Interior lighting**: dimmed outdoor ambient + real lamps (ceiling lamp switch, desk lamp + PC screen glow, stove
+  flame, open-fridge light, stairwell lights that switch on when you stamp and go off by themselves).
+* **Daily needs, money, rent, sleep** — rules live in `../shared-rules/` (engine-agnostic JSON + pure functions; API in
+  `../shared-rules/README.md`), bridged by `js/game.js`. Needs 饱腹 / 精力 / 清洁 / 心情 decay per game hour; HUD bars +
+  money + "房租 N天M小时后". Actions with real durations fast-forward the clock while 李默 is busy: cook noodles with egg /
+  stir-fried greens (consumes fridge items, the table shows the meal, clear it after), snack / drink from the fridge,
+  shower (hidden in the cubicle, water runs), wash, toilet, change clothes, browse on the PC, read, look out of the
+  window, sleep (21:00–06:00, wakes 07:00, screen darkens, bed left messy → make it) or nap when tired; buy breakfast
+  at the stall (only while 王阿姨 is cooking) and drinks at the vending machine (both cost money now). Rent ¥450 is
+  taken every Sunday 20:00 if the money is there, otherwise it is owed (mood hit, "欠租" in the HUD). Conditions:
+  starving / smelly / tired (walks slower) / soaked in rain without umbrella / owing rent.
+* **Facade variety + weathering** (shared ask with the 45° line): seeded per-module looks — brick bays with water/rust
+  streaks or a plaster patch, windows with three different curtain sets, laundry and things kept on the security
+  cage, flower pots, thin drip streaks under some sills, AC units with rust runs and condensate pipes; parked bikes
+  now face 6 different ways; warmer late-afternoon light (14:30–17:30 ambient keys).
+* Small fixes: no duplicate date on the phone (top bar only), weekday follows the day counter (rent is weekly).
 
 ## What's new in v3
 * **60 fps renderer** (`js/render.js`, `main.js`): rAF + fixed 60 Hz simulation with render interpolation; static
@@ -84,7 +116,11 @@ No full-screen CSS/canvas filters are used (lighting = one ½-res multiply + add
   states, footprints, chunk ground, sorting, fading, interactions, rules, events, log · `actors.js` 李默 + NPC agents,
   steering, ground effects, audit · `traffic.js` · `fx.js` particles + weather · `render.js` chunks, lightmap,
   frame composition · `mobile.js` touch UI · `main.js` loop, input, camera, HUD, debug, test hooks.
-* `tools/playtest.py` — **91 checks, last run 91/91 PASS** (collision, sorting, fading, traffic, events, every
+* `interiors.json` (+ `interiors.js`) — `stair_1f`, `stair_2f`, `room_2f02` (objects, colliders, portals, camera fit). Generated by `tools/build_interiors.py`.
+* `js/game.js` — gameplay bridge: rules state, action menus, timed activities, scene transitions / portals, auto lights, needs HUD.
+* `../shared-rules/` — rules.json / rules.js / tests (shared with the 45° line).
+* `tools/playtest.py` — **123 checks, last run 123/123 PASS** (v3's 91 + 32 Stage-2 checks: transitions both ways, room collision / sorting / fading, lamp switch, window view by time / weather / season, street state persists while inside, needs decay, cooking, shower, sleep, nap / make bed, tired speed, rent paid / owed, shop costs, action menu, interior clipping audit).
+* Previous: `tools/playtest.py` — **91 checks, last run 91/91 PASS** (collision, sorting, fading, traffic, events, every
   interaction + repair timings, log, lighting, rain/snow/fog, seasons, calendar, URL params, NPC schedule + weather
   reactions, route validation, clipping audit, mobile portrait/landscape with emulated touch, no JS errors).
 * `tools/capture.py` — deterministic captures → `screenshots/80–89`; `tools/fpsprobe.py`, `tools/profile.py`,
@@ -95,6 +131,21 @@ Screenshots: `80-spring.png`, `81-summer.png`, `82-autumn.png`, `83-winter-snow.
 (+`.mp4`, 25 fps; time-lapse repair), `87-walk-60fps.mp4` (60 fps), `88-debug-fps.png`, `89-mobile-portrait.png`,
 `89-mobile-landscape.png`. Older v2 shots `50–57` kept for comparison.
 
+Stage 2.1+2.2 captures: `90-room-day.png`, `91-room-night-lamp.png`, `92-room-rain-window.png` (autumn dusk rain through the
+window), `93-stair-1f.png`, `94-stair-2f-night.png`, `95-street-facade-variety.png`, phone portrait `96-phone-room.png`,
+`96-phone-stair-1f.png`, `96-phone-stair-2f.png`, `96-phone-action-menu.png`, and `97-home-routine.mp4` (30 fps, ~50 s:
+street → door → stairs → 2F → room → lamp → cook → clear table → PC → sleep → morning → shower → out).
+
+## Honest quality notes (v4)
+* Interiors are 8 × 4 m single-depth rooms seen from the front with the camera-side wall cut away; the 2F-02 room is
+  readable but furniture is small at 1× on a phone, so phone portrait uses ×2 zoom indoors and pans with 李默.
+* 李默 has no cooking / sleeping / showering animations: he is hidden (bed / shower) or stands idle while a progress
+  bar runs and the object changes state (stove flame, meal on the table, running shower, PC on).
+* The window view is a procedural painting, not the real street rendered from the inside.
+* Needs balance is first-pass (a sensible routine keeps everything above ~30 for a week; tested in `test_rules.js`).
+* No job yet, so money only goes down (rent + food) — the convenience-store shift arrives in sub-stage 3.
+* Bike riding animation: still pushing only (no riding sprite exists for 李默).
+
 ## Honest quality notes (v3)
 * Lighting is a 2D lightmap (multiply + additive halos), not relit renders: night reads well, but light pools on
   the ground are soft blobs and headlight beams are modest; no shadows from lamps.
@@ -103,7 +154,7 @@ Screenshots: `80-spring.png`, `81-summer.png`, `82-autumn.png`, `83-winter-snow.
 * Rain reflections are vertical streak sprites under lights, not true mirrored reflections.
 * Leaf piles / petals / litter are small procedural sprites; autumn piles are subtle at 1×.
 * NPC animation is walk/idle only (cook/chat are idle poses + bubbles); NPCs never interact with objects except the gate.
-* Bikes only rot 0 (parked bikes always face the same way); 李默 pushes the bike (no riding sprite).
+* (fixed in v4: parked bikes face 6 ways) 李默 pushes the bike (no riding sprite).
 * The street is still one 28 m slice; facades repeat 5 module types.
 
 ## Earlier assessment of the look (v2, still valid for surfaces) (vs. concept art `web-demo/img/bg/ext_day.jpg`)
@@ -161,5 +212,5 @@ key, events → GDScript runner with the same action names, glows/emit → Canva
 ARCHITECTURE §8.
 
 ## Known limits
-No interiors yet; one slice (no streaming); props mostly rot 0; traffic has no lane changes; the GIFs are large
+Interiors: home only (store in 2.3); one street slice (streaming in 2.4); props mostly rot 0; traffic has no lane changes; the GIFs are large
 because the camera scrolls (use the MP4s).

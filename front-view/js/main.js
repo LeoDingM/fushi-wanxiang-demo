@@ -11,7 +11,7 @@
   const st = (SP.state = { debug: Q.get("debug") === "1", toast: null, manual: Q.get("manual") === "1", fps: 60, cpu: 0, near: null, showLog: Q.get("log") !== "0", steps: 0, ft: new Float32Array(240), fti: 0 });
   SP.now = 0; SP.rand = SP.rng(20260321);
   const player = (SP.player = new SP.LiMo());
-  const cam = (SP.cam = { fx: 0, fy: 0, ix: 0, iy: 0, zoom: +(Q.get("zoom") || 1), ready: false });
+  const cam = (SP.cam = { fx: 0, fy: 0, ix: 0, iy: 0, zoom: +(Q.get("zoom") || 1), base: +(Q.get("zoom") || 1), ready: false });
   SP.render.init(canvas);
   const ctx = canvas.getContext("2d");
 
@@ -22,7 +22,13 @@
     if (["arrowup", "arrowdown", "arrowleft", "arrowright", " "].includes(k)) e.preventDefault();
     keys[k] = true;
     if (e.repeat || !window.__protoReady) return;
-    for (const [name, ev] of Object.entries(W.data.events)) if (ev.key === k) fireEvent(name);
+    const G = SP.game;
+    if (G.menu) {                                   // action menu: 1-9 choose, E = first available, Esc / Q closes
+      if (/^[1-9]$/.test(k)) { G.pick(+k - 1); return; }
+      if (k === "e") { G.pick(null); return; }
+      if (k === "escape" || k === "q") { G.closeMenu(); return; }
+    }
+    for (const [name, ev] of Object.entries(W.data.events || {})) if (ev.key === k) fireEvent(name);
     if (k === "0") resetScene();
     else if (k === "t") SP.clock.cycleTime();
     else if (k === "r") { SP.clock.cycleWeather(); toast(`天气：${SP.clock.weatherName(SP.clock.target)}`); }
@@ -41,8 +47,10 @@
   SP.toast = toast;
   function resetScene() {
     SP.rand = SP.rng(20260321); SP.now = 0;
-    SP.clock.init(W.data, Q); W.load(window.SCENE_DATA); SP.fx.reset(); SP.traffic.reset();
-    player.carry = null; SP.render.build(); SP.actors.init(W.data); toast("场景已重置");
+    W.stash = {}; W.sceneId = null;
+    SP.clock.init(window.SCENE_DATA, Q); W.load(window.SCENE_DATA); SP.fx.reset(); SP.traffic.reset();
+    const sp = W.data.spawn; player.x = player.px = sp.x; player.y = player.py = sp.y; player.setDir(sp.dir); player.hidden = false; cam.ready = false;
+    player.carry = null; SP.render.build(); SP.actors.init(W.data); SP.game.init(); toast("场景已重置");
   }
   W.pulseDoor = function () {
     const d = W.byId.unit_door; if (!d || d.state === "open" && !d.pulse) return;
@@ -60,8 +68,7 @@
       for (const g of W.objects) if (g.interact === "gate") W.touch(g);
       W.logEvent(open ? "李默推开了院门" : "李默关上了院门"); toast(open ? "推开铁门" : "关上铁门（院子被封住）"); return;
     }
-    if (kind === "use" && o.interact === "door") { W.setState(o, o.state === "open" ? "closed" : "open"); o.pulse = false; toast(o.state === "open" ? "单元门开了（原型不做室内）" : "单元门关上"); return; }
-    if (kind === "use" && o.interact === "stall") { const v = SP.actors.byId("vendor"); toast(v && !v.hidden && v.act === "cook" ? "王阿姨早点摊 · 豆浆油条 ¥8" : "摊主不在（早点 05:30–10:30）"); return; }
+    if (kind === "use" && o.interact === "door") { SP.game.go({ to: o.to, spawn: o.spawn, door: o.id }); return; }
     if (kind === "use" && o.interact === "locker") { toast("快递柜：没有你的件"); return; }
     const msg = W.act(o, kind, player);
     if (msg) toast(msg);
@@ -77,10 +84,13 @@
     if (down("d", "arrowright")) dx += 1;
     const T = SP.touchInput;
     if (!dx && !dy && T && T.m > 0) { dx = T.x; dy = T.y; mag = Math.min(1, 0.35 + T.m * 0.65); }
+    SP.game.moving = !!(dx || dy);              // raw stick intent (portal re-arming), even while frozen
+    if (SP.game.busy()) { dx = dy = 0; }
+    SP.game.vy = -dy;
     const moving = !!(dx || dy), r = player.r;
     let dist = 0;
     if (moving) {
-      const len = Math.hypot(dx, dy), step = SP.LIMO.speed * mag * dt;
+      const len = Math.hypot(dx, dy), step = SP.LIMO.speed * mag * (SP.game.speedMul || 1) * dt;
       const vx = (dx / len) * step, vy = (-dy / len) * step;
       const x0 = player.x, y0 = player.y, A = SP.actors;
       if (Math.abs(vx) > 0.01) player.dirVec[0] = Math.sign(vx);
@@ -108,6 +118,7 @@
     const m = Math.floor(SP.clock.abs());
     if (m !== lastRule) { lastRule = m; W.updateRules(); }
     if (wasFF && !SP.clock.ff) SP.actors.settle();
+    SP.game.update(dt, gm);
     SP.actors.update(dt, gm);
     SP.traffic.update(dt);
     SP.fx.update(dt);
@@ -118,9 +129,13 @@
 
   // ---------- camera: smooth float follow, integer offset that keeps 李默's screen position constant while walking ----------
   function updateCam(dt, al) {
-    const z = cam.zoom, vw = canvas.width / z, vh = canvas.height / z, B = W.data.bounds;
-    const xmin = SP.sx(B.x0), xmax = SP.sx(B.x1);
-    const ytop = SP.sy(W.data.camera.facade_y, W.data.camera.top_z_at_facade), ybot = SP.sy(B.y0 - 0.4);
+    const B = W.data.bounds, cd = W.data.camera;
+    const xmin = SP.sx(B.x0 - (cd.fit ? 0.3 : 0)), xmax = SP.sx(B.x1 + (cd.fit ? 0.3 : 0));
+    const ytop = cd.top_y != null ? SP.sy(cd.top_y, cd.top_z) : SP.sy(cd.facade_y, cd.top_z_at_facade), ybot = SP.sy(cd.bottom_y != null ? cd.bottom_y : B.y0 - 0.4);
+    // interiors fit the room: largest integer zoom that shows it (x2 on desktop, x1 on phones)
+    // (phone portrait: x2 and the camera pans with 李默 - half the room at a time, but furniture reads at thumb size)
+    cam.zoom = cd.fit && !Q.get("zoom") ? (SP.mobile && SP.mobile.portrait && canvas.width >= 340 ? 2 : SP.clamp(Math.floor(Math.min(canvas.width / (xmax - xmin + 24), canvas.height / (ybot - ytop + 60))), 1, 3)) : cam.base;
+    const z = cam.zoom, vw = canvas.width / z, vh = canvas.height / z;
     const x = player.px + (player.x - player.px) * al, y = player.py + (player.y - player.py) * al;
     const X = SP.sx(x), Y = SP.sy(y), lift = vh > vw ? 50 : Math.min(120, vh * 0.17);
     let tx = X - Math.floor(vw / 2), ty = Y - lift - Math.floor(vh / 2);
@@ -148,18 +163,19 @@
   }
   function drawDebug(list, pi, al) {
     ctx.save(); ctx.lineWidth = 1;
-    const tr = W.data.traffic, cw = tr.crosswalk;
+    const tr = W.data.traffic || { lanes: [] }, cw = tr.crosswalk;
     ctx.setLineDash([4, 3]);
-    poly([[cw.x0, cw.y0], [cw.x1, cw.y0], [cw.x1, cw.y1], [cw.x0, cw.y1]], "rgba(80,220,255,0.9)");
+    if (cw) poly([[cw.x0, cw.y0], [cw.x1, cw.y0], [cw.x1, cw.y1], [cw.x0, cw.y1]], "rgba(80,220,255,0.9)");
+    for (const p of W.portals || []) { const r = p.rect; poly([[r[0], r[1]], [r[2], r[1]], [r[2], r[3]], [r[0], r[3]]], "rgba(255,230,80,0.95)", "rgba(255,230,80,0.12)"); }
     for (const l of tr.lanes) { ctx.strokeStyle = "rgba(255,80,80,0.95)"; ctx.beginPath(); ctx.moveTo(SP.sx(l.stop_x), SP.sy(l.y - 1.8)); ctx.lineTo(SP.sx(l.stop_x), SP.sy(l.y + 1.8)); ctx.stroke(); }
     ctx.setLineDash([]);
     for (const c of W.colliders) poly(c.poly, "rgba(255,70,70,0.95)", "rgba(255,60,60,0.15)");
     for (const c of SP.traffic.cars) poly(c.poly, "rgba(255,170,40,0.95)", "rgba(255,170,40,0.18)");
     for (const h of W.hazards) { ctx.strokeStyle = "#ff5af0"; ctx.beginPath(); ctx.ellipse(SP.sx(h.x), SP.sy(h.y), h.r * 48, h.r * 22.5 / 1.4, 0, 0, 6.28); ctx.stroke(); }
     // NPC graph + paths
-    const N = W.data.npcs.graph.nodes;
+    const N = W.data.npcs ? W.data.npcs.graph.nodes : {};
     ctx.strokeStyle = "rgba(120,255,140,0.35)";
-    for (const [u, v] of W.data.npcs.graph.edges) { ctx.beginPath(); ctx.moveTo(SP.sx(N[u][0]), SP.sy(N[u][1])); ctx.lineTo(SP.sx(N[v][0]), SP.sy(N[v][1])); ctx.stroke(); }
+    for (const [u, v] of W.data.npcs ? W.data.npcs.graph.edges : []) { ctx.beginPath(); ctx.moveTo(SP.sx(N[u][0]), SP.sy(N[u][1])); ctx.lineTo(SP.sx(N[v][0]), SP.sy(N[v][1])); ctx.stroke(); }
     ctx.font = "9px monospace"; ctx.textAlign = "center";
     for (const a of SP.actors.list) {
       if (a.hidden) continue;
@@ -196,12 +212,14 @@
     ctx.restore(); st.blockedBy = null;
   }
   const hudEl = document.getElementById("status"), toastEl = document.getElementById("toast"), promptEl = document.getElementById("prompt"), logEl = document.getElementById("log");
-  let hudKey = "", logKey = "", promptKey = "";
+  let hudKey = "", logKey = "", promptKey = "", toastKey = null;
   function hud() {
     const C = SP.clock;
-    const s = `${C.dateLabel()} · ${C.clockLabel()} ${C.phaseName()} · ${C.seasonName()} · ${C.weatherName()}${C.scale > 1 ? " ×" + C.scale : ""}`;
+    const s = `${W.interior ? W.data.name + " · " : ""}${C.dateLabel()} · ${C.clockLabel()} ${C.phaseName()} · ${C.seasonName()} · ${C.weatherName()}${C.scale > 1 ? " ×" + C.scale : ""}`;
+    SP.game.hud();
     if (s !== hudKey) { hudKey = s; hudEl.textContent = s; }
-    toastEl.textContent = st.toast ? st.toast.msg : ""; toastEl.style.opacity = st.toast ? 1 : 0;
+    const tm = st.toast ? st.toast.msg : "";
+    if (tm !== toastKey) { toastKey = tm; toastEl.textContent = tm; toastEl.style.opacity = tm ? 1 : 0; }
     let p = "";
     if (player.carry) p = (SP.isTouch ? "互动" : "E") + " 停车";
     else if (st.near) {
@@ -240,15 +258,20 @@
   const assets = [["atlas", "kit/kit_atlas.png"], ["emit", "kit/kit_emit.png"], ...(SP.K.snow_atlases || []).map((f, i) => ["snow" + i, "kit/" + f]), ...SP.spriteAssets()];
   SP.load(assets).then(() => {
     SP.img.snow = (SP.K.snow_atlases || []).map((f, i) => SP.img["snow" + i]);
+    SP.scenes = Object.assign({ street: window.SCENE_DATA }, window.INTERIOR_SCENES || {});
     SP.clock.init(window.SCENE_DATA, Q);
     W.load(window.SCENE_DATA);
+    SP.game.init();
+    const start = Q.get("scene");
+    if (start && start !== "street" && SP.scenes[start]) W.enter(start);
     SP.traffic.reset();
-    const sp = W.data.spawn;
-    player.x = player.px = Q.get("px") ? +Q.get("px") : sp.x; player.y = player.py = Q.get("py") ? +Q.get("py") : sp.y; player.setDir(Q.get("dir") || sp.dir);
+    const sp = W.data.spawn, spx = Array.isArray(sp) ? sp[0] : sp.x, spy = Array.isArray(sp) ? sp[1] : sp.y, spd = Array.isArray(sp) ? sp[2] : sp.dir;
+    player.x = player.px = Q.get("px") ? +Q.get("px") : spx; player.y = player.py = Q.get("py") ? +Q.get("py") : spy; player.setDir(Q.get("dir") || spd);
     SP.render.build();
     SP.actors.init(W.data);
+    SP.game.updateLights(true);
     if (Q.get("npcs") === "0") for (const a of SP.actors.npcs) { a.def = Object.assign({}, a.def, { blocks: [{ from: "00:00", to: "23:59", act: "inside", at: a.def.start }], trips: null }); a.hide(a.def.start); }
-    W.logEvent(`${SP.clock.dateLabel()} · ${SP.clock.seasonName()} · ${SP.clock.weatherName()}`);
+    W.logEvent("李默出门，开始新的一天");
     const btn = (e) => {
       if (e === "reset") resetScene(); else if (e === "time") SP.clock.cycleTime(); else if (e === "debug") st.debug = !st.debug;
       else if (e === "weather") { SP.clock.cycleWeather(); toast(`天气：${SP.clock.weatherName(SP.clock.target)}`); }
@@ -264,7 +287,9 @@
       SP, player, world: W, traffic: SP.traffic, state: st, clock: SP.clock, actors: SP.actors, render: SP.render,
       step: (dt, n) => { for (let i = 0; i < (n || 1); i++) { acc += dt; while (acc >= DT - 1e-9) { update(DT); acc -= DT; } render(SP.clamp(acc / DT, 0, 1), dt); } return true; },
       sim: (seconds) => { const n = Math.round(seconds / DT); for (let i = 0; i < n; i++) update(DT); return true; },
-      trigger: fireEvent, setTime, reset: resetScene, interact, toast: () => st.toast && st.toast.msg,
+      trigger: fireEvent, setTime, reset: resetScene, interact, toast: () => st.toast && st.toast.msg, game: SP.game,
+      /** jump straight into a scene (tests / captures): same path as a portal, without the fade */
+      enter: (id, x, y, dir) => { const S = SP.scenes[id], sp = S.spawn; SP.game.switchScene(id, [x != null ? x : (sp.x != null ? sp.x : sp[0]), y != null ? y : (sp.y != null ? sp.y : sp[1]), dir || (sp.dir || sp[2])]); return W.sceneId; },
       order: () => SP.render.lastList.map((d) => (d.kind === "obj" ? d.o.id + "/" + d.part : d.kind === "player" ? "PLAYER" : d.kind === "car" ? d.car.id : d.kind === "npc" ? "NPC:" + d.a.id : d.kind)),
       alpha: (id, part) => { const o = W.byId[id]; return o ? (o.alpha[part || W.piece(o).parts[0]] ?? 1) : null; },
       place: (x, y, dir) => { player.x = player.px = x; player.y = player.py = y; if (dir) player.setDir(dir); cam.ready = false; },

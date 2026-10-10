@@ -62,7 +62,7 @@
     while (steps.length < 3) steps.unshift({ walk: f, blend: 0 });
     return { t: 0, steps, walk: steps[0].walk, blend: steps[0].blend, from: f };
   };
-  LP.umbrella = function () { const C = SP.clock; return C.weather === "rain" && C.intensity > 0.12 && !this.carry; };
+  LP.umbrella = function () { const C = SP.clock; return !SP.world.interior && C.weather === "rain" && C.intensity > 0.12 && !this.carry; };
   /** interpolated screen px of the feet (alpha = render interpolation factor) */
   LP.screenAt = function (al) { const x = this.px + (this.x - this.px) * al, y = this.py + (this.y - this.py) * al; return [Math.round(SP.sx(x)), Math.round(SP.sy(y))]; };
   LP.screen = function () { return [Math.round(SP.sx(this.x)), Math.round(SP.sy(this.y))]; };
@@ -120,7 +120,7 @@
     this.umbrellaIdx = def.umbrella || 0; this.maxStuck = 0; this.breathT = SP.hash(i, 3) * 3;
   }
   A.init = function (data) {
-    G = data.npcs; NODES = G.graph.nodes; ADJ = {};
+    G = data.npcs || { graph: { nodes: {}, edges: [], hidden: [] }, agents: {} }; NODES = G.graph.nodes; ADJ = {};
     for (const [u, v] of G.graph.edges) { (ADJ[u] = ADJ[u] || []).push(v); (ADJ[v] = ADJ[v] || []).push(u); }
     A.hiddenNodes = new Set(G.graph.hidden); A.roadNodes = new Set(G.graph.road_nodes || []);
     A.npcs = Object.entries(G.agents).filter(([k]) => k[0] !== "_").map(([id, def], i) => new Agent(id, def, i));
@@ -280,6 +280,7 @@
   /** footprints in snow, splashes in puddles, kicking through leaf piles, winter breath */
   A.groundEffects = function (a, dist) {
     const C = SP.clock, W = SP.world;
+    if (W.interior) return;
     a.stepAcc += dist;
     if (a.stepAcc > 0.34) {
       a.stepAcc = 0; a.foot ^= 1;

@@ -8,6 +8,8 @@
   T.reset = function () {
     T.cars = []; T.crashed = null; T.timers = {}; T.n = 0;
     const tr = SP.world.data.traffic;
+    T.parked = SP.world.objects.filter((o) => o.type === "p_car");
+    if (!tr) return;
     tr.lanes.forEach((l, i) => (T.timers[l.id] = 0.6 + i * 1.7));
     // a parked car is part of the static scene (objects); moving cars live here
     T.parked = SP.world.objects.filter((o) => o.type === "p_car");
@@ -51,6 +53,7 @@
     return gap;
   }
   T.update = function (dt) {
+    if (!SP.world.data.traffic) return;
     const tr = SP.world.data.traffic;
     for (const l of tr.lanes) {
       T.timers[l.id] -= dt;

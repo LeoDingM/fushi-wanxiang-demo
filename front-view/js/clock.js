@@ -15,6 +15,8 @@
   C.seasonName = (s) => NAMES[s || C.season];
   C.weatherName = (w) => WNAMES[w || C.weather];
   C.abs = () => C.day * 1440 + C.min;
+  /** game weekday 0 = Sun (the compressed calendar jumps dates, so weekdays follow the day counter: rent is weekly) */
+  C.weekday = () => (((C.cal && C.cal.start_weekday != null) ? C.cal.start_weekday : 1) + C.day) % 7;
   C.seasonOf = (day) => C.order[Math.floor(day / C.daysPerSeason) % 4];
   C.init = function (data, Q) {
     const cal = (C.cal = data.calendar), W = (C.wcfg = data.weather);
@@ -90,7 +92,7 @@
   C.dateLabel = function () {
     const ss = C.cal.season_start[C.season], i = C.day % C.daysPerSeason, yr = C.cal.start[0] + Math.floor(C.day / (C.daysPerSeason * 4)) + (C.season === "winter" && ss[0] < 3 ? 1 : 0);
     const d = new Date(yr, ss[0] - 1, ss[1] + Math.round(i * 90 / C.daysPerSeason));
-    return `${d.getMonth() + 1}月${d.getDate()}日 周${"日一二三四五六"[d.getDay()]} · 第${C.day + 1}天`;
+    return `${d.getMonth() + 1}月${d.getDate()}日 周${"日一二三四五六"[C.weekday()]} · 第${C.day + 1}天`;
   };
   /** advance by dt real seconds; returns game minutes elapsed */
   C.update = function (dt) {
@@ -123,8 +125,8 @@
     return gm;
   };
   // ambient keyframes by hour: [hour, r, g, b]
-  const KEYS = [[0, 46, 56, 104], [4.8, 52, 62, 110], [5.8, 150, 130, 150], [6.8, 236, 206, 186], [8.2, 255, 252, 246], [16.4, 255, 252, 244],
-                [17.4, 255, 214, 172], [18.4, 226, 156, 132], [19.3, 104, 104, 160], [20.5, 58, 68, 120], [24, 46, 56, 104]];
+  const KEYS = [[0, 46, 56, 104], [4.8, 52, 62, 110], [5.8, 150, 130, 150], [6.8, 236, 206, 186], [8.2, 255, 252, 246], [14.6, 255, 250, 240], [16.2, 255, 238, 208],      // warm late-afternoon light (shared with the 45° line)
+                [17.4, 255, 212, 166], [18.4, 226, 156, 132], [19.3, 104, 104, 160], [20.5, 58, 68, 120], [24, 46, 56, 104]];
   const SEASON_MUL = { spring: [1, 1, 0.99], summer: [1, 0.99, 0.94], autumn: [1, 0.96, 0.88], winter: [0.93, 0.96, 1.0] };
   C.computeAmbient = function () {
     const h = C.min / 60;
