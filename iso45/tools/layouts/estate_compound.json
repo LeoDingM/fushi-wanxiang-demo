@@ -1,0 +1,416 @@
+{
+ "id": "estate_compound",
+ "name": "云栖里 · 门禁小区庭院",
+ "_doc": "Midtown-B gated 小区: perimeter, S gate+guard, garden path, N lobby+club, E sports pad. fade_group lobby_facade/gate.",
+ "bounds": [
+  0.3,
+  0.3,
+  19.7,
+  15.7
+ ],
+ "ground": {
+  "origin": [
+   0,
+   0
+  ],
+  "chunk": 2,
+  "cols": 10,
+  "rows": 8,
+  "legend": {
+   "G": "g_grass",
+   "S": "g_sidewalk",
+   "K": "g_concrete",
+   "C": "g_court"
+  },
+  "data_south_to_north": [
+   "GGSSSSGGGG",
+   "GGSSSSGGGG",
+   "GGSSSSGCCC",
+   "GGSSKKSCCC",
+   "GGSSKKSCCC",
+   "GGSSKKSSGG",
+   "KKKKKKKKKK",
+   "KKKKKKKKKK"
+  ]
+ },
+ "walls": [
+  {
+   "side": "N",
+   "line": 16.0,
+   "from": 0.0,
+   "to": 20.0,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "door",
+     "at": 3.0,
+     "id": "club_door",
+     "interact": "portal",
+     "to": "estate_club",
+     "spawn": [
+      6.0,
+      1.4,
+      "N"
+     ],
+     "label": "云栖会所",
+     "block": false
+    },
+    {
+     "kind": "door",
+     "at": 9.0,
+     "id": "lobby_door",
+     "interact": "portal",
+     "to": "estate_lobby",
+     "spawn": [
+      4.0,
+      1.3,
+      "N"
+     ],
+     "label": "进大堂",
+     "block": false
+    },
+    {
+     "kind": "window",
+     "at": 14.5,
+     "id": "facade_w2",
+     "interact": "window_in",
+     "reach": [
+      15.25,
+      14.5
+     ]
+    }
+   ]
+  },
+  {
+   "side": "E",
+   "line": 20.0,
+   "from": 0.0,
+   "to": 16.0,
+   "finish": "plain"
+  },
+  {
+   "side": "S",
+   "line": 0.0,
+   "from": 0.0,
+   "to": 20.0,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "gap",
+     "at": 8.5,
+     "w": 3.0
+    }
+   ]
+  },
+  {
+   "side": "W",
+   "line": 0.0,
+   "from": 0.0,
+   "to": 16.0,
+   "finish": "plain"
+  }
+ ],
+ "furniture": [
+  {
+   "type": "w_gate_l",
+   "x": 8.55,
+   "y": 0.55,
+   "state": "open",
+   "id": "gate_l",
+   "fade_group": "gate"
+  },
+  {
+   "type": "w_gate_r",
+   "x": 11.45,
+   "y": 0.55,
+   "state": "open",
+   "id": "gate_r",
+   "fade_group": "gate"
+  },
+  {
+   "type": "w_pillar",
+   "x": 8.2,
+   "y": 0.7,
+   "id": "gate_p_l"
+  },
+  {
+   "type": "w_pillar",
+   "x": 11.8,
+   "y": 0.7,
+   "id": "gate_p_r"
+  },
+  {
+   "type": "p_locker",
+   "x": 6.8,
+   "y": 1.8,
+   "id": "guard_booth",
+   "interact": "notice",
+   "note": "门岗 · 访客登记（演示）· 云栖里安保",
+   "reach": [
+    6.8,
+    2.5
+   ]
+  },
+  {
+   "type": "p_notice",
+   "x": 5.5,
+   "y": 1.2,
+   "id": "gate_sign",
+   "interact": "notice",
+   "note": "云栖里 · 门禁小区 · 非机动车请停东侧",
+   "reach": [
+    5.5,
+    1.8
+   ]
+  },
+  {
+   "type": "w_fence",
+   "x": 3.0,
+   "y": 0.7,
+   "id": "fence_s1"
+  },
+  {
+   "type": "w_fence",
+   "x": 5.2,
+   "y": 0.7,
+   "id": "fence_s2"
+  },
+  {
+   "type": "w_fence",
+   "x": 14.0,
+   "y": 0.7,
+   "id": "fence_s3"
+  },
+  {
+   "type": "w_fence",
+   "x": 16.2,
+   "y": 0.7,
+   "id": "fence_s4"
+  },
+  {
+   "type": "w_fence",
+   "x": 18.2,
+   "y": 0.7,
+   "id": "fence_s5"
+  },
+  {
+   "type": "p_hedge",
+   "x": 4.5,
+   "y": 5.5,
+   "id": "hedge_w1"
+  },
+  {
+   "type": "p_hedge",
+   "x": 4.5,
+   "y": 7.5,
+   "id": "hedge_w2"
+  },
+  {
+   "type": "p_tree",
+   "x": 3.2,
+   "y": 4.2,
+   "id": "tree1"
+  },
+  {
+   "type": "p_tree",
+   "x": 3.5,
+   "y": 10.0,
+   "id": "tree2"
+  },
+  {
+   "type": "p_tree",
+   "x": 16.5,
+   "y": 10.2,
+   "id": "tree4"
+  },
+  {
+   "type": "p_planter",
+   "x": 8.2,
+   "y": 7.0,
+   "id": "planter1"
+  },
+  {
+   "type": "p_planter",
+   "x": 11.8,
+   "y": 7.0,
+   "id": "planter2"
+  },
+  {
+   "type": "p_planter",
+   "x": 10.0,
+   "y": 5.0,
+   "rot": 6,
+   "id": "planter3"
+  },
+  {
+   "type": "p_lamp",
+   "x": 7.2,
+   "y": 3.8,
+   "state": "ok",
+   "id": "lamp1"
+  },
+  {
+   "type": "p_lamp",
+   "x": 12.8,
+   "y": 3.8,
+   "state": "ok",
+   "id": "lamp2"
+  },
+  {
+   "type": "p_lamp",
+   "x": 7.2,
+   "y": 11.8,
+   "state": "ok",
+   "id": "lamp3"
+  },
+  {
+   "type": "p_lamp",
+   "x": 12.8,
+   "y": 11.8,
+   "state": "ok",
+   "id": "lamp4"
+  },
+  {
+   "type": "p_bins",
+   "x": 17.5,
+   "y": 13.8,
+   "id": "bins"
+  },
+  {
+   "type": "f_steps",
+   "x": 10.0,
+   "y": 15.3,
+   "id": "lobby_steps"
+  },
+  {
+   "type": "p_planter",
+   "x": 7.5,
+   "y": 14.0,
+   "id": "lobby_plant_l"
+  },
+  {
+   "type": "p_planter",
+   "x": 12.5,
+   "y": 14.0,
+   "id": "lobby_plant_r"
+  },
+  {
+   "type": "p_notice",
+   "x": 14.2,
+   "y": 5.2,
+   "id": "sport_sign",
+   "interact": "notice",
+   "note": "云栖里 · 运动垫 / 羽毛球简易场 · 07:00–21:00 · 勿扰民",
+   "reach": [
+    14.2,
+    5.9
+   ]
+  },
+  {
+   "type": "p_locker",
+   "x": 18.5,
+   "y": 5.0,
+   "id": "sport_locker",
+   "interact": "notice",
+   "note": "外场器材柜 · 球拍/毽子（演示）",
+   "reach": [
+    17.9,
+    5.0
+   ]
+  },
+  {
+   "type": "p_bike",
+   "x": 18.2,
+   "y": 9.5,
+   "state": "parked",
+   "id": "sport_bike1"
+  },
+  {
+   "type": "p_bike",
+   "x": 18.8,
+   "y": 10.2,
+   "state": "parked",
+   "id": "sport_bike2"
+  },
+  {
+   "type": "p_planter",
+   "x": 14.0,
+   "y": 9.8,
+   "id": "sport_plant1"
+  },
+  {
+   "type": "p_planter",
+   "x": 14.0,
+   "y": 6.8,
+   "id": "sport_plant2"
+  },
+  {
+   "type": "p_lamp",
+   "x": 15.5,
+   "y": 4.8,
+   "state": "ok",
+   "id": "sport_lamp1"
+  },
+  {
+   "type": "p_lamp",
+   "x": 18.5,
+   "y": 11.0,
+   "state": "ok",
+   "id": "sport_lamp2"
+  },
+  {
+   "type": "p_pot",
+   "x": 16.0,
+   "y": 11.5,
+   "id": "sport_pot"
+  },
+  {
+   "type": "p_planter",
+   "x": 15.0,
+   "y": 11.2,
+   "id": "sport_rest"
+  },
+  {
+   "type": "p_tree",
+   "x": 13.2,
+   "y": 8.0,
+   "id": "tree3"
+  },
+  {
+   "type": "p_hedge",
+   "x": 13.5,
+   "y": 5.5,
+   "id": "hedge_e1"
+  },
+  {
+   "type": "p_hedge",
+   "x": 13.5,
+   "y": 10.5,
+   "id": "hedge_e2"
+  }
+ ],
+ "portals": [
+  {
+   "id": "exit_street",
+   "rect": [
+    8.6,
+    0.35,
+    11.4,
+    1.1
+   ],
+   "to": "street",
+   "spawn": [
+    116.0,
+    3.0,
+    "S"
+   ],
+   "dir": "S",
+   "label": "出门 · 街道"
+  }
+ ],
+ "spawn": [
+  10.0,
+  1.8,
+  "N"
+ ]
+}

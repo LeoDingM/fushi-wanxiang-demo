@@ -362,6 +362,10 @@
       // Group fade only for members near the PLAYER (not near the hit piece —
       // otherwise a tall far facade that overlaps the sprite ghosts the whole block).
       if (!fg || !hit.has(fg)) return false;
+      // Midtown strip: never ghost towers once 李默 is in 云栖 pocket (x≥146).
+      if (String(fg).indexOf("mt_") === 0 && px >= 146) return false;
+      // Civic façades (派出所/医院/消防): never wash whole block — QA + role-read need solid shells.
+      if (String(fg).indexOf("civic_") === 0) return false;
       return Math.hypot((o.x || 0) - px, (o.y || 0) - py) <= FADE_LOCAL_R;
     };
     for (const o of W.objects) {
@@ -369,7 +373,12 @@
       if (P.layer !== "sorted" || !(P.fadeable || P.fade_parts)) continue;
       for (const part of P.parts) {
         const idHit = hit.has(o.id + "/" + part);
-        const on = idHit || nearHit(o, o.fade_group);
+        let on = idHit || nearHit(o, o.fade_group);
+        // Don't ghost midtown towers once 李默 is in 云栖 pocket (x≥146).
+        const fg0 = o.fade_group || "";
+        if (on && String(fg0).indexOf("mt_") === 0 && px >= 146) on = false;
+        // Civic façades (派出所/卫生中心/消防站): never fade — role boards must stay solid/opaque.
+        if (on && String(fg0).indexOf("civic_") === 0) on = false;
         const fadeable = P.fadeable || (P.fade_parts && P.fade_parts.includes(part));
         const target = Math.min(on && fadeable ? FADE_ALPHA : 1, o.ghost || 1);   // ghost: always half see-through (balcony glass)
         const a = o.alpha[part] == null ? 1 : o.alpha[part];

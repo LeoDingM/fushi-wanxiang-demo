@@ -58,7 +58,7 @@
       objects: w.objects.concat(furn),
       colliders: w.colliders,
       spawn: [W / 2, 1.0, "N"],
-      portals: [{ id: "exit_street", rect: [gap.at, 0.1, gap.at + gap.w, 0.55], dir: "S", to: "street", spawn: [-16.8, 0.95, "S"], label: "出门（回到街上）" }],
+      portals: [{ id: "exit_street", rect: [gap.at, 0.1, gap.at + gap.w, 0.55], dir: "S", to: "street", spawn: [-33.8, 0.95, "S"], label: "出门（回到街上）" }],
       _amenity: true, _props: true, _doc: "Amenities-Props pharmacy; slide via SP.amenities.SLIDE_EAST.pharmacy"
     };
   }
@@ -66,23 +66,23 @@
   // ---------- old-block street stubs (kit pieces + custom interact; no NPC spawns) ----------
   // Clear of market stubs (−13.8…−9.6 / 15.2) and courtyard clutter.
   const STREET_STUBS = [
-    { id: "prop_parcel", type: "p_locker", x: 10.2, y: 3.55, z: 0, rot: 0, state: "default",
+    { id: "prop_parcel", type: "p_locker", x: 3.2, y: 1.55, z: 0, rot: 0, state: "default",
       interact: "prop_parcel", name: "井槐快递驿站", _prop: "parcel" },
-    { id: "prop_pharm_gate", type: "p_stall", x: -16.8, y: 1.9, z: 0, rot: 0, state: "default",
+    { id: "prop_pharm_gate", type: "p_stall", x: -33.8, y: 2.25, z: 0, rot: 0, state: "default",
       interact: "prop_pharmacy", name: "井槐药店", to: PHARM, _prop: "pharmacy" },
-    { id: "prop_charger", type: "p_ebike", x: 4.8, y: 3.45, z: 0, rot: 0, state: "default",
+    { id: "prop_charger", type: "p_ebike", x: 2.0, y: 5.2, z: 0, rot: 0, state: "default",
       interact: "prop_charger", name: "社区充电桩", _prop: "charger" },
-    { id: "prop_recycle", type: "p_bins", x: -5.6, y: 3.5, z: 0, rot: 0, state: "default",
+    { id: "prop_recycle", type: "p_bins", x: -1.2, y: 5.25, z: 0, rot: 0, state: "default",
       interact: "prop_recycle", name: "垃圾分类点", _prop: "recycle" }
   ];
   AP.streetStubs = STREET_STUBS;
   AP.PHARM = PHARM;
 
   const SIGNS = [
-    { id: "parcel", x: 10.2, y: 3.55, z: 2.35, img: "img/amenities/props/parcel_sign.png" },
-    { id: "pharmacy", x: -16.8, y: 1.9, z: 2.4, img: "img/amenities/props/pharmacy_sign.png" },
-    { id: "charger", x: 4.8, y: 3.45, z: 2.2, img: "img/amenities/props/charger_sign.png" },
-    { id: "recycle", x: -5.6, y: 3.5, z: 2.2, img: "img/amenities/props/recycle_sign.png" }
+    { id: "parcel", x: 3.2, y: 1.55, z: 2.35, img: "img/amenities/props/parcel_sign.png" },
+    { id: "pharmacy", x: -33.8, y: 2.25, z: 2.4, img: "img/amenities/props/pharmacy_sign.png" },
+    { id: "charger", x: 2.0, y: 5.2, z: 2.2, img: "img/amenities/props/charger_sign.png" },
+    { id: "recycle", x: -1.2, y: 5.25, z: 2.2, img: "img/amenities/props/recycle_sign.png" }
   ];
   AP.SIGNS = SIGNS;
   AP._signImgs = {};

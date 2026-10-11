@@ -284,7 +284,7 @@
 
   // ========== 4) Hour itinerary chain (bus/shops soft links) ==========
   O.SOFT_POI = {
-    bus: { label: "公交站", scene: "street", xy: [-18, 3.5] },
+    bus: { label: "公交站", scene: "street", xy: [-20, 2.4] },
     store: { label: "24便利店", scene: "street", xy: [8, 2.5] },
     noodles: { label: "兰州牛肉面", scene: "street", xy: [68, 2.2] },
     tea: { label: "茶语奶茶", scene: "street", xy: [72, 2.2] },

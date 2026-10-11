@@ -1,0 +1,478 @@
+{
+ "id": "room_mt_plan_c",
+ "name": "Midtown方案C · 大客厅优先 ~50㎡ · 玻璃阳台",
+ "_doc": "Plan C ~50㎡: larger footprint living-first, twin sofa, bed mid-north, kitchen W, wide S glass balcony with washer+rack.",
+ "bounds": [
+  0.15,
+  0.15,
+  8.35,
+  6.35
+ ],
+ "ground": {
+  "origin": [
+   0,
+   0
+  ],
+  "chunk": 2,
+  "cols": 5,
+  "rows": 4,
+  "legend": {
+   "W": "g_wood:b",
+   "T": "g_tile",
+   "B": "g_terrazzo"
+  },
+  "data_south_to_north": [
+   "BBBWW",
+   "WWWWW",
+   "WWWWT",
+   "WWTTT"
+  ]
+ },
+ "walls": [
+  {
+   "side": "N",
+   "line": 6.5,
+   "from": 0.0,
+   "to": 5.0,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "window",
+     "at": 2.0,
+     "interact": "window_in",
+     "id": "bed_win",
+     "reach": [
+      2.7,
+      5.2
+     ]
+    }
+   ]
+  },
+  {
+   "side": "N",
+   "line": 6.5,
+   "from": 5.0,
+   "to": 8.5,
+   "finish": "tile"
+  },
+  {
+   "side": "E",
+   "line": 8.5,
+   "from": 0.0,
+   "to": 4.0,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "door",
+     "at": 1.0,
+     "id": "room_door",
+     "interact": "portal",
+     "to": "mt_jx_1f",
+     "spawn": [
+      3.5,
+      1.2,
+      "N"
+     ],
+     "label": "回走廊",
+     "block": false
+    }
+   ]
+  },
+  {
+   "side": "E",
+   "line": 8.5,
+   "from": 4.0,
+   "to": 6.5,
+   "finish": "tile"
+  },
+  {
+   "side": "S",
+   "line": 0.0,
+   "from": 0.0,
+   "to": 8.5,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "window",
+     "at": 2.5,
+     "interact": "window_in",
+     "id": "bay_win",
+     "reach": [
+      3.2,
+      0.55
+     ]
+    }
+   ]
+  },
+  {
+   "side": "W",
+   "line": 0.0,
+   "from": 0.0,
+   "to": 6.5,
+   "finish": "plain"
+  },
+  {
+   "side": "P",
+   "axis": "x",
+   "line": 4.0,
+   "from": 0.0,
+   "to": 5.0,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "door",
+     "at": 2.0,
+     "id": "bed_door",
+     "interact": "idoor",
+     "name": "卧室门",
+     "state": "open"
+    }
+   ]
+  },
+  {
+   "side": "P",
+   "axis": "x",
+   "line": 4.0,
+   "from": 5.0,
+   "to": 8.5,
+   "finish": "tile"
+  },
+  {
+   "side": "P",
+   "axis": "y",
+   "line": 5.0,
+   "from": 4.0,
+   "to": 6.5,
+   "finish": "tile",
+   "openings": [
+    {
+     "kind": "door",
+     "at": 4.2,
+     "id": "bath_door",
+     "interact": "idoor",
+     "name": "卫生间门",
+     "state": "closed"
+    }
+   ]
+  }
+ ],
+ "furniture": [
+  {
+   "type": "f_kitchen",
+   "x": 0.55,
+   "y": 1.4,
+   "rot": 2,
+   "state": "off",
+   "interact": "stove",
+   "id": "stove",
+   "reach": [
+    1.15,
+    1.4
+   ]
+  },
+  {
+   "type": "f_fridge",
+   "x": 0.55,
+   "y": 2.7,
+   "state": "closed",
+   "interact": "fridge",
+   "id": "fridge",
+   "reach": [
+    1.15,
+    2.7
+   ]
+  },
+  {
+   "type": "f_chair",
+   "x": 3.2,
+   "y": 1.7,
+   "rot": 6,
+   "id": "sofa",
+   "interact": "sit",
+   "reach": [
+    2.8,
+    1.7
+   ]
+  },
+  {
+   "type": "f_chair",
+   "x": 4.4,
+   "y": 1.7,
+   "rot": 6,
+   "id": "sofa2",
+   "interact": "sit",
+   "reach": [
+    4.0,
+    1.7
+   ]
+  },
+  {
+   "type": "f_table",
+   "x": 3.8,
+   "y": 2.6,
+   "id": "coffee",
+   "state": "empty",
+   "interact": "table"
+  },
+  {
+   "type": "f_shelf",
+   "x": 5.8,
+   "y": 2.8,
+   "id": "tv_stand",
+   "interact": "notice",
+   "note": "宽厅电视墙 · 方案C",
+   "reach": [
+    5.8,
+    2.4
+   ]
+  },
+  {
+   "type": "f_table",
+   "x": 6.8,
+   "y": 1.4,
+   "id": "dining"
+  },
+  {
+   "type": "f_stool",
+   "x": 6.8,
+   "y": 0.85,
+   "id": "dstool"
+  },
+  {
+   "type": "i_pendant",
+   "x": 3.8,
+   "y": 2.1,
+   "state": "off",
+   "interact": "light",
+   "id": "room_light",
+   "reach": [
+    3.8,
+    2.1
+   ]
+  },
+  {
+   "type": "f_bed",
+   "x": 2.0,
+   "y": 5.75,
+   "state": "made",
+   "interact": "bed",
+   "id": "bed",
+   "reach": [
+    [
+     1.5,
+     5.1
+    ],
+    [
+     2.5,
+     5.1
+    ]
+   ]
+  },
+  {
+   "type": "f_nightstand",
+   "x": 0.55,
+   "y": 5.75,
+   "state": "off",
+   "interact": "bedlamp",
+   "id": "nightstand",
+   "reach": [
+    1.0,
+    5.25
+   ]
+  },
+  {
+   "type": "f_wardrobe",
+   "x": 3.35,
+   "y": 5.8,
+   "rot": 6,
+   "state": "closed",
+   "interact": "wardrobe",
+   "id": "wardrobe",
+   "reach": [
+    3.35,
+    5.35
+   ]
+  },
+  {
+   "type": "f_desk",
+   "x": 1.1,
+   "y": 4.45,
+   "rot": 4,
+   "state": "off",
+   "interact": "pc",
+   "id": "desk",
+   "reach": [
+    2.2,
+    4.45
+   ]
+  },
+  {
+   "type": "f_chair",
+   "x": 1.95,
+   "y": 4.45,
+   "id": "desk_chair"
+  },
+  {
+   "type": "i_ac",
+   "x": 0.45,
+   "y": 5.2,
+   "z": 2.2,
+   "rot": 6,
+   "state": "off",
+   "interact": "ac",
+   "id": "ac",
+   "reach": [
+    1.05,
+    5.2
+   ]
+  },
+  {
+   "type": "f_toilet",
+   "x": 5.4,
+   "y": 5.9,
+   "id": "toilet",
+   "interact": "toilet",
+   "reach": [
+    5.4,
+    5.4
+   ]
+  },
+  {
+   "type": "f_basin",
+   "x": 7.4,
+   "y": 4.4,
+   "id": "basin",
+   "interact": "basin",
+   "reach": [
+    7.0,
+    4.8
+   ]
+  },
+  {
+   "type": "f_shower",
+   "x": 7.4,
+   "y": 5.9,
+   "state": "dry",
+   "interact": "shower",
+   "id": "shower",
+   "reach": [
+    7.0,
+    5.5
+   ]
+  },
+  {
+   "type": "i_balfront",
+   "x": 1.5,
+   "y": 0.05,
+   "state": "glass",
+   "id": "bay_glass_0",
+   "view": true,
+   "ghost": 0.5
+  },
+  {
+   "type": "i_balfront",
+   "x": 3.0,
+   "y": 0.05,
+   "state": "glass",
+   "id": "bay_glass_1",
+   "view": true,
+   "ghost": 0.5
+  },
+  {
+   "type": "i_balfront",
+   "x": 4.5,
+   "y": 0.05,
+   "state": "glass",
+   "id": "bay_glass_2",
+   "view": true,
+   "ghost": 0.5
+  },
+  {
+   "type": "i_dryrack",
+   "x": 0.75,
+   "y": 0.55,
+   "interact": "rack",
+   "id": "rack",
+   "reach": [
+    1.2,
+    0.95
+   ]
+  },
+  {
+   "type": "f_washer",
+   "x": 5.3,
+   "y": 0.6,
+   "state": "idle",
+   "interact": "washer",
+   "id": "washer",
+   "reach": [
+    5.3,
+    1.05
+   ]
+  },
+  {
+   "type": "i_notice",
+   "x": 6.5,
+   "y": 0.55,
+   "z": 1.15,
+   "interact": "notice",
+   "id": "bay_note",
+   "note": "方案C · 宽幅南向玻璃阳台：洗衣机+晾衣杆 · ~50㎡客厅优先",
+   "reach": [
+    6.5,
+    1.0
+   ]
+  }
+ ],
+ "spawn": [
+  7.6,
+  0.9,
+  "W"
+ ],
+ "colliders": [
+  {
+   "id": "bay_glass_col",
+   "rect": [
+    0.9,
+    -0.05,
+    5.4,
+    0.22
+   ]
+  }
+ ],
+ "laundry": [
+  {
+   "id": "bay_pole0",
+   "pts": [
+    0.5,
+    0.62,
+    3.6,
+    0.62
+   ],
+   "z": 2.0,
+   "rack": "balcony",
+   "max": 4,
+   "items": [],
+   "indoor": true,
+   "mine": true,
+   "half": 0
+  },
+  {
+   "id": "bay_pole1",
+   "pts": [
+    0.5,
+    0.78,
+    3.6,
+    0.78
+   ],
+   "z": 2.0,
+   "rack": "balcony",
+   "max": 4,
+   "items": [],
+   "indoor": true,
+   "mine": true,
+   "half": 1
+  }
+ ],
+ "plan": "C"
+}

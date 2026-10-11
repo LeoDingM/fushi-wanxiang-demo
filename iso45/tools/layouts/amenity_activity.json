@@ -1,0 +1,175 @@
+{
+ "id": "amenity_activity",
+ "name": "井槐社区活动中心·书屋",
+ "_doc": "Amenities-Infra: reading room / activity hall stub.",
+ "interior": true,
+ "bounds": [
+  0.15,
+  0.15,
+  8.85,
+  5.85
+ ],
+ "ground": {
+  "origin": [
+   0,
+   0
+  ],
+  "chunk": 2,
+  "cols": 5,
+  "rows": 3,
+  "legend": {
+   "T": "g_tile"
+  },
+  "data_south_to_north": [
+   "TTTTT",
+   "TTTTT",
+   "TTTTT"
+  ]
+ },
+ "walls": [
+  {
+   "side": "N",
+   "line": 6.0,
+   "from": 0,
+   "to": 9,
+   "finish": "tile",
+   "openings": [
+    {
+     "kind": "window",
+     "at": 2.0,
+     "interact": "window_in",
+     "id": "aw1",
+     "reach": [
+      2.8,
+      5.2
+     ]
+    },
+    {
+     "kind": "window",
+     "at": 6.0,
+     "interact": "window_in",
+     "id": "aw2",
+     "reach": [
+      6.8,
+      5.2
+     ]
+    }
+   ]
+  },
+  {
+   "side": "E",
+   "line": 9,
+   "from": 0,
+   "to": 6,
+   "finish": "tile",
+   "openings": [
+    {
+     "kind": "door",
+     "at": 1.5,
+     "id": "exit",
+     "interact": "portal",
+     "to": "street",
+     "spawn": [
+      4.0,
+      -6.5,
+      "N"
+     ],
+     "label": "出门",
+     "block": false,
+     "reach": [
+      8.3,
+      2.2
+     ]
+    }
+   ]
+  },
+  {
+   "side": "W",
+   "line": 0,
+   "from": 0,
+   "to": 6,
+   "finish": "tile",
+   "openings": []
+  },
+  {
+   "side": "S",
+   "line": 0,
+   "from": 0,
+   "to": 9,
+   "finish": "tile",
+   "openings": []
+  }
+ ],
+ "furniture": [
+  {
+   "type": "f_shelf",
+   "x": 1.5,
+   "y": 4.5,
+   "id": "book_a",
+   "interact": "amenity_book",
+   "name": "书架·文学"
+  },
+  {
+   "type": "f_shelf",
+   "x": 3.2,
+   "y": 4.5,
+   "id": "book_b",
+   "interact": "amenity_book",
+   "name": "书架·生活"
+  },
+  {
+   "type": "f_shelf",
+   "x": 5.0,
+   "y": 4.5,
+   "id": "book_c",
+   "interact": "amenity_book",
+   "name": "书架·社区报"
+  },
+  {
+   "type": "f_table",
+   "x": 2.5,
+   "y": 2.4,
+   "id": "read_table",
+   "interact": "amenity_read",
+   "name": "阅览桌"
+  },
+  {
+   "type": "f_chair",
+   "x": 1.6,
+   "y": 2.4,
+   "id": "read_ch1",
+   "interact": "amenity_read",
+   "name": "阅览椅"
+  },
+  {
+   "type": "f_chair",
+   "x": 3.4,
+   "y": 2.4,
+   "id": "read_ch2",
+   "interact": "amenity_read",
+   "name": "阅览椅"
+  },
+  {
+   "type": "s_counter",
+   "x": 7.2,
+   "y": 4.5,
+   "id": "act_desk",
+   "interact": "amenity_activity_desk",
+   "name": "活动报名台"
+  },
+  {
+   "type": "i_notice",
+   "x": 7.5,
+   "y": 5.5,
+   "z": 1.4,
+   "id": "act_notice",
+   "interact": "notice",
+   "note": "本周活动：周三晚书法 · 周六亲子绘本 · 书屋免费阅览，勿外带。"
+  }
+ ],
+ "spawn": [
+  7.5,
+  1.5,
+  "N"
+ ]
+}

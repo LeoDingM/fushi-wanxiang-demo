@@ -52,8 +52,8 @@ def shot(name, js, wait=0.7):
 
 # 1 — B12 faces clear sidewalk + asphalt (match ref-b12-open-road framing)
 shot("road1-b12-open.png", """
-SP.player.x=6.5; SP.player.y=2.2; SP.player.setDir('N');
-SP.cam.zoom=SP.cam.zt=0.95;
+SP.player.x=6.5; SP.player.y=1.4; SP.player.setDir('N');
+SP.cam.zoom=SP.cam.zt=0.92;
 """)
 
 # 2 — south strip: hospital/activity south of ROAD_Y (no walls on asphalt)
@@ -79,6 +79,18 @@ SP.cam.zoom=SP.cam.zt=0.75;
 shot("road5-b12-plate-road.png", """
 SP.player.x=1.5; SP.player.y=11.0; SP.player.setDir('S');
 SP.cam.zoom=SP.cam.zt=1.25;
+""")
+
+# 6 — gate + 井槐里 bus (below gate) + elev notice (east sidewalk)
+shot("roadfix-gate-bus-elev.png", """
+SP.player.x=-8.0; SP.player.y=2.6; SP.player.setDir('W');
+SP.cam.zoom=SP.cam.zt=1.05;
+""")
+
+# 7 — elev at east of 12号 (19.5,2.25) with gate in frame
+shot("roadfix-elev-east.png", """
+SP.player.x=14.0; SP.player.y=2.5; SP.player.setDir('E');
+SP.cam.zoom=SP.cam.zt=1.1;
 """)
 
 errs = [x for x in c.logs if x.get('method')=='Runtime.exceptionThrown']

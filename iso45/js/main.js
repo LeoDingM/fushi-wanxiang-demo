@@ -191,11 +191,13 @@
         if (!txt || txt === PLATE_B12 || /井槐里\s*12/.test(String(txt))) continue;
       }
       if (!txt) continue;
-      const p = W.local(o, 1.5, -0.1, 2.75), d = Math.hypot(player.x - p[0], player.y - p[1]); if (d > 14) continue;
+      // B12 street plate: longer range + full opacity (was fading to "ghost box" from south sidewalk)
+      const maxD = main ? 28 : 14;
+      const p = W.local(o, 1.5, -0.1, 2.75), d = Math.hypot(player.x - p[0], player.y - p[1]); if (d > maxD) continue;
       const X = Math.round((SP.sx(p[0], p[1]) - cx) * z), Y = Math.round((SP.sy(p[0], p[1], p[2]) - cy) * z);
       const k = Math.max(0.8, Math.min(1.6, z * 1.3)) * kk * (main ? 1.15 : 0.9);
       const w = Math.round(78 * k), h = Math.round(20 * k);
-      ctx.save(); ctx.globalAlpha = Math.min(1, (14 - d) / 4);
+      ctx.save(); ctx.globalAlpha = main ? 1 : Math.min(1, (14 - d) / 4);
       if (n > 0.2) { ctx.shadowColor = "rgba(160,200,255,0.9)"; ctx.shadowBlur = 10 * k * n; }
       ctx.fillStyle = n > 0.2 ? "#2f6fd0" : "#1d4f91"; ctx.fillRect(X - w / 2, Y - h, w, h); ctx.shadowBlur = 0;
       ctx.strokeStyle = "#e8eef8"; ctx.lineWidth = Math.max(1, k); ctx.strokeRect(X - w / 2 + 1.5 * k, Y - h + 1.5 * k, w - 3 * k, h - 3 * k);
@@ -207,6 +209,57 @@
         ctx.fillStyle = g; ctx.fillRect(lx - 18 * k, ly - 18 * k, 36 * k, 36 * k); ctx.globalCompositeOperation = "source-over";
         ctx.fillStyle = "#fff6dc"; ctx.fillRect(lx - 3 * k, ly - 1.5 * k, 6 * k, 3 * k);
       }
+      ctx.restore();
+    }
+  }
+  /** Civic role boards (派出所/卫生中心/消防站): camera-space, full opacity near — never washed by façade fade */
+  const CIVIC_BOARDS = [
+    { id: "civic_police_S1F_1_shop", label: "井槐里派出所", sub: "POLICE", color: "#1a4a9c", badge: "警" },
+    { id: "civic_hospital_S1F_1_shop", label: "井槐社区卫生中心", sub: "CLINIC", color: "#0a9a72", badge: "医" },
+    { id: "civic_fire_S1F_1_shop", label: "井槐消防站", sub: "FIRE STATION", color: "#c43c12", badge: "消", fire: true }
+  ];
+  function drawCivicSigns(z, cx, cy) {
+    if (W.interior || z < 0.35 || player.level === "roof") return;
+    const kk = canvas.width / Math.max(1, canvas.getBoundingClientRect().width || canvas.width);
+    const Wd = canvas.width, Hd = canvas.height;
+    const cand = [];
+    for (const s of CIVIC_BOARDS) {
+      const o = W.byId[s.id];
+      if (!o) continue;
+      const d = Math.hypot(player.x - o.x, player.y - o.y);
+      if (d > 28) continue;
+      let X = Math.round((SP.sx(o.x, o.y) - cx) * z);
+      let Y = Math.round((SP.sy(o.x, o.y, 4.6) - cy) * z) - Math.round(48 * z);  // lift into mid-frame
+      // clamp onto canvas so nearest role board is never culled off-screen
+      X = Math.max(80, Math.min(Wd - 80, X));
+      Y = Math.max(90, Math.min(Hd - 60, Y));
+      cand.push({ s, d, X, Y });
+    }
+    cand.sort((a, b) => a.d - b.d);
+    for (let i = 0; i < cand.length && i < 1; i++) {  // only nearest — avoid wrong role label
+      const { s, X, Y } = cand[i];
+      const k = Math.max(0.95, Math.min(1.85, z * 1.4)) * kk * (s.fire ? 1.25 : (i === 0 ? 1.15 : 0.95));
+      const tw = Math.round(Math.max(120, s.label.length * 13) * k);
+      const th = Math.round(24 * k);
+      ctx.save();
+      ctx.globalAlpha = i === 0 ? 1 : 0.9;
+      const br = Math.round(12 * k);
+      ctx.fillStyle = s.color;
+      ctx.beginPath(); ctx.arc(X - tw / 2 - br - 3 * k, Y - th / 2, br, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = "#fff"; ctx.font = `bold ${Math.round(12 * k)}px sans-serif`;
+      ctx.textAlign = "center"; ctx.textBaseline = "middle";
+      ctx.fillText(s.badge, X - tw / 2 - br - 3 * k, Y - th / 2);
+      ctx.textBaseline = "alphabetic";
+      ctx.fillStyle = s.color;
+      ctx.fillRect(X - tw / 2, Y - th, tw, th);
+      if (s.fire) { ctx.fillStyle = "#f0c040"; ctx.fillRect(X - tw / 2, Y, tw, Math.round(3.5 * k)); }
+      ctx.strokeStyle = "#fff"; ctx.lineWidth = Math.max(1.5, k * 1.2);
+      ctx.strokeRect(X - tw / 2 + k, Y - th + k, tw - 2 * k, th - 2 * k);
+      ctx.fillStyle = "#fff"; ctx.font = `bold ${Math.round(14 * k)}px sans-serif`;
+      ctx.fillText(s.label, X, Y - Math.round(6 * k));
+      ctx.font = `${Math.round(9 * k)}px sans-serif`;
+      ctx.globalAlpha = 0.95;
+      ctx.fillText(s.sub, X, Y + Math.round(13 * k));
       ctx.restore();
     }
   }
@@ -394,7 +447,7 @@
     SP.env.drawFog(ctx, canvas.width, canvas.height);
     SP.env.drawWeather(ctx, canvas.width, canvas.height, cam.x, cam.y, cam.zoom, st.lastDt || 1 / 60);
     if (st.debug) drawDebugText(list, pi);
-    drawStopSign(z, cx, cy); drawDoorPlates(z, cx, cy); drawAcFx(z, cx, cy);
+    drawStopSign(z, cx, cy); drawDoorPlates(z, cx, cy); drawCivicSigns(z, cx, cy); drawAcFx(z, cx, cy);
     if (SP.game) { SP.game.drawOverlay(ctx, canvas.width, canvas.height); SP.game.hud(); }
     hud();
   }

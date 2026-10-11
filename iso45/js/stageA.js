@@ -70,7 +70,7 @@
   A.spawnAt = function (key) {
     const map = {
       police: { to: "civic_police", street: [-36, -6.5, "N"] },
-      hospital: { to: "civic_hospital", street: [13, -6.5, "N"] },
+      hospital: { to: "civic_hospital", street: [-49, -6.5, "N"] },
       fire: { to: "civic_fire", street: [58, -6.5, "N"] },
       xin: { to: "stair_xin_1f", street: [82, 15.5, "N"] },
       home12: { to: "stair_1f", street: [1.5, 12, "N"] }
@@ -83,8 +83,8 @@
   // ---------- bus ----------
   A.busStops = [
     { id: "bus_stop", name: "井槐里", x: -20, y: 2.4 },
-    { id: "bus_stop_m", name: "卫生中心", x: 20.5, y: 1.0 },
-    { id: "bus_stop_e", name: "东街", x: 74.5, y: 1.0 }
+    { id: "bus_stop_m", name: "卫生中心", x: -46.0, y: 2.4 },
+    { id: "bus_stop_e", name: "东街", x: 74.5, y: 2.4 }
   ];
   A.busTimetable = function () {
     const mins = A.busRideMin(), names = A.busStops.map((s) => s.name);
@@ -584,14 +584,14 @@
         const places = [
           { name: "井槐里12号", x: 1.5, y: 12, mark: "住" },
           { name: "派出所", x: -36, y: -6.5, mark: "警" },
-          { name: "社区医院", x: 22, y: -6.5, mark: "医" },
+          { name: "社区医院", x: -49, y: -6.5, mark: "医" },
           { name: "消防站", x: 58, y: -6.5, mark: "消" },
           { name: "馨园公寓", x: 82, y: 15.5, mark: "租" },
           { name: "24便利店", x: 34, y: 6, mark: "" },
-          { name: "地铁井槐里站", x: 41.2, y: -8.2, mark: "轨" },
+          { name: "地铁井槐里站", x: 41.2, y: -12.2, mark: "轨" },
           { name: "公交·井槐里", x: -20, y: 2.4, mark: "公交" },
-          { name: "公交·卫生中心", x: 22, y: 1, mark: "公交" },
-          { name: "公交·东街", x: 74.5, y: 1, mark: "公交" }
+          { name: "公交·卫生中心", x: -46, y: 2.4, mark: "公交" },
+          { name: "公交·东街", x: 74.5, y: 2.4, mark: "公交" }
         ];
         const px = SP.player.x, py = SP.player.y;
         body = `<div class="pmap">${places.map((p) => {

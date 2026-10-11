@@ -1,0 +1,141 @@
+{
+ "id": "amenity_toilet",
+ "name": "井槐公厕 · 厕位",
+ "_doc": "Amenities-Infra: public toilet with simple stalls (not hospital).",
+ "interior": true,
+ "bounds": [
+  0.15,
+  0.15,
+  5.85,
+  4.85
+ ],
+ "ground": {
+  "origin": [
+   0,
+   0
+  ],
+  "chunk": 2,
+  "cols": 3,
+  "rows": 3,
+  "legend": {
+   "T": "g_tile"
+  },
+  "data_south_to_north": [
+   "TTT",
+   "TTT",
+   "TTT"
+  ]
+ },
+ "walls": [
+  {
+   "side": "N",
+   "line": 5.0,
+   "from": 0,
+   "to": 6,
+   "finish": "tile",
+   "openings": [
+    {
+     "kind": "window",
+     "at": 2.5,
+     "interact": "window_in",
+     "id": "tw1",
+     "reach": [
+      3.0,
+      4.2
+     ]
+    }
+   ]
+  },
+  {
+   "side": "E",
+   "line": 6,
+   "from": 0,
+   "to": 5,
+   "finish": "tile",
+   "openings": [
+    {
+     "kind": "door",
+     "at": 1.5,
+     "id": "exit",
+     "interact": "portal",
+     "to": "street",
+     "spawn": [
+      12.5,
+      -6.5,
+      "N"
+     ],
+     "label": "出门",
+     "block": false,
+     "reach": [
+      5.3,
+      2.2
+     ]
+    }
+   ]
+  },
+  {
+   "side": "W",
+   "line": 0,
+   "from": 0,
+   "to": 5,
+   "finish": "tile",
+   "openings": []
+  },
+  {
+   "side": "S",
+   "line": 0,
+   "from": 0,
+   "to": 6,
+   "finish": "tile",
+   "openings": []
+  }
+ ],
+ "furniture": [
+  {
+   "type": "f_toilet",
+   "x": 1.5,
+   "y": 3.5,
+   "id": "wc_a",
+   "interact": "amenity_wc",
+   "name": "厕位 A"
+  },
+  {
+   "type": "f_toilet",
+   "x": 3.5,
+   "y": 3.5,
+   "id": "wc_b",
+   "interact": "amenity_wc",
+   "name": "厕位 B"
+  },
+  {
+   "type": "f_toilet",
+   "x": 5.0,
+   "y": 3.5,
+   "id": "wc_c",
+   "interact": "amenity_wc",
+   "name": "厕位 C"
+  },
+  {
+   "type": "f_basin",
+   "x": 1.3,
+   "y": 1.5,
+   "id": "sink",
+   "interact": "basin",
+   "name": "洗手池"
+  },
+  {
+   "type": "i_notice",
+   "x": 4.2,
+   "y": 4.6,
+   "z": 1.3,
+   "id": "wc_notice",
+   "interact": "notice",
+   "note": "公厕须知：文明如厕 · 节约用水。厕位三间（示意）。"
+  }
+ ],
+ "spawn": [
+  4.8,
+  1.3,
+  "N"
+ ]
+}

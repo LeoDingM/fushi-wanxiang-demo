@@ -472,10 +472,10 @@
       { id: "xin", name: "馨园公寓", mark: "馨", x: 82, y: 15.5, cat: "住", walk: 18 },
       { id: "home12", name: "井槐里12号", mark: "12", x: 1.5, y: 12, cat: "住", walk: 3 },
       { id: "store", name: "24便利店", mark: "店", x: 48, y: -4, cat: "购", walk: 10 },
-      { id: "metro", name: "地铁·井槐里", mark: "轨", x: 38, y: -11, cat: "交", walk: 8 },
+      { id: "metro", name: "地铁·井槐里", mark: "轨", x: 41.2, y: -10.6, cat: "交", walk: 8 },
       { id: "bus_j", name: "公交·井槐里", mark: "公交", x: -20, y: 2.4, cat: "交", walk: 4, bus: true },
-      { id: "bus_h", name: "公交·卫生中心", mark: "公交", x: 22, y: 1, cat: "交", walk: 9, bus: true },
-      { id: "bus_e", name: "公交·东街", mark: "公交", x: 74.5, y: 1, cat: "交", walk: 16, bus: true },
+      { id: "bus_h", name: "公交·卫生中心", mark: "公交", x: -46, y: 2.4, cat: "交", walk: 9, bus: true },
+      { id: "bus_e", name: "公交·东街", mark: "公交", x: 74.5, y: 2.4, cat: "交", walk: 16, bus: true },
       { id: "police", name: "派出所", mark: "警", x: -36, y: -6.5, cat: "公", walk: 7 },
       { id: "hospital", name: "社区医院", mark: "医", x: 22, y: -6.5, cat: "公", walk: 9 },
       { id: "fire", name: "消防站", mark: "消", x: 58, y: -6.5, cat: "公", walk: 12 }

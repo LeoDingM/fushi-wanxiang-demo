@@ -1,0 +1,17 @@
+{
+  "assign_counts": {
+    "jx:A": 8,
+    "jx:D": 8,
+    "yj:B": 17,
+    "yj:C": 7,
+    "cn:C": 8,
+    "cn:D": 8,
+    "cn:A": 8,
+    "cn:B": 8
+  },
+  "rules": {
+    "jx": "A/D alternate by floor+slot",
+    "yj": "C if slot1 and floor>=6 else B",
+    "cn": "A,B,C,D rotate (fl+slot)%4"
+  }
+}

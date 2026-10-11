@@ -15,7 +15,7 @@
     court:   { x: 11.5, y: 30.8, label: "井槐里 · 运动场" },
     park:    { x: 4.5,  y: 31.5, label: "井槐社区小公园" },
     stadium: { x: 70.0, y: -28.0, label: "井槐社区体育场" },
-    clinic:  { x: 31.0, y: -19.0, label: "井槐社区诊所" },
+    clinic:  { x: 12.0, y: -19.0, label: "井槐社区诊所" },  // west of metro plaza (was 31 — occluded pavilion)
   };
 
   // ---------- art (img/amenities/) ----------
@@ -59,11 +59,11 @@
       interact: "amenity_park", name: "社区小公园 · 长椅"
     });
     // --- 社区诊所 exterior (gap east of 卫生中心) ---
-    const cx = 29.0, cy = -19.0, fg = "amenity_clinic";
+    const cx = P.clinic.x - 1.5, cy = P.clinic.y, fg = "amenity_clinic";  // follow POIS (12,-19), was hardcoded 29 occluding metro
     objs.push({ id: "am_clinic_S1F_0", type: "f_shop", x: cx, y: cy, state: "window", fade_group: fg });
     objs.push({
       id: "am_clinic_door", type: "f_shop", x: cx + 3.0, y: cy, state: "door", fade_group: fg,
-      interact: "civic", to: "amenity_clinic", spawn: [31.5, -6.5, "N"],
+      interact: "civic", to: "amenity_clinic", spawn: [12.0, -16.5, "N"],
       name: "井槐社区诊所", hours: ["08:00", "20:00"]
     });
     objs.push({ id: "am_clinic_S1F_2", type: "f_shop", x: cx + 6.0, y: cy, state: "window", fade_group: fg });
@@ -315,7 +315,7 @@
       court: [13.0, 16.8, "N"],
       park: [6.0, 27.2, "N"],
       stadium: [73.0, -24.8, "S"],
-      clinic: [31.5, -6.8, "S"],
+      clinic: [12.0, -16.5, "S"],
       clinic_in: null,
     };
     if (key === "clinic_in") {

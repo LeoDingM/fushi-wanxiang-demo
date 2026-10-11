@@ -395,6 +395,62 @@
     M._wrapRent = true;
   };
 
+
+  /** Street nameplates (f_shopsign atlas = 24便利店 — never use). Mirror civic_look. */
+  M.SIGNS = [
+    { key: "jx", label: "景秀苑", sub: "JINGXIU YUAN", color: "#5a6a8a", x: 110.0, y: 4.45, z: 2.55 },
+    { key: "yj", label: "云阶公馆", sub: "YUNJIE MANSION", color: "#3a6a9a", x: 124.0, y: 5.15, z: 2.55 },
+    { key: "cn", label: "城南一号", sub: "CHENGNAN NO.1", color: "#4a5a70", x: 138.5, y: 3.75, z: 2.55 },
+    { key: "seam", label: "往城南 →", sub: "TO MIDTOWN", color: "#6a5a40", x: 105.0, y: 1.5, z: 2.2 },
+  ];
+  M.drawSignLabels = function (ctx) {
+    if (!ctx || !SP.sx || !SP.world || SP.world.interior) return;
+    const z = (SP.cam && SP.cam.zoom) || 1;
+    if (z < 0.35) return;
+    for (const s of M.SIGNS) {
+      const X = SP.sx(s.x, s.y), Y = SP.sy(s.x, s.y, s.z || 2.5);
+      ctx.save();
+      ctx.globalAlpha = 0.92;
+      const tw = Math.max(72, s.label.length * 12);
+      ctx.fillStyle = s.color;
+      ctx.fillRect(X - tw / 2, Y - 14, tw, 18);
+      ctx.fillStyle = "#ffffff";
+      ctx.font = "bold 11px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText(s.label, X, Y - 1);
+      ctx.font = "8px sans-serif";
+      ctx.globalAlpha = 0.85;
+      ctx.fillText(s.sub, X, Y + 16);
+      ctx.restore();
+    }
+  };
+  M.wrapSignDraw = function () {
+    if (M._signHook) return;
+    M._signHook = true;
+    const draw = function () {
+      if (!SP.world || SP.world.interior) return;
+      const c = document.getElementById("c") || document.querySelector("canvas");
+      if (!c) return;
+      try { M.drawSignLabels(c.getContext("2d")); } catch (e) {}
+    };
+    SP.afterRender = SP.afterRender || [];
+    SP.afterRender.push(draw);
+    const iv = setInterval(function () {
+      const P = window.__proto;
+      if (P && P.render && !P._mtSign) {
+        const prev = P.render.bind(P);
+        P.render = function () {
+          const r = prev();
+          try { draw(); } catch (e) {}
+          return r;
+        };
+        P._mtSign = true;
+        clearInterval(iv);
+      }
+    }, 200);
+    setInterval(draw, 300);
+  };
+
   M.install = function () {
     if (M._in) return;
     M._in = true;
@@ -407,6 +463,7 @@
     M.wrapRentHooks();
     M.labelStreetDoors();
     M.syncFacadeOccupied();
+    M.wrapSignDraw();
     if (SP.midtownElev && SP.midtownElev.install) SP.midtownElev.install();
     setTimeout(function () {
       M.wireRent(); M.wrapUnits(); M.wrapHousing();

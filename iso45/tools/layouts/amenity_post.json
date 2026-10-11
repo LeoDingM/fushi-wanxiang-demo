@@ -1,0 +1,158 @@
+{
+ "id": "amenity_post",
+ "name": "井槐邮政·通讯营业厅",
+ "_doc": "Amenities-Infra: post + telecom counter (not bank clone).",
+ "interior": true,
+ "bounds": [
+  0.15,
+  0.15,
+  7.85,
+  5.35
+ ],
+ "ground": {
+  "origin": [
+   0,
+   0
+  ],
+  "chunk": 2,
+  "cols": 4,
+  "rows": 3,
+  "legend": {
+   "T": "g_tile"
+  },
+  "data_south_to_north": [
+   "TTTT",
+   "TTTT",
+   "TTTT"
+  ]
+ },
+ "walls": [
+  {
+   "side": "N",
+   "line": 5.5,
+   "from": 0,
+   "to": 8,
+   "finish": "tile",
+   "openings": [
+    {
+     "kind": "window",
+     "at": 1.5,
+     "interact": "window_in",
+     "id": "pw1",
+     "reach": [
+      2.2,
+      4.8
+     ]
+    },
+    {
+     "kind": "window",
+     "at": 5.0,
+     "interact": "window_in",
+     "id": "pw2",
+     "reach": [
+      5.8,
+      4.8
+     ]
+    }
+   ]
+  },
+  {
+   "side": "E",
+   "line": 8,
+   "from": 0,
+   "to": 5.5,
+   "finish": "tile",
+   "openings": [
+    {
+     "kind": "door",
+     "at": 1.2,
+     "id": "exit",
+     "interact": "portal",
+     "to": "street",
+     "spawn": [
+      -20.5,
+      -6.5,
+      "N"
+     ],
+     "label": "出门",
+     "block": false,
+     "reach": [
+      7.3,
+      2.0
+     ]
+    }
+   ]
+  },
+  {
+   "side": "W",
+   "line": 0,
+   "from": 0,
+   "to": 5.5,
+   "finish": "tile",
+   "openings": []
+  },
+  {
+   "side": "S",
+   "line": 0,
+   "from": 0,
+   "to": 8,
+   "finish": "tile",
+   "openings": []
+  }
+ ],
+ "furniture": [
+  {
+   "type": "s_counter",
+   "x": 2.2,
+   "y": 4.2,
+   "id": "post_mail",
+   "interact": "amenity_post_mail",
+   "name": "寄件窗口"
+  },
+  {
+   "type": "s_counter",
+   "x": 5.0,
+   "y": 4.2,
+   "id": "post_tel",
+   "interact": "amenity_post_tel",
+   "name": "通讯/话费台"
+  },
+  {
+   "type": "f_shelf",
+   "x": 1.2,
+   "y": 2.2,
+   "id": "post_shelf",
+   "name": "信封/纸箱架"
+  },
+  {
+   "type": "f_chair",
+   "x": 3.5,
+   "y": 2.0,
+   "id": "post_wait",
+   "interact": "amenity_post_wait",
+   "name": "等候椅"
+  },
+  {
+   "type": "f_chair",
+   "x": 4.8,
+   "y": 2.0,
+   "id": "post_wait2",
+   "interact": "amenity_post_wait",
+   "name": "等候椅"
+  },
+  {
+   "type": "i_notice",
+   "x": 6.6,
+   "y": 5.0,
+   "z": 1.4,
+   "id": "post_notice",
+   "interact": "notice",
+   "note": "邮政·通讯：寄件/取件 08:30–18:00 · 话费充值 · 简讯卡。大件请走驿站。"
+  }
+ ],
+ "spawn": [
+  6.5,
+  1.4,
+  "N"
+ ]
+}

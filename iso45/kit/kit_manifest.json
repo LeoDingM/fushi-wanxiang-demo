@@ -7312,7 +7312,7 @@
         0,
         1.75
       ],
-      "fadeable": true,
+      "fadeable": false,
       "geo": {
         "default": {
           "main": [
@@ -7366,7 +7366,7 @@
           ]
         ]
       },
-      "fadeable": true,
+      "fadeable": false,
       "rots": [
         0,
         6
@@ -7438,7 +7438,7 @@
           ]
         ]
       },
-      "fadeable": true,
+      "fadeable": false,
       "rots": [
         0,
         6
@@ -7491,7 +7491,7 @@
           0.27
         ]
       ],
-      "fadeable": true,
+      "fadeable": false,
       "sort_z": [
         0,
         2.82

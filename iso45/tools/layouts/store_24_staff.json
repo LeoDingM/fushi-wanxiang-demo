@@ -1,0 +1,127 @@
+{
+ "id": "store_24_staff",
+ "name": "邻里便利 24h · 员工室",
+ "_doc": "员工室 back room behind the store's E-wall staff door: lockers (换店服), schedule board + punch clock (排班 / 打卡), stool. Same room-layout system; built by tools/build_store.py into store45.js (window.STORE45.store_24_staff).",
+ "bounds": [
+  0.15,
+  0.15,
+  3.5,
+  3.0
+ ],
+ "ground": {
+  "origin": [
+   0,
+   0
+  ],
+  "chunk": 2,
+  "cols": 2,
+  "rows": 2,
+  "legend": {
+   "T": "g_tile"
+  },
+  "data_south_to_north": [
+   "TT",
+   "TT"
+  ]
+ },
+ "walls": [
+  {
+   "side": "N",
+   "line": 3.0,
+   "from": 0.0,
+   "to": 3.5,
+   "finish": "tile"
+  },
+  {
+   "side": "E",
+   "line": 3.5,
+   "from": 0.0,
+   "to": 3.0,
+   "finish": "tile"
+  },
+  {
+   "side": "S",
+   "line": 0.0,
+   "from": 0.0,
+   "to": 3.5,
+   "finish": "tile"
+  },
+  {
+   "side": "W",
+   "line": 0.0,
+   "from": 0.0,
+   "to": 3.0,
+   "finish": "tile",
+   "openings": [
+    {
+     "kind": "gap",
+     "at": 1.0,
+     "w": 1.0
+    }
+   ]
+  }
+ ],
+ "furniture": [
+  {
+   "type": "st_locker",
+   "x": 1.95,
+   "y": 2.72,
+   "state": "closed",
+   "interact": "store_locker",
+   "id": "lockers",
+   "name": "更衣柜",
+   "reach": [
+    1.95,
+    2.05
+   ]
+  },
+  {
+   "type": "st_board",
+   "x": 3.38,
+   "y": 1.55,
+   "rot": 6,
+   "state": "default",
+   "interact": "store_board",
+   "id": "board",
+   "name": "排班表 · 打卡机",
+   "reach": [
+    2.75,
+    1.55
+   ]
+  },
+  {
+   "type": "f_stool",
+   "x": 0.75,
+   "y": 2.55
+  },
+  {
+   "type": "d_mat",
+   "x": 0.75,
+   "y": 1.5
+  }
+ ],
+ "portals": [
+  {
+   "id": "exit_store",
+   "rect": [
+    0.15,
+    1.05,
+    0.45,
+    1.95
+   ],
+   "dir": "W",
+   "to": "store_24",
+   "spawn": [
+    7.4,
+    5.4,
+    "W"
+   ],
+   "label": "回店里"
+  }
+ ],
+ "spawn": [
+  0.95,
+  1.5,
+  "E"
+ ]
+}

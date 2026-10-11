@@ -1,0 +1,14 @@
+{
+  "id": "room_mt_yj_302",
+  "name": "云阶公馆 3-02 · 方案B · 玻璃幕精装",
+  "building": "mt_yj",
+  "mt_floor": 3,
+  "mt_slot": 2,
+  "mt_plan": "B",
+  "spawn": [
+    6.2,
+    0.85,
+    "W"
+  ],
+  "nobj": 59
+}

@@ -1,0 +1,14 @@
+{
+  "id": "room_mt_jx_502",
+  "name": "景秀苑 5-02 · 方案D · 转型简装",
+  "building": "mt_jx",
+  "mt_floor": 5,
+  "mt_slot": 2,
+  "mt_plan": "D",
+  "spawn": [
+    6.2,
+    0.85,
+    "W"
+  ],
+  "nobj": 58
+}

@@ -105,7 +105,9 @@
   function ensureStreetMark() {
     const scene = window.SCENE || (SP.world && SP.world.data);
     if (!scene || !scene.objects) return;
-    if (scene.objects.some((o) => o.id === STREET_MARK)) return;
+    // chunk already has es_yunqi_gate — do not stack a second notice (ghost kiosk at mouth)
+    if (scene.objects.some((o) => o.id === STREET_MARK || o.id === "es_yunqi_gate")) return;
+    if (SP.world && SP.world.byId && SP.world.byId.es_yunqi_gate) return;
     scene.objects.push({
       id: STREET_MARK,
       type: "p_notice",

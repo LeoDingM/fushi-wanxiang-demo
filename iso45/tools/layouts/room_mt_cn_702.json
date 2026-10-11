@@ -1,0 +1,14 @@
+{
+  "id": "room_mt_cn_702",
+  "name": "城南一号 7-02 · 方案B · 高层塔配",
+  "building": "mt_cn",
+  "mt_floor": 7,
+  "mt_slot": 2,
+  "mt_plan": "B",
+  "spawn": [
+    6.2,
+    0.85,
+    "W"
+  ],
+  "nobj": 60
+}

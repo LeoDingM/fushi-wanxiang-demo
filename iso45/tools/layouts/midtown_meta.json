@@ -1,0 +1,35 @@
+{
+  "axis": "east",
+  "phase": "A5-plans",
+  "buildings": [
+    {
+      "key": "jx",
+      "name": "景秀苑",
+      "floors": 8,
+      "style": "transitional"
+    },
+    {
+      "key": "yj",
+      "name": "云阶公馆",
+      "floors": 12,
+      "style": "glass"
+    },
+    {
+      "key": "cn",
+      "name": "城南一号",
+      "floors": 16,
+      "style": "tower"
+    }
+  ],
+  "chunk_objects": 520,
+  "scenes": 144,
+  "units": 72,
+  "rent_featured": [
+    "mt-jx-101",
+    "mt-jx-502",
+    "mt-yj-601",
+    "mt-yj-1201",
+    "mt-cn-801",
+    "mt-cn-1601"
+  ]
+}

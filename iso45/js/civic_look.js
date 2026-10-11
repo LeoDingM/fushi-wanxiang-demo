@@ -47,9 +47,9 @@
 
   // ---------- 2) Modernize civic exteriors (runtime — glass shop GF already rebuilt; add sign overlays) ----------
   CL.SIGNS = [
-    { group: "civic_police", label: "井槐里派出所", sub: "POLICE STATION", color: "#1a4a9c", x: -36.0, y: -19.0, z: 2.55 },
-    { group: "civic_hospital", label: "井槐社区医院", sub: "COMMUNITY HOSPITAL", color: "#0d8a6a", x: 13.0, y: -19.0, z: 2.55 },
-    { group: "civic_fire", label: "井槐消防站", sub: "FIRE STATION", color: "#c43c12", x: 58.0, y: -19.0, z: 2.55 }
+    { group: "civic_police", label: "井槐里派出所", sub: "POLICE STATION", color: "#1a4a9c", x: -36.0, y: -19.0, z: 3.15, badge: "警" },
+    { group: "civic_hospital", label: "井槐社区卫生中心", sub: "COMMUNITY CLINIC", color: "#0d8a6a", x: -49.0, y: -19.0, z: 3.15, badge: "医" },
+    { group: "civic_fire", label: "井槐消防站", sub: "FIRE STATION", color: "#c43c12", x: 56.5, y: -19.0, z: 3.35, badge: "消", emphasize: true }
   ];
 
   CL.patchSceneData = function () {
@@ -59,15 +59,14 @@
     const map = {
       civic_police_S1F_1_shop: ["civic_police", "井槐里派出所", [-36.0, -6.5, "N"], ["09:00", "17:00"]],
       civic_police_S1F_1_door: ["civic_police", "井槐里派出所", [-36.0, -6.5, "N"], ["09:00", "17:00"]],
-      civic_hospital_S1F_1_shop: ["civic_hospital", "井槐社区卫生中心", [13.0, -6.5, "N"], ["08:00", "20:00"]],
-      civic_hospital_S1F_1_door: ["civic_hospital", "井槐社区卫生中心", [13.0, -6.5, "N"], ["08:00", "20:00"]],
+      civic_hospital_S1F_1_shop: ["civic_hospital", "井槐社区卫生中心", [-49.0, -6.5, "N"], ["08:00", "20:00"]],
+      civic_hospital_S1F_1_door: ["civic_hospital", "井槐社区卫生中心", [-49.0, -6.5, "N"], ["08:00", "20:00"]],
       civic_fire_S1F_1_shop: ["civic_fire", "井槐消防站", [58.0, -6.5, "N"], ["00:00", "24:00"]],
       civic_fire_S1F_1_door: ["civic_fire", "井槐消防站", [58.0, -6.5, "N"], ["00:00", "24:00"]],
       school_pri_S1F_1_shop: ["school_pri", "井槐社区小学", [68.0, -6.5, "N"], ["07:30", "17:30"]],
       school_mid_S1F_1_shop: ["school_mid", "井槐社区初中", [80.0, -6.5, "N"], ["07:30", "17:30"]],
       school_high_S1F_1_shop: ["school_high", "井槐社区高中", [92.0, -6.5, "N"], ["07:30", "17:30"]],
-      shop_barber_S1F_0_shop: ["shop_barber", "剪艺理发", [48.5, 5.2, "N"], ["10:00", "21:00"]]
-    };
+          };
     for (const o of data.objects) {
       const m = map[o.id];
       if (m) {
@@ -104,20 +103,68 @@
     if (!ctx || !SP.sx || !SP.world || SP.world.interior) return;
     const z = (SP.cam && SP.cam.zoom) || 1;
     if (z < 0.35) return;
+    const px = (SP.player && SP.player.x) || 0, py = (SP.player && SP.player.y) || 0;
     for (const s of CL.SIGNS) {
+      const dist = Math.hypot((s.x || 0) - px, (s.y || 0) - py);
+      if (dist > 42) continue;  // only local civic — avoid off-screen ghosts
       const X = SP.sx(s.x, s.y), Y = SP.sy(s.x, s.y, s.z || 2.5);
+      const big = !!s.emphasize || dist < 22;
+      const fs = big ? 14 : 12;
+      const tw = Math.max(big ? 110 : 88, s.label.length * (big ? 13 : 11) + 8);
+      const th = big ? 22 : 18;
       ctx.save();
-      ctx.globalAlpha = 0.92;
-      const tw = Math.max(72, s.label.length * 11);
+      ctx.globalAlpha = dist < 28 ? 0.96 : 0.88;
+      // role badge (警/医/消)
+      if (s.badge) {
+        const br = big ? 12 : 10;
+        ctx.fillStyle = s.color;
+        ctx.beginPath();
+        ctx.arc(X - tw / 2 - br - 4, Y - th / 2 + 2, br, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = "#ffffff";
+        ctx.font = "bold " + (big ? 12 : 10) + "px sans-serif";
+        ctx.textAlign = "center";
+        ctx.textBaseline = "middle";
+        ctx.fillText(s.badge, X - tw / 2 - br - 4, Y - th / 2 + 2);
+        ctx.textBaseline = "alphabetic";
+      }
       ctx.fillStyle = s.color;
-      ctx.fillRect(X - tw / 2, Y - 14, tw, 18);
+      ctx.fillRect(X - tw / 2, Y - th + 4, tw, th);
+      // fire: thin gold under-bar so it never reads as plain brick shop
+      if (s.group === "civic_fire") {
+        ctx.fillStyle = "#f0c040";
+        ctx.fillRect(X - tw / 2, Y + 4, tw, 3);
+      }
       ctx.fillStyle = "#ffffff";
-      ctx.font = "bold 11px sans-serif";
+      ctx.font = "bold " + fs + "px sans-serif";
       ctx.textAlign = "center";
-      ctx.fillText(s.label, X, Y - 1);
-      ctx.font = "8px sans-serif";
-      ctx.globalAlpha = 0.85;
+      ctx.fillText(s.label, X, Y - 2);
+      ctx.font = (big ? 9 : 8) + "px sans-serif";
+      ctx.globalAlpha = 0.9;
       ctx.fillText(s.sub, X, Y + 16);
+      ctx.restore();
+    }
+    // Live shop portals (chunk-loaded): guarantee 派出所/卫生中心/消防站 read even if SIGNS miss
+    const objs = SP.world.objects || [];
+    for (let i = 0; i < objs.length; i++) {
+      const o = objs[i];
+      if (!o || o.interact !== "civic" || !o.name) continue;
+      if (String(o.to || o.fade_group || "").indexOf("civic_") < 0 && String(o.id || "").indexOf("civic_") < 0) continue;
+      const dist = Math.hypot((o.x || 0) - px, (o.y || 0) - py);
+      if (dist > 36) continue;
+      const X = SP.sx(o.x, o.y), Y = SP.sy(o.x, o.y, 3.2);
+      const isFire = /消防/.test(o.name);
+      const col = isFire ? "#c43c12" : /卫生|医院/.test(o.name) ? "#0d8a6a" : "#1a4a9c";
+      const tw = Math.max(100, o.name.length * 13);
+      ctx.save();
+      ctx.globalAlpha = 0.95;
+      ctx.fillStyle = col;
+      ctx.fillRect(X - tw / 2, Y - 18, tw, 20);
+      if (isFire) { ctx.fillStyle = "#f0c040"; ctx.fillRect(X - tw / 2, Y + 2, tw, 3); }
+      ctx.fillStyle = "#fff";
+      ctx.font = "bold 13px sans-serif";
+      ctx.textAlign = "center";
+      ctx.fillText(o.name, X, Y - 3);
       ctx.restore();
     }
   };

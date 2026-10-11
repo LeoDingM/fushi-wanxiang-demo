@@ -1,0 +1,342 @@
+{
+ "id": "estate_lobby",
+ "name": "云栖里 · 现代大堂",
+ "_doc": "Tier-1 redo: plain walls, terrazzo, glass openings, LED on, stone counter, mail wall, elev glass door — no corkboard/stair.",
+ "bounds": [
+  0.2,
+  0.2,
+  9.8,
+  6.8
+ ],
+ "ground": {
+  "origin": [
+   0,
+   0
+  ],
+  "chunk": 2,
+  "cols": 5,
+  "rows": 4,
+  "legend": {
+   "T": "g_terrazzo"
+  },
+  "data_south_to_north": [
+   "TTTTT",
+   "TTTTT",
+   "TTTTT",
+   "TTTTT"
+  ]
+ },
+ "walls": [
+  {
+   "side": "N",
+   "line": 7.0,
+   "from": 0.0,
+   "to": 10.0,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "window",
+     "at": 1.5,
+     "interact": "window_in",
+     "id": "lob_w1",
+     "reach": [
+      2.25,
+      5.9
+     ]
+    },
+    {
+     "kind": "window",
+     "at": 4.5,
+     "interact": "window_in",
+     "id": "lob_w2",
+     "reach": [
+      5.25,
+      5.9
+     ]
+    },
+    {
+     "kind": "window",
+     "at": 7.5,
+     "interact": "window_in",
+     "id": "lob_w3",
+     "reach": [
+      8.25,
+      5.9
+     ]
+    }
+   ]
+  },
+  {
+   "side": "E",
+   "line": 10.0,
+   "from": 0.0,
+   "to": 7.0,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "gap",
+     "at": 0.0,
+     "w": 7.0
+    }
+   ]
+  },
+  {
+   "side": "S",
+   "line": 0.0,
+   "from": 0.0,
+   "to": 10.0,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "gap",
+     "at": 3.0,
+     "w": 4.0
+    }
+   ]
+  },
+  {
+   "side": "W",
+   "line": 0.0,
+   "from": 0.0,
+   "to": 7.0,
+   "finish": "plain",
+   "openings": [
+    {
+     "kind": "window",
+     "at": 2.0,
+     "interact": "window_in",
+     "id": "lob_ww1",
+     "reach": [
+      0.95,
+      2.75
+     ]
+    },
+    {
+     "kind": "gap",
+     "at": 4.5,
+     "w": 2.5
+    }
+   ]
+  }
+ ],
+ "furniture": [
+  {
+   "type": "s_counter",
+   "x": 3.8,
+   "y": 5.0,
+   "id": "reception",
+   "interact": "notice",
+   "note": "石材前台 · 云栖里物业 / 访客平板登记",
+   "reach": [
+    3.8,
+    4.35
+   ]
+  },
+  {
+   "type": "s_barstool",
+   "x": 2.4,
+   "y": 4.6,
+   "id": "recv_stool"
+  },
+  {
+   "type": "s_cooler",
+   "x": 5.8,
+   "y": 5.0,
+   "state": "full",
+   "id": "water",
+   "interact": "notice",
+   "note": "直饮水",
+   "reach": [
+    5.8,
+    4.4
+   ]
+  },
+  {
+   "type": "i_mailbox",
+   "x": 7.2,
+   "y": 5.8,
+   "id": "mail_wall",
+   "interact": "notice",
+   "note": "智能信报墙 · 扫码取件",
+   "reach": [
+    7.2,
+    5.15
+   ]
+  },
+  {
+   "type": "f_chair",
+   "x": 1.5,
+   "y": 2.0,
+   "rot": 2,
+   "id": "wait1",
+   "interact": "sit",
+   "reach": [
+    2.05,
+    2.0
+   ]
+  },
+  {
+   "type": "f_chair",
+   "x": 2.7,
+   "y": 2.0,
+   "rot": 2,
+   "id": "wait2",
+   "interact": "sit",
+   "reach": [
+    3.25,
+    2.0
+   ]
+  },
+  {
+   "type": "f_table",
+   "x": 2.1,
+   "y": 2.9,
+   "id": "wait_table"
+  },
+  {
+   "type": "p_planter",
+   "x": 0.9,
+   "y": 5.2,
+   "id": "plant1"
+  },
+  {
+   "type": "p_planter",
+   "x": 8.5,
+   "y": 1.3,
+   "id": "plant2"
+  },
+  {
+   "type": "p_planter",
+   "x": 0.9,
+   "y": 1.2,
+   "id": "plant3"
+  },
+  {
+   "type": "p_planter",
+   "x": 5.5,
+   "y": 1.2,
+   "id": "plant4"
+  },
+  {
+   "type": "i_track",
+   "x": 1.5,
+   "y": 6.5,
+   "z": 2.55,
+   "id": "led1"
+  },
+  {
+   "type": "i_track",
+   "x": 4.0,
+   "y": 6.5,
+   "z": 2.55,
+   "id": "led2"
+  },
+  {
+   "type": "i_track",
+   "x": 6.5,
+   "y": 6.5,
+   "z": 2.55,
+   "id": "led3"
+  },
+  {
+   "type": "i_track",
+   "x": 8.5,
+   "y": 6.5,
+   "z": 2.55,
+   "id": "led4"
+  },
+  {
+   "type": "i_pendant",
+   "x": 3.6,
+   "y": 3.2,
+   "state": "on",
+   "interact": "light",
+   "id": "lobby_led",
+   "reach": [
+    3.6,
+    3.2
+   ]
+  },
+  {
+   "type": "i_pendant",
+   "x": 7.0,
+   "y": 3.5,
+   "state": "on",
+   "interact": "light",
+   "id": "lobby_led2",
+   "reach": [
+    7.0,
+    3.5
+   ]
+  },
+  {
+   "type": "i_ac",
+   "x": 5.0,
+   "y": 6.55,
+   "z": 2.35,
+   "state": "off",
+   "interact": "ac",
+   "id": "lobby_ac",
+   "reach": [
+    5.0,
+    5.9
+   ]
+  },
+  {
+   "type": "d_mat",
+   "x": 4.5,
+   "y": 0.65,
+   "id": "entry_mat"
+  },
+  {
+   "type": "d_rug",
+   "x": 2.0,
+   "y": 2.2,
+   "id": "wait_rug"
+  },
+  {
+   "type": "i_door",
+   "x": 9.7,
+   "y": 1.8,
+   "state": "closed",
+   "interact": "portal",
+   "to": "room_midtown_a101",
+   "spawn": [
+    7.4,
+    2.4,
+    "W"
+   ],
+   "id": "unit_a101",
+   "label": "A-101",
+   "reach": [
+    9.0,
+    1.8
+   ],
+   "variant": "base"
+  }
+ ],
+ "portals": [
+  {
+   "id": "to_courtyard",
+   "rect": [
+    3.0,
+    0.2,
+    7.0,
+    0.95
+   ],
+   "to": "street",
+   "spawn": [
+    151.5,
+    14.2,
+    "S"
+   ],
+   "dir": "S",
+   "label": "玻璃门 · 庭院"
+  }
+ ],
+ "spawn": [
+  4.5,
+  1.4,
+  "N"
+ ]
+}

@@ -102,11 +102,10 @@
   // ---------- street exterior stubs (old block) ----------
   const STREET_STUBS = [
     // 菜市场 cluster west of 12号 (near shared bikes)
-    { id: "mkt_jhl_a", type: "p_stall", x: -13.8, y: 1.85, z: 0, rot: 0, state: "default", name: "青菜摊" },
-    { id: "mkt_jhl_gate", type: "p_stall", x: -11.6, y: 1.85, z: 0, rot: 0, state: "default", interact: "market", name: "井槐里菜市场", to: MKT },
-    { id: "mkt_jhl_b", type: "p_stall", x: -9.6, y: 1.9, z: 0, rot: 6, state: "default", name: "禽蛋摊" },
+    // Only interactable market gate on N curb — decorative a/b removed (were clipping tree_se/poles)
+    { id: "mkt_jhl_gate", type: "p_stall", x: 29.8, y: 2.55, z: 0, rot: 0, state: "default", interact: "market", name: "井槐里菜市场", to: MKT },
     // 小超市 stub east of community gate (still old-block; slide +55 for midtown)
-    { id: "smkt_jhl_gate", type: "p_stall", x: 15.2, y: 1.85, z: 0, rot: 0, state: "default", interact: "supermarket", name: "惠民小超市", to: SMKT },
+    { id: "smkt_jhl_gate", type: "p_stall", x: 43.5, y: 5.15, z: 0, rot: 0, state: "default", interact: "supermarket", name: "惠民小超市", to: SMKT },
   ];
   AM.streetStubs = STREET_STUBS;
 

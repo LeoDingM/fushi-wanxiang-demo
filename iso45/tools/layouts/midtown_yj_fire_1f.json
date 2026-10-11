@@ -1,0 +1,240 @@
+{
+  "format": "fushi-scene",
+  "version": 2,
+  "id": "mt_yj_fire_1f",
+  "name": "云阶公馆 · 消防通道 1F",
+  "interior": true,
+  "units": "m",
+  "grid_m": 0.5,
+  "floor": 1,
+  "building": "mt_yj",
+  "midtown": true,
+  "kind": "fire",
+  "objects": [
+    {
+      "id": "w0",
+      "type": "i_wall",
+      "x": 0.5,
+      "y": 4.0,
+      "z": 0,
+      "state": "dado"
+    },
+    {
+      "id": "w1",
+      "type": "i_wall",
+      "x": 1.5,
+      "y": 4.0,
+      "z": 0,
+      "state": "dado"
+    },
+    {
+      "id": "w2",
+      "type": "i_wall",
+      "x": 2.5,
+      "y": 4.0,
+      "z": 0,
+      "state": "dado"
+    },
+    {
+      "id": "w3",
+      "type": "i_wall",
+      "x": 3.5,
+      "y": 4.0,
+      "z": 0,
+      "state": "dado"
+    },
+    {
+      "id": "w4",
+      "type": "i_wall",
+      "x": 4.5,
+      "y": 4.0,
+      "z": 0,
+      "state": "dado"
+    },
+    {
+      "id": "w5",
+      "type": "i_wall",
+      "x": 5.5,
+      "y": 4.0,
+      "z": 0,
+      "state": "dado"
+    },
+    {
+      "id": "c0",
+      "type": "i_cut",
+      "x": 0.8,
+      "y": 0.2,
+      "z": 0
+    },
+    {
+      "id": "c1",
+      "type": "i_cut",
+      "x": 2.0,
+      "y": 0.2,
+      "z": 0
+    },
+    {
+      "id": "c2",
+      "type": "i_cut",
+      "x": 3.2,
+      "y": 0.2,
+      "z": 0
+    },
+    {
+      "id": "c3",
+      "type": "i_cut",
+      "x": 4.4,
+      "y": 0.2,
+      "z": 0
+    },
+    {
+      "id": "c4",
+      "type": "i_cut",
+      "x": 5.6,
+      "y": 0.2,
+      "z": 0
+    },
+    {
+      "id": "yj_fire_note_1",
+      "type": "i_notice",
+      "x": 2.0,
+      "y": 3.98,
+      "z": 1.1,
+      "interact": "notice",
+      "note": "云阶公馆 消防通道 1F · 保持畅通 · 禁止堆放杂物"
+    },
+    {
+      "id": "yj_fire_up_1",
+      "type": "i_flight",
+      "x": 3.2,
+      "y": 1.0,
+      "z": 0,
+      "state": "up",
+      "interact": "stairs",
+      "go": "up",
+      "to": "mt_yj_fire_2f",
+      "reach": [
+        3.5,
+        0.7
+      ]
+    },
+    {
+      "id": "yj_fire_back_1",
+      "type": "i_door",
+      "x": 0.6,
+      "y": 2.5,
+      "z": 0,
+      "state": "closed",
+      "interact": "portal",
+      "name": "回走廊",
+      "to": "mt_yj_1f",
+      "spawn": [
+        1.2,
+        2.2,
+        "E"
+      ],
+      "label": "回走廊",
+      "reach": [
+        1.2,
+        2.2
+      ]
+    },
+    {
+      "id": "yj_fire_exit",
+      "type": "i_door",
+      "x": 2.2,
+      "y": 0.3,
+      "z": 0,
+      "state": "open",
+      "interact": "portal",
+      "name": "紧急出口",
+      "to": "street",
+      "spawn": [
+        120.0,
+        4.0,
+        "S"
+      ],
+      "label": "紧急出口到街",
+      "reach": [
+        2.2,
+        0.9
+      ]
+    }
+  ],
+  "colliders": [],
+  "portals": [
+    {
+      "id": "up_2",
+      "rect": [
+        2.8,
+        0.5,
+        4.0,
+        1.0
+      ],
+      "dir": "N",
+      "to": "mt_yj_fire_2f",
+      "spawn": [
+        3.5,
+        0.4,
+        "S"
+      ],
+      "label": "消防上楼",
+      "go": "up"
+    },
+    {
+      "id": "exit_street_fire",
+      "rect": [
+        1.5,
+        0.15,
+        3.0,
+        0.5
+      ],
+      "dir": "S",
+      "to": "street",
+      "spawn": [
+        120.0,
+        4.0,
+        "S"
+      ],
+      "label": "紧急出口"
+    }
+  ],
+  "laundry": [],
+  "puddles": [],
+  "leaf_piles": [],
+  "wires": [],
+  "npcs": [],
+  "events": [],
+  "interactions": {},
+  "calendar": {},
+  "weather": {},
+  "repair_hours_scale": 1,
+  "bounds": {
+    "x0": 0.15,
+    "y0": 0.15,
+    "x1": 6.9,
+    "y1": 3.85
+  },
+  "ground": {
+    "origin": [
+      0,
+      0
+    ],
+    "chunk": 2,
+    "cols": 4,
+    "rows": 2,
+    "legend": {
+      "T": "g_terrazzo"
+    },
+    "data_south_to_north": [
+      "TTTT",
+      "TTTT"
+    ]
+  },
+  "spawn": [
+    2.5,
+    1.5,
+    "N"
+  ],
+  "bg_view": null
+}

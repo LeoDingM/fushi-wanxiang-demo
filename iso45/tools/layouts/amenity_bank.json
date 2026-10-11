@@ -1,0 +1,161 @@
+{
+ "id": "amenity_bank",
+ "name": "井槐银行 · 营业厅",
+ "_doc": "Amenities-Infra: small bank lobby + ATM (not full branch).",
+ "interior": true,
+ "bounds": [
+  0.15,
+  0.15,
+  7.85,
+  5.35
+ ],
+ "ground": {
+  "origin": [
+   0,
+   0
+  ],
+  "chunk": 2,
+  "cols": 4,
+  "rows": 3,
+  "legend": {
+   "T": "g_tile"
+  },
+  "data_south_to_north": [
+   "TTTT",
+   "TTTT",
+   "TTTT"
+  ]
+ },
+ "walls": [
+  {
+   "side": "N",
+   "line": 5.5,
+   "from": 0,
+   "to": 8,
+   "finish": "tile",
+   "openings": [
+    {
+     "kind": "window",
+     "at": 1.5,
+     "interact": "window_in",
+     "id": "bw1",
+     "reach": [
+      2.2,
+      4.8
+     ]
+    },
+    {
+     "kind": "window",
+     "at": 5.5,
+     "interact": "window_in",
+     "id": "bw2",
+     "reach": [
+      6.2,
+      4.8
+     ]
+    }
+   ]
+  },
+  {
+   "side": "E",
+   "line": 8,
+   "from": 0,
+   "to": 5.5,
+   "finish": "tile",
+   "openings": [
+    {
+     "kind": "door",
+     "at": 1.2,
+     "id": "exit",
+     "interact": "portal",
+     "to": "street",
+     "spawn": [
+      -8.5,
+      -6.5,
+      "N"
+     ],
+     "label": "出门",
+     "block": false,
+     "reach": [
+      7.3,
+      2.0
+     ]
+    }
+   ]
+  },
+  {
+   "side": "W",
+   "line": 0,
+   "from": 0,
+   "to": 5.5,
+   "finish": "tile",
+   "openings": []
+  },
+  {
+   "side": "S",
+   "line": 0,
+   "from": 0,
+   "to": 8,
+   "finish": "tile",
+   "openings": []
+  }
+ ],
+ "furniture": [
+  {
+   "type": "s_counter",
+   "x": 2.5,
+   "y": 4.2,
+   "id": "bank_desk",
+   "interact": "amenity_bank_desk",
+   "name": "综合柜面"
+  },
+  {
+   "type": "s_cooler",
+   "x": 5.5,
+   "y": 4.0,
+   "rot": 0,
+   "state": "empty",
+   "id": "bank_atm",
+   "interact": "amenity_atm",
+   "name": "ATM 取款机"
+  },
+  {
+   "type": "f_chair",
+   "x": 1.5,
+   "y": 2.0,
+   "id": "wait_a",
+   "interact": "amenity_bank_wait",
+   "name": "等候椅"
+  },
+  {
+   "type": "f_chair",
+   "x": 2.7,
+   "y": 2.0,
+   "id": "wait_b",
+   "interact": "amenity_bank_wait",
+   "name": "等候椅"
+  },
+  {
+   "type": "f_chair",
+   "x": 4.0,
+   "y": 2.0,
+   "id": "wait_c",
+   "interact": "amenity_bank_wait",
+   "name": "等候椅"
+  },
+  {
+   "type": "i_notice",
+   "x": 6.5,
+   "y": 5.0,
+   "z": 1.4,
+   "id": "bank_notice",
+   "interact": "notice",
+   "note": "井槐银行：个人业务 09:00–17:00 · ATM 24 小时。取款单笔限额 ¥2000（示意）。"
+  }
+ ],
+ "spawn": [
+  6.5,
+  1.4,
+  "N"
+ ]
+}

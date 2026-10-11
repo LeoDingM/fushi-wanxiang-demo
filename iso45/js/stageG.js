@@ -233,7 +233,7 @@
     civic_hospital: { label: "医院", spawn: "hospital" },
     civic_fire: { label: "消防站", spawn: "fire" },
     street: { label: "街道", scene: "street", xy: [1.5, 10] },
-    bus: { label: "公交站", scene: "street", xy: [-18, 3.5] },
+    bus: { label: "公交站", scene: "street", xy: [-20, 2.4] },
     gate: { label: "铁门门岗", scene: "street", xy: [-2, 11] }
   };
 

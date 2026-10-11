@@ -20,16 +20,16 @@
   }, AM.SLIDE_EAST || {});
 
   AI.POIS = {
-    bank:        { x: -10.0, y: -19.0, label: "井槐银行网点" },
-    toilet:      { x: 39.5,  y: -19.0, label: "公共卫生间" },
+    bank:        { x: -67.0, y: -19.0, label: "井槐银行网点" },
+    toilet:      { x: 18.5,  y: -19.0, label: "公共卫生间" },  // clear of metro pavilion plaza x36–48
     garage:      { x: 29.8,  y: 8.2,   label: "地下车库入口" },
-    dryclean:    { x: 42.0,  y: -19.0, label: "净衣坊·干洗" },
-    post:        { x: -22.0, y: -19.0, label: "井槐邮政·通讯" },
-    activity:    { x: 2.0,   y: -19.0, label: "社区活动中心·书屋" },
-    bike_repair: { x: -13.5, y: 2.2,   label: "路边修车摊" },
-    locksmith:   { x: -11.0, y: 2.35,  label: "修锁配钥匙" },
+    dryclean:    { x: 54.0,  y: -19.0, label: "净衣坊·干洗" },  // east of metro; was 42/−19 occluding pavilion
+    post:        { x: -34.0, y: -29.0, label: "井槐邮政·通讯" },
+    activity:    { x: 58.0,  y: -29.0, label: "社区活动中心·书屋" },
+    bike_repair: { x: -12.5, y: 5.15,  label: "路边修车摊" },
+    locksmith:   { x: -4.0,  y: 5.15,  label: "修锁配钥匙" },
     animal_rescue: { x: 7.8, y: 33.0, label: "爱心屋·流浪救助" },
-    elev_notice:   { x: 9.2,  y: 2.15, label: "电梯加装公示" }
+    elev_notice:   { x: 14.2, y: 5.25, label: "电梯加装公示" }
   };
 
   // ---------- art ----------
@@ -89,7 +89,7 @@
     objs.push({ id: "infra_bank_S1F_0w", type: "f_window", x: bx, y: by, state: "intact", fade_group: fg, night_lit: true, variant: "w2" });
     objs.push({
       id: "infra_bank_door", type: "f_shop", x: bx + 3, y: by, state: "door", fade_group: fg,
-      interact: "civic", to: "amenity_bank", spawn: [-8.5, -6.5, "N"],
+      interact: "civic", to: "amenity_bank", spawn: [-64.0, -6.5, "N"],
       name: "井槐银行", hours: ["09:00", "17:00"]
     });
     objs.push({ id: "infra_bank_S1F_2", type: "f_wall", x: bx + 6, y: by, state: "ground", fade_group: fg, variant: "base" });
@@ -113,7 +113,7 @@
     objs.push({ id: "infra_toilet_S1F_0", type: "f_shop", x: tx, y: ty, state: "window", fade_group: tfg });
     objs.push({
       id: "infra_toilet_door", type: "f_shop", x: tx + 3, y: ty, state: "door", fade_group: tfg,
-      interact: "civic", to: "amenity_toilet", spawn: [41.0, -6.5, "N"],
+      interact: "civic", to: "amenity_toilet", spawn: [18.5, -16.5, "N"],
       name: "公共卫生间", hours: ["06:00", "22:00"]
     });
     objs.push({ id: "infra_toilet_pipe", type: "f_pipe", x: tx + 5.85, y: ty, fade_group: tfg });
@@ -154,11 +154,11 @@
     objs.push({ id: "infra_post_S1F_0", type: "f_shop", x: px, y: py, state: "window", fade_group: pfg });
     objs.push({
       id: "infra_post_door", type: "f_shop", x: px + 3, y: py, state: "door", fade_group: pfg,
-      interact: "civic", to: "amenity_post", spawn: [-20.5, -6.5, "N"],
+      interact: "civic", to: "amenity_post", spawn: [-34.0, -20.5, "N"],
       name: "井槐邮政·通讯", hours: ["08:30", "18:00"]
     });
     objs.push({ id: "infra_post_S1F_2", type: "f_shop", x: px + 6, y: py, state: "window", fade_group: pfg });
-    objs.push({ id: "infra_post_sign", type: "f_shopsign", x: px + 3, y: py, z: 3.2, fade_group: pfg });
+    objs.push({ id: "infra_post_sign", type: "p_notice", x: px + 3, y: py, z: 0, fade_group: pfg, interact: "notice", name: "邮局", note: "井槐邮政所", reach: [px + 3, py + 0.6] });
     objs.push({ id: "infra_post_S2F_0", type: "f_wall", x: px, y: py, z: 3, state: "upper", fade_group: pfg, variant: "base" });
     objs.push({ id: "infra_post_S2F_0w", type: "f_window", x: px, y: py, z: 3, state: "intact", fade_group: pfg, night_lit: true });
     objs.push({ id: "infra_post_S2F_1", type: "f_wall", x: px + 3, y: py, z: 3, state: "upper", fade_group: pfg, variant: "base" });
@@ -174,7 +174,7 @@
     objs.push({ id: "infra_act_S1F_0w", type: "f_window", x: ax, y: ay, state: "intact", fade_group: afg, night_lit: true, variant: "w2" });
     objs.push({
       id: "infra_act_door", type: "f_door", x: ax + 3, y: ay, state: "closed", fade_group: afg,
-      interact: "civic", to: "amenity_activity", spawn: [4.0, -6.5, "N"],
+      interact: "civic", to: "amenity_activity", spawn: [58.0, -20.5, "N"],
       name: "社区活动中心·书屋", hours: ["09:00", "21:00"]
     });
     objs.push({ id: "infra_act_S1F_2", type: "f_wall", x: ax + 6, y: ay, state: "ground", fade_group: afg, variant: "w1" });
@@ -194,9 +194,9 @@
       id: "infra_bike_stall", type: "p_stall", x: P.bike_repair.x, y: P.bike_repair.y,
       interact: "amenity_bike_repair", name: "路边修车摊"
     });
-    objs.push({ id: "infra_bike_a", type: "p_bike", x: P.bike_repair.x - 1.4, y: P.bike_repair.y + 0.4, state: "parked" });
-    objs.push({ id: "infra_bike_b", type: "p_bike", x: P.bike_repair.x + 1.5, y: P.bike_repair.y - 0.2, state: "knocked" });
-    objs.push({ id: "infra_bike_bins", type: "p_bins", x: P.bike_repair.x + 2.4, y: P.bike_repair.y + 0.6 });
+    objs.push({ id: "infra_bike_a", type: "p_bike", x: P.bike_repair.x - 2.2, y: 5.35, state: "parked" });
+    objs.push({ id: "infra_bike_b", type: "p_bike", x: P.bike_repair.x + 2.3, y: 5.4, state: "knocked" });
+    objs.push({ id: "infra_bike_bins", type: "p_bins", x: P.bike_repair.x + 0.4, y: 5.55 });
     objs.push({
       id: "infra_lock_stall", type: "p_notice", x: P.locksmith.x, y: P.locksmith.y,
       interact: "amenity_locksmith", name: "修锁配钥匙"
@@ -215,25 +215,25 @@
       interact: "amenity_animal_bowl", name: "饮水/食盆" });
     objs.push({ id: "infra_animal_hedge", type: "p_hedge", x: P.animal_rescue.x - 2.0, y: P.animal_rescue.y + 1.3 });
 
-    // === 电梯加装公示: notice+post at 12号东侧北人行道 (board only, no facade) ===
+    // === 电梯加装公示: courtyard wall (14.2,5.25) — not sidewalk path center ===
     objs.push({ id: "infra_elev_post", type: "p_post", x: P.elev_notice.x - 0.9, y: P.elev_notice.y });
     objs.push({
       id: "infra_elev_board", type: "p_notice", x: P.elev_notice.x, y: P.elev_notice.y,
       interact: "amenity_elev_notice", name: "电梯加装公示",
       note: "井槐里12号电梯加装公示：业主表决通过 · 施工围挡预告 · 费用分摊方案见物业（示意）。异议期至本月末。"
     });
-    objs.push({ id: "infra_elev_pot", type: "p_planter", x: P.elev_notice.x + 1.4, y: P.elev_notice.y + 0.35 });
+    objs.push({ id: "infra_elev_pot", type: "p_planter", x: P.elev_notice.x - 3.0, y: 3.10 });
 
     return objs;
   };
 
   AI.streetColliders = function () {
     return [
-      { id: "infra_bank", rect: [-13.3, -19.3, -4.0, -10.0], _amenity: true, _infra: true },
-      { id: "infra_toilet", rect: [37.7, -19.3, 44.0, -13.0], _amenity: true, _infra: true },
-      { id: "infra_dry", rect: [40.2, -19.3, 48.5, -13.0], _amenity: true, _infra: true },
-      { id: "infra_post", rect: [-25.3, -19.3, -16.0, -10.0], _amenity: true, _infra: true },
-      { id: "infra_act", rect: [-1.3, -19.3, 8.0, -13.0], _amenity: true, _infra: true }
+      { id: "infra_bank", rect: [-70.3, -19.3, -61.0, -10.0], _amenity: true, _infra: true },
+      { id: "infra_toilet", rect: [15.5, -19.3, 24.0, -13.0], _amenity: true, _infra: true },
+      { id: "infra_dry", rect: [51.0, -19.3, 60.5, -13.0], _amenity: true, _infra: true },
+      { id: "infra_post", rect: [-37.3, -29.3, -28.0, -20.0], _amenity: true, _infra: true },
+      { id: "infra_act", rect: [54.7, -29.3, 64.0, -23.0], _amenity: true, _infra: true }
       // garage + stalls intentionally open (walkable)
     ];
   };
@@ -516,10 +516,10 @@
       dryclean: [48.0, -6.6, "S"],
       post: [-20.5, -6.6, "S"],
       activity: [4.0, -6.6, "S"],
-      bike_repair: [-13.5, 1.2, "N"],
-      locksmith: [-11.0, 1.2, "N"],
+      bike_repair: [-12.5, 4.6, "N"],
+      locksmith: [-4.0, 4.6, "N"],
       animal_rescue: [9.2, 27.8, "N"],
-      elev_notice: [19.5, 1.2, "N"]
+      elev_notice: [14.2, 4.6, "N"]
     };
     if (key === "bank_in" && SP.scenes.amenity_bank) {
       return SP.game.switchScene("amenity_bank", SP.scenes.amenity_bank.spawn);
@@ -546,15 +546,15 @@
   AI.listAdded = function () {
     return [
       { id: "bank", name: "银行网点（外立面+ATM取款）", where: "南街西段 ≈(−10,−10)", status: "enterable+atm" },
-      { id: "toilet", name: "公厕（可进厕位）", where: "南街中段 ≈(10,−10)", status: "enterable" },
+      { id: "toilet", name: "公共卫生间", where: "南带 ≈(18.5,−19) 避开地铁亭", status: "exterior" },
       { id: "garage", name: "地下车库入口坡道", where: "12号院东侧巷口 ≈(20,12)", status: "ramp_stub" },
-      { id: "dryclean", name: "干洗店外立面", where: "东街南侧 ≈(48,−10)", status: "exterior" },
+      { id: "dryclean", name: "干洗店外立面", where: "东街南侧 ≈(54,−19) 避开地铁亭", status: "exterior" },
       { id: "post", name: "邮政·通讯营业厅", where: "南街更西 ≈(−22,−10)", status: "enterable" },
       { id: "activity", name: "社区活动中心·书屋", where: "南街中西 ≈(2,−10)", status: "enterable" },
-      { id: "bike_repair", name: "路边修车摊", where: "北人行道西 ≈(−13.5,2.2)", status: "stall" },
-      { id: "locksmith", name: "修锁配钥匙点", where: "北人行道西 ≈(−11,2.3)", status: "stall" },
+      { id: "bike_repair", name: "路边修车摊", where: "北墙边 ≈(−12.5,5.15) 清开灯杆精灵/办公路线", status: "stall" },
+      { id: "locksmith", name: "修锁配钥匙点", where: "北墙边 ≈(−4,5.15) 不挡办公路线", status: "stall" },
       { id: "animal_rescue", name: "爱心屋·流浪救助", where: "小公园北侧 ≈(9.2,29)", status: "prop_stall" },
-      { id: "elev_notice", name: "电梯加装公示点", where: "12号东侧北人行道 ≈(19.5,2.3)", status: "notice_board" }
+      { id: "elev_notice", name: "电梯加装公示点", where: "院墙边 ≈(14.2,5.25) 不挡人行道中线", status: "notice_board" }
     ];
   };
 

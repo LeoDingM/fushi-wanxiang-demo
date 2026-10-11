@@ -105,7 +105,17 @@
 
     // ---------------------------------------------------------------- area build
     const P = (t) => MAN.pieces[t];
-    const fkey = (o, part) => `${o.type}/base/${part}/${o.state}/${o.rot || 0}`;
+    const fkey = (o, part) => {
+      const tryK = (st, r) => `${o.type}/base/${part}/${st}/${r}`;
+      let k = tryK(o.state, o.rot || 0); if (MAN.frames[k]) return k;
+      k = tryK(o.state, 0); if (MAN.frames[k]) return k;
+      const pcF = P(o.type);
+      if (pcF && pcF.states) for (const st of pcF.states) {
+        k = tryK(st, o.rot || 0); if (MAN.frames[k]) return k;
+        k = tryK(st, 0); if (MAN.frames[k]) return k;
+      }
+      return tryK(o.state, o.rot || 0);
+    };
     function boxOf(o, part, dx) {
       const g = ((P(o.type).geo || {})[o.state] || {})[part]; if (!g) return null;
       const xs = [], ys = [];
@@ -123,10 +133,60 @@
     }
     function frameRect(key, X, Y) { const f = MAN.frames[key]; if (!f) return null; const x0 = Math.round(X) - f[4], y0 = Math.round(Y) - f[5]; return [x0, y0, x0 + f[2], y0 + f[3]]; }
 
+
+
+    /** Depth down-stair matching kit art / Leo ref: dark well + beige treads + yellow nose + cheek rails. */
+    function drawDepthDown(g, o) {
+      const steps = 8, halfW = 1.5, run = 3.85;
+      const R = ((o.rot || 0) % 8) * Math.PI / 4;
+      const rp = (lx, ly) => {
+        const c = Math.cos(R), s = Math.sin(R);
+        return [o.x + lx * c - ly * s, o.y + lx * s + ly * c];
+      };
+      const quad = (pts, fill) => {
+        g.beginPath();
+        pts.forEach(([x, y, z], i) => { const X = sx(x, y), Y = sy(x, y, z || 0); i ? g.lineTo(X, Y) : g.moveTo(X, Y); });
+        g.closePath(); g.fillStyle = fill; g.fill();
+      };
+      // dark well apron (physical hole lip)
+      {
+        const a = rp(-halfW - 0.2, -0.08), b = rp(halfW + 0.2, -0.08);
+        const c2 = rp(halfW + 0.2, 0.12), d = rp(-halfW - 0.2, 0.12);
+        quad([[a[0], a[1], 0.03], [b[0], b[1], 0.03], [c2[0], c2[1], 0.03], [d[0], d[1], 0.03]], "#4a4e56");
+      }
+      // recessed dark pit under treads
+      {
+        const a = rp(-halfW, 0.1), b = rp(halfW, 0.1), c2 = rp(halfW, 0.1 + run), d = rp(-halfW, 0.1 + run);
+        quad([[a[0], a[1], -0.05], [b[0], b[1], -0.05], [c2[0], c2[1], -1.15], [d[0], d[1], -1.15]], "#2a2d34");
+      }
+      for (let i = 0; i < steps; i++) {
+        const t0 = i / steps, t1 = (i + 1) / steps;
+        const ya = 0.12 + run * t0, yb = 0.12 + run * t1;
+        const za = -0.14 * i, zb = -0.14 * (i + 1);
+        const A = rp(-halfW, ya), B = rp(halfW, ya), C = rp(halfW, yb), D = rp(-halfW, yb);
+        quad([[A[0], A[1], za], [B[0], B[1], za], [B[0], B[1], zb], [A[0], A[1], zb]], "#6e7380"); // riser
+        quad([[A[0], A[1], zb], [B[0], B[1], zb], [C[0], C[1], zb], [D[0], D[1], zb]], i % 2 ? "#c4b69a" : "#b9ab8e"); // tread
+        const n1 = rp(-halfW, ya + (yb - ya) * 0.18), n2 = rp(halfW, ya + (yb - ya) * 0.18);
+        quad([[A[0], A[1], zb + 0.01], [B[0], B[1], zb + 0.01], [n2[0], n2[1], zb + 0.01], [n1[0], n1[1], zb + 0.01]], "#e0c56a");
+      }
+      // cheek walls + top rail (kit-like)
+      for (const sx0 of [-halfW - 0.08, halfW + 0.05]) {
+        const a = rp(sx0, 0.12), b = rp(sx0, 0.12 + run * 0.98);
+        quad([[a[0], a[1], 0.95], [b[0], b[1], 0.05], [b[0] + 0.08, b[1], 0.05], [a[0] + 0.08, a[1], 0.95]], "#8a909a");
+        quad([[a[0], a[1], 1.05], [b[0], b[1], 0.2], [b[0] + 0.05, b[1], 0.2], [a[0] + 0.05, a[1], 1.05]], "#6aa8a0"); // teal handrail
+      }
+    }
+
     function buildArea(id) {
       const A = DATA.areas[id]; if (!A) throw new Error("metro: no area " + id);
       const W = { A, id, objs: [], byId: {}, statics: [], cols: [], gates: A.gates || [], psd: A.psd || [], signs: {} };
-      for (const o0 of A.objects) { const o = Object.assign({ rot: 0, state: "default" }, o0); W.objs.push(o); W.byId[o.id] = o; }
+      for (const o0 of A.objects) {
+        const o = Object.assign({ rot: 0 }, o0);
+        const pc0 = P(o.type);
+        if (!o.state || o.state === "default" || (pc0 && pc0.states && pc0.states.indexOf(o.state) < 0))
+          o.state = (pc0 && pc0.states && pc0.states[0]) || "default";
+        W.objs.push(o); W.byId[o.id] = o;
+      }
       W.cols = A.colliders.map((c) => c.rect);
       for (const sg of A.signs || []) (W.signs[sg.obj + "/" + (sg.part || "main")] = W.signs[sg.obj + "/" + (sg.part || "main")] || []).push(sg);
       // sorted drawables (static objects, all parts)
@@ -156,7 +216,10 @@
       const g = gc.getContext("2d"); g.translate(-X0 + 2, -Y0 + 2); g.imageSmoothingEnabled = false;
       for (const [x, y, s] of chunks) drawFrame(g, `mg_floor/base/main/${s}/0`, sx(x, y), sy(x, y, 0));
       for (const T of A.tracks || []) drawRails(g, T, A);
-      for (const o of lows) drawFrame(g, fkey(o, "main"), sx(o.x, o.y), sy(o.x, o.y, 0), 1, 0.5);
+      for (const o of lows) {
+        if (o.type === "mt_down") drawDepthDown(g, o);
+        else drawFrame(g, fkey(o, "main"), sx(o.x, o.y), sy(o.x, o.y, 0), 1, 0.5);
+      }
       const sc = document.createElement("canvas"); sc.width = gc.width; sc.height = gc.height; const sg = sc.getContext("2d"); sg.translate(-X0 + 2, -Y0 + 2);
       for (const d of W.statics) if (d.o && !/^mt_(psd|gate)/.test(d.o.type)) drawFrame(sg, fkey(d.o, d.part) + "#shadow", sx(d.o.x, d.o.y), sy(d.o.x, d.o.y, 0));
       g.setTransform(1, 0, 0, 1, 0, 0); g.globalAlpha = A.kind === "street" ? 0.34 : 0.26; g.drawImage(sc, 0, 0); g.globalAlpha = 1;
@@ -684,6 +747,7 @@
       }
       return rows;
     }
+
     function bagDrawable(out) {
       if (!S.bag) return; const o = S.bag.o, k = Math.min(1, S.bag.t / S.bag.dur), x = o.x - 1.15 + 2.3 * k, y = o.y, z = 0.78;
       const box = [x - 0.18, y - 0.12, z, x + 0.18, y + 0.12, z + 0.3], X = sx(x, y), Y = sy(x, y, z);
