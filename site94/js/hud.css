@@ -1,0 +1,254 @@
+/* 《浮世万象》PC HUD v2 (js/hud.js) — one design system for the desktop overlay.
+   Scoped to body.hud-pc (desktop, not ?shot=1, not ?hud=0); the phone / touch UI is untouched. */
+:root {
+  --hud-font: "Noto Sans CJK SC", "PingFang SC", "Microsoft YaHei", "Source Han Sans SC", system-ui, sans-serif;
+  --hud-bg: rgba(17, 21, 30, 0.72);
+  --hud-bg-strong: rgba(17, 21, 30, 0.9);
+  --hud-line: rgba(255, 255, 255, 0.10);
+  --hud-hi: rgba(255, 255, 255, 0.06);
+  --hud-hover: rgba(255, 255, 255, 0.11);
+  --hud-text: #f1f3f8;
+  --hud-sub: #aeb7c7;
+  --hud-dim: #7a8597;
+  --hud-accent: #f4c66f;
+  --hud-accent-bg: rgba(244, 198, 111, 0.16);
+  --hud-ok: #79d18e;
+  --hud-warn: #f2b849;
+  --hud-bad: #f06a5a;
+  --hud-r: 16px;
+  --hud-r-sm: 10px;
+  --hud-gap: 14px;
+  --hud-shadow: 0 10px 30px rgba(0, 0, 0, 0.30), 0 1px 3px rgba(0, 0, 0, 0.25);
+  --hud-blur: blur(16px) saturate(160%);
+  --hud-ease: cubic-bezier(.2, .8, .2, 1);
+}
+html body.hud-pc { overflow: hidden; background: #0e0f13; }
+html body.hud-pc #app { display: block; min-height: 0; }
+html body.hud-pc #bar { display: none !important; }
+#hud { display: none; }
+html body.hud-pc #hud { display: block; position: absolute; inset: 0; pointer-events: none; z-index: 8; font: 13px/1.45 var(--hud-font); color: var(--hud-text); -webkit-font-smoothing: antialiased; }
+html body.hud-pc #hud * { box-sizing: border-box; }
+html body.hud-pc #hud > *:not(#hud-tip):not(#hud-prompt) { zoom: var(--hud-zoom, 1); }
+.hud-panel { background: var(--hud-bg); border: 1px solid var(--hud-line); border-radius: var(--hud-r); box-shadow: var(--hud-shadow), inset 0 1px 0 rgba(255,255,255,.06);
+  -webkit-backdrop-filter: var(--hud-blur); backdrop-filter: var(--hud-blur); pointer-events: auto; }
+.hud-ico { display: inline-block; width: 18px; height: 18px; flex: none; background: currentColor; -webkit-mask: var(--ico) center / contain no-repeat; mask: var(--ico) center / contain no-repeat; }
+#hud button { font-family: var(--hud-font); }
+#hud kbd, #hud-help kbd { display: inline-block; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 6px; background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.16); border-bottom-width: 2px;
+  color: var(--hud-text); font: 600 12px/19px var(--hud-font); text-align: center; box-sizing: border-box; }
+@keyframes hudIn { from { opacity: 0; transform: translateY(6px) scale(.98); } to { opacity: 1; transform: none; } }
+@keyframes hudPulse { 0%, 100% { box-shadow: var(--hud-shadow), 0 0 0 0 rgba(240,106,90,0); } 50% { box-shadow: var(--hud-shadow), 0 0 0 4px rgba(240,106,90,.35); } }
+@keyframes hudPulseW { 0%, 100% { box-shadow: var(--hud-shadow), 0 0 0 0 rgba(242,184,73,0); } 50% { box-shadow: var(--hud-shadow), 0 0 0 4px rgba(242,184,73,.30); } }
+@keyframes hudDot { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.25); } }
+
+/* ---------- player card (top-left, collapsible) ---------- */
+#hud-player { position: absolute; left: var(--hud-gap); top: var(--hud-gap); width: 318px; padding: 10px 10px 10px 10px; transition: width .28s var(--hud-ease); }
+#hud-player[data-state="closed"] { width: 296px; }
+#hud-player[data-state="closed"][data-alert="critical"], #hud-player[data-state="closed"]:has(.hp-health.low) { animation: hudPulse 1.8s ease-in-out infinite; }
+#hud-player[data-state="closed"][data-alert="warn"] { animation: hudPulseW 2.4s ease-in-out infinite; }
+#hud-player .hp-strip { display: flex; align-items: center; gap: 11px; }
+#hud-player[data-state="closed"] .hp-strip { cursor: pointer; }
+#hud-player .hp-avatar { position: relative; width: 44px; height: 44px; border-radius: 50%; flex: none; display: grid; place-items: center; font-size: 19px; font-weight: 700; color: #2a2114;
+  background: radial-gradient(circle at 35% 30%, #ffe8b8, #e9ba69 60%, #b98a3e); box-shadow: 0 0 0 2px rgba(255,255,255,.18), 0 3px 10px rgba(0,0,0,.35); }
+#hud-player .hp-dot { position: absolute; right: -1px; top: -1px; width: 12px; height: 12px; border-radius: 50%; border: 2px solid #1b202b; background: var(--hud-warn); display: none; }
+#hud-player[data-alert="warn"] .hp-dot { display: block; }
+#hud-player[data-alert="critical"] .hp-dot { display: block; background: var(--hud-bad); animation: hudDot 1.2s ease-in-out infinite; }
+#hud-player .hp-mid { flex: 1; min-width: 0; }
+#hud-player .hp-name { display: flex; align-items: center; gap: 8px; }
+#hud-player .hp-name b { white-space: nowrap; font-size: 15px; font-weight: 700; letter-spacing: .02em; }
+#hud-player .hp-chip { display: inline-flex; align-items: center; gap: 4px; height: 22px; padding: 0 8px 0 6px; border-radius: 11px; background: rgba(255,255,255,.09); color: var(--hud-sub); font-size: 12px; white-space: nowrap; }
+#hud-player .hp-chip .hud-ico { width: 14px; height: 14px; }
+#hud-player .hp-health { display: flex; align-items: center; gap: 7px; margin-top: 6px; color: var(--hud-bad); }
+#hud-player .hp-health .hud-ico { width: 15px; height: 15px; }
+#hud-player .hp-health .bar { flex: 1; height: 7px; border-radius: 4px; background: rgba(255,255,255,.13); overflow: hidden; }
+#hud-player .hp-health .bar i { display: block; height: 100%; border-radius: 4px; background: linear-gradient(90deg, #ff917a, #ee5b57); transition: width .4s var(--hud-ease); }
+#hud-player .hp-health span { min-width: 26px; text-align: right; color: var(--hud-text); font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+#hud-player .hp-money { margin-left: auto; display: inline-flex; align-items: center; gap: 5px; height: 24px; padding: 0 9px 0 7px; border-radius: var(--hud-r-sm); background: var(--hud-accent-bg); color: var(--hud-accent); font-size: 14px; font-weight: 700; font-variant-numeric: tabular-nums; white-space: nowrap; }
+#hud-player .hp-money .hud-ico { width: 16px; height: 16px; }
+#hud-player .hp-toggle { width: 30px; height: 30px; flex: none; padding: 0; border: 0; border-radius: 9px; background: rgba(255,255,255,.07); color: var(--hud-sub); display: grid; place-items: center; cursor: pointer; transition: background .15s, color .15s; }
+#hud-player .hp-toggle:hover { background: var(--hud-hover); color: var(--hud-text); }
+#hud-player .hp-body { display: grid; grid-template-rows: 1fr; transition: grid-template-rows .3s var(--hud-ease), opacity .25s; }
+#hud-player[data-state="closed"] .hp-body { grid-template-rows: 0fr; opacity: 0; }
+#hud-player .hp-inner { overflow: hidden; min-height: 0; }
+#hud-player[data-state="open"] .hp-inner { padding-top: 12px; margin-top: 10px; border-top: 1px solid var(--hud-line); }
+#hud-player .hp-alert { margin-top: 10px; padding: 7px 10px; border-radius: var(--hud-r-sm); background: rgba(240,106,90,.16); color: #ffc7bd; font-size: 13px; }
+#hud-player .hp-alert:empty { display: none; }
+
+/* needs (#needs rendered by game.js, re-homed into the card; values annotated by hud.js) */
+html body.hud-pc #needs { position: static; display: grid; grid-template-columns: 1fr 1fr; gap: 10px 16px; max-width: none; text-shadow: none; font-size: 13px; pointer-events: auto; padding: 0 4px; }
+html body.hud-pc #needs .nd { display: grid; grid-template-columns: 22px 1fr 26px; align-items: center; gap: 7px; background: none; padding: 0; border-radius: 0; cursor: default; }
+html body.hud-pc #needs .nd em { display: none; }
+html body.hud-pc #needs .nd::before { content: ""; width: 22px; height: 22px; border-radius: 7px; background: rgba(255,255,255,.08); -webkit-mask: none; mask: none;
+  background-image: none; box-shadow: inset 0 0 0 1px rgba(255,255,255,.04); grid-column: 1; grid-row: 1; }
+html body.hud-pc #needs .nd u { grid-column: 2; grid-row: 1; width: auto; height: 7px; border-radius: 4px; background: rgba(255,255,255,.13); }
+html body.hud-pc #needs .nd b { border-radius: 4px; background: var(--hud-ok); transition: width .4s var(--hud-ease); }
+html body.hud-pc #needs .nd.warn b { background: var(--hud-warn); } html body.hud-pc #needs .nd.critical b { background: var(--hud-bad); }
+html body.hud-pc #needs .nd::after { content: attr(data-v); grid-column: 3; grid-row: 1; text-align: right; color: var(--hud-text); font-size: 13px; font-weight: 600; font-variant-numeric: tabular-nums; }
+html body.hud-pc #needs .nd.warn::after { color: var(--hud-warn); } html body.hud-pc #needs .nd.critical::after { color: var(--hud-bad); }
+html body.hud-pc #needs .nd { position: relative; }
+html body.hud-pc #needs .nd u::before { content: ""; position: absolute; left: 4px; top: 50%; width: 14px; height: 14px; margin-top: -7px; background: var(--hud-sub); -webkit-mask: var(--ico) center / contain no-repeat; mask: var(--ico) center / contain no-repeat; }
+html body.hud-pc #needs .nd.warn u::before { background: var(--hud-warn); } html body.hud-pc #needs .nd.critical u::before { background: var(--hud-bad); }
+html body.hud-pc #needs .money { display: none; }
+html body.hud-pc #needs .rent { grid-column: 1 / -1; display: flex; align-items: center; gap: 7px; height: 32px; margin-top: 2px; padding: 0 11px; border-radius: var(--hud-r-sm); background: var(--hud-hi); color: var(--hud-sub); font-size: 13px; white-space: nowrap; }
+html body.hud-pc #needs .rent::before { content: ""; width: 15px; height: 15px; flex: none; background: currentColor; -webkit-mask: var(--ico) center / contain no-repeat; mask: var(--ico) center / contain no-repeat; }
+html body.hud-pc #needs .cond { grid-column: 1 / -1; width: auto; text-align: left; color: #ffc7bd; font-size: 13px; }
+
+/* ---------- clock widget (top-right) ---------- */
+#hud-clock { position: absolute; right: var(--hud-gap); top: var(--hud-gap); width: 262px; padding: 12px 12px 10px; }
+#hud-clock .ck-top { display: flex; align-items: center; gap: 12px; }
+#hud-clock .ck-sky { width: 50px; height: 50px; border-radius: 14px; flex: none; display: grid; place-items: center; background: linear-gradient(160deg, #ffd98b, #f39a48); color: #fff8e6; box-shadow: inset 0 1px 0 rgba(255,255,255,.35); transition: background .6s; }
+#hud-clock[data-phase="dusk"] .ck-sky { background: linear-gradient(160deg, #f7a374, #a25a8c); }
+#hud-clock[data-phase="night"] .ck-sky { background: linear-gradient(160deg, #4a60a3, #1c2550); color: #e6ebff; }
+#hud-clock[data-phase="dawn"] .ck-sky { background: linear-gradient(160deg, #9fc3ef, #f3b17f); }
+#hud-clock .ck-sky .hud-ico { width: 26px; height: 26px; }
+#hud-clock .ck-main { min-width: 0; flex: 1; }
+#hud-clock .ck-tline { display: flex; align-items: baseline; gap: 8px; }
+#hud-clock .ck-time { font-size: 32px; line-height: 1; font-weight: 700; letter-spacing: .01em; font-variant-numeric: tabular-nums; }
+#hud-clock.paused .ck-time { color: var(--hud-sub); animation: hudBlink 1.6s ease-in-out infinite; }
+@keyframes hudBlink { 50% { opacity: .45; } }
+#hud-clock .ck-phase { color: var(--hud-sub); font-size: 13px; }
+#hud-clock .ck-date { display: flex; align-items: center; gap: 6px; margin-top: 6px; color: var(--hud-sub); font-size: 13px; white-space: nowrap; }
+#hud-clock .ck-date .hud-ico { width: 14px; height: 14px; }
+#hud-clock .ck-dayn { margin-left: auto; padding: 0 7px; height: 20px; line-height: 20px; border-radius: 10px; background: var(--hud-hi); font-size: 12px; color: var(--hud-sub); }
+#hud-clock .ck-row { display: flex; gap: 6px; margin-top: 10px; }
+#hud-clock .ck-pill { display: inline-flex; align-items: center; gap: 6px; height: 28px; padding: 0 10px 0 8px; border-radius: 14px; background: var(--hud-hi); color: var(--hud-text); font-size: 13px; white-space: nowrap; }
+#hud-clock .ck-pill .hud-ico { width: 16px; height: 16px; color: var(--hud-sub); }
+#hud-clock .ck-pill.tag { color: var(--hud-accent); background: var(--hud-accent-bg); }
+#hud-clock .ck-speed { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 8px; padding: 3px; border-radius: 12px; background: rgba(0,0,0,.22); }
+#hud-clock .ck-speed button { height: 30px; padding: 0; border: 0; border-radius: 9px; background: transparent; color: var(--hud-sub); font: 600 13px var(--hud-font); font-variant-numeric: tabular-nums; cursor: pointer; display: grid; place-items: center; transition: background .18s, color .18s; }
+#hud-clock .ck-speed button .hud-ico { width: 14px; height: 14px; }
+#hud-clock .ck-speed button:hover { background: var(--hud-hover); color: var(--hud-text); }
+#hud-clock .ck-speed button.on { background: rgba(255,255,255,.92); color: #1b2130; box-shadow: 0 2px 6px rgba(0,0,0,.25); }
+#hud-clock.paused .ck-speed button.on { background: var(--hud-accent); color: #2a2114; }
+#hud-clock .ck-ff { position: absolute; inset: 3px; display: grid; place-items: center; border-radius: 9px; background: rgba(120,170,255,.92); color: #fff; font-size: 12px; font-weight: 700; letter-spacing: .1em; pointer-events: none; }
+#hud-clock .ck-ff[hidden] { display: none; }
+
+/* ---------- action dock (bottom-right, collapsible) ---------- */
+#hud-dock { position: absolute; right: var(--hud-gap); bottom: var(--hud-gap); display: flex; align-items: center; gap: 2px; padding: 6px; border-radius: 22px; }
+#hud-dock > button, #hud-dock > details > summary { position: relative; width: 56px; height: 56px; min-height: 0 !important; padding: 0; margin: 0; border: 0; border-radius: 14px; background: transparent;
+  color: var(--hud-text); font-size: 0 !important; line-height: 0; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px; list-style: none;
+  transition: background .18s, color .18s, transform .15s, width .3s var(--hud-ease), opacity .22s, margin .3s var(--hud-ease); overflow: hidden; }
+#hud-dock > details { position: relative; }
+#hud-dock > details > summary::-webkit-details-marker { display: none; }
+#hud-dock > button:not(.dk-toggle)::before, #hud-dock > details > summary::before { content: ""; width: 24px; height: 24px; flex: none; background: currentColor; -webkit-mask: var(--ico) center / contain no-repeat; mask: var(--ico) center / contain no-repeat; }
+#hud-dock > button:not(.dk-toggle)::after, #hud-dock > details > summary::after { content: attr(data-label); font: 500 11px/1 var(--hud-font); color: var(--hud-sub); letter-spacing: .04em; white-space: nowrap; }
+#hud-dock > button:hover, #hud-dock > details > summary:hover { background: var(--hud-hover); }
+#hud-dock > button:active { transform: scale(.94); }
+#hud-dock > button.on, #hud-dock > details[open] > summary { background: var(--hud-accent-bg); color: var(--hud-accent); }
+#hud-dock > button.on::after, #hud-dock > details[open] > summary::after { color: var(--hud-accent); }
+#hud-dock > button.on::before { animation: none; }
+#hud-dock > button[disabled] { opacity: .38; cursor: default; }
+#hud-dock > button[hidden] { display: none; }
+#hud-dock .dk-sep { width: 1px; height: 30px; margin: 0 5px; background: var(--hud-line); flex: none; transition: width .3s var(--hud-ease), margin .3s var(--hud-ease), opacity .2s; }
+#hud-dock .dk-toggle { width: 52px; height: 52px; margin-left: 4px; border-radius: 50%; background: linear-gradient(160deg, #ffd78a, #e9ad54); color: #2a2114; display: grid; place-items: center; box-shadow: 0 4px 14px rgba(233,173,84,.35), inset 0 1px 0 rgba(255,255,255,.45); font-size: 0 !important; }
+#hud-dock .dk-toggle:hover { background: linear-gradient(160deg, #ffe09d, #f0b965); }
+#hud-dock .dk-toggle .hud-ico { width: 22px; height: 22px; transition: transform .3s var(--hud-ease); }
+#hud-dock[data-state="open"] .dk-toggle .hud-ico { transform: rotate(90deg); }
+#hud-dock[data-state="closed"] .dk-x { width: 0 !important; margin: 0 !important; opacity: 0; pointer-events: none; padding: 0; }
+#hud-dock[data-state="closed"] > details.dk-x > summary { width: 0 !important; }
+#hud-dock[data-state="closed"] .dk-sep.dk-x { width: 0; margin: 0; }
+/* 随身与互动 popover (#conflict-buttons lives inside the details) */
+html body.hud-pc #hud-dock #conflict-actions-menu #conflict-buttons { position: absolute !important; right: -8px; left: auto; bottom: calc(100% + 16px) !important; top: auto; z-index: 3; display: flex; flex-direction: column; flex-wrap: nowrap; gap: 2px; width: 210px; max-width: none; padding: 8px;
+  background: var(--hud-bg-strong); border: 1px solid var(--hud-line); border-radius: var(--hud-r); box-shadow: var(--hud-shadow); -webkit-backdrop-filter: var(--hud-blur); backdrop-filter: var(--hud-blur); animation: hudIn .18s var(--hud-ease); }
+html body.hud-pc #hud-dock #conflict-buttons::before { content: "随身与互动"; padding: 4px 10px 8px; color: var(--hud-dim); font-size: 12px; letter-spacing: .08em; }
+html body.hud-pc #hud-dock #conflict-buttons button { min-height: 38px; padding: 0 12px; text-align: left; border: 0; border-radius: 10px; background: transparent; color: var(--hud-text); font: 13px var(--hud-font); }
+html body.hud-pc #hud-dock #conflict-buttons button:hover { background: var(--hud-hover); }
+html body.hud-pc #hud-dock #conflict-buttons button[hidden] { display: none; }
+
+/* ---------- popovers: 更多 / 调试 ---------- */
+.hud-pop { position: absolute; z-index: 9; padding: 8px; background: var(--hud-bg-strong); }
+.hud-pop:not([hidden]) { animation: hudIn .2s var(--hud-ease); }
+.hud-pop[hidden] { display: none !important; }
+.pop-title { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 6px 6px 8px 10px; color: var(--hud-text); font-size: 14px; font-weight: 700; }
+.pop-x { width: 30px; height: 30px; border: 0; border-radius: 9px; background: transparent; color: var(--hud-sub); cursor: pointer; padding: 0; display: grid; place-items: center; transition: background .15s, color .15s; }
+.pop-x .hud-ico { width: 16px; height: 16px; }
+.pop-x:hover { background: var(--hud-hover); color: var(--hud-text); }
+.hud-pop .pop-sec { padding: 10px 10px 4px; color: var(--hud-dim); font-size: 12px; letter-spacing: .08em; }
+.hud-pop .pop-list { display: flex; flex-direction: column; gap: 1px; }
+.hud-pop .pop-list > button, .hud-pop .pop-grid > button { display: flex; align-items: center; gap: 11px; width: 100%; min-height: 40px !important; margin: 0 !important; padding: 0 10px; border: 0; border-radius: 10px; background: transparent;
+  color: var(--hud-text); font: 13px var(--hud-font); text-align: left; cursor: pointer; position: static !important; transition: background .15s; }
+.hud-pop .pop-list > button:hover, .hud-pop .pop-grid > button:hover { background: var(--hud-hover); }
+.hud-pop .pop-list > button[disabled] { opacity: .45; }
+.hud-pop .pop-list > button[hidden] { display: none; }
+.hud-pop .pop-list > button::before { content: ""; width: 20px; height: 20px; flex: none; margin: 0 2px 0 4px; background: var(--hud-sub); -webkit-mask: var(--ico) center / contain no-repeat; mask: var(--ico) center / contain no-repeat; }
+.hud-pop .pop-list > button:hover::before { background: var(--hud-text); }
+.hud-pop .pop-list > button[data-key]::after { content: attr(data-key); margin-left: auto; min-width: 22px; height: 22px; padding: 0 6px; border-radius: 6px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.14); border-bottom-width: 2px; color: var(--hud-text); font-size: 12px; font-weight: 600; line-height: 19px; text-align: center; box-sizing: border-box; }
+#hud-more { right: var(--hud-gap); bottom: 92px; width: 280px; max-height: calc(100vh / var(--hud-zoom, 1) - 270px); overflow-y: auto; }
+#hud-more .pop-list > button { min-height: 35px !important; }
+#hud-debug { right: var(--hud-gap); top: 222px; width: 312px; max-height: calc(100vh / var(--hud-zoom, 1) - 330px); overflow-y: auto; }
+#hud-debug .pop-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; padding: 0 2px; }
+#hud-debug .pop-grid > button { min-height: 38px !important; background: var(--hud-hi); justify-content: flex-start; }
+#hud-debug .pop-grid > button[data-key]::before { content: attr(data-key); min-width: 22px; height: 22px; padding: 0 5px; border-radius: 6px; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.14); border-bottom-width: 2px; color: var(--hud-text); font-size: 12px; font-weight: 600; line-height: 19px; text-align: center; box-sizing: border-box; }
+#hud-debug .pop-grid > button.wide { grid-column: 1 / -1; }
+#hud-debug #status { display: block; margin: 10px 2px 2px; padding: 8px 10px; border-radius: 10px; background: rgba(0,0,0,.28); color: var(--hud-sub); font: 12px/1.5 "Noto Sans Mono CJK SC", ui-monospace, monospace; opacity: 1; white-space: normal; word-break: break-all; }
+#hud-debug .pop-note { padding: 8px 6px 2px; color: var(--hud-dim); font-size: 12px; }
+
+/* ---------- tooltip ---------- */
+#hud-tip { position: absolute; left: 0; top: 0; z-index: 20; max-width: 280px; padding: 8px 11px; border-radius: 11px; background: var(--hud-bg-strong); border: 1px solid var(--hud-line); box-shadow: var(--hud-shadow);
+  color: var(--hud-text); font: 13px/1.4 var(--hud-font); pointer-events: none; opacity: 0; transform: translateY(4px); transition: opacity .14s, transform .14s var(--hud-ease); zoom: var(--hud-zoom, 1); visibility: hidden; }
+#hud-tip.on { opacity: 1; transform: none; visibility: visible; }
+#hud-tip.measure { visibility: hidden; display: block; transition: none; }
+#hud-tip .tp-h { display: flex; align-items: center; gap: 6px; font-weight: 600; white-space: nowrap; }
+#hud-tip .tp-h kbd { margin-left: 2px; }
+#hud-tip .tp-k { color: var(--hud-sub); font-weight: 400; font-size: 12px; }
+#hud-tip .tp-s { margin-top: 3px; color: var(--hud-sub); font-size: 12px; }
+
+/* ---------- contextual interaction prompt (above 李默) ---------- */
+#hud-prompt { position: absolute; left: 50%; top: 50%; z-index: 7; display: none; flex-direction: column; align-items: center; gap: 4px; transform: translate(-50%, -100%); pointer-events: none; zoom: var(--hud-zoom, 1);
+  transition: left .08s linear, top .08s linear; }
+#hud-prompt.on { display: flex; animation: hudIn .18s var(--hud-ease); }
+#hud-prompt.docked { left: 50% !important; top: auto !important; bottom: 26px; transform: translateX(-50%); }
+#hud-prompt .pr-row { display: flex; align-items: center; gap: 4px; padding: 5px 6px; border-radius: 14px; background: var(--hud-bg-strong); border: 1px solid var(--hud-line); box-shadow: var(--hud-shadow); -webkit-backdrop-filter: var(--hud-blur); backdrop-filter: var(--hud-blur); }
+#hud-prompt .pr-it { display: inline-flex; align-items: center; gap: 7px; padding: 0 8px 0 2px; color: var(--hud-text); font-size: 13px; font-weight: 500; white-space: nowrap; }
+#hud-prompt .pr-it + .pr-it { border-left: 1px solid var(--hud-line); padding-left: 8px; }
+#hud-prompt .pr-it kbd { background: var(--hud-accent); border-color: rgba(0,0,0,.15); color: #2a2114; }
+#hud-prompt .pr-ex { display: inline-flex; align-items: center; gap: 6px; padding: 3px 8px 3px 10px; border-radius: 11px; background: rgba(17,21,30,.75); color: var(--hud-sub); font-size: 12px; }
+#hud-prompt .pr-ex kbd { height: 19px; min-width: 19px; font-size: 11px; line-height: 16px; }
+#hud-prompt:not(.docked)::after { content: ""; width: 10px; height: 10px; margin-top: -9px; background: var(--hud-bg-strong); border-right: 1px solid var(--hud-line); border-bottom: 1px solid var(--hud-line); transform: rotate(45deg); order: 0; }
+#hud-prompt:not(.docked) .pr-ex { order: 1; margin-top: 2px; }
+html body.hud-pc #prompt { display: none !important; }
+
+/* ---------- 操作说明 overlay ---------- */
+#hud-help { position: fixed; inset: 0; z-index: 300; display: grid; place-items: center; background: rgba(8,10,14,.5); -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px); font: 13px/1.5 var(--hud-font); color: var(--hud-text); }
+#hud-help:not([hidden]) { animation: hudFade .2s ease-out; }
+#hud-help:not([hidden]) .hud-help { animation: hudIn .24s var(--hud-ease); }
+@keyframes hudFade { from { opacity: 0; } }
+#hud-help[hidden] { display: none; }
+#hud-help .hud-help { width: min(740px, calc(100vw - 48px)); max-height: calc(100vh / var(--hud-zoom, 1) - 48px); overflow-y: auto; padding: 16px 24px 14px; background: var(--hud-bg-strong); zoom: var(--hud-zoom, 1); }
+#hud-help .help-title { padding: 4px 0 2px; font-size: 19px; }
+#hud-help .help-sub { margin: 0 0 4px; color: var(--hud-sub); font-size: 13px; }
+#hud-help .help-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 0 30px; }
+#hud-help .help-cols h3 { grid-column: 1 / -1; margin: 12px 0 2px; color: var(--hud-accent); font-size: 12px; font-weight: 600; letter-spacing: .12em; }
+#hud-help .help-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 4px 0; border-bottom: 1px solid var(--hud-line); }
+#hud-help .help-row span:last-child { display: flex; gap: 4px; flex-wrap: wrap; justify-content: flex-end; }
+#hud-help .help-foot { margin-top: 10px; color: var(--hud-dim); font-size: 12px; }
+
+/* ---------- existing overlays re-skinned to the same language ---------- */
+html body.hud-pc #floorbadge { left: 50%; top: var(--hud-gap); transform: translateX(-50%); height: 34px; padding: 0 16px; border-radius: 17px; background: var(--hud-bg); border: 1px solid var(--hud-line);
+  -webkit-backdrop-filter: var(--hud-blur); backdrop-filter: var(--hud-blur); box-shadow: var(--hud-shadow); color: var(--hud-text); font: 600 13px/32px var(--hud-font); z-index: 8; zoom: var(--hud-zoom, 1); }
+html body.hud-pc #toast { top: 64px; padding: 9px 18px; border-radius: 20px; background: var(--hud-bg-strong); border: 1px solid var(--hud-line); box-shadow: var(--hud-shadow); color: var(--hud-text);
+  font: 500 13px/1.45 var(--hud-font); z-index: 9; max-width: 46vw; text-align: center; transition: opacity .25s ease; zoom: var(--hud-zoom, 1); -webkit-backdrop-filter: var(--hud-blur); backdrop-filter: var(--hud-blur); }
+html body.hud-pc #toast::before { content: ""; display: inline-block; width: 7px; height: 7px; margin: 0 9px 2px 0; border-radius: 50%; background: var(--hud-accent); vertical-align: middle; }
+html body.hud-pc #toast:empty { padding: 0; border: 0; }
+html body.hud-pc #toast:empty::before { display: none; }
+html body.hud-pc #paystack { top: 234px; right: var(--hud-gap); zoom: var(--hud-zoom, 1); }
+html body.hud-pc #paystack .pay { border-radius: 14px; box-shadow: var(--hud-shadow); font-family: var(--hud-font); }
+html body.hud-pc #storehud { top: 90px !important; left: var(--hud-gap) !important; border-radius: var(--hud-r-sm) !important; font-family: var(--hud-font) !important; zoom: var(--hud-zoom, 1); }
+html body.hud-pc #hud-player[data-state="open"] ~ #storehud { top: 280px !important; }
+html body.hud-pc #phone-waypoint { left: 50%; right: auto; top: 56px; transform: translateX(-50%); max-width: 560px; padding: 7px 16px; border-radius: 17px; background: var(--hud-bg); border: 1px solid var(--hud-line); color: var(--hud-text); font: 13px/1.5 var(--hud-font);
+  -webkit-backdrop-filter: var(--hud-blur); backdrop-filter: var(--hud-blur); box-shadow: var(--hud-shadow); z-index: 8; text-align: center; zoom: var(--hud-zoom, 1); }
+html body.hud-pc #log { left: var(--hud-gap); bottom: var(--hud-gap); border-radius: var(--hud-r-sm); background: var(--hud-bg-strong); }
+html body.hud-pc #amenu { bottom: 96px; padding: 8px; border-radius: var(--hud-r); background: var(--hud-bg-strong); border: 1px solid var(--hud-line); box-shadow: var(--hud-shadow); -webkit-backdrop-filter: var(--hud-blur); backdrop-filter: var(--hud-blur); font-family: var(--hud-font); min-width: 280px; zoom: var(--hud-zoom, 1); }
+html body.hud-pc #amenu:not(.hidden) { animation: hudIn .18s var(--hud-ease); }
+html body.hud-pc #amenu .t { color: var(--hud-text); font-size: 14px; padding: 4px 0 8px; }
+html body.hud-pc #amenu button { background: transparent; border: 0; border-radius: 10px; color: var(--hud-text); font: 13px var(--hud-font); min-height: 38px; }
+html body.hud-pc #amenu button:hover { background: var(--hud-hover); }
+html body.hud-pc #amenu button b { display: inline-block; min-width: 22px; height: 22px; margin-right: 9px; border-radius: 6px; background: var(--hud-accent); color: #2a2114; font-size: 12px; line-height: 22px; text-align: center; }
+html body.hud-pc #amenu button.x { color: var(--hud-sub); }
+html body.hud-pc #conflict-hud { display: none !important; }
+html body.hud-pc #progress-save-panel { top: 76px !important; border-radius: var(--hud-r) !important; border: 1px solid var(--hud-line) !important; background: var(--hud-bg-strong) !important; -webkit-backdrop-filter: var(--hud-blur); backdrop-filter: var(--hud-blur); font-family: var(--hud-font); box-shadow: var(--hud-shadow) !important; animation: hudIn .2s var(--hud-ease); }
+html body.hud-pc #progress-save-panel button { border-radius: 9px; background: rgba(255,255,255,.08); border: 1px solid var(--hud-line); color: var(--hud-text); min-height: 32px; font-family: var(--hud-font); }
+html body.hud-pc #progress-save-panel button:hover { background: var(--hud-hover); }
+html body.hud-pc #progress-save-panel textarea { border-radius: 9px !important; border-color: var(--hud-line) !important; background: rgba(0,0,0,.3) !important; }
+/* shared paper dialogs (js/panel_theme.css): keep the readable light paper, align header / font / radius with the HUD */
+html body.hud-pc { --panel-head: #1b2230; --panel-accent: #2f4b5e; }
+html body.hud-pc #housing-leases section, html body.hud-pc #dev-god section { border-radius: 18px; font-family: var(--hud-font); }
