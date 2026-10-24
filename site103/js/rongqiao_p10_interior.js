@@ -1,0 +1,44 @@
+/* P10 Slice 2：月河中心大堂。沿用场景切换（portal → switchScene）。
+ * 菜市场仍是唯一的无缝室内。上层门禁未开，没有样板层。名字未经Leo确认。 */
+(function (SP) {
+  'use strict';
+  const A = SP && SP.modernResidence;
+  if (!A || !A.opening || !SP.scenes || SP.rongqiaoP10Interior) return;
+  const STREET = [391, 159.2, 'S'];
+  const at = (id, type, x, y, more) => Object.assign({ id, type, x, y, z: 0, state: 'default' }, more);
+  const id = 'yh_lobby';
+  const w = 16, h = 8;
+  const s = {
+    format: 'fushi-scene', version: 2, id, name: '月河中心 · 首层大堂', interior: true, units: 'm', grid_m: 0.5,
+    bounds: { x0: 0, y0: 0, x1: w, y1: h }, spawn: [8.2, 1.55, 'N'],
+    objects: [], colliders: [], portals: [], laundry: [], puddles: [], leaf_piles: [], wires: [], npcs: [], events: {}, interactions: {},
+  };
+  s.ground = { origin: [0, 0], chunk: 1, cols: w, rows: h, legend: { T: 'g_terrazzo:default' }, data_south_to_north: Array(h).fill('T'.repeat(w)) };
+  s.colliders.push(
+    { id: id + '_edge_s', rect: [0, -0.3, w, 0.1] },
+    { id: id + '_edge_n', rect: [0, h - 0.1, w, h + 0.3] },
+    { id: id + '_edge_w', rect: [-0.3, 0, 0.1, h] },
+    { id: id + '_edge_e', rect: [w - 0.1, 0, w + 0.3, h] },
+  );
+  for (let x = 0; x < w; x++) {
+    s.objects.push(at(id + '_n_' + x, 'modern_intwall', x, h - 0.02, { state: 'plain' }));
+    s.objects.push(at(id + '_s_' + x, 'modern_intwall', x, 0, { state: 'cut' }));
+  }
+  for (let y = 0; y < h; y++) {
+    s.objects.push(at(id + '_w_' + y, 'modern_intwall', 0, y + 1, { rot: 6, state: 'cut' }));
+    s.objects.push(at(id + '_e_' + y, 'modern_intwall', w - 0.02, y + 1, { rot: 6, state: 'plain' }));
+  }
+  A.opening(s, 'south', 7.4, 8.6);
+  s.objects.push(at(id + '_exit', 'modern_intdoor', 7.4, 0.02, { state: 'closed', interact: 'portal', to: 'street', spawn: STREET, reach: [8.0, 1.15], label: '出门 · 回到河东大道（月河中心）', name: '出门' }));
+  s.portals.push({ id: id + '_walk', rect: [7.3, 0.15, 8.7, 0.7], dir: 'S', to: 'street', spawn: STREET, label: '出门 · 回到河东大道（月河中心）' });
+  s.objects.push(at(id + '_desk', 's_counter', 8.4, 4.0, { rot: 4, interact: 'notice', reach: [8.4, 3.2], name: '前台', note: '月河中心前台。访客在此登记。电梯和楼梯的上层门禁未开，这一批只有大堂。' }));
+  s.objects.push(at(id + '_sofa', 'modern_sofa', 3.2, 2.8, { name: '大堂沙发' }));
+  s.objects.push(at(id + '_chair', 'f_chair', 5.4, 2.6));
+  s.objects.push(at(id + '_pot', 'p_planter', 13.2, 2.2));
+  s.objects.push(at(id + '_dir', 'i_notice', 12.2, 4.6, { z: 1.15, interact: 'notice', reach: [12.2, 3.7], name: '大堂指南', note: '月河中心 · 1F 大堂。2F 及以上门禁未开。' }));
+  s.objects.push(at(id + '_lift', 'modern_lift', 3.8, 6.0, { state: 'closed', interact: 'notice', reach: [5.0, 5.1], name: '电梯', note: '电梯门禁未开。上层不在这一批。' }));
+  s.objects.push(at(id + '_lamp', 'i_pendant', 8.2, 3.0, { state: 'on' }));
+  s.objects.push(at(id + '_lamp2', 'i_pendant', 8.2, 5.4, { state: 'on' }));
+  SP.scenes[id] = s;
+  SP.rongqiaoP10Interior = { id, street: STREET.slice() };
+})(typeof window !== 'undefined' ? window.SP : globalThis.SP);
