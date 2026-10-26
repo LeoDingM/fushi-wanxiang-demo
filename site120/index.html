@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta name="robots" content="noindex,nofollow,noarchive,nosnippet,noimageindex">
+<meta name="referrer" content="same-origin">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>浮世万象 · 整合试玩版 I18</title>
+  <link rel="stylesheet" href="js/panel_theme.css" />
+  <link rel="stylesheet" href="js/hud.css" />
+  <!-- Modal input owner must precede phone / developer-tool capture handlers. -->
+
+
+  <style>
+    html, body { margin: 0; background: #0e0f13; color: #d8dbe4; font: 13px/1.5 "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif; }
+    #app { display: flex; flex-direction: column; align-items: center; min-height: 100vh; }
+    #bar { width: min(100vw, 177.7vh); display: flex; gap: 8px; align-items: center; padding: 6px 10px; box-sizing: border-box; flex-wrap: wrap; }
+    #bar b { color: #e8c88a; }
+    button { background: #23262f; color: #e6e8ee; border: 1px solid #3a3f4c; border-radius: 4px; padding: 3px 9px; font: inherit; cursor: pointer; }
+    button:hover { background: #2e3240; }
+    #wrap { position: relative; }
+    canvas { display: block; image-rendering: pixelated; width: min(100vw, calc((100vh - 70px) * 16 / 9)); height: auto; background: #17181d; }
+    #toast { position: absolute; left: 50%; top: 12px; transform: translateX(-50%); background: rgba(14,16,22,.8); padding: 4px 14px; border-radius: 4px; transition: opacity .3s; pointer-events: none; }
+    #prompt { position: absolute; left: 50%; bottom: 14px; transform: translateX(-50%); color: #ffe6a8; text-shadow: 0 1px 2px #000; pointer-events: none; }
+    #status { opacity: .8; margin-left: auto; }
+    body.shot #bar { display: none; } body.shot canvas { width: auto; } body.shot #app { align-items: flex-start; }
+
+    /* ---- phone / touch (js/mobile.js) ---- */
+    html, body { overscroll-behavior: none; -webkit-text-size-adjust: 100%; }
+    body.mobile { overflow: hidden; position: fixed; inset: 0; touch-action: none; -webkit-user-select: none; user-select: none; -webkit-touch-callout: none; }
+    body.mobile #bar { display: none; }
+    body.mobile #app { display: block; }
+    body.mobile canvas { touch-action: none; }
+    body.mobile #toast { top: 26%; font-size: 14px; max-width: 80vw; text-align: center; }
+    body.mobile #prompt { display: none; }
+    #touch { position: fixed; inset: 0; pointer-events: none; z-index: 10; font-family: inherit; }
+    body.kbd #touch { display: none; }
+    #joy-zone { position: absolute; left: 0; bottom: 0; width: 55vw; height: 55%; pointer-events: auto; touch-action: none; }
+    #joy-base { position: absolute; left: calc(22px + env(safe-area-inset-left, 0px)); bottom: calc(30px + env(safe-area-inset-bottom, 0px)); width: 132px; height: 132px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(201,166,107,0.10) 0%, rgba(18,22,30,0.45) 70%); border: 2px solid rgba(201,166,107,0.45); box-shadow: 0 4px 18px rgba(0,0,0,0.45); }
+    #joy-base.on { border-color: rgba(201,166,107,0.85); }
+    #joy-knob { position: absolute; left: 50%; top: 50%; width: 58px; height: 58px; margin: -29px 0 0 -29px; border-radius: 50%;
+      background: radial-gradient(circle at 40% 35%, #f0dcae, #c9a66b 60%, #8a6f42); box-shadow: 0 3px 10px rgba(0,0,0,0.5); opacity: 0.9; }
+    .tbtn { position: absolute; pointer-events: auto; touch-action: none; border-radius: 50%; background: rgba(18,22,30,0.62); color: #e8c88a; border: 2px solid rgba(201,166,107,0.6);
+      font-family: inherit; box-shadow: 0 4px 16px rgba(0,0,0,0.45); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0; }
+    .tbtn.down, .ebtn.down { background: rgba(201,166,107,0.35); transform: scale(0.94); }
+    #btn-act { right: calc(22px + env(safe-area-inset-right, 0px)); bottom: calc(38px + env(safe-area-inset-bottom, 0px)); width: 92px; height: 92px; font-size: 21px; font-weight: 600; letter-spacing: 0.08em; }
+    #btn-act.ready { border-color: #f0c674; color: #ffe1a0; box-shadow: 0 0 0 4px rgba(240,198,116,0.22), 0 4px 18px rgba(0,0,0,0.5); animation: actpulse 1.1s ease-in-out infinite; }
+    @keyframes actpulse { 50% { box-shadow: 0 0 0 9px rgba(240,198,116,0.10), 0 4px 18px rgba(0,0,0,0.5); } }
+    .tbtn.small { width: 54px; height: 54px; font-size: 18px; color: #8fd8d2; border-color: rgba(110,200,196,0.55); }
+    .tbtn.small i { font-style: normal; font-size: 10px; margin-top: 1px; color: #a9afbd; }
+    .tbtn.on { background: rgba(110,200,196,0.3); }
+    #btn-time { right: calc(130px + env(safe-area-inset-right, 0px)); bottom: calc(28px + env(safe-area-inset-bottom, 0px)); }
+    #btn-umb { right: calc(40px + env(safe-area-inset-right, 0px)); bottom: calc(146px + env(safe-area-inset-bottom, 0px)); }
+    #btn-cycle { right: calc(118px + env(safe-area-inset-right, 0px)); bottom: calc(176px + env(safe-area-inset-bottom, 0px)); border-color: #f0c674; color: #ffe1a0; }
+    body.landscape #btn-cycle { right: calc(92px + env(safe-area-inset-right, 0px)); bottom: 136px; width: 46px; height: 46px; }
+    #btn-kick { right: calc(128px + env(safe-area-inset-right, 0px)); bottom: calc(96px + env(safe-area-inset-bottom, 0px)); width: 62px; height: 62px; font-size: 17px; font-weight: 600; color: #ffb3a0; border-color: rgba(230,120,100,0.6); }
+    #btn-run { right: calc(206px + env(safe-area-inset-right, 0px)); bottom: calc(40px + env(safe-area-inset-bottom, 0px)); width: 54px; height: 54px; font-size: 16px; font-weight: 600; color: #a8e0ff; border-color: rgba(120,190,240,0.55); }
+    #btn-run.on { background: rgba(80,150,210,0.5); color: #fff; border-color: #9fd6ff; }
+    body.landscape #btn-run { right: calc(170px + env(safe-area-inset-right, 0px)); bottom: 14px; width: 48px; height: 48px; }
+    #btn-kick.ready { border-color: #ff9070; box-shadow: 0 0 0 3px rgba(255,140,110,0.22), 0 4px 16px rgba(0,0,0,0.45); }
+    body.landscape #btn-kick { right: calc(104px + env(safe-area-inset-right, 0px)); bottom: 72px; width: 54px; height: 54px; }
+    #log { position: absolute; left: 10px; bottom: 10px; margin: 0; max-width: 46%; padding: 6px 9px; background: rgba(12,14,20,0.72); color: #dfe6f2; font: 12px/1.45 monospace; white-space: pre-wrap; display: none; pointer-events: none; border-radius: 4px; }
+    body.mobile #log { bottom: auto; top: calc(96px + env(safe-area-inset-top, 0px)); left: 60px; max-width: 70vw; font-size: 11px; }
+    #evbar { position: absolute; right: calc(8px + env(safe-area-inset-right, 0px)); top: calc(48px + env(safe-area-inset-top, 0px)); display: flex; flex-direction: column; flex-wrap: wrap-reverse; max-height: calc(100% - 240px); align-content: flex-start; gap: 7px; pointer-events: none; }
+    .ebtn { pointer-events: auto; touch-action: none; min-width: 52px; height: 34px; border-radius: 17px; background: rgba(18,22,30,0.62); color: #e6e8ee; border: 1px solid rgba(201,166,107,0.5);
+      font: 13px/1 inherit; font-family: inherit; box-shadow: 0 2px 10px rgba(0,0,0,0.4); padding: 0 10px; }
+    body.landscape #joy-base { width: 116px; height: 116px; left: calc(16px + env(safe-area-inset-left, 0px)); bottom: 16px; }
+    body.landscape #btn-act { width: 80px; height: 80px; right: calc(16px + env(safe-area-inset-right, 0px)); bottom: 20px; font-size: 19px; }
+    body.landscape #btn-time { right: calc(106px + env(safe-area-inset-right, 0px)); bottom: 12px; width: 48px; height: 48px; }
+    body.landscape #btn-umb { right: calc(28px + env(safe-area-inset-right, 0px)); bottom: 110px; width: 48px; height: 48px; }
+    #zoombar { position: absolute; left: calc(10px + env(safe-area-inset-left, 0px)); top: calc(48px + env(safe-area-inset-top, 0px)); display: flex; flex-direction: column; gap: 8px; pointer-events: none; }
+    .zbtn { pointer-events: auto; width: 44px; height: 44px; border-radius: 22px; background: rgba(18,22,30,0.62); color: #f0dcae; border: 2px solid rgba(201,166,107,0.5);
+      font: 22px/1 inherit; font-family: inherit; padding: 0; box-shadow: 0 2px 10px rgba(0,0,0,0.4); }
+    .zbtn.down { background: rgba(201,166,107,0.45); }
+    body.landscape #zoombar { top: calc(10px + env(safe-area-inset-top, 0px)); flex-direction: row; }
+    body.landscape #evbar { top: calc(8px + env(safe-area-inset-top, 0px)); max-height: calc(100% - 150px); }
+    /* debug / event buttons live in a collapsible menu so the HUD + location title stay readable */
+    #evbar .ebtn:not(#ev-tog) { display: none; }
+    #evbar.open .ebtn:not(#ev-tog) { display: block; }
+    #ev-tog { min-width: 40px; }
+    /* ---------- needs HUD + action menu (Stage 3, from the front-view line) ---------- */
+    #needs { position: absolute; right: 10px; top: 10px; display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: center; justify-content: flex-end; max-width: 52%; pointer-events: none; font-size: 12px; text-shadow: 0 1px 2px #000; }
+    #needs .nd { display: inline-flex; align-items: center; gap: 3px; background: rgba(10,12,18,.62); padding: 1px 5px; border-radius: 4px; }
+    #needs .nd em { font-style: normal; font-size: 12px; }
+    #needs .nd u { display: inline-block; width: 46px; height: 6px; background: rgba(255,255,255,.14); border-radius: 3px; overflow: hidden; text-decoration: none; }
+    #needs .nd b { display: block; height: 100%; background: #8fd07a; }
+    #needs .nd.warn b { background: #e8b84a; } #needs .nd.critical b { background: #e05a48; }
+    #needs .money { background: rgba(10,12,18,.62); padding: 1px 6px; border-radius: 4px; color: #ffe08a; font-weight: bold; }
+    #needs .rent { background: rgba(10,12,18,.5); padding: 1px 6px; border-radius: 4px; color: #c8d0e0; font-size: 11px; }
+    #needs .cond { width: 100%; text-align: right; color: #ffb4a0; font-size: 11px; }
+    #amenu { position: absolute; left: 50%; bottom: 46px; transform: translateX(-50%); background: rgba(16,18,26,.94); border: 1px solid rgba(255,255,255,.18); border-radius: 10px; padding: 8px; display: flex; flex-direction: column; gap: 5px; min-width: 220px; z-index: 6; }
+    #amenu.hidden { display: none; }
+    body.touch #amenu { z-index: 40; bottom: auto; top: 50%; transform: translate(-50%, -50%); max-height: calc(100% - 12px); overflow-y: auto; }
+    body.touch.landscape #amenu:not(.hidden) { display: grid; grid-template-columns: 1fr 1fr; min-width: 380px; }
+    body.touch.landscape #amenu .t { grid-column: 1 / -1; }
+    body.touch.landscape #amenu button { padding-top: 6px; padding-bottom: 6px; }
+    #amenu .t { color: #e8c88a; font-weight: bold; text-align: center; }
+    #amenu button { text-align: left; padding: 6px 10px; font-size: 14px; border-radius: 6px; }
+    #amenu button b { color: #e8c88a; margin-right: 4px; } #amenu button i { color: #9fb4d8; font-style: normal; font-size: 12px; margin-left: 4px; }
+    #amenu button[disabled] { opacity: .5; } #amenu button.x { text-align: center; color: #aab; }
+    body.mobile #needs { right: auto; left: 8px; top: calc(env(safe-area-inset-top, 0px) + 74px); max-width: 96%; justify-content: flex-start; font-size: 11px; }
+    body.mobile #needs .nd u { width: 30px; }
+    body.mobile #needs .cond { text-align: left; }
+    body.mobile.landscape #needs { top: 46px; }
+    body.mobile:not(.landscape) #needs { left: calc(62px + env(safe-area-inset-left, 0px)); max-width: calc(100% - 120px); }   /* portrait: clear of the zoom column + ☰ menu */
+    body.mobile #amenu { bottom: calc(env(safe-area-inset-bottom, 0px) + 190px); min-width: 250px; }
+    body.mobile.landscape #amenu { bottom: 16px; }
+    body.mobile #amenu button { padding: 10px 12px; font-size: 15px; }
+    #floorbadge { position: absolute; left: 50%; top: 8px; transform: translateX(-50%); background: rgba(10,12,18,.62); color: #f0dcae; padding: 2px 10px; border-radius: 10px; font-size: 12px; pointer-events: none; }
+    #floorbadge:empty { display: none; }
+    /* WeChat / Alipay-style payment + message cards */
+    #paystack { position: absolute; right: 10px; top: 44px; display: flex; flex-direction: column; gap: 6px; z-index: 35; pointer-events: none; width: 230px; }
+    body.mobile #paystack { right: calc(env(safe-area-inset-right, 0px) + 52px); top: calc(env(safe-area-inset-top, 0px) + 8px); width: 200px; }
+    #paystack .pay { background: #fff; color: #1d1f24; border-radius: 10px; box-shadow: 0 4px 14px rgba(0,0,0,.35); overflow: hidden; font-size: 12px; transition: opacity .5s, transform .5s; }
+    #paystack .pay.out { opacity: 0; transform: translateY(-8px); }
+    #paystack .hd { display: flex; justify-content: space-between; padding: 5px 9px; color: #fff; font-weight: bold; background: #07c160; }
+    #paystack .pay.ali .hd { background: #1677ff; }
+    #paystack .pay.msg .hd { background: #2e3138; } #paystack .hd i { font-style: normal; opacity: .9; }
+    #paystack .amt { font-size: 20px; font-weight: bold; text-align: center; padding: 4px 0 0; }
+    #paystack .bd { padding: 4px 9px 7px; color: #555; text-align: center; }
+    #paystack .pay.msg .bd { text-align: left; color: #222; }
+    body:not(.mobile) #floorbadge { left: 10px; transform: none; }
+  </style>
+</head>
+<body>
+
+  <div id="app">
+    <div id="bar">
+      <b>浮世万象 · 45° 斜视原型</b>
+      <span>WASD 移动 · 默认：E 交互 · F 进出／上下车 · Q 攻击 · T 踢腿 · 手机→更多可改键</span>
+      <button data-ev="broken_window">1 破窗</button>
+      <button data-ev="fire">2 起火</button>
+      <button data-ev="crash">3 撞车</button>
+      <button data-ev="umbrella">U 伞</button>
+      <button data-ev="reset">0 重置</button>
+      <button data-ev="time">] 昼夜</button>
+      <button data-ev="debug">` 调试</button>
+      <button data-ev="zoomin">= 放大</button>
+      <button data-ev="zoomout">- 缩小</button>
+      <button data-ev="season">Y 季节</button>
+      <button data-ev="weather">R 天气</button>
+      <button data-ev="kick">T 踢</button>
+      <span id="status"></span>
+    </div>
+    <div id="wrap">
+      <canvas id="game" width="1280" height="720"></canvas>
+      <div id="toast"></div>
+      <div id="prompt"></div>
+      <pre id="log"></pre>
+      <div id="needs"></div>
+      <div id="floorbadge"></div>
+      <div id="paystack"></div>
+      <div id="amenu" class="hidden"></div>
+    </div>
+  </div>
+  <!-- classic scripts so file:// works (no fetch / modules): kit manifest + scene data are .js wrappers of the JSON files -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="play-461d3eb50930.js"></script></body>
+</html>
