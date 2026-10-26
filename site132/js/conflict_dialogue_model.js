@@ -1,0 +1,12 @@
+/* Dialogue is a record of claims, never an authority over world state. */
+(function(root){
+ 'use strict';
+ const starters={timid:['别过来！','救命啊！','你为什么打我？'],assertive:['你为什么踢我？','你疯了吗？','先把话说清楚！'],aggressive:['你动手是吧？','你完了！','你疯了吧！'],calm:['为什么攻击我？','先停一下。','我们无冤无仇吧？'],civic:['住手！','别再动手了！','这里有人打人！']};
+ const tails={timid:['我不想打架！','谁能帮帮我？','离我远一点！'],assertive:['你得说清楚！','我会报警的！','别以为没人看见！'],aggressive:['别再碰我！','你给我站住！','这事没完！'],calm:['有话好好说。','先保持距离。','我会找人来处理。'],civic:['请大家帮忙作证！','我会说明经过。','让警察来处理！']};
+ function reaction(p,weapon='kick',stage=p.mode){const type=starters[p.personality]?p.personality:'calm',n=(p.hits||0)+(stage==='flee'?3:stage==='fight'?5:0);let first=starters[type][n%3];if(weapon==='knife')first='把刀放下！';else if(weapon!=='kick')first=first.replace('踢','打');return first+tails[type][Math.floor(n/2)%3];}
+ function ensure(c){return c.dialogue||(c.dialogue={version:1,nextId:1,lines:[]});}
+ function append(c,{speaker,name,text,source='local',at}){if(typeof text!=='string'||!text.trim()||text.length>600||!Number.isFinite(at))return null;const d=ensure(c),line={id:d.nextId++,speaker:String(speaker),name:String(name).slice(0,60),text:text.trim(),source,at};d.lines.push(line);if(d.lines.length>120)d.lines.shift();return line;}
+ function localReplies(participants,claim){return participants.filter(p=>p.id!=='player').map(p=>({speaker:p.id,text:p.role==='police'?({admit:'你的陈述已记录。请对方说明受到什么伤害，以及有没有继续动手。',defense:'防卫是你的主张。请分别说清先后顺序，我们会核对目击材料。',accuse:'双方对谁先动手有争议。先别互相指责，把各自看到的经过说清楚。',dispute:'可以提出异议。对方的说法不等于已经查明的事实。'}[claim]||'请双方依次陈述，不要打断，也不要再动手。'):(p.personality==='timid'?'我被打时很害怕，我只想让这件事停下来。':p.personality==='aggressive'?'他先打我，我当然生气！但我会把自己后面做的事说清楚。':'我的说法是他先动手。请核对当时在场的人，不要只听一边。')}));}
+ function validate(d,at){if(!d)return true;if(d.version!==1||!Number.isSafeInteger(d.nextId)||d.nextId<1||!Array.isArray(d.lines)||d.lines.length>120)return false;let last=0;return d.lines.every(l=>{const ok=Number.isSafeInteger(l.id)&&l.id>last&&l.id<d.nextId&&typeof l.speaker==='string'&&l.speaker.length<100&&typeof l.name==='string'&&l.name.length<=60&&typeof l.text==='string'&&l.text.length>0&&l.text.length<=600&&['local','ai','player','rule'].includes(l.source)&&Number.isFinite(l.at)&&l.at>=0&&l.at<=at;last=l.id;return ok;});}
+ const api={reaction,ensure,append,localReplies,validate};root.ConflictDialogueModel=api;if(typeof module!=='undefined'&&module.exports)module.exports=api;
+})(typeof window!=='undefined'?window:globalThis);
