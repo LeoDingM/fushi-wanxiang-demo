@@ -28,6 +28,10 @@
     #status { opacity: .8; margin-left: auto; }
     #boot-status { position: fixed; left: 12px; bottom: 12px; z-index: 30; margin: 0; color: #d8dbe4; font: 13px/1.4 "PingFang SC", "Microsoft YaHei", sans-serif; pointer-events: none; text-shadow: 0 1px 2px #000; }
     #boot-status.done { display: none; }
+    #boot-bar { position: fixed; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 30; width: min(70vw, 360px); height: 8px; border-radius: 4px; background: rgba(255,255,255,.12); overflow: hidden; pointer-events: none; }
+    #boot-bar > i { display: block; height: 100%; width: 0; background: #e9c46a; transition: width .2s; }
+    #boot-bar.done { display: none; }
+    #boot-status.big { left: 50%; top: calc(50% + 14px); bottom: auto; transform: translateX(-50%); white-space: nowrap; }
     body.shot #bar { display: none; } body.shot canvas { width: auto; } body.shot #app { align-items: flex-start; }
 
     /* ---- phone / touch (js/mobile.js) ---- */
@@ -150,6 +154,7 @@
     </div>
     <div id="wrap">
       <canvas id="game" width="1280" height="720"></canvas>
+      <div id="boot-bar" aria-hidden="true"><i></i></div>
       <p id="boot-status" role="status">正在载入…</p>
       <div id="toast"></div>
       <div id="prompt"></div>
@@ -437,5 +442,34 @@
 
 
 
-<script src="play-e43f06891d96.js"></script></body>
+<script>window.__BOOT={"js":"play-c80b7a049ff6.js","jsBytes":4681737,"bootImg":579998,"img":{"east_services_emit.png":3402,"community_bus_stops_emit.png":115,"community_bus_stops_atlas.png":2925,"east_services_atlas.png":2536,"community_emit.png":5196,"community_atlas.png":6669,"kit_community_library/kit_emit.png":14535,"kit_community_library/kit_atlas.png":68346,"kit_modern_residential/kit_emit.png":7242,"kit_modern_residential/kit_atlas.png":136788,"kit/kit_snow.png":225633,"kit/kit_emit.png":17415,"kit/kit_atlas.png":335725,"kit_community_civic/kit_emit.png":23281,"kit_community_civic/kit_atlas.png":84829,"kit_int/kit_emit.png":14913,"kit_int/kit_atlas.png":119360,"kit_cbd_bus/bus.png":15093,"kit_cbd_bus/bus_emit.png":5300,"kit_modern_b/kit_emit.png":202,"kit_modern_b/kit_atlas.png":24254,"kit_cbd/kit_shadow.png":12128,"kit_cbd/kit_snow.png":24675,"kit_cbd/kit_emit.png":5169,"kit_cbd/kit_atlas.png":633566,"kit_metro/kit_emit.png":11229,"kit_metro/kit_atlas.png":108068,"kit_store/kit_emit.png":4597,"kit_store/kit_atlas.png":30418,"img/sprites-v2/v2a_sparrow.png":4552,"img/sprites-v2/v2a_grey_tabby.png":11308,"img/actors/rider_w.png":20459,"img/actors/li_mo_umb_w.png":54289,"img/actors/clerk_zhao.png":42113,"img/actors/uncle_w.png":39145,"img/actors/li_mo_bar.png":4172,"img/actors/office.png":49655,"img/actors/student.png":46203,"img/actors/vendor_w.png":63374,"img/actors/vendor.png":61650,"img/actors/student_w.png":47197,"img/actors/rider.png":19779,"img/actors/uncle.png":36804,"img/actors/clerk_zhou.png":43378,"img/actors/office_w.png":50593,"img/actors/li_mo_umb.png":53064,"img/actors/li_mo_w.png":95611,"img/actors/li_mo_home.png":7457,"img/actors/li_mo_uniform.png":48707,"img/actors/li_mo.png":92585,"img/npc-diversity/clerk_zhao.png":42113,"img/npc-diversity/man_sidepart.png":48356,"img/npc-diversity/fit_jacket.png":49600,"img/npc-diversity/woman_bob.png":42042,"img/npc-diversity/woman_pony.png":46874,"img/npc-diversity/woman_bun.png":40491,"img/npc-diversity/student_skirt.png":46237,"img/npc-diversity/man_grey.png":43614,"img/npc-diversity/nurse.png":42573,"img/npc-diversity/man_undercut.png":46822,"img/npc-diversity/firefighter.png":51585,"img/npc-diversity/woman_perm.png":42658,"img/npc-diversity/man_bald.png":38685,"img/npc-diversity/fit_hoodie.png":46159,"img/npc-diversity/police.png":47462,"img/npc-diversity/woman_long.png":42158,"img/npc-diversity/fit_work.png":49640,"img/npc-diversity/fit_shirt.png":49618,"img/npc-diversity/clerk_zhou.png":43378,"img/npc-diversity/student_long.png":46243,"img/npc-diversity/fit_knit.png":49600,"img/npc-diversity/man_buzz.png":42414,"img/npc-diversity/man_short.png":50493,"img/npc-diversity/woman_wave.png":45317,"img/npc-diversity/woman_braid.png":42712,"img/npc-diversity/office_skirt.png":49861,"img/npc-diversity/fit_manager.png":47215,"img/npc-diversity/woman_pixie.png":40949}};
+// Inlined by prepare.py (not bundled): shows a percentage + MB progress bar while the game bundle streams in.
+(function () {
+  var B = window.__BOOT, bar = document.getElementById("boot-bar"), st = document.getElementById("boot-status"), MB = 1048576;
+  if (st) st.classList.add("big");
+  window.__bootBar = function (f, got, all, label) {
+    f = Math.max(0, Math.min(1, f || 0));
+    if (bar && bar.firstChild) bar.firstChild.style.width = (f * 100).toFixed(1) + "%";
+    if (st && !st.classList.contains("done")) st.textContent = "正在载入 " + Math.round(f * 100) + "%" + (all ? " · " + (got / MB).toFixed(1) + " / " + (all / MB).toFixed(1) + " MB" : "") + (label ? " · " + label : "");
+  };
+  var all = B.jsBytes + B.bootImg, run = function (text) {
+    var s = document.createElement("script");
+    if (text == null) { s.src = B.js; document.body.appendChild(s); return; }
+    // the bundle was written to run while the page is still parsing (modules defer to DOMContentLoaded): replay that order
+    var late = document.readyState !== "loading";
+    if (late) Object.defineProperty(document, "readyState", { configurable: true, get: function () { return "loading"; } });
+    s.textContent = text; document.body.appendChild(s);
+    if (late) { delete document.readyState; document.dispatchEvent(new Event("DOMContentLoaded")); }
+  };
+  window.__bootBar(0, 0, all, "程序");
+  if (!window.fetch || !window.TextDecoder) return run(null);
+  fetch(B.js).then(function (r) {
+    if (!r.ok || !r.body || !r.body.getReader) return r.text();
+    var rd = r.body.getReader(), parts = [], got = 0;
+    return (function pump() { return rd.read().then(function (x) {
+      if (x.done) { var u = new Uint8Array(got), o = 0; parts.forEach(function (p) { u.set(p, o); o += p.length; }); return new TextDecoder().decode(u); }
+      parts.push(x.value); got += x.value.length; window.__bootBar(got / all, got, all, "程序"); return pump(); }); })();
+  }).then(run, function () { run(null); });
+})();
+</script></body>
 </html>

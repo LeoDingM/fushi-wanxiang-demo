@@ -51,7 +51,7 @@
     let n = 0; const total = list.length;
     return Promise.all(list.map(([k, src]) => new Promise((res) => {
       const im = new Image();
-      const done = () => { n++; if (onProgress) onProgress(n, total); res(); };
+      const done = () => { n++; if (onProgress) onProgress(n, total, src); res(); };
       im.onload = done; im.onerror = () => { console.error("missing", src); done(); }; im.src = src; SP.img[k] = im;
     })));
   };

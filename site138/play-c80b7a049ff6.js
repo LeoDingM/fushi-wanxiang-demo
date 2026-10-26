@@ -3608,7 +3608,7 @@ window.ACTORS={"li_mo":{"img":"img/actors/li_mo.png","frames":{"idle_S_1":[0,0,2
     let n = 0; const total = list.length;
     return Promise.all(list.map(([k, src]) => new Promise((res) => {
       const im = new Image();
-      const done = () => { n++; if (onProgress) onProgress(n, total); res(); };
+      const done = () => { n++; if (onProgress) onProgress(n, total, src); res(); };
       im.onload = done; im.onerror = () => { console.error("missing", src); done(); }; im.src = src; SP.img[k] = im;
     })));
   };
@@ -25295,12 +25295,31 @@ const capture0=PS.capture,restore0=PS.restore;PS.capture=function(){if(M.state()
   // ---------- boot ----------
   function bootStatus(text, done) {
     const el = document.getElementById("boot-status"); if (!el) return;
-    if (done) { el.classList.add("done"); el.textContent = ""; return; }
+    if (done) { el.classList.add("done"); el.textContent = ""; const bar = document.getElementById("boot-bar"); if (bar) bar.classList.add("done"); return; }
     if (text && el.textContent !== text) el.textContent = text;
   }
-  const assets = [["atlas", "kit/kit_atlas.png"], ["emit", "kit/kit_emit.png"], ["int_atlas", "kit_int/kit_atlas.png"], ["int_emit", "kit_int/kit_emit.png"]].concat(Object.entries(window.ACTORS).map(([k, v]) => ["actor_" + k, v.img]), SP.overrideAssets());
+  // first frame waits only on the street kits, overrides and 李默's base sheet; every other actor sheet (NPCs, winter /
+  // umbrella / home variants, npc-diversity) streams in after boot — Actor.draw skips a sheet until it has arrived.
+  const BOOT_ACTORS = ["li_mo"];
+  const assets = [["atlas", "kit/kit_atlas.png"], ["emit", "kit/kit_emit.png"], ["int_atlas", "kit_int/kit_atlas.png"], ["int_emit", "kit_int/kit_emit.png"]].concat(BOOT_ACTORS.filter((k) => window.ACTORS[k]).map((k) => ["actor_" + k, window.ACTORS[k].img]), SP.overrideAssets());
+  const BOOT = window.__BOOT || {}, sizes = BOOT.img || {};
+  const imgBytes = assets.reduce((a, [, src]) => a + (sizes[src] || 0), 0);
+  function bootProgress(n, total, gotBytes) {
+    const jsB = BOOT.jsBytes || 0, all = jsB + imgBytes;
+    if (window.__bootBar) window.__bootBar(all ? (jsB + gotBytes) / all : n / total, all ? jsB + gotBytes : 0, all, "贴图 " + n + "/" + total);
+    else bootStatus("正在载入贴图 " + n + "/" + total);
+  }
+  function lazyActors() {
+    const todo = Object.keys(window.ACTORS).filter((k) => window.ACTORS[k].img && !SP.img["actor_" + k]);
+    let i = 0; const pump = () => { if (i >= todo.length) return; const k = todo[i++];
+      if (SP.img["actor_" + k] || (SP._actLoading && SP._actLoading[k])) return pump();
+      SP.ensureActor(k); const t0 = Date.now(); const wait = () => { if (SP.img["actor_" + k] || Date.now() - t0 > 8000) pump(); else setTimeout(wait, 50); }; setTimeout(wait, 50); };
+    for (let c = 0; c < 4; c++) pump();
+  }
+  SP.lazyActors = lazyActors;
   bootStatus("正在载入…");
-  SP.load(assets, (n, total) => bootStatus("正在载入贴图 " + n + "/" + total)).then(() => {
+  let gotBytes = 0;
+  SP.load(assets, (n, total, src) => { gotBytes += sizes[src] || 0; bootProgress(n, total, gotBytes); }).then(() => {
     bootStatus("正在铺开街区…");
     SP.applyOverrides();
     CK.init(window.SCENE_DATA, Q); SP.season = CK.season; syncLight();
@@ -25347,6 +25366,7 @@ const capture0=PS.capture,restore0=PS.restore;PS.capture=function(){if(M.state()
                pixels: () => SP.audit.checkPixels(buildList(SP.actors.list.map((a) => a.spriteRect())), null) },
     };
     window.__protoReady = true;
+    setTimeout(lazyActors, 0);
     // lazy module sprites (store uniforms / clerks): fetched after boot so the first frame is not delayed
     if (!window.ACTORS.li_mo_uniform && !document.querySelector('script[src="js/actors_store.js"]')) { const sc = document.createElement("script"); sc.src = "js/actors_store.js"; document.head.appendChild(sc); }
     if (!st.manual) requestAnimationFrame(frame); else step(1 / 60);
