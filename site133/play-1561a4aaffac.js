@@ -15043,19 +15043,48 @@ window.METRO45={"areas":{"cbd_concourse":{"id":"cbd_concourse","station":"cbd","
     },
   });
 
-  /* 九栋立面按色族拉开：淡灰／淡金／淡蓝／深蓝／渐变／石材开窗。
-   * 仍是河东主城气质，不回榕桥暖砖巷，也不整片南埠白幕墙。
-   * podium / crownStone / setbackTop / beltEvery 给装配；FACE 给白天盖绘。 */
+  /* 九栋：色族 + 体量一起拉开。楼高／面宽／进深／剪影各不相同，
+   * 避免一排同高同宽矩形板楼读成小区。仍是河东主城办公／科研，
+   * 不回榕桥暖砖，不整片南埠白幕。mass 单位是 3 m 开间。
+   * 真实参照见 docs/hedong-office-refs.md（沪深穗京／NYC／Chicago）。
+   * podium / crownStone / setbackTop / beltEvery / mass 给装配；FACE 给白天盖绘。 */
   const STYLE = {
-    yh:  { glass: 'hd_g_yh',  podium: 3, crownStone: 1, setbackTop: 0, beltEvery: 0, family: '淡蓝高透', trait: '淡蓝高透密竖梃，细横档，石材压顶一层' },
-    hd:  { glass: 'hd_g_hd',  podium: 3, crownStone: 2, setbackTop: 0, beltEvery: 0, family: '淡灰中透', trait: '淡灰中透疏竖梃，厚腰档，顶两层石材冠' },
-    ls:  { glass: 'hd_g_ls',  podium: 4, crownStone: 1, setbackTop: 0, beltEvery: 0, family: '深蓝低透', trait: '深蓝低透，四层石材裙，厚上下腰板' },
-    cj:  { glass: 'hd_g_cj',  podium: 3, crownStone: 1, setbackTop: 3, beltEvery: 0, family: '蓝灰竖向渐变', trait: '蓝灰竖向渐变幕墙，双道遮阳，顶三层收进' },
-    yl:  { glass: 'hd_g_yl',  podium: 2, crownStone: 0, setbackTop: 0, beltEvery: 0, glassCrown: 1, family: '淡金高档', trait: '淡金香槟玻璃，疏竖梃，两道厚横档，玻璃收顶' },
-    sl:  { glass: 'hd_g_sl',  podium: 3, crownStone: 2, setbackTop: 0, beltEvery: 5, family: '淡灰高透', trait: '淡灰高透密格，每五层石材腰，顶两层石材冠' },
-    dl:  { glass: 'hd_g_dl',  podium: 4, crownStone: 2, setbackTop: 0, beltEvery: 0, family: '装饰艺术石材', trait: '米色石灰岩实墙开窗（装饰艺术／帝国大厦气质），不是玻璃幕墙' },
-    yx:  { glass: 'hd_g_yx',  podium: 3, crownStone: 1, setbackTop: 2, beltEvery: 4, family: '淡蓝中透', trait: '淡蓝中透，每四层石材腰，顶两层收进' },
-    yl2: { glass: 'hd_g_yl2', podium: 4, crownStone: 2, setbackTop: 0, beltEvery: 6, family: '米黄石材开窗', trait: '米黄／淡陶土色石材开窗，帝国大厦式腰线，石材压顶' },
+    /* 33F 方点塔 + L 型大裙楼：区标 */
+    yh:  { glass: 'hd_g_yh',  podium: 3, crownStone: 1, setbackTop: 0, beltEvery: 0, family: '淡蓝高透', form: '方点塔+L裙',
+           mass: { F: 33, podiumNS: 11, podiumNW: 5, towerNS: 4, towerNW: 4, towerOff: 0 },
+           trait: '33 层方点塔，L 型石材裙；淡蓝高透密竖梃' },
+    /* 22F 宽板：矮而宽的办公板楼 */
+    hd:  { glass: 'hd_g_hd',  podium: 3, crownStone: 2, setbackTop: 0, beltEvery: 0, family: '淡灰中透', form: '宽板楼',
+           mass: { F: 22, podiumNS: 10, podiumNW: 4, towerNS: 8, towerNW: 4, towerOff: 1 },
+           trait: '22 层宽板，淡灰中透，厚腰档石材冠' },
+    /* 29F 深进深科研块 */
+    ls:  { glass: 'hd_g_ls',  podium: 4, crownStone: 1, setbackTop: 0, beltEvery: 0, family: '深蓝低透', form: '深进深块',
+           mass: { F: 29, podiumNS: 8, podiumNW: 6, towerNS: 6, towerNW: 5, towerOff: 1 },
+           trait: '29 层深进深科研块，深蓝低透，四层石材裙' },
+    /* 28F 阶梯收顶 */
+    cj:  { glass: 'hd_g_cj',  podium: 3, crownStone: 1, setbackTop: 3, beltEvery: 0, family: '蓝灰竖向渐变', form: '阶梯收顶',
+           mass: { F: 28, podiumNS: 10, podiumNW: 4, towerNS: 6, towerNW: 4, towerOff: 0, midFromTop: 7, midNS: 4, midNW: 3, crownNS: 3, crownNW: 3 },
+           trait: '28 层阶梯收顶，蓝灰竖向渐变幕墙' },
+    /* 25F 薄进深淡金板 */
+    yl:  { glass: 'hd_g_yl',  podium: 2, crownStone: 0, setbackTop: 0, beltEvery: 0, glassCrown: 1, family: '淡金高档', form: '薄板',
+           mass: { F: 25, podiumNS: 9, podiumNW: 3, towerNS: 5, towerNW: 3, towerOff: 2 },
+           trait: '25 层薄进深淡金板，玻璃收顶' },
+    /* 32F 高板 + 中段微收 */
+    sl:  { glass: 'hd_g_sl',  podium: 3, crownStone: 2, setbackTop: 0, beltEvery: 5, family: '淡灰高透', form: '高板微收',
+           mass: { F: 32, podiumNS: 10, podiumNW: 4, towerNS: 5, towerNW: 4, towerOff: 0, midFromTop: 8, midNS: 4, midNW: 4 },
+           trait: '32 层高板微收，淡灰高透密格' },
+    /* 27F 装饰艺术宽塔 + 收冠 */
+    dl:  { glass: 'hd_g_dl',  podium: 4, crownStone: 2, setbackTop: 2, beltEvery: 0, family: '装饰艺术石材', form: '帝国大厦式宽塔',
+           mass: { F: 27, podiumNS: 10, podiumNW: 5, towerNS: 7, towerNW: 4, towerOff: 1, crownNS: 4, crownNW: 3 },
+           trait: '27 层帝国大厦式宽塔，米色石灰岩开窗，顶两层收冠' },
+    /* 31F 双道收进办公 */
+    yx:  { glass: 'hd_g_yx',  podium: 3, crownStone: 1, setbackTop: 3, beltEvery: 4, family: '淡蓝中透', form: '双道收进',
+           mass: { F: 31, podiumNS: 11, podiumNW: 4, towerNS: 5, towerNW: 4, towerOff: 0, midFromTop: 6, midNS: 4, midNW: 3, crownNS: 3, crownNW: 3 },
+           trait: '31 层双道收进，淡蓝中透' },
+    /* 23F 矮胖科研块：刻意不修长 */
+    yl2: { glass: 'hd_g_yl2', podium: 4, crownStone: 2, setbackTop: 0, beltEvery: 6, family: '米黄石材开窗', form: '矮胖科研块',
+           mass: { F: 23, podiumNS: 10, podiumNW: 5, towerNS: 8, towerNW: 5, towerOff: 1 },
+           trait: '23 层矮胖科研块，米黄石材开窗' },
   };
   root.HEDONG_TOWER_STYLE = STYLE;
 
@@ -16734,7 +16763,7 @@ window.METRO45={"areas":{"cbd_concourse":{"id":"cbd_concourse","station":"cbd","
  * 石澜路以东的街块之后是东缘绿地和围挡，河东一期走廊从河东大桥收到 840。
  * 数字全部未经Leo确认，理由写在 expansionP10.reasons：
  *   河东大道 26 m（y 132–158），澜石路、澄江路、石澜路和南街 16 m。大道只铺路面，不接实时车道。
- *   七栋：月河中心 26F、河东广场 24F、澜石大厦 28F、澄江中心 26F、月澜大厦 24F、石澜中心 28F、东澜大厦 24F。
+ *   七栋体量拉开：月河中心 33F 方点塔、河东广场 22F 宽板、澜石大厦 29F 深块、澄江中心 28F 阶梯、月澜大厦 25F 薄板、石澜中心 32F 高板、东澜大厦 27F 装饰艺术宽塔。
  *   裙楼 3 层浅石材，塔楼冷玻璃，顶层石材收边。平屋面 r_mod。
  *   行道树只用银杏，过了河东大桥才开始，12 m 一棵。车行道上不种。木棉和柳留在榕桥。
  *   月河仍在 x 336 折向南，东岸硬质步道第一片已经铺满。这一片没有新的河岸。
@@ -16853,14 +16882,15 @@ window.METRO45={"areas":{"cbd_concourse":{"id":"cbd_concourse","station":"cbd","
   for (const y of [72, 100, 124, 170]) put('lamp_cj_' + y, 'p_lamp', 469.2, y, { interact: 'lamp' });
   for (const y of [72, 100, 124, 170]) put('lamp_sl_' + y, 'p_lamp', 603.2, y, { interact: 'lamp' });
   const TOWERS = [
-    { id: 'yh', name: '月河中心', x: 376, y: 162, F: 26, side: 'W' },
-    { id: 'hd', name: '河东广场', x: 424, y: 162, F: 24, side: 'E' },
-    { id: 'ls', name: '澜石大厦', x: 376, y: 84, F: 28, side: 'W' },
-    { id: 'cj', name: '澄江中心', x: 496, y: 162, F: 26, side: 'W' },
-    { id: 'yl', name: '月澜大厦', x: 556, y: 84, F: 24, side: 'W' },
-    { id: 'sl', name: '石澜中心', x: 640, y: 162, F: 28, side: 'W' },
-    { id: 'dl', name: '东澜大厦', x: 690, y: 84, F: 24, side: 'W' },
+    { id: 'yh', name: '月河中心', x: 376, y: 162, side: 'W' },
+    { id: 'hd', name: '河东广场', x: 424, y: 162, side: 'E' },
+    { id: 'ls', name: '澜石大厦', x: 376, y: 84, side: 'W' },
+    { id: 'cj', name: '澄江中心', x: 496, y: 162, side: 'W' },
+    { id: 'yl', name: '月澜大厦', x: 556, y: 84, side: 'W' },
+    { id: 'sl', name: '石澜中心', x: 640, y: 162, side: 'W' },
+    { id: 'dl', name: '东澜大厦', x: 690, y: 84, side: 'W' },
   ];
+
   const STYLE = root.HEDONG_TOWER_STYLE || {};
   function pickFace(spec, f, F, lobby) {
     const st = STYLE[spec.id] || { glass: 'hd_glass', podium: 3, crownStone: 1, setbackTop: 0, beltEvery: 0 };
@@ -16870,24 +16900,49 @@ window.METRO45={"areas":{"cbd_concourse":{"id":"cbd_concourse","station":"cbd","
     if (st.beltEvery && f > (st.podium || 3) && f % st.beltEvery === 0) return { variant: 'hd_stone' };
     return { variant: st.glass, hdGlass: 1 };
   }
-  function bayPlan(spec, f, F, x, towerX) {
+  function massOf(spec) {
     const st = STYLE[spec.id] || {};
+    const m = Object.assign({
+      F: spec.F, podiumNS: 10, podiumNW: 4, towerNS: 5, towerNW: 4, towerOff: null,
+      midFromTop: 0, midNS: 4, midNW: 4, crownNS: 3, crownNW: 3,
+    }, st.mass || {});
+    if (m.towerOff == null) m.towerOff = spec.side === 'E' ? Math.max(0, m.podiumNS - m.towerNS) : 0;
+    return m;
+  }
+  function bayPlan(spec, f, F, x) {
+    const st = STYLE[spec.id] || {};
+    const m = massOf(spec);
     const podium = st.podium || 3;
     const setback = st.setbackTop || 0;
-    if (f <= podium) return { nS: 10, xS: x, nW: 4, xW: x };
-    if (setback && f > F - setback) return { nS: 3, xS: towerX + 3, nW: 4, xW: towerX + 3 };
-    return { nS: 5, xS: towerX, nW: 4, xW: towerX };
+    if (f <= podium) return { nS: m.podiumNS, xS: x, nW: m.podiumNW, xW: x };
+    if (setback && f > F - setback) {
+      const cOff = m.towerOff + Math.floor((m.towerNS - m.crownNS) / 2);
+      return { nS: m.crownNS, xS: x + cOff * 3, nW: m.crownNW, xW: x + cOff * 3 };
+    }
+    if (m.midFromTop && f > F - m.midFromTop) {
+      const mOff = m.towerOff + Math.floor((m.towerNS - m.midNS) / 2);
+      return { nS: m.midNS, xS: x + mOff * 3, nW: m.midNW, xW: x + mOff * 3 };
+    }
+    return { nS: m.towerNS, xS: x + m.towerOff * 3, nW: m.towerNW, xW: x + m.towerOff * 3 };
   }
+
   const built = [];
   for (const spec of TOWERS) {
-    const fg = 'rqe_p10_' + spec.id, x = spec.x, y = spec.y, F = spec.F;
-    const towerX = spec.side === 'E' ? x + 15 : x, wingX = spec.side === 'E' ? x : x + 15;
     const st0 = STYLE[spec.id] || {};
+    const m = massOf(spec);
+    const F = m.F, fg = 'rqe_p10_' + spec.id, x = spec.x, y = spec.y;
+    const W = m.podiumNS * 3, D = m.podiumNW * 3;
+    const towerX = x + m.towerOff * 3;
+    const wingOff = m.towerOff > 0 ? 0 : m.towerOff + m.towerNS;
+    const wingX = x + wingOff * 3;
+    const wingW = m.towerOff > 0 ? m.towerOff : Math.max(0, m.podiumNS - m.towerOff - m.towerNS);
     for (let f = 1; f <= F; f++) {
       const z = (f - 1) * 3, st = f === 1 ? 'ground' : 'upper';
-      const plan = bayPlan(spec, f, F, x, towerX);
+      const plan = bayPlan(spec, f, F, x);
+      const lobbyLo = Math.max(0, Math.floor(plan.nS / 2) - 2);
+      const lobbyHi = Math.min(plan.nS - 1, lobbyLo + 3);
       for (let b = 0; b < plan.nS; b++) {
-        const lobby = f === 1 && b >= 3 && b <= 6;
+        const lobby = f === 1 && b >= lobbyLo && b <= lobbyHi;
         const face = pickFace(spec, f, F, lobby);
         const more = { z, state: st, fade_group: fg, variant: face.variant };
         if (face.hdGlass) {
@@ -16906,16 +16961,17 @@ window.METRO45={"areas":{"cbd_concourse":{"id":"cbd_concourse","station":"cbd","
         put(spec.id + '_W' + f + '_' + b, 'f_wall', plan.xW, y + 3 + b * 3, more);
       }
     }
-    put(spec.id + '_roof', 'b_roof_a', towerX + ((st0.setbackTop || 0) ? 3 : 0), y, { z: F * 3, fade_group: fg, variant: 'r_mod' });
-    put(spec.id + '_wing', 'b_roof_a', wingX, y, { z: 9, fade_group: fg, variant: 'r_mod' });
-    const logoX = towerX + ((st0.setbackTop || 0) ? 3 : 0) + 4.6;
+    const roofOff = (st0.setbackTop || 0) ? Math.floor((m.towerNS - (m.crownNS || 3)) / 2) * 3 : 0;
+    put(spec.id + '_roof', 'b_roof_a', towerX + roofOff, y, { z: F * 3, fade_group: fg, variant: 'r_mod' });
+    if (wingW > 0) put(spec.id + '_wing', 'b_roof_a', wingX, y, { z: (st0.podium || 3) * 3, fade_group: fg, variant: 'r_mod' });
+    const logoX = towerX + roofOff + Math.min(4.6, m.towerNS * 1.5);
     put(spec.id + '_logo', 'rq_hd_name', logoX, y - 0.02, { z: F * 3 - 1.7, variant: spec.id, fade_group: fg });
-    put(spec.id + '_plate', 'rq_hd_plate', x + 12.6, y - 0.02, { z: 2.15, variant: spec.id, fade_group: fg });
+    put(spec.id + '_plate', 'rq_hd_plate', x + W * 0.42, y - 0.02, { z: 2.15, variant: spec.id, fade_group: fg });
     if (spec.id === 'yh') put('yh_entry', 'modern_entry_marker', 391, 161.1, { interact: 'portal', to: 'yh_lobby', label: '进入月河中心 · 写字楼大堂', name: '月河中心', reach: [391, 159.2], spawn: [8.2, 1.55, 'N'], fade_group: fg });
     if (spec.id === 'cj') put('cj_entry', 'modern_entry_marker', 511, 161.1, { interact: 'portal', to: 'cj_lobby', label: '进入澄江中心 · 写字楼大堂', name: '澄江中心', reach: [511, 159.2], spawn: [8.2, 1.55, 'N'], fade_group: fg });
     if (spec.id === 'dl') put('dl_entry', 'modern_entry_marker', 705, 83.1, { interact: 'portal', to: 'dl_lobby', label: '进入东澜大厦 · 写字楼大堂', name: '东澜大厦', reach: [705, 80.8], spawn: [8.2, 1.55, 'N'], fade_group: fg });
-    block(fg, [x, y, x + 30, y + 12]);
-    built.push({ id: fg, name: spec.name, x0: x, y0: y, W: 30, D: 12, F, floors: F });
+    block(fg, [x, y, x + W, y + D]);
+    built.push({ id: fg, name: spec.name, x0: x, y0: y, W, D, F, floors: F, form: st0.form || '', family: st0.family || '' });
   }
   for (const r of solids) N.solids.push(r.slice());
   D.colliders = D.colliders.concat(colliders);
@@ -16962,13 +17018,13 @@ window.METRO45={"areas":{"cbd_concourse":{"id":"cbd_concourse","station":"cbd","
   };
   N.mapPois = (N.mapPois || []).concat([
     { id: 'p10_avenue', name: '河东大道', x: 390, y: 134.2, desc: '26 m 大道，石材玻璃塔楼。名字和路宽未经确认', cat: 'life' },
-    { id: 'p10_yh', name: '月河中心', x: 391, y: 159.2, desc: '26 层。南门可进大堂，上层未开。名字未经确认', cat: 'work' },
-    { id: 'p10_hd', name: '河东广场', x: 439, y: 159.2, desc: '24 层，澜石路东侧。只是外观', cat: 'work' },
-    { id: 'p10_ls', name: '澜石大厦', x: 391, y: 78.2, desc: '28 层，南街北侧。只是外观', cat: 'work' },
-    { id: 'p10_cj', name: '澄江中心', x: 511, y: 159.2, desc: '26 层。南门可进大堂，上层未开。名字未经确认', cat: 'work' },
-    { id: 'p10_yl', name: '月澜大厦', x: 571, y: 78.2, desc: '24 层，南街北侧东段。只是外观。名字未经确认', cat: 'work' },
-    { id: 'p10_sl', name: '石澜中心', x: 655, y: 159.2, desc: '28 层，石澜路东侧。只是外观。名字未经确认', cat: 'work' },
-    { id: 'p10_dl', name: '东澜大厦', x: 705, y: 80.8, desc: '24 层。南门可进大堂，上层未开。名字未经确认', cat: 'work' },
+    { id: 'p10_yh', name: '月河中心', x: 391, y: 159.2, desc: '33 层方点塔。南门可进大堂，上层未开。名字未经确认', cat: 'work' },
+    { id: 'p10_hd', name: '河东广场', x: 439, y: 159.2, desc: '22 层宽板，澜石路东侧。只是外观', cat: 'work' },
+    { id: 'p10_ls', name: '澜石大厦', x: 391, y: 78.2, desc: '29 层深进深科研块，南街北侧。只是外观', cat: 'work' },
+    { id: 'p10_cj', name: '澄江中心', x: 511, y: 159.2, desc: '28 层阶梯收顶。南门可进大堂，上层未开。名字未经确认', cat: 'work' },
+    { id: 'p10_yl', name: '月澜大厦', x: 571, y: 78.2, desc: '25 层薄进深淡金板，南街北侧东段。只是外观。名字未经确认', cat: 'work' },
+    { id: 'p10_sl', name: '石澜中心', x: 655, y: 159.2, desc: '32 层高板微收。只是外观。名字未经确认', cat: 'work' },
+    { id: 'p10_dl', name: '东澜大厦', x: 705, y: 80.8, desc: '27 层帝国大厦式宽塔，南门可进大堂。名字未经确认', cat: 'work' },
     { id: 'p10_edge', name: '河东东缘', x: 826, y: 145, desc: '大道尽头的银杏绿地和围挡。名字未经确认', cat: 'life' },
     { id: 'p10_cross', name: '澄江路', x: 469.2, y: 110, desc: '16 m 次干。名字和路宽未经确认', cat: 'life' },
     { id: 'p10_cross2', name: '石澜路', x: 603.2, y: 110, desc: '16 m 次干。名字和路宽未经确认', cat: 'life' },
@@ -16980,7 +17036,7 @@ window.METRO45={"areas":{"cbd_concourse":{"id":"cbd_concourse","station":"cbd","
 /* 月河区 · 河东新城 P10 第五片 (2026-10-26). 在 x 840 东缘围挡之外再往东约 160 m。
  * 可玩东界收到 1000，地面到 1020。拆掉第四片 x 837.6 绿篱和东侧封边。
  * 河东大道 / 澜石南街穿过旧绿地，接到新东界。新次干银杏路 16 m。
- * 两栋：银杏中心 30F（办公科研，可进大堂）、研澜大厦 28F（科研外观）。
+ * 两栋体量拉开：银杏中心 31F 双道收进（办公科研，可进大堂）、研澜大厦 23F 矮胖科研块。
  * 衔接：榕校路东口 ↔ 河东大桥 ↔ 河东大道的人行／路缘连续；桥西口补步道灯。
  * 墙皮仍是浅石材裙楼＋冷玻璃塔身，银杏行道树。不做 438 m 塔，不加河东公交，不南扩。
  * 名字、楼高、路宽全部未经 Leo 确认。 */
@@ -17108,9 +17164,10 @@ window.METRO45={"areas":{"cbd_concourse":{"id":"cbd_concourse","station":"cbd","
   put('br_lamp_w4', 'p_lamp', 328, 156.4, { interact: 'lamp' });
 
   const TOWERS = [
-    { id: 'yx', name: '银杏中心', x: 888, y: 162, F: 30, side: 'W' },
-    { id: 'yl2', name: '研澜大厦', x: 948, y: 84, F: 28, side: 'W' },
+    { id: 'yx', name: '银杏中心', x: 888, y: 162, side: 'W' },
+    { id: 'yl2', name: '研澜大厦', x: 948, y: 84, side: 'W' },
   ];
+
   const STYLE = root.HEDONG_TOWER_STYLE || {};
   function pickFace(spec, f, F, lobby) {
     const st = STYLE[spec.id] || { glass: 'hd_glass', podium: 3, crownStone: 1, setbackTop: 0, beltEvery: 0 };
@@ -17120,24 +17177,49 @@ window.METRO45={"areas":{"cbd_concourse":{"id":"cbd_concourse","station":"cbd","
     if (st.beltEvery && f > (st.podium || 3) && f % st.beltEvery === 0) return { variant: 'hd_stone' };
     return { variant: st.glass, hdGlass: 1 };
   }
-  function bayPlan(spec, f, F, x, towerX) {
+  function massOf(spec) {
     const st = STYLE[spec.id] || {};
+    const m = Object.assign({
+      F: spec.F, podiumNS: 10, podiumNW: 4, towerNS: 5, towerNW: 4, towerOff: null,
+      midFromTop: 0, midNS: 4, midNW: 4, crownNS: 3, crownNW: 3,
+    }, st.mass || {});
+    if (m.towerOff == null) m.towerOff = spec.side === 'E' ? Math.max(0, m.podiumNS - m.towerNS) : 0;
+    return m;
+  }
+  function bayPlan(spec, f, F, x) {
+    const st = STYLE[spec.id] || {};
+    const m = massOf(spec);
     const podium = st.podium || 3;
     const setback = st.setbackTop || 0;
-    if (f <= podium) return { nS: 10, xS: x, nW: 4, xW: x };
-    if (setback && f > F - setback) return { nS: 3, xS: towerX + 3, nW: 4, xW: towerX + 3 };
-    return { nS: 5, xS: towerX, nW: 4, xW: towerX };
+    if (f <= podium) return { nS: m.podiumNS, xS: x, nW: m.podiumNW, xW: x };
+    if (setback && f > F - setback) {
+      const cOff = m.towerOff + Math.floor((m.towerNS - m.crownNS) / 2);
+      return { nS: m.crownNS, xS: x + cOff * 3, nW: m.crownNW, xW: x + cOff * 3 };
+    }
+    if (m.midFromTop && f > F - m.midFromTop) {
+      const mOff = m.towerOff + Math.floor((m.towerNS - m.midNS) / 2);
+      return { nS: m.midNS, xS: x + mOff * 3, nW: m.midNW, xW: x + mOff * 3 };
+    }
+    return { nS: m.towerNS, xS: x + m.towerOff * 3, nW: m.towerNW, xW: x + m.towerOff * 3 };
   }
+
   const built = [];
   for (const spec of TOWERS) {
-    const fg = 'rqe_p10_' + spec.id, x = spec.x, y = spec.y, F = spec.F;
-    const towerX = spec.side === 'E' ? x + 15 : x, wingX = spec.side === 'E' ? x : x + 15;
     const st0 = STYLE[spec.id] || {};
+    const m = massOf(spec);
+    const F = m.F, fg = 'rqe_p10_' + spec.id, x = spec.x, y = spec.y;
+    const W = m.podiumNS * 3, D = m.podiumNW * 3;
+    const towerX = x + m.towerOff * 3;
+    const wingOff = m.towerOff > 0 ? 0 : m.towerOff + m.towerNS;
+    const wingX = x + wingOff * 3;
+    const wingW = m.towerOff > 0 ? m.towerOff : Math.max(0, m.podiumNS - m.towerOff - m.towerNS);
     for (let f = 1; f <= F; f++) {
       const z = (f - 1) * 3, st = f === 1 ? 'ground' : 'upper';
-      const plan = bayPlan(spec, f, F, x, towerX);
+      const plan = bayPlan(spec, f, F, x);
+      const lobbyLo = Math.max(0, Math.floor(plan.nS / 2) - 2);
+      const lobbyHi = Math.min(plan.nS - 1, lobbyLo + 3);
       for (let b = 0; b < plan.nS; b++) {
-        const lobby = f === 1 && b >= 3 && b <= 6;
+        const lobby = f === 1 && b >= lobbyLo && b <= lobbyHi;
         const face = pickFace(spec, f, F, lobby);
         const more = { z, state: st, fade_group: fg, variant: face.variant };
         if (face.hdGlass) {
@@ -17156,16 +17238,16 @@ window.METRO45={"areas":{"cbd_concourse":{"id":"cbd_concourse","station":"cbd","
         put(spec.id + '_W' + f + '_' + b, 'f_wall', plan.xW, y + 3 + b * 3, more);
       }
     }
-    put(spec.id + '_roof', 'b_roof_a', towerX + ((st0.setbackTop || 0) ? 3 : 0), y, { z: F * 3, fade_group: fg, variant: 'r_mod' });
-    put(spec.id + '_wing', 'b_roof_a', wingX, y, { z: 9, fade_group: fg, variant: 'r_mod' });
-    const logoX = towerX + ((st0.setbackTop || 0) ? 3 : 0) + 4.6;
+    const roofOff = (st0.setbackTop || 0) ? Math.floor((m.towerNS - (m.crownNS || 3)) / 2) * 3 : 0;
+    put(spec.id + '_roof', 'b_roof_a', towerX + roofOff, y, { z: F * 3, fade_group: fg, variant: 'r_mod' });
+    if (wingW > 0) put(spec.id + '_wing', 'b_roof_a', wingX, y, { z: (st0.podium || 3) * 3, fade_group: fg, variant: 'r_mod' });
+    const logoX = towerX + roofOff + Math.min(4.6, m.towerNS * 1.5);
     put(spec.id + '_logo', 'rq_hd_name', logoX, y - 0.02, { z: F * 3 - 1.7, variant: spec.id, fade_group: fg });
-    put(spec.id + '_plate', 'rq_hd_plate', x + 12.6, y - 0.02, { z: 2.15, variant: spec.id, fade_group: fg });
+    put(spec.id + '_plate', 'rq_hd_plate', x + W * 0.42, y - 0.02, { z: 2.15, variant: spec.id, fade_group: fg });
     if (spec.id === 'yx') put('yx_entry', 'modern_entry_marker', 903, 161.1, { interact: 'portal', to: 'yx_lobby', label: '进入银杏中心 · 写字楼大堂', name: '银杏中心', reach: [903, 159.2], spawn: [8.2, 1.55, 'N'], fade_group: fg });
-    block(fg, [x, y, x + 30, y + 12]);
-    built.push({ id: fg, name: spec.name, x0: x, y0: y, W: 30, D: 12, F, floors: F });
+    block(fg, [x, y, x + W, y + D]);
+    built.push({ id: fg, name: spec.name, x0: x, y0: y, W, D, F, floors: F, form: st0.form || '', family: st0.family || '' });
   }
-
   for (const r of solids) N.solids.push(r.slice());
   D.colliders = D.colliders.concat(colliders);
   root.SCENE_CHUNKS = root.SCENE_CHUNKS || {};
@@ -17185,14 +17267,14 @@ window.METRO45={"areas":{"cbd_concourse":{"id":"cbd_concourse","station":"cbd","
   P.terminus = [ROAD, 64, SEAL, 192];
   P.buildings = (P.buildings || []).concat(built);
   P.reasons.x1 = '第五片：可玩东界从 840 收到 1000（+160 m），地面到 1020。拆掉第四片 837 m 绿篱。大道和南街铺到 984，再往东是银杏绿地，997 m 一带一道绿篱围挡。';
-  P.reasons.slice5 = '第五片在东缘围挡外再推一小片。银杏路是南北 16 m 次干。银杏中心 30 层（办公科研，南门可进大堂），研澜大厦 28 层（科研外观）。墙皮仍是浅石材裙楼，银杏中心淡蓝中透、研澜米黄石材开窗，与西段淡金／深蓝／渐变等色族分开，银杏行道树。衔接上把榕校路东口到河东大桥西口的大道断面补齐，并加桥西口步道灯。不做 438 m 月河新城塔，不加河东公交，不南扩。名字和尺寸未经确认。';
+  P.reasons.slice5 = '第五片在东缘围挡外再推一小片。银杏路是南北 16 m 次干。银杏中心 31 层双道收进（办公科研，南门可进大堂），研澜大厦 23 层矮胖科研块。墙皮仍是浅石材裙楼，银杏中心淡蓝中透、研澜米黄石材开窗，与西段淡金／深蓝／渐变等色族分开，银杏行道树。衔接上把榕校路东口到河东大桥西口的大道断面补齐，并加桥西口步道灯。不做 438 m 月河新城塔，不加河东公交，不南扩。名字和尺寸未经确认。';
   P.reasons.link = '榕校路东口（x≈298）经河东大桥（x 336–356）接河东大道。桥西引道按大道 26 m 断面重铺，清掉大道高度带残留绿篱，避免撞墙感。';
 
   N.mapPois = (N.mapPois || []).filter((p) => p.id !== 'p10_edge').concat([
     { id: 'p10_edge', name: '河东东缘', x: 986, y: 145, desc: '大道尽头的银杏绿地和围挡。名字未经确认', cat: 'life' },
     { id: 'p10_cross3', name: '银杏路', x: 857.2, y: 110, desc: '16 m 次干。名字和路宽未经确认', cat: 'life' },
-    { id: 'p10_yx', name: '银杏中心', x: 903, y: 159.2, desc: '30 层办公科研。南门可进大堂，上层未开。名字未经确认', cat: 'work' },
-    { id: 'p10_yl2', name: '研澜大厦', x: 963, y: 78.2, desc: '28 层科研外观。只是外观。名字未经确认', cat: 'work' },
+    { id: 'p10_yx', name: '银杏中心', x: 903, y: 159.2, desc: '31 层双道收进办公科研。南门可进大堂，上层未开。名字未经确认', cat: 'work' },
+    { id: 'p10_yl2', name: '研澜大厦', x: 963, y: 78.2, desc: '23 层矮胖科研块。只是外观。名字未经确认', cat: 'work' },
     { id: 'p10_bridge_w', name: '河东大桥西口', x: 320, y: 145, desc: '榕校路东口接河东大桥。衔接补强。名字未经确认', cat: 'life' },
   ]);
 })();

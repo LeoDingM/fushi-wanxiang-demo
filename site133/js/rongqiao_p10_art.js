@@ -94,19 +94,48 @@
     },
   });
 
-  /* 九栋立面按色族拉开：淡灰／淡金／淡蓝／深蓝／渐变／石材开窗。
-   * 仍是河东主城气质，不回榕桥暖砖巷，也不整片南埠白幕墙。
-   * podium / crownStone / setbackTop / beltEvery 给装配；FACE 给白天盖绘。 */
+  /* 九栋：色族 + 体量一起拉开。楼高／面宽／进深／剪影各不相同，
+   * 避免一排同高同宽矩形板楼读成小区。仍是河东主城办公／科研，
+   * 不回榕桥暖砖，不整片南埠白幕。mass 单位是 3 m 开间。
+   * 真实参照见 docs/hedong-office-refs.md（沪深穗京／NYC／Chicago）。
+   * podium / crownStone / setbackTop / beltEvery / mass 给装配；FACE 给白天盖绘。 */
   const STYLE = {
-    yh:  { glass: 'hd_g_yh',  podium: 3, crownStone: 1, setbackTop: 0, beltEvery: 0, family: '淡蓝高透', trait: '淡蓝高透密竖梃，细横档，石材压顶一层' },
-    hd:  { glass: 'hd_g_hd',  podium: 3, crownStone: 2, setbackTop: 0, beltEvery: 0, family: '淡灰中透', trait: '淡灰中透疏竖梃，厚腰档，顶两层石材冠' },
-    ls:  { glass: 'hd_g_ls',  podium: 4, crownStone: 1, setbackTop: 0, beltEvery: 0, family: '深蓝低透', trait: '深蓝低透，四层石材裙，厚上下腰板' },
-    cj:  { glass: 'hd_g_cj',  podium: 3, crownStone: 1, setbackTop: 3, beltEvery: 0, family: '蓝灰竖向渐变', trait: '蓝灰竖向渐变幕墙，双道遮阳，顶三层收进' },
-    yl:  { glass: 'hd_g_yl',  podium: 2, crownStone: 0, setbackTop: 0, beltEvery: 0, glassCrown: 1, family: '淡金高档', trait: '淡金香槟玻璃，疏竖梃，两道厚横档，玻璃收顶' },
-    sl:  { glass: 'hd_g_sl',  podium: 3, crownStone: 2, setbackTop: 0, beltEvery: 5, family: '淡灰高透', trait: '淡灰高透密格，每五层石材腰，顶两层石材冠' },
-    dl:  { glass: 'hd_g_dl',  podium: 4, crownStone: 2, setbackTop: 0, beltEvery: 0, family: '装饰艺术石材', trait: '米色石灰岩实墙开窗（装饰艺术／帝国大厦气质），不是玻璃幕墙' },
-    yx:  { glass: 'hd_g_yx',  podium: 3, crownStone: 1, setbackTop: 2, beltEvery: 4, family: '淡蓝中透', trait: '淡蓝中透，每四层石材腰，顶两层收进' },
-    yl2: { glass: 'hd_g_yl2', podium: 4, crownStone: 2, setbackTop: 0, beltEvery: 6, family: '米黄石材开窗', trait: '米黄／淡陶土色石材开窗，帝国大厦式腰线，石材压顶' },
+    /* 33F 方点塔 + L 型大裙楼：区标 */
+    yh:  { glass: 'hd_g_yh',  podium: 3, crownStone: 1, setbackTop: 0, beltEvery: 0, family: '淡蓝高透', form: '方点塔+L裙',
+           mass: { F: 33, podiumNS: 11, podiumNW: 5, towerNS: 4, towerNW: 4, towerOff: 0 },
+           trait: '33 层方点塔，L 型石材裙；淡蓝高透密竖梃' },
+    /* 22F 宽板：矮而宽的办公板楼 */
+    hd:  { glass: 'hd_g_hd',  podium: 3, crownStone: 2, setbackTop: 0, beltEvery: 0, family: '淡灰中透', form: '宽板楼',
+           mass: { F: 22, podiumNS: 10, podiumNW: 4, towerNS: 8, towerNW: 4, towerOff: 1 },
+           trait: '22 层宽板，淡灰中透，厚腰档石材冠' },
+    /* 29F 深进深科研块 */
+    ls:  { glass: 'hd_g_ls',  podium: 4, crownStone: 1, setbackTop: 0, beltEvery: 0, family: '深蓝低透', form: '深进深块',
+           mass: { F: 29, podiumNS: 8, podiumNW: 6, towerNS: 6, towerNW: 5, towerOff: 1 },
+           trait: '29 层深进深科研块，深蓝低透，四层石材裙' },
+    /* 28F 阶梯收顶 */
+    cj:  { glass: 'hd_g_cj',  podium: 3, crownStone: 1, setbackTop: 3, beltEvery: 0, family: '蓝灰竖向渐变', form: '阶梯收顶',
+           mass: { F: 28, podiumNS: 10, podiumNW: 4, towerNS: 6, towerNW: 4, towerOff: 0, midFromTop: 7, midNS: 4, midNW: 3, crownNS: 3, crownNW: 3 },
+           trait: '28 层阶梯收顶，蓝灰竖向渐变幕墙' },
+    /* 25F 薄进深淡金板 */
+    yl:  { glass: 'hd_g_yl',  podium: 2, crownStone: 0, setbackTop: 0, beltEvery: 0, glassCrown: 1, family: '淡金高档', form: '薄板',
+           mass: { F: 25, podiumNS: 9, podiumNW: 3, towerNS: 5, towerNW: 3, towerOff: 2 },
+           trait: '25 层薄进深淡金板，玻璃收顶' },
+    /* 32F 高板 + 中段微收 */
+    sl:  { glass: 'hd_g_sl',  podium: 3, crownStone: 2, setbackTop: 0, beltEvery: 5, family: '淡灰高透', form: '高板微收',
+           mass: { F: 32, podiumNS: 10, podiumNW: 4, towerNS: 5, towerNW: 4, towerOff: 0, midFromTop: 8, midNS: 4, midNW: 4 },
+           trait: '32 层高板微收，淡灰高透密格' },
+    /* 27F 装饰艺术宽塔 + 收冠 */
+    dl:  { glass: 'hd_g_dl',  podium: 4, crownStone: 2, setbackTop: 2, beltEvery: 0, family: '装饰艺术石材', form: '帝国大厦式宽塔',
+           mass: { F: 27, podiumNS: 10, podiumNW: 5, towerNS: 7, towerNW: 4, towerOff: 1, crownNS: 4, crownNW: 3 },
+           trait: '27 层帝国大厦式宽塔，米色石灰岩开窗，顶两层收冠' },
+    /* 31F 双道收进办公 */
+    yx:  { glass: 'hd_g_yx',  podium: 3, crownStone: 1, setbackTop: 3, beltEvery: 4, family: '淡蓝中透', form: '双道收进',
+           mass: { F: 31, podiumNS: 11, podiumNW: 4, towerNS: 5, towerNW: 4, towerOff: 0, midFromTop: 6, midNS: 4, midNW: 3, crownNS: 3, crownNW: 3 },
+           trait: '31 层双道收进，淡蓝中透' },
+    /* 23F 矮胖科研块：刻意不修长 */
+    yl2: { glass: 'hd_g_yl2', podium: 4, crownStone: 2, setbackTop: 0, beltEvery: 6, family: '米黄石材开窗', form: '矮胖科研块',
+           mass: { F: 23, podiumNS: 10, podiumNW: 5, towerNS: 8, towerNW: 5, towerOff: 1 },
+           trait: '23 层矮胖科研块，米黄石材开窗' },
   };
   root.HEDONG_TOWER_STYLE = STYLE;
 
