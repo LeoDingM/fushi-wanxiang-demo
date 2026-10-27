@@ -1,0 +1,80 @@
+/* Site88 local: phone apps 街坊外卖 (takeout) and 槐集优选 (online shopping). Layout patterns of common Chinese apps,
+ * fictional brands and own CSS icons. Every action goes through SP.commerce (quote → one-time confirm). */
+(function(root){'use strict';const SP=root.SP;if(!SP||SP.commerceUI)return;const M=root.CommerceModel;
+const yuan=c=>'¥'+(c/100).toFixed(2).replace(/\.00$/,''),yuanF=c=>'¥'+(c/100).toFixed(2);
+let owner=null;const V={food:{page:'home',store:null,cart:{},dest:'door_2f02',filter:'',cat:''},shop:{page:'home',cart:{},dest:'locker',filter:'',cat:''}};
+function reset(){owner=SP.game?.ps||null;V.food={page:'home',store:null,cart:{},dest:'door_2f02',filter:'',cat:''};V.shop={page:'home',cart:{},dest:'locker',filter:'',cat:''};}
+function el(tag,cls,parent,text){const e=document.createElement(tag);if(cls)e.className=cls;if(text!==undefined)e.textContent=text;if(parent)parent.appendChild(e);return e;}
+function btn(label,parent,fn,cls,aria){const b=el('button',cls||'phone-btn',parent,label);b.type='button';b.onclick=fn;if(aria)b.setAttribute('aria-label',aria);return b;}
+function price(k){return SP.commerce.price(k);}
+function cents(v){return Math.round(v*100);}
+function guard(ctx,fn){return()=>{if(!ctx.isCurrent())return false;const r=fn();ctx.rerender();return r;};}
+function seg(parent,items,ctx){const s=el('div','cm-seg',parent);for(const [label,on,fn]of items){const b=btn(label,s,guard(ctx,fn),'cm-seg-btn'+(on?' on':''));b.setAttribute('aria-label',label);}return s;}
+function search(parent,ph,aria,v,cards){const box=el('div','cm-search',parent);const i=el('input','',box);i.type='search';i.placeholder=ph;i.setAttribute('aria-label',aria);i.value=v.filter||'';i.oninput=()=>{v.filter=String(i.value||'').trim();for(const [e,t]of cards)e.hidden=!!v.filter&&!t.includes(v.filter);};return box;}
+function stepper(parent,cart,sku,label,ctx){const w=el('div','cm-step',parent);if(cart[sku]>0){btn('−',w,guard(ctx,()=>{cart[sku]--;if(cart[sku]<=0)delete cart[sku];}),'cm-step-btn',`减一份·${label}`);el('span','cm-step-n',w,String(cart[sku]));}btn('+',w,guard(ctx,()=>{cart[sku]=Math.min(10,(cart[sku]||0)+1);}),'cm-step-btn add',`加一份·${label}`);return w;}
+function cartSum(cat,cart){let n=0,c=0;for(const [k,q]of Object.entries(cart)){if(!cat[k]||!(q>0))continue;n+=q;c+=q*cents(price(cat[k].key));}return{n,c};}
+function timeline(parent,steps,at){const t=el('div','cm-timeline',parent);steps.forEach(([label,done,when],i)=>{const r=el('div','cm-tl'+(done?' done':'')+(i===at?' now':''),t);el('i','',r);const d=el('div','',r);el('strong','',d,label);if(when)el('small','',d,when);});return t;}
+function destButtons(parent,v,app,ctx){const s=el('div','cm-dests',parent);const live=SP.commerce.ctx();for(const [id,D]of Object.entries(M.DEST).sort((a,b)=>app==='shop'?(b[1].locker?1:0)-(a[1].locker?1:0):0)){if(app==='food'&&D.locker)continue;if(D.lease&&!live.sharedLease)continue;btn((app==='shop'&&D.locker?'驿站自提 · ':'送到 · ')+D.name,s,guard(ctx,()=>{v.dest=id;}),'cm-dest'+(v.dest===id?' on':''));}if(!M.DEST[v.dest]||M.DEST[v.dest].lease&&!live.sharedLease||app==='food'&&M.DEST[v.dest].locker)v.dest='door_2f02';}
+function quoteBox(parent,app,v,ctx){const q=SP.commerce.quote(app,v.cart,v.dest),box=el('section','phone-card cm-bill',parent);
+ if(!q.ok){el('p','cm-warn',box,q.reason);return;}
+ const row=(a,b,cls)=>{const r=el('div','cm-bill-row'+(cls?' '+cls:''),box);el('span','',r,a);el('b','',r,b);};
+ row('商品金额',yuanF(q.goodsCents));if(app==='food')row('打包费',yuanF(q.packCents));row(app==='food'?'配送费（骑手）':'运费',q.feeCents?yuanF(q.feeCents):'包邮');row('实付',yuanF(q.totalCents),'total');
+ el('p','cm-note',box,app==='food'?`预计 ${SP.commerce.hm(q.arriveAt)} 送达 · ${q.courier==='rider'?'街景里的黄衣骑手接单（按他的实际路线估算，可在街上看到他）':'平台其他骑手接单（后台模拟，街景不显示；街景骑手忙或已收工）'}，从${M.MERCHANTS[q.merchant].name}取餐送到楼下`:`预计 ${SP.commerce.hm(q.arriveAt)} ${v.dest==='locker'?'到驿站快递柜，需本人去取':'到货，09:00–21:00上门，本人在家签收，不在家改投驿站'}`);
+ const pay=btn('提交订单 · '+(SP.game?.rules?.payLabel?.(SP.game.ps)||'微信支付'),parent,guard(ctx,()=>{const r=SP.commerce.confirm(q.token);if(!r.ok){SP.toast?.(r.reason);return false;}v.cart={};v.page='orders';return true;}),'phone-btn cm-pay');pay.setAttribute('aria-label','提交订单');}
+/* ---------------- 街坊外卖 ---------------- */
+function takeout(mount,ctx){if(SP.game?.ps!==owner)reset();const v=V.food;if(!SP.commerce||!M){el('p','phone-status',mount,'外卖暂时还未准备好。');return;}
+ const wrap=el('div','cm-app cm-food',mount);seg(wrap,[['外卖首页',v.page==='home'||v.page==='store',()=>{v.page='home';v.store=null;}],['外卖订单',v.page==='orders',()=>{v.page='orders';}]],ctx);
+ if(v.page==='store'&&v.store)return foodStore(wrap,v,ctx);if(v.page==='checkout')return foodCheckout(wrap,v,ctx);if(v.page==='orders')return foodOrders(wrap,v,ctx);
+ const cards=[];search(wrap,'搜索商家或菜品，如 牛肉面','搜索外卖',v,cards);
+ const cats=el('div','cm-cats',wrap);for(const [c,ic]of [['早点','bun'],['快餐','rice'],['面食','noodle'],['便利店','store']]){const b=btn('',cats,guard(ctx,()=>{v.cat=v.cat===c?'':c;}),'cm-cat'+(v.cat===c?' on':''),'分类·'+c);const i=el('span','cm-ci',b);if(i.dataset)i.dataset.icon=ic;el('span','cm-cl',b,c);}
+ el('div','cm-banner food',wrap).appendChild(el('span','',null,`老街近邻 · 约15–25分钟送达 · 配送费${yuan(cents(price('to_delivery_fee')))} · ${yuan(cents(price('to_min_order')))}起送`));
+ const live=SP.commerce.ctx(),at=SP.clock.abs(),dest=v.dest==='door_shared'&&live.sharedLease?'door_shared':'door_2f02';el('h3','cm-h',wrap,'附近商家');
+ for(const [id,m]of Object.entries(M.MERCHANTS)){const dishes=Object.values(M.MENU).filter(d=>d.m===id);if(v.cat&&!m.tags.includes(v.cat)&&!dishes.some(d=>d.cat===v.cat))continue;const open=M.open(id,at,live)&&M.riderOn(at),c=el('section','phone-card cm-shop'+(open?'':' shut'),wrap);cards.push([c,m.name+dishes.map(d=>d.label).join('')]);
+  const logo=el('div','cm-logo',c,m.name.slice(0,1));if(logo.dataset)logo.dataset.m=id;const info=el('div','cm-info',c);el('strong','',info,m.name);el('small','cm-rate',info,`★${m.rating} · ${m.sold}`);el('small','',info,`${M.distance(id,dest)}m · 约${M.eta(id,dest)}分钟 · 配送${yuan(cents(price('to_delivery_fee')))} · 起送${yuan(cents(price('to_min_order')))}`);
+  const tg=el('div','app-tags',info);for(const t of m.tags)el('span','',tg,t);el('span','cm-open',info,open?'营业中':(M.open(id,at,live)?'骑手休息（07:00–23:00）':'休息中'));
+  btn('进店 · '+m.name,info,guard(ctx,()=>{v.page='store';v.store=id;}),'phone-btn secondary cm-enter');}
+ const cn=el('section','phone-card cm-shop shut',wrap);el('div','cm-logo',cn,'食');const ci=el('div','cm-info',cn);el('strong','',ci,'槐东社区食堂');el('small','',ci,'07:00–20:00 · 到店就餐或打包，暂不接外卖');}
+function foodStore(wrap,v,ctx){const id=v.store,m=M.MERCHANTS[id],live=SP.commerce.ctx(),at=SP.clock.abs();
+ const head=el('div','cm-store-head',wrap);btn('‹ 商家列表',head,guard(ctx,()=>{v.page='home';v.store=null;}),'cm-back');el('strong','',head,m.name);el('small','',head,`★${m.rating} · ${m.sold} · ${M.open(id,at,live)?'营业中':'休息中'} · 出餐约${m.prep}分钟`);
+ const menu=el('section','phone-card cm-menu',wrap);for(const [sku,d]of Object.entries(M.MENU)){if(d.m!==id)continue;const r=el('div','cm-dish',menu);const pic=el('div','cm-dish-pic',r);if(pic.dataset)pic.dataset.cat=d.cat;const t=el('div','cm-dish-t',r);el('strong','',t,d.label);el('small','',t,d.pack?'外卖餐盒打包 · 常温约8小时内吃完':'原包装 · 可放冰箱');el('b','cm-price',t,yuan(cents(price(d.key))));stepper(r,v.cart,sku,d.label,ctx);}
+ for(const k of Object.keys(v.cart))if(M.MENU[k]?.m!==id)delete v.cart[k];
+ const sum=cartSum(M.MENU,v.cart),bar=el('div','cm-cartbar'+(sum.n?' on':''),wrap);el('span','cm-cart-ico',bar,String(sum.n));const s=el('div','cm-cart-sum',bar);el('b','',s,sum.n?yuan(sum.c):'未选购商品');el('small','',s,`另需配送费${yuan(cents(price('to_delivery_fee')))}`);
+ const go=btn(sum.c>=cents(price('to_min_order'))?'去结算':`${yuan(cents(price('to_min_order')))}起送`,bar,guard(ctx,()=>{v.page='checkout';}),'cm-go');go.disabled=sum.c<cents(price('to_min_order'));}
+function foodCheckout(wrap,v,ctx){const head=el('div','cm-store-head',wrap);btn('‹ 返回菜单',head,guard(ctx,()=>{v.page='store';}),'cm-back');el('strong','',head,'确认订单');
+ el('h3','cm-h',wrap,'收货地址');destButtons(wrap,v,'food',ctx);const list=el('section','phone-card cm-lines',wrap);for(const [k,n]of Object.entries(v.cart)){const r=el('div','cm-bill-row',list);el('span','',r,M.MENU[k].label+' ×'+n);el('b','',r,yuan(n*cents(price(M.MENU[k].key))));}
+ quoteBox(wrap,'food',v,ctx);}
+function foodOrders(wrap,v,ctx){const s=SP.commerce.view(),at=SP.clock.abs(),list=(s?.orders||[]).filter(o=>o.app==='food').slice().reverse();if(!list.length){el('p','app-empty',el('section','phone-card',wrap),'还没有外卖订单。去首页挑一家附近的店吧。');return;}
+ for(const o of list){const c=el('section','phone-card cm-order',wrap),h=el('div','cm-order-h',c);el('strong','',h,M.MERCHANTS[o.merchant].name);el('span','cm-st '+o.status,h,{preparing:'商家出餐中',riding:'骑手配送中',at_door:'已放门口',received:'已取到',cancelled:'已取消'}[o.status]);
+  el('p','cm-order-items',c,SP.commerce.names(o)+' · 实付'+yuanF(o.totalCents));
+  if(o.status!=='cancelled')timeline(c,[['已下单',true,SP.commerce.hm(o.placedAt)],['商家出餐 · 骑手取餐',o.courier==='rider'?o.status!=='preparing':at>=o.readyAt,SP.commerce.hm(o.readyAt)],['骑手配送',o.courier==='rider'?o.status!=='preparing':at>=o.readyAt,'预计'+SP.commerce.hm(o.arriveAt)+'送达'],[o.status==='at_door'?'已放在门口':'送达',['at_door','received'].includes(o.status),M.DEST[o.dest].name],['已取到',o.status==='received',o.handedAt!==null?SP.commerce.hm(o.handedAt):'']],o.status==='preparing'?1:o.status==='riding'?2:o.status==='at_door'?3:4);
+  if(o.status==='riding'||o.status==='preparing'){const D=M.DEST[o.dest],live=o.courier==='rider'?SP.commerceRider?.view?.():null,mine=live&&live.orderId===o.id&&live.x!=null,tr=el('div','cm-track',c),bar=el('span','',tr);
+   if(mine){const left=Math.round(Math.hypot(D.x-live.x,D.y-live.y)),f=o.status==='preparing'?.15:Math.max(.2,Math.min(.97,1-left/Math.max(1,Math.hypot(D.x-M.MERCHANTS[o.merchant].x,D.y-M.MERCHANTS[o.merchant].y))));bar.style.width=Math.round(f*100)+'%';
+    el('small','cm-note cm-rider-live',c,(o.status==='preparing'?(live.phase==='pickup'?`骑手已到${M.MERCHANTS[o.merchant].name}门口等餐`:`骑手正骑车前往${M.MERCHANTS[o.merchant].name}取餐`):`骑手距收货点约${left}m`)+'（街景可见：黄衣电动车骑手，位置与预计时间按他的实际路线实时更新）');}
+   else{const p=SP.commerce.riderAt(o,at),left=Math.round(Math.hypot(D.x-p.x,D.y-p.y));bar.style.width=Math.round((p.f||0)*100)+'%';el('small','cm-note cm-rider-model',c,(o.status==='preparing'?`骑手前往${M.MERCHANTS[o.merchant].name}取餐`:`骑手距收货点约${left}m`)+(o.courier==='rider'?'（街景骑手暂时不在线，按路线估算）':'（平台其他骑手 · 后台模拟位置，街景不显示；街景骑手忙或已收工）'));}}
+  if(o.status==='preparing')btn('取消订单',c,guard(ctx,()=>{const r=SP.commerce.cancel(o.id);if(!r.ok)SP.toast?.(r.reason);return r.ok;}),'phone-btn secondary');}}
+/* ---------------- 槐集优选 ---------------- */
+function shop(mount,ctx){if(SP.game?.ps!==owner)reset();const v=V.shop;if(!SP.commerce||!M){el('p','phone-status',mount,'购物暂时还未准备好。');return;}
+ const sum=cartSum(M.SHOP,v.cart),wrap=el('div','cm-app cm-shopapp',mount);seg(wrap,[['优选首页',v.page==='home',()=>{v.page='home';}],[`购物车${sum.n?'('+sum.n+')':''}`,v.page==='cart'||v.page==='checkout',()=>{v.page='cart';}],['网购订单',v.page==='orders',()=>{v.page='orders';}]],ctx);
+ if(v.page==='cart')return shopCart(wrap,v,ctx);if(v.page==='checkout')return shopCheckout(wrap,v,ctx);if(v.page==='orders')return shopOrders(wrap,v,ctx);
+ const cards=[];search(wrap,'搜索商品，如 洗衣液','搜索商品',v,cards);
+ const ban=el('div','cm-banner shop',wrap);el('strong','',ban,'同城仓直发');el('span','',ban,`满${yuan(cents(price('shop_free_ship')))}包邮 · 约8小时到社区驿站`);
+ const cats=el('div','cm-cats five',wrap);for(const [c,ic]of [['粮油速食','noodle'],['生鲜','egg'],['日用百货','daily'],['礼品','gift'],['家电','fridge']]){const b=btn('',cats,guard(ctx,()=>{v.cat=v.cat===c?'':c;}),'cm-cat'+(v.cat===c?' on':''),'分类·'+c);const i=el('span','cm-ci',b);if(i.dataset)i.dataset.icon=ic;el('span','cm-cl',b,c);}
+ el('h3','cm-h',wrap,v.cat||'猜你喜欢');const grid=el('div','cm-grid',wrap);
+ for(const [sku,p]of Object.entries(M.SHOP)){if(v.cat&&p.cat!==v.cat)continue;const c=el('section','cm-prod',grid);cards.push([c,p.label+p.cat]);const pic=el('div','cm-prod-pic',c);if(pic.dataset)pic.dataset.sku=sku;el('strong','',c,p.label);el('small','',c,p.spec);const pr=el('div','cm-prod-p',c);el('b','',pr,yuan(cents(price(p.key))));el('small','',pr,'同城仓');
+  btn(v.cart[sku]?`已加${v.cart[sku]}件`:'加入购物车',c,guard(ctx,()=>{v.cart[sku]=Math.min(10,(v.cart[sku]||0)+1);SP.toast?.('已加入购物车：'+p.label);}),'cm-add','加入购物车·'+p.label);}
+ if(!v.cat||v.cat==='家电'){const f=SP.commerce.fridgeListing(),c=el('section','phone-card cm-fridge',wrap);cards.push([c,'二手小冰箱家电冰箱']);const pic=el('div','cm-prod-pic',c);if(pic.dataset)pic.dataset.sku='fridge';const t=el('div','cm-info',c);el('strong','',t,'二手小冰箱 · 家电回收站');el('small','',t,'合租房间用 · 送货上门09:00–21:00本人签收，或3小时后驿站自提');el('b','cm-price',t,yuan(cents(f.price)));
+  if(f.order)el('p','cm-note',t,'冰箱订单：'+({ordered:'已下单，等待到货',arrived:'已到驿站快递柜，等你去取',carried:'正在搬回房间',handed:'已签收，进房间就能装好',installed:'已在你房间里运行'})[f.order.status]);
+  else if(!f.leased)el('p','cm-note',t,'需要先有栖和公寓合租房的租约，冰箱才有地方放。');
+  else{btn('冰箱 · 送货上门',t,guard(ctx,()=>SP.toast?.(SP.commerce.orderFridge('delivery'))),'phone-btn');btn('冰箱 · 驿站自提',t,guard(ctx,()=>SP.toast?.(SP.commerce.orderFridge('pickup'))),'phone-btn secondary');}}}
+function shopCart(wrap,v,ctx){const box=el('section','phone-card cm-lines',wrap);const keys=Object.keys(v.cart).filter(k=>M.SHOP[k]&&v.cart[k]>0);if(!keys.length){el('p','app-empty',box,'购物车是空的。');return;}
+ for(const k of keys){const p=M.SHOP[k],r=el('div','cm-dish',box);const pic=el('div','cm-dish-pic',r);if(pic.dataset)pic.dataset.sku=k;const t=el('div','cm-dish-t',r);el('strong','',t,p.label);el('small','',t,p.spec);el('b','cm-price',t,yuan(cents(price(p.key))));stepper(r,v.cart,k,p.label,ctx);}
+ const sum=cartSum(M.SHOP,v.cart),bar=el('div','cm-cartbar on shop',wrap);el('span','cm-cart-ico',bar,String(sum.n));const s=el('div','cm-cart-sum',bar);el('b','',s,yuan(sum.c));el('small','',s,sum.c>=cents(price('shop_free_ship'))?'已包邮':`运费${yuan(cents(price('shop_ship_fee')))}，满${yuan(cents(price('shop_free_ship')))}包邮`);btn('结算',bar,guard(ctx,()=>{v.page='checkout';}),'cm-go');}
+function shopCheckout(wrap,v,ctx){const head=el('div','cm-store-head',wrap);btn('‹ 返回购物车',head,guard(ctx,()=>{v.page='cart';}),'cm-back');el('strong','',head,'确认订单');el('h3','cm-h',wrap,'配送方式');destButtons(wrap,v,'shop',ctx);quoteBox(wrap,'shop',v,ctx);}
+function shopOrders(wrap,v,ctx){const s=SP.commerce.view(),at=SP.clock.abs(),list=(s?.orders||[]).filter(o=>o.app==='shop').slice().reverse(),f=SP.commerce.fridgeListing();
+ if(f.order){const c=el('section','phone-card cm-order',wrap);const h=el('div','cm-order-h',c);el('strong','',h,'二手小冰箱 · 家电回收站');el('span','cm-st',h,f.order.status==='installed'?'已安装':'进行中');el('p','cm-order-items',c,({ordered:'已下单，等待到货',arrived:'已到驿站快递柜，等你去取',carried:'正在搬回房间',handed:'已签收，进房间就能装好',installed:'已在你房间里运行'})[f.order.status]);}
+ if(!list.length&&!f.order){el('p','app-empty',el('section','phone-card',wrap),'还没有网购订单。');return;}
+ for(const o of list){const c=el('section','phone-card cm-order',wrap),h=el('div','cm-order-h',c);el('strong','',h,'槐集优选 · 订单'+o.id);el('span','cm-st '+o.status,h,{paid:'待发货',shipping:'运输中',at_locker:'待取件',received:'已签收'}[o.status]);el('p','cm-order-items',c,SP.commerce.names(o)+' · 实付'+yuanF(o.totalCents));
+  const loc=o.dest==='locker'||o.status==='at_locker';timeline(c,[['已付款',true,SP.commerce.hm(o.placedAt)],['商家发货',at>=o.readyAt,SP.commerce.hm(o.readyAt)],['同城运输中',at>=o.readyAt,'预计'+SP.commerce.hm(o.arriveAt)+'到达'],[loc?(o.attempts?'上门未遇，改投驿站':'已到驿站快递柜'):'快递员上门派送',['at_locker','received'].includes(o.status),loc?M.DEST.locker.name:M.DEST[o.dest].name],['已签收',o.status==='received',o.handedAt!==null?SP.commerce.hm(o.handedAt):'']],o.status==='paid'?1:o.status==='shipping'?2:o.status==='at_locker'?3:4);
+  if(o.status==='at_locker')el('p','cm-note',c,'请本人到社区服务站（街坊药房旁）快递柜，点“取出网购包裹”。');}}
+SP.commerceUI={takeout,shop,reset,_view:V};
+})(typeof window!=='undefined'?window:globalThis);
