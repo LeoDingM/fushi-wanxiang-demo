@@ -1,0 +1,3 @@
+(function(root){'use strict';const SP=root.SP,own=(o,k)=>Object.hasOwn(o,k);function checked(s,at,ps){const n=SP.employment.prepare(s,at,ps);if(!n)throw Error('岗位任职或离职依据无效');return n;}
+ SP.employmentSave={captureState(ps,at){if(!SP.employment.canSave())throw Error('岗位提交中');return checked(ps.employment||SP.employment.fresh(at),at,ps);},prepareState(ps,ext,at){const has=own(ps,'employment'),mark=own(ext||{},'employment');if(has!==mark||mark&&ext.employment!==1)throw Error('岗位扩展声明不一致');const migrated=!has||ps.employment.version<11||ps.employment.studio?.version===1;ps.employment=checked(has?ps.employment:SP.employment.fresh(at),at,ps);return migrated;},applyCommitted(ps,at){ps.employment=checked(ps.employment,at,ps);SP.employment.resetRuntime();}};
+})(window);
