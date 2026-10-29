@@ -1,0 +1,4718 @@
+/* 鹰山宋城 — Song module atlas (井槐里-style kitbash).
+ * Pre-bakes textured isometric modules (瓦 / 柱 / 匾 / 窗 / 招幌 / 隔扇 / 斗拱 / 墙板 / 屋脊 / 城砖垛口女墙) into an atlas,
+ * then AncientParts stamps them instead of live polyline描线. Aligns with community atlas pipeline
+ * (kit_ancient/kit_atlas.png + kit_manifest.json).
+ * Site197 facade-detail：门/窗/隔扇/斗拱/屋脊瓦再细化 + 新模块（万字窗、板门、雕刻隔扇、大斗拱、脊瓦、门槛）。
+ * Site198 wall-merlon：南薰门/城墙 城砖·垛口·女墙 atlas 模块（禁纯线稿）。
+ * Site198 roof-ridge：屋脊线/瓦当/鸱吻/屋檐滴水 atlas 细节增强；店铺与公建屋顶更密。禁纯线稿。
+ * Site201 signboards：店招/牌匾/幌子文字与边框 atlas 细化（匾额金边如意、竖招板、幌子织纹/奶油布）。禁纯线稿。
+ * Site202 paving：御街/广场方砖·条石·席纹铺地 + 排水沟 + 路牙 atlas 模块。禁纯线稿。
+ * Site203 lattice：格扇门窗/花窗/隔扇/槛窗 atlas 细化（lattice_geshan / window_huachuang / door_geshan_bubujin / sill_kanchuang）。禁纯线稿。
+ * Site204：街具点景 atlas 模块 prop_shideng/prop_shiteng/prop_huagang/prop_lamp_pole（石灯笼·石凳·花缸·挂灯杆）。禁纯线稿。
+ * Site205 roof-tiles：瓦当/滴水/瓦垄/檐口 atlas 细化（tile_wadang / tile_dishui / tile_walong / eave_yankou）；比 Site198 更密；禁纯线稿。
+ * Site206：山墙/清水砖/墀头/墙帽 atlas 细化（wall_shangqiang / brick_qingshui / ornament_chitou / wall_cap）。禁纯线稿。
+ * Site207 rail-queti：栏杆寻杖/雀替/挂落/小柱 atlas 细化（rail_xunzhang / ornament_queti / hanging_gualuo / baluster_xiaozhu）；廊道·临河·庭院·桥侧 densify；禁纯线稿。
+ * Site208：彩绘梁枋/额枋/斗拱色块 atlas 细化（beam_efang / caihua_band / dougong_block / eave_board）；宋画青绿+朱红点缀，勿霓虹。禁纯线稿。
+ * Site209 door-hardware：门钉/铺首衔环/门槛/抱鼓石 atlas 细化（door_mending / knocker_pushou / sill_menkan / stone_baogu）；城门·衙署·豪宅·店铺大门 densify；禁纯线稿。
+ * Site210：旗幡/帷幔/流苏/檐下挂饰 atlas 细化（banner_qifan / curtain_weiman / tassel_liusu / hang_ornament）；与 site201 幌子互补，勿重复堆叠。禁纯线稿。
+ * Site211 platform：台基/阶条石/垂带/踏垛 atlas 细化（base_taiji / step_tiaotiao / ramp_chuidai / stair_taduo）；城门·衙署·酒楼·殿宇·府邸基座 densify；注意与铺地衔接；禁纯线稿。
+ * Site212：影壁/照壁/砖雕花心 atlas 细化（wall_yingbi / wall_zhaobi / brick_huaxin / screen_base）；南薰门内·府邸入口·巷口点景；禁纯线稿。
+ * Site213 ridge-beasts：屋脊鸱吻/垂脊走兽/正脊饰/垂脊 atlas 细化（ridge_chiwen / beast_zoushou / ridge_ornament / hip_chuiji）；城楼·酒楼·府邸大屋顶 densify；与瓦当衔接；禁纯线稿。
+ * Site214：落地罩/隔断屏/月洞门框 atlas 细化（screen_luodizhao / partition_geshan / moon_yuedong / frame_menkuang）；茶坊·酒楼·豪宅门厅/廊口可见处；与格扇 #117 互补；禁纯线稿。
+ * Site215 hitching：拴马桩/上马石/石敢当/路牙石标 atlas 细化（post_shuanma / stone_shangma / stone_ganddang / curb_marker）；御街·南薰门外·府邸门前 densify；与街具#118、台基#125互补；禁纯线稿。
+ * Site216 louwindow：漏窗/花墙/透空砖雕/花格墙 atlas 细化（window_lou / wall_huaziang / brick_toukong / lattice_wall）；艮岳苑·豪宅侧墙·巷墙 densify；与格扇#117、影壁#126互补；禁纯线稿。
+ * Site217 pavilions：井亭/路亭/小牌坊/亭顶 atlas 细化（pavilion_jingting / pavilion_luting / gate_paifang_s / roof_ting）；御街交叉口·汴河岸·艮岳苑入口 densify；点景小体量不堵路；禁纯线稿。
+ * Site218 chuihuamen：垂花门/小门楼/门罩/门柱石 atlas 细化（gate_chuihua / gate_menlou_s / eave_menzhao / post_menzhu）；豪宅·四合院门前·横巷口 densify；点景不堵主路中线；禁纯线稿。
+ * Site219 rockery：太湖石/叠石假山/小峰石/石附苔 atlas 细化（rock_taihu / rock_dieshi / rock_peak_s / plant_rock_moss）；豪宅庭院·艮岳外围 densify；禁纯线稿。
+ * Site220 meirenkao：美人靠/飞来椅/坐槛/廊凳 atlas 细化（seat_meirenkao / seat_feilaichi / rail_zuokan / bench_lang）；曲廊侧·井亭路亭旁·汴河岸观景 densify；点景不堵路；禁纯线稿。
+ * Site220 meirenkao：美人靠/飞来椅/坐槛/廊凳 atlas 细化（seat_meirenkao / seat_feilaichi / rail_zuokan / bench_lang）；曲廊侧·井亭路亭旁·汴河岸观景 densify；点景不堵路；禁纯线稿。
+ * Site221 biane：匾额/对联/小字牌/垂挂牌 atlas 细化（sign_biane / sign_duilian / sign_zhaopai_s / sign_hanging）；店铺门楣·宅门·巷口·亭侧 densify；与 site201 招牌互补；禁纯线稿。
+ * Site222 baogu：抱鼓石/方门墩/小石炉 atlas 点景（stone_baogu / stone_mendun / stone_lu）；宅门两侧·垂花门前·巷口·富户院门 densify；与拴马石#128、太湖石#133互补；禁纯线稿。
+ * Site225 gongdeng：宫灯/纱灯/立灯 atlas 点景（lantern_gong / lantern_sha / lantern_stand）；街巷宅院挂灯·立灯 densify；与灯笼#113 lanternGlow/渔火互补细化；禁纯线稿。
+ * Site226 zhuli：竹篱/花篱/柴扉 atlas 点景（fence_zhuli / fence_huali / gate_chaifei）；巷口·宅侧·园边·桥头小径 densify；与漏窗#131、隔断#129互补（室外篱门≠漏窗/内隔断）；禁纯线稿。
+ * Site227 huotan：货摊/货架/晾晒 atlas 点景（stall_huotan / rack_huojia / pole_liangshai）；主街两侧·巷口·桥头·宅前 densify；与招牌#115、街具#118互补；禁纯线稿。
+ * Site228 shizhuo：石桌/石凳/棋枰 atlas 点景（seat_shizhuo / seat_shideng / seat_qiping）；庭院·巷角·亭侧·桥头·树下 densify；与美人靠#134、街具#118互补（庭院闲坐对弈≠廊边美人靠/简易街具石凳）；禁纯线稿。
+ * Site229 shuigang：水缸/井栏/水桶 atlas 点景（prop_shuigang / prop_jinglan / prop_shuitong）；宅院角·巷口·井边·厨后·桥头 densify；与井亭#130互补（取水储水点景≠井亭建筑）；禁纯线稿。
+ * Site230 xianglu：香炉/烛台/小供案 atlas 点景（prop_xianglu / prop_zhutai / prop_gongan_s）；影壁前·宅门内·亭侧·巷口小龛·庭院角 densify；与影壁#126、匾额#135互补（香火案几点景≠影壁本体/匾额）；≠site222 stone_lu 门侧小石炉；禁纯线稿。
+ * Site231 chaidui：柴堆/草垛/粮袋 atlas 点景（prop_chaidui / prop_caoduo / prop_liangdai）；宅后·厨侧·巷口·码头边·厩旁 densify；与货摊#141、水缸#143互补；禁纯线稿。
+ * Site224 shishi：石狮/小蹲兽门兽 atlas 点景（stone_shishi / stone_shishi_s）；宅门·桥头·广场入口·衙署/庙前 densify；与抱鼓石#136、脊兽#127互补（门兽≠屋脊兽）；禁纯线稿。
+ * Site223 penjing：盆景/砖花坛/石台 atlas 细化（pot_penjing / bed_huatan / stone_shitai）；富户庭院·巷口·桥头·亭侧·门前 densify；与植物#106、太湖石#133互补；禁纯线稿。
+ * 未经Leo确认. */
+(function (root) {
+  'use strict';
+  const A = root.RongqiaoArt; if (!A) throw new Error('RongqiaoArt first');
+  const { shade, C, FONT_SERIF } = root.AncientCore;
+  const KX = 32, KY = 16, PZ = 39.1918;
+  const TILE = C.TILE, RED = C.RED, RED_W = C.RED_W, WOOD = C.WOOD, WOOD_D = C.WOOD_D;
+  const PAPER = C.PAPER, BRICK = C.BRICK, STONE = C.STONE, PLASTER = C.PLASTER, PLASTER_W = C.PLASTER_W;
+  const CAI_G = C.CAI_G, CAI_B = C.CAI_B, GOLD = C.GOLD, RIDGE = C.RIDGE;
+
+  let atlas = null, ag = null, frames = {}, ready = false;
+
+  let _makeCanvas = null;
+  function defaultMake(w, h) {
+    if (_makeCanvas) return _makeCanvas(w, h);
+    if (typeof document !== 'undefined' && document.createElement) {
+      const c = document.createElement('canvas'); c.width = w; c.height = h; return c;
+    }
+    throw new Error('AncientAtlas: no makeCanvas (set AncientAtlas._makeCanvas for node)');
+  }
+
+  function painter(g, ox, oy) {
+    const P = (x, y, z) => [ox + (x - y) * KX, oy - (x + y) * KY - (z || 0) * PZ];
+    function poly(pts, fill, line, lw) {
+      g.beginPath(); pts.forEach((p, i) => (i ? g.lineTo(p[0], p[1]) : g.moveTo(p[0], p[1]))); g.closePath();
+      if (fill) { g.fillStyle = fill; g.fill(); }
+      if (line) { g.strokeStyle = line; g.lineWidth = lw || 1; g.stroke(); }
+    }
+    const face = (pts, fill, line, lw) => poly(pts.map((p) => P(p[0], p[1], p[2])), fill, line, lw);
+    function box(x0, y0, z0, x1, y1, z1, col, o = {}) {
+      const line = o.line === false ? null : o.line || shade(col, 0.55);
+      if (!o.noW) face([[x0, y0, z0], [x0, y1, z0], [x0, y1, z1], [x0, y0, z1]], o.west || shade(col, 0.8), line);
+      if (!o.noS) face([[x0, y0, z0], [x1, y0, z0], [x1, y0, z1], [x0, y0, z1]], o.south || col, line);
+      if (!o.noTop) face([[x0, y0, z1], [x1, y0, z1], [x1, y1, z1], [x0, y1, z1]], o.top || shade(col, 1.12), line);
+    }
+    function seg(a, b, col, lw) {
+      const p = P(...a), q = P(...b);
+      g.strokeStyle = col; g.lineWidth = lw || 1; g.beginPath();
+      g.moveTo(Math.round(p[0]) + 0.5, Math.round(p[1]) + 0.5); g.lineTo(Math.round(q[0]) + 0.5, Math.round(q[1]) + 0.5); g.stroke();
+    }
+    function QS(y, x0, z0, x1, z1, fill, line) { face([[x0, y, z0], [x1, y, z0], [x1, y, z1], [x0, y, z1]], fill, line); }
+    function QW(x, y0, z0, y1, z1, fill, line) { face([[x, y0, z0], [x, y1, z0], [x, y1, z1], [x, y0, z1]], fill, line); }
+    return { P, g, poly, face, box, seg, QS, QW };
+  }
+
+  function boundsOf(geo, pad) {
+    const [x0, y0, z0, x1, y1, z1] = geo, xs = [], ys = []; pad = pad == null ? 4 : pad;
+    for (const x of [x0, x1]) for (const y of [y0, y1]) for (const z of [z0, z1]) {
+      xs.push((x - y) * KX); ys.push(-(x + y) * KY - z * PZ);
+    }
+    return [Math.floor(Math.min(...xs)) - pad, Math.floor(Math.min(...ys)) - pad, Math.ceil(Math.max(...xs)) + pad, Math.ceil(Math.max(...ys)) + pad];
+  }
+
+  /* ---- module painters (local metres; origin at bay bottom-left on S face unless noted) ---- */
+  function paintWallPlasterS(d, w, h, o = {}) {
+    const fr = o.frame || WOOD, pl = o.col || PLASTER;
+    d.QS(0, 0, 0, w, h, pl, shade(pl, 0.55));
+    // timber posts + mid rail + top plate (textured, not sparse lines)
+    d.QS(0 - 0.01, 0, 0, 0.08, h, shade(fr, 0.95), shade(fr, 0.5));
+    d.QS(0 - 0.01, w - 0.08, 0, w, h, shade(fr, 0.95), shade(fr, 0.5));
+    d.QS(0 - 0.01, 0, h - 0.12, w, h, shade(fr, 0.9), shade(fr, 0.5));
+    d.QS(0 - 0.01, 0, h * 0.48, w, h * 0.48 + 0.1, shade(fr, 0.92));
+    // subtle plaster grit
+    for (let i = 0; i < 18; i++) {
+      const x = 0.12 + (i * 0.37) % (w - 0.24), z = 0.2 + ((i * 0.61) % (h - 0.4));
+      d.QS(0 - 0.005, x, z, x + 0.04, z + 0.03, shade(pl, i % 2 ? 0.94 : 1.06));
+    }
+  }
+  function paintWallBrickS(d, w, h) {
+    d.QS(0, 0, 0, w, h, BRICK, shade(BRICK, 0.5));
+    for (let z = 0.16, k = 0; z < h - 0.02; z += 0.16, k++) {
+      d.seg([0.02, 0 - 0.005, z], [w - 0.02, 0 - 0.005, z], shade(BRICK, 0.78));
+      for (let x = (k % 2) * 0.2; x < w - 0.05; x += 0.4) d.seg([x, 0 - 0.005, z], [x, 0 - 0.005, Math.min(h, z + 0.16)], shade(BRICK, 0.72));
+    }
+  }
+  function paintWin(d, w, h, style) {
+    const fr = RED_W, paper = PAPER, m = 0.07;
+    // outer timber frame (thick, weathered)
+    d.QS(0, 0, 0, w, h, fr, shade(fr, 0.42));
+    d.QS(-0.004, 0.02, 0.02, w - 0.02, h - 0.02, shade(fr, 0.92), shade(fr, 0.5));
+    // paper pane with soft grit (not flat fill)
+    d.QS(-0.008, m, m, w - m, h - m, paper, shade(fr, 0.55));
+    for (let i = 0; i < 14; i++) {
+      const x = m + 0.04 + (i * 0.29) % (w - 2 * m - 0.1);
+      const z = m + 0.05 + ((i * 0.47) % (h - 2 * m - 0.12));
+      d.QS(-0.009, x, z, x + 0.05, z + 0.04, shade(paper, i % 2 ? 0.94 : 1.06));
+    }
+    const X0 = m + 0.03, X1 = w - m - 0.03, Z0 = m + 0.03, Z1 = h - m - 0.03, lc = shade(fr, 0.78);
+    // inner bead/rebate
+    d.QS(-0.01, X0 - 0.015, Z0 - 0.015, X1 + 0.015, Z1 + 0.015, null, shade(fr, 0.55));
+    if (style === 'diamond') {
+      const s = 0.13, Hh = Z1 - Z0;
+      for (let a = X0 - Hh; a < X1; a += s) {
+        const p0x = Math.max(X0, a), p0z = Z0 + Math.max(0, X0 - a);
+        const p1x = Math.min(X1, a + Hh), p1z = Z0 + Math.min(Hh, X1 - a);
+        if (p1x > p0x) {
+          d.seg([p0x, -0.012, p0z], [p1x, -0.012, p1z], lc);
+          d.seg([p0x, -0.012, Z1 - (p0z - Z0)], [p1x, -0.012, Z1 - (p1z - Z0)], lc);
+        }
+      }
+    } else if (style === 'bubujin') {
+      const s = 0.11;
+      for (let x = X0 + s; x < X1; x += s) d.seg([x, -0.012, Z0], [x, -0.012, Z1], lc);
+      for (let z = Z0 + s; z < Z1; z += s) d.seg([X0, -0.012, z], [X1, -0.012, z], lc);
+      const cx = (X0 + X1) / 2, cz = (Z0 + Z1) / 2;
+      d.QS(-0.014, cx - (X1 - X0) * 0.2, cz - (Z1 - Z0) * 0.2, cx + (X1 - X0) * 0.2, cz + (Z1 - Z0) * 0.2, paper, lc);
+      d.QS(-0.016, cx - (X1 - X0) * 0.1, cz - (Z1 - Z0) * 0.1, cx + (X1 - X0) * 0.1, cz + (Z1 - Z0) * 0.1, shade(paper, 1.05), shade(GOLD, 0.7));
+    } else if (style === 'wanzi') {
+      // 万字纹：田字 + 角拐
+      const cx = (X0 + X1) / 2, cz = (Z0 + Z1) / 2, s = Math.min(X1 - X0, Z1 - Z0) * 0.18;
+      d.seg([cx, -0.012, Z0], [cx, -0.012, Z1], lc);
+      d.seg([X0, -0.012, cz], [X1, -0.012, cz], lc);
+      for (const [sx, sz] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) {
+        const ox = cx + sx * s * 0.9, oz = cz + sz * s * 0.9;
+        d.seg([ox, -0.012, oz], [ox + sx * s, -0.012, oz], lc);
+        d.seg([ox + sx * s, -0.012, oz], [ox + sx * s, -0.012, oz + sz * s], lc);
+        d.seg([ox, -0.012, oz], [ox, -0.012, oz + sz * s], lc);
+        d.seg([ox, -0.012, oz + sz * s], [ox + sx * s * 0.55, -0.012, oz + sz * s], lc);
+      }
+      // fine grid fill
+      const g = 0.14;
+      for (let x = X0 + g; x < X1; x += g) d.seg([x, -0.011, Z0], [x, -0.011, Z1], shade(fr, 0.88));
+      for (let z = Z0 + g; z < Z1; z += g) d.seg([X0, -0.011, z], [X1, -0.011, z], shade(fr, 0.88));
+    } else if (style === 'vbars') {
+      for (let x = X0 + 0.06; x < X1; x += 0.08) {
+        d.QS(-0.012, x - 0.012, Z0, x + 0.012, Z1, shade(fr, 0.95), shade(fr, 0.55));
+      }
+    } else {
+      const s = 0.1;
+      for (let x = X0 + s; x < X1; x += s) d.seg([x, -0.012, Z0], [x, -0.012, Z1], lc);
+      for (let z = Z0 + s; z < Z1; z += s) d.seg([X0, -0.012, z], [X1, -0.012, z], lc);
+    }
+    // carved sill + drip edge
+    d.QS(-0.01, 0, 0, w, 0.07, shade(fr, 0.65));
+    d.QS(-0.012, 0.04, 0.02, w - 0.04, 0.055, shade(GOLD, 0.55));
+    d.QS(-0.01, 0, h - 0.06, w, h, shade(fr, 0.7));
+    // gold corner pins + mid stile bosses
+    for (const [sx, sz] of [[m, m], [w - m, m], [m, h - m], [w - m, h - m], [w / 2, m], [w / 2, h - m]]) {
+      d.QS(-0.014, sx - 0.035, sz - 0.035, sx + 0.035, sz + 0.035, GOLD);
+      d.QS(-0.015, sx - 0.015, sz - 0.015, sx + 0.015, sz + 0.015, shade(GOLD, 1.25));
+    }
+  }
+  function paintGeshanLeaf(d, w, h, o = {}) {
+    const fr = RED_W, m = 0.05, carved = !!(o && o.carved);
+    const style = (o && o.style) || 'grid';
+    d.QS(0, 0, 0, w, h, fr, shade(fr, 0.38));
+    // stile / rail timber with grain
+    d.QS(-0.006, 0, 0, 0.05, h, shade(fr, 0.72));
+    d.QS(-0.006, w - 0.05, 0, w, h, shade(fr, 0.72));
+    d.QS(-0.006, 0, 0, w, 0.06, shade(fr, 0.68));
+    d.QS(-0.006, 0, h - 0.06, w, h, shade(fr, 0.68));
+    d.QS(-0.008, 0, h * 0.38, w, h * 0.38 + 0.08, shade(fr, 0.78)); // mid rail
+    for (let z = 0.1; z < h - 0.08; z += 0.22) {
+      d.seg([0.02, -0.01, z], [0.045, -0.01, z], shade(fr, 1.15));
+      d.seg([w - 0.045, -0.01, z], [w - 0.02, -0.01, z], shade(fr, 1.15));
+    }
+    // upper lattice pane
+    d.QS(-0.007, m, h * 0.42, w - m, h - m, PAPER, shade(fr, 0.55));
+    const s = style === 'diamond' ? 0.11 : 0.09;
+    const X0 = m + 0.02, X1 = w - m - 0.02, Z0 = h * 0.42 + 0.02, Z1 = h - m - 0.02, lc = shade(fr, 0.8);
+    if (style === 'diamond') {
+      const Hh = Z1 - Z0;
+      for (let a = X0 - Hh; a < X1; a += s) {
+        const p0x = Math.max(X0, a), p0z = Z0 + Math.max(0, X0 - a);
+        const p1x = Math.min(X1, a + Hh), p1z = Z0 + Math.min(Hh, X1 - a);
+        if (p1x > p0x) {
+          d.seg([p0x, -0.012, p0z], [p1x, -0.012, p1z], lc);
+          d.seg([p0x, -0.012, Z1 - (p0z - Z0)], [p1x, -0.012, Z1 - (p1z - Z0)], lc);
+        }
+      }
+    } else if (style === 'bubujin') {
+      const bs = 0.1;
+      for (let x = X0 + bs; x < X1; x += bs) d.seg([x, -0.012, Z0], [x, -0.012, Z1], lc);
+      for (let z = Z0 + bs; z < Z1; z += bs) d.seg([X0, -0.012, z], [X1, -0.012, z], lc);
+      const cx = (X0 + X1) / 2, cz = (Z0 + Z1) / 2;
+      d.QS(-0.014, cx - (X1 - X0) * 0.22, cz - (Z1 - Z0) * 0.22, cx + (X1 - X0) * 0.22, cz + (Z1 - Z0) * 0.22, PAPER, lc);
+      d.QS(-0.016, cx - (X1 - X0) * 0.1, cz - (Z1 - Z0) * 0.1, cx + (X1 - X0) * 0.1, cz + (Z1 - Z0) * 0.1, shade(PAPER, 1.05), shade(GOLD, 0.7));
+      /* Site203：步步锦加中挺与边框金钉 */
+      d.QS(-0.013, cx - 0.025, Z0, cx + 0.025, Z1, shade(fr, 0.95), shade(fr, 0.5));
+      for (const [sx, sz] of [[X0 + 0.04, Z0 + 0.04], [X1 - 0.04, Z0 + 0.04], [X0 + 0.04, Z1 - 0.04], [X1 - 0.04, Z1 - 0.04]]) {
+        d.QS(-0.015, sx - 0.025, sz - 0.025, sx + 0.025, sz + 0.025, GOLD);
+      }
+    } else {
+      for (let x = X0 + s; x < X1; x += s) d.seg([x, -0.012, Z0], [x, -0.012, Z1], lc);
+      for (let z = Z0 + s; z < Z1; z += s) d.seg([X0, -0.012, z], [X1, -0.012, z], lc);
+    }
+    // lower carved apron panel
+    d.QS(-0.008, m + 0.02, m, w - m - 0.02, h * 0.36, shade(fr, 0.88), shade(fr, 0.48));
+    d.QS(-0.01, m + 0.08, m + 0.06, w - m - 0.08, h * 0.32, shade(fr, 1.05));
+    if (carved) {
+      // relief cloud / peony suggestion
+      d.QS(-0.012, m + 0.14, m + 0.12, w - m - 0.14, h * 0.28, shade(GOLD, 0.55));
+      d.QS(-0.013, w * 0.35, m + 0.16, w * 0.65, h * 0.26, shade(GOLD, 0.85));
+      d.QS(-0.014, w * 0.42, m + 0.2, w * 0.58, h * 0.24, shade(fr, 0.95));
+      for (const dx of [-0.12, 0.12]) {
+        d.QS(-0.013, w * 0.5 + dx - 0.05, m + 0.18, w * 0.5 + dx + 0.05, h * 0.22, shade(GOLD, 0.7));
+      }
+    } else {
+      d.QS(-0.012, m + 0.14, m + 0.12, w - m - 0.14, h * 0.26, shade(GOLD, 0.65));
+      d.QS(-0.013, m + 0.22, m + 0.18, w - m - 0.22, h * 0.22, shade(fr, 1.08));
+    }
+    // copper door pull / 门环
+    const px = w * 0.72, pz = h * 0.28;
+    d.QS(-0.015, px - 0.04, pz - 0.04, px + 0.04, pz + 0.04, shade(GOLD, 0.9));
+    d.QS(-0.016, px - 0.02, pz - 0.08, px + 0.02, pz - 0.02, shade(GOLD, 1.1));
+    // bottom threshold lip
+    d.QS(-0.011, 0, 0, w, 0.04, shade(STONE, 0.95), shade(STONE, 0.55));
+  }
+  function paintBanDoor(d, w, h) {
+    const fr = '#3a2a20', stud = GOLD;
+    d.QS(0, 0, 0, w, h, fr, shade(fr, 0.4));
+    // vertical planks
+    for (let x = 0.05; x < w - 0.04; x += 0.16) {
+      d.QS(-0.005, x, 0.04, x + 0.14, h - 0.04, shade(fr, 0.95 + ((x * 10) % 3) * 0.04), shade(fr, 0.55));
+      d.seg([x + 0.02, -0.008, 0.08], [x + 0.02, -0.008, h - 0.08], shade(fr, 1.15));
+    }
+    // horizontal battens
+    for (const z of [0.18, h * 0.5, h - 0.22]) {
+      d.QS(-0.01, 0.04, z - 0.05, w - 0.04, z + 0.05, shade(fr, 0.75), shade(fr, 0.45));
+    }
+    // metal studs
+    for (let row = 0; row < 4; row++) for (let col = 0; col < 3; col++) {
+      const x = 0.18 + col * ((w - 0.36) / 2), z = 0.35 + row * ((h - 0.7) / 3);
+      d.QS(-0.014, x - 0.03, z - 0.03, x + 0.03, z + 0.03, stud);
+      d.QS(-0.015, x - 0.012, z - 0.012, x + 0.012, z + 0.012, shade(stud, 1.3));
+    }
+    // knocker
+    d.QS(-0.016, w * 0.55 - 0.05, h * 0.55 - 0.05, w * 0.55 + 0.05, h * 0.55 + 0.05, shade(stud, 0.85));
+    d.QS(-0.017, w * 0.55 - 0.02, h * 0.48, w * 0.55 + 0.02, h * 0.55, shade(stud, 1.1));
+    d.QS(-0.01, 0, 0, w, 0.05, STONE, shade(STONE, 0.55));
+  }
+  function paintColumn(d, h, r) {
+    const col = RED, gold = GOLD;
+    const a = d.P(0, 0, 0), b = d.P(0, 0, h);
+    const w = r * 45.25, L = Math.round(a[0] - w), R = Math.round(a[0] + w), T = Math.round(b[1]), Hh = Math.round(a[1] - b[1]);
+    d.g.fillStyle = shade(col, 0.72); d.g.fillRect(L, T, R - L, Hh);
+    d.g.fillStyle = col; d.g.fillRect(L, T, Math.max(1, Math.round((R - L) * 0.62)), Hh);
+    d.g.fillStyle = shade(col, 1.28); d.g.fillRect(L + 1, T, 1, Hh);
+    d.g.fillStyle = shade(col, 0.45); d.g.fillRect(L - 1, T, 1, Hh); d.g.fillRect(R, T, 1, Hh);
+    // 金箍 bands
+    for (const t of [0.12, 0.5, 0.88]) {
+      const yy = Math.round(T + Hh * t);
+      d.g.fillStyle = shade(gold, 0.85); d.g.fillRect(L, yy, R - L, 2);
+      d.g.fillStyle = shade(gold, 1.35); d.g.fillRect(L + 1, yy, Math.max(1, R - L - 2), 1);
+    }
+    d.g.fillStyle = shade(gold, 1.1); d.g.fillRect(L - 1, T, R - L + 2, 2);
+    d.g.fillStyle = CAI_B; d.g.fillRect(L, T + 2, R - L, 2);
+    // stone base disc
+    d.g.fillStyle = STONE; d.g.beginPath(); d.g.ellipse(a[0], a[1] - 2, w + 3, (w + 3) * 0.5, 0, 0, Math.PI * 2); d.g.fill();
+    d.g.strokeStyle = shade(STONE, 0.6); d.g.lineWidth = 1; d.g.stroke();
+  }
+  /* Site201：宋风匾额边框 — 多层金边 + 如意角花 + 漆面/木面底（禁纯线稿） */
+  function paintPlaqueFrame(d, w, ht, o = {}) {
+    const style = o.style || 'dark';
+    const fr = GOLD;
+    const bg = style === 'wood' ? '#5a3a22' : '#1a2840';
+    const bgLite = style === 'wood' ? shade(bg, 1.22) : shade(bg, 1.18);
+    const bgDark = shade(bg, 0.55);
+    /* outer dark rail */
+    d.QS(0, -w / 2 - 0.12, -ht / 2 - 0.12, w / 2 + 0.12, ht / 2 + 0.12, shade(fr, 0.55), shade(fr, 0.32));
+    /* mid gold frame */
+    d.QS(-0.004, -w / 2 - 0.08, -ht / 2 - 0.08, w / 2 + 0.08, ht / 2 + 0.08, shade(fr, 0.85), shade(fr, 0.42));
+    d.QS(-0.008, -w / 2 - 0.055, -ht / 2 - 0.055, w / 2 + 0.055, ht / 2 + 0.055, fr, shade(fr, 0.48));
+    /* bright inner fillet */
+    d.QS(-0.012, -w / 2 - 0.03, -ht / 2 - 0.03, w / 2 + 0.03, ht / 2 + 0.03, shade(fr, 1.28));
+    /* lacquer / wood panel */
+    d.QS(-0.016, -w / 2, -ht / 2, w / 2, ht / 2, bg, bgDark);
+    /* subtle panel grain / sheen strips (atlas texture, not line art) */
+    for (let i = 0; i < 5; i++) {
+      const zx = -ht / 2 + 0.08 + i * (ht - 0.16) / 4;
+      d.QS(-0.018, -w / 2 + 0.06, zx, w / 2 - 0.06, zx + 0.035, i % 2 ? bgLite : shade(bg, 0.92));
+    }
+    /* 如意角花 bosses */
+    for (const [sx, sz] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) {
+      const px = sx * (w / 2 + 0.01), pz = sz * (ht / 2 + 0.01);
+      d.QS(-0.01, px - 0.08, pz - 0.055, px + 0.08, pz + 0.055, shade(fr, 1.05), shade(fr, 0.5));
+      d.QS(-0.014, px - 0.045, pz - 0.03, px + 0.045, pz + 0.03, shade(fr, 1.32));
+      d.QS(-0.016, px - 0.02, pz - 0.015, px + 0.02, pz + 0.015, '#e8c868');
+    }
+    /* top rail jewels */
+    for (const sx of [-0.35, 0, 0.35]) {
+      const px = sx * w;
+      d.QS(-0.01, px - 0.05, ht / 2 + 0.02, px + 0.05, ht / 2 + 0.09, shade(fr, 1.15));
+      d.QS(-0.014, px - 0.025, ht / 2 + 0.04, px + 0.025, ht / 2 + 0.075, '#c8322c', shade('#c8322c', 0.5));
+    }
+    /* tassels */
+    for (const s of [-1, 1]) {
+      d.seg([s * (w / 2 + 0.09), -0.02, -ht / 2], [s * (w / 2 + 0.09), -0.02, -ht / 2 - 0.38], fr);
+      d.QS(-0.01, s * (w / 2 + 0.04), -ht / 2 - 0.5, s * (w / 2 + 0.14), -ht / 2 - 0.36, '#c8322c', shade('#c8322c', 0.5));
+      d.QS(-0.012, s * (w / 2 + 0.06), -ht / 2 - 0.46, s * (w / 2 + 0.12), -ht / 2 - 0.4, shade('#c8322c', 1.2));
+    }
+  }
+  /* Site201：竖招木板边框 atlas（金边+木纹底） */
+  function paintVsignBoard(d, w, ht) {
+    const fr = GOLD, bg = '#2a1e16', wood = '#6a4a2a';
+    d.QS(0, -w / 2 - 0.08, -ht / 2 - 0.08, w / 2 + 0.08, ht / 2 + 0.08, shade(fr, 0.65), shade(fr, 0.35));
+    d.QS(-0.005, -w / 2 - 0.05, -ht / 2 - 0.05, w / 2 + 0.05, ht / 2 + 0.05, fr, shade(fr, 0.45));
+    d.QS(-0.01, -w / 2 - 0.02, -ht / 2 - 0.02, w / 2 + 0.02, ht / 2 + 0.02, shade(fr, 1.22));
+    d.QS(-0.014, -w / 2, -ht / 2, w / 2, ht / 2, bg, shade(bg, 0.45));
+    /* vertical wood grain */
+    for (let i = 0; i < 4; i++) {
+      const x = -w / 2 + 0.06 + i * (w - 0.12) / 3;
+      d.QS(-0.016, x, -ht / 2 + 0.06, x + 0.04, ht / 2 - 0.06, i % 2 ? wood : shade(wood, 0.85));
+    }
+    /* corner studs */
+    for (const [sx, sz] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) {
+      const px = sx * (w / 2 - 0.02), pz = sz * (ht / 2 - 0.02);
+      d.QS(-0.012, px - 0.04, pz - 0.03, px + 0.04, pz + 0.03, shade(fr, 1.18));
+    }
+    /* top hanging ring */
+    d.QS(-0.008, -0.06, ht / 2 + 0.02, 0.06, ht / 2 + 0.1, shade(fr, 0.9));
+    d.QS(-0.012, -0.03, ht / 2 + 0.04, 0.03, ht / 2 + 0.08, shade(fr, 1.25));
+  }
+  function paintBanner(d, w, L, col) {
+    col = col || '#c8322c';
+    /* cloth body with soft tip */
+    d.face([[-w / 2, 0, 0], [w / 2, 0, 0], [w / 2 + 0.03, 0, -L], [w * 0.12, 0, -L - 0.22], [-w / 2 - 0.02, 0, -L]], col, shade(col, 0.48));
+    /* weave / stripe texture */
+    for (let i = 0; i < 6; i++) {
+      const z0 = -0.14 - i * (L - 0.28) / 5;
+      d.QS(-0.008, -w / 2 + 0.04, z0, w / 2 - 0.04, z0 - 0.05, i % 2 ? shade(col, 1.12) : shade(col, 0.88));
+    }
+    /* top hanging bar */
+    d.QS(-0.01, -w / 2 - 0.02, -0.14, w / 2 + 0.02, 0.02, shade('#3a2a1a', 0.9), shade('#3a2a1a', 0.5));
+    d.QS(-0.014, -w / 2 + 0.02, -0.11, w / 2 - 0.02, -0.01, GOLD);
+    d.QS(-0.016, -w / 2 + 0.05, -0.09, w / 2 - 0.05, -0.03, shade(GOLD, 1.25));
+    /* side gold piping */
+    d.seg([-w / 2 + 0.02, -0.01, -0.12], [-w / 2 + 0.01, -0.01, -L + 0.08], shade(GOLD, 0.85));
+    d.seg([w / 2 - 0.02, -0.01, -0.12], [w / 2 + 0.01, -0.01, -L + 0.08], shade(GOLD, 0.85));
+    /* inner gold border */
+    d.QS(-0.012, -w / 2 + 0.06, -L + 0.08, w / 2 - 0.06, -0.18, null, GOLD);
+    /* fringe tassels denser */
+    for (let k = 0; k < 6; k++) {
+      const tx = -w / 2 + 0.05 + k * w * 0.18;
+      d.seg([tx, 0, -L + 0.02], [tx, 0, -L - 0.2 - (k % 2) * 0.07], shade(col, 0.62));
+      d.QS(-0.005, tx - 0.035, -L - 0.26 - (k % 2) * 0.07, tx + 0.035, -L - 0.18 - (k % 2) * 0.07, GOLD);
+      d.QS(-0.008, tx - 0.018, -L - 0.24 - (k % 2) * 0.07, tx + 0.018, -L - 0.2 - (k % 2) * 0.07, shade(GOLD, 1.2));
+    }
+  }
+  function paintLantern(d, r) {
+    /* Site200：灯笼本体略增暖纸透光高光（白天可读，夜景 emit 叠层更贴） */
+    const col = '#d83028', cord = 0.25;
+    d.seg([0, 0, 0], [0, 0, -cord], '#2a1a12');
+    const c = d.P(0, 0, -cord - r * 1.2), g = d.g;
+    const cx = Math.round(c[0]), cy = Math.round(c[1]), rr = r * 45.25 * 0.8;
+    g.fillStyle = '#3a2a1a'; g.fillRect(cx - Math.round(rr * 0.55), cy - Math.round(rr * 1.2), Math.max(3, Math.round(rr * 1.1)), 2);
+    g.fillStyle = GOLD; g.fillRect(cx - Math.round(rr * 0.45), cy - Math.round(rr * 1.15), Math.max(2, Math.round(rr * 0.9)), 1);
+    g.beginPath(); g.ellipse(c[0], c[1], rr, rr * 1.08, 0, 0, Math.PI * 2); g.fillStyle = col; g.fill();
+    g.strokeStyle = shade(col, 0.45); g.lineWidth = 1; g.stroke();
+    g.fillStyle = shade(col, 1.55); g.beginPath(); g.ellipse(c[0] - rr * 0.15, c[1] - rr * 0.1, rr * 0.5, rr * 0.58, 0, 0, Math.PI * 2); g.fill();
+    g.fillStyle = 'rgba(255,220,150,0.35)'; g.beginPath(); g.ellipse(c[0], c[1], rr * 0.55, rr * 0.62, 0, 0, Math.PI * 2); g.fill();
+    g.fillStyle = shade(col, 0.7);
+    for (const f of [-0.6, -0.2, 0.2, 0.6]) g.fillRect(Math.round(c[0] + f * rr), Math.round(c[1] - rr * 0.85), 1, Math.round(rr * 1.7));
+    g.fillStyle = '#3a2a1a'; g.fillRect(cx - Math.round(rr * 0.55), cy + Math.round(rr * 1.0), Math.max(3, Math.round(rr * 1.1)), 2);
+    g.fillStyle = GOLD; g.fillRect(cx - Math.round(rr * 0.45), cy + Math.round(rr * 1.05), Math.max(2, Math.round(rr * 0.9)), 1);
+    g.fillStyle = '#e8c050'; g.fillRect(cx, cy + Math.round(rr * 1.1) + 2, 1, 4);
+    g.fillStyle = '#c8322c'; g.fillRect(cx - 1, cy + Math.round(rr * 1.1) + 6, 3, 2);
+  }
+  function paintTileStripS(d, w) {
+    // one eave-course of 筒瓦 + 瓦当 + 滴水 — textured module ~1 m wide (Site198 denser motif)
+    const col = TILE, lite = shade(col, 1.28), dark = shade(col, 0.5);
+    d.QS(0, 0, 0, w, 0.34, col, dark);
+    for (let x = 0.04; x < w; x += 0.16) {
+      d.QS(-0.008, x, 0.02, x + 0.09, 0.32, lite, dark);
+      d.QS(-0.01, x + 0.015, 0.04, x + 0.075, 0.3, shade(col, 1.42));
+      d.seg([x + 0.045, -0.012, 0.02], [x + 0.045, -0.012, 0.32], shade(col, 0.72));
+    }
+    for (let x = 0.12; x < w; x += 0.16) d.QS(-0.004, x, 0.03, x + 0.07, 0.28, shade(col, 0.76));
+    // 瓦当 discs denser + floral motif
+    for (let x = 0.08; x < w; x += 0.16) {
+      const q = d.P(x, -0.035, -0.02);
+      const cx = Math.round(q[0]), cy = Math.round(q[1]) + 1;
+      d.g.fillStyle = shade(col, 0.32); d.g.beginPath();
+      d.g.ellipse(cx, cy, 3.6, 4.0, 0, 0, Math.PI * 2); d.g.fill();
+      d.g.fillStyle = shade(col, 0.55); d.g.beginPath();
+      d.g.ellipse(cx, cy, 2.5, 2.8, 0, 0, Math.PI * 2); d.g.fill();
+      d.g.fillStyle = shade(GOLD, 0.85); d.g.beginPath();
+      d.g.ellipse(cx, cy, 1.4, 1.5, 0, 0, Math.PI * 2); d.g.fill();
+      d.g.fillStyle = shade(GOLD, 1.1); d.g.fillRect(cx - 1, cy - 1, 2, 2);
+      d.g.fillStyle = shade(GOLD, 0.65); d.g.fillRect(cx, cy - 3, 1, 6); d.g.fillRect(cx - 3, cy, 6, 1);
+    }
+    // 滴水 denser
+    for (let x = 0.16; x < w; x += 0.16) {
+      const q = d.P(x, -0.055, -0.1);
+      const cx = Math.round(q[0]), cy = Math.round(q[1]);
+      d.g.fillStyle = shade(col, 0.48);
+      d.g.beginPath(); d.g.moveTo(cx - 2.5, cy); d.g.lineTo(cx + 2.5, cy); d.g.lineTo(cx, cy + 5); d.g.closePath(); d.g.fill();
+      d.g.fillStyle = lite; d.g.fillRect(cx - 1, cy, 2, 1);
+      d.g.fillStyle = shade(GOLD, 0.55); d.g.fillRect(cx, cy + 1, 1, 2);
+    }
+  }
+  function paintTileCourseS(d, w) {
+    const col = TILE, lite = shade(col, 1.22), dark = shade(col, 0.58);
+    d.QS(0, 0, 0, w, 0.2, col, dark);
+    for (let x = 0.04; x < w; x += 0.16) {
+      d.QS(-0.006, x, 0.015, x + 0.09, 0.185, lite, dark);
+      d.seg([x + 0.045, -0.01, 0.015], [x + 0.045, -0.01, 0.185], shade(col, 0.7));
+    }
+    for (let x = 0.12; x < w; x += 0.16) d.QS(-0.003, x, 0.03, x + 0.07, 0.17, shade(col, 0.78));
+  }
+  function paintTileRidgeS(d, w) {
+    const col = RIDGE, lite = shade(col, 1.28), dark = shade(col, 0.52);
+    d.box(0, -0.1, 0, w, 0.1, 0.26, col, { line: dark, top: lite, south: shade(col, 0.95) });
+    for (let x = 0.08; x < w; x += 0.22) {
+      d.QS(-0.105, x - 0.07, 0.03, x + 0.07, 0.24, lite, dark);
+      d.QS(-0.11, x - 0.04, 0.07, x + 0.04, 0.22, shade(GOLD, 0.55));
+      d.QS(-0.112, x - 0.015, 0.1, x + 0.015, 0.2, shade(GOLD, 0.85));
+    }
+    d.QS(-0.115, 0, 0.2, w, 0.26, shade(col, 1.38));
+    d.QS(-0.12, 0.05, 0.22, w - 0.05, 0.245, shade(GOLD, 0.45));
+  }
+  /** Site198：独立瓦当模块（圆当 + 兽面/宝相花纹） */
+  function paintWadangS(d, w) {
+    const col = TILE, dark = shade(col, 0.42), lite = shade(col, 1.3);
+    d.QS(0, 0, 0, w, 0.22, col, dark);
+    for (let x = 0.12; x < w; x += 0.28) {
+      const q = d.P(x, -0.04, 0.08);
+      const cx = Math.round(q[0]), cy = Math.round(q[1]);
+      d.g.fillStyle = dark; d.g.beginPath(); d.g.ellipse(cx, cy, 5.2, 5.8, 0, 0, Math.PI * 2); d.g.fill();
+      d.g.fillStyle = shade(col, 0.62); d.g.beginPath(); d.g.ellipse(cx, cy, 4.0, 4.4, 0, 0, Math.PI * 2); d.g.fill();
+      d.g.fillStyle = lite; d.g.beginPath(); d.g.ellipse(cx, cy, 2.6, 2.8, 0, 0, Math.PI * 2); d.g.fill();
+      d.g.fillStyle = shade(GOLD, 0.9); d.g.beginPath(); d.g.ellipse(cx, cy, 1.5, 1.6, 0, 0, Math.PI * 2); d.g.fill();
+      d.g.fillStyle = shade(GOLD, 1.15); d.g.fillRect(cx - 1, cy - 1, 2, 2);
+      d.g.fillStyle = shade(GOLD, 0.7);
+      for (const a of [0, 45, 90, 135]) {
+        const rad = a * Math.PI / 180, rr = 3.2;
+        d.g.fillRect(cx + Math.round(Math.cos(rad) * rr) - 1, cy + Math.round(Math.sin(rad) * rr) - 1, 2, 2);
+      }
+    }
+  }
+  /** Site198：屋檐滴水模块（三角滴水 + 筒瓦接缝） */
+  function paintDripS(d, w) {
+    const col = TILE, lite = shade(col, 1.25), dark = shade(col, 0.48);
+    d.QS(0, 0, 0.06, w, 0.28, col, dark);
+    for (let x = 0.06; x < w; x += 0.18) {
+      d.QS(-0.006, x, 0.08, x + 0.1, 0.26, lite, dark);
+    }
+    for (let x = 0.1; x < w; x += 0.18) {
+      const q = d.P(x, -0.06, -0.02);
+      const cx = Math.round(q[0]), cy = Math.round(q[1]);
+      d.g.fillStyle = dark;
+      d.g.beginPath(); d.g.moveTo(cx - 3, cy); d.g.lineTo(cx + 3, cy); d.g.lineTo(cx, cy + 7); d.g.closePath(); d.g.fill();
+      d.g.fillStyle = lite; d.g.beginPath(); d.g.moveTo(cx - 2, cy); d.g.lineTo(cx + 2, cy); d.g.lineTo(cx, cy + 5); d.g.closePath(); d.g.fill();
+      d.g.fillStyle = shade(GOLD, 0.55); d.g.fillRect(cx, cy + 1, 1, 3);
+    }
+  }
+  /** Site198：鸱吻/正脊兽 atlas 模块（贴图拼装，非纯线稿） */
+  function paintChiwenS(d, w, o = {}) {
+    const flip = !!(o && o.flip);
+    const col = RIDGE, lite = shade(col, 1.28), dark = shade(col, 0.48), gold = shade(GOLD, 0.85);
+    const s = flip ? -1 : 1;
+    // base seat
+    d.box(0.05, -0.12, 0, w - 0.05, 0.12, 0.18, col, { line: dark, top: lite, south: shade(col, 0.95) });
+    // rising body (fish-dragon silhouette as textured boxes)
+    d.box(0.15, -0.14, 0.15, w * 0.55, 0.1, 0.55, col, { line: dark, top: lite, south: shade(col, 1.05) });
+    d.box(w * 0.35, -0.16, 0.4, w * 0.72, 0.08, 0.85, col, { line: dark, top: shade(col, 1.2), south: lite });
+    // snout / open mouth
+    d.box(w * 0.55, -0.18, 0.7, w * 0.95, 0.06, 1.05, col, { line: dark, south: shade(col, 1.12), top: lite });
+    d.QS(-0.18, w * 0.62, 0.78, w * 0.9, 0.98, shade(col, 0.7));
+    d.QS(-0.185, w * 0.68, 0.82, w * 0.86, 0.94, shade('#1a120e', 0.9));
+    // crest / fin
+    d.QS(-0.2, w * 0.25, 0.55, w * 0.48, 0.95, gold);
+    d.QS(-0.205, w * 0.3, 0.7, w * 0.42, 1.05, shade(GOLD, 1.1));
+    // eye
+    const eq = d.P(w * 0.48, -0.17, 0.72);
+    d.g.fillStyle = '#f0e8c8'; d.g.beginPath();
+    d.g.ellipse(Math.round(eq[0]), Math.round(eq[1]), 2.2, 2.4, 0, 0, Math.PI * 2); d.g.fill();
+    d.g.fillStyle = '#1a120e'; d.g.fillRect(Math.round(eq[0]), Math.round(eq[1]), 1, 1);
+    // scale beads
+    for (let z = 0.22; z < 0.7; z += 0.1) {
+      for (let x = 0.2; x < w * 0.5; x += 0.12) {
+        d.QS(-0.15, x, z, x + 0.06, z + 0.05, shade(col, 1.15 + (z % 0.2) * 0.3));
+      }
+    }
+    // tail curl toward ridge
+    d.box(0.02, -0.1, 0.05, 0.22, 0.1, 0.35, col, { line: dark, south: shade(col, 0.9) });
+    d.QS(-0.16, 0.04, 0.28, 0.18, 0.42, gold);
+    void s;
+  }
+
+  /** Site205：更密瓦当（宝相/兽面金饰 + 重圈当缘；禁纯线稿）— 强化既有 tile_wadang_S */
+  function paintWadangDenseS(d, w) {
+    const col = TILE, dark = shade(col, 0.38), lite = shade(col, 1.35);
+    d.QS(0, 0, 0, w, 0.24, col, dark);
+    for (let x = 0.08; x < w; x += 0.22) {
+      d.QS(-0.004, x - 0.02, 0.02, x + 0.14, 0.2, shade(col, 0.92), dark);
+      const q = d.P(x + 0.05, -0.045, 0.1);
+      const cx = Math.round(q[0]), cy = Math.round(q[1]);
+      d.g.fillStyle = dark; d.g.beginPath(); d.g.ellipse(cx, cy, 6.0, 6.6, 0, 0, Math.PI * 2); d.g.fill();
+      d.g.fillStyle = shade(col, 0.55); d.g.beginPath(); d.g.ellipse(cx, cy, 4.8, 5.2, 0, 0, Math.PI * 2); d.g.fill();
+      d.g.fillStyle = lite; d.g.beginPath(); d.g.ellipse(cx, cy, 3.2, 3.4, 0, 0, Math.PI * 2); d.g.fill();
+      d.g.fillStyle = shade(GOLD, 0.95); d.g.beginPath(); d.g.ellipse(cx, cy, 1.9, 2.0, 0, 0, Math.PI * 2); d.g.fill();
+      d.g.fillStyle = shade(GOLD, 1.2); d.g.fillRect(cx - 1, cy - 1, 3, 3);
+      d.g.fillStyle = shade(GOLD, 0.75);
+      for (const a of [0, 30, 60, 90, 120, 150]) {
+        const rad = a * Math.PI / 180, rr = 3.8;
+        d.g.fillRect(cx + Math.round(Math.cos(rad) * rr) - 1, cy + Math.round(Math.sin(rad) * rr) - 1, 2, 2);
+      }
+      /* petal beads */
+      for (const a of [15, 75, 135]) {
+        const rad = a * Math.PI / 180, rr = 2.4;
+        d.g.fillStyle = shade(GOLD, 1.05);
+        d.g.fillRect(cx + Math.round(Math.cos(rad) * rr), cy + Math.round(Math.sin(rad) * rr), 1, 1);
+      }
+    }
+  }
+  /** Site205：滴水（如意尖头 + 筒瓦接缝 + 金点；比 tile_drip 更密） */
+  function paintDishuiS(d, w) {
+    const col = TILE, lite = shade(col, 1.3), dark = shade(col, 0.42);
+    d.QS(0, 0, 0.04, w, 0.3, col, dark);
+    for (let x = 0.04; x < w; x += 0.14) {
+      d.QS(-0.006, x, 0.06, x + 0.09, 0.28, lite, dark);
+      d.seg([x + 0.045, -0.012, 0.06], [x + 0.045, -0.012, 0.28], shade(col, 0.68));
+    }
+    for (let x = 0.07; x < w; x += 0.14) {
+      const q = d.P(x, -0.07, -0.04);
+      const cx = Math.round(q[0]), cy = Math.round(q[1]);
+      d.g.fillStyle = dark;
+      d.g.beginPath(); d.g.moveTo(cx - 3.5, cy); d.g.lineTo(cx + 3.5, cy); d.g.lineTo(cx + 1.2, cy + 5); d.g.lineTo(cx, cy + 8); d.g.lineTo(cx - 1.2, cy + 5); d.g.closePath(); d.g.fill();
+      d.g.fillStyle = lite;
+      d.g.beginPath(); d.g.moveTo(cx - 2.2, cy + 0.5); d.g.lineTo(cx + 2.2, cy + 0.5); d.g.lineTo(cx, cy + 6); d.g.closePath(); d.g.fill();
+      d.g.fillStyle = shade(GOLD, 0.7); d.g.fillRect(cx - 1, cy + 1, 2, 3);
+      d.g.fillStyle = shade(GOLD, 1.05); d.g.fillRect(cx, cy + 4, 1, 2);
+    }
+  }
+  /** Site205：瓦垄（筒瓦垄脊 + 板瓦凹槽交替，屋顶坡面） */
+  function paintWalongS(d, w) {
+    const col = TILE, lite = shade(col, 1.32), dark = shade(col, 0.48), mid = shade(col, 0.78);
+    d.QS(0, 0, 0, w, 0.26, col, dark);
+    for (let x = 0.03; x < w; x += 0.13) {
+      /* 筒瓦垄 */
+      d.QS(-0.008, x, 0.01, x + 0.075, 0.25, lite, dark);
+      d.QS(-0.01, x + 0.012, 0.04, x + 0.063, 0.22, shade(col, 1.45));
+      d.seg([x + 0.038, -0.014, 0.02], [x + 0.038, -0.014, 0.24], shade(col, 0.7));
+      /* 板瓦凹 */
+      const bx = x + 0.075;
+      if (bx + 0.05 < w) {
+        d.QS(-0.003, bx, 0.03, bx + 0.05, 0.22, mid);
+        d.QS(-0.004, bx + 0.01, 0.05, bx + 0.04, 0.2, shade(col, 0.62));
+      }
+    }
+    /* 金边接缝点 */
+    for (let x = 0.1; x < w; x += 0.26) {
+      d.QS(-0.012, x - 0.02, 0.11, x + 0.02, 0.15, shade(GOLD, 0.5));
+    }
+  }
+  /** Site205：檐口（木檐楣 + 瓦口线 + 滴水座） */
+  function paintYankouS(d, w) {
+    const wood = WOOD_D, lite = shade(wood, 1.35), dark = shade(wood, 0.45);
+    const col = TILE;
+    /* timber fascia */
+    d.QS(0, 0, 0.08, w, 0.28, wood, dark);
+    d.QS(-0.004, 0.02, 0.1, w - 0.02, 0.26, shade(wood, 1.08), dark);
+    for (let x = 0.08; x < w; x += 0.22) {
+      d.seg([x, -0.01, 0.1], [x, -0.01, 0.26], shade(wood, 0.7));
+      d.QS(-0.008, x - 0.03, 0.14, x + 0.03, 0.22, lite);
+    }
+    /* tile mouth / 瓦口 */
+    d.QS(-0.02, 0, 0.0, w, 0.1, col, shade(col, 0.5));
+    for (let x = 0.05; x < w; x += 0.12) {
+      d.QS(-0.025, x, 0.01, x + 0.07, 0.09, shade(col, 1.2), shade(col, 0.55));
+    }
+    /* gold trim beads along eave lip */
+    for (let x = 0.1; x < w; x += 0.18) {
+      d.QS(-0.03, x - 0.015, 0.02, x + 0.015, 0.05, shade(GOLD, 0.65));
+    }
+    /* small drip seats */
+    for (let x = 0.14; x < w; x += 0.24) {
+      const q = d.P(x, -0.05, -0.02);
+      const cx = Math.round(q[0]), cy = Math.round(q[1]);
+      d.g.fillStyle = shade(col, 0.45);
+      d.g.beginPath(); d.g.moveTo(cx - 2, cy); d.g.lineTo(cx + 2, cy); d.g.lineTo(cx, cy + 4); d.g.closePath(); d.g.fill();
+    }
+  }
+
+  /* Site203：密格隔心/横披 — 多重棂条 + 纸面颗粒（禁纯线稿） */
+  function paintLatticeGeshan(d, w, h, o = {}) {
+    const fr = RED_W, paper = PAPER, m = 0.06;
+    d.QS(0, 0, 0, w, h, fr, shade(fr, 0.4));
+    d.QS(-0.004, 0.025, 0.025, w - 0.025, h - 0.025, shade(fr, 0.92), shade(fr, 0.5));
+    d.QS(-0.008, m, m, w - m, h - m, paper, shade(fr, 0.55));
+    for (let i = 0; i < 16; i++) {
+      const x = m + 0.03 + (i * 0.27) % (w - 2 * m - 0.08);
+      const z = m + 0.04 + ((i * 0.43) % (h - 2 * m - 0.1));
+      d.QS(-0.009, x, z, x + 0.045, z + 0.035, shade(paper, i % 2 ? 0.94 : 1.06));
+    }
+    const X0 = m + 0.02, X1 = w - m - 0.02, Z0 = m + 0.02, Z1 = h - m - 0.02;
+    const lc = shade(fr, 0.78), s = 0.085;
+    /* dense grid + mid stile/rail */
+    for (let x = X0 + s; x < X1; x += s) d.seg([x, -0.012, Z0], [x, -0.012, Z1], lc);
+    for (let z = Z0 + s; z < Z1; z += s) d.seg([X0, -0.012, z], [X1, -0.012, z], lc);
+    d.QS(-0.011, (X0 + X1) / 2 - 0.03, Z0, (X0 + X1) / 2 + 0.03, Z1, shade(fr, 0.95), shade(fr, 0.5));
+    d.QS(-0.011, X0, (Z0 + Z1) / 2 - 0.03, X1, (Z0 + Z1) / 2 + 0.03, shade(fr, 0.95), shade(fr, 0.5));
+    /* gold corner pins */
+    for (const [sx, sz] of [[m, m], [w - m, m], [m, h - m], [w - m, h - m]]) {
+      d.QS(-0.014, sx - 0.03, sz - 0.03, sx + 0.03, sz + 0.03, GOLD);
+      d.QS(-0.015, sx - 0.012, sz - 0.012, sx + 0.012, sz + 0.012, shade(GOLD, 1.25));
+    }
+  }
+  /* Site203：花窗 — 外框雕刻如意/卷草 + 冰裂纹隔心 */
+  function paintHuachuang(d, w, h) {
+    const fr = RED_W, paper = PAPER, m = 0.09;
+    d.QS(0, 0, 0, w, h, fr, shade(fr, 0.38));
+    d.QS(-0.004, 0.03, 0.03, w - 0.03, h - 0.03, shade(fr, 0.9), shade(fr, 0.48));
+    /* carved outer border bosses */
+    for (let i = 0; i < 8; i++) {
+      const t = i / 8, x = 0.08 + t * (w - 0.16), z = 0.05;
+      d.QS(-0.01, x - 0.04, z, x + 0.04, z + 0.06, shade(GOLD, 0.7));
+      d.QS(-0.01, x - 0.04, h - z - 0.06, x + 0.04, h - z, shade(GOLD, 0.7));
+    }
+    for (let i = 0; i < 5; i++) {
+      const t = i / 5, z = 0.12 + t * (h - 0.24);
+      d.QS(-0.01, 0.04, z - 0.035, 0.1, z + 0.035, shade(GOLD, 0.65));
+      d.QS(-0.01, w - 0.1, z - 0.035, w - 0.04, z + 0.035, shade(GOLD, 0.65));
+    }
+    d.QS(-0.008, m, m, w - m, h - m, paper, shade(fr, 0.55));
+    for (let i = 0; i < 12; i++) {
+      const x = m + 0.04 + (i * 0.31) % (w - 2 * m - 0.1);
+      const z = m + 0.05 + ((i * 0.49) % (h - 2 * m - 0.12));
+      d.QS(-0.009, x, z, x + 0.05, z + 0.04, shade(paper, i % 2 ? 0.93 : 1.05));
+    }
+    /* 冰裂纹：不规则斜交棂（atlas 填面，非稀疏线稿） */
+    const X0 = m + 0.04, X1 = w - m - 0.04, Z0 = m + 0.04, Z1 = h - m - 0.04, lc = shade(fr, 0.8);
+    const segs = [
+      [0.05, 0.08, 0.55, 0.22], [0.55, 0.22, 0.95, 0.1], [0.2, 0.08, 0.35, 0.45],
+      [0.35, 0.45, 0.7, 0.35], [0.7, 0.35, 0.85, 0.7], [0.1, 0.4, 0.45, 0.55],
+      [0.45, 0.55, 0.3, 0.9], [0.3, 0.9, 0.65, 0.85], [0.65, 0.85, 0.9, 0.55],
+      [0.15, 0.65, 0.5, 0.75], [0.55, 0.1, 0.6, 0.5], [0.75, 0.15, 0.55, 0.55],
+      [0.05, 0.5, 0.25, 0.75], [0.8, 0.4, 0.95, 0.8], [0.4, 0.7, 0.75, 0.95],
+    ];
+    const Ww = X1 - X0, Hh = Z1 - Z0;
+    for (const [ax, az, bx, bz] of segs) {
+      d.seg([X0 + ax * Ww, -0.012, Z0 + az * Hh], [X0 + bx * Ww, -0.012, Z0 + bz * Hh], lc);
+    }
+    /* thickened timber ribs as filled strips */
+    d.QS(-0.011, X0 + Ww * 0.32, Z0, X0 + Ww * 0.38, Z1, shade(fr, 0.92), shade(fr, 0.5));
+    d.QS(-0.011, X0, Z0 + Hh * 0.42, X1, Z0 + Hh * 0.48, shade(fr, 0.92), shade(fr, 0.5));
+    /* corner peony suggestion */
+    for (const [sx, sz] of [[m + 0.08, m + 0.08], [w - m - 0.08, m + 0.08], [m + 0.08, h - m - 0.08], [w - m - 0.08, h - m - 0.08]]) {
+      d.QS(-0.014, sx - 0.05, sz - 0.05, sx + 0.05, sz + 0.05, shade(GOLD, 0.75));
+      d.QS(-0.015, sx - 0.022, sz - 0.022, sx + 0.022, sz + 0.022, shade(GOLD, 1.2));
+    }
+  }
+  /* Site203：槛窗 — 石槛 + 矮窗格 + 上披 */
+  function paintKanchuang(d, w, h) {
+    const fr = RED_W, paper = PAPER, sillH = Math.min(0.28, h * 0.22);
+    /* stone sill base */
+    d.QS(0, 0, 0, w, sillH, STONE, shade(STONE, 0.5));
+    d.QS(-0.005, 0.04, 0.04, w - 0.04, sillH - 0.04, shade(STONE, 1.08));
+    for (let x = 0.12; x < w; x += 0.28) d.seg([x, -0.008, 0.03], [x, -0.008, sillH - 0.03], shade(STONE, 0.72));
+    d.QS(-0.008, 0, sillH - 0.04, w, sillH, shade(WOOD, 0.75));
+    /* window frame above sill */
+    const z0 = sillH, hh = h - sillH;
+    d.QS(-0.002, 0, z0, w, h, fr, shade(fr, 0.4));
+    d.QS(-0.006, 0.04, z0 + 0.04, w - 0.04, h - 0.04, shade(fr, 0.92), shade(fr, 0.5));
+    const m = 0.08;
+    d.QS(-0.01, m, z0 + m, w - m, h - m, paper, shade(fr, 0.55));
+    for (let i = 0; i < 10; i++) {
+      const x = m + 0.03 + (i * 0.33) % (w - 2 * m - 0.08);
+      const z = z0 + m + 0.04 + ((i * 0.41) % (hh - 2 * m - 0.1));
+      d.QS(-0.011, x, z, x + 0.045, z + 0.03, shade(paper, i % 2 ? 0.94 : 1.05));
+    }
+    const X0 = m + 0.02, X1 = w - m - 0.02, Z0 = z0 + m + 0.02, Z1 = h - m - 0.02, lc = shade(fr, 0.78);
+    const s = 0.1;
+    for (let x = X0 + s; x < X1; x += s) d.seg([x, -0.013, Z0], [x, -0.013, Z1], lc);
+    for (let z = Z0 + s; z < Z1; z += s) d.seg([X0, -0.013, z], [X1, -0.013, z], lc);
+    /* mid stile */
+    d.QS(-0.012, (X0 + X1) / 2 - 0.025, Z0, (X0 + X1) / 2 + 0.025, Z1, shade(fr, 0.95), shade(fr, 0.5));
+    /* top drip + gold pins */
+    d.QS(-0.01, 0, h - 0.05, w, h, shade(fr, 0.7));
+    for (const sx of [m, w / 2, w - m]) {
+      d.QS(-0.014, sx - 0.03, h - 0.04, sx + 0.03, h - 0.01, GOLD);
+    }
+  }
+
+  function paintThreshold(d, w) {
+    d.QS(0, 0, 0, w, 0.18, STONE, shade(STONE, 0.5));
+    d.QS(-0.005, 0.04, 0.04, w - 0.04, 0.14, shade(STONE, 1.08));
+    for (let x = 0.15; x < w; x += 0.35) d.seg([x, -0.008, 0.02], [x, -0.008, 0.16], shade(STONE, 0.72));
+    d.QS(-0.008, 0, 0, w, 0.03, shade(STONE, 0.7));
+    d.QS(-0.008, 0, 0.15, w, 0.18, shade(WOOD, 0.75));
+  }
+  function paintDougong(d, o = {}) {
+    const large = !!(o && o.large);
+    const s = large ? 1.35 : 1;
+    const c = '#7a4a2c', g1 = CAI_G, g2 = CAI_B, L = shade(c, 0.48);
+    // 坐斗
+    d.box(-0.18 * s, -0.06, 0, 0.18 * s, 0.32, 0.16 * s, c, { line: L, south: g1, top: shade(c, 1.15) });
+    d.QS(-0.07, -0.14 * s, 0.12 * s, 0.14 * s, 0.15 * s, GOLD);
+    // 华栱 / 横栱 layer 1
+    d.box(-0.55 * s, -0.14, 0.16 * s, 0.55 * s, 0.28, 0.28 * s, c, { line: L, south: g2, top: shade(c, 1.1) });
+    d.QS(-0.15, -0.5 * s, 0.18 * s, 0.5 * s, 0.2 * s, shade(g1, 1.15));
+    // 昂 / 出跳
+    d.box(-0.1 * s, -0.48 * s, 0.16 * s, 0.1 * s, 0.12, 0.34 * s, c, { line: L, south: shade(c, 1.12), top: shade(c, 1.2) });
+    d.QS(-0.49 * s, -0.06 * s, 0.28 * s, -0.42 * s, 0.32 * s, shade(GOLD, 0.75)); // tip
+    // 散斗 trio
+    for (const k of [-1, 0, 1]) {
+      d.box(k * 0.45 * s - 0.1 * s, -0.16 - (k === 0 ? 0.28 * s : 0), 0.28 * s, k * 0.45 * s + 0.1 * s, 0.22, 0.4 * s, c, { line: L, south: g1, top: shade(c, 1.12) });
+      d.QS(-0.17 - (k === 0 ? 0.28 * s : 0), k * 0.45 * s - 0.06 * s, 0.36 * s, k * 0.45 * s + 0.06 * s, 0.38 * s, GOLD);
+    }
+    // upper 枋 / 挑檐枋
+    d.box(-0.78 * s, -0.2, 0.4 * s, 0.78 * s, 0.22, 0.52 * s, c, { line: L, south: g2, top: shade(c, 1.18) });
+    d.QS(-0.21, -0.72 * s, 0.48 * s, 0.72 * s, 0.52 * s, GOLD);
+    d.QS(-0.21, -0.72 * s, 0.4 * s, 0.72 * s, 0.43 * s, shade(GOLD, 0.8));
+    // second 昂 for large
+    if (large) {
+      d.box(-0.08 * s, -0.72 * s, 0.34 * s, 0.08 * s, -0.2, 0.52 * s, c, { line: L, south: shade(c, 1.18) });
+      d.box(-0.95 * s, -0.24, 0.52 * s, 0.95 * s, 0.2, 0.62 * s, c, { line: L, south: g1, top: shade(c, 1.2) });
+      d.QS(-0.25, -0.9 * s, 0.58 * s, 0.9 * s, 0.62 * s, GOLD);
+      // caihua face panels
+      d.QS(-0.22, -0.4 * s, 0.44 * s, -0.15 * s, 0.5 * s, g1);
+      d.QS(-0.22, 0.15 * s, 0.44 * s, 0.4 * s, 0.5 * s, g1);
+    } else {
+      d.box(-0.08 * s, -0.62 * s, 0.34 * s, 0.08 * s, -0.18, 0.5 * s, c, { line: L, south: shade(c, 1.15) });
+    }
+    d.QS(-0.15, -0.48 * s, 0.16 * s, 0.48 * s, 0.18 * s, shade(g1, 1.2));
+  }
+  function paintEfangUnit(d, w) {
+    const b = CAI_B, g = CAI_G, z0 = 0, z1 = 0.35;
+    d.box(0, -0.04, z0, w, 0.2, z1, b, { line: shade(b, 0.45), west: shade(g, 0.8), top: shade(b, 0.8) });
+    d.QS(-0.045, 0, z1 - 0.03, w, z1, GOLD);
+    d.QS(-0.045, 0, z0, w, z0 + 0.03, shade(GOLD, 0.85));
+    const m = w / 2, zh = (z0 + z1) / 2;
+    d.QS(-0.045, 0.06, z0 + 0.04, w * 0.2, z1 - 0.04, g);
+    d.QS(-0.045, w - w * 0.2, z0 + 0.04, w - 0.06, z1 - 0.04, g);
+    d.QS(-0.05, w * 0.28, z0 + (z1 - z0) * 0.22, w - w * 0.28, z1 - (z1 - z0) * 0.22, '#e8d6a0', shade(GOLD, 0.55));
+    d.QS(-0.052, m - 0.12, zh - 0.06, m + 0.12, zh + 0.06, g);
+    d.QS(-0.054, m - 0.05, zh - 0.03, m + 0.05, zh + 0.03, GOLD);
+  }
+  /* ---- Site198：城墙灰砖 / 垛口 / 女墙（南薰门同色；禁纯线稿） ---- */
+  const CITY = '#8a8680', CITY_W = '#6e6a64', CITY_TOP = '#a29e95';
+  function paintCityBrickS(d, w, h) {
+    d.QS(0, 0, 0, w, h, CITY, shade(CITY, 0.48));
+    // thick mortar courses + running bond (城砖 atlas, not sparse coursesS lines)
+    for (let z = 0.22, k = 0; z < h - 0.02; z += 0.22, k++) {
+      d.QS(-0.004, 0.01, z - 0.02, w - 0.01, z, shade(CITY, 0.72));
+      const ox = (k % 2) * 0.28;
+      for (let x = ox; x < w - 0.04; x += 0.55) {
+        d.seg([x, -0.006, z - 0.22], [x, -0.006, z], shade(CITY, 0.62));
+        // brick face grit / weathering flecks
+        d.QS(-0.007, x + 0.06, z - 0.16, x + 0.22, z - 0.08, shade(CITY, k % 3 ? 0.94 : 1.08));
+      }
+    }
+    // occasional dark streak (雨渍)
+    for (let i = 0; i < 4; i++) {
+      const x = 0.18 + i * (w / 4.2);
+      d.seg([x, -0.008, h * 0.15], [x, -0.008, h * (0.55 + (i % 2) * 0.2)], shade(CITY, 0.78));
+    }
+  }
+  function paintCityBrickW(d, dpth, h) {
+    d.QW(0, 0, 0, dpth, h, CITY_W, shade(CITY_W, 0.48));
+    for (let z = 0.22, k = 0; z < h - 0.02; z += 0.22, k++) {
+      d.seg([ -0.005, 0.02, z], [ -0.005, dpth - 0.02, z], shade(CITY_W, 0.72));
+      for (let y = (k % 2) * 0.28; y < dpth - 0.04; y += 0.55) {
+        d.seg([ -0.005, y, z - 0.22], [ -0.005, y, z], shade(CITY_W, 0.62));
+      }
+    }
+  }
+  function paintCityStoneS(d, w, h) {
+    d.QS(0, 0, 0, w, h, STONE, shade(STONE, 0.5));
+    for (let z = 0.4, k = 0; z < h - 0.02; z += 0.4, k++) {
+      d.QS(-0.004, 0.02, z - 0.03, w - 0.02, z, shade(STONE, 0.78));
+      for (let x = (k % 2) * 0.55; x < w - 0.05; x += 1.1) {
+        d.seg([x, -0.006, z - 0.4], [x, -0.006, z], shade(STONE, 0.68));
+        d.QS(-0.007, x + 0.12, z - 0.28, x + 0.55, z - 0.12, shade(STONE, 1.06));
+      }
+    }
+  }
+  /** 垛口（crenel tooth）：带射击孔的城垛块 */
+  function paintMerlon(d, o = {}) {
+    const w = o.w || 1.05, dpth = o.d || 0.55, h = o.h || 1.7;
+    const slit = o.slit !== false;
+    d.box(0, 0, 0, w, dpth, h, CITY, { line: shade(CITY, 0.45), west: CITY_W, top: shade(CITY, 1.18), south: shade(CITY, 0.98) });
+    // brick courses on S + W
+    for (let z = 0.22; z < h - 0.05; z += 0.22) {
+      d.seg([0.04, -0.008, z], [w - 0.04, -0.008, z], shade(CITY, 0.7));
+      d.seg([-0.008, 0.04, z], [-0.008, dpth - 0.04, z], shade(CITY_W, 0.7));
+    }
+    for (let x = 0.28; x < w - 0.05; x += 0.28) d.seg([x, -0.01, 0.05], [x, -0.01, h - 0.08], shade(CITY, 0.62));
+    // coping cap
+    d.box(-0.04, -0.04, h - 0.08, w + 0.04, dpth + 0.04, h + 0.06, shade(CITY, 1.12), { line: shade(CITY, 0.5), west: CITY_W, top: shade(CITY, 1.25) });
+    // 射击孔
+    if (slit) {
+      const sx = w * 0.42, sz = h * 0.55;
+      d.QS(-0.012, sx, sz, sx + 0.18, sz + 0.42, '#2a2622', shade(CITY, 0.4));
+      d.QS(-0.014, sx + 0.03, sz + 0.06, sx + 0.15, sz + 0.36, '#1a1814');
+    }
+    // corner highlight
+    d.QS(-0.006, 0.02, h - 0.18, 0.12, h - 0.04, shade(CITY, 1.15));
+  }
+  /** 垛口缺口（crenel / embrasure）矮段 */
+  function paintCrenel(d, o = {}) {
+    const w = o.w || 0.55, dpth = o.d || 0.55, h = o.h || 1.0;
+    d.box(0, 0, 0, w, dpth, h, CITY, { line: shade(CITY, 0.45), west: CITY_W, top: shade(CITY, 1.15), south: shade(CITY, 0.95) });
+    for (let z = 0.22; z < h - 0.04; z += 0.22) {
+      d.seg([0.03, -0.008, z], [w - 0.03, -0.008, z], shade(CITY, 0.7));
+    }
+    d.box(-0.03, -0.03, h - 0.06, w + 0.03, dpth + 0.03, h + 0.04, shade(CITY, 1.1), { line: shade(CITY, 0.5), west: CITY_W, top: shade(CITY, 1.22) });
+  }
+  /** 女墙（parapet）：连续低墙段 */
+  function paintParapet(d, o = {}) {
+    const w = o.w || 1.6, dpth = o.d || 0.6, h = o.h || 1.1;
+    d.box(0, 0, 0, w, dpth, h, CITY, { line: shade(CITY, 0.48), west: CITY_W, top: shade(CITY, 1.15), south: shade(CITY, 0.96) });
+    for (let z = 0.22; z < h - 0.04; z += 0.22) {
+      d.seg([0.04, -0.008, z], [w - 0.04, -0.008, z], shade(CITY, 0.7));
+      const k = Math.round(z / 0.22);
+      for (let x = (k % 2) * 0.28; x < w - 0.04; x += 0.55) d.seg([x, -0.01, z - 0.22], [x, -0.01, z], shade(CITY, 0.62));
+    }
+    // tile-ish coping
+    d.box(-0.05, -0.05, h - 0.05, w + 0.05, dpth + 0.05, h + 0.1, shade(CITY, 1.08), { line: shade(CITY, 0.5), west: CITY_W, top: shade(CITY, 1.22) });
+    d.QS(-0.06, 0.1, h + 0.02, w - 0.1, h + 0.08, shade(CITY, 1.28));
+  }
+  /** 城墙走道顶面砖 */
+  function paintWalkTop(d, w, dpth) {
+    d.box(0, 0, 0, w, dpth, 0.06, CITY_TOP, { line: shade(CITY, 0.5), west: shade(CITY_TOP, 0.85), top: shade(CITY_TOP, 1.08), south: shade(CITY_TOP, 0.95) });
+    for (let x = 0.35; x < w; x += 0.7) d.seg([x, 0.02, 0.07], [x, dpth - 0.02, 0.07], shade(CITY, 0.78));
+    for (let y = 0.35; y < dpth; y += 0.7) d.seg([0.02, y, 0.07], [w - 0.02, y, 0.07], shade(CITY, 0.82));
+  }
+  /* Site202 paving atlas kitbash — 方砖 / 条石 / 席纹 / 排水沟 / 路牙（禁纯线稿） */
+  function paintPaveFangzhuan(d, w, dpth) {
+    const col = '#a8a296', m = '#7a7468';
+    d.box(0, 0, 0, w, dpth, 0.05, col, { line: shade(col, 0.5), west: shade(col, 0.82), top: shade(col, 1.1), south: shade(col, 0.95) });
+    for (let x = 0.4; x < w; x += 0.5) d.seg([x, 0.02, 0.06], [x, dpth - 0.02, 0.06], shade(m, 0.95));
+    for (let y = 0.4; y < dpth; y += 0.5) d.seg([0.02, y, 0.06], [w - 0.02, y, 0.06], shade(m, 1.05));
+    for (let i = 0; i < 8; i++) {
+      const x = 0.1 + (i * 0.37) % (w - 0.3), y = 0.12 + ((i * 0.53) % (dpth - 0.25));
+      d.box(x, y, 0.05, x + 0.12, y + 0.09, 0.055, shade(col, i % 2 ? 0.9 : 1.08), { line: false, noW: true, noS: true });
+    }
+  }
+  function paintPaveTiaoshi(d, w, dpth) {
+    const col = '#8e887c', m = '#6a6458';
+    d.box(0, 0, 0, w, dpth, 0.05, col, { line: shade(col, 0.48), west: shade(col, 0.8), top: shade(col, 1.08), south: shade(col, 0.94) });
+    for (let x = 0.55; x < w; x += 0.7) d.seg([x, 0.02, 0.06], [x, dpth - 0.02, 0.06], shade(m, 0.9));
+    for (let y = 0.9; y < dpth; y += 1.0) d.seg([0.02, y, 0.06], [w - 0.02, y, 0.06], shade(m, 1.05));
+    d.QS(-0.01, 0.15, 0.055, w - 0.15, 0.06, 'rgba(220,210,190,0.28)');
+  }
+  function paintPaveXiewen(d, w, dpth) {
+    const col = '#b0aa9c', m = '#7a7468';
+    d.box(0, 0, 0, w, dpth, 0.05, col, { line: shade(col, 0.5), west: shade(col, 0.82), top: shade(col, 1.1), south: shade(col, 0.95) });
+    for (let i = -2; i < 5; i++) {
+      const x0 = i * 0.45;
+      d.seg([x0, 0.05, 0.06], [x0 + dpth, dpth - 0.05, 0.06], shade(m, 0.92));
+      d.seg([x0 + dpth, 0.05, 0.06], [x0, dpth - 0.05, 0.06], shade(m, 0.88));
+    }
+  }
+  function paintDrainGutter(d) {
+    const w = 0.7, dpth = 0.7;
+    const ditch = '#5a554c', wet = '#3a4a52', curb = '#9a9488';
+    d.box(0.08, 0.12, -0.05, w - 0.08, dpth - 0.12, 0.02, ditch, { line: shade(ditch, 0.5), top: wet, west: shade(ditch, 0.75), south: shade(ditch, 0.85) });
+    d.box(0, 0.08, 0.02, 0.14, dpth - 0.08, 0.16, curb, { line: shade(curb, 0.48), west: shade(curb, 0.78), top: shade(curb, 1.12), south: shade(curb, 0.95) });
+    d.box(w - 0.14, 0.08, 0.02, w, dpth - 0.08, 0.16, curb, { line: shade(curb, 0.48), west: shade(curb, 0.78), top: shade(curb, 1.12), south: shade(curb, 0.95) });
+    for (let y = 0.22; y < dpth - 0.1; y += 0.28) {
+      d.seg([0.02, y, 0.04], [0.02, y, 0.14], shade(curb, 0.7));
+      d.seg([w - 0.02, y, 0.04], [w - 0.02, y, 0.14], shade(curb, 0.7));
+    }
+    /* wet glints — textured, not line-only */
+    d.QS(-0.02, 0.18, 0.025, w - 0.18, 0.03, 'rgba(120,150,160,0.35)');
+    d.box(0.2, 0.25, 0.02, 0.5, 0.45, 0.035, shade(wet, 1.15), { line: false, noW: true, noS: true });
+  }
+  function paintCurbStone(d) {
+    const w = 0.95, dpth = 0.32, h = 0.22;
+    const curb = '#9a9488';
+    d.box(0, 0, 0, w, dpth, h, curb, { line: shade(curb, 0.48), west: shade(curb, 0.78), top: shade(curb, 1.14), south: shade(curb, 0.95) });
+    for (let x = 0.28; x < w; x += 0.45) d.seg([x, -0.01, 0.02], [x, -0.01, h - 0.02], shade(curb, 0.68));
+    d.box(0.05, -0.02, h - 0.04, w - 0.05, dpth + 0.02, h + 0.03, shade(curb, 1.08), { line: shade(curb, 0.5), top: shade(curb, 1.2), west: shade(curb, 0.85), south: shade(curb, 1.02) });
+    for (let i = 0; i < 5; i++) {
+      const x = 0.1 + i * 0.16;
+      d.box(x, 0.04, h + 0.01, x + 0.08, 0.14, h + 0.025, shade(curb, i % 2 ? 0.92 : 1.1), { line: false, noW: true, noS: true });
+    }
+  }
+  function paintWallW(d, dpth, h, brick) {
+
+    const col = brick ? shade(BRICK, 0.85) : PLASTER_W, fr = shade(WOOD, 0.85);
+    d.QW(0, 0, 0, dpth, h, col, shade(col, 0.55));
+    if (brick) {
+      for (let z = 0.16, k = 0; z < h; z += 0.16, k++) {
+        d.seg([0 - 0.005, 0.02, z], [0 - 0.005, dpth - 0.02, z], shade(col, 0.78));
+        for (let y = (k % 2) * 0.2; y < dpth; y += 0.4) d.seg([0 - 0.005, y, z], [0 - 0.005, y, Math.min(h, z + 0.16)], shade(col, 0.72));
+      }
+    } else {
+      d.QW(-0.01, 0, 0, 0.08, h, fr);
+      d.QW(-0.01, dpth - 0.08, 0, dpth, h, fr);
+      d.QW(-0.01, 0, h - 0.12, dpth, h, fr);
+      d.QW(-0.01, 0, h * 0.48, dpth, h * 0.48 + 0.1, fr);
+    }
+  }
+
+
+  /* ---- Site204：宋风街具 atlas 模块（石灯笼/石凳/花缸/挂灯杆）禁纯线稿 ---- */
+  function paintPropShideng(d) {
+    const ST = '#8a8070', STW = '#6a6258', TOP = '#9a9080', GOLD = '#c8a040';
+    // 基座
+    d.box(-0.42, -0.42, 0, 0.42, 0.42, 0.28, ST, { line: shade(ST, 0.5), west: STW, top: shade(ST, 0.9) });
+    for (let z = 0.1; z < 0.26; z += 0.1) {
+      d.seg([-0.4, -0.425, z], [0.4, -0.425, z], shade(ST, 0.7));
+      d.seg([-0.425, -0.4, z], [-0.425, 0.4, z], shade(STW, 0.7));
+    }
+    // 中柱
+    d.box(-0.16, -0.16, 0.28, 0.16, 0.16, 0.95, shade(ST, 0.95), { line: shade(ST, 0.5), west: STW, top: TOP });
+    for (let z = 0.4; z < 0.9; z += 0.14) d.seg([-0.17, -0.17, z], [0.17, -0.17, z], shade(ST, 0.75));
+    // 灯室六角（贴图块 + 格栅）
+    d.box(-0.34, -0.34, 0.95, 0.34, 0.34, 1.55, shade(ST, 1.02), { line: shade(ST, 0.48), west: STW, top: TOP });
+    d.QS(-0.35, -0.22, 1.05, 0.22, 1.45, '#e8d090', shade(ST, 0.55));
+    d.QS(-0.36, -0.16, 1.12, 0.16, 1.38, '#fff0b8');
+    for (const x of [-0.14, 0, 0.14]) d.seg([x, -0.355, 1.05], [x, -0.355, 1.45], shade(ST, 0.55));
+    for (const z of [1.18, 1.32]) d.seg([-0.22, -0.355, z], [0.22, -0.355, z], shade(ST, 0.55));
+    // 宝顶屋顶
+    d.box(-0.48, -0.48, 1.55, 0.48, 0.48, 1.68, shade(ST, 1.08), { line: shade(ST, 0.5), west: STW, top: shade(ST, 1.2) });
+    d.box(-0.22, -0.22, 1.68, 0.22, 0.22, 1.88, shade(ST, 1.05), { line: shade(ST, 0.5), west: STW, top: TOP });
+    d.box(-0.08, -0.08, 1.88, 0.08, 0.08, 2.12, GOLD, { line: shade(GOLD, 0.55), west: shade(GOLD, 0.8), top: '#e8c868' });
+    // 隅石装饰
+    for (const [x, y] of [[-0.4, -0.4], [0.4, -0.4], [-0.4, 0.4], [0.4, 0.4]]) {
+      d.box(x - 0.08, y - 0.08, 0.28, x + 0.08, y + 0.08, 0.42, shade(ST, 0.9), { line: shade(ST, 0.5), west: STW, top: TOP });
+    }
+  }
+  function paintPropShiteng(d) {
+    const ST = '#8a8070', STW = '#6a6258';
+    // 两条石腿
+    d.box(-0.55, -0.22, 0, -0.32, 0.22, 0.38, ST, { line: shade(ST, 0.5), west: STW, top: shade(ST, 0.88) });
+    d.box(0.32, -0.22, 0, 0.55, 0.22, 0.38, ST, { line: shade(ST, 0.5), west: STW, top: shade(ST, 0.88) });
+    for (let z = 0.12; z < 0.36; z += 0.12) {
+      d.seg([-0.54, -0.225, z], [-0.33, -0.225, z], shade(ST, 0.7));
+      d.seg([0.33, -0.225, z], [0.54, -0.225, z], shade(ST, 0.7));
+    }
+    // 坐面厚板
+    d.box(-0.72, -0.32, 0.38, 0.72, 0.32, 0.52, shade(ST, 1.02), { line: shade(ST, 0.48), west: STW, top: shade(ST, 1.15) });
+    for (let x = -0.5; x < 0.55; x += 0.28) d.seg([x, -0.325, 0.52], [x, 0.325, 0.52], shade(ST, 0.78));
+    d.seg([-0.7, -0.325, 0.45], [0.7, -0.325, 0.45], shade(ST, 0.72));
+    // 端面装饰线
+    d.QS(-0.73, -0.28, 0.4, 0.28, 0.5, shade(ST, 1.08), shade(ST, 0.55));
+    d.QS(0.73, -0.28, 0.4, 0.28, 0.5, shade(STW, 1.05), shade(ST, 0.55));
+  }
+  function paintPropHuagang(d) {
+    const CER = '#8a5a3a', CERW = '#6a4028', GLAZE = '#6a8a58', RIM = '#c8a878';
+    // 缸身（略收腰）
+    d.box(-0.38, -0.38, 0, 0.38, 0.38, 0.22, shade(CER, 0.9), { line: shade(CER, 0.5), west: CERW, top: shade(CER, 0.85) });
+    d.box(-0.42, -0.42, 0.22, 0.42, 0.42, 0.72, CER, { line: shade(CER, 0.48), west: CERW, top: shade(CER, 0.95) });
+    d.box(-0.36, -0.36, 0.72, 0.36, 0.36, 0.88, shade(CER, 1.05), { line: shade(CER, 0.5), west: CERW, top: RIM });
+    // 釉带与浮雕环
+    d.QS(-0.425, -0.35, 0.38, 0.35, 0.52, GLAZE, shade(CER, 0.55));
+    d.QS(-0.425, -0.32, 0.58, 0.32, 0.66, shade(RIM, 0.95), shade(CER, 0.55));
+    for (let z = 0.28; z < 0.7; z += 0.12) d.seg([-0.43, -0.43, z], [0.43, -0.43, z], shade(CER, 0.72));
+    // 泥土 + 花叶簇
+    d.box(-0.3, -0.3, 0.88, 0.3, 0.3, 0.96, '#4a3a28', { line: '#2a1a10', top: '#3a2a18', west: '#3a2a18' });
+    for (const [dx, dy, zz, r, c1, c2] of [
+      [-0.12, -0.08, 1.15, 0.18, '#6f9e46', '#466e30'],
+      [0.14, 0.06, 1.28, 0.16, '#8ab850', '#5f8e3c'],
+      [0.02, -0.14, 1.08, 0.14, '#c8322c', '#8a2010'],
+      [-0.05, 0.12, 1.22, 0.12, '#e85a3a', '#a03018'],
+      [0.18, -0.1, 1.18, 0.1, '#f0c850', '#a07020'],
+    ]) {
+      const g = d.g, p = d.P(dx, dy, zz);
+      g.fillStyle = c1; g.beginPath(); g.ellipse(p[0], p[1], r * 28, r * 20, 0, 0, Math.PI * 2); g.fill();
+      g.fillStyle = c2; g.beginPath(); g.ellipse(p[0] - 3, p[1] + 2, r * 14, r * 10, 0, 0, Math.PI * 2); g.fill();
+    }
+  }
+  function paintPropLampPole(d) {
+    const WOOD = '#5a2a1c', WOOD_D = '#2a0e08', ST = '#8a8070', STW = '#6a6258', GOLD = '#c8a040';
+    // 石座
+    d.box(-0.28, -0.28, 0, 0.28, 0.28, 0.36, ST, { line: shade(ST, 0.5), west: STW, top: shade(ST, 0.9) });
+    for (let z = 0.12; z < 0.34; z += 0.12) d.seg([-0.26, -0.285, z], [0.26, -0.285, z], shade(ST, 0.7));
+    // 木杆
+    d.box(-0.09, -0.09, 0.36, 0.09, 0.09, 3.55, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.1) });
+    for (let z = 0.7; z < 3.4; z += 0.35) d.seg([-0.1, -0.1, z], [0.1, -0.1, z], shade(WOOD, 1.15));
+    // 横挑臂
+    d.box(-0.08, -0.95, 3.25, 0.08, 0.12, 3.42, WOOD, { line: WOOD_D, west: shade(WOOD, 0.75), top: shade(WOOD, 1.08) });
+    d.box(-0.12, -0.12, 3.5, 0.12, 0.12, 3.7, GOLD, { line: shade(GOLD, 0.55), west: shade(GOLD, 0.8), top: '#e8c868' });
+    // 吊绳 + 挂灯（贴图块，非纯线）
+    d.seg([0, -0.78, 3.28], [0, -0.78, 2.95], WOOD_D, 2);
+    const g = d.g, c = d.P(0, -0.78, 2.55);
+    g.fillStyle = '#5a2a1c'; g.fillRect(Math.round(c[0] - 2), Math.round(c[1] - 22), 4, 8);
+    g.fillStyle = '#c8322c'; g.beginPath(); g.ellipse(c[0], c[1], 14, 18, 0, 0, Math.PI * 2); g.fill();
+    g.fillStyle = '#e85840'; g.beginPath(); g.ellipse(c[0] - 3, c[1] - 2, 8, 12, 0, 0, Math.PI * 2); g.fill();
+    g.fillStyle = '#c8a040'; g.fillRect(Math.round(c[0] - 12), Math.round(c[1] - 20), 24, 3);
+    g.fillRect(Math.round(c[0] - 12), Math.round(c[1] + 16), 24, 3);
+    g.fillStyle = '#c8322c'; g.fillRect(Math.round(c[0] - 1), Math.round(c[1] + 19), 2, 10);
+  }
+
+
+  /* ---- Site206：山墙 / 清水砖 / 墀头 / 墙帽（民居店铺侧墙；禁纯线稿） ---- */
+  const QS_BRICK = '#9a9690', QS_BRICK_W = '#7e7a74', QS_MORTAR = '#b8b2a6';
+  /** 硬山山墙面：密实清水砖 + 屋脊三角收分感（体积块，非描线） */
+  function paintShangqiang(d, w, h) {
+    d.QS(0, 0, 0, w, h, QS_BRICK, shade(QS_BRICK, 0.48));
+    // dense running-bond brick courses
+    for (let z = 0.12, k = 0; z < h - 0.02; z += 0.12, k++) {
+      d.QS(-0.004, 0.01, z - 0.015, w - 0.01, z, shade(QS_MORTAR, 0.92));
+      const ox = (k % 2) * 0.18;
+      for (let x = ox; x < w - 0.03; x += 0.36) {
+        d.seg([x, -0.006, z - 0.12], [x, -0.006, z], shade(QS_BRICK, 0.62));
+        d.QS(-0.007, x + 0.04, z - 0.09, x + 0.18, z - 0.04, shade(QS_BRICK, k % 3 ? 0.94 : 1.1));
+      }
+    }
+    // triangular gable taper hint (upper third denser coping bands)
+    const peak = h * 0.72;
+    for (let i = 0; i < 5; i++) {
+      const t = i / 5, z0 = peak + t * (h - peak) * 0.85;
+      const inset = t * w * 0.28;
+      d.QS(-0.008, inset, z0, w - inset, Math.min(h - 0.02, z0 + 0.1), shade(QS_BRICK, 1.08), shade(QS_BRICK, 0.55));
+    }
+    // rain streaks / soot
+    for (let i = 0; i < 5; i++) {
+      const x = 0.15 + i * (w / 5.2);
+      d.seg([x, -0.009, h * 0.12], [x, -0.009, h * (0.5 + (i % 2) * 0.18)], shade(QS_BRICK, 0.78));
+    }
+    // stone plinth strip
+    d.QS(-0.01, 0, 0, w, 0.28, STONE, shade(STONE, 0.5));
+    d.QS(-0.012, 0.05, 0.08, w - 0.05, 0.2, shade(STONE, 1.08));
+  }
+  /** 清水砖：比 wall_brick 更密更细的灰砖贴面 */
+  function paintQingshuiBrick(d, w, h) {
+    d.QS(0, 0, 0, w, h, QS_BRICK, shade(QS_BRICK, 0.5));
+    for (let z = 0.11, k = 0; z < h - 0.01; z += 0.11, k++) {
+      d.QS(-0.004, 0.01, z - 0.012, w - 0.01, z, shade(QS_MORTAR, 0.95));
+      const ox = (k % 2) * 0.16;
+      for (let x = ox; x < w - 0.02; x += 0.32) {
+        d.seg([x, -0.006, z - 0.11], [x, -0.006, z], shade(QS_BRICK, 0.64));
+        // brick face fleck (volume, not line-only)
+        d.QS(-0.007, x + 0.03, z - 0.08, x + 0.14, z - 0.03, shade(QS_BRICK, (k + Math.floor(x * 10)) % 2 ? 0.92 : 1.08));
+      }
+    }
+    for (let i = 0; i < 6; i++) {
+      const x = 0.1 + (i * 0.41) % (w - 0.2), z = 0.15 + ((i * 0.53) % (h - 0.3));
+      d.QS(-0.008, x, z, x + 0.08, z + 0.05, shade(QS_BRICK, i % 2 ? 0.85 : 1.12));
+    }
+  }
+  /** 墀头：硬山端头砖叠涩饰（立体体积） */
+  function paintChitou(d, o = {}) {
+    const w = o.w || 0.7, dpth = o.d || 0.55, h = o.h || 0.95;
+    const cap = '#a8a49c', body = QS_BRICK;
+    // stepped corbel stack (dense boxes)
+    d.box(0, 0, 0, w, dpth, h * 0.35, body, { line: shade(body, 0.45), west: QS_BRICK_W, top: shade(body, 1.08), south: shade(body, 0.98) });
+    d.box(-0.04, -0.04, h * 0.32, w + 0.04, dpth + 0.04, h * 0.55, shade(body, 1.02), { line: shade(body, 0.48), west: QS_BRICK_W, top: shade(body, 1.12) });
+    d.box(-0.08, -0.08, h * 0.52, w + 0.08, dpth + 0.08, h * 0.72, shade(body, 1.05), { line: shade(body, 0.5), west: QS_BRICK_W, top: shade(body, 1.15) });
+    // ornamental brick tooth band
+    for (let x = 0.05; x < w - 0.05; x += 0.12) {
+      d.box(x, -0.02, h * 0.58, x + 0.08, 0.08, h * 0.68, shade(body, 0.88), { line: shade(body, 0.5), west: QS_BRICK_W, top: shade(body, 1.1) });
+    }
+    // stone/tile cap
+    d.box(-0.1, -0.1, h * 0.7, w + 0.1, dpth + 0.1, h + 0.05, cap, { line: '#5a5650', west: shade(cap, 0.82), top: shade(cap, 1.18), south: shade(cap, 1.05) });
+    d.QS(-0.12, 0.05, h + 0.02, w - 0.05, h + 0.06, shade(cap, 1.22));
+    // side brick grit
+    for (let z = 0.08; z < h * 0.5; z += 0.11) {
+      d.seg([0.03, -0.01, z], [w - 0.03, -0.01, z], shade(body, 0.7));
+      d.seg([-0.01, 0.05, z], [-0.01, dpth - 0.05, z], shade(QS_BRICK_W, 0.7));
+    }
+  }
+  /** 墙帽：墙顶压顶石/瓦垄帽 */
+  function paintWallCap(d, w, dpth) {
+    const cap = '#a29e95', tile = '#6e6a64';
+    d.box(0, 0, 0, w, dpth, 0.18, cap, { line: shade(cap, 0.5), west: shade(cap, 0.82), top: shade(cap, 1.12), south: shade(cap, 0.96) });
+    // tile ridge bumps along length
+    for (let x = 0.08; x < w - 0.05; x += 0.22) {
+      d.box(x, -0.02, 0.14, x + 0.16, dpth + 0.02, 0.28, tile, { line: shade(tile, 0.55), west: shade(tile, 0.75), top: shade(tile, 1.15), south: shade(tile, 0.95) });
+    }
+    d.QS(-0.01, 0.06, 0.2, w - 0.06, 0.26, shade(cap, 1.2));
+    // end stops
+    d.box(-0.04, -0.04, 0.05, 0.1, dpth + 0.04, 0.32, shade(tile, 0.9), { line: shade(tile, 0.5), west: shade(tile, 0.7), top: shade(tile, 1.1) });
+    d.box(w - 0.1, -0.04, 0.05, w + 0.04, dpth + 0.04, 0.32, shade(tile, 0.9), { line: shade(tile, 0.5), west: shade(tile, 0.7), top: shade(tile, 1.1) });
+  }
+
+  /* ---- Site207：栏杆寻杖 / 雀替 / 挂落 / 小柱（宋风木作；禁纯线稿） ---- */
+  /** 寻杖栏杆段：望柱座 + 密排小柱 + 寻杖圆木顶 + 中枋（体积块，非描线） */
+  function paintRailXunzhang(d, w) {
+    const wood = WOOD, dark = shade(wood, 0.42), lite = shade(wood, 1.28), mid = shade(wood, 0.88);
+    const red = RED_W, gold = shade(GOLD, 0.75);
+    /* deck sill / 地栿 */
+    d.QS(0, 0, 0, w, 0.14, shade(wood, 0.78), dark);
+    d.QS(-0.004, 0.02, 0.04, w - 0.02, 0.12, lite);
+    /* mid rail 中枋 */
+    d.QS(-0.01, 0.02, 0.42, w - 0.02, 0.55, mid, dark);
+    d.QS(-0.012, 0.04, 0.46, w - 0.04, 0.52, shade(wood, 1.12));
+    for (let x = 0.1; x < w; x += 0.28) d.seg([x, -0.014, 0.44], [x, -0.014, 0.54], shade(wood, 0.65));
+    /* dense baluster posts 望柱/小柱 */
+    for (let x = 0.08; x < w - 0.05; x += 0.18) {
+      d.QS(-0.008, x, 0.12, x + 0.07, 0.95, shade(wood, 0.95), dark);
+      d.QS(-0.01, x + 0.015, 0.18, x + 0.055, 0.9, lite);
+      /* grain flecks */
+      d.QS(-0.011, x + 0.02, 0.35, x + 0.05, 0.42, shade(wood, 1.15));
+      d.QS(-0.011, x + 0.02, 0.68, x + 0.05, 0.74, shade(wood, 0.8));
+    }
+    /* 寻杖 top rail — round timber feel via stacked strips + gold trim beads */
+    d.QS(-0.02, 0, 0.92, w, 1.12, wood, dark);
+    d.QS(-0.024, 0.02, 0.98, w - 0.02, 1.1, lite);
+    d.QS(-0.026, 0.04, 1.02, w - 0.04, 1.08, shade(wood, 1.35));
+    for (let x = 0.12; x < w; x += 0.22) {
+      d.QS(-0.03, x - 0.03, 1.0, x + 0.03, 1.08, gold);
+      d.QS(-0.032, x - 0.012, 1.02, x + 0.012, 1.06, shade(GOLD, 1.15));
+    }
+    /* end 望柱 caps */
+    for (const x of [0.04, w - 0.14]) {
+      d.QS(-0.015, x, 0.1, x + 0.1, 1.15, red, shade(red, 0.45));
+      d.QS(-0.018, x + 0.015, 1.1, x + 0.085, 1.22, shade(red, 1.15));
+      d.QS(-0.02, x + 0.03, 1.18, x + 0.07, 1.26, gold);
+    }
+  }
+  /** 雀替：柱梁交角如意卷草/云头立体饰（贴图体积，非线稿） */
+  function paintOrnamentQueti(d) {
+    const c = '#7a4a2c', g1 = CAI_G, g2 = CAI_B, L = shade(c, 0.48);
+    /* seat against column */
+    d.box(0, -0.08, 0.35, 0.22, 0.28, 0.72, c, { line: L, south: shade(c, 1.05), top: shade(c, 1.15), west: shade(c, 0.85) });
+    /* curved brace body stepping out */
+    d.box(0.05, -0.14, 0.15, 0.55, 0.22, 0.48, c, { line: L, south: g1, top: shade(c, 1.12) });
+    d.box(0.18, -0.18, 0.02, 0.85, 0.16, 0.32, c, { line: L, south: g2, top: shade(c, 1.18) });
+    /* cloud / ruyi head tip */
+    d.box(0.7, -0.2, 0.0, 1.05, 0.12, 0.22, c, { line: L, south: shade(c, 1.2), top: shade(c, 1.25) });
+    d.QS(-0.21, 0.78, 0.06, 1.0, 0.18, shade(GOLD, 0.8));
+    d.QS(-0.22, 0.85, 0.1, 0.96, 0.16, shade(GOLD, 1.15));
+    /* carved volute beads */
+    for (let i = 0; i < 5; i++) {
+      const x = 0.25 + i * 0.12, z = 0.2 + (i % 2) * 0.08;
+      d.QS(-0.16, x, z, x + 0.08, z + 0.08, shade(g1, 1.1 + (i % 2) * 0.1));
+      d.QS(-0.165, x + 0.02, z + 0.02, x + 0.06, z + 0.06, shade(GOLD, 0.7));
+    }
+    /* upper tenon into beam */
+    d.box(0.02, -0.1, 0.65, 0.35, 0.26, 0.78, c, { line: L, south: g1, top: shade(c, 1.2) });
+    d.QS(-0.11, 0.05, 0.7, 0.32, 0.76, GOLD);
+    /* underside shadow volume */
+    d.QS(-0.05, 0.15, 0.05, 0.7, 0.12, shade(c, 0.7));
+  }
+  /** 挂落：柱间挂落透空棂格 + 花心 + 边框（密实贴图） */
+  function paintHangingGualuo(d, w, h) {
+    const fr = RED_W, paper = '#3a2a20', dark = shade(fr, 0.42), lite = shade(fr, 1.2);
+    /* outer frame */
+    d.QS(0, 0, 0, w, h, fr, dark);
+    d.QS(-0.004, 0.04, 0.04, w - 0.04, h - 0.04, shade(fr, 0.92), dark);
+    /* dark openwork ground */
+    d.QS(-0.008, 0.08, 0.08, w - 0.08, h - 0.08, paper, shade(fr, 0.55));
+    /* dense lattice / 万字节奏 */
+    const step = 0.14;
+    for (let x = 0.12; x < w - 0.1; x += step) {
+      d.QS(-0.01, x, 0.1, x + 0.035, h - 0.1, lite);
+      d.QS(-0.011, x + 0.008, 0.14, x + 0.027, h - 0.14, shade(fr, 1.05));
+    }
+    for (let z = 0.14; z < h - 0.1; z += step) {
+      d.QS(-0.01, 0.1, z, w - 0.1, z + 0.035, lite);
+    }
+    /* diamond / flower centers */
+    for (let xi = 0; xi < 3; xi++) {
+      for (let zi = 0; zi < 2; zi++) {
+        const cx = w * (0.22 + xi * 0.28), cz = h * (0.28 + zi * 0.38);
+        d.QS(-0.014, cx - 0.08, cz - 0.08, cx + 0.08, cz + 0.08, shade(CAI_G, 1.05), shade(fr, 0.5));
+        d.QS(-0.016, cx - 0.04, cz - 0.04, cx + 0.04, cz + 0.04, shade(GOLD, 0.85));
+        d.QS(-0.017, cx - 0.015, cz - 0.015, cx + 0.015, cz + 0.015, shade(GOLD, 1.2));
+      }
+    }
+    /* bottom apron scallops */
+    for (let x = 0.15; x < w - 0.1; x += 0.2) {
+      const q = d.P(x, -0.02, -0.02);
+      const px = Math.round(q[0]), py = Math.round(q[1]);
+      d.g.fillStyle = dark;
+      d.g.beginPath(); d.g.moveTo(px - 4, py); d.g.lineTo(px + 4, py); d.g.lineTo(px, py + 6); d.g.closePath(); d.g.fill();
+      d.g.fillStyle = lite;
+      d.g.beginPath(); d.g.moveTo(px - 2, py); d.g.lineTo(px + 2, py); d.g.lineTo(px, py + 4); d.g.closePath(); d.g.fill();
+    }
+    /* gold edge beads */
+    for (let x = 0.1; x < w; x += 0.24) {
+      d.QS(-0.018, x - 0.02, h - 0.06, x + 0.02, h - 0.02, shade(GOLD, 0.7));
+      d.QS(-0.018, x - 0.02, 0.02, x + 0.02, 0.06, shade(GOLD, 0.7));
+    }
+  }
+  /** 小柱/望柱：栏杆端柱 + 莲瓣柱头（立体） */
+  function paintBalusterXiaozhu(d) {
+    const wood = WOOD, dark = shade(wood, 0.45), lite = shade(wood, 1.25), red = RED;
+    /* base stone plinth */
+    d.box(-0.14, -0.14, 0, 0.14, 0.14, 0.18, STONE, { line: shade(STONE, 0.5), top: shade(STONE, 1.12), west: shade(STONE, 0.82) });
+    /* shaft */
+    d.box(-0.09, -0.09, 0.16, 0.09, 0.09, 1.05, red, { line: shade(red, 0.45), south: shade(red, 1.05), top: shade(red, 1.15), west: shade(red, 0.85) });
+    for (let z = 0.25; z < 1.0; z += 0.18) {
+      d.QS(-0.1, -0.06, z, 0.06, z + 0.04, shade(red, 1.18));
+      d.QS(-0.1, -0.04, z + 0.06, 0.04, z + 0.09, shade(red, 0.8));
+    }
+    /* neck ring */
+    d.box(-0.12, -0.12, 1.0, 0.12, 0.12, 1.12, wood, { line: dark, top: lite, south: shade(wood, 1.05) });
+    d.QS(-0.13, -0.08, 1.04, 0.08, 1.1, shade(GOLD, 0.7));
+    /* lotus / 莲瓣 cap */
+    d.box(-0.16, -0.16, 1.1, 0.16, 0.16, 1.22, wood, { line: dark, top: shade(wood, 1.3), south: lite });
+    for (let a = 0; a < 8; a++) {
+      const ang = a * Math.PI / 4;
+      const dx = Math.cos(ang) * 0.1, dy = Math.sin(ang) * 0.06;
+      d.QS(-0.17, dx - 0.03, 1.14, dx + 0.03, 1.2, shade(GOLD, 0.85));
+    }
+    /* finial bead */
+    d.box(-0.05, -0.05, 1.2, 0.05, 0.05, 1.38, shade(GOLD, 0.95), { line: shade(GOLD, 0.55), top: shade(GOLD, 1.25), south: shade(GOLD, 1.1) });
+    d.QS(-0.06, -0.03, 1.32, 0.03, 1.36, shade(GOLD, 1.3));
+  }
+
+  /* ---- Site208：彩绘梁枋 / 额枋带 / 斗拱色块 / 檐板（望川楼·茶坊·店铺檐下；禁纯线稿；青绿朱红克制） ---- */
+  const CAIHUA_RED = '#a8342a', CAIHUA_CREAM = '#e8d6a0', CAIHUA_WOOD = '#6a4428';
+  /** 梁底/额枋彩绘单元：密实青绿面板 + 朱红点缀如意（体积块） */
+  function paintBeamEfang(d, w) {
+    const b = CAI_B, g = CAI_G, z0 = 0, z1 = 0.42;
+    d.box(0, -0.06, z0, w, 0.22, z1, b, { line: shade(b, 0.45), west: shade(g, 0.82), top: shade(b, 0.85), south: shade(b, 0.98) });
+    // dense panel courses
+    for (let x = 0.04; x < w - 0.04; x += 0.55) {
+      const x1 = Math.min(w - 0.04, x + 0.48);
+      d.QS(-0.05, x, z0 + 0.05, x1, z1 - 0.05, g, shade(g, 0.55));
+      d.QS(-0.052, x + 0.06, z0 + 0.1, x1 - 0.06, z1 - 0.1, shade(g, 1.08));
+      // 如意中心小块 + 朱红点缀
+      const m = (x + x1) / 2, zh = (z0 + z1) / 2;
+      d.QS(-0.054, m - 0.1, zh - 0.07, m + 0.1, zh + 0.07, CAIHUA_CREAM, shade(GOLD, 0.55));
+      d.QS(-0.056, m - 0.04, zh - 0.03, m + 0.04, zh + 0.03, CAIHUA_RED);
+      d.QS(-0.057, m - 0.018, zh - 0.015, m + 0.018, zh + 0.015, shade(GOLD, 1.15));
+    }
+    // gold edge rails
+    d.QS(-0.048, 0.02, z1 - 0.035, w - 0.02, z1, GOLD);
+    d.QS(-0.048, 0.02, z0, w - 0.02, z0 + 0.035, shade(GOLD, 0.85));
+    // wood soffit strip under beam
+    d.box(0.02, -0.02, z0 - 0.06, w - 0.02, 0.18, z0, CAIHUA_WOOD, { line: shade(CAIHUA_WOOD, 0.5), top: shade(CAIHUA_WOOD, 1.1), south: shade(CAIHUA_WOOD, 0.95) });
+  }
+  /** 彩画水平色带：青绿叠层 + 朱红分隔（檐下密实色块） */
+  function paintCaihuaBand(d, w) {
+    const z0 = 0, z1 = 0.28;
+    d.box(0, -0.05, z0, w, 0.18, z1, CAI_G, { line: shade(CAI_G, 0.48), west: shade(CAI_B, 0.85), top: shade(CAI_G, 1.1), south: shade(CAI_G, 0.98) });
+    // three-band Song palette
+    d.QS(-0.05, 0.02, z0 + 0.02, w - 0.02, z0 + 0.09, CAI_B, shade(CAI_B, 0.55));
+    d.QS(-0.05, 0.02, z0 + 0.1, w - 0.02, z0 + 0.18, CAI_G, shade(CAI_G, 0.55));
+    d.QS(-0.05, 0.02, z0 + 0.19, w - 0.02, z1 - 0.02, shade(CAI_B, 0.92), shade(CAI_B, 0.5));
+    // vermillion divider ticks (dense, not neon)
+    for (let x = 0.12; x < w - 0.08; x += 0.42) {
+      d.QS(-0.052, x, z0 + 0.04, x + 0.08, z1 - 0.04, CAIHUA_RED);
+      d.QS(-0.053, x + 0.02, z0 + 0.08, x + 0.06, z0 + 0.16, GOLD);
+    }
+    d.QS(-0.048, 0.01, z1 - 0.03, w - 0.01, z1, shade(GOLD, 0.9));
+  }
+  /** 斗拱色块：坐斗/栱身青绿面 + 朱红散斗（立体体积，非描线） */
+  function paintDougongBlock(d, o = {}) {
+    const s = (o && o.large) ? 1.25 : 1;
+    const wood = CAIHUA_WOOD, g1 = CAI_G, g2 = CAI_B, L = shade(wood, 0.48);
+    // 坐斗 body
+    d.box(-0.2 * s, -0.08, 0, 0.2 * s, 0.3, 0.18 * s, wood, { line: L, south: g1, top: shade(wood, 1.12), west: shade(wood, 0.85) });
+    d.QS(-0.09, -0.12 * s, 0.1 * s, 0.12 * s, 0.16 * s, GOLD);
+    // 华栱
+    d.box(-0.52 * s, -0.16, 0.16 * s, 0.52 * s, 0.26, 0.3 * s, wood, { line: L, south: g2, top: shade(wood, 1.08) });
+    d.QS(-0.17, -0.45 * s, 0.18 * s, 0.45 * s, 0.22 * s, shade(g1, 1.12));
+    // 散斗 trio with 朱红 face
+    for (const k of [-1, 0, 1]) {
+      d.box(k * 0.42 * s - 0.1 * s, -0.18 - (k === 0 ? 0.22 * s : 0), 0.28 * s, k * 0.42 * s + 0.1 * s, 0.2, 0.42 * s, wood, { line: L, south: g1, top: shade(wood, 1.1) });
+      d.QS(-0.19 - (k === 0 ? 0.22 * s : 0), k * 0.42 * s - 0.07 * s, 0.34 * s, k * 0.42 * s + 0.07 * s, 0.4 * s, CAIHUA_RED);
+      d.QS(-0.2 - (k === 0 ? 0.22 * s : 0), k * 0.42 * s - 0.035 * s, 0.36 * s, k * 0.42 * s + 0.035 * s, 0.385 * s, GOLD);
+    }
+    // upper 枋
+    d.box(-0.72 * s, -0.22, 0.4 * s, 0.72 * s, 0.2, 0.52 * s, wood, { line: L, south: g2, top: shade(wood, 1.15) });
+    d.QS(-0.23, -0.65 * s, 0.46 * s, 0.65 * s, 0.52 * s, GOLD);
+    // side caihua panels
+    d.QS(-0.24, -0.35 * s, 0.42 * s, -0.12 * s, 0.5 * s, g1);
+    d.QS(-0.24, 0.12 * s, 0.42 * s, 0.35 * s, 0.5 * s, g1);
+  }
+  /** 檐板/挑檐枋：木色底 + 青绿边 + 朱红端头 */
+  function paintEaveBoard(d, w) {
+    const z0 = 0, z1 = 0.32;
+    d.box(0, -0.08, z0, w, 0.2, z1, CAIHUA_WOOD, { line: shade(CAIHUA_WOOD, 0.5), west: shade(CAIHUA_WOOD, 0.8), top: shade(CAIHUA_WOOD, 1.12), south: shade(CAIHUA_WOOD, 0.96) });
+    // grain flecks (volume)
+    for (let x = 0.08; x < w - 0.08; x += 0.28) {
+      d.QS(-0.09, x, z0 + 0.06, x + 0.18, z1 - 0.06, shade(CAIHUA_WOOD, (Math.floor(x * 10) % 2) ? 0.9 : 1.08));
+    }
+    // 青绿边条
+    d.QS(-0.095, 0.04, z1 - 0.08, w - 0.04, z1 - 0.02, CAI_G, shade(CAI_G, 0.55));
+    d.QS(-0.095, 0.04, z0 + 0.02, w - 0.04, z0 + 0.07, CAI_B, shade(CAI_B, 0.55));
+    // 朱红端头块
+    d.box(0.02, -0.1, z0 + 0.04, 0.22, 0.05, z1 - 0.04, CAIHUA_RED, { line: shade(CAIHUA_RED, 0.55), top: shade(CAIHUA_RED, 1.1), south: shade(CAIHUA_RED, 0.95) });
+    d.box(w - 0.22, -0.1, z0 + 0.04, w - 0.02, 0.05, z1 - 0.04, CAIHUA_RED, { line: shade(CAIHUA_RED, 0.55), top: shade(CAIHUA_RED, 1.1), south: shade(CAIHUA_RED, 0.95) });
+    d.QS(-0.1, 0.06, z1 - 0.04, w - 0.06, z1, shade(GOLD, 0.85));
+  }
+
+
+
+  /* ---- Site209：门钉 / 铺首衔环 / 门槛 / 抱鼓石（宋风大门；禁纯线稿） ---- */
+  /** 门钉面板：朱漆板门 + 密排铜钉（体积块，非描线） */
+  function paintDoorMending(d, w, h) {
+    const fr = '#6a1e16', dark = shade(fr, 0.42), lite = shade(fr, 1.18), stud = GOLD, studD = shade(GOLD, 0.55);
+    d.QS(0, 0, 0, w, h, fr, dark);
+    /* vertical planks denser */
+    for (let x = 0.04; x < w - 0.03; x += 0.13) {
+      d.QS(-0.004, x, 0.03, x + 0.115, h - 0.03, shade(fr, 0.92 + ((x * 17) % 3) * 0.05), shade(fr, 0.55));
+      d.QS(-0.006, x + 0.02, 0.06, x + 0.04, h - 0.06, lite);
+    }
+    /* horizontal battens */
+    for (const z of [0.14, h * 0.33, h * 0.66, h - 0.16]) {
+      d.QS(-0.01, 0.03, z - 0.045, w - 0.03, z + 0.045, shade(fr, 0.72), dark);
+      d.QS(-0.012, 0.05, z - 0.02, w - 0.05, z + 0.02, shade(fr, 1.05));
+    }
+    /* dense 门钉 grid 7x9 */
+    const cols = 7, rows = 9;
+    for (let row = 0; row < rows; row++) for (let col = 0; col < cols; col++) {
+      const x = 0.12 + col * ((w - 0.24) / (cols - 1));
+      const z = 0.22 + row * ((h - 0.44) / (rows - 1));
+      d.QS(-0.014, x - 0.035, z - 0.035, x + 0.035, z + 0.035, studD);
+      d.QS(-0.016, x - 0.022, z - 0.022, x + 0.022, z + 0.022, stud);
+      d.QS(-0.018, x - 0.01, z - 0.01, x + 0.01, z + 0.01, shade(stud, 1.35));
+    }
+    /* edge rail beads */
+    for (let z = 0.18; z < h - 0.1; z += 0.22) {
+      d.QS(-0.02, 0.02, z, 0.08, z + 0.06, shade(stud, 0.85));
+      d.QS(-0.02, w - 0.08, z, w - 0.02, z + 0.06, shade(stud, 0.85));
+    }
+  }
+  /** 铺首衔环：兽面铺首 + 圆环（立体贴图） */
+  function paintKnockerPushou(d) {
+    const br = '#8a6a28', dark = shade(br, 0.4), gold = GOLD, red = '#5a1810';
+    /* back plate */
+    d.box(-0.28, -0.08, -0.05, 0.28, 0.12, 0.55, shade(br, 0.85), { line: dark, south: shade(br, 1.05), top: shade(br, 1.2), west: shade(br, 0.75) });
+    d.QS(-0.09, -0.22, 0.02, 0.22, 0.5, shade(gold, 0.7));
+    /* beast face forehead / brows */
+    d.box(-0.22, -0.1, 0.32, 0.22, 0.1, 0.52, shade(br, 1.05), { line: dark, south: shade(gold, 0.9), top: shade(gold, 1.15) });
+    d.QS(-0.11, -0.12, 0.4, 0.12, 0.48, shade(gold, 1.25));
+    /* eyes */
+    for (const sx of [-1, 1]) {
+      d.QS(-0.12, sx * 0.12 - 0.06, 0.28, sx * 0.12 + 0.06, 0.38, shade(red, 0.9), dark);
+      d.QS(-0.13, sx * 0.12 - 0.03, 0.3, sx * 0.12 + 0.03, 0.36, shade(gold, 1.2));
+    }
+    /* snout / nose boss */
+    d.box(-0.1, -0.12, 0.12, 0.1, 0.1, 0.3, shade(br, 1.1), { line: dark, south: shade(gold, 0.95), top: shade(gold, 1.2) });
+    d.QS(-0.13, -0.05, 0.18, 0.05, 0.26, shade(gold, 1.3));
+    /* fangs */
+    for (const sx of [-1, 1]) {
+      d.box(sx * 0.12 - 0.03, -0.1, 0.02, sx * 0.12 + 0.03, 0.06, 0.14, shade(gold, 1.05), { line: dark, south: shade(gold, 1.2) });
+    }
+    /* ring 衔环 — stacked torus feel */
+    d.box(-0.18, -0.14, -0.22, 0.18, 0.08, 0.08, shade(gold, 0.85), { line: dark, south: shade(gold, 1.05), top: shade(gold, 1.15) });
+    d.QS(-0.15, -0.14, -0.18, 0.14, 0.02, shade(gold, 1.2));
+    d.QS(-0.16, -0.1, -0.14, 0.1, -0.04, shade(gold, 0.7));
+    /* ring lower arc beads */
+    for (let i = 0; i < 7; i++) {
+      const t = i / 6, x = -0.14 + t * 0.28, z = -0.2 + Math.sin(t * Math.PI) * 0.12;
+      d.QS(-0.15, x - 0.025, z - 0.025, x + 0.025, z + 0.025, shade(gold, 0.95 + (i % 2) * 0.15));
+    }
+    /* side ear flanges */
+    for (const sx of [-1, 1]) {
+      d.box(sx * 0.22 - 0.05, -0.06, 0.15, sx * 0.22 + 0.05, 0.1, 0.42, shade(br, 0.95), { line: dark, south: shade(gold, 0.8), top: shade(gold, 1.1) });
+    }
+  }
+  /** 门槛：石质门槛 + 木槛面 + 铜角包（密实） */
+  function paintSillMenkan(d, w) {
+    const stone = STONE, wood = WOOD, dark = shade(stone, 0.48), lite = shade(stone, 1.15), gold = shade(GOLD, 0.8);
+    /* stone body */
+    d.box(0, -0.18, 0, w, 0.22, 0.28, stone, { line: dark, south: shade(stone, 1.05), top: lite, west: shade(stone, 0.82) });
+    d.QS(-0.01, 0.04, 0.04, w - 0.04, 0.22, shade(stone, 1.12));
+    /* wood tread strip */
+    d.QS(-0.02, 0.06, 0.18, w - 0.06, 0.26, shade(wood, 0.95), shade(wood, 0.5));
+    d.QS(-0.022, 0.1, 0.2, w - 0.1, 0.24, shade(wood, 1.18));
+    /* joint seams */
+    for (let x = 0.2; x < w; x += 0.28) {
+      d.seg([x, -0.19, 0.02], [x, -0.19, 0.26], shade(stone, 0.65));
+      d.QS(-0.015, x - 0.02, 0.08, x + 0.02, 0.14, shade(stone, 0.85));
+    }
+    /* brass corner wraps */
+    for (const x of [0.02, w - 0.18]) {
+      d.QS(-0.025, x, 0.02, x + 0.16, 0.26, gold);
+      d.QS(-0.027, x + 0.03, 0.06, x + 0.13, 0.22, shade(GOLD, 1.2));
+      d.QS(-0.028, x + 0.06, 0.1, x + 0.1, 0.18, shade(GOLD, 1.35));
+    }
+    /* front lip shadow */
+    d.QS(-0.005, 0, 0, w, 0.04, shade(stone, 0.7));
+  }
+  /** 抱鼓石：门枕石鼓面 + 须弥座 + 兽纹（立体） */
+  function paintStoneBaogu(d) {
+    const stone = STONE, dark = shade(stone, 0.45), lite = shade(stone, 1.18), gold = shade(GOLD, 0.75);
+    /* 须弥座 base */
+    d.box(-0.42, -0.32, 0, 0.42, 0.32, 0.28, stone, { line: dark, south: shade(stone, 1.02), top: lite, west: shade(stone, 0.8) });
+    d.QS(-0.02, -0.35, 0.08, 0.35, 0.22, shade(stone, 1.12));
+    /* waist ring */
+    d.box(-0.36, -0.28, 0.24, 0.36, 0.28, 0.38, shade(stone, 0.92), { line: dark, south: shade(stone, 1.08), top: lite });
+    d.QS(-0.03, -0.3, 0.28, 0.3, 0.34, gold);
+    /* drum body */
+    d.box(-0.38, -0.3, 0.36, 0.38, 0.3, 1.05, stone, { line: dark, south: shade(stone, 1.05), top: shade(stone, 1.2), west: shade(stone, 0.85) });
+    /* concentric drum face rings */
+    for (const r of [0.32, 0.22, 0.12]) {
+      d.QS(-0.32, -r, 0.55 - r * 0.15, r, 0.85 + r * 0.1, shade(stone, 1.08 + (0.32 - r)));
+    }
+    d.QS(-0.33, -0.08, 0.62, 0.08, 0.78, shade(stone, 1.25));
+    d.QS(-0.34, -0.035, 0.66, 0.035, 0.74, gold);
+    /* side bosses / 兽纹 beads */
+    for (let i = 0; i < 8; i++) {
+      const ang = i * Math.PI / 4;
+      const dx = Math.cos(ang) * 0.28, dz = 0.7 + Math.sin(ang) * 0.22;
+      d.QS(-0.31, dx - 0.04, dz - 0.04, dx + 0.04, dz + 0.04, shade(stone, 1.15));
+      if (i % 2 === 0) d.QS(-0.32, dx - 0.02, dz - 0.02, dx + 0.02, dz + 0.02, gold);
+    }
+    /* top lotus / 莲瓣 cap */
+    d.box(-0.34, -0.26, 1.0, 0.34, 0.26, 1.18, stone, { line: dark, south: lite, top: shade(stone, 1.28) });
+    for (let a = 0; a < 6; a++) {
+      const x = -0.26 + a * 0.1;
+      d.QS(-0.27, x, 1.05, x + 0.07, 1.14, shade(stone, 1.2));
+    }
+    d.QS(-0.28, -0.12, 1.1, 0.12, 1.16, gold);
+    /* pillow stone stub behind */
+    d.box(-0.2, 0.2, 0.2, 0.2, 0.45, 0.55, shade(stone, 0.9), { line: dark, south: shade(stone, 1.0), top: lite });
+  }
+
+
+  /* ---- Site210：旗幡 / 帷幔 / 流苏 / 檐下挂饰（御街·酒楼·茶坊·南广场；与幌子/灯笼互补；禁纯线稿；色调克制） ---- */
+  const QIFAN_RED = '#a8342a', QIFAN_CREAM = '#e8d6a0', QIFAN_TEAL = '#3a6a58', QIFAN_INK = '#2a3a48', QIFAN_WOOD = '#6a4428';
+  /** 旗幡：燕尾锦幡体积（非店招幌子文字布）；密实布面叠层 + 金边 */
+  function paintBannerQifan(d, o = {}) {
+    const L = 1.55, w = 0.48;
+    const col = o.col || QIFAN_RED, alt = o.alt || QIFAN_CREAM;
+    // pole tip / hanging ring (volume)
+    d.box(-0.04, -0.05, -0.02, 0.04, 0.05, 0.08, QIFAN_WOOD, { line: shade(QIFAN_WOOD, 0.5), top: shade(QIFAN_WOOD, 1.12) });
+    d.QS(-0.06, -0.06, 0.02, 0.06, 0.07, GOLD);
+    // cloth body (dense face + west depth)
+    d.box(-w / 2, -0.04, -L + 0.15, w / 2, 0.06, 0.02, col, { line: shade(col, 0.48), west: shade(col, 0.78), top: shade(col, 1.08), south: shade(col, 0.96) });
+    // weave courses
+    for (let i = 0; i < 7; i++) {
+      const z0 = -0.08 - i * (L - 0.35) / 6;
+      d.QS(-0.05, -w / 2 + 0.04, z0, w / 2 - 0.04, z0 - 0.06, i % 2 ? shade(col, 1.1) : shade(col, 0.88));
+    }
+    // cream diagonal panel + teal tip band
+    d.QS(-0.052, -w / 2 + 0.08, -0.35, w / 2 - 0.08, -0.55, alt, shade(alt, 0.55));
+    d.QS(-0.054, -w / 2 + 0.1, -0.4, w / 2 - 0.1, -0.5, shade(GOLD, 0.95));
+    d.QS(-0.052, -w / 2 + 0.06, -L + 0.35, w / 2 - 0.06, -L + 0.5, QIFAN_TEAL, shade(QIFAN_TEAL, 0.5));
+    // swallowtail fork (volume wedges)
+    d.box(-w / 2, -0.03, -L, -0.04, 0.04, -L + 0.22, shade(col, 0.92), { line: shade(col, 0.45), south: shade(col, 0.9) });
+    d.box(0.04, -0.03, -L, w / 2, 0.04, -L + 0.22, shade(col, 0.92), { line: shade(col, 0.45), south: shade(col, 0.9) });
+    d.QS(-0.055, -w / 2 + 0.02, -L - 0.02, -0.06, -L + 0.12, shade(col, 0.75));
+    d.QS(-0.055, 0.06, -L - 0.02, w / 2 - 0.02, -L + 0.12, shade(col, 0.75));
+    // gold piping + tip beads
+    d.QS(-0.048, -w / 2 + 0.02, -0.02, -w / 2 + 0.06, -L + 0.25, shade(GOLD, 0.85));
+    d.QS(-0.048, w / 2 - 0.06, -0.02, w / 2 - 0.02, -L + 0.25, shade(GOLD, 0.85));
+    for (const sx of [-0.18, 0.18]) {
+      d.QS(-0.056, sx - 0.04, -L - 0.08, sx + 0.04, -L - 0.02, GOLD);
+      d.QS(-0.058, sx - 0.02, -L - 0.06, sx + 0.02, -L - 0.03, shade(GOLD, 1.2));
+    }
+  }
+  /** 帷幔：檐下软幔叠层（褶皱体积块，非描线） */
+  function paintCurtainWeiman(d, w) {
+    const z0 = 0, z1 = 0.95;
+    const cloth = '#c8a878', deep = '#8a6848', cream = QIFAN_CREAM;
+    d.box(0, -0.06, z0 - 0.05, w, 0.14, z0 + 0.08, QIFAN_WOOD, { line: shade(QIFAN_WOOD, 0.5), top: shade(QIFAN_WOOD, 1.1), south: shade(QIFAN_WOOD, 0.95) });
+    d.QS(-0.07, 0.02, z0 - 0.02, w - 0.02, z0 + 0.06, shade(GOLD, 0.9));
+    // hanging folds as vertical volumes
+    const n = Math.max(4, Math.round(w / 0.42));
+    for (let i = 0; i < n; i++) {
+      const x0 = 0.04 + i * (w - 0.08) / n;
+      const x1 = x0 + (w - 0.08) / n - 0.04;
+      const mid = (x0 + x1) / 2;
+      const col = i % 2 ? cloth : shade(cloth, 0.9);
+      d.box(x0, -0.08, z0 + 0.05, x1, 0.1, z1 - 0.08, col, { line: shade(deep, 0.55), west: shade(col, 0.78), top: shade(col, 1.05), south: shade(col, 0.96) });
+      // fold ridge highlight
+      d.QS(-0.09, mid - 0.04, z0 + 0.1, mid + 0.04, z1 - 0.12, shade(cream, 0.95));
+      d.QS(-0.092, mid - 0.02, z0 + 0.18, mid + 0.02, z1 - 0.2, shade(cloth, 1.15));
+      // bottom scallop volume
+      d.box(x0 + 0.02, -0.09, z1 - 0.14, x1 - 0.02, 0.06, z1, shade(deep, 1.05), { line: shade(deep, 0.5), south: shade(cloth, 0.85), top: shade(cream, 0.9) });
+      d.QS(-0.095, mid - 0.06, z1 - 0.06, mid + 0.06, z1 + 0.02, QIFAN_RED);
+      d.QS(-0.096, mid - 0.03, z1 - 0.04, mid + 0.03, z1, GOLD);
+    }
+    // teal header band
+    d.QS(-0.085, 0.04, z0 + 0.08, w - 0.04, z0 + 0.18, QIFAN_TEAL, shade(QIFAN_TEAL, 0.5));
+    d.QS(-0.086, 0.08, z0 + 0.1, w - 0.08, z0 + 0.15, shade(GOLD, 0.9));
+  }
+  /** 流苏：密排穗球/穗绳体积（檐下点缀，非幌子底穗） */
+  function paintTasselLiusu(d) {
+    const cord = QIFAN_WOOD, ball = QIFAN_RED, tip = QIFAN_CREAM;
+    d.box(-0.12, -0.05, 0.85, 0.12, 0.05, 0.95, cord, { line: shade(cord, 0.5), top: shade(GOLD, 0.95) });
+    d.QS(-0.06, -0.1, 0.88, 0.1, 0.94, GOLD);
+    // three hanging strands
+    for (const sx of [-0.14, 0, 0.14]) {
+      d.box(sx - 0.025, -0.04, 0.08, sx + 0.025, 0.04, 0.88, shade(cord, 0.92), { line: shade(cord, 0.5), south: shade(cord, 0.85) });
+      // bead stack
+      for (let k = 0; k < 4; k++) {
+        const z = 0.72 - k * 0.12;
+        const c = k % 2 ? ball : tip;
+        d.box(sx - 0.05, -0.05, z, sx + 0.05, 0.05, z + 0.08, c, { line: shade(c, 0.5), top: shade(c, 1.15), south: shade(c, 0.95) });
+        d.QS(-0.055, sx - 0.025, z + 0.02, sx + 0.025, z + 0.06, shade(GOLD, 1.1));
+      }
+      // fringe brush volume at tip
+      d.box(sx - 0.07, -0.04, -0.02, sx + 0.07, 0.04, 0.12, shade(ball, 0.9), { line: shade(ball, 0.48), south: shade(ball, 0.85), top: shade(tip, 0.95) });
+      for (let f = -2; f <= 2; f++) {
+        d.QS(-0.05, sx + f * 0.022 - 0.012, -0.12, sx + f * 0.022 + 0.012, -0.02, shade(tip, 0.9 + (f & 1) * 0.1));
+      }
+      d.QS(-0.052, sx - 0.03, -0.08, sx + 0.03, -0.04, GOLD);
+    }
+  }
+  /** 檐下挂饰：木环+玉璧/铃铎体积（非灯笼） */
+  function paintHangOrnament(d) {
+    const wood = QIFAN_WOOD, jade = '#7a9a78', bronze = '#8a6a3a';
+    // hanging cord + ring
+    d.box(-0.02, -0.02, 0.95, 0.02, 0.02, 1.15, wood, { line: shade(wood, 0.5) });
+    d.box(-0.1, -0.05, 0.88, 0.1, 0.05, 0.98, bronze, { line: shade(bronze, 0.5), top: shade(GOLD, 0.9), south: shade(bronze, 0.95) });
+    d.QS(-0.06, -0.06, 0.9, 0.06, 0.96, shade(GOLD, 1.15));
+    // jade bi disc (volume ring via stacked boxes)
+    d.box(-0.16, -0.06, 0.55, 0.16, 0.06, 0.85, jade, { line: shade(jade, 0.5), west: shade(jade, 0.78), top: shade(jade, 1.12), south: shade(jade, 0.96) });
+    d.QS(-0.07, -0.08, 0.62, 0.08, 0.78, shade(jade, 1.15));
+    d.box(-0.05, -0.04, 0.64, 0.05, 0.04, 0.76, shade(jade, 0.75), { line: shade(jade, 0.45), top: shade('#c8d8c0', 0.95) });
+    // lower bronze bell / pendant
+    d.box(-0.1, -0.05, 0.28, 0.1, 0.05, 0.55, bronze, { line: shade(bronze, 0.5), south: shade(bronze, 0.92), top: shade(bronze, 1.1) });
+    d.QS(-0.06, -0.07, 0.4, 0.07, 0.5, shade(GOLD, 0.95));
+    d.box(-0.07, -0.04, 0.12, 0.07, 0.04, 0.3, shade(bronze, 0.85), { line: shade(bronze, 0.48), south: shade(QIFAN_RED, 0.9), top: shade(bronze, 1.05) });
+    d.QS(-0.055, -0.04, 0.18, 0.04, 0.26, GOLD);
+    // tip bead
+    d.box(-0.04, -0.03, 0.02, 0.04, 0.03, 0.12, QIFAN_RED, { line: shade(QIFAN_RED, 0.5), top: shade(QIFAN_RED, 1.12) });
+    d.QS(-0.05, -0.02, 0.05, 0.02, 0.1, shade(GOLD, 1.15));
+  }
+
+  /* ---- Site211：台基 / 阶条石 / 垂带 / 踏垛（宋风石作；禁纯线稿；与铺地 kitbash 分面） ---- */
+  /** 台基：须弥座式密实石层（圭脚·下枋·束腰·上枋·压面） */
+  function paintBaseTaiji(d, w, h) {
+    const stone = STONE, dark = shade(stone, 0.45), lite = shade(stone, 1.18), mid = shade(stone, 0.92);
+    const gold = shade(GOLD, 0.55);
+    /* 圭脚 plinth */
+    d.box(0, -0.22, 0, w, 0.22, h * 0.18, stone, { line: dark, south: shade(stone, 1.02), top: lite, west: shade(stone, 0.8) });
+    d.QS(-0.01, 0.04, 0.02, w - 0.04, h * 0.14, shade(stone, 1.1));
+    /* 下枋 */
+    d.box(-0.04, -0.18, h * 0.16, w + 0.04, 0.18, h * 0.32, mid, { line: dark, south: shade(stone, 1.05), top: lite, west: shade(stone, 0.78) });
+    for (let x = 0.12; x < w; x += 0.28) {
+      d.QS(-0.02, x - 0.04, h * 0.2, x + 0.08, h * 0.28, shade(stone, 1.12));
+      d.QS(-0.022, x, h * 0.22, x + 0.04, h * 0.26, gold);
+    }
+    /* 束腰 waist — denser ashlar */
+    d.box(0.02, -0.16, h * 0.3, w - 0.02, 0.16, h * 0.62, shade(stone, 0.95), { line: dark, south: shade(stone, 1.0), top: lite, west: shade(stone, 0.82) });
+    for (let z = h * 0.34, k = 0; z < h * 0.6; z += 0.12, k++) {
+      d.QS(-0.015, 0.06, z - 0.015, w - 0.06, z, shade(stone, 0.75));
+      const ox = (k % 2) * 0.16;
+      for (let x = 0.1 + ox; x < w - 0.12; x += 0.32) {
+        d.QS(-0.018, x, z - 0.09, x + 0.22, z - 0.02, shade(stone, k % 3 ? 0.98 : 1.14));
+        d.QS(-0.02, x + 0.06, z - 0.07, x + 0.14, z - 0.04, shade(stone, 1.22));
+      }
+    }
+    /* 上枋 */
+    d.box(-0.05, -0.2, h * 0.6, w + 0.05, 0.2, h * 0.78, mid, { line: dark, south: shade(stone, 1.06), top: lite, west: shade(stone, 0.8) });
+    d.QS(-0.025, 0.05, h * 0.66, w - 0.05, h * 0.74, shade(stone, 1.15));
+    /* 压面 / 阶条帽 */
+    d.box(-0.08, -0.24, h * 0.76, w + 0.08, 0.24, h, stone, { line: dark, south: lite, top: shade(stone, 1.25), west: shade(stone, 0.85) });
+    d.QS(-0.03, 0.08, h * 0.86, w - 0.08, h * 0.96, shade(stone, 1.2));
+    /* joint beads */
+    for (let x = 0.25; x < w; x += 0.45) d.seg([x, -0.25, h * 0.78], [x, -0.25, h - 0.02], shade(stone, 0.65));
+  }
+  /** 阶条石：台基顶缘长条压面石（密实体积） */
+  function paintStepTiaotiao(d, w) {
+    const stone = STONE, dark = shade(stone, 0.48), lite = shade(stone, 1.2);
+    d.box(0, -0.28, 0, w, 0.32, 0.28, stone, { line: dark, south: shade(stone, 1.05), top: lite, west: shade(stone, 0.82) });
+    d.QS(-0.02, 0.04, 0.06, w - 0.04, 0.22, shade(stone, 1.12));
+    /* longitudinal seams */
+    for (let x = 0.35; x < w; x += 0.55) {
+      d.seg([x, -0.29, 0.02], [x, -0.29, 0.26], shade(stone, 0.68));
+      d.QS(-0.025, x - 0.03, 0.1, x + 0.03, 0.18, shade(stone, 0.9));
+    }
+    /* front lip bevel */
+    d.QS(-0.01, 0, 0, w, 0.05, shade(stone, 0.78));
+    d.QS(-0.03, 0.08, 0.18, w - 0.08, 0.26, shade(stone, 1.22));
+    /* corner wraps */
+    for (const x of [0.02, w - 0.22]) {
+      d.QS(-0.035, x, 0.02, x + 0.2, 0.26, shade(stone, 1.08));
+      d.QS(-0.037, x + 0.04, 0.08, x + 0.16, 0.2, shade(stone, 1.28));
+    }
+  }
+  /** 垂带：踏跺两侧斜帮石（立体） */
+  function paintRampChuidai(d) {
+    const stone = STONE, dark = shade(stone, 0.45), lite = shade(stone, 1.16), rail = shade(stone, 1.05);
+    /* sloping cheek — stepped boxes approximating 垂带 slope */
+    const steps = 6;
+    for (let i = 0; i < steps; i++) {
+      const t0 = i / steps, t1 = (i + 1) / steps;
+      const z0 = t0 * 1.15, z1 = t1 * 1.15;
+      const y0 = -0.35 - t0 * 1.1, y1 = 0.22;
+      d.box(0, y0, z0, 0.42, y1, z1, shade(stone, 0.95 + (i % 2) * 0.06), {
+        line: dark, south: shade(stone, 1.02), top: lite, west: shade(stone, 0.8),
+      });
+      d.QS(-0.02, 0.04, z0 + 0.04, 0.36, z1 - 0.02, shade(stone, 1.1));
+    }
+    /* outer molding rail */
+    d.box(-0.04, -0.4, 0, 0.08, 0.25, 1.18, rail, { line: dark, south: lite, top: shade(stone, 1.22), west: shade(stone, 0.78) });
+    /* decorative bosses along slope */
+    for (let i = 0; i < 5; i++) {
+      const t = (i + 0.5) / 5;
+      const z = t * 1.05;
+      d.QS(-0.03, 0.08, z, 0.28, z + 0.1, shade(stone, 1.18));
+      d.QS(-0.032, 0.14, z + 0.02, 0.22, z + 0.08, shade(GOLD, 0.65));
+    }
+    /* base shoe */
+    d.box(-0.06, -0.45, 0, 0.48, 0.28, 0.18, stone, { line: dark, south: shade(stone, 1.0), top: lite });
+  }
+  /** 踏垛：一级踏步密实石面（踏面+踢面） */
+  function paintStairTaduo(d, w) {
+    const stone = STONE, dark = shade(stone, 0.48), lite = shade(stone, 1.18);
+    /* riser 踢面 */
+    d.box(0, -0.22, 0, w, 0.22, 0.22, stone, { line: dark, south: shade(stone, 1.02), top: lite, west: shade(stone, 0.8) });
+    d.QS(-0.01, 0.04, 0.04, w - 0.04, 0.18, shade(stone, 1.08));
+    /* tread 踏面 overhang */
+    d.box(-0.02, -0.28, 0.18, w + 0.02, 0.28, 0.32, shade(stone, 1.02), { line: dark, south: lite, top: shade(stone, 1.22), west: shade(stone, 0.85) });
+    d.QS(-0.03, 0.05, 0.22, w - 0.05, 0.3, shade(stone, 1.2));
+    /* tread seams */
+    for (let x = 0.3; x < w; x += 0.4) {
+      d.seg([x, -0.29, 0.2], [x, -0.29, 0.3], shade(stone, 0.7));
+      d.QS(-0.025, x - 0.025, 0.08, x + 0.025, 0.14, shade(stone, 0.88));
+    }
+    /* nose bevel */
+    d.QS(-0.015, 0, 0.16, w, 0.2, shade(stone, 0.82));
+    d.QS(-0.035, 0.1, 0.26, w - 0.1, 0.31, shade(stone, 1.28));
+  }
+
+  /* ---- Site212：影壁 / 照壁 / 砖雕花心 / 须弥座基（宋风入口点景；禁纯线稿；密实体积） ---- */
+  const YB_BRICK = '#9a8a72', YB_BRICK_D = '#6a5a48', YB_PLASTER = '#ddd5c4', YB_PLASTER_D = '#c8bfae';
+  const YB_TILE = '#6a5a48', YB_RED = '#8a2a1e', YB_CREAM = '#e8dcc0', YB_TEAL = '#3a6a58';
+  /** 影壁墙身：清水砖框 + 粉壁心 + 砖雕花心凹龛 + 瓦檐（体积块） */
+  function paintWallYingbi(d, w, h) {
+    const brick = YB_BRICK, dark = shade(brick, 0.48), lite = shade(brick, 1.12);
+    const plas = YB_PLASTER, plasD = YB_PLASTER_D;
+    /* thick screen body */
+    d.box(0, -0.18, 0, w, 0.22, h, plas, { line: shade(plasD, 0.55), west: plasD, south: shade(plas, 0.98), top: shade(plas, 1.1) });
+    /* brick frame rails */
+    d.box(0, -0.2, 0, 0.22, 0.24, h, brick, { line: dark, west: YB_BRICK_D, south: lite, top: lite });
+    d.box(w - 0.22, -0.2, 0, w, 0.24, h, brick, { line: dark, west: YB_BRICK_D, south: lite, top: lite });
+    d.box(0, -0.2, h - 0.28, w, 0.24, h, brick, { line: dark, west: YB_BRICK_D, south: lite, top: shade(brick, 1.2) });
+    d.box(0, -0.2, 0, w, 0.24, 0.32, brick, { line: dark, west: YB_BRICK_D, south: lite, top: lite });
+    /* brick courses on frame */
+    for (let z = 0.08; z < h - 0.05; z += 0.14) {
+      d.QS(-0.21, 0.02, z, 0.2, z + 0.04, shade(brick, 0.78));
+      d.QS(-0.21, w - 0.2, z, w - 0.02, z + 0.04, shade(brick, 0.78));
+    }
+    for (let x = 0.08; x < w - 0.05; x += 0.18) {
+      d.QS(-0.21, x, 0.06, x + 0.14, 0.28, shade(brick, 0.88));
+      d.QS(-0.21, x, h - 0.24, x + 0.14, h - 0.06, shade(brick, 0.88));
+    }
+    /* plaster field */
+    d.QS(-0.22, 0.28, 0.38, w - 0.28, h - 0.34, shade(plas, 1.05), shade(plasD, 0.6));
+    d.QS(-0.225, 0.34, 0.44, w - 0.34, h - 0.4, shade(plas, 0.96));
+    /* recessed flower niche */
+    const cx = w / 2, cz = h * 0.52;
+    d.QS(-0.23, cx - 0.42, cz - 0.42, cx + 0.42, cz + 0.42, shade(plasD, 0.85), shade(brick, 0.55));
+    d.QS(-0.235, cx - 0.36, cz - 0.36, cx + 0.36, cz + 0.36, shade(YB_CREAM, 0.95));
+    /* brick flower petals (volume beads) */
+    for (let i = 0; i < 8; i++) {
+      const a = i * Math.PI / 4;
+      const px = cx + Math.cos(a) * 0.22, pz = cz + Math.sin(a) * 0.22;
+      d.QS(-0.24, px - 0.07, pz - 0.07, px + 0.07, pz + 0.07, shade(YB_RED, 0.85 + (i % 2) * 0.1));
+      d.QS(-0.245, px - 0.04, pz - 0.04, px + 0.04, pz + 0.04, shade(GOLD, 0.9));
+    }
+    d.QS(-0.25, cx - 0.1, cz - 0.1, cx + 0.1, cz + 0.1, shade(YB_TEAL, 0.95));
+    d.QS(-0.255, cx - 0.05, cz - 0.05, cx + 0.05, cz + 0.05, GOLD);
+    /* tile coping */
+    d.box(-0.06, -0.26, h - 0.06, w + 0.06, 0.28, h + 0.22, YB_TILE, { line: shade(YB_TILE, 0.45), west: shade(YB_TILE, 0.75), south: shade(YB_TILE, 0.95), top: shade(YB_TILE, 1.15) });
+    for (let x = 0.05; x < w; x += 0.16) d.QS(-0.27, x, h + 0.02, x + 0.12, h + 0.18, shade(YB_TILE, 1.08));
+    d.QS(-0.28, w / 2 - 0.12, h + 0.12, w / 2 + 0.12, h + 0.26, shade(GOLD, 0.75));
+  }
+  /** 照壁：更正式的入口对景墙（朱红边框 + 灰砖心 + 花心 + 琉璃瓦顶） */
+  function paintWallZhaobi(d, w, h) {
+    const brick = YB_BRICK, dark = shade(brick, 0.45), red = YB_RED, plas = '#cfc6b4';
+    d.box(0, -0.2, 0, w, 0.24, h, plas, { line: shade(plas, 0.5), west: shade(plas, 0.78), south: shade(plas, 0.98), top: shade(plas, 1.08) });
+    /* red lacquer frame */
+    d.box(0, -0.22, 0, 0.28, 0.26, h, red, { line: shade(red, 0.45), west: shade(red, 0.7), south: shade(red, 1.05), top: shade(red, 1.15) });
+    d.box(w - 0.28, -0.22, 0, w, 0.26, h, red, { line: shade(red, 0.45), west: shade(red, 0.7), south: shade(red, 1.05), top: shade(red, 1.15) });
+    d.box(0, -0.22, h - 0.32, w, 0.26, h, red, { line: shade(red, 0.45), south: shade(red, 1.08), top: shade(red, 1.2) });
+    d.box(0, -0.22, 0, w, 0.26, 0.36, red, { line: shade(red, 0.45), south: shade(red, 1.05), top: shade(red, 1.12) });
+    /* gold pin beads on frame */
+    for (let z = 0.5; z < h - 0.4; z += 0.35) {
+      d.QS(-0.23, 0.06, z, 0.22, z + 0.08, GOLD);
+      d.QS(-0.23, w - 0.22, z, w - 0.06, z + 0.08, GOLD);
+    }
+    /* brick field densify */
+    d.QS(-0.23, 0.34, 0.42, w - 0.34, h - 0.38, shade(brick, 0.95), dark);
+    for (let zz = 0.5; zz < h - 0.45; zz += 0.16) {
+      for (let xx = 0.4; xx < w - 0.4; xx += 0.28) {
+        d.QS(-0.235, xx, zz, xx + 0.24, zz + 0.12, shade(brick, 0.88 + ((xx + zz) * 13 % 3) * 0.04));
+      }
+    }
+    /* central flower plaque */
+    const cx = w / 2, cz = h * 0.55;
+    d.box(cx - 0.48, -0.24, cz - 0.48, cx + 0.48, 0.2, cz + 0.48, shade(YB_CREAM, 0.95), { line: shade(brick, 0.5), south: shade(YB_CREAM, 1.05), top: shade(YB_CREAM, 1.12) });
+    d.QS(-0.25, cx - 0.4, cz - 0.4, cx + 0.4, cz + 0.4, shade(YB_TEAL, 0.55));
+    for (let i = 0; i < 6; i++) {
+      const a = i * Math.PI / 3;
+      const px = cx + Math.cos(a) * 0.24, pz = cz + Math.sin(a) * 0.24;
+      d.QS(-0.255, px - 0.08, pz - 0.08, px + 0.08, pz + 0.08, shade(YB_RED, 0.9));
+      d.QS(-0.26, px - 0.04, pz - 0.04, px + 0.04, pz + 0.04, GOLD);
+    }
+    d.QS(-0.265, cx - 0.1, cz - 0.1, cx + 0.1, cz + 0.1, shade(GOLD, 1.15));
+    /* glazed tile roof */
+    d.box(-0.1, -0.3, h - 0.08, w + 0.1, 0.3, h + 0.28, shade(YB_TEAL, 0.95), { line: shade(YB_TEAL, 0.45), west: shade(YB_TEAL, 0.7), south: shade(YB_TEAL, 1.05), top: shade(YB_TEAL, 1.2) });
+    for (let x = 0.05; x < w; x += 0.18) d.QS(-0.31, x, h + 0.04, x + 0.14, h + 0.22, shade(YB_TEAL, 1.1));
+    d.QS(-0.32, w / 2 - 0.15, h + 0.16, w / 2 + 0.15, h + 0.32, GOLD);
+  }
+  /** 砖雕花心：独立圆形砖雕团花（可贴壁心） */
+  function paintBrickHuaxin(d) {
+    const brick = YB_BRICK, dark = shade(brick, 0.45), cream = YB_CREAM;
+    d.box(-0.55, -0.12, -0.55, 0.55, 0.14, 0.55, brick, { line: dark, west: YB_BRICK_D, south: shade(brick, 1.02), top: shade(brick, 1.15) });
+    d.QS(-0.13, -0.48, -0.48, 0.48, 0.48, shade(cream, 0.92), dark);
+    /* outer ring of brick bosses */
+    for (let i = 0; i < 12; i++) {
+      const a = i * Math.PI / 6;
+      const x = Math.cos(a) * 0.4, z = Math.sin(a) * 0.4;
+      d.QS(-0.14, x - 0.06, z - 0.06, x + 0.06, z + 0.06, shade(brick, 1.05 + (i % 2) * 0.08));
+    }
+    /* petal layers */
+    for (let i = 0; i < 8; i++) {
+      const a = i * Math.PI / 4 + 0.2;
+      const x = Math.cos(a) * 0.24, z = Math.sin(a) * 0.24;
+      d.QS(-0.15, x - 0.09, z - 0.09, x + 0.09, z + 0.09, shade(YB_RED, 0.82 + (i % 3) * 0.06));
+      d.QS(-0.155, x - 0.05, z - 0.05, x + 0.05, z + 0.05, shade(GOLD, 0.95));
+    }
+    d.QS(-0.16, -0.14, -0.14, 0.14, 0.14, shade(YB_TEAL, 0.9));
+    d.QS(-0.165, -0.08, -0.08, 0.08, 0.08, shade(GOLD, 1.2));
+    d.QS(-0.17, -0.035, -0.035, 0.035, 0.035, shade(cream, 1.15));
+    /* square frame corners */
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
+      d.QS(-0.145, sx * 0.46 - 0.06, sz * 0.46 - 0.06, sx * 0.46 + 0.06, sz * 0.46 + 0.06, GOLD);
+    }
+  }
+  /** 须弥座/影壁基座：石质叠涩底座 */
+  function paintScreenBase(d, w) {
+    const stone = STONE, dark = shade(stone, 0.48), lite = shade(stone, 1.15), gold = shade(GOLD, 0.75);
+    d.box(0, -0.35, 0, w, 0.35, 0.22, stone, { line: dark, west: shade(stone, 0.8), south: shade(stone, 1.02), top: lite });
+    d.QS(-0.02, 0.04, 0.06, w - 0.04, 0.18, shade(stone, 1.1));
+    /* waist */
+    d.box(0.06, -0.28, 0.18, w - 0.06, 0.28, 0.38, shade(stone, 0.92), { line: dark, south: shade(stone, 1.05), top: lite });
+    d.QS(-0.03, 0.1, 0.24, w - 0.1, 0.32, gold);
+    /* upper plinth */
+    d.box(0.02, -0.32, 0.34, w - 0.02, 0.32, 0.52, stone, { line: dark, west: shade(stone, 0.82), south: shade(stone, 1.04), top: shade(stone, 1.2) });
+    for (let x = 0.15; x < w - 0.1; x += 0.22) {
+      d.QS(-0.04, x, 0.38, x + 0.14, 0.48, shade(stone, 1.12));
+      d.seg([x + 0.07, -0.33, 0.36], [x + 0.07, -0.33, 0.5], shade(stone, 0.7));
+    }
+    /* corner wraps */
+    for (const x of [0.04, w - 0.2]) {
+      d.QS(-0.05, x, 0.04, x + 0.16, 0.48, gold);
+      d.QS(-0.055, x + 0.04, 0.12, x + 0.12, 0.4, shade(GOLD, 1.15));
+    }
+  }
+
+  /* ---- Site213：鸱吻 / 垂脊走兽 / 正脊饰 / 垂脊（宋风脊饰；禁纯线稿；与瓦当 kitbash 分面） ---- */
+  /** 鸱吻 densify：鱼龙吻座更密实体积 + 金鳞/须/张开吻口（强化既有 chiwen_S） */
+  function paintRidgeChiwen(d, w, o = {}) {
+    const flip = !!(o && o.flip);
+    const col = RIDGE, lite = shade(col, 1.3), dark = shade(col, 0.42), gold = shade(GOLD, 0.9);
+    const mid = shade(col, 0.95);
+    // layered seat / 吻座
+    d.box(0.02, -0.16, 0, w - 0.02, 0.16, 0.22, col, { line: dark, top: lite, south: shade(col, 0.98), west: shade(col, 0.78) });
+    d.QS(-0.02, 0.08, 0.04, w - 0.08, 0.18, shade(col, 1.12));
+    for (let x = 0.15; x < w - 0.1; x += 0.18) d.QS(-0.025, x, 0.08, x + 0.08, 0.16, gold);
+    // rising body volumes
+    d.box(0.1, -0.18, 0.18, w * 0.5, 0.12, 0.62, mid, { line: dark, top: lite, south: shade(col, 1.05) });
+    d.box(w * 0.28, -0.2, 0.48, w * 0.68, 0.1, 0.92, col, { line: dark, top: shade(col, 1.22), south: lite });
+    // open mouth / snout
+    d.box(w * 0.52, -0.22, 0.78, w * 0.98, 0.08, 1.18, col, { line: dark, south: shade(col, 1.15), top: lite });
+    d.QS(-0.2, w * 0.58, 0.86, w * 0.92, 1.1, shade(col, 0.65));
+    d.QS(-0.205, w * 0.64, 0.9, w * 0.88, 1.06, shade('#1a120e', 0.92));
+    // tongue / gold inner
+    d.QS(-0.21, w * 0.7, 0.94, w * 0.84, 1.02, shade(GOLD, 0.75));
+    // dorsal crest / fin (volume beads)
+    for (let z = 0.55; z < 1.15; z += 0.1) {
+      d.QS(-0.22, w * 0.22, z, w * 0.42, z + 0.08, gold);
+      d.QS(-0.225, w * 0.28, z + 0.02, w * 0.38, z + 0.1, shade(GOLD, 1.15));
+    }
+    // eye
+    const eq = d.P(w * 0.46, -0.2, 0.78);
+    d.g.fillStyle = '#f0e8c8'; d.g.beginPath();
+    d.g.ellipse(Math.round(eq[0]), Math.round(eq[1]), 2.6, 2.8, 0, 0, Math.PI * 2); d.g.fill();
+    d.g.fillStyle = '#1a120e'; d.g.fillRect(Math.round(eq[0]), Math.round(eq[1]), 2, 2);
+    d.g.fillStyle = shade(GOLD, 1.1); d.g.fillRect(Math.round(eq[0]) - 1, Math.round(eq[1]) - 1, 1, 1);
+    // dense scale beads
+    for (let z = 0.24; z < 0.78; z += 0.08) {
+      for (let x = 0.14; x < w * 0.52; x += 0.1) {
+        d.QS(-0.16, x, z, x + 0.055, z + 0.045, shade(col, 1.12 + ((x * 10 + z * 10) % 3) * 0.08));
+      }
+    }
+    // whiskers / antennae volume tips
+    d.box(w * 0.72, -0.14, 1.05, w * 0.9, 0.04, 1.22, gold, { line: shade(GOLD, 0.5), top: shade(GOLD, 1.2) });
+    d.box(w * 0.78, -0.12, 1.12, w * 0.95, 0.03, 1.28, shade(GOLD, 1.1), { line: shade(GOLD, 0.55) });
+    // tail curl toward ridge
+    d.box(0.0, -0.12, 0.05, 0.28, 0.12, 0.42, col, { line: dark, south: shade(col, 0.88), top: lite });
+    d.QS(-0.18, 0.04, 0.3, 0.22, 0.48, gold);
+    void flip;
+  }
+  /** 垂脊走兽：蹲坐兽体积（狮形/龙形简化密实体） */
+  function paintBeastZoushou(d) {
+    const col = RIDGE, dark = shade(col, 0.45), lite = shade(col, 1.25), gold = shade(GOLD, 0.85);
+    // pedestal
+    d.box(-0.18, -0.16, 0, 0.18, 0.16, 0.14, col, { line: dark, top: lite, south: shade(col, 0.95) });
+    d.QS(-0.02, -0.12, 0.04, 0.12, 0.12, shade(col, 1.1));
+    // haunches / body
+    d.box(-0.22, -0.18, 0.12, 0.22, 0.14, 0.55, shade(col, 0.98), { line: dark, top: lite, south: shade(col, 1.05), west: shade(col, 0.8) });
+    d.QS(-0.03, -0.14, 0.28, 0.14, 0.48, shade(col, 1.15));
+    // chest
+    d.box(-0.16, -0.2, 0.4, 0.2, 0.1, 0.72, col, { line: dark, south: lite, top: shade(col, 1.2) });
+    // head
+    d.box(-0.14, -0.22, 0.65, 0.18, 0.08, 0.95, col, { line: dark, south: shade(col, 1.12), top: lite });
+    d.QS(-0.2, -0.08, 0.72, 0.12, 0.9, shade(col, 0.7));
+    // mane / crest gold beads
+    for (let z = 0.7; z < 1.05; z += 0.08) {
+      d.QS(-0.24, -0.1, z, 0.14, z + 0.06, gold);
+    }
+    // eye
+    const eq = d.P(0.02, -0.22, 0.82);
+    d.g.fillStyle = '#f0e8c8'; d.g.beginPath();
+    d.g.ellipse(Math.round(eq[0]), Math.round(eq[1]), 1.8, 2.0, 0, 0, Math.PI * 2); d.g.fill();
+    d.g.fillStyle = '#1a120e'; d.g.fillRect(Math.round(eq[0]), Math.round(eq[1]), 1, 1);
+    // paws
+    for (const x of [-0.16, 0.06]) {
+      d.box(x, -0.2, 0.05, x + 0.1, 0.05, 0.2, shade(col, 0.9), { line: dark, top: lite });
+    }
+    // back ridge scales
+    for (let z = 0.2; z < 0.6; z += 0.1) {
+      d.QS(-0.18, -0.08, z, 0.08, z + 0.06, shade(col, 1.18));
+      d.QS(-0.185, -0.04, z + 0.01, 0.04, z + 0.05, gold);
+    }
+  }
+  /** 正脊饰：宝瓶/脊刹密实体积（正脊中段点缀） */
+  function paintRidgeOrnament(d) {
+    const col = RIDGE, dark = shade(col, 0.45), lite = shade(col, 1.28), gold = shade(GOLD, 0.95);
+    // base plinth
+    d.box(-0.28, -0.18, 0, 0.28, 0.18, 0.18, col, { line: dark, top: lite, south: shade(col, 0.98) });
+    d.QS(-0.02, -0.2, 0.04, 0.2, 0.14, shade(col, 1.12));
+    // bulbous vase body
+    d.box(-0.22, -0.16, 0.15, 0.22, 0.16, 0.55, shade(col, 0.96), { line: dark, top: lite, south: shade(col, 1.06), west: shade(col, 0.8) });
+    d.QS(-0.03, -0.14, 0.28, 0.14, 0.48, shade(col, 1.15));
+    // neck ring
+    d.box(-0.14, -0.12, 0.52, 0.14, 0.12, 0.68, col, { line: dark, south: lite, top: shade(col, 1.2) });
+    d.QS(-0.04, -0.1, 0.56, 0.1, 0.64, gold);
+    // finial orb
+    d.box(-0.1, -0.1, 0.66, 0.1, 0.1, 0.9, shade(col, 1.05), { line: dark, top: lite, south: shade(col, 1.15) });
+    d.QS(-0.05, -0.06, 0.74, 0.06, 0.86, shade(GOLD, 1.1));
+    // tip bead
+    d.box(-0.05, -0.06, 0.88, 0.05, 0.06, 1.05, gold, { line: shade(GOLD, 0.5), top: shade(GOLD, 1.25) });
+    // side bosses
+    for (const x of [-0.2, 0.12]) {
+      d.QS(-0.06, x, 0.32, x + 0.08, 0.42, gold);
+    }
+  }
+  /** 垂脊：斜脊筒瓦垄带（密实瓦体积） */
+  function paintHipChuiji(d, w) {
+    const col = RIDGE, lite = shade(col, 1.28), dark = shade(col, 0.48), mid = shade(TILE, 0.92);
+    d.box(0, -0.14, 0, w, 0.14, 0.32, col, { line: dark, top: lite, south: shade(col, 1.02), west: shade(col, 0.8) });
+    d.QS(-0.02, 0.04, 0.08, w - 0.04, 0.26, shade(col, 1.12));
+    // tile barrels along hip
+    for (let x = 0.06; x < w; x += 0.16) {
+      d.QS(-0.03, x, 0.1, x + 0.1, 0.28, lite);
+      d.seg([x + 0.05, -0.15, 0.06], [x + 0.05, -0.15, 0.3], shade(col, 0.65));
+      d.QS(-0.035, x + 0.02, 0.16, x + 0.08, 0.24, shade(GOLD, 0.45));
+    }
+    // underside tile wash
+    d.QS(0.01, 0, 0, w, 0.06, mid);
+    // end boss
+    d.box(w - 0.18, -0.16, 0.05, w + 0.02, 0.12, 0.38, shade(col, 1.05), { line: dark, top: lite, south: shade(col, 1.15) });
+    d.QS(-0.04, w - 0.14, 0.18, w - 0.02, 0.32, goldish());
+    function goldish() { return shade(GOLD, 0.8); }
+  }
+  /* ---- Site214：落地罩 / 隔扇屏 / 月洞 / 门框（室内外过渡；禁纯线稿；密实体积；与 Site203 格扇门窗互补） ---- */
+  const SC_WOOD = '#7a4a2c', SC_WOOD_D = '#4a2a18', SC_RED = '#8a2a1e', SC_CREAM = '#e8dcc0';
+  const SC_TEAL = '#3a6a58', SC_PAPER = '#d8cdb8', SC_STONE = '#9a9080';
+  /** 落地罩：开敞间两侧通顶罩架（立柱+上枋花心+下裙板；门厅可见） */
+  function paintScreenLuodizhao(d, w, h) {
+    const wood = SC_WOOD, dark = shade(wood, 0.45), red = SC_RED, cream = SC_CREAM;
+    /* thick posts */
+    d.box(0, -0.18, 0, 0.28, 0.22, h, red, { line: shade(red, 0.42), west: shade(red, 0.7), south: shade(red, 1.05), top: shade(red, 1.15) });
+    d.box(w - 0.28, -0.18, 0, w, 0.22, h, red, { line: shade(red, 0.42), west: shade(red, 0.7), south: shade(red, 1.05), top: shade(red, 1.15) });
+    /* upper lintel / 罩枋 */
+    d.box(0, -0.2, h - 0.55, w, 0.24, h, wood, { line: dark, west: SC_WOOD_D, south: shade(wood, 1.05), top: shade(wood, 1.2) });
+    d.QS(-0.21, 0.08, h - 0.48, w - 0.08, h - 0.08, shade(wood, 1.12));
+    /* gold pin beads on posts */
+    for (let z = 0.4; z < h - 0.6; z += 0.38) {
+      d.QS(-0.19, 0.06, z, 0.22, z + 0.08, GOLD);
+      d.QS(-0.19, w - 0.22, z, w - 0.06, z + 0.08, GOLD);
+    }
+    /* upper openwork lattice band（密实格，非线稿） */
+    d.QS(-0.16, 0.32, h - 1.35, w - 0.32, h - 0.58, shade(SC_PAPER, 0.75), dark);
+    for (let x = 0.4; x < w - 0.35; x += 0.16) d.QS(-0.17, x, h - 1.3, x + 0.05, h - 0.62, shade(wood, 1.15));
+    for (let z = h - 1.25; z < h - 0.65; z += 0.16) d.QS(-0.17, 0.38, z, w - 0.38, z + 0.05, shade(wood, 1.08));
+    /* central flower plaque */
+    const cx = w / 2, cz = h - 0.95;
+    d.box(cx - 0.42, -0.22, cz - 0.32, cx + 0.42, 0.18, cz + 0.32, cream, { line: dark, south: shade(cream, 1.05), top: shade(cream, 1.12) });
+    d.QS(-0.23, cx - 0.34, cz - 0.24, cx + 0.34, cz + 0.24, shade(SC_TEAL, 0.55));
+    for (let i = 0; i < 6; i++) {
+      const a = i * Math.PI / 3;
+      const px = cx + Math.cos(a) * 0.18, pz = cz + Math.sin(a) * 0.16;
+      d.QS(-0.24, px - 0.07, pz - 0.07, px + 0.07, pz + 0.07, shade(SC_RED, 0.9));
+      d.QS(-0.245, px - 0.035, pz - 0.035, px + 0.035, pz + 0.035, GOLD);
+    }
+    d.QS(-0.25, cx - 0.08, cz - 0.08, cx + 0.08, cz + 0.08, shade(GOLD, 1.15));
+    /* lower apron / 裙板 */
+    d.box(0.28, -0.16, 0, w - 0.28, 0.2, 1.05, wood, { line: dark, west: SC_WOOD_D, south: shade(wood, 1.02), top: shade(wood, 1.12) });
+    d.QS(-0.17, 0.38, 0.12, w - 0.38, 0.95, shade(cream, 0.92), dark);
+    for (let x = 0.5; x < w - 0.45; x += 0.28) {
+      d.QS(-0.18, x, 0.22, x + 0.18, 0.85, shade(wood, 0.95));
+      d.QS(-0.185, x + 0.04, 0.35, x + 0.14, 0.72, shade(SC_TEAL, 0.7));
+      d.QS(-0.19, x + 0.07, 0.48, x + 0.11, 0.6, GOLD);
+    }
+    /* mid rail */
+    d.box(0.28, -0.18, 1.0, w - 0.28, 0.22, 1.22, red, { line: shade(red, 0.45), south: shade(red, 1.08), top: shade(red, 1.15) });
+    d.QS(-0.19, 0.35, 1.06, w - 0.35, 1.16, GOLD);
+    /* open middle void hint (dark recess) */
+    d.QS(-0.12, 0.35, 1.28, w - 0.35, h - 1.4, shade('#2a1e16', 0.55));
+  }
+  /** 隔扇屏：门厅内隔断屏（多扇密格，立于廊口；非外立面门窗格扇） */
+  function paintPartitionGeshan(d, w, h) {
+    const wood = SC_WOOD, dark = shade(wood, 0.48), red = SC_RED, paper = SC_PAPER;
+    const n = 4, leaf = w / n;
+    d.box(0, -0.14, 0, w, 0.18, h, wood, { line: dark, west: SC_WOOD_D, south: shade(wood, 0.98), top: shade(wood, 1.1) });
+    for (let i = 0; i < n; i++) {
+      const x0 = i * leaf, x1 = x0 + leaf;
+      /* stile */
+      d.box(x0, -0.16, 0, x0 + 0.1, 0.2, h, red, { line: shade(red, 0.45), south: shade(red, 1.05), top: shade(red, 1.12) });
+      if (i === n - 1) d.box(x1 - 0.1, -0.16, 0, x1, 0.2, h, red, { line: shade(red, 0.45), south: shade(red, 1.05), top: shade(red, 1.12) });
+      /* upper lattice */
+      d.QS(-0.17, x0 + 0.12, h * 0.42, x1 - 0.08, h - 0.12, shade(paper, 0.88), dark);
+      for (let x = x0 + 0.18; x < x1 - 0.1; x += 0.12) d.QS(-0.175, x, h * 0.44, x + 0.035, h - 0.14, shade(wood, 1.12));
+      for (let z = h * 0.46; z < h - 0.16; z += 0.12) d.QS(-0.175, x0 + 0.14, z, x1 - 0.1, z + 0.035, shade(wood, 1.05));
+      /* diamond bosses */
+      const cx = (x0 + x1) / 2, cz = h * 0.68;
+      d.QS(-0.18, cx - 0.1, cz - 0.1, cx + 0.1, cz + 0.1, shade(SC_TEAL, 0.75));
+      d.QS(-0.185, cx - 0.05, cz - 0.05, cx + 0.05, cz + 0.05, GOLD);
+      /* lower solid panel */
+      d.QS(-0.17, x0 + 0.12, 0.12, x1 - 0.08, h * 0.38, shade(SC_CREAM, 0.95), dark);
+      d.QS(-0.175, x0 + 0.18, 0.2, x1 - 0.14, h * 0.34, shade(wood, 0.9));
+      d.QS(-0.18, x0 + 0.28, 0.28, x1 - 0.24, h * 0.3, shade(SC_TEAL, 0.55));
+    }
+    /* top rail + feet */
+    d.box(0, -0.18, h - 0.18, w, 0.22, h, red, { line: shade(red, 0.45), south: shade(red, 1.1), top: shade(red, 1.18) });
+    d.QS(-0.19, 0.08, h - 0.14, w - 0.08, h - 0.04, GOLD);
+    d.box(0.05, -0.2, 0, 0.35, 0.24, 0.18, SC_STONE, { line: shade(SC_STONE, 0.5), top: shade(SC_STONE, 1.15) });
+    d.box(w - 0.35, -0.2, 0, w - 0.05, 0.24, 0.18, SC_STONE, { line: shade(SC_STONE, 0.5), top: shade(SC_STONE, 1.15) });
+  }
+  /** 月洞门框：圆形月洞 thr、红漆内环、砖拱外圈（廊口/门厅过渡） */
+  function paintMoonYuedong(d, w, h) {
+    const brick = '#9a8a72', dark = shade(brick, 0.48), red = SC_RED, plas = '#ddd5c4';
+    /* wall field */
+    d.box(0, -0.16, 0, w, 0.2, h, plas, { line: shade(plas, 0.55), west: shade(plas, 0.8), south: shade(plas, 0.98), top: shade(plas, 1.08) });
+    /* brick surround densify */
+    for (let z = 0.08; z < h - 0.05; z += 0.14) {
+      for (let x = 0.06; x < w - 0.05; x += 0.26) {
+        d.QS(-0.17, x, z, x + 0.22, z + 0.11, shade(brick, 0.88 + ((x + z) * 11 % 3) * 0.04));
+      }
+    }
+    const cx = w / 2, cz = h * 0.48, R = Math.min(w, h) * 0.36;
+    /* outer brick ring (volume beads approximating circle) */
+    for (let i = 0; i < 24; i++) {
+      const a = i * Math.PI / 12;
+      const x = cx + Math.cos(a) * R, z = cz + Math.sin(a) * R;
+      d.QS(-0.19, x - 0.1, z - 0.1, x + 0.1, z + 0.1, shade(brick, 1.02 + (i % 2) * 0.06));
+      d.QS(-0.195, x - 0.06, z - 0.06, x + 0.06, z + 0.06, shade(brick, 0.85));
+    }
+    /* red lacquer inner ring */
+    const R2 = R * 0.78;
+    for (let i = 0; i < 20; i++) {
+      const a = i * Math.PI / 10;
+      const x = cx + Math.cos(a) * R2, z = cz + Math.sin(a) * R2;
+      d.QS(-0.2, x - 0.08, z - 0.08, x + 0.08, z + 0.08, shade(red, 0.95));
+      d.QS(-0.205, x - 0.04, z - 0.04, x + 0.04, z + 0.04, GOLD);
+    }
+    /* dark opening */
+    const R3 = R * 0.62;
+    d.QS(-0.21, cx - R3, cz - R3, cx + R3, cz + R3, shade('#1a120e', 0.92));
+    d.QS(-0.215, cx - R3 * 0.85, cz - R3 * 0.85, cx + R3 * 0.85, cz + R3 * 0.85, shade('#2a1e16', 0.8));
+    /* tile coping */
+    d.box(-0.05, -0.22, h - 0.08, w + 0.05, 0.26, h + 0.22, shade(SC_TEAL, 0.9), { line: shade(SC_TEAL, 0.45), south: shade(SC_TEAL, 1.05), top: shade(SC_TEAL, 1.18) });
+    for (let x = 0.08; x < w; x += 0.18) d.QS(-0.23, x, h + 0.02, x + 0.14, h + 0.18, shade(SC_TEAL, 1.1));
+    d.QS(-0.24, cx - 0.12, h + 0.12, cx + 0.12, h + 0.26, GOLD);
+  }
+  /** 门框：朱红抱框+石门槛+金钉（开敞门厅口；与门钉轨互补） */
+  function paintFrameMenkuang(d, w, h) {
+    const red = SC_RED, wood = SC_WOOD, dark = shade(red, 0.42), stone = SC_STONE;
+    /* posts */
+    d.box(0, -0.2, 0, 0.32, 0.24, h, red, { line: dark, west: shade(red, 0.7), south: shade(red, 1.05), top: shade(red, 1.15) });
+    d.box(w - 0.32, -0.2, 0, w, 0.24, h, red, { line: dark, west: shade(red, 0.7), south: shade(red, 1.05), top: shade(red, 1.15) });
+    /* lintel */
+    d.box(0, -0.22, h - 0.42, w, 0.26, h, wood, { line: shade(wood, 0.45), west: SC_WOOD_D, south: shade(wood, 1.05), top: shade(wood, 1.18) });
+    d.QS(-0.23, 0.1, h - 0.34, w - 0.1, h - 0.08, shade(wood, 1.12));
+    d.QS(-0.235, 0.2, h - 0.28, w - 0.2, h - 0.14, GOLD);
+    /* gold pin beads */
+    for (let z = 0.35; z < h - 0.5; z += 0.32) {
+      d.QS(-0.21, 0.08, z, 0.24, z + 0.07, GOLD);
+      d.QS(-0.21, w - 0.24, z, w - 0.08, z + 0.07, GOLD);
+    }
+    /* stone threshold */
+    d.box(0.05, -0.28, 0, w - 0.05, 0.32, 0.28, stone, { line: shade(stone, 0.5), west: shade(stone, 0.8), south: shade(stone, 1.02), top: shade(stone, 1.15) });
+    d.QS(-0.02, 0.15, 0.08, w - 0.15, 0.22, shade(stone, 1.1));
+    /* corner fill volumes (雀替感) */
+    for (const sx of [0.32, w - 0.85]) {
+      d.box(sx, -0.18, h - 0.85, sx + 0.5, 0.16, h - 0.42, wood, { line: shade(wood, 0.5), south: shade(SC_TEAL, 0.85), top: shade(wood, 1.1) });
+      d.QS(-0.19, sx + 0.08, h - 0.75, sx + 0.42, h - 0.5, shade(SC_TEAL, 0.7));
+      d.QS(-0.195, sx + 0.18, h - 0.68, sx + 0.32, h - 0.55, GOLD);
+    }
+    /* dark opening */
+    d.QS(-0.12, 0.38, 0.32, w - 0.38, h - 0.48, shade('#1a120e', 0.75));
+  }
+
+
+
+  /* ---- Site215：拴马桩/上马石/石敢当/路牙石标 atlas 模块（禁纯线稿、密实 kitbash） ---- */
+  function paintPostShuanma(d) {
+    const ST = '#8a8070', STW = '#6a6258', TOP = '#9a9080', GOLD = '#c8a040', DARK = '#5a5248';
+    // 须弥座基
+    d.box(-0.38, -0.38, 0, 0.38, 0.38, 0.22, ST, { line: shade(ST, 0.48), west: STW, top: shade(ST, 0.9) });
+    d.box(-0.32, -0.32, 0.22, 0.32, 0.32, 0.38, shade(ST, 0.95), { line: shade(ST, 0.5), west: STW, top: TOP });
+    for (let z = 0.08; z < 0.2; z += 0.08) d.seg([-0.36, -0.385, z], [0.36, -0.385, z], shade(ST, 0.7));
+    // 桩身：方柱 + 鼓节 + 浮雕环带
+    d.box(-0.18, -0.18, 0.38, 0.18, 0.18, 1.85, shade(ST, 1.0), { line: shade(ST, 0.48), west: STW, top: TOP });
+    for (let z = 0.55; z < 1.8; z += 0.22) {
+      d.box(-0.22, -0.22, z, 0.22, 0.22, z + 0.08, shade(ST, z % 0.44 < 0.22 ? 1.08 : 0.92), { line: shade(ST, 0.5), west: STW, top: TOP });
+    }
+    for (let z = 0.5; z < 1.8; z += 0.14) d.seg([-0.19, -0.185, z], [0.19, -0.185, z], shade(ST, 0.72));
+    // 南面浮雕条（实体积块，非纯线）
+    d.QS(-0.185, -0.12, 0.7, 0.12, 1.55, shade(ST, 1.12), shade(ST, 0.55));
+    for (let i = 0; i < 5; i++) {
+      const z = 0.85 + i * 0.14;
+      d.box(-0.1, -0.2, z, 0.1, -0.185, z + 0.08, shade(DARK, 1.05), { line: false, noW: true, noS: true });
+    }
+    // 兽首顶（蹲兽简化密实体积）
+    d.box(-0.28, -0.28, 1.85, 0.28, 0.28, 2.05, shade(ST, 1.05), { line: shade(ST, 0.48), west: STW, top: TOP });
+    d.box(-0.22, -0.26, 2.05, 0.22, 0.22, 2.35, shade(ST, 1.08), { line: shade(ST, 0.5), west: STW, top: shade(ST, 1.15) });
+    d.box(-0.14, -0.3, 2.18, 0.14, -0.18, 2.42, shade(ST, 0.95), { line: shade(ST, 0.5), west: STW, top: TOP }); // snout
+    d.box(-0.18, -0.12, 2.35, -0.08, -0.02, 2.52, shade(ST, 1.1), { line: shade(ST, 0.5), west: STW, top: TOP }); // ear L
+    d.box(0.08, -0.12, 2.35, 0.18, -0.02, 2.52, shade(ST, 1.1), { line: shade(ST, 0.5), west: STW, top: TOP }); // ear R
+    d.QS(-0.27, -0.1, 2.12, 0.1, 2.28, shade(ST, 1.18), shade(ST, 0.55));
+    // 金环拴马环（贴图块）
+    d.box(-0.06, -0.32, 1.35, 0.06, -0.22, 1.55, GOLD, { line: shade(GOLD, 0.55), west: shade(GOLD, 0.8), top: '#e8c868' });
+    d.box(-0.14, -0.36, 1.4, 0.14, -0.3, 1.5, shade(GOLD, 0.9), { line: shade(GOLD, 0.5), west: shade(GOLD, 0.75), top: GOLD });
+  }
+  function paintStoneShangma(d) {
+    const ST = '#8a8070', STW = '#6a6258', TOP = '#9a9080', DARK = '#5a5248';
+    // 三级上马石（密实体积）
+    d.box(-0.7, -0.45, 0, 0.7, 0.45, 0.28, ST, { line: shade(ST, 0.48), west: STW, top: shade(ST, 0.92) });
+    d.box(-0.55, -0.38, 0.28, 0.55, 0.38, 0.52, shade(ST, 1.0), { line: shade(ST, 0.5), west: STW, top: shade(ST, 1.05) });
+    d.box(-0.38, -0.3, 0.52, 0.38, 0.3, 0.78, shade(ST, 1.05), { line: shade(ST, 0.48), west: STW, top: shade(ST, 1.15) });
+    // 阶面缝与端面
+    for (const [y0, y1, z] of [[-0.44, 0.44, 0.28], [-0.37, 0.37, 0.52], [-0.29, 0.29, 0.78]]) {
+      d.seg([-0.65, y0, z], [0.65, y0, z], shade(ST, 0.7));
+      d.seg([-0.65, y1, z], [0.65, y1, z], shade(ST, 0.7));
+    }
+    for (let x = -0.5; x < 0.55; x += 0.25) d.seg([x, -0.46, 0.28], [x, 0.46, 0.28], shade(ST, 0.75));
+    // 侧面浮雕块
+    d.QS(-0.71, -0.35, 0.06, 0.35, 0.24, shade(ST, 1.1), shade(ST, 0.55));
+    d.QS(0.71, -0.35, 0.06, 0.35, 0.24, shade(STW, 1.05), shade(ST, 0.55));
+    for (let i = 0; i < 3; i++) {
+      const z = 0.1 + i * 0.18;
+      d.box(-0.72, -0.18, z, -0.7, 0.18, z + 0.1, shade(DARK, 1.05), { line: false, noW: true, noS: true });
+      d.box(0.7, -0.18, z, 0.72, 0.18, z + 0.1, shade(DARK, 1.05), { line: false, noW: true, noS: true });
+    }
+    // 顶面防滑纹理块
+    for (let i = 0; i < 4; i++) {
+      const x = -0.28 + i * 0.16;
+      d.box(x, -0.18, 0.78, x + 0.1, 0.18, 0.8, shade(ST, i % 2 ? 0.92 : 1.12), { line: false, noW: true, noS: true });
+    }
+  }
+  function paintStoneGanddang(d) {
+    const ST = '#8a8070', STW = '#6a6258', TOP = '#9a9080', DARK = '#5a5248', INK = '#3a342c';
+    // 基座
+    d.box(-0.42, -0.28, 0, 0.42, 0.28, 0.26, ST, { line: shade(ST, 0.48), west: STW, top: shade(ST, 0.9) });
+    d.box(-0.36, -0.22, 0.26, 0.36, 0.22, 0.38, shade(ST, 0.95), { line: shade(ST, 0.5), west: STW, top: TOP });
+    // 碑身
+    d.box(-0.32, -0.16, 0.38, 0.32, 0.16, 1.55, shade(ST, 1.02), { line: shade(ST, 0.48), west: STW, top: TOP });
+    // 内凹铭文框（实体积）
+    d.QS(-0.33, -0.22, 0.55, 0.22, 1.35, shade(ST, 1.14), shade(ST, 0.55));
+    d.box(-0.24, -0.18, 0.58, 0.24, -0.14, 1.32, shade(DARK, 0.95), { line: shade(DARK, 0.5), west: INK, top: shade(DARK, 1.05) });
+    // 「石敢当」字块暗示（密实方块，非描字线）
+    const glyphs = [
+      [-0.14, 0.7, 0.28, 0.18], [-0.14, 0.95, 0.28, 0.18], [-0.14, 1.2, 0.28, 0.18],
+    ];
+    for (const [gx, gz, gw, gh] of glyphs) {
+      d.box(gx, -0.185, gz, gx + gw, -0.155, gz + gh, shade(INK, 1.1), { line: false, noW: true, noS: true });
+      d.box(gx + 0.04, -0.19, gz + 0.04, gx + gw - 0.04, -0.16, gz + gh - 0.04, shade(ST, 1.15), { line: false, noW: true, noS: true });
+    }
+    // 碑帽尖顶
+    d.box(-0.38, -0.2, 1.55, 0.38, 0.2, 1.68, shade(ST, 1.08), { line: shade(ST, 0.5), west: STW, top: shade(ST, 1.18) });
+    d.box(-0.22, -0.14, 1.68, 0.22, 0.14, 1.82, shade(ST, 1.05), { line: shade(ST, 0.5), west: STW, top: TOP });
+    d.box(-0.1, -0.1, 1.82, 0.1, 0.1, 1.95, shade(ST, 1.12), { line: shade(ST, 0.5), west: STW, top: shade(ST, 1.2) });
+    for (let z = 0.5; z < 1.5; z += 0.16) d.seg([-0.31, -0.165, z], [0.31, -0.165, z], shade(ST, 0.7));
+  }
+  function paintCurbMarker(d) {
+    const ST = '#8a8070', STW = '#6a6258', TOP = '#9a9080', DARK = '#5a5248';
+    // 路牙石标：矮方柱 + 帽顶
+    d.box(-0.28, -0.28, 0, 0.28, 0.28, 0.18, ST, { line: shade(ST, 0.48), west: STW, top: shade(ST, 0.9) });
+    d.box(-0.2, -0.2, 0.18, 0.2, 0.2, 0.72, shade(ST, 1.0), { line: shade(ST, 0.5), west: STW, top: TOP });
+    for (let z = 0.28; z < 0.7; z += 0.12) d.seg([-0.21, -0.205, z], [0.21, -0.205, z], shade(ST, 0.72));
+    d.QS(-0.205, -0.14, 0.3, 0.14, 0.6, shade(ST, 1.12), shade(ST, 0.55));
+    d.box(-0.08, -0.22, 0.4, 0.08, -0.2, 0.55, shade(DARK, 1.05), { line: false, noW: true, noS: true });
+    d.box(-0.26, -0.26, 0.72, 0.26, 0.26, 0.82, shade(ST, 1.08), { line: shade(ST, 0.5), west: STW, top: shade(ST, 1.18) });
+    d.box(-0.12, -0.12, 0.82, 0.12, 0.12, 0.95, shade(ST, 1.05), { line: shade(ST, 0.5), west: STW, top: TOP });
+  }
+
+  /* ---- Site217：井亭/路亭/小牌坊/亭顶 atlas 模块（禁纯线稿、密实 kitbash；点景小体量） ---- */
+  function paintPavilionJingting(d) {
+    const ST = '#8a8070', STW = '#6a6258', TOP = '#9a9080', WOOD = '#6a4a2c', WOOD_D = '#3a2214';
+    const TILE = '#4a5560', TILE_L = '#6a7580', RED = '#a03830', RED_W = '#70241c';
+    // 石台基
+    d.box(-1.15, -1.15, 0, 1.15, 1.15, 0.22, ST, { line: shade(ST, 0.48), west: STW, top: shade(ST, 0.9) });
+    d.box(-1.05, -1.05, 0.22, 1.05, 1.05, 0.38, shade(ST, 0.98), { line: shade(ST, 0.5), west: STW, top: TOP });
+    for (let x = -0.9; x < 0.95; x += 0.3) d.seg([x, -1.06, 0.38], [x, 1.06, 0.38], shade(ST, 0.72));
+    // 井口石栏（中心凹）
+    d.box(-0.55, -0.55, 0.38, 0.55, 0.55, 0.72, shade(ST, 1.02), { line: shade(ST, 0.48), west: STW, top: shade(ST, 1.1) });
+    d.box(-0.35, -0.35, 0.72, 0.35, 0.35, 0.78, '#2a3438', { line: shade(ST, 0.5), west: '#1a2428', top: '#1e2a30' });
+    // 四柱
+    for (const [x, y] of [[-0.85, -0.85], [0.85, -0.85], [-0.85, 0.85], [0.85, 0.85]]) {
+      d.box(x - 0.12, y - 0.12, 0.38, x + 0.12, y + 0.12, 2.35, RED, { line: shade(RED, 0.5), west: RED_W, top: shade(RED, 1.1) });
+      d.box(x - 0.16, y - 0.16, 0.38, x + 0.16, y + 0.16, 0.52, ST, { line: shade(ST, 0.5), west: STW, top: TOP });
+    }
+    // 额枋环圈（实体积）
+    for (const [x0, y0, x1, y1] of [
+      [-0.95, -0.95, 0.95, -0.78], [-0.95, 0.78, 0.95, 0.95],
+      [-0.95, -0.95, -0.78, 0.95], [0.78, -0.95, 0.95, 0.95],
+    ]) {
+      d.box(x0, y0, 2.2, x1, y1, 2.42, '#2f5a86', { line: '#1a3a50', top: '#3f7a6a', west: '#244a6a' });
+    }
+    // 斗拱色块点缀
+    for (const [x, y] of [[-0.85, -0.85], [0.85, -0.85], [-0.85, 0.85], [0.85, 0.85]]) {
+      d.box(x - 0.22, y - 0.18, 2.42, x + 0.22, y + 0.18, 2.62, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.1) });
+      d.box(x - 0.28, y - 0.1, 2.55, x + 0.28, y + 0.1, 2.72, shade(WOOD, 1.05), { line: WOOD_D, west: shade(WOOD, 0.85), top: shade(WOOD, 1.15) });
+    }
+    // 歇山顶密实（屋面块 + 瓦垄暗示）
+    d.box(-1.35, -1.35, 2.72, 1.35, 1.35, 2.92, TILE, { line: shade(TILE, 0.5), west: shade(TILE, 0.75), top: TILE_L });
+    d.box(-1.05, -1.05, 2.92, 1.05, 1.05, 3.35, shade(TILE, 1.05), { line: shade(TILE, 0.5), west: shade(TILE, 0.8), top: shade(TILE_L, 1.08) });
+    d.box(-0.55, -0.55, 3.35, 0.55, 0.55, 3.72, shade(TILE, 1.1), { line: shade(TILE, 0.5), west: shade(TILE, 0.85), top: '#8a9098' });
+    d.box(-0.2, -0.2, 3.72, 0.2, 0.2, 3.95, ST, { line: shade(ST, 0.5), west: STW, top: TOP });
+    // 瓦垄条（实体积带，非纯线）
+    for (let i = -4; i <= 4; i++) {
+      const x = i * 0.26;
+      d.box(x - 0.06, -1.32, 2.78, x + 0.06, 1.32, 2.9, shade(TILE, i % 2 ? 0.95 : 1.12), { line: false, noW: true, noS: true });
+    }
+    for (let z = 2.85; z < 3.3; z += 0.12) d.seg([-1.0, -1.06, z], [1.0, -1.06, z], shade(TILE, 0.7));
+    // 正脊
+    d.box(-1.1, -0.1, 3.55, 1.1, 0.1, 3.78, shade(TILE, 1.15), { line: shade(TILE, 0.5), west: shade(TILE, 0.85), top: '#9aa0a8' });
+  }
+  function paintPavilionLuting(d) {
+    const ST = '#8a8070', STW = '#6a6258', TOP = '#9a9080', WOOD = '#6a4a2c', WOOD_D = '#3a2214';
+    const TILE = '#4a5560', TILE_L = '#6a7580', RED = '#a03830', RED_W = '#70241c';
+    // 台基稍扁（路亭）
+    d.box(-1.35, -1.05, 0, 1.35, 1.05, 0.18, ST, { line: shade(ST, 0.48), west: STW, top: shade(ST, 0.9) });
+    d.box(-1.25, -0.95, 0.18, 1.25, 0.95, 0.32, shade(ST, 0.98), { line: shade(ST, 0.5), west: STW, top: TOP });
+    // 坐槛石条（两侧）
+    d.box(-1.15, -0.95, 0.32, 1.15, -0.7, 0.72, ST, { line: shade(ST, 0.5), west: STW, top: shade(ST, 1.08) });
+    d.box(-1.15, 0.7, 0.32, 1.15, 0.95, 0.72, ST, { line: shade(ST, 0.5), west: STW, top: shade(ST, 1.08) });
+    for (let x = -1.0; x < 1.05; x += 0.35) {
+      d.seg([x, -0.96, 0.72], [x, -0.7, 0.72], shade(ST, 0.7));
+      d.seg([x, 0.7, 0.72], [x, 0.96, 0.72], shade(ST, 0.7));
+    }
+    // 四柱开敞
+    for (const [x, y] of [[-1.05, -0.75], [1.05, -0.75], [-1.05, 0.75], [1.05, 0.75]]) {
+      d.box(x - 0.11, y - 0.11, 0.32, x + 0.11, y + 0.11, 2.55, RED, { line: shade(RED, 0.5), west: RED_W, top: shade(RED, 1.1) });
+      d.box(x - 0.15, y - 0.15, 0.32, x + 0.15, y + 0.15, 0.48, ST, { line: shade(ST, 0.5), west: STW, top: TOP });
+    }
+    // 额枋 + 雀替块
+    for (const [x0, y0, x1, y1] of [
+      [-1.15, -0.85, 1.15, -0.65], [-1.15, 0.65, 1.15, 0.85],
+      [-1.15, -0.85, -0.95, 0.85], [0.95, -0.85, 1.15, 0.85],
+    ]) {
+      d.box(x0, y0, 2.4, x1, y1, 2.62, '#2f5a86', { line: '#1a3a50', top: '#3f7a6a', west: '#244a6a' });
+    }
+    for (const [x, y] of [[-1.05, -0.75], [1.05, -0.75], [-1.05, 0.75], [1.05, 0.75]]) {
+      d.box(x - 0.28, y - 0.08, 2.28, x + 0.28, y + 0.08, 2.45, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.1) });
+    }
+    // 歇山亭顶
+    d.box(-1.55, -1.25, 2.62, 1.55, 1.25, 2.82, TILE, { line: shade(TILE, 0.5), west: shade(TILE, 0.75), top: TILE_L });
+    d.box(-1.2, -0.95, 2.82, 1.2, 0.95, 3.28, shade(TILE, 1.05), { line: shade(TILE, 0.5), west: shade(TILE, 0.8), top: shade(TILE_L, 1.08) });
+    d.box(-0.5, -0.45, 3.28, 0.5, 0.45, 3.68, shade(TILE, 1.1), { line: shade(TILE, 0.5), west: shade(TILE, 0.85), top: '#8a9098' });
+    for (let i = -5; i <= 5; i++) {
+      const x = i * 0.26;
+      d.box(x - 0.06, -1.22, 2.68, x + 0.06, 1.22, 2.8, shade(TILE, i % 2 ? 0.95 : 1.12), { line: false, noW: true, noS: true });
+    }
+    d.box(-1.25, -0.1, 3.48, 1.25, 0.1, 3.72, shade(TILE, 1.15), { line: shade(TILE, 0.5), west: shade(TILE, 0.85), top: '#9aa0a8' });
+    d.box(-0.18, -0.18, 3.72, 0.18, 0.18, 3.95, ST, { line: shade(ST, 0.5), west: STW, top: TOP });
+  }
+  function paintGatePaifangS(d) {
+    const ST = '#8a8070', STW = '#6a6258', TOP = '#9a9080', WOOD = '#6a4a2c', WOOD_D = '#3a2214';
+    const TILE = '#4a5560', TILE_L = '#6a7580', RED = '#a03830', RED_W = '#70241c', GOLD = '#c8a040';
+    // 夹杆石双柱底座
+    for (const x of [-1.35, 1.35]) {
+      d.box(x - 0.38, -0.35, 0, x + 0.38, 0.35, 0.55, ST, { line: shade(ST, 0.48), west: STW, top: shade(ST, 0.9) });
+      d.box(x - 0.28, -0.28, 0.55, x + 0.28, 0.28, 0.72, shade(ST, 0.98), { line: shade(ST, 0.5), west: STW, top: TOP });
+      // 石柱
+      d.box(x - 0.18, -0.18, 0.72, x + 0.18, 0.18, 2.85, shade(ST, 1.02), { line: shade(ST, 0.48), west: STW, top: TOP });
+      for (let z = 0.9; z < 2.8; z += 0.2) d.seg([x - 0.19, -0.185, z], [x + 0.19, -0.185, z], shade(ST, 0.72));
+      d.QS(x - 0.185, -0.12, 1.1, 0.12, 2.5, shade(ST, 1.12), shade(ST, 0.55));
+    }
+    // 额枋横梁（单开间）
+    d.box(-1.55, -0.22, 2.55, 1.55, 0.22, 2.85, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.1) });
+    d.box(-1.45, -0.18, 2.85, 1.45, 0.18, 3.15, '#2f5a86', { line: '#1a3a50', west: '#244a6a', top: '#3f7a6a' });
+    // 匾额色块
+    d.box(-0.7, -0.2, 2.95, 0.7, -0.12, 3.35, '#1f2f4a', { line: GOLD, west: '#152238', top: '#2a4060' });
+    d.box(-0.5, -0.22, 3.05, 0.5, -0.14, 3.25, shade(GOLD, 0.95), { line: false, noW: true, noS: true });
+    // 斗拱块
+    for (const x of [-1.35, 0, 1.35]) {
+      d.box(x - 0.28, -0.28, 3.15, x + 0.28, 0.28, 3.4, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.12) });
+      d.box(x - 0.35, -0.16, 3.32, x + 0.35, 0.16, 3.52, shade(WOOD, 1.05), { line: WOOD_D, west: shade(WOOD, 0.85), top: shade(WOOD, 1.15) });
+    }
+    // 小歇山顶
+    d.box(-1.85, -0.55, 3.52, 1.85, 0.55, 3.72, TILE, { line: shade(TILE, 0.5), west: shade(TILE, 0.75), top: TILE_L });
+    d.box(-1.45, -0.4, 3.72, 1.45, 0.4, 4.15, shade(TILE, 1.05), { line: shade(TILE, 0.5), west: shade(TILE, 0.8), top: shade(TILE_L, 1.08) });
+    d.box(-0.55, -0.22, 4.15, 0.55, 0.22, 4.45, shade(TILE, 1.1), { line: shade(TILE, 0.5), west: shade(TILE, 0.85), top: '#8a9098' });
+    for (let i = -6; i <= 6; i++) {
+      const x = i * 0.26;
+      d.box(x - 0.05, -0.52, 3.58, x + 0.05, 0.52, 3.7, shade(TILE, i % 2 ? 0.95 : 1.12), { line: false, noW: true, noS: true });
+    }
+    d.box(-1.5, -0.08, 4.28, 1.5, 0.08, 4.5, shade(TILE, 1.15), { line: shade(TILE, 0.5), west: shade(TILE, 0.85), top: '#9aa0a8' });
+    // 脊端鸱吻简化块
+    for (const x of [-1.45, 1.45]) {
+      d.box(x - 0.18, -0.14, 4.35, x + 0.18, 0.14, 4.75, shade(TILE, 1.08), { line: shade(TILE, 0.5), west: shade(TILE, 0.8), top: TILE_L });
+    }
+  }
+  function paintRoofTing(d) {
+    const TILE = '#4a5560', TILE_L = '#6a7580', ST = '#8a8070', STW = '#6a6258', TOP = '#9a9080';
+    // 可复用亭顶模块：檐口 + 屋面 + 正脊
+    d.box(-1.4, -1.4, 0, 1.4, 1.4, 0.22, TILE, { line: shade(TILE, 0.5), west: shade(TILE, 0.75), top: TILE_L });
+    d.box(-1.1, -1.1, 0.22, 1.1, 1.1, 0.7, shade(TILE, 1.05), { line: shade(TILE, 0.5), west: shade(TILE, 0.8), top: shade(TILE_L, 1.08) });
+    d.box(-0.55, -0.55, 0.7, 0.55, 0.55, 1.15, shade(TILE, 1.1), { line: shade(TILE, 0.5), west: shade(TILE, 0.85), top: '#8a9098' });
+    for (let i = -4; i <= 4; i++) {
+      const x = i * 0.28;
+      d.box(x - 0.06, -1.38, 0.06, x + 0.06, 1.38, 0.2, shade(TILE, i % 2 ? 0.95 : 1.12), { line: false, noW: true, noS: true });
+    }
+    d.box(-1.15, -0.1, 0.95, 1.15, 0.1, 1.22, shade(TILE, 1.15), { line: shade(TILE, 0.5), west: shade(TILE, 0.85), top: '#9aa0a8' });
+    d.box(-0.18, -0.18, 1.22, 0.18, 0.18, 1.42, ST, { line: shade(ST, 0.5), west: STW, top: TOP });
+    for (const x of [-1.1, 1.1]) {
+      d.box(x - 0.16, -0.12, 1.05, x + 0.16, 0.12, 1.4, shade(TILE, 1.08), { line: shade(TILE, 0.5), west: shade(TILE, 0.8), top: TILE_L });
+    }
+  }
+
+
+
+
+
+
+
+  /* ---- Site218：垂花门/小门楼/门罩/门柱石 atlas 模块（禁纯线稿、密实 kitbash；宅院入口点景） ---- */
+  function paintGateChuihua(d) {
+    const ST = '#8a8070', STW = '#6a6258', TOP = '#9a9080', WOOD = '#6a4a2c', WOOD_D = '#3a2214';
+    const TILE = '#4a5560', TILE_L = '#6a7580', RED = '#a03830', RED_W = '#70241c', GOLD = '#c8a040';
+    // 石台基 + 门槛
+    d.box(-1.55, -0.55, 0, 1.55, 0.55, 0.28, ST, { line: shade(ST, 0.48), west: STW, top: shade(ST, 0.9) });
+    d.box(-1.4, -0.42, 0.28, 1.4, 0.42, 0.48, shade(ST, 0.98), { line: shade(ST, 0.5), west: STW, top: TOP });
+    d.box(-0.55, -0.35, 0.48, 0.55, 0.35, 0.62, WOOD_D, { line: shade(WOOD_D, 0.6), west: shade(WOOD_D, 0.8), top: shade(WOOD, 0.7) });
+    for (let x = -1.25; x < 1.3; x += 0.35) d.seg([x, -0.43, 0.48], [x, 0.43, 0.48], shade(ST, 0.7));
+    // 夹柱石墩
+    for (const x of [-1.15, 1.15]) {
+      d.box(x - 0.32, -0.38, 0.48, x + 0.32, 0.38, 0.78, ST, { line: shade(ST, 0.48), west: STW, top: TOP });
+      d.box(x - 0.22, -0.28, 0.78, x + 0.22, 0.28, 0.92, shade(ST, 1.02), { line: shade(ST, 0.5), west: STW, top: shade(ST, 1.12) });
+    }
+    // 两红柱
+    for (const x of [-1.15, 1.15]) {
+      d.box(x - 0.14, -0.14, 0.92, x + 0.14, 0.14, 3.05, RED, { line: shade(RED, 0.5), west: RED_W, top: shade(RED, 1.1) });
+      // 金箍环
+      for (const z of [1.35, 2.35]) d.box(x - 0.16, -0.16, z, x + 0.16, 0.16, z + 0.08, GOLD, { line: shade(GOLD, 0.55), west: shade(GOLD, 0.8), top: shade(GOLD, 1.15) });
+    }
+    // 额枋 + 彩绘色块
+    d.box(-1.35, -0.2, 2.85, 1.35, 0.2, 3.12, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.1) });
+    d.box(-1.25, -0.16, 3.12, 1.25, 0.16, 3.35, '#2f5a86', { line: '#1a3a50', west: '#244a6a', top: '#3f7a6a' });
+    d.box(-0.55, -0.18, 3.18, 0.55, -0.1, 3.42, '#1f2f4a', { line: GOLD, west: '#152238', top: '#2a4060' });
+    // 垂花柱头（檐下悬花蕾实体块）
+    for (const x of [-1.55, 1.55]) {
+      d.box(x - 0.12, -0.12, 2.55, x + 0.12, 0.12, 3.05, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.1) });
+      d.box(x - 0.18, -0.18, 2.35, x + 0.18, 0.18, 2.6, RED, { line: shade(RED, 0.5), west: RED_W, top: shade(RED, 1.12) });
+      d.box(x - 0.14, -0.14, 2.2, x + 0.14, 0.14, 2.38, GOLD, { line: shade(GOLD, 0.55), west: shade(GOLD, 0.8), top: shade(GOLD, 1.15) });
+      d.box(x - 0.1, -0.1, 2.05, x + 0.1, 0.1, 2.22, shade(RED, 1.05), { line: shade(RED, 0.5), west: RED_W, top: shade(RED, 1.15) });
+    }
+    // 雀替块
+    for (const x of [-1.0, 1.0]) {
+      d.box(x - 0.28, -0.1, 2.7, x + 0.28, 0.1, 2.92, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.1) });
+    }
+    // 小歇山顶 + 瓦垄
+    d.box(-1.75, -0.55, 3.35, 1.75, 0.55, 3.55, TILE, { line: shade(TILE, 0.5), west: shade(TILE, 0.75), top: TILE_L });
+    d.box(-1.35, -0.4, 3.55, 1.35, 0.4, 3.95, shade(TILE, 1.05), { line: shade(TILE, 0.5), west: shade(TILE, 0.8), top: shade(TILE_L, 1.08) });
+    d.box(-0.5, -0.22, 3.95, 0.5, 0.22, 4.25, shade(TILE, 1.1), { line: shade(TILE, 0.5), west: shade(TILE, 0.85), top: '#8a9098' });
+    for (let i = -6; i <= 6; i++) {
+      const x = i * 0.25;
+      d.box(x - 0.05, -0.52, 3.4, x + 0.05, 0.52, 3.52, shade(TILE, i % 2 ? 0.95 : 1.12), { line: false, noW: true, noS: true });
+    }
+    d.box(-1.4, -0.08, 4.1, 1.4, 0.08, 4.32, shade(TILE, 1.15), { line: shade(TILE, 0.5), west: shade(TILE, 0.85), top: '#9aa0a8' });
+    for (const x of [-1.3, 1.3]) {
+      d.box(x - 0.16, -0.12, 4.15, x + 0.16, 0.12, 4.48, shade(TILE, 1.08), { line: shade(TILE, 0.5), west: shade(TILE, 0.8), top: TILE_L });
+    }
+  }
+  function paintGateMenlouS(d) {
+    const ST = '#8a8070', STW = '#6a6258', TOP = '#9a9080', WOOD = '#6a4a2c', WOOD_D = '#3a2214';
+    const TILE = '#4a5560', TILE_L = '#6a7580', RED = '#a03830', RED_W = '#70241c', GOLD = '#c8a040';
+    // 台基
+    d.box(-1.45, -0.7, 0, 1.45, 0.7, 0.32, ST, { line: shade(ST, 0.48), west: STW, top: shade(ST, 0.9) });
+    d.box(-1.3, -0.55, 0.32, 1.3, 0.55, 0.52, shade(ST, 0.98), { line: shade(ST, 0.5), west: STW, top: TOP });
+    // 砖墩墙裙（两侧，中空门洞）
+    for (const x of [-1.05, 1.05]) {
+      d.box(x - 0.35, -0.5, 0.52, x + 0.35, 0.5, 2.55, '#9a8a72', { line: shade('#9a8a72', 0.48), west: '#6a5e4c', top: shade('#9a8a72', 1.1) });
+      for (let z = 0.65; z < 2.45; z += 0.18) {
+        for (let yy = -0.4; yy < 0.45; yy += 0.22) {
+          d.QS(x - 0.36, yy, z, yy + 0.18, z + 0.14, shade('#9a8a72', 0.9 + ((yy + z) * 7 % 3) * 0.04));
+        }
+      }
+    }
+    // 门洞额枋
+    d.box(-0.75, -0.45, 2.35, 0.75, 0.45, 2.65, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.1) });
+    d.box(-0.55, -0.42, 0.52, 0.55, -0.32, 2.35, WOOD_D, { line: shade(WOOD_D, 0.55), west: shade(WOOD_D, 0.75), top: shade(WOOD, 0.7) });
+    // 上层小楼板 + 短柱
+    d.box(-1.25, -0.55, 2.65, 1.25, 0.55, 2.85, ST, { line: shade(ST, 0.5), west: STW, top: TOP });
+    for (const x of [-0.95, 0, 0.95]) {
+      d.box(x - 0.1, -0.12, 2.85, x + 0.1, 0.12, 3.55, RED, { line: shade(RED, 0.5), west: RED_W, top: shade(RED, 1.1) });
+    }
+    d.box(-1.15, -0.18, 3.45, 1.15, 0.18, 3.7, '#2f5a86', { line: '#1a3a50', west: '#244a6a', top: '#3f7a6a' });
+    d.box(-0.4, -0.2, 3.5, 0.4, -0.12, 3.75, '#1f2f4a', { line: GOLD, west: '#152238', top: '#2a4060' });
+    // 门楼歇山顶
+    d.box(-1.55, -0.7, 3.7, 1.55, 0.7, 3.9, TILE, { line: shade(TILE, 0.5), west: shade(TILE, 0.75), top: TILE_L });
+    d.box(-1.15, -0.5, 3.9, 1.15, 0.5, 4.3, shade(TILE, 1.05), { line: shade(TILE, 0.5), west: shade(TILE, 0.8), top: shade(TILE_L, 1.08) });
+    d.box(-0.45, -0.25, 4.3, 0.45, 0.25, 4.55, shade(TILE, 1.1), { line: shade(TILE, 0.5), west: shade(TILE, 0.85), top: '#8a9098' });
+    for (let i = -5; i <= 5; i++) {
+      const x = i * 0.26;
+      d.box(x - 0.05, -0.65, 3.76, x + 0.05, 0.65, 3.88, shade(TILE, i % 2 ? 0.95 : 1.12), { line: false, noW: true, noS: true });
+    }
+    d.box(-1.2, -0.08, 4.4, 1.2, 0.08, 4.6, shade(TILE, 1.15), { line: shade(TILE, 0.5), west: shade(TILE, 0.85), top: '#9aa0a8' });
+  }
+  function paintEaveMenzhao(d) {
+    const ST = '#8a8070', STW = '#6a6258', TOP = '#9a9080', WOOD = '#6a4a2c', WOOD_D = '#3a2214';
+    const TILE = '#4a5560', TILE_L = '#6a7580', RED = '#a03830', RED_W = '#70241c', GOLD = '#c8a040';
+    // 门罩：贴墙浅出檐（砖托 + 木枋 + 小瓦顶）
+    d.box(-1.2, -0.15, 0, 1.2, 0.25, 0.35, ST, { line: shade(ST, 0.48), west: STW, top: TOP });
+    // 两挑梁托
+    for (const x of [-0.85, 0.85]) {
+      d.box(x - 0.14, -0.2, 0.2, x + 0.14, 0.35, 1.15, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.1) });
+      d.box(x - 0.22, -0.18, 1.0, x + 0.22, 0.32, 1.25, shade(WOOD, 1.05), { line: WOOD_D, west: shade(WOOD, 0.85), top: shade(WOOD, 1.15) });
+      d.box(x - 0.1, -0.12, 0.85, x + 0.1, 0.28, 1.05, RED, { line: shade(RED, 0.5), west: RED_W, top: shade(RED, 1.1) });
+    }
+    // 横枋 + 金边匾托
+    d.box(-1.15, -0.22, 1.15, 1.15, 0.38, 1.4, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.1) });
+    d.box(-0.7, -0.24, 1.22, 0.7, -0.14, 1.48, '#1f2f4a', { line: GOLD, west: '#152238', top: '#2a4060' });
+    // 小披檐瓦顶
+    d.box(-1.4, -0.35, 1.4, 1.4, 0.45, 1.58, TILE, { line: shade(TILE, 0.5), west: shade(TILE, 0.75), top: TILE_L });
+    d.box(-1.1, -0.25, 1.58, 1.1, 0.35, 1.9, shade(TILE, 1.05), { line: shade(TILE, 0.5), west: shade(TILE, 0.8), top: shade(TILE_L, 1.08) });
+    for (let i = -5; i <= 5; i++) {
+      const x = i * 0.24;
+      d.box(x - 0.05, -0.32, 1.45, x + 0.05, 0.42, 1.56, shade(TILE, i % 2 ? 0.95 : 1.12), { line: false, noW: true, noS: true });
+    }
+    d.box(-1.15, -0.08, 1.82, 1.15, 0.12, 2.05, shade(TILE, 1.12), { line: shade(TILE, 0.5), west: shade(TILE, 0.85), top: '#9aa0a8' });
+    // 滴水暗示块
+    for (let x = -1.2; x <= 1.2; x += 0.3) {
+      d.box(x - 0.06, -0.34, 1.35, x + 0.06, -0.28, 1.48, shade(TILE, 1.1), { line: false, noW: true, noS: true });
+    }
+  }
+  function paintPostMenzhu(d) {
+    const ST = '#8a8070', STW = '#6a6258', TOP = '#9a9080', GOLD = '#c8a040';
+    // 须弥座
+    d.box(-0.42, -0.42, 0, 0.42, 0.42, 0.28, ST, { line: shade(ST, 0.48), west: STW, top: shade(ST, 0.9) });
+    d.box(-0.36, -0.36, 0.28, 0.36, 0.36, 0.48, shade(ST, 0.98), { line: shade(ST, 0.5), west: STW, top: TOP });
+    // 方柱身密实石皮
+    d.box(-0.28, -0.28, 0.48, 0.28, 0.28, 1.85, shade(ST, 1.02), { line: shade(ST, 0.48), west: STW, top: TOP });
+    for (let z = 0.55; z < 1.8; z += 0.18) {
+      d.seg([-0.29, -0.285, z], [0.29, -0.285, z], shade(ST, 0.7));
+      d.QS(-0.29, -0.22, z + 0.02, 0.22, z + 0.1, shade(ST, 1.08));
+    }
+    // 柱帽 + 金钉
+    d.box(-0.34, -0.34, 1.85, 0.34, 0.34, 2.05, ST, { line: shade(ST, 0.5), west: STW, top: shade(ST, 1.12) });
+    d.box(-0.22, -0.22, 2.05, 0.22, 0.22, 2.22, shade(ST, 1.05), { line: shade(ST, 0.5), west: STW, top: TOP });
+    d.box(-0.1, -0.1, 2.22, 0.1, 0.1, 2.35, GOLD, { line: shade(GOLD, 0.55), west: shade(GOLD, 0.8), top: shade(GOLD, 1.15) });
+  }
+
+  /* ---- Site216：漏窗 / 花墙 / 透空砖雕 / 花格墙 atlas 模块（禁纯线稿、密实 kitbash；与格扇/影壁互补） ---- */
+  const LW_BRICK = '#9a8a72', LW_BRICK_D = '#6a5e4c', LW_PLAS = '#ddd5c4', LW_CREAM = '#e8dcc0';
+  const LW_TEAL = '#3a6a58', LW_RED = '#8a2a1e', LW_WOOD = '#7a4a2c', LW_STONE = '#9a9080';
+  /** 漏窗：墙面透空花窗（框+密实几何花心；非门窗格扇） */
+  function paintWindowLou(d, w, h) {
+    const brick = LW_BRICK, dark = shade(brick, 0.48), plas = LW_PLAS, cream = LW_CREAM;
+    /* wall field */
+    d.box(0, -0.16, 0, w, 0.2, h, plas, { line: shade(plas, 0.55), west: shade(plas, 0.8), south: shade(plas, 0.98), top: shade(plas, 1.08) });
+    /* brick courses densify */
+    for (let z = 0.06; z < h - 0.04; z += 0.14) {
+      for (let x = 0.05; x < w - 0.04; x += 0.24) {
+        d.QS(-0.17, x, z, x + 0.2, z + 0.11, shade(brick, 0.88 + ((x + z) * 11 % 3) * 0.04));
+      }
+    }
+    /* outer frame */
+    const m = 0.22;
+    d.box(m, -0.2, m, w - m, 0.24, h - m, LW_WOOD, { line: shade(LW_WOOD, 0.45), west: shade(LW_WOOD, 0.7), south: shade(LW_WOOD, 1.05), top: shade(LW_WOOD, 1.15) });
+    d.QS(-0.21, m + 0.06, m + 0.06, w - m - 0.06, h - m - 0.06, shade(cream, 0.55), dark);
+    /* openwork geometric lattice (dense volumes, not linework) */
+    const ix0 = m + 0.14, ix1 = w - m - 0.14, iz0 = m + 0.14, iz1 = h - m - 0.14;
+    d.QS(-0.12, ix0, iz0, ix1, iz1, shade('#1a120e', 0.55));
+    for (let x = ix0 + 0.08; x < ix1 - 0.05; x += 0.18) d.QS(-0.19, x, iz0 + 0.04, x + 0.06, iz1 - 0.04, shade(LW_WOOD, 1.12));
+    for (let z = iz0 + 0.08; z < iz1 - 0.05; z += 0.18) d.QS(-0.19, ix0 + 0.04, z, ix1 - 0.04, z + 0.06, shade(LW_WOOD, 1.05));
+    /* diamond flower bosses */
+    const cx = w / 2, cz = h / 2;
+    for (let i = 0; i < 8; i++) {
+      const a = i * Math.PI / 4;
+      const px = cx + Math.cos(a) * 0.42, pz = cz + Math.sin(a) * 0.38;
+      d.QS(-0.2, px - 0.1, pz - 0.1, px + 0.1, pz + 0.1, shade(LW_TEAL, 0.75));
+      d.QS(-0.205, px - 0.05, pz - 0.05, px + 0.05, pz + 0.05, shade(GOLD, 0.95));
+    }
+    d.QS(-0.21, cx - 0.14, cz - 0.14, cx + 0.14, cz + 0.14, shade(LW_RED, 0.85));
+    d.QS(-0.215, cx - 0.07, cz - 0.07, cx + 0.07, cz + 0.07, shade(GOLD, 1.15));
+    /* corner gold pins */
+    for (const sx of [m + 0.08, w - m - 0.2]) for (const sz of [m + 0.08, h - m - 0.2]) {
+      d.QS(-0.22, sx, sz, sx + 0.12, sz + 0.12, GOLD);
+    }
+  }
+  /** 花墙：透空花墙段（砖框+多窗洞花心；园林墙面点缀） */
+  function paintWallHuaziang(d, w, h) {
+    const brick = LW_BRICK, dark = shade(brick, 0.48), plas = LW_PLAS;
+    d.box(0, -0.18, 0, w, 0.22, h, plas, { line: shade(plas, 0.55), west: shade(plas, 0.78), south: shade(plas, 0.98), top: shade(plas, 1.1) });
+    for (let z = 0.05; z < h - 0.04; z += 0.13) {
+      for (let x = 0.04; x < w - 0.04; x += 0.22) {
+        d.QS(-0.185, x, z, x + 0.18, z + 0.1, shade(brick, 0.9 + ((x * 7 + z * 5) % 3) * 0.05));
+      }
+    }
+    /* tiled coping */
+    d.box(-0.08, -0.22, h - 0.12, w + 0.08, 0.26, h + 0.28, shade(LW_TEAL, 0.95), { line: shade(LW_TEAL, 0.45), west: shade(LW_TEAL, 0.7), south: shade(LW_TEAL, 1.05), top: shade(LW_TEAL, 1.2) });
+    for (let x = 0.05; x < w; x += 0.2) d.QS(-0.23, x, h + 0.02, x + 0.14, h + 0.22, shade(LW_TEAL, 1.1));
+    /* three pierced openings with flower centers */
+    const slots = [
+      [w * 0.12, h * 0.22, w * 0.34, h * 0.72],
+      [w * 0.38, h * 0.18, w * 0.62, h * 0.78],
+      [w * 0.66, h * 0.22, w * 0.88, h * 0.72],
+    ];
+    for (const [x0, z0, x1, z1] of slots) {
+      d.QS(-0.12, x0, z0, x1, z1, shade('#1a120e', 0.5));
+      d.box(x0 - 0.06, -0.2, z0 - 0.06, x1 + 0.06, 0.24, z1 + 0.06, LW_WOOD, { line: shade(LW_WOOD, 0.45), south: shade(LW_WOOD, 1.05), top: shade(LW_WOOD, 1.12) });
+      /* lattice densify inside opening */
+      for (let x = x0 + 0.08; x < x1 - 0.05; x += 0.14) d.QS(-0.19, x, z0 + 0.06, x + 0.045, z1 - 0.06, shade(LW_WOOD, 1.1));
+      for (let z = z0 + 0.08; z < z1 - 0.05; z += 0.14) d.QS(-0.19, x0 + 0.06, z, x1 - 0.06, z + 0.045, shade(LW_WOOD, 1.02));
+      const cx = (x0 + x1) / 2, cz = (z0 + z1) / 2;
+      d.QS(-0.2, cx - 0.12, cz - 0.12, cx + 0.12, cz + 0.12, shade(LW_TEAL, 0.7));
+      d.QS(-0.205, cx - 0.06, cz - 0.06, cx + 0.06, cz + 0.06, GOLD);
+    }
+    /* base plinth */
+    d.box(0.02, -0.2, 0, w - 0.02, 0.24, 0.28, LW_STONE, { line: shade(LW_STONE, 0.5), south: shade(LW_STONE, 1.05), top: shade(LW_STONE, 1.15) });
+    d.QS(-0.21, 0.1, 0.08, w - 0.1, 0.2, shade(LW_STONE, 1.12));
+  }
+  /** 透空砖雕：独立透空砖雕面板（可贴墙/花墙花心） */
+  function paintBrickToukong(d) {
+    const brick = LW_BRICK, dark = shade(brick, 0.45), cream = LW_CREAM;
+    d.box(-0.7, -0.14, -0.7, 0.7, 0.16, 0.7, brick, { line: dark, west: LW_BRICK_D, south: shade(brick, 1.02), top: shade(brick, 1.15) });
+    d.QS(-0.15, -0.62, -0.62, 0.62, 0.62, shade(cream, 0.9), dark);
+    /* openwork ring + petals as volume beads */
+    for (let i = 0; i < 16; i++) {
+      const a = i * Math.PI / 8;
+      const x = Math.cos(a) * 0.48, z = Math.sin(a) * 0.48;
+      d.QS(-0.16, x - 0.08, z - 0.08, x + 0.08, z + 0.08, shade(brick, 1.0 + (i % 2) * 0.08));
+      d.QS(-0.165, x - 0.04, z - 0.04, x + 0.04, z + 0.04, shade(brick, 0.82));
+    }
+    for (let i = 0; i < 8; i++) {
+      const a = i * Math.PI / 4 + 0.2;
+      const x = Math.cos(a) * 0.28, z = Math.sin(a) * 0.28;
+      d.QS(-0.17, x - 0.1, z - 0.1, x + 0.1, z + 0.1, shade(LW_TEAL, 0.8));
+      d.QS(-0.175, x - 0.05, z - 0.05, x + 0.05, z + 0.05, shade(GOLD, 0.95));
+    }
+    /* center void hint */
+    d.QS(-0.12, -0.16, -0.16, 0.16, 0.16, shade('#1a120e', 0.65));
+    d.QS(-0.18, -0.1, -0.1, 0.1, 0.1, shade(LW_RED, 0.9));
+    d.QS(-0.185, -0.05, -0.05, 0.05, 0.05, shade(GOLD, 1.2));
+    /* square frame corners */
+    for (const sx of [-1, 1]) for (const sz of [-1, 1]) {
+      d.QS(-0.155, sx * 0.58 - 0.08, sz * 0.58 - 0.08, sx * 0.58 + 0.08, sz * 0.58 + 0.08, GOLD);
+    }
+  }
+  /** 花格墙：密实花格墙板（万字/冰裂纹体量；侧墙/巷墙贴面） */
+  function paintLatticeWall(d, w, h) {
+    const wood = LW_WOOD, dark = shade(wood, 0.48), cream = LW_CREAM, brick = LW_BRICK;
+    d.box(0, -0.14, 0, w, 0.18, h, wood, { line: dark, west: shade(wood, 0.7), south: shade(wood, 0.98), top: shade(wood, 1.1) });
+    /* outer brick surround */
+    for (let z = 0.04; z < h - 0.04; z += 0.16) {
+      d.QS(-0.15, 0.04, z, 0.18, z + 0.12, shade(brick, 0.95));
+      d.QS(-0.15, w - 0.18, z, w - 0.04, z + 0.12, shade(brick, 0.95));
+    }
+    d.QS(-0.16, 0.2, 0.08, w - 0.2, h - 0.08, shade(cream, 0.72), dark);
+    /* wanzi / ice-crack dense grid */
+    for (let x = 0.28; x < w - 0.22; x += 0.2) d.QS(-0.17, x, 0.16, x + 0.07, h - 0.16, shade(wood, 1.12));
+    for (let z = 0.22; z < h - 0.16; z += 0.2) d.QS(-0.17, 0.24, z, w - 0.24, z + 0.07, shade(wood, 1.05));
+    /* diagonal volume beads (ice-crack hint) */
+    for (let i = 0; i < 6; i++) {
+      const x = 0.4 + i * 0.35;
+      if (x > w - 0.4) break;
+      d.QS(-0.175, x - 0.08, h * 0.35, x + 0.08, h * 0.35 + 0.55, shade(wood, 1.15));
+      d.QS(-0.175, x - 0.08, h * 0.55, x + 0.08, h * 0.55 + 0.45, shade(wood, 1.08));
+    }
+    /* center teal plaque */
+    const cx = w / 2, cz = h * 0.5;
+    d.box(cx - 0.35, -0.2, cz - 0.28, cx + 0.35, 0.16, cz + 0.28, cream, { line: dark, south: shade(cream, 1.05), top: shade(cream, 1.12) });
+    d.QS(-0.21, cx - 0.28, cz - 0.2, cx + 0.28, cz + 0.2, shade(LW_TEAL, 0.55));
+    for (let i = 0; i < 4; i++) {
+      const a = i * Math.PI / 2 + 0.4;
+      const px = cx + Math.cos(a) * 0.14, pz = cz + Math.sin(a) * 0.12;
+      d.QS(-0.22, px - 0.06, pz - 0.06, px + 0.06, pz + 0.06, shade(LW_RED, 0.9));
+      d.QS(-0.225, px - 0.03, pz - 0.03, px + 0.03, pz + 0.03, GOLD);
+    }
+    /* top/bottom rails */
+    d.box(0, -0.16, h - 0.2, w, 0.2, h, LW_RED, { line: shade(LW_RED, 0.45), south: shade(LW_RED, 1.08), top: shade(LW_RED, 1.15) });
+    d.QS(-0.17, 0.08, h - 0.14, w - 0.08, h - 0.06, GOLD);
+    d.box(0, -0.16, 0, w, 0.2, 0.22, LW_STONE, { line: shade(LW_STONE, 0.5), south: shade(LW_STONE, 1.05), top: shade(LW_STONE, 1.12) });
+  }
+
+
+
+  /* ---- Site219：太湖石/叠石假山/小峰石/石附苔 atlas 模块（禁纯线稿、密实 kitbash；豪宅庭院·艮岳外围点景） ---- */
+  function paintRockTaihu(d) {
+    const ST = '#8a8680', STW = '#6a6660', TOP = '#9a9688', DARK = '#3a3834', HOLE = '#2a2824', MOSS = '#4a6a3a', MOSS2 = '#6a8a4a';
+    // 基座丘
+    d.box(-0.95, -0.75, 0, 0.95, 0.75, 0.42, ST, { line: shade(ST, 0.48), west: STW, top: shade(ST, 0.9) });
+    d.box(-0.82, -0.62, 0.42, 0.82, 0.62, 0.72, shade(ST, 0.98), { line: shade(ST, 0.5), west: STW, top: TOP });
+    // 太湖石主体：皱皱漏透 — 多层不规则体积 + 透空孔
+    d.box(-0.7, -0.5, 0.72, 0.55, 0.48, 1.85, shade(ST, 1.02), { line: shade(ST, 0.48), west: STW, top: TOP });
+    d.box(-0.35, -0.55, 1.4, 0.75, 0.35, 2.55, shade(ST, 1.05), { line: shade(ST, 0.5), west: STW, top: shade(ST, 1.12) });
+    d.box(-0.55, -0.28, 2.2, 0.35, 0.45, 3.15, shade(ST, 1.0), { line: shade(ST, 0.48), west: STW, top: TOP });
+    d.box(0.1, -0.4, 2.55, 0.62, 0.22, 3.55, shade(ST, 1.08), { line: shade(ST, 0.5), west: STW, top: shade(ST, 1.15) });
+    // 侧枝石
+    d.box(-0.95, -0.15, 1.1, -0.55, 0.35, 2.05, shade(ST, 0.95), { line: shade(ST, 0.5), west: STW, top: TOP });
+    d.box(0.45, -0.1, 0.9, 0.95, 0.4, 1.75, shade(ST, 0.98), { line: shade(ST, 0.5), west: STW, top: TOP });
+    // 透空孔（实体暗块，非纯线）
+    for (const [x0, z0, x1, z1] of [
+      [-0.35, 1.05, -0.05, 1.45], [0.05, 1.65, 0.38, 2.05], [-0.22, 2.45, 0.12, 2.85],
+      [0.22, 2.85, 0.48, 3.2], [-0.72, 1.35, -0.48, 1.75], [0.55, 1.15, 0.78, 1.5],
+    ]) {
+      d.QS(-0.52, x0, z0, x1, z1, HOLE, shade(ST, 0.45));
+      d.box(x0, -0.56, z0, x1, -0.48, z1, DARK, { line: false, noW: true, noS: true });
+    }
+    // 皱纹体积带
+    for (let z = 0.9; z < 3.3; z += 0.22) {
+      d.box(-0.55 + (z % 0.44) * 0.15, -0.58, z, 0.45 - (z % 0.44) * 0.1, -0.5, z + 0.08, shade(ST, z % 0.44 < 0.22 ? 1.12 : 0.9), { line: false, noW: true, noS: true });
+    }
+    for (let z = 0.85; z < 3.2; z += 0.18) d.seg([-0.6, -0.52, z], [0.5, -0.52, z], shade(ST, 0.7));
+    // 石附苔点缀
+    for (const [x, y, z] of [[-0.6, -0.4, 0.85], [0.4, 0.2, 1.5], [-0.2, 0.3, 2.3], [0.35, -0.25, 2.9], [-0.4, 0.15, 1.2]]) {
+      d.box(x - 0.08, y - 0.08, z, x + 0.08, y + 0.08, z + 0.12, MOSS, { line: false, noW: true, noS: true });
+      d.box(x - 0.05, y - 0.05, z + 0.1, x + 0.05, y + 0.05, z + 0.18, MOSS2, { line: false, noW: true, noS: true });
+    }
+  }
+  function paintRockDieshi(d) {
+    const ST = '#8a8070', STW = '#6a6258', TOP = '#9a9080', DARK = '#4a443c', MOSS = '#4a6a3a', MOSS2 = '#5a7a42';
+    // 叠石组：三层错落堆叠（密实体积）
+    const layers = [
+      [-1.35, -1.0, 0, 1.35, 1.0, 0.55],
+      [-1.1, -0.85, 0.55, 1.15, 0.9, 1.15],
+      [-0.95, -0.55, 1.15, 0.55, 0.75, 1.85],
+      [0.15, -0.7, 1.15, 1.2, 0.55, 2.05],
+      [-0.55, -0.35, 1.85, 0.45, 0.55, 2.65],
+      [0.25, -0.25, 2.05, 0.95, 0.4, 2.95],
+      [-0.25, -0.15, 2.65, 0.55, 0.35, 3.45],
+    ];
+    for (let i = 0; i < layers.length; i++) {
+      const [x0, y0, z0, x1, y1, z1] = layers[i];
+      const col = shade(ST, 0.92 + (i % 3) * 0.06);
+      d.box(x0, y0, z0, x1, y1, z1, col, { line: shade(ST, 0.48), west: STW, top: shade(TOP, 0.95 + (i % 2) * 0.08) });
+      // 层缝
+      d.seg([x0 + 0.05, y0 - 0.01, z0], [x1 - 0.05, y0 - 0.01, z0], shade(ST, 0.68));
+    }
+    // 缝隙暗块
+    for (const [x0, z0, x1, z1] of [[-0.4, 0.7, -0.1, 1.0], [0.3, 1.4, 0.65, 1.7], [-0.15, 2.2, 0.2, 2.5]]) {
+      d.box(x0, -0.9, z0, x1, -0.82, z1, DARK, { line: false, noW: true, noS: true });
+    }
+    // 苔斑密实
+    for (let i = 0; i < 10; i++) {
+      const x = -0.9 + (i % 5) * 0.4, y = -0.5 + ((i / 5) | 0) * 0.55, z = 0.35 + i * 0.28;
+      d.box(x - 0.07, y - 0.07, z, x + 0.07, y + 0.07, z + 0.1, i % 2 ? MOSS : MOSS2, { line: false, noW: true, noS: true });
+    }
+    // 顶峰小石
+    d.box(-0.12, -0.12, 3.45, 0.28, 0.22, 3.85, shade(ST, 1.1), { line: shade(ST, 0.5), west: STW, top: shade(ST, 1.18) });
+  }
+  function paintRockPeakS(d) {
+    const ST = '#8a8070', STW = '#6a6258', TOP = '#9a9080', DARK = '#4a443c', MOSS = '#4a6a3a';
+    // 小峰石：瘦高峰
+    d.box(-0.55, -0.45, 0, 0.55, 0.45, 0.35, ST, { line: shade(ST, 0.48), west: STW, top: shade(ST, 0.9) });
+    d.box(-0.42, -0.35, 0.35, 0.42, 0.35, 0.85, shade(ST, 0.98), { line: shade(ST, 0.5), west: STW, top: TOP });
+    d.box(-0.32, -0.28, 0.85, 0.28, 0.28, 1.65, shade(ST, 1.02), { line: shade(ST, 0.48), west: STW, top: TOP });
+    d.box(-0.22, -0.2, 1.65, 0.2, 0.2, 2.35, shade(ST, 1.05), { line: shade(ST, 0.5), west: STW, top: shade(ST, 1.12) });
+    d.box(-0.14, -0.14, 2.35, 0.14, 0.14, 2.85, shade(ST, 1.08), { line: shade(ST, 0.5), west: STW, top: shade(ST, 1.15) });
+    d.box(-0.08, -0.08, 2.85, 0.08, 0.08, 3.15, shade(ST, 1.1), { line: shade(ST, 0.5), west: STW, top: TOP });
+    // 侧棱浮雕块
+    d.QS(-0.33, -0.18, 1.0, 0.18, 1.5, shade(ST, 1.12), shade(ST, 0.55));
+    d.QS(0.33, -0.15, 1.2, 0.15, 1.8, shade(STW, 1.05), shade(ST, 0.55));
+    for (let z = 0.5; z < 2.8; z += 0.2) d.seg([-0.3, -0.29, z], [0.3, -0.29, z], shade(ST, 0.72));
+    // 裂缝暗带
+    for (let i = 0; i < 4; i++) {
+      const z = 0.6 + i * 0.5;
+      d.box(-0.05, -0.3, z, 0.05, -0.28, z + 0.25, DARK, { line: false, noW: true, noS: true });
+    }
+    // 苔
+    for (const [x, z] of [[-0.25, 0.5], [0.2, 1.1], [-0.12, 1.9], [0.08, 2.5]]) {
+      d.box(x - 0.06, -0.2, z, x + 0.06, -0.12, z + 0.1, MOSS, { line: false, noW: true, noS: true });
+    }
+  }
+  function paintPlantRockMoss(d) {
+    const ST = '#8a8070', STW = '#6a6258', TOP = '#9a9080';
+    const MOSS = '#4a6a3a', MOSS2 = '#5a7a42', MOSS3 = '#3a5a2a', LEAF = '#6a8a48';
+    // 小石基
+    d.box(-0.55, -0.4, 0, 0.55, 0.4, 0.35, ST, { line: shade(ST, 0.48), west: STW, top: shade(ST, 0.92) });
+    d.box(-0.4, -0.3, 0.35, 0.4, 0.3, 0.72, shade(ST, 1.0), { line: shade(ST, 0.5), west: STW, top: TOP });
+    // 密实苔毯（多层体积，非线）
+    for (let i = 0; i < 8; i++) {
+      const a = (i / 8) * Math.PI * 2;
+      const x = Math.cos(a) * 0.35, y = Math.sin(a) * 0.25;
+      const col = i % 3 === 0 ? MOSS : i % 3 === 1 ? MOSS2 : MOSS3;
+      d.box(x - 0.14, y - 0.12, 0.65, x + 0.14, y + 0.12, 0.95 + (i % 3) * 0.08, col, { line: false, noW: true, noS: true });
+    }
+    d.box(-0.28, -0.2, 0.9, 0.28, 0.2, 1.15, MOSS2, { line: shade(MOSS, 0.6), west: MOSS3, top: LEAF });
+    // 小簇叶
+    for (const [x, y, z] of [[-0.15, -0.05, 1.15], [0.12, 0.08, 1.2], [0.0, -0.12, 1.25], [0.2, -0.08, 1.1]]) {
+      d.box(x - 0.08, y - 0.06, z, x + 0.08, y + 0.06, z + 0.22, LEAF, { line: false, noW: true, noS: true });
+      d.box(x - 0.05, y - 0.04, z + 0.18, x + 0.05, y + 0.04, z + 0.32, shade(LEAF, 1.1), { line: false, noW: true, noS: true });
+    }
+    // 石面残留
+    d.QS(-0.42, -0.25, 0.4, 0.25, 0.65, shade(ST, 1.1), shade(ST, 0.55));
+  }
+
+  /* ---- Site220：美人靠/飞来椅/坐槛/廊凳 atlas 模块（禁纯线稿、密实 kitbash；廊边亭边点景坐具） ---- */
+  function paintSeatMeirenkao(d) {
+    const WOOD = '#6a4a2c', WOOD_D = '#3a2214', WOOD_L = '#8a6a48', RED = '#a03830', RED_W = '#70241c';
+    const ST = '#8a8070', STW = '#6a6258', GOLD = '#c8a040';
+    // 石地栿
+    d.box(-1.35, -0.38, 0, 1.35, 0.42, 0.18, ST, { line: shade(ST, 0.48), west: STW, top: shade(ST, 0.92) });
+    for (let x = -1.1; x < 1.15; x += 0.28) d.seg([x, -0.39, 0.18], [x, 0.42, 0.18], shade(ST, 0.7));
+    // 坐面厚板（临边微外挑）
+    d.box(-1.28, -0.32, 0.18, 1.28, 0.36, 0.42, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.12) });
+    d.box(-1.22, -0.28, 0.42, 1.22, 0.32, 0.52, shade(WOOD, 1.05), { line: WOOD_D, west: shade(WOOD, 0.85), top: WOOD_L });
+    for (let x = -1.0; x < 1.05; x += 0.22) d.seg([x, -0.33, 0.52], [x, 0.33, 0.52], shade(WOOD, 0.75));
+    // 望柱两端
+    for (const x of [-1.2, 1.2]) {
+      d.box(x - 0.12, -0.2, 0.18, x + 0.12, 0.28, 1.35, RED, { line: shade(RED, 0.5), west: RED_W, top: shade(RED, 1.1) });
+      d.box(x - 0.14, -0.22, 1.3, x + 0.14, 0.3, 1.45, GOLD, { line: shade(GOLD, 0.55), west: shade(GOLD, 0.8), top: shade(GOLD, 1.15) });
+    }
+    // 鹅颈靠背（阶梯外挑实体块，非线稿）
+    const steps = [
+      [-1.05, 0.55, -0.05], [-0.75, 0.7, 0.08], [-0.4, 0.85, 0.18],
+      [0.0, 0.95, 0.22], [0.4, 0.85, 0.18], [0.75, 0.7, 0.08], [1.05, 0.55, -0.05],
+    ];
+    for (const [x, z, oy] of steps) {
+      d.box(x - 0.18, -0.18 + oy, 0.5, x + 0.18, 0.22 + oy, z, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.1) });
+      d.box(x - 0.1, -0.12 + oy, z - 0.08, x + 0.1, 0.16 + oy, z + 0.12, shade(WOOD, 1.08), { line: WOOD_D, west: shade(WOOD, 0.85), top: WOOD_L });
+    }
+    // 寻杖横杆密实
+    d.box(-1.15, -0.08, 1.05, 1.15, 0.18, 1.22, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.15) });
+    for (let x = -0.95; x < 1.0; x += 0.2) d.QS(-0.1, x, 1.08, x + 0.08, 1.18, GOLD);
+    // 竖棂密排
+    for (let x = -0.95; x < 1.0; x += 0.16) {
+      d.box(x - 0.035, -0.06, 0.52, x + 0.035, 0.12, 1.08, shade(WOOD, 0.95), { line: false, noW: true, noS: true });
+    }
+    // 坐面金钉装饰
+    for (const x of [-0.8, -0.3, 0.3, 0.8]) d.QS(-0.34, x - 0.04, 0.44, x + 0.04, 0.5, GOLD);
+  }
+  function paintSeatFeilaichi(d) {
+    const WOOD = '#6a4a2c', WOOD_D = '#3a2214', WOOD_L = '#8a6a48', RED = '#a03830', RED_W = '#70241c';
+    const ST = '#8a8070', STW = '#6a6258', GOLD = '#c8a040';
+    // 石础
+    d.box(-0.55, -0.45, 0, 0.55, 0.45, 0.16, ST, { line: shade(ST, 0.48), west: STW, top: shade(ST, 0.92) });
+    // 四腿
+    for (const [x, y] of [[-0.38, -0.28], [0.38, -0.28], [-0.38, 0.28], [0.38, 0.28]]) {
+      d.box(x - 0.08, y - 0.08, 0.16, x + 0.08, y + 0.08, 0.55, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.05) });
+    }
+    // 坐面
+    d.box(-0.52, -0.4, 0.55, 0.52, 0.4, 0.72, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: WOOD_L });
+    for (let x = -0.4; x < 0.42; x += 0.18) d.seg([x, -0.41, 0.72], [x, 0.41, 0.72], shade(WOOD, 0.75));
+    // 飞来靠背：后腿上延 + 外挑弧背（阶梯实体）
+    d.box(-0.42, 0.22, 0.72, 0.42, 0.38, 1.55, RED, { line: shade(RED, 0.5), west: RED_W, top: shade(RED, 1.1) });
+    const arcs = [
+      [-0.35, 0.85, 0.45], [-0.18, 1.05, 0.55], [0.0, 1.2, 0.62], [0.18, 1.05, 0.55], [0.35, 0.85, 0.45],
+    ];
+    for (const [x, z, oy] of arcs) {
+      d.box(x - 0.12, 0.18 + oy * 0.15, 0.9, x + 0.12, 0.42 + oy * 0.15, z, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.12) });
+    }
+    d.box(-0.45, 0.35, 1.35, 0.45, 0.55, 1.52, WOOD, { line: WOOD_D, west: shade(WOOD, 0.85), top: WOOD_L });
+    for (let x = -0.35; x < 0.38; x += 0.14) d.QS(-0.42, x, 1.38, x + 0.06, 1.48, GOLD);
+    // 扶手
+    for (const s of [-1, 1]) {
+      d.box(s * 0.48 - 0.06, -0.25, 0.72, s * 0.48 + 0.06, 0.25, 0.95, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.1) });
+      d.box(s * 0.48 - 0.08, 0.1, 0.9, s * 0.48 + 0.08, 0.4, 1.15, shade(WOOD, 1.05), { line: WOOD_D, west: shade(WOOD, 0.85), top: WOOD_L });
+    }
+    // 座前金钉
+    for (const x of [-0.25, 0, 0.25]) d.QS(-0.41, x - 0.03, 0.62, x + 0.03, 0.68, GOLD);
+  }
+  function paintRailZuokan(d) {
+    const WOOD = '#6a4a2c', WOOD_D = '#3a2214', WOOD_L = '#8a6a48';
+    const ST = '#8a8070', STW = '#6a6258', GOLD = '#c8a040', RED = '#a03830';
+    // 石槛座
+    d.box(-1.2, -0.28, 0, 1.2, 0.32, 0.22, ST, { line: shade(ST, 0.48), west: STW, top: shade(ST, 0.92) });
+    for (let x = -1.0; x < 1.05; x += 0.25) d.seg([x, -0.29, 0.22], [x, 0.32, 0.22], shade(ST, 0.7));
+    // 木坐槛厚板（可坐）
+    d.box(-1.15, -0.24, 0.22, 1.15, 0.28, 0.55, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: WOOD_L });
+    d.box(-1.1, -0.2, 0.55, 1.1, 0.24, 0.68, shade(WOOD, 1.05), { line: WOOD_D, west: shade(WOOD, 0.85), top: shade(WOOD, 1.15) });
+    for (let x = -0.95; x < 1.0; x += 0.2) d.seg([x, -0.25, 0.68], [x, 0.25, 0.68], shade(WOOD, 0.75));
+    // 低靠背短棂
+    for (let x = -0.95; x < 1.0; x += 0.18) {
+      d.box(x - 0.04, 0.12, 0.68, x + 0.04, 0.26, 1.05, shade(WOOD, 0.95), { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.08) });
+    }
+    d.box(-1.05, 0.1, 1.0, 1.05, 0.28, 1.15, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.12) });
+    for (let x = -0.85; x < 0.9; x += 0.22) d.QS(-0.12, x, 1.02, x + 0.08, 1.12, GOLD);
+    // 端柱
+    for (const x of [-1.1, 1.1]) {
+      d.box(x - 0.1, -0.18, 0.22, x + 0.1, 0.28, 1.2, RED, { line: shade(RED, 0.5), west: shade(RED, 0.75), top: shade(RED, 1.1) });
+      d.box(x - 0.12, -0.2, 1.15, x + 0.12, 0.3, 1.28, GOLD, { line: shade(GOLD, 0.55), west: shade(GOLD, 0.8), top: shade(GOLD, 1.15) });
+    }
+  }
+  function paintBenchLang(d) {
+    const WOOD = '#6a4a2c', WOOD_D = '#3a2214', WOOD_L = '#8a6a48';
+    const ST = '#8a8070', STW = '#6a6258', GOLD = '#c8a040';
+    // 双石腿
+    d.box(-0.85, -0.28, 0, -0.55, 0.28, 0.42, ST, { line: shade(ST, 0.5), west: STW, top: shade(ST, 0.9) });
+    d.box(0.55, -0.28, 0, 0.85, 0.28, 0.42, ST, { line: shade(ST, 0.5), west: STW, top: shade(ST, 0.9) });
+    for (let z = 0.12; z < 0.4; z += 0.12) {
+      d.seg([-0.84, -0.285, z], [-0.56, -0.285, z], shade(ST, 0.7));
+      d.seg([0.56, -0.285, z], [0.84, -0.285, z], shade(ST, 0.7));
+    }
+    // 木坐面长板
+    d.box(-1.05, -0.35, 0.42, 1.05, 0.35, 0.58, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: WOOD_L });
+    d.box(-1.0, -0.3, 0.58, 1.0, 0.3, 0.68, shade(WOOD, 1.05), { line: WOOD_D, west: shade(WOOD, 0.85), top: shade(WOOD, 1.15) });
+    for (let x = -0.85; x < 0.9; x += 0.22) d.seg([x, -0.36, 0.68], [x, 0.36, 0.68], shade(WOOD, 0.75));
+    // 端面卷草块 + 金钉
+    d.QS(-1.06, -0.28, 0.48, 0.28, 0.62, shade(WOOD, 1.1), WOOD_D);
+    d.QS(1.06, -0.28, 0.48, 0.28, 0.62, shade(WOOD, 1.05), WOOD_D);
+    for (const x of [-0.7, -0.25, 0.25, 0.7]) d.QS(-0.36, x - 0.04, 0.6, x + 0.04, 0.66, GOLD);
+    // 中撑
+    d.box(-0.1, -0.22, 0.1, 0.1, 0.22, 0.42, shade(ST, 0.95), { line: shade(ST, 0.5), west: STW, top: shade(ST, 1.05) });
+  }
+
+
+
+
+  /* ---- Site221：匾额/对联/小字牌/垂挂牌 atlas 模块（禁纯线稿、密实 kitbash；与 site201 plaque/vsign/banner 互补） ---- */
+  function paintSignBiane(d) {
+    /* 横匾：厚漆木匾身+金边如意角+浮雕字块实体（非线稿字） */
+    const W = 2.6, H = 0.85;
+    const BG = '#3a2418', BGW = '#2a1810', TOP = '#5a3a22', GOLD2 = '#d4a84a', RED2 = '#8a2820', CREAM = '#e8d8b0';
+    d.box(-W / 2, -0.18, -H / 2, W / 2, 0.18, H / 2, BG, { line: shade(BG, 0.48), west: BGW, top: TOP });
+    d.box(-W / 2 + 0.06, -0.2, -H / 2 + 0.06, W / 2 - 0.06, -0.12, H / 2 - 0.06, shade(BG, 1.08), { line: false, noW: true, noS: true });
+    d.box(-W / 2 - 0.06, -0.14, -H / 2 - 0.06, W / 2 + 0.06, 0.14, -H / 2, GOLD2, { line: shade(GOLD2, 0.5), west: shade(GOLD2, 0.75), top: shade(GOLD2, 1.15) });
+    d.box(-W / 2 - 0.06, -0.14, H / 2, W / 2 + 0.06, 0.14, H / 2 + 0.06, GOLD2, { line: shade(GOLD2, 0.5), west: shade(GOLD2, 0.75), top: shade(GOLD2, 1.15) });
+    d.box(-W / 2 - 0.06, -0.14, -H / 2, -W / 2, 0.14, H / 2, GOLD2, { line: shade(GOLD2, 0.5), west: shade(GOLD2, 0.7), top: shade(GOLD2, 1.1) });
+    d.box(W / 2, -0.14, -H / 2, W / 2 + 0.06, 0.14, H / 2, GOLD2, { line: shade(GOLD2, 0.5), west: shade(GOLD2, 0.7), top: shade(GOLD2, 1.1) });
+    d.QS(-0.21, -W / 2 + 0.08, -H / 2 + 0.08, W / 2 - 0.08, -H / 2 + 0.14, shade(GOLD2, 1.25));
+    d.QS(-0.21, -W / 2 + 0.08, H / 2 - 0.14, W / 2 - 0.08, H / 2 - 0.08, shade(GOLD2, 1.25));
+    const chars = [-0.85, -0.28, 0.28, 0.85];
+    for (let i = 0; i < chars.length; i++) {
+      const cx = chars[i];
+      d.box(cx - 0.2, -0.22, -0.22, cx + 0.2, -0.16, 0.22, CREAM, { line: shade(CREAM, 0.55), west: shade(CREAM, 0.85), top: shade(CREAM, 1.12) });
+      d.box(cx - 0.12, -0.24, -0.12, cx + 0.12, -0.18, 0.12, shade(RED2, 1.05), { line: false, noW: true, noS: true });
+      d.box(cx - 0.06, -0.245, -0.06, cx + 0.06, -0.19, 0.06, GOLD2, { line: false, noW: true, noS: true });
+    }
+    for (let i = 0; i < 4; i++) {
+      const z = -H / 2 + 0.18 + i * 0.16;
+      d.box(-W / 2 + 0.12, -0.19, z, W / 2 - 0.12, -0.17, z + 0.04, shade(BG, i % 2 ? 1.12 : 0.9), { line: false, noW: true, noS: true });
+    }
+    for (const [sx, sz] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) {
+      const px = sx * (W / 2 - 0.08), pz = sz * (H / 2 - 0.08);
+      d.box(px - 0.1, -0.22, pz - 0.08, px + 0.1, -0.15, pz + 0.08, GOLD2, { line: shade(GOLD2, 0.5), west: shade(GOLD2, 0.75), top: shade(GOLD2, 1.2) });
+      d.box(px - 0.05, -0.23, pz - 0.04, px + 0.05, -0.16, pz + 0.04, shade(GOLD2, 1.3), { line: false, noW: true, noS: true });
+    }
+    for (const sx of [-0.7, 0.7]) {
+      d.box(sx - 0.06, -0.08, H / 2 + 0.02, sx + 0.06, 0.08, H / 2 + 0.14, shade(GOLD2, 0.9), { line: shade(GOLD2, 0.5), west: shade(GOLD2, 0.7), top: shade(GOLD2, 1.15) });
+    }
+  }
+  function paintSignDuilian(d) {
+    const W = 0.42, H = 2.35;
+    const BG = '#2a1a12', BGW = '#1a1008', TOP = '#4a3020', GOLD2 = '#d4a84a', CREAM = '#e8d4a8', RED2 = '#7a2418';
+    d.box(-W / 2, -0.12, 0, W / 2, 0.12, H, BG, { line: shade(BG, 0.48), west: BGW, top: TOP });
+    d.box(-W / 2 - 0.04, -0.1, 0, -W / 2, 0.1, H, GOLD2, { line: shade(GOLD2, 0.5), west: shade(GOLD2, 0.7), top: shade(GOLD2, 1.1) });
+    d.box(W / 2, -0.1, 0, W / 2 + 0.04, 0.1, H, GOLD2, { line: shade(GOLD2, 0.5), west: shade(GOLD2, 0.7), top: shade(GOLD2, 1.1) });
+    d.box(-W / 2 - 0.04, -0.1, H, W / 2 + 0.04, 0.1, H + 0.05, GOLD2, { line: shade(GOLD2, 0.5), west: shade(GOLD2, 0.7), top: shade(GOLD2, 1.15) });
+    d.box(-W / 2 - 0.04, -0.1, -0.05, W / 2 + 0.04, 0.1, 0, GOLD2, { line: shade(GOLD2, 0.5), west: shade(GOLD2, 0.7), top: shade(GOLD2, 1.1) });
+    for (let i = 0; i < 5; i++) {
+      const cz = 0.28 + i * 0.4;
+      d.box(-0.12, -0.14, cz - 0.12, 0.12, -0.08, cz + 0.12, CREAM, { line: shade(CREAM, 0.55), west: shade(CREAM, 0.85), top: shade(CREAM, 1.1) });
+      d.box(-0.07, -0.15, cz - 0.07, 0.07, -0.09, cz + 0.07, shade(RED2, 1.05), { line: false, noW: true, noS: true });
+      d.box(-0.03, -0.155, cz - 0.03, 0.03, -0.095, cz + 0.03, GOLD2, { line: false, noW: true, noS: true });
+    }
+    for (let i = 0; i < 3; i++) {
+      const x = -0.1 + i * 0.1;
+      d.box(x, -0.125, 0.1, x + 0.03, -0.11, H - 0.1, shade(BG, i % 2 ? 1.12 : 0.88), { line: false, noW: true, noS: true });
+    }
+    d.box(-0.14, -0.14, H - 0.18, 0.14, 0.08, H - 0.02, RED2, { line: shade(RED2, 0.5), west: shade(RED2, 0.75), top: shade(RED2, 1.1) });
+    d.box(-0.14, -0.14, 0.02, 0.14, 0.08, 0.16, RED2, { line: shade(RED2, 0.5), west: shade(RED2, 0.75), top: shade(RED2, 1.1) });
+    d.box(-0.06, -0.06, H + 0.02, 0.06, 0.06, H + 0.14, GOLD2, { line: shade(GOLD2, 0.5), west: shade(GOLD2, 0.7), top: shade(GOLD2, 1.15) });
+  }
+  function paintSignZhaopaiS(d) {
+    const W = 1.15, H = 0.55;
+    const BG = '#4a3424', BGW = '#322418', TOP = '#6a4a32', GOLD2 = '#c89848', ST = '#8a8070', INK = '#1a1814';
+    d.box(-W / 2 - 0.05, -0.1, -0.08, W / 2 + 0.05, 0.12, 0.06, ST, { line: shade(ST, 0.5), west: shade(ST, 0.75), top: shade(ST, 1.05) });
+    d.box(-W / 2, -0.14, 0.06, W / 2, 0.1, H, BG, { line: shade(BG, 0.48), west: BGW, top: TOP });
+    d.box(-W / 2 - 0.03, -0.12, 0.06, -W / 2, 0.08, H, GOLD2, { line: false, noW: true, noS: true });
+    d.box(W / 2, -0.12, 0.06, W / 2 + 0.03, 0.08, H, GOLD2, { line: false, noW: true, noS: true });
+    d.box(-W / 2 - 0.03, -0.12, H, W / 2 + 0.03, 0.08, H + 0.03, GOLD2, { line: false, noW: true, noS: true });
+    for (const cx of [-0.32, 0, 0.32]) {
+      d.box(cx - 0.14, -0.16, 0.18, cx + 0.14, -0.1, 0.42, shade('#e0d0a8', 1.0), { line: shade('#e0d0a8', 0.55), west: shade('#e0d0a8', 0.85), top: shade('#e0d0a8', 1.1) });
+      d.box(cx - 0.08, -0.165, 0.24, cx + 0.08, -0.11, 0.36, INK, { line: false, noW: true, noS: true });
+    }
+    for (const [sx, sz] of [[-1, 0], [1, 0], [-1, 1], [1, 1]]) {
+      const px = sx * (W / 2 - 0.08), pz = 0.12 + sz * (H - 0.2);
+      d.box(px - 0.04, -0.15, pz - 0.03, px + 0.04, -0.11, pz + 0.03, GOLD2, { line: false, noW: true, noS: true });
+    }
+  }
+  function paintSignHanging(d) {
+    const W = 0.7, H = 1.55;
+    const BG = '#5a3a22', BGW = '#3a2414', TOP = '#7a5232', GOLD2 = '#d4a84a', RED2 = '#a03028', CREAM = '#e8dcc0';
+    d.box(-W / 2 - 0.08, -0.1, H - 0.08, W / 2 + 0.08, 0.1, H + 0.08, shade('#3a2a1a', 0.95), { line: shade('#3a2a1a', 0.5), west: shade('#3a2a1a', 0.7), top: GOLD2 });
+    for (const sx of [-0.22, 0.22]) {
+      d.box(sx - 0.03, -0.04, H - 0.55, sx + 0.03, 0.04, H - 0.05, GOLD2, { line: shade(GOLD2, 0.5), west: shade(GOLD2, 0.75), top: shade(GOLD2, 1.1) });
+      for (let i = 0; i < 3; i++) {
+        const z = H - 0.15 - i * 0.14;
+        d.box(sx - 0.045, -0.05, z - 0.04, sx + 0.045, 0.05, z + 0.04, shade(GOLD2, 1.15), { line: false, noW: true, noS: true });
+      }
+    }
+    d.box(-W / 2, -0.12, 0.15, W / 2, 0.12, H - 0.55, BG, { line: shade(BG, 0.48), west: BGW, top: TOP });
+    d.box(-W / 2 - 0.04, -0.1, 0.15, -W / 2, 0.1, H - 0.55, GOLD2, { line: shade(GOLD2, 0.5), west: shade(GOLD2, 0.7), top: shade(GOLD2, 1.1) });
+    d.box(W / 2, -0.1, 0.15, W / 2 + 0.04, 0.1, H - 0.55, GOLD2, { line: shade(GOLD2, 0.5), west: shade(GOLD2, 0.7), top: shade(GOLD2, 1.1) });
+    for (let i = 0; i < 3; i++) {
+      const cz = 0.35 + i * 0.28;
+      d.box(-0.16, -0.14, cz - 0.1, 0.16, -0.08, cz + 0.1, CREAM, { line: shade(CREAM, 0.55), west: shade(CREAM, 0.85), top: shade(CREAM, 1.1) });
+      d.box(-0.09, -0.145, cz - 0.06, 0.09, -0.09, cz + 0.06, RED2, { line: false, noW: true, noS: true });
+    }
+    for (let k = 0; k < 5; k++) {
+      const tx = -W / 2 + 0.1 + k * (W - 0.2) / 4;
+      d.box(tx - 0.04, -0.06, -0.05, tx + 0.04, 0.06, 0.18, RED2, { line: false, noW: true, noS: true });
+      d.box(tx - 0.03, -0.05, -0.18, tx + 0.03, 0.05, -0.02, shade(GOLD2, 0.95), { line: false, noW: true, noS: true });
+    }
+    for (let i = 0; i < 4; i++) {
+      const z = 0.25 + i * 0.2;
+      d.box(-W / 2 + 0.08, -0.125, z, W / 2 - 0.08, -0.115, z + 0.04, shade(BG, i % 2 ? 1.12 : 0.88), { line: false, noW: true, noS: true });
+    }
+  }
+
+
+  /* ---- Site222：抱鼓石/方门墩/小石炉（宅门·巷口点景；复用 site209 stone_baogu 画法并加方墩/石炉；禁纯线稿） ---- */
+  /** 方门墩：须弥座 + 方石墩 + 鼓面浅雕 + 顶帽（比抱鼓更方正，民居/巷口常用） */
+  function paintStoneMendun(d) {
+    const stone = STONE, dark = shade(stone, 0.45), lite = shade(stone, 1.18), gold = shade(GOLD, 0.72);
+    const moss = '#5a6a48';
+    // 须弥座
+    d.box(-0.48, -0.4, 0, 0.48, 0.4, 0.26, stone, { line: dark, south: shade(stone, 1.02), top: lite, west: shade(stone, 0.8) });
+    d.QS(-0.02, -0.42, 0.06, 0.42, 0.2, shade(stone, 1.12));
+    // 束腰
+    d.box(-0.4, -0.34, 0.22, 0.4, 0.34, 0.36, shade(stone, 0.9), { line: dark, south: shade(stone, 1.06), top: lite });
+    for (let x = -0.28; x < 0.3; x += 0.14) d.QS(-0.03, x, 0.26, x + 0.08, 0.32, gold);
+    // 方墩身（密实石块 + 分面）
+    d.box(-0.42, -0.36, 0.34, 0.42, 0.36, 1.05, stone, { line: dark, south: shade(stone, 1.04), top: shade(stone, 1.18), west: shade(stone, 0.82) });
+    for (let z = 0.42; z < 1.0; z += 0.14) {
+      d.seg([-0.4, -0.37, z], [0.4, -0.37, z], shade(stone, 0.72));
+      d.seg([-0.43, -0.3, z], [-0.43, 0.3, z], shade(stone, 0.65));
+    }
+    for (let x = -0.28; x < 0.3; x += 0.18) d.seg([x, -0.37, 0.36], [x, -0.37, 1.02], shade(stone, 0.78));
+    // 浅鼓面圆环（方墩上浅浮雕）
+    for (const r of [0.26, 0.16, 0.08]) {
+      d.QS(-0.37, -r, 0.58 - r * 0.12, r, 0.88 + r * 0.08, shade(stone, 1.1 + (0.26 - r) * 0.4));
+    }
+    d.QS(-0.38, -0.06, 0.68, 0.06, 0.8, shade(stone, 1.22));
+    d.QS(-0.39, -0.03, 0.72, 0.03, 0.76, gold);
+    // 角兽珠
+    for (const [dx, dz] of [[-0.28, 0.48], [0.28, 0.48], [-0.28, 0.92], [0.28, 0.92]]) {
+      d.QS(-0.36, dx - 0.05, dz - 0.05, dx + 0.05, dz + 0.05, shade(stone, 1.14));
+    }
+    // 顶帽莲瓣
+    d.box(-0.38, -0.32, 1.0, 0.38, 0.32, 1.2, stone, { line: dark, south: lite, top: shade(stone, 1.26) });
+    for (let a = 0; a < 5; a++) {
+      const x = -0.24 + a * 0.12;
+      d.QS(-0.3, x, 1.04, x + 0.08, 1.14, shade(stone, 1.18));
+    }
+    d.QS(-0.31, -0.1, 1.1, 0.1, 1.16, gold);
+    // 苔点
+    d.QS(-0.35, -0.3, 0.38, -0.18, 0.46, moss);
+    d.QS(-0.34, 0.2, 0.9, 0.32, 0.98, shade(moss, 1.1));
+  }
+  /** 小石炉/香炉座：三足或方座 + 炉身 + 炉沿 + 轻烟孔（富户院门/巷口香火点景） */
+  function paintStoneLu(d) {
+    const stone = STONE, dark = shade(stone, 0.45), lite = shade(stone, 1.2), gold = shade(GOLD, 0.78);
+    const ash = '#4a4038', ember = '#8a5030';
+    // 方座
+    d.box(-0.36, -0.3, 0, 0.36, 0.3, 0.22, stone, { line: dark, south: shade(stone, 1.02), top: lite, west: shade(stone, 0.8) });
+    for (let x = -0.24; x < 0.26; x += 0.16) d.seg([x, -0.31, 0.22], [x, 0.3, 0.22], shade(stone, 0.7));
+    // 三足（前二后一实体块）
+    for (const [x, y] of [[-0.22, -0.18], [0.22, -0.18], [0, 0.2]]) {
+      d.box(x - 0.07, y - 0.07, 0.18, x + 0.07, y + 0.07, 0.48, shade(stone, 0.92), { line: dark, west: shade(stone, 0.78), top: shade(stone, 1.08) });
+    }
+    // 炉身鼓腹
+    d.box(-0.3, -0.26, 0.45, 0.3, 0.26, 0.95, stone, { line: dark, south: shade(stone, 1.05), top: shade(stone, 1.15), west: shade(stone, 0.84) });
+    for (let z = 0.55; z < 0.9; z += 0.12) d.seg([-0.28, -0.27, z], [0.28, -0.27, z], shade(stone, 0.72));
+    // 炉身浅纹环
+    d.QS(-0.27, -0.22, 0.62, 0.22, 0.72, shade(stone, 1.12));
+    d.QS(-0.28, -0.14, 0.64, 0.14, 0.7, gold);
+    // 炉沿外翻
+    d.box(-0.34, -0.3, 0.92, 0.34, 0.3, 1.08, stone, { line: dark, south: lite, top: shade(stone, 1.24), west: shade(stone, 0.85) });
+    for (let a = 0; a < 8; a++) {
+      const ang = a * Math.PI / 4;
+      const dx = Math.cos(ang) * 0.22, dz = 1.0 + Math.sin(ang) * 0.04;
+      d.QS(-0.31, dx - 0.04, dz - 0.04, dx + 0.04, dz + 0.04, shade(stone, 1.16));
+    }
+    // 炉口内灰 + 三足香孔
+    d.box(-0.18, -0.14, 1.05, 0.18, 0.14, 1.12, ash, { line: shade(ash, 0.6), top: shade(ash, 1.1) });
+    for (const x of [-0.1, 0, 0.1]) {
+      d.QS(-0.16, x - 0.025, 1.08, x + 0.025, 1.14, ember);
+      d.QS(-0.17, x - 0.012, 1.12, x + 0.012, 1.22, shade(ember, 1.15));
+    }
+    // 耳
+    for (const s of [-1, 1]) {
+      d.box(s * 0.32 - 0.05, -0.08, 0.7, s * 0.32 + 0.05, 0.08, 1.0, shade(stone, 0.95), { line: dark, west: shade(stone, 0.8), top: lite });
+      d.QS(s * 0.34, -0.04, 0.78, 0.04, 0.92, gold);
+    }
+  }
+
+
+
+  /* ---- Site223：盆景/砖花坛/石台 atlas 模块（禁纯线稿、密实 kitbash；宅院与街巷点景；与 site197Plants / site219Rockery 互补） ---- */
+  function paintPotPenjing(d) {
+    /* 盆景：釉陶盆 + 泥土丘 + 曲干小树 + 叶簇实体（非线稿） */
+    const CER = '#7a4a32', CERW = '#5a3020', GLAZE = '#4a6a58', RIM = '#c8a878';
+    const SOIL = '#4a3a28', TRUNK = '#5a3a28', TRUNK2 = '#3a2418';
+    const LEAF = '#5a8a3a', LEAF2 = '#3a6a28', LEAF3 = '#7aaa48', FLOWER = '#c84838';
+    // 盆座
+    d.box(-0.42, -0.42, 0, 0.42, 0.42, 0.18, shade(CER, 0.88), { line: shade(CER, 0.5), west: CERW, top: shade(CER, 0.92) });
+    // 盆身收腰
+    d.box(-0.48, -0.48, 0.18, 0.48, 0.48, 0.55, CER, { line: shade(CER, 0.48), west: CERW, top: shade(CER, 0.95) });
+    d.box(-0.44, -0.44, 0.55, 0.44, 0.44, 0.72, shade(CER, 1.05), { line: shade(CER, 0.5), west: CERW, top: RIM });
+    d.QS(-0.485, -0.4, 0.32, 0.4, 0.48, GLAZE, shade(CER, 0.55));
+    d.QS(-0.485, -0.36, 0.52, 0.36, 0.62, shade(RIM, 0.95), shade(CER, 0.55));
+    for (let z = 0.22; z < 0.7; z += 0.1) d.seg([-0.49, -0.49, z], [0.49, -0.49, z], shade(CER, 0.7));
+    // 泥土丘
+    d.box(-0.34, -0.34, 0.72, 0.34, 0.34, 0.92, SOIL, { line: shade(SOIL, 0.55), west: shade(SOIL, 0.85), top: shade(SOIL, 1.08) });
+    d.box(-0.22, -0.18, 0.92, 0.2, 0.2, 1.02, shade(SOIL, 1.05), { line: false, noW: true, noS: true });
+    // 小石点缀
+    d.box(-0.28, 0.1, 0.92, -0.14, 0.28, 1.08, '#8a8070', { line: shade('#8a8070', 0.5), west: '#6a6258', top: '#9a9080' });
+    d.box(0.12, -0.28, 0.92, 0.28, -0.1, 1.05, '#7a7668', { line: shade('#7a7668', 0.5), west: '#5a5648', top: '#8a8678' });
+    // 曲干（多段箱体）
+    d.box(-0.06, -0.06, 1.0, 0.08, 0.08, 1.55, TRUNK, { line: TRUNK2, west: shade(TRUNK, 0.8), top: shade(TRUNK, 1.1) });
+    d.box(0.02, -0.05, 1.45, 0.22, 0.08, 1.85, TRUNK, { line: TRUNK2, west: shade(TRUNK, 0.78), top: shade(TRUNK, 1.08) });
+    d.box(-0.18, -0.04, 1.7, 0.05, 0.1, 2.15, shade(TRUNK, 0.95), { line: TRUNK2, west: shade(TRUNK, 0.75), top: shade(TRUNK, 1.1) });
+    d.box(0.08, -0.02, 1.95, 0.28, 0.1, 2.35, shade(TRUNK, 1.02), { line: TRUNK2, west: shade(TRUNK, 0.8), top: shade(TRUNK, 1.12) });
+    for (let z = 1.1; z < 2.2; z += 0.18) d.seg([-0.07, -0.07, z], [0.09, -0.07, z], shade(TRUNK, 1.15));
+    // 叶簇实体（椭圆填充叠箱）
+    for (const [dx, dy, zz, sx, sy, sz, c1, c2] of [
+      [-0.15, -0.05, 2.2, 0.35, 0.28, 0.45, LEAF, LEAF2],
+      [0.2, 0.05, 2.35, 0.32, 0.26, 0.4, LEAF3, LEAF],
+      [0.05, -0.15, 2.5, 0.28, 0.22, 0.35, LEAF, LEAF2],
+      [-0.05, 0.12, 2.55, 0.25, 0.2, 0.3, LEAF3, LEAF],
+      [0.18, -0.08, 2.65, 0.22, 0.18, 0.28, LEAF, LEAF3],
+    ]) {
+      d.box(dx - sx / 2, dy - sy / 2, zz, dx + sx / 2, dy + sy / 2, zz + sz, c1, { line: shade(c1, 0.55), west: c2, top: shade(c1, 1.12) });
+      d.box(dx - sx / 3, dy - sy / 3, zz + sz * 0.35, dx + sx / 3, dy + sy / 3, zz + sz * 0.85, shade(c1, 1.08), { line: false, noW: true, noS: true });
+    }
+    // 点花
+    for (const [dx, dy, zz] of [[-0.1, 0.05, 2.55], [0.22, -0.02, 2.7], [0.0, -0.12, 2.45]]) {
+      d.box(dx - 0.05, dy - 0.05, zz, dx + 0.05, dy + 0.05, zz + 0.08, FLOWER, { line: false, noW: true, noS: true });
+    }
+  }
+  function paintBedHuatan(d) {
+    /* 砖花坛：密实砖砌四面 + 灰缝 + 角柱 + 泥土 + 花叶簇 */
+    const BR = '#9a8a78', BRW = '#7a6a58', MORT = '#b8b0a0', TOP = '#aea090';
+    const SOIL = '#4a3a28', LEAF = '#5a8a3a', LEAF2 = '#3a6a28', R1 = '#c84838', R2 = '#e8a838', R3 = '#d86040';
+    const W = 1.7, D = 1.15, H = 0.72;
+    // 基座条石
+    d.box(-W / 2 - 0.06, -D / 2 - 0.06, 0, W / 2 + 0.06, D / 2 + 0.06, 0.14, '#8a8070', { line: shade('#8a8070', 0.5), west: '#6a6258', top: '#9a9080' });
+    // 四面砖墙
+    d.box(-W / 2, -D / 2, 0.14, W / 2, -D / 2 + 0.22, H, BR, { line: shade(BR, 0.5), west: BRW, top: TOP });
+    d.box(-W / 2, D / 2 - 0.22, 0.14, W / 2, D / 2, H, BR, { line: shade(BR, 0.5), west: BRW, top: TOP });
+    d.box(-W / 2, -D / 2 + 0.2, 0.14, -W / 2 + 0.22, D / 2 - 0.2, H, BR, { line: shade(BR, 0.5), west: BRW, top: TOP });
+    d.box(W / 2 - 0.22, -D / 2 + 0.2, 0.14, W / 2, D / 2 - 0.2, H, BR, { line: shade(BR, 0.5), west: BRW, top: TOP });
+    // 砖缝密实
+    for (let z = 0.26; z < H; z += 0.12) {
+      d.seg([-W / 2 + 0.02, -D / 2 - 0.01, z], [W / 2 - 0.02, -D / 2 - 0.01, z], MORT);
+      d.seg([-W / 2 - 0.01, -D / 2 + 0.02, z], [-W / 2 - 0.01, D / 2 - 0.02, z], shade(MORT, 0.9));
+    }
+    for (let x = -W / 2 + 0.2; x < W / 2; x += 0.28) {
+      d.seg([x, -D / 2 - 0.01, 0.2], [x, -D / 2 - 0.01, H - 0.04], shade(BR, 0.72));
+    }
+    // 角柱
+    for (const [sx, sy] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) {
+      const px = sx * (W / 2 - 0.08), py = sy * (D / 2 - 0.08);
+      d.box(px - 0.1, py - 0.1, 0.14, px + 0.1, py + 0.1, H + 0.1, shade(BR, 0.95), { line: shade(BR, 0.48), west: BRW, top: TOP });
+      d.box(px - 0.08, py - 0.08, H + 0.1, px + 0.08, py + 0.08, H + 0.18, '#8a8070', { line: false, noW: true, noS: true });
+    }
+    // 泥土
+    d.box(-W / 2 + 0.24, -D / 2 + 0.24, 0.5, W / 2 - 0.24, D / 2 - 0.24, H - 0.02, SOIL, { line: shade(SOIL, 0.55), west: shade(SOIL, 0.85), top: shade(SOIL, 1.05) });
+    // 花叶簇密实
+    for (const [dx, dy, zz, sx, sy, sz, c1, c2] of [
+      [-0.45, -0.2, H, 0.35, 0.28, 0.55, LEAF, LEAF2],
+      [0.35, 0.15, H + 0.05, 0.32, 0.26, 0.5, LEAF2, LEAF],
+      [-0.1, 0.25, H, 0.3, 0.24, 0.48, LEAF, LEAF2],
+      [0.4, -0.25, H + 0.08, 0.28, 0.22, 0.42, shade(LEAF, 1.1), LEAF],
+      [-0.35, 0.05, H + 0.15, 0.25, 0.2, 0.38, LEAF2, LEAF],
+      [0.05, -0.15, H + 0.2, 0.28, 0.22, 0.4, LEAF, LEAF2],
+    ]) {
+      d.box(dx - sx / 2, dy - sy / 2, zz, dx + sx / 2, dy + sy / 2, zz + sz, c1, { line: shade(c1, 0.55), west: c2, top: shade(c1, 1.1) });
+    }
+    for (const [dx, dy, zz, c] of [
+      [-0.4, -0.15, H + 0.4, R1], [0.3, 0.1, H + 0.45, R2], [-0.05, 0.2, H + 0.35, R3],
+      [0.35, -0.2, H + 0.38, R1], [-0.25, 0.1, H + 0.5, R2], [0.1, -0.05, H + 0.55, R3],
+    ]) {
+      d.box(dx - 0.06, dy - 0.06, zz, dx + 0.06, dy + 0.06, zz + 0.1, c, { line: false, noW: true, noS: true });
+    }
+  }
+  function paintStoneShitai(d) {
+    /* 石台/条石座：分层条石 + 束腰 + 浮雕边 + 台面 */
+    const ST = '#8a8478', STW = '#6a6458', TOP = '#a09a8c', EDGE = '#9a9488';
+    const W = 1.9, D = 0.85;
+    // 基座
+    d.box(-W / 2 - 0.05, -D / 2 - 0.05, 0, W / 2 + 0.05, D / 2 + 0.05, 0.22, shade(ST, 0.9), { line: shade(ST, 0.5), west: STW, top: shade(ST, 0.95) });
+    for (let x = -W / 2 + 0.15; x < W / 2; x += 0.35) {
+      d.seg([x, -D / 2 - 0.02, 0.08], [x, -D / 2 - 0.02, 0.2], shade(ST, 0.7));
+    }
+    // 束腰
+    d.box(-W / 2 + 0.08, -D / 2 + 0.06, 0.22, W / 2 - 0.08, D / 2 - 0.06, 0.42, shade(ST, 0.95), { line: shade(ST, 0.48), west: STW, top: EDGE });
+    d.QS(-0.01, -W / 2 + 0.15, 0.28, W / 2 - 0.15, 0.36, shade(EDGE, 1.08), shade(ST, 0.55));
+    // 浮雕纹带
+    for (let i = 0; i < 5; i++) {
+      const x = -W / 2 + 0.25 + i * 0.35;
+      d.box(x - 0.08, -D / 2 + 0.02, 0.26, x + 0.08, -D / 2 + 0.1, 0.38, shade(ST, 1.08), { line: false, noW: true, noS: true });
+    }
+    // 上台面厚板
+    d.box(-W / 2, -D / 2, 0.42, W / 2, D / 2, 0.62, ST, { line: shade(ST, 0.48), west: STW, top: TOP });
+    d.box(-W / 2 + 0.06, -D / 2 + 0.06, 0.62, W / 2 - 0.06, D / 2 - 0.06, 0.7, shade(ST, 1.05), { line: shade(ST, 0.5), west: shade(STW, 1.05), top: shade(TOP, 1.08) });
+    // 台面分缝
+    for (let x = -W / 2 + 0.4; x < W / 2; x += 0.45) {
+      d.seg([x, -D / 2 + 0.08, 0.705], [x, D / 2 - 0.08, 0.705], shade(ST, 0.75));
+    }
+    // 角兽足感
+    for (const [sx, sy] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) {
+      const px = sx * (W / 2 - 0.12), py = sy * (D / 2 - 0.1);
+      d.box(px - 0.1, py - 0.08, 0, px + 0.1, py + 0.08, 0.28, shade(ST, 0.85), { line: shade(ST, 0.48), west: STW, top: EDGE });
+    }
+    // 苔点
+    for (const [dx, dy, zz] of [[-0.7, 0.25, 0.7], [0.55, -0.2, 0.7], [-0.2, -0.28, 0.42]]) {
+      d.box(dx - 0.06, dy - 0.05, zz, dx + 0.06, dy + 0.05, zz + 0.05, '#4a6a3a', { line: false, noW: true, noS: true });
+    }
+  }
+  /* ---- Site224：石狮/小蹲兽（门兽点景；≠屋脊兽；禁纯线稿、密实 kitbash） ---- */
+  /** 石狮：须弥座 + 蹲踞狮身 + 卷鬃头 + 前爪绣球（宅门/广场/衙署庙前） */
+  function paintStoneShishi(d) {
+    const stone = STONE, dark = shade(stone, 0.45), lite = shade(stone, 1.2), gold = shade(GOLD, 0.78);
+    const moss = '#5a6a48', ribbon = '#a8342a';
+    // 须弥座
+    d.box(-0.55, -0.48, 0, 0.55, 0.48, 0.28, stone, { line: dark, south: shade(stone, 1.02), top: lite, west: shade(stone, 0.8) });
+    d.QS(-0.02, -0.5, 0.08, 0.5, 0.22, shade(stone, 1.12));
+    d.box(-0.48, -0.42, 0.24, 0.48, 0.42, 0.4, shade(stone, 0.92), { line: dark, south: shade(stone, 1.06), top: lite });
+    for (let x = -0.32; x < 0.34; x += 0.16) d.QS(-0.03, x, 0.28, x + 0.1, 0.36, gold);
+    // 狮身蹲踞（胸+臀实体块）
+    d.box(-0.42, -0.2, 0.38, 0.38, 0.42, 1.15, stone, { line: dark, south: shade(stone, 1.04), top: shade(stone, 1.16), west: shade(stone, 0.82) });
+    d.box(-0.36, -0.38, 0.42, 0.32, -0.05, 1.05, shade(stone, 0.96), { line: dark, south: shade(stone, 1.08), top: lite, west: shade(stone, 0.78) });
+    // 肋线/鳞片浅浮雕
+    for (let z = 0.55; z < 1.05; z += 0.12) d.seg([-0.34, -0.39, z], [0.28, -0.39, z], shade(stone, 0.7));
+    for (let x = -0.22; x < 0.26; x += 0.16) d.seg([x, -0.39, 0.45], [x, -0.39, 1.0], shade(stone, 0.78));
+    // 前爪
+    for (const x of [-0.22, 0.12]) {
+      d.box(x - 0.1, -0.42, 0.38, x + 0.1, -0.22, 0.72, shade(stone, 0.94), { line: dark, west: shade(stone, 0.8), top: lite });
+      d.QS(-0.36, x - 0.08, 0.4, x + 0.08, 0.52, shade(stone, 1.14));
+      for (const dx of [-0.05, 0, 0.05]) d.QS(-0.38, x + dx - 0.015, 0.38, x + dx + 0.015, 0.46, dark);
+    }
+    // 绣球
+    d.box(0.18, -0.48, 0.42, 0.48, -0.22, 0.78, shade(stone, 0.98), { line: dark, south: lite, top: shade(stone, 1.18) });
+    for (const r of [0.1, 0.06]) d.QS(-0.4, 0.28 - r, 0.55 - r * 0.2, 0.38 + r, 0.7 + r * 0.15, shade(stone, 1.1 + (0.1 - r)));
+    d.QS(-0.42, 0.3, 0.58, 0.36, 0.66, gold);
+    // 头 + 卷鬃（密实块，非线稿）
+    d.box(-0.28, -0.32, 1.05, 0.28, 0.22, 1.55, stone, { line: dark, south: shade(stone, 1.06), top: shade(stone, 1.2), west: shade(stone, 0.84) });
+    for (let k = 0; k < 10; k++) {
+      const a = (k / 10) * Math.PI * 2;
+      const dx = Math.cos(a) * 0.3, dz = 1.3 + Math.sin(a) * 0.22;
+      d.QS(-0.3, dx - 0.07, dz - 0.07, dx + 0.07, dz + 0.07, k % 2 ? shade(stone, 1.14) : shade(stone, 0.92));
+    }
+    // 面：眼·鼻·口
+    d.QS(-0.34, -0.16, 1.28, -0.06, 1.36, dark);
+    d.QS(-0.34, 0.06, 1.28, 0.16, 1.36, dark);
+    d.QS(-0.35, -0.04, 1.22, 0.04, 1.3, shade(stone, 1.22));
+    d.QS(-0.36, -0.1, 1.14, 0.1, 1.22, shade(ribbon, 0.85));
+    d.QS(-0.37, -0.06, 1.16, 0.06, 1.2, shade(ribbon, 1.1));
+    // 耳
+    for (const s of [-1, 1]) {
+      d.box(s * 0.22 - 0.06, -0.28, 1.42, s * 0.22 + 0.06, -0.16, 1.58, shade(stone, 0.95), { line: dark, top: lite });
+    }
+    // 项圈铃
+    d.box(-0.22, -0.28, 1.0, 0.22, 0.05, 1.1, ribbon, { line: shade(ribbon, 0.5), top: shade(ribbon, 1.15) });
+    d.QS(-0.3, -0.05, 0.98, 0.05, 1.08, gold);
+    // 后臀尾卷
+    d.box(0.28, 0.15, 0.7, 0.48, 0.4, 1.05, shade(stone, 0.9), { line: dark, west: shade(stone, 0.75), top: lite });
+    d.QS(-0.28, 0.32, 1.0, 0.46, 1.12, shade(stone, 1.1));
+    // 苔点
+    d.QS(-0.4, -0.4, 0.3, -0.28, 0.38, moss);
+    d.QS(-0.38, 0.25, 0.85, 0.38, 0.95, shade(moss, 1.1));
+  }
+  /** 小蹲兽：矮座 + 紧凑蹲身 + 小鬃头（桥头/巷口次位点景） */
+  function paintStoneShishiS(d) {
+    const stone = STONE, dark = shade(stone, 0.45), lite = shade(stone, 1.18), gold = shade(GOLD, 0.72);
+    const moss = '#5a6a48';
+    d.box(-0.38, -0.32, 0, 0.38, 0.32, 0.2, stone, { line: dark, south: shade(stone, 1.02), top: lite, west: shade(stone, 0.8) });
+    d.QS(-0.02, -0.34, 0.06, 0.34, 0.16, shade(stone, 1.1));
+    // 蹲身
+    d.box(-0.3, -0.18, 0.18, 0.28, 0.28, 0.78, stone, { line: dark, south: shade(stone, 1.04), top: shade(stone, 1.14), west: shade(stone, 0.82) });
+    d.box(-0.26, -0.3, 0.2, 0.22, -0.02, 0.7, shade(stone, 0.96), { line: dark, south: shade(stone, 1.08), top: lite });
+    for (let z = 0.32; z < 0.68; z += 0.1) d.seg([-0.24, -0.31, z], [0.2, -0.31, z], shade(stone, 0.72));
+    // 前爪
+    for (const x of [-0.16, 0.08]) {
+      d.box(x - 0.07, -0.32, 0.18, x + 0.07, -0.16, 0.48, shade(stone, 0.94), { line: dark, top: lite });
+      d.QS(-0.28, x - 0.05, 0.2, x + 0.05, 0.3, shade(stone, 1.12));
+    }
+    // 头
+    d.box(-0.2, -0.24, 0.68, 0.2, 0.14, 1.05, stone, { line: dark, south: shade(stone, 1.06), top: shade(stone, 1.18), west: shade(stone, 0.84) });
+    for (let k = 0; k < 8; k++) {
+      const a = (k / 8) * Math.PI * 2;
+      const dx = Math.cos(a) * 0.2, dz = 0.86 + Math.sin(a) * 0.14;
+      d.QS(-0.22, dx - 0.05, dz - 0.05, dx + 0.05, dz + 0.05, k % 2 ? shade(stone, 1.12) : shade(stone, 0.9));
+    }
+    d.QS(-0.26, -0.1, 0.86, -0.02, 0.94, dark);
+    d.QS(-0.26, 0.02, 0.86, 0.1, 0.94, dark);
+    d.QS(-0.27, -0.06, 0.78, 0.06, 0.86, shade(stone, 1.2));
+    d.QS(-0.24, -0.04, 0.72, 0.04, 0.78, gold);
+    // 尾卷
+    d.box(0.2, 0.1, 0.45, 0.34, 0.28, 0.72, shade(stone, 0.9), { line: dark, top: lite });
+    d.QS(-0.22, -0.22, 0.22, -0.12, 0.3, moss);
+  }
+
+
+/* ---- Site225：宫灯/纱灯/立灯（街巷宅院挂灯·立灯点景；≠石灯笼/挂灯杆/圆灯笼串；禁纯线稿、密实 kitbash） ---- */
+  /** 宫灯：六角木框 + 纱绢面 + 金顶宝盖 + 流苏（门楣下/亭角挂） */
+  function paintLanternGong(d) {
+    const WOOD = '#5a2a1c', WOOD_D = '#2a0e08', GOLD = '#c8a040', SILK = '#e8d8a8', SILK2 = '#d8c090';
+    const RED = '#c8322c', CREAM = '#f0e8d0';
+    // 吊绳/钩
+    d.seg([0, 0, 2.55], [0, 0, 2.35], WOOD_D, 2);
+    d.box(-0.06, -0.06, 2.32, 0.06, 0.06, 2.42, GOLD, { line: shade(GOLD, 0.55), top: '#e8c868' });
+    // 宝盖顶
+    d.box(-0.42, -0.42, 2.15, 0.42, 0.42, 2.32, GOLD, { line: shade(GOLD, 0.5), west: shade(GOLD, 0.78), top: '#e8c868' });
+    d.box(-0.28, -0.28, 2.05, 0.28, 0.28, 2.15, shade(GOLD, 0.92), { line: shade(GOLD, 0.5), west: shade(GOLD, 0.75), top: shade(GOLD, 1.1) });
+    // 六角上框
+    d.box(-0.38, -0.38, 1.95, 0.38, 0.38, 2.08, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.08) });
+    for (let a = 0; a < 6; a++) {
+      const ang = a * Math.PI / 3;
+      const dx = Math.cos(ang) * 0.34, dy = Math.sin(ang) * 0.34;
+      d.box(dx - 0.04, dy - 0.04, 1.15, dx + 0.04, dy + 0.04, 2.0, WOOD, { line: WOOD_D, west: shade(WOOD, 0.78), top: shade(WOOD, 1.05) });
+    }
+    // 纱绢面（密实色块，非线稿）
+    d.box(-0.32, -0.32, 1.2, 0.32, 0.32, 1.95, SILK, { line: shade(SILK, 0.55), west: SILK2, top: CREAM });
+    d.QS(-0.33, -0.26, 1.3, 0.26, 1.85, CREAM, shade(SILK, 0.6));
+    d.QS(-0.34, -0.18, 1.4, 0.18, 1.75, 'rgba(255,240,180,0.55)');
+    // 框内竖棱
+    for (const x of [-0.16, 0, 0.16]) d.seg([x, -0.335, 1.25], [x, -0.335, 1.9], shade(WOOD, 0.85));
+    for (const z of [1.45, 1.7]) d.seg([-0.28, -0.335, z], [0.28, -0.335, z], shade(WOOD, 0.9));
+    // 下框 + 托盘
+    d.box(-0.38, -0.38, 1.05, 0.38, 0.38, 1.2, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.08) });
+    d.box(-0.3, -0.3, 0.95, 0.3, 0.3, 1.08, GOLD, { line: shade(GOLD, 0.55), west: shade(GOLD, 0.78), top: '#e8c868' });
+    // 流苏
+    for (const [dx, dy] of [[-0.22, -0.22], [0.22, -0.22], [-0.22, 0.22], [0.22, 0.22], [0, -0.28], [0, 0.28]]) {
+      d.box(dx - 0.03, dy - 0.03, 0.55, dx + 0.03, dy + 0.03, 0.98, RED, { line: shade(RED, 0.5), top: shade(RED, 1.15) });
+      d.QS(-0.02, dx - 0.025, 0.5, dx + 0.025, 0.58, GOLD);
+    }
+  }
+  /** 纱灯：竹骨圆筒 + 薄纱透光 + 上下木箍 + 短穗（巷口/门楣轻挂） */
+  function paintLanternSha(d) {
+    const BAM = '#8a6a38', BAM_D = '#5a4020', SILK = '#f0d8c0', SILK2 = '#e0c0a0', GOLD = '#c8a040';
+    const RED = '#b83830', CREAM = '#fff0d8';
+    d.seg([0, 0, 2.15], [0, 0, 1.98], BAM_D, 2);
+    d.box(-0.08, -0.08, 1.92, 0.08, 0.08, 2.02, GOLD, { line: shade(GOLD, 0.55), top: '#e8c868' });
+    // 上箍
+    d.box(-0.36, -0.36, 1.78, 0.36, 0.36, 1.92, BAM, { line: BAM_D, west: shade(BAM, 0.8), top: shade(BAM, 1.1) });
+    for (let a = 0; a < 8; a++) {
+      const ang = a * Math.PI / 4;
+      const dx = Math.cos(ang) * 0.3, dy = Math.sin(ang) * 0.3;
+      d.box(dx - 0.025, dy - 0.025, 0.95, dx + 0.025, dy + 0.025, 1.82, shade(BAM, 0.95), { line: BAM_D, west: shade(BAM, 0.75), top: shade(BAM, 1.05) });
+    }
+    // 纱面筒体密实
+    d.box(-0.32, -0.32, 1.0, 0.32, 0.32, 1.8, SILK, { line: shade(SILK, 0.55), west: SILK2, top: CREAM });
+    d.QS(-0.33, -0.24, 1.1, 0.24, 1.7, CREAM, shade(SILK, 0.6));
+    d.QS(-0.34, -0.14, 1.25, 0.14, 1.55, 'rgba(255,230,180,0.45)');
+    // 纱纹横带
+    for (const z of [1.2, 1.4, 1.6]) d.seg([-0.3, -0.335, z], [0.3, -0.335, z], shade(SILK2, 0.85));
+    // 下箍
+    d.box(-0.36, -0.36, 0.85, 0.36, 0.36, 1.0, BAM, { line: BAM_D, west: shade(BAM, 0.8), top: shade(BAM, 1.08) });
+    d.box(-0.2, -0.2, 0.75, 0.2, 0.2, 0.88, GOLD, { line: shade(GOLD, 0.55), top: '#e8c868' });
+    // 短穗
+    for (const dx of [-0.18, 0, 0.18]) {
+      d.box(dx - 0.025, -0.02, 0.42, dx + 0.025, 0.02, 0.78, RED, { line: shade(RED, 0.5), top: shade(RED, 1.12) });
+    }
+  }
+  /** 立灯/灯架：石座 + 木架 + 横挑臂 + 挂宫灯头（廊前/桥栏旁；≠石灯笼/挂灯杆） */
+  function paintLanternStand(d) {
+    const ST = '#8a8070', STW = '#6a6258', WOOD = '#5a2a1c', WOOD_D = '#2a0e08', GOLD = '#c8a040';
+    const SILK = '#e8d0a0', RED = '#c8322c';
+    // 石座
+    d.box(-0.32, -0.32, 0, 0.32, 0.32, 0.28, ST, { line: shade(ST, 0.5), west: STW, top: shade(ST, 0.92) });
+    for (let z = 0.1; z < 0.26; z += 0.1) d.seg([-0.3, -0.325, z], [0.3, -0.325, z], shade(ST, 0.7));
+    // 立柱
+    d.box(-0.08, -0.08, 0.28, 0.08, 0.08, 2.35, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.1) });
+    for (let z = 0.5; z < 2.2; z += 0.28) d.seg([-0.09, -0.09, z], [0.09, -0.09, z], shade(WOOD, 1.12));
+    // 斜撑
+    d.box(-0.06, -0.45, 1.55, 0.06, -0.05, 1.72, WOOD, { line: WOOD_D, west: shade(WOOD, 0.75), top: shade(WOOD, 1.05) });
+    d.box(-0.05, -0.55, 1.2, 0.05, -0.08, 1.35, WOOD, { line: WOOD_D, west: shade(WOOD, 0.78), top: shade(WOOD, 1.05) });
+    // 横挑臂
+    d.box(-0.07, -0.85, 2.15, 0.07, 0.12, 2.3, WOOD, { line: WOOD_D, west: shade(WOOD, 0.75), top: shade(WOOD, 1.08) });
+    d.box(-0.1, -0.1, 2.28, 0.1, 0.1, 2.45, GOLD, { line: shade(GOLD, 0.55), west: shade(GOLD, 0.8), top: '#e8c868' });
+    // 吊绳 + 小宫灯头（密实块）
+    d.seg([0, -0.7, 2.18], [0, -0.7, 1.95], WOOD_D, 2);
+    d.box(-0.22, -0.92, 1.85, 0.22, -0.48, 1.98, GOLD, { line: shade(GOLD, 0.5), west: shade(GOLD, 0.78), top: '#e8c868' });
+    d.box(-0.2, -0.9, 1.35, 0.2, -0.5, 1.85, SILK, { line: shade(SILK, 0.55), west: shade(SILK, 0.85), top: shade(SILK, 1.1) });
+    d.QS(-0.21, -0.88, 1.45, -0.52, 1.75, 'rgba(255,235,170,0.5)');
+    for (const x of [-0.08, 0.08]) d.seg([x, -0.92, 1.4], [x, -0.92, 1.8], shade(WOOD, 0.85));
+    d.box(-0.2, -0.9, 1.22, 0.2, -0.5, 1.38, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.05) });
+    d.box(-0.04, -0.72, 0.95, 0.04, -0.68, 1.25, RED, { line: shade(RED, 0.5), top: shade(RED, 1.12) });
+  }
+
+
+/* ---- Site226：竹篱/花篱/柴扉（巷口·宅侧·园边·桥头小径点景；≠漏窗花墙/内隔断屏；禁纯线稿、密实 kitbash） ---- */
+  /** 竹篱：密排竹竿 + 横篾绑 + 石脚（巷口/桥头小径侧；室外篱笆≠漏窗） */
+  function paintFenceZhuli(d) {
+    const BAM = '#7a9a48', BAM_D = '#3a5020', BAM_L = '#a8c868', BIND = '#8a6a38', BIND_D = '#4a3018';
+    const ST = '#8a8070', STW = '#6a6258', LEAF = '#4a7830', CREAM = '#e8e0c8';
+    // 石脚基座
+    d.box(-1.05, -0.18, 0, 1.05, 0.18, 0.22, ST, { line: shade(ST, 0.5), west: STW, top: shade(ST, 0.92) });
+    for (let x = -0.95; x < 0.95; x += 0.28) d.seg([x, -0.185, 0.08], [x + 0.22, -0.185, 0.08], shade(ST, 0.7));
+    // 密排竹竿（实体柱，非线稿）
+    for (let i = -5; i <= 5; i++) {
+      const x = i * 0.18;
+      const h = 1.15 + (Math.abs(i) % 3) * 0.06;
+      d.box(x - 0.055, -0.07, 0.2, x + 0.055, 0.07, h, BAM, { line: BAM_D, west: shade(BAM, 0.78), top: BAM_L });
+      // 竹节环
+      for (let z = 0.38; z < h - 0.08; z += 0.28) {
+        d.box(x - 0.065, -0.08, z - 0.025, x + 0.065, 0.08, z + 0.025, BAM_D, { line: shade(BAM_D, 0.7), top: BAM_L });
+      }
+      // 梢端斜切尖
+      d.box(x - 0.04, -0.05, h - 0.02, x + 0.04, 0.05, h + 0.12, BAM_L, { line: BAM_D, west: shade(BAM, 0.85), top: CREAM });
+    }
+    // 横篾绑带（三道密实）
+    for (const z of [0.42, 0.78, 1.08]) {
+      d.box(-1.0, -0.09, z - 0.04, 1.0, 0.09, z + 0.04, BIND, { line: BIND_D, west: shade(BIND, 0.8), top: shade(BIND, 1.1) });
+      for (let x = -0.9; x < 0.9; x += 0.36) {
+        d.box(x - 0.04, -0.1, z - 0.06, x + 0.04, 0.1, z + 0.06, BIND_D, { line: shade(BIND_D, 0.7), top: shade(BIND, 1.05) });
+      }
+    }
+    // 两端立柱加粗
+    for (const x of [-1.0, 1.0]) {
+      d.box(x - 0.08, -0.1, 0.18, x + 0.08, 0.1, 1.35, shade(BAM, 0.9), { line: BAM_D, west: shade(BAM, 0.72), top: BAM_L });
+      d.box(x - 0.1, -0.12, 1.3, x + 0.1, 0.12, 1.42, BIND, { line: BIND_D, top: shade(BIND, 1.12) });
+    }
+    // 篱根少许竹叶簇（密实色块）
+    for (const [dx, dz] of [[-0.7, 0.55], [0.55, 0.7], [-0.2, 0.95], [0.85, 0.5]]) {
+      d.box(dx - 0.12, -0.14, dz, dx + 0.12, -0.02, dz + 0.28, LEAF, { line: shade(LEAF, 0.55), top: shade(LEAF, 1.2) });
+      d.QS(-0.15, dx - 0.1, dz + 0.05, dx + 0.1, dz + 0.22, shade(LEAF, 1.15));
+    }
+  }
+  /** 花篱：木格篱架 + 攀花藤叶密实团块 + 石座（宅侧/园边；≠漏窗花墙） */
+  function paintFenceHuali(d) {
+    const WOOD = '#5a3a22', WOOD_D = '#2a1408', WOOD_L = '#8a6040';
+    const ST = '#8a8070', STW = '#6a6258';
+    const LEAF = '#3a6828', LEAF2 = '#5a9038', FLOWER = '#c84860', FLOWER2 = '#e87890', GOLD = '#c8a040';
+    const CREAM = '#f0e8d0', TEAL = '#3a6870';
+    // 石座
+    d.box(-1.15, -0.2, 0, 1.15, 0.2, 0.26, ST, { line: shade(ST, 0.5), west: STW, top: shade(ST, 0.92) });
+    for (let x = -1.05; x < 1.05; x += 0.3) d.seg([x, -0.205, 0.1], [x + 0.24, -0.205, 0.1], shade(ST, 0.72));
+    // 木立柱 + 顶梁
+    for (const x of [-1.05, -0.35, 0.35, 1.05]) {
+      d.box(x - 0.07, -0.09, 0.24, x + 0.07, 0.09, 1.45, WOOD, { line: WOOD_D, west: shade(WOOD, 0.78), top: WOOD_L });
+    }
+    d.box(-1.12, -0.1, 1.38, 1.12, 0.1, 1.52, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: WOOD_L });
+    d.QS(-0.11, -1.05, 1.42, 1.05, 1.5, GOLD);
+    // 横档密格
+    for (const z of [0.55, 0.85, 1.15]) {
+      d.box(-1.08, -0.08, z - 0.035, 1.08, 0.08, z + 0.035, WOOD, { line: WOOD_D, west: shade(WOOD, 0.82), top: WOOD_L });
+    }
+    // 竖格条
+    for (let x = -0.9; x <= 0.9; x += 0.22) {
+      d.box(x - 0.03, -0.07, 0.3, x + 0.03, 0.07, 1.38, shade(WOOD, 0.95), { line: WOOD_D, west: shade(WOOD, 0.75), top: WOOD_L });
+    }
+    // 攀花藤叶密实团（多簇，禁线稿）
+    const clusters = [
+      [-0.75, 0.7], [-0.4, 1.05], [0.1, 0.65], [0.5, 1.1], [0.85, 0.75],
+      [-0.95, 1.15], [0.25, 0.95], [-0.15, 1.25], [0.7, 0.5], [-0.55, 0.45],
+    ];
+    for (const [cx, cz] of clusters) {
+      d.box(cx - 0.18, -0.16, cz - 0.12, cx + 0.18, 0.02, cz + 0.22, LEAF, { line: shade(LEAF, 0.5), top: LEAF2 });
+      d.QS(-0.17, cx - 0.14, cz - 0.06, cx + 0.14, cz + 0.16, shade(LEAF2, 1.05));
+      // 花点
+      d.box(cx - 0.06, -0.18, cz + 0.05, cx + 0.06, -0.04, cz + 0.16, FLOWER, { line: shade(FLOWER, 0.55), top: FLOWER2 });
+      d.QS(-0.185, cx - 0.04, cz + 0.07, cx + 0.04, cz + 0.14, shade(CREAM, 0.95));
+    }
+    // 顶上少许垂花
+    for (const x of [-0.6, 0, 0.6]) {
+      d.box(x - 0.1, -0.14, 1.48, x + 0.1, 0.02, 1.72, LEAF2, { line: shade(LEAF, 0.55), top: shade(LEAF2, 1.15) });
+      d.box(x - 0.05, -0.16, 1.6, x + 0.05, -0.02, 1.78, FLOWER, { line: shade(FLOWER, 0.5), top: FLOWER2 });
+    }
+    // 中心小牌饰
+    d.box(-0.22, -0.14, 0.9, 0.22, 0.12, 1.2, CREAM, { line: WOOD_D, south: shade(CREAM, 1.05), top: shade(CREAM, 1.12) });
+    d.QS(-0.15, -0.16, 0.96, 0.16, 1.14, shade(TEAL, 0.55));
+    d.QS(-0.155, -0.08, 1.0, 0.08, 1.1, GOLD);
+  }
+  /** 柴扉：柴木小门 + 斜撑 + 竹编门扇 + 石槛（园门/巷侧小门；≠垂花门/门楼） */
+  function paintGateChaifei(d) {
+    const WOOD = '#5a3a22', WOOD_D = '#2a1408', WOOD_L = '#8a6040', BAM = '#7a9a48', BAM_D = '#3a5020';
+    const ST = '#8a8070', STW = '#6a6258', BIND = '#8a6a38', IRON = '#3a3028', CREAM = '#e0d4b8';
+    // 石槛
+    d.box(-0.85, -0.22, 0, 0.85, 0.22, 0.2, ST, { line: shade(ST, 0.5), west: STW, top: shade(ST, 0.92) });
+    for (let x = -0.75; x < 0.75; x += 0.28) d.seg([x, -0.225, 0.08], [x + 0.22, -0.225, 0.08], shade(ST, 0.7));
+    // 门柱（左右）
+    for (const x of [-0.72, 0.72]) {
+      d.box(x - 0.1, -0.12, 0.18, x + 0.1, 0.12, 1.85, WOOD, { line: WOOD_D, west: shade(WOOD, 0.78), top: WOOD_L });
+      for (let z = 0.5; z < 1.7; z += 0.35) d.seg([x - 0.11, -0.13, z], [x + 0.11, -0.13, z], shade(WOOD, 1.12));
+      // 柱顶帽
+      d.box(x - 0.14, -0.14, 1.8, x + 0.14, 0.14, 1.95, WOOD_D, { line: shade(WOOD_D, 0.7), top: WOOD_L });
+      d.box(x - 0.08, -0.08, 1.92, x + 0.08, 0.08, 2.05, BIND, { line: shade(BIND, 0.55), top: shade(BIND, 1.1) });
+    }
+    // 上楣梁
+    d.box(-0.78, -0.12, 1.7, 0.78, 0.12, 1.88, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: WOOD_L });
+    d.QS(-0.13, -0.7, 1.76, 0.7, 1.85, shade(CREAM, 0.85));
+    // 门扇：竖柴条密排
+    for (let i = -4; i <= 4; i++) {
+      const x = i * 0.14;
+      const h = 1.55 + (Math.abs(i) % 2) * 0.05;
+      d.box(x - 0.05, -0.08, 0.22, x + 0.05, 0.08, h, shade(WOOD, 0.92 + (i % 3) * 0.03), { line: WOOD_D, west: shade(WOOD, 0.75), top: WOOD_L });
+    }
+    // 横档 + 斜撑（实体）
+    for (const z of [0.55, 1.05, 1.45]) {
+      d.box(-0.65, -0.1, z - 0.04, 0.65, 0.1, z + 0.04, WOOD, { line: WOOD_D, west: shade(WOOD, 0.82), top: WOOD_L });
+    }
+    // 斜撑 X
+    d.box(-0.55, -0.09, 0.4, -0.05, 0.09, 0.55, WOOD_D, { line: shade(WOOD_D, 0.7), top: WOOD_L });
+    d.box(-0.45, -0.09, 0.7, 0.05, 0.09, 0.85, WOOD_D, { line: shade(WOOD_D, 0.7), top: WOOD_L });
+    d.box(-0.3, -0.09, 1.0, 0.2, 0.09, 1.15, WOOD_D, { line: shade(WOOD_D, 0.7), top: WOOD_L });
+    d.box(0.05, -0.09, 0.4, 0.55, 0.09, 0.55, WOOD_D, { line: shade(WOOD_D, 0.7), top: WOOD_L });
+    d.box(-0.05, -0.09, 0.7, 0.45, 0.09, 0.85, WOOD_D, { line: shade(WOOD_D, 0.7), top: WOOD_L });
+    d.box(-0.2, -0.09, 1.0, 0.3, 0.09, 1.15, WOOD_D, { line: shade(WOOD_D, 0.7), top: WOOD_L });
+    // 竹编补板（门扇中段密实）
+    d.box(-0.5, -0.11, 0.7, 0.5, 0.05, 1.2, BAM, { line: BAM_D, west: shade(BAM, 0.8), top: shade(BAM, 1.1) });
+    for (let x = -0.45; x < 0.45; x += 0.12) d.seg([x, -0.115, 0.75], [x, -0.115, 1.15], shade(BAM_D, 0.9));
+    for (let z = 0.8; z < 1.15; z += 0.1) d.seg([-0.48, -0.115, z], [0.48, -0.115, z], shade(BAM, 0.85));
+    // 门环/闩
+    d.box(0.35, -0.14, 0.95, 0.55, -0.02, 1.15, IRON, { line: shade(IRON, 0.6), top: shade(IRON, 1.15) });
+    d.box(0.38, -0.16, 1.0, 0.52, -0.06, 1.1, shade(CREAM, 0.7), { line: IRON, top: CREAM });
+    d.box(-0.15, -0.14, 1.0, 0.35, -0.04, 1.1, BIND, { line: shade(BIND, 0.55), top: shade(BIND, 1.1) });
+    // 两侧短篱翼（衔接感）
+    for (const side of [-1, 1]) {
+      const bx = side * 0.95;
+      for (let i = 0; i < 3; i++) {
+        const x = bx + side * (0.12 + i * 0.14);
+        d.box(x - 0.04, -0.06, 0.2, x + 0.04, 0.06, 1.05, BAM, { line: BAM_D, west: shade(BAM, 0.78), top: shade(BAM, 1.1) });
+      }
+      d.box(bx + side * 0.08, -0.08, 0.55, bx + side * 0.5, 0.08, 0.65, BIND, { line: shade(BIND, 0.55), top: shade(BIND, 1.08) });
+    }
+  }
+
+  /* Site228：石桌 — 厚石板桌面 + 鼓形/方石腿 + 线脚密实（禁纯线稿） */
+  function paintSeatShizhuo(d) {
+    const ST = '#8a8070', STW = '#6a6258', STL = '#a09888', MOSS = '#5a7048', GOLD = '#c8a040';
+    // 四石腿（鼓形收腰实体）
+    for (const [x, y] of [[-0.55, -0.45], [0.55, -0.45], [-0.55, 0.45], [0.55, 0.45]]) {
+      d.box(x - 0.16, y - 0.16, 0, x + 0.16, y + 0.16, 0.18, ST, { line: shade(ST, 0.5), west: STW, top: shade(ST, 0.9) });
+      d.box(x - 0.14, y - 0.14, 0.18, x + 0.14, y + 0.14, 0.42, shade(ST, 0.95), { line: shade(ST, 0.48), west: STW, top: shade(ST, 1.02) });
+      d.box(x - 0.18, y - 0.18, 0.42, x + 0.18, y + 0.18, 0.58, ST, { line: shade(ST, 0.5), west: STW, top: STL });
+      for (let z = 0.12; z < 0.55; z += 0.14) d.seg([x - 0.17, y - 0.17, z], [x + 0.17, y - 0.17, z], shade(ST, 0.72));
+    }
+    // 厚石桌面 + 线脚
+    d.box(-0.95, -0.75, 0.58, 0.95, 0.75, 0.72, ST, { line: shade(ST, 0.48), west: STW, top: shade(ST, 0.95) });
+    d.box(-0.88, -0.68, 0.72, 0.88, 0.68, 0.88, shade(ST, 1.05), { line: shade(ST, 0.5), west: STW, top: STL });
+    for (let x = -0.7; x < 0.75; x += 0.28) d.seg([x, -0.69, 0.88], [x, 0.69, 0.88], shade(ST, 0.78));
+    for (let y = -0.5; y < 0.55; y += 0.28) d.seg([-0.89, y, 0.88], [0.89, y, 0.88], shade(ST, 0.75));
+    // 桌沿回纹块 + 角饰
+    d.box(-0.92, -0.72, 0.78, -0.7, -0.5, 0.86, shade(ST, 1.12), { line: shade(ST, 0.55), top: GOLD });
+    d.box(0.7, -0.72, 0.78, 0.92, -0.5, 0.86, shade(ST, 1.1), { line: shade(ST, 0.55), top: GOLD });
+    d.box(-0.92, 0.5, 0.78, -0.7, 0.72, 0.86, shade(ST, 1.1), { line: shade(ST, 0.55), top: GOLD });
+    d.box(0.7, 0.5, 0.78, 0.92, 0.72, 0.86, shade(ST, 1.08), { line: shade(ST, 0.55), top: GOLD });
+    // 青苔点缀
+    d.QS(-0.76, -0.6, 0.62, -0.35, 0.7, MOSS);
+    d.QS(0.55, 0.4, 0.64, 0.72, 0.72, shade(MOSS, 0.9));
+  }
+
+  /* Site228：石凳 — 圆鼓墩/方墩密实（≠site204 简易双腿 prop_shiteng；≠石灯笼 aq_shideng） */
+  function paintSeatShideng(d) {
+    const ST = '#8a8070', STW = '#6a6258', STL = '#a09888', MOSS = '#5a7048', GOLD = '#c8a040';
+    // 鼓形墩身（多层收腰实体）
+    d.box(-0.42, -0.42, 0, 0.42, 0.42, 0.14, ST, { line: shade(ST, 0.5), west: STW, top: shade(ST, 0.9) });
+    d.box(-0.38, -0.38, 0.14, 0.38, 0.38, 0.32, shade(ST, 0.95), { line: shade(ST, 0.48), west: STW, top: shade(ST, 1.0) });
+    d.box(-0.34, -0.34, 0.32, 0.34, 0.34, 0.48, shade(ST, 0.92), { line: shade(ST, 0.5), west: STW, top: shade(ST, 0.98) });
+    d.box(-0.4, -0.4, 0.48, 0.4, 0.4, 0.62, ST, { line: shade(ST, 0.48), west: STW, top: STL });
+    // 坐面厚圆盘 + 弦纹
+    d.box(-0.48, -0.48, 0.62, 0.48, 0.48, 0.78, shade(ST, 1.05), { line: shade(ST, 0.5), west: STW, top: STL });
+    for (let a = 0; a < 8; a++) {
+      const ang = (a / 8) * Math.PI * 2;
+      const x0 = Math.cos(ang) * 0.28, y0 = Math.sin(ang) * 0.28;
+      d.seg([x0, y0, 0.78], [x0 * 1.35, y0 * 1.35, 0.78], shade(ST, 0.75));
+    }
+    // 束腰回纹环
+    d.box(-0.36, -0.36, 0.28, 0.36, 0.36, 0.36, shade(ST, 1.12), { line: shade(ST, 0.55), west: STW, top: GOLD });
+    for (let i = 0; i < 6; i++) {
+      const ang = (i / 6) * Math.PI * 2;
+      const x = Math.cos(ang) * 0.3, y = Math.sin(ang) * 0.3;
+      d.QS(y - 0.05, x - 0.05, 0.3, x + 0.05, 0.34, GOLD);
+    }
+    // 青苔
+    d.QS(-0.45, -0.35, 0.08, -0.1, 0.16, MOSS);
+    d.QS(0.2, 0.15, 0.5, 0.4, 0.58, shade(MOSS, 0.85));
+  }
+
+  /* Site228：棋枰桌 — 石桌面刻棋盘格 + 石腿 + 边线密实（对弈点景） */
+  function paintSeatQiping(d) {
+    const ST = '#8a8070', STW = '#6a6258', STL = '#a09888', INK = '#2a2418', CREAM = '#e0d4b8', GOLD = '#c8a040', WOOD = '#6a4a2c';
+    // 四短石腿
+    for (const [x, y] of [[-0.5, -0.5], [0.5, -0.5], [-0.5, 0.5], [0.5, 0.5]]) {
+      d.box(x - 0.14, y - 0.14, 0, x + 0.14, y + 0.14, 0.5, ST, { line: shade(ST, 0.5), west: STW, top: shade(ST, 0.92) });
+      for (let z = 0.12; z < 0.48; z += 0.14) d.seg([x - 0.15, y - 0.15, z], [x + 0.15, y - 0.15, z], shade(ST, 0.72));
+    }
+    // 厚桌面
+    d.box(-0.85, -0.85, 0.5, 0.85, 0.85, 0.68, ST, { line: shade(ST, 0.48), west: STW, top: shade(ST, 0.95) });
+    d.box(-0.78, -0.78, 0.68, 0.78, 0.78, 0.82, shade(ST, 1.04), { line: shade(ST, 0.5), west: STW, top: STL });
+    // 棋盘面（浅色石板）
+    d.box(-0.62, -0.62, 0.82, 0.62, 0.62, 0.9, CREAM, { line: INK, west: shade(CREAM, 0.85), top: shade(CREAM, 1.08) });
+    // 棋盘格线（实体细条，非纯线稿）
+    for (let i = -4; i <= 4; i++) {
+      const t = i * 0.12;
+      d.box(t - 0.015, -0.58, 0.9, t + 0.015, 0.58, 0.92, INK, { line: false, noW: true, noS: true });
+      d.box(-0.58, t - 0.015, 0.9, 0.58, t + 0.015, 0.92, INK, { line: false, noW: true, noS: true });
+    }
+    // 星位/天元小块
+    for (const [x, y] of [[-0.36, -0.36], [0.36, -0.36], [-0.36, 0.36], [0.36, 0.36], [0, 0], [-0.36, 0], [0.36, 0], [0, -0.36], [0, 0.36]]) {
+      d.box(x - 0.04, y - 0.04, 0.9, x + 0.04, y + 0.04, 0.94, INK, { line: false, noW: true, noS: true });
+    }
+    // 边框金钉 + 木纹边
+    d.box(-0.72, -0.72, 0.78, 0.72, -0.62, 0.86, WOOD, { line: shade(WOOD, 0.55), top: shade(WOOD, 1.1) });
+    d.box(-0.72, 0.62, 0.78, 0.72, 0.72, 0.86, WOOD, { line: shade(WOOD, 0.55), top: shade(WOOD, 1.1) });
+    d.box(-0.72, -0.62, 0.78, -0.62, 0.62, 0.86, WOOD, { line: shade(WOOD, 0.55), top: shade(WOOD, 1.1) });
+    d.box(0.62, -0.62, 0.78, 0.72, 0.62, 0.86, WOOD, { line: shade(WOOD, 0.55), top: shade(WOOD, 1.1) });
+    for (const x of [-0.55, -0.2, 0.2, 0.55]) {
+      d.QS(-0.7, x - 0.03, 0.84, x + 0.03, 0.88, GOLD);
+      d.QS(0.66, x - 0.03, 0.84, x + 0.03, 0.88, GOLD);
+    }
+  }
+
+
+
+
+/* ---- Site227：货摊/货架/晾晒杆（市井点景；≠既有 aq_stall 粗摊；与招牌#115/街具#118互补；禁纯线稿、密实 kitbash） ---- */
+  /** 小货摊：木柱棚架 + 布幌披檐 + 案台货筐（主街侧/巷口/桥头） */
+
+  /** Site229 水缸：陶缸储水（无花叶；≠花缸 prop_huagang）——缸身收腰+箍环+木盖+水面 */
+  function paintPropShuigang(d) {
+    const CER = '#7a5a3a', CERW = '#4a3018', GLAZE = '#5a7a68', RIM = '#c8b898', WOOD = '#5a3a22', WOOD_D = '#2a160c';
+    const WATER = '#3a6a78', WATER_L = '#6a9aaa';
+    d.box(-0.48, -0.48, 0, 0.48, 0.48, 0.18, shade(CER, 0.88), { line: shade(CER, 0.48), west: CERW, top: shade(CER, 0.85) });
+    d.box(-0.52, -0.52, 0.18, 0.52, 0.52, 0.55, CER, { line: shade(CER, 0.48), west: CERW, top: shade(CER, 0.95) });
+    d.box(-0.46, -0.46, 0.55, 0.46, 0.46, 0.95, shade(CER, 1.02), { line: shade(CER, 0.5), west: CERW, top: shade(CER, 1.05) });
+    d.box(-0.5, -0.5, 0.95, 0.5, 0.5, 1.12, shade(CER, 1.08), { line: shade(CER, 0.5), west: CERW, top: RIM });
+    d.QS(-0.53, -0.42, 0.35, 0.42, 0.48, GLAZE, shade(CER, 0.55));
+    d.QS(-0.53, -0.38, 0.62, 0.38, 0.72, shade(RIM, 0.9), shade(CER, 0.55));
+    for (const z of [0.32, 0.48, 0.68, 0.88]) d.seg([-0.53, -0.53, z], [0.53, -0.53, z], shade(CER, 0.7));
+    for (const z of [0.4, 0.78]) {
+      d.box(-0.54, -0.54, z, 0.54, 0.54, z + 0.06, shade(CERW, 1.05), { line: shade(CERW, 0.6), west: shade(CERW, 0.85), top: shade(CER, 0.9) });
+    }
+    d.box(-0.38, -0.38, 1.05, 0.38, 0.38, 1.1, WATER, { line: shade(WATER, 0.55), west: shade(WATER, 0.8), top: WATER_L });
+    d.QS(-0.02, -0.22, 1.08, 0.22, 1.12, shade(WATER_L, 1.15));
+    d.box(-0.42, -0.42, 1.12, 0.42, 0.42, 1.22, WOOD, { line: WOOD_D, west: shade(WOOD, 0.78), top: shade(WOOD, 1.1) });
+    d.box(-0.08, -0.08, 1.22, 0.08, 0.08, 1.32, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.12) });
+    d.box(0.35, -0.06, 0.7, 0.48, 0.06, 1.05, WOOD, { line: WOOD_D, west: shade(WOOD, 0.75), top: shade(WOOD, 1.05) });
+  }
+  /** Site229 井栏：石井栏口（无亭顶四柱；≠井亭 pavilion_jingting）——方栏+柱头+井口暗水 */
+  function paintPropJinglan(d) {
+    const ST = '#8a8070', STW = '#6a6258', TOP = '#9a9080', MOSS = '#4a6a48';
+    d.box(-0.85, -0.85, 0, 0.85, 0.85, 0.16, ST, { line: shade(ST, 0.48), west: STW, top: shade(ST, 0.9) });
+    d.box(-0.78, -0.78, 0.16, 0.78, 0.78, 0.28, shade(ST, 0.98), { line: shade(ST, 0.5), west: STW, top: TOP });
+    for (let x = -0.65; x < 0.7; x += 0.26) d.seg([x, -0.79, 0.28], [x, 0.79, 0.28], shade(ST, 0.72));
+    /* 井口暗水凹 */
+    d.box(-0.42, -0.42, 0.28, 0.42, 0.42, 0.34, '#2a3438', { line: shade(ST, 0.5), west: '#1a2428', top: '#1e2a30' });
+    d.box(-0.32, -0.32, 0.22, 0.32, 0.32, 0.28, '#3a5a68', { line: shade('#3a5a68', 0.55), west: '#2a4a58', top: '#4a7a88' });
+    /* 四面石栏板 */
+    for (const [x0, y0, x1, y1] of [
+      [-0.72, -0.72, 0.72, -0.52], [-0.72, 0.52, 0.72, 0.72],
+      [-0.72, -0.72, -0.52, 0.72], [0.52, -0.72, 0.72, 0.72],
+    ]) {
+      d.box(x0, y0, 0.28, x1, y1, 0.85, ST, { line: shade(ST, 0.48), west: STW, top: shade(ST, 1.08) });
+    }
+    /* 四角柱头 */
+    for (const [x, y] of [[-0.62, -0.62], [0.62, -0.62], [-0.62, 0.62], [0.62, 0.62]]) {
+      d.box(x - 0.12, y - 0.12, 0.28, x + 0.12, y + 0.12, 1.05, shade(ST, 1.02), { line: shade(ST, 0.5), west: STW, top: TOP });
+      d.box(x - 0.14, y - 0.14, 1.05, x + 0.14, y + 0.14, 1.18, ST, { line: shade(ST, 0.5), west: STW, top: shade(TOP, 1.05) });
+      d.box(x - 0.08, y - 0.08, 1.18, x + 0.08, y + 0.08, 1.28, shade(ST, 1.1), { line: shade(ST, 0.5), west: STW, top: TOP });
+    }
+    /* 栏面刻线/苔点 */
+    for (const z of [0.45, 0.62, 0.78]) d.seg([-0.7, -0.73, z], [0.7, -0.73, z], shade(ST, 0.7));
+    d.box(-0.55, -0.74, 0.5, -0.35, -0.7, 0.7, MOSS, { line: shade(MOSS, 0.55), west: shade(MOSS, 0.8), top: shade(MOSS, 1.1) });
+    d.box(0.3, 0.7, 0.55, 0.55, 0.74, 0.75, MOSS, { line: shade(MOSS, 0.55), west: shade(MOSS, 0.8), top: shade(MOSS, 1.1) });
+    /* 辘轳小架（矮木架，非亭） */
+    const WOOD = '#5a3a22', WOOD_D = '#2a160c';
+    d.box(-0.06, -0.55, 0.85, 0.06, -0.45, 1.55, WOOD, { line: WOOD_D, west: shade(WOOD, 0.78), top: shade(WOOD, 1.08) });
+    d.box(-0.06, 0.45, 0.85, 0.06, 0.55, 1.55, WOOD, { line: WOOD_D, west: shade(WOOD, 0.78), top: shade(WOOD, 1.08) });
+    d.box(-0.08, -0.55, 1.48, 0.08, 0.55, 1.6, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.1) });
+    d.box(-0.12, -0.08, 1.42, 0.12, 0.08, 1.55, shade(WOOD, 1.05), { line: WOOD_D, west: shade(WOOD, 0.85), top: shade(WOOD, 1.12) });
+  }
+  /** Site229 水桶：木桶+铁箍+提梁绳（取水点景） */
+  function paintPropShuitong(d) {
+    const WOOD = '#6a4a28', WOOD_D = '#3a2210', BAND = '#4a4a48', ROPE = '#8a6a38', WATER = '#3a6a78';
+    d.box(-0.32, -0.32, 0, 0.32, 0.32, 0.12, shade(WOOD, 0.9), { line: WOOD_D, west: shade(WOOD, 0.75), top: shade(WOOD, 0.95) });
+    d.box(-0.35, -0.35, 0.12, 0.35, 0.35, 0.55, WOOD, { line: WOOD_D, west: shade(WOOD, 0.78), top: shade(WOOD, 1.02) });
+    d.box(-0.32, -0.32, 0.55, 0.32, 0.32, 0.85, shade(WOOD, 1.05), { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.08) });
+    for (const z of [0.22, 0.42, 0.68]) {
+      d.box(-0.37, -0.37, z, 0.37, 0.37, z + 0.05, BAND, { line: shade(BAND, 0.55), west: shade(BAND, 0.8), top: shade(BAND, 1.1) });
+    }
+    for (let x = -0.28; x <= 0.28; x += 0.1) d.seg([x, -0.36, 0.15], [x, -0.36, 0.82], shade(WOOD, 0.85));
+    d.box(-0.26, -0.26, 0.78, 0.26, 0.26, 0.84, WATER, { line: shade(WATER, 0.55), west: shade(WATER, 0.8), top: '#6a9aaa' });
+    /* 提梁 */
+    d.box(-0.38, -0.04, 0.7, -0.32, 0.04, 0.85, WOOD, { line: WOOD_D, west: shade(WOOD, 0.75), top: shade(WOOD, 1.05) });
+    d.box(0.32, -0.04, 0.7, 0.38, 0.04, 0.85, WOOD, { line: WOOD_D, west: shade(WOOD, 0.75), top: shade(WOOD, 1.05) });
+    d.box(-0.38, -0.04, 1.05, 0.38, 0.04, 1.15, ROPE, { line: shade(ROPE, 0.55), west: shade(ROPE, 0.8), top: shade(ROPE, 1.1) });
+    d.seg([-0.35, 0, 0.85], [-0.35, 0, 1.08], WOOD_D, 2);
+    d.seg([0.35, 0, 0.85], [0.35, 0, 1.08], WOOD_D, 2);
+    d.box(-0.06, -0.06, 1.12, 0.06, 0.06, 1.28, ROPE, { line: shade(ROPE, 0.55), west: shade(ROPE, 0.8), top: shade(ROPE, 1.12) });
+  }
+
+
+  /** Site231 柴堆：交错柴捆+绳索（宅后/厨侧/厩旁储柴；kitbash 密实） */
+  function paintPropChaidui(d) {
+    const WOOD = '#6a4a28', WOOD_D = '#3a2210', WOOD_L = '#8a6a40', BARK = '#4a3018', ROPE = '#8a6a38', MOSS = '#4a6a48';
+    /* 底层横柴 */
+    for (let i = 0; i < 5; i++) {
+      const x0 = -0.85 + i * 0.32, x1 = x0 + 0.28;
+      const y0 = -0.42 + (i % 2) * 0.08, y1 = 0.42 - (i % 2) * 0.06;
+      d.box(x0, y0, 0, x1, y1, 0.22, i % 2 ? WOOD : WOOD_L, { line: WOOD_D, west: BARK, top: shade(WOOD, 1.05) });
+    }
+    /* 中层斜交 */
+    for (let i = 0; i < 4; i++) {
+      const x0 = -0.72 + i * 0.36, x1 = x0 + 0.3;
+      d.box(x0, -0.38, 0.22, x1, 0.38, 0.48, shade(WOOD, 0.98), { line: WOOD_D, west: shade(BARK, 1.05), top: shade(WOOD_L, 1.02) });
+    }
+    /* 上层短柴+尖端 */
+    for (let i = 0; i < 3; i++) {
+      const x0 = -0.55 + i * 0.4, x1 = x0 + 0.32;
+      d.box(x0, -0.28, 0.48, x1, 0.28, 0.78, WOOD_L, { line: WOOD_D, west: BARK, top: shade(WOOD, 1.1) });
+      d.box(x0 + 0.05, -0.12, 0.78, x1 - 0.05, 0.12, 0.98, shade(WOOD, 1.05), { line: WOOD_D, west: shade(BARK, 0.9), top: shade(WOOD_L, 1.12) });
+    }
+    /* 竖向柴端截面纹理 */
+    for (let x = -0.7; x <= 0.7; x += 0.22) d.seg([x, -0.44, 0.05], [x, -0.44, 0.2], shade(WOOD_D, 1.05));
+    for (let x = -0.6; x <= 0.55; x += 0.28) d.seg([x, 0.4, 0.25], [x, 0.4, 0.45], shade(WOOD_D, 1.0));
+    /* 捆绳 */
+    d.box(-0.9, -0.08, 0.18, 0.9, 0.08, 0.26, ROPE, { line: shade(ROPE, 0.55), west: shade(ROPE, 0.8), top: shade(ROPE, 1.1) });
+    d.box(-0.78, -0.08, 0.5, 0.78, 0.08, 0.58, ROPE, { line: shade(ROPE, 0.55), west: shade(ROPE, 0.8), top: shade(ROPE, 1.08) });
+    d.QS(-0.6, -0.1, 0.55, 0.6, 0.62, shade(ROPE, 1.12));
+    /* 苔点/碎屑 */
+    d.box(-0.7, -0.45, 0.02, -0.5, -0.38, 0.12, MOSS, { line: shade(MOSS, 0.55), west: shade(MOSS, 0.8), top: shade(MOSS, 1.1) });
+    d.box(0.45, 0.32, 0.02, 0.7, 0.42, 0.1, shade(BARK, 0.9), { line: WOOD_D, west: BARK, top: shade(WOOD, 0.95) });
+    d.box(-0.15, -0.2, 0.95, 0.15, 0.15, 1.12, WOOD, { line: WOOD_D, west: BARK, top: shade(WOOD_L, 1.08) });
+  }
+  /** Site231 草垛：圆丘草垛+苫顶绳网（宅后/厩旁/码头边；kitbash 密实） */
+  function paintPropCaoduo(d) {
+    const STRAW = '#c8a858', STRAW_D = '#8a6830', STRAW_L = '#e0c878', ROPE = '#6a4a28', THAT = '#a88840';
+    /* 基盘 */
+    d.box(-0.95, -0.85, 0, 0.95, 0.85, 0.12, shade(STRAW_D, 0.95), { line: shade(STRAW_D, 0.55), west: shade(STRAW_D, 0.8), top: STRAW });
+    /* 下层宽丘 */
+    d.box(-0.88, -0.78, 0.12, 0.88, 0.78, 0.55, STRAW, { line: shade(STRAW_D, 0.5), west: STRAW_D, top: shade(STRAW_L, 1.02) });
+    d.box(-0.78, -0.68, 0.55, 0.78, 0.68, 0.95, shade(STRAW, 1.02), { line: shade(STRAW_D, 0.5), west: shade(STRAW_D, 0.9), top: STRAW_L });
+    /* 上层收尖 */
+    d.box(-0.58, -0.5, 0.95, 0.58, 0.5, 1.35, STRAW_L, { line: shade(STRAW_D, 0.5), west: THAT, top: shade(STRAW_L, 1.1) });
+    d.box(-0.35, -0.3, 1.35, 0.35, 0.3, 1.65, THAT, { line: shade(STRAW_D, 0.55), west: shade(STRAW_D, 0.95), top: shade(STRAW_L, 1.15) });
+    d.box(-0.18, -0.15, 1.65, 0.18, 0.15, 1.85, shade(THAT, 1.05), { line: shade(STRAW_D, 0.55), west: STRAW_D, top: '#f0d898' });
+    /* 草丝纹理 */
+    for (let x = -0.8; x <= 0.8; x += 0.2) d.seg([x, -0.8, 0.2], [x * 0.7, -0.55, 0.9], shade(STRAW_D, 0.9));
+    for (let x = -0.6; x <= 0.6; x += 0.22) d.seg([x, 0.72, 0.3], [x * 0.65, 0.4, 1.1], shade(STRAW_D, 0.85));
+    for (const z of [0.35, 0.7, 1.1]) d.seg([-0.75, -0.7, z], [0.75, -0.7, z], shade(STRAW_D, 0.75));
+    /* 苫绳网 */
+    d.box(-0.92, -0.06, 0.4, 0.92, 0.06, 0.48, ROPE, { line: shade(ROPE, 0.55), west: shade(ROPE, 0.8), top: shade(ROPE, 1.08) });
+    d.box(-0.7, -0.06, 0.9, 0.7, 0.06, 0.98, ROPE, { line: shade(ROPE, 0.55), west: shade(ROPE, 0.8), top: shade(ROPE, 1.05) });
+    d.seg([-0.5, 0, 0.48], [0, 0, 1.7], ROPE, 2);
+    d.seg([0.5, 0, 0.48], [0, 0, 1.7], ROPE, 2);
+    d.QS(-0.2, -0.08, 1.55, 0.2, 1.72, shade(STRAW_L, 1.2));
+  }
+  /** Site231 粮袋：麻袋堆+绳口（巷口/码头边/厨侧；≠货摊案上小袋） */
+  function paintPropLiangdai(d) {
+    const BAG = '#c8b070', BAG_D = '#8a7040', BAG_L = '#e0d0a0', ROPE = '#5a3a22', STITCH = '#6a5028', MARK = '#8a3030';
+    /* 底层两袋横放 */
+    d.box(-0.7, -0.45, 0, -0.05, 0.4, 0.55, BAG, { line: shade(BAG_D, 0.5), west: BAG_D, top: shade(BAG_L, 1.02) });
+    d.box(0.05, -0.4, 0, 0.7, 0.45, 0.55, shade(BAG, 0.98), { line: shade(BAG_D, 0.5), west: shade(BAG_D, 0.9), top: BAG_L });
+    /* 中层斜交 */
+    d.box(-0.55, -0.35, 0.55, 0.15, 0.35, 1.05, shade(BAG, 1.02), { line: shade(BAG_D, 0.5), west: BAG_D, top: shade(BAG_L, 1.05) });
+    d.box(-0.1, -0.38, 0.55, 0.6, 0.32, 1.05, BAG, { line: shade(BAG_D, 0.5), west: shade(BAG_D, 0.85), top: BAG_L });
+    /* 顶袋立放收口 */
+    d.box(-0.28, -0.28, 1.05, 0.28, 0.28, 1.55, shade(BAG, 1.05), { line: shade(BAG_D, 0.5), west: BAG_D, top: BAG_L });
+    d.box(-0.22, -0.22, 1.55, 0.22, 0.22, 1.72, shade(BAG_L, 1.02), { line: shade(BAG_D, 0.55), west: shade(BAG_D, 0.9), top: '#f0e8c8' });
+    /* 绳口结 */
+    d.box(-0.12, -0.12, 1.68, 0.12, 0.12, 1.85, ROPE, { line: shade(ROPE, 0.55), west: shade(ROPE, 0.8), top: shade(ROPE, 1.1) });
+    d.box(-0.06, -0.06, 1.85, 0.06, 0.06, 1.95, shade(ROPE, 1.05), { line: shade(ROPE, 0.55), west: shade(ROPE, 0.85), top: shade(ROPE, 1.15) });
+    /* 缝线/印记 */
+    for (const z of [0.2, 0.4]) d.seg([-0.68, -0.46, z], [-0.08, -0.46, z], STITCH);
+    for (const z of [0.18, 0.38]) d.seg([0.08, 0.46, z], [0.68, 0.46, z], STITCH);
+    d.seg([-0.5, -0.36, 0.7], [0.1, -0.36, 0.95], STITCH);
+    d.seg([-0.2, 0.3, 0.7], [0.55, 0.3, 0.95], STITCH);
+    d.box(-0.15, -0.32, 0.75, 0.05, -0.28, 0.95, MARK, { line: shade(MARK, 0.55), west: shade(MARK, 0.8), top: shade(MARK, 1.1) });
+    d.box(0.25, 0.25, 0.72, 0.45, 0.32, 0.92, MARK, { line: shade(MARK, 0.55), west: shade(MARK, 0.8), top: shade(MARK, 1.1) });
+    /* 侧袋捆绳 */
+    d.box(-0.72, -0.08, 0.28, -0.02, 0.08, 0.36, ROPE, { line: shade(ROPE, 0.55), west: shade(ROPE, 0.8), top: shade(ROPE, 1.08) });
+    d.box(0.02, -0.08, 0.28, 0.72, 0.08, 0.36, ROPE, { line: shade(ROPE, 0.55), west: shade(ROPE, 0.8), top: shade(ROPE, 1.08) });
+    d.QS(-0.2, -0.3, 1.6, 0.2, 1.7, shade(BAG_L, 1.15));
+  }
+
+  function paintStallHuotan(d) {
+    const WOOD = '#5a3a22', WOOD_D = '#2a160c', CLOTH = '#c85038', CLOTH2 = '#a03828';
+    const BOARD = '#7a5a38', CREAM = '#e8d8b8', JAR = '#6a8a58', FRUIT = '#d87838', BAG = '#c8b070';
+    for (const [dx, dy] of [[-0.85, -0.45], [0.85, -0.45], [-0.85, 0.45], [0.85, 0.45]]) {
+      d.box(dx - 0.06, dy - 0.06, 0, dx + 0.06, dy + 0.06, 2.15, WOOD, { line: WOOD_D, west: shade(WOOD, 0.78), top: shade(WOOD, 1.08) });
+    }
+    d.box(-0.92, -0.52, 2.05, 0.92, 0.52, 2.22, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.1) });
+    d.box(-1.05, -0.6, 1.85, 1.05, 0.55, 2.1, CLOTH, { line: shade(CLOTH, 0.5), west: CLOTH2, top: shade(CLOTH, 1.12) });
+    for (let x = -0.9; x <= 0.9; x += 0.3) d.seg([x, -0.62, 1.9], [x, -0.62, 2.05], shade(CLOTH2, 0.85));
+    d.QS(-0.7, -0.58, 1.92, 0.7, 2.05, shade(CLOTH, 1.15));
+    d.box(-0.95, -0.5, 0.85, 0.95, 0.5, 1.05, BOARD, { line: WOOD_D, west: shade(BOARD, 0.8), top: shade(BOARD, 1.08) });
+    d.box(-0.9, -0.45, 0.55, 0.9, 0.45, 0.88, WOOD, { line: WOOD_D, west: shade(WOOD, 0.75), top: shade(WOOD, 1.02) });
+    d.box(-0.7, -0.35, 1.05, -0.35, 0.0, 1.45, JAR, { line: shade(JAR, 0.5), west: shade(JAR, 0.78), top: shade(JAR, 1.1) });
+    d.box(-0.25, -0.3, 1.05, 0.15, 0.15, 1.38, FRUIT, { line: shade(FRUIT, 0.5), west: shade(FRUIT, 0.8), top: '#e89850' });
+    d.box(0.25, -0.35, 1.05, 0.7, 0.1, 1.42, BAG, { line: shade(BAG, 0.5), west: shade(BAG, 0.8), top: CREAM });
+    d.box(-0.15, 0.1, 1.05, 0.35, 0.4, 1.32, '#8a4a2a', { line: WOOD_D, west: shade('#8a4a2a', 0.8), top: '#c87040' });
+    d.box(-0.08, -0.62, 1.55, 0.08, -0.55, 1.9, CLOTH2, { line: shade(CLOTH2, 0.5), top: shade(CLOTH, 1.1) });
+    d.QS(-0.1, -0.61, 1.5, 0.1, 1.58, '#c8a040');
+  }
+  /** 货架：木格层架 + 坛罐布匹货堆（店侧/宅前空地） */
+  function paintRackHuojia(d) {
+    const WOOD = '#5a3a22', WOOD_D = '#2a160c', BOARD = '#7a5a38';
+    const JAR = '#6a7a58', JAR2 = '#8a5a3a', CLOTH = '#c8b898', BLUE = '#3a5a78', RED = '#a83830';
+    for (const dx of [-0.7, 0.7]) {
+      d.box(dx - 0.07, -0.28, 0, dx + 0.07, 0.28, 2.55, WOOD, { line: WOOD_D, west: shade(WOOD, 0.78), top: shade(WOOD, 1.08) });
+    }
+    d.box(-0.78, -0.32, 2.4, 0.78, 0.32, 2.55, WOOD, { line: WOOD_D, west: shade(WOOD, 0.8), top: shade(WOOD, 1.1) });
+    for (const z of [0.35, 0.95, 1.55, 2.15]) {
+      d.box(-0.72, -0.3, z, 0.72, 0.3, z + 0.1, BOARD, { line: WOOD_D, west: shade(BOARD, 0.8), top: shade(BOARD, 1.08) });
+    }
+    d.box(-0.68, 0.22, 0.4, 0.68, 0.3, 2.4, shade(WOOD, 0.92), { line: WOOD_D, west: shade(WOOD, 0.7), top: shade(WOOD, 1.05) });
+    d.box(-0.55, -0.2, 0.45, -0.2, 0.15, 0.9, JAR, { line: shade(JAR, 0.5), west: shade(JAR, 0.78), top: shade(JAR, 1.1) });
+    d.box(-0.05, -0.18, 0.45, 0.35, 0.18, 0.85, JAR2, { line: shade(JAR2, 0.5), west: shade(JAR2, 0.8), top: shade(JAR2, 1.08) });
+    d.box(0.4, -0.15, 0.45, 0.62, 0.15, 0.88, RED, { line: shade(RED, 0.5), top: shade(RED, 1.1) });
+    d.box(-0.6, -0.22, 1.05, -0.1, 0.18, 1.45, CLOTH, { line: shade(CLOTH, 0.55), west: shade(CLOTH, 0.85), top: '#f0e8d0' });
+    d.box(0.0, -0.2, 1.05, 0.55, 0.18, 1.48, BLUE, { line: shade(BLUE, 0.5), west: shade(BLUE, 0.8), top: shade(BLUE, 1.12) });
+    d.box(-0.5, -0.18, 1.65, -0.05, 0.15, 2.05, JAR2, { line: shade(JAR2, 0.5), west: shade(JAR2, 0.78), top: '#c87848' });
+    d.box(0.1, -0.2, 1.65, 0.55, 0.18, 2.08, CLOTH, { line: shade(CLOTH, 0.55), west: shade(CLOTH, 0.85), top: '#fff0d8' });
+    for (const x of [-0.25, 0.25]) d.seg([x, -0.3, 0.45], [x, -0.3, 2.35], shade(WOOD, 0.9));
+  }
+  /** 晾晒杆：竹竿架 + 横竿 + 衣物布巾（宅前/巷口；市井感） */
+  function paintPoleLiangshai(d) {
+    const BAM = '#8a6a38', BAM_D = '#5a4020';
+    const CLOTH_R = '#c85038', CLOTH_B = '#3a5a88', CLOTH_C = '#e8d8b0', CLOTH_G = '#4a7a58';
+    for (const dx of [-1.15, 1.15]) {
+      d.box(dx - 0.05, -0.05, 0, dx + 0.05, 0.05, 2.85, BAM, { line: BAM_D, west: shade(BAM, 0.78), top: shade(BAM, 1.1) });
+      d.box(dx - 0.04, -0.35, 0, dx + 0.04, -0.05, 1.2, BAM, { line: BAM_D, west: shade(BAM, 0.75), top: shade(BAM, 1.05) });
+      d.box(dx - 0.04, 0.05, 0, dx + 0.04, 0.35, 1.15, BAM, { line: BAM_D, west: shade(BAM, 0.75), top: shade(BAM, 1.05) });
+    }
+    d.box(-1.2, -0.04, 2.55, 1.2, 0.04, 2.68, BAM, { line: BAM_D, west: shade(BAM, 0.8), top: shade(BAM, 1.1) });
+    d.box(-1.2, -0.04, 2.15, 1.2, 0.04, 2.28, BAM, { line: BAM_D, west: shade(BAM, 0.8), top: shade(BAM, 1.08) });
+    const clothes = [
+      [-0.9, CLOTH_R, 1.35], [-0.45, CLOTH_B, 1.55], [0.0, CLOTH_C, 1.25],
+      [0.45, CLOTH_G, 1.5], [0.85, CLOTH_R, 1.4],
+    ];
+    for (const [cx, col, h] of clothes) {
+      d.box(cx - 0.18, -0.02, 2.28 - h, cx + 0.18, 0.06, 2.55, col, { line: shade(col, 0.5), west: shade(col, 0.82), top: shade(col, 1.12) });
+      d.QS(-0.03, cx - 0.16, 2.28 - h + 0.1, cx + 0.16, 2.5, shade(col, 1.15));
+      for (let k = 0; k < 3; k++) {
+        const zz = 2.28 - h + 0.2 + k * 0.28;
+        if (zz < 2.5) d.seg([cx - 0.15, -0.03, zz], [cx + 0.15, -0.03, zz], shade(col, 0.75));
+      }
+    }
+    for (const [cx, col] of [[-0.7, CLOTH_C], [0.2, CLOTH_B], [0.7, CLOTH_G]]) {
+      d.box(cx - 0.14, -0.02, 1.55, cx + 0.14, 0.05, 2.15, col, { line: shade(col, 0.5), west: shade(col, 0.85), top: shade(col, 1.1) });
+    }
+  }
+
+  
+  /* Site230：香炉 — 三足青铜炉+炉盖+香炷轻烟（影壁前/小龛/供案；≠site222 stone_lu 门侧小石炉） */
+  function paintPropXianglu(d) {
+    const BRZ = '#6a5a38', BRZ_D = '#3a2e18', BRZ_L = '#9a8850', GOLD = '#c8a040';
+    const ASH = '#4a4030', SMOKE = 'rgba(200,200,190,0.45)', RED = '#a83828';
+    // 三足
+    for (const [x, y] of [[-0.28, -0.18], [0.28, -0.18], [0, 0.28]]) {
+      d.box(x - 0.07, y - 0.07, 0, x + 0.07, y + 0.07, 0.28, BRZ, { line: BRZ_D, west: shade(BRZ, 0.78), top: shade(BRZ, 0.95) });
+      d.box(x - 0.05, y - 0.05, 0.28, x + 0.05, y + 0.05, 0.42, shade(BRZ, 0.92), { line: BRZ_D, west: shade(BRZ, 0.75), top: BRZ_L });
+    }
+    // 炉身收腰
+    d.box(-0.38, -0.32, 0.42, 0.38, 0.32, 0.55, BRZ, { line: BRZ_D, west: shade(BRZ, 0.8), top: shade(BRZ, 0.95) });
+    d.box(-0.42, -0.36, 0.55, 0.42, 0.36, 0.78, shade(BRZ, 1.02), { line: BRZ_D, west: shade(BRZ, 0.82), top: BRZ_L });
+    d.box(-0.36, -0.3, 0.78, 0.36, 0.3, 0.95, BRZ, { line: BRZ_D, west: shade(BRZ, 0.78), top: shade(BRZ, 1.05) });
+    // 炉沿回纹块 + 金钉
+    d.box(-0.48, -0.4, 0.95, 0.48, 0.4, 1.08, BRZ_L, { line: BRZ_D, west: shade(BRZ, 0.85), top: GOLD });
+    for (const x of [-0.32, 0, 0.32]) {
+      d.QS(-0.38, x - 0.04, 1.0, x + 0.04, 1.06, GOLD);
+      d.QS(0.32, x - 0.04, 1.0, x + 0.04, 1.06, GOLD);
+    }
+    // 炉盖 + 纽
+    d.box(-0.28, -0.24, 1.08, 0.28, 0.24, 1.22, shade(BRZ, 1.05), { line: BRZ_D, west: shade(BRZ, 0.8), top: BRZ_L });
+    d.box(-0.1, -0.1, 1.22, 0.1, 0.1, 1.42, GOLD, { line: shade(GOLD, 0.55), west: shade(GOLD, 0.85), top: shade(GOLD, 1.15) });
+    // 香灰 + 三炷香
+    d.box(-0.22, -0.18, 1.05, 0.22, 0.18, 1.12, ASH, { line: false, noW: true, noS: true });
+    for (const x of [-0.12, 0, 0.12]) {
+      d.box(x - 0.025, -0.02, 1.12, x + 0.025, 0.02, 1.55, RED, { line: shade(RED, 0.5), top: '#e85840' });
+      d.QS(-0.04, x - 0.03, 1.55, x + 0.03, 1.62, '#ffc878');
+    }
+    // 轻烟（半透明色块，非线稿）
+    d.QS(-0.18, -0.1, 1.62, 0.12, 1.85, SMOKE);
+    d.QS(0.02, 0.0, 1.78, 0.18, 2.05, 'rgba(210,210,200,0.35)');
+  }
+
+  /* Site230：烛台 — 铜座+烛杆+烛泪+烛火（案几/龛侧；密实 kitbash） */
+  function paintPropZhutai(d) {
+    const BRZ = '#6a5a38', BRZ_D = '#3a2e18', BRZ_L = '#9a8850', GOLD = '#c8a040';
+    const WAX = '#e8d8b0', WAX_D = '#c8b888', FLAME = '#ff9830', FLAME2 = '#ffe060';
+    // 宽底座
+    d.box(-0.32, -0.28, 0, 0.32, 0.28, 0.12, BRZ, { line: BRZ_D, west: shade(BRZ, 0.78), top: shade(BRZ, 0.95) });
+    d.box(-0.26, -0.22, 0.12, 0.26, 0.22, 0.28, shade(BRZ, 1.02), { line: BRZ_D, west: shade(BRZ, 0.8), top: BRZ_L });
+    // 束腰柱
+    d.box(-0.1, -0.1, 0.28, 0.1, 0.1, 0.85, BRZ, { line: BRZ_D, west: shade(BRZ, 0.78), top: shade(BRZ, 1.05) });
+    d.box(-0.14, -0.14, 0.5, 0.14, 0.14, 0.62, GOLD, { line: shade(GOLD, 0.55), west: shade(GOLD, 0.85), top: shade(GOLD, 1.12) });
+    // 托盘
+    d.box(-0.22, -0.2, 0.85, 0.22, 0.2, 0.98, BRZ_L, { line: BRZ_D, west: shade(BRZ, 0.85), top: GOLD });
+    // 蜡烛 + 烛泪
+    d.box(-0.08, -0.08, 0.98, 0.08, 0.08, 1.55, WAX, { line: WAX_D, west: shade(WAX, 0.88), top: shade(WAX, 1.08) });
+    d.box(-0.12, -0.06, 1.0, -0.06, 0.06, 1.18, shade(WAX, 0.92), { line: false, noW: true, noS: true });
+    d.box(0.04, -0.1, 1.05, 0.14, 0.02, 1.22, shade(WAX, 0.9), { line: false, noW: true, noS: true });
+    // 烛芯 + 火焰
+    d.box(-0.02, -0.02, 1.55, 0.02, 0.02, 1.62, '#2a2010', { line: false, noW: true, noS: true });
+    d.box(-0.06, -0.05, 1.62, 0.06, 0.05, 1.82, FLAME, { line: shade(FLAME, 0.6), west: '#e86820', top: FLAME2 });
+    d.QS(-0.04, -0.03, 1.78, 0.03, 1.95, FLAME2);
+  }
+
+  /* Site230：小供案/条几 — 木案+牙板+供品垫（宅门内/影壁前/亭侧；≠大庙殿布局） */
+  function paintPropGonganS(d) {
+    const WOOD = '#5a3a22', WOOD_D = '#2a160c', WOOD_L = '#8a6a42', GOLD = '#c8a040';
+    const CLOTH = '#a83828', CLOTH2 = '#781820', CREAM = '#e8d8b8', CERAM = '#6a7a58';
+    // 四腿
+    for (const [x, y] of [[-0.85, -0.32], [0.85, -0.32], [-0.85, 0.32], [0.85, 0.32]]) {
+      d.box(x - 0.07, y - 0.07, 0, x + 0.07, y + 0.07, 0.72, WOOD, { line: WOOD_D, west: shade(WOOD, 0.78), top: shade(WOOD, 1.05) });
+      for (let z = 0.15; z < 0.7; z += 0.18) d.seg([x - 0.08, y - 0.08, z], [x + 0.08, y - 0.08, z], shade(WOOD, 0.7));
+    }
+    // 牙板
+    d.box(-0.88, -0.35, 0.55, 0.88, 0.35, 0.68, shade(WOOD, 0.95), { line: WOOD_D, west: shade(WOOD, 0.75), top: WOOD_L });
+    d.box(-0.7, -0.28, 0.48, -0.55, 0.28, 0.55, GOLD, { line: shade(GOLD, 0.5), top: shade(GOLD, 1.1) });
+    d.box(0.55, -0.28, 0.48, 0.7, 0.28, 0.55, GOLD, { line: shade(GOLD, 0.5), top: shade(GOLD, 1.1) });
+    // 案面
+    d.box(-0.95, -0.4, 0.72, 0.95, 0.4, 0.88, WOOD_L, { line: WOOD_D, west: shade(WOOD, 0.82), top: shade(WOOD_L, 1.08) });
+    for (let x = -0.7; x < 0.75; x += 0.28) d.seg([x, -0.38, 0.88], [x, 0.38, 0.88], shade(WOOD, 0.72));
+    // 红呢垫
+    d.box(-0.7, -0.28, 0.88, 0.7, 0.28, 0.95, CLOTH, { line: CLOTH2, west: shade(CLOTH, 0.8), top: shade(CLOTH, 1.12) });
+    // 供品：果盘/瓷瓶/香盒
+    d.box(-0.45, -0.15, 0.95, -0.15, 0.15, 1.18, CERAM, { line: shade(CERAM, 0.5), west: shade(CERAM, 0.78), top: shade(CERAM, 1.1) });
+    d.box(0.1, -0.18, 0.95, 0.45, 0.18, 1.12, CREAM, { line: shade(CREAM, 0.6), west: shade(CREAM, 0.85), top: '#f0e8d0' });
+    d.box(-0.08, -0.12, 0.95, 0.08, 0.12, 1.08, GOLD, { line: shade(GOLD, 0.55), top: shade(GOLD, 1.15) });
+    d.QS(-0.2, -0.5, 1.0, -0.3, 1.05, '#d87838');
+    d.QS(-0.2, 0.25, 1.0, 0.4, 1.05, '#e89850');
+  }
+
+
+  const MODULES = [
+    { key: 'wall_plaster_S', geo: [0, -0.05, 0, 1.5, 0.1, 2.4], paint: (d) => paintWallPlasterS(d, 1.5, 2.4), mw: 1.5, mh: 2.4, face: 'S' },
+    { key: 'wall_brick_S', geo: [0, -0.05, 0, 1.5, 0.1, 1.2], paint: (d) => paintWallBrickS(d, 1.5, 1.2), mw: 1.5, mh: 1.2, face: 'S' },
+    { key: 'wall_plaster_W', geo: [-0.05, 0, 0, 0.1, 1.5, 2.4], paint: (d) => paintWallW(d, 1.5, 2.4, false), mw: 1.5, mh: 2.4, face: 'W' },
+    { key: 'wall_brick_W', geo: [-0.05, 0, 0, 0.1, 1.5, 1.2], paint: (d) => paintWallW(d, 1.5, 1.2, true), mw: 1.5, mh: 1.2, face: 'W' },
+    { key: 'win_grid_S', geo: [0, -0.05, 0, 1.0, 0.1, 1.4], paint: (d) => paintWin(d, 1.0, 1.4, 'grid'), mw: 1.0, mh: 1.4, face: 'S' },
+    { key: 'win_diamond_S', geo: [0, -0.05, 0, 1.0, 0.1, 1.4], paint: (d) => paintWin(d, 1.0, 1.4, 'diamond'), mw: 1.0, mh: 1.4, face: 'S' },
+    { key: 'win_bubujin_S', geo: [0, -0.05, 0, 1.0, 0.1, 1.4], paint: (d) => paintWin(d, 1.0, 1.4, 'bubujin'), mw: 1.0, mh: 1.4, face: 'S' },
+    { key: 'win_wanzi_S', geo: [0, -0.05, 0, 1.0, 0.1, 1.4], paint: (d) => paintWin(d, 1.0, 1.4, 'wanzi'), mw: 1.0, mh: 1.4, face: 'S' },
+    { key: 'win_vbars_S', geo: [0, -0.05, 0, 1.0, 0.1, 0.6], paint: (d) => paintWin(d, 1.0, 0.6, 'vbars'), mw: 1.0, mh: 0.6, face: 'S' },
+    { key: 'door_geshan_S', geo: [0, -0.05, 0, 0.7, 0.1, 2.5], paint: (d) => paintGeshanLeaf(d, 0.7, 2.5, { style: 'grid' }), mw: 0.7, mh: 2.5, face: 'S' },
+    { key: 'door_geshan_carved_S', geo: [0, -0.05, 0, 0.7, 0.1, 2.5], paint: (d) => paintGeshanLeaf(d, 0.7, 2.5, { carved: true, style: 'diamond' }), mw: 0.7, mh: 2.5, face: 'S' },
+    { key: 'door_ban_S', geo: [0, -0.05, 0, 0.85, 0.1, 2.5], paint: (d) => paintBanDoor(d, 0.85, 2.5), mw: 0.85, mh: 2.5, face: 'S' },
+    { key: 'threshold_S', geo: [0, -0.05, 0, 1.0, 0.1, 0.2], paint: (d) => paintThreshold(d, 1.0), mw: 1.0, mh: 0.2, face: 'S' },
+    /* Site203 lattice densify */
+    { key: 'lattice_geshan_S', geo: [0, -0.05, 0, 1.1, 0.1, 1.0], paint: (d) => paintLatticeGeshan(d, 1.1, 1.0), mw: 1.1, mh: 1.0, face: 'S' },
+    { key: 'window_huachuang_S', geo: [0, -0.05, 0, 1.1, 0.1, 1.5], paint: (d) => paintHuachuang(d, 1.1, 1.5), mw: 1.1, mh: 1.5, face: 'S' },
+    { key: 'door_geshan_bubujin_S', geo: [0, -0.05, 0, 0.7, 0.1, 2.5], paint: (d) => paintGeshanLeaf(d, 0.7, 2.5, { style: 'bubujin' }), mw: 0.7, mh: 2.5, face: 'S' },
+    { key: 'sill_kanchuang_S', geo: [0, -0.05, 0, 1.2, 0.1, 1.6], paint: (d) => paintKanchuang(d, 1.2, 1.6), mw: 1.2, mh: 1.6, face: 'S' },
+    { key: 'column_red', geo: [-0.2, -0.2, 0, 0.2, 0.2, 3.5], paint: (d) => paintColumn(d, 3.5, 0.15), mw: 0.4, mh: 3.5, face: 'C', origin: 'center' },
+    { key: 'plaque_frame', geo: [-1.2, -0.1, -0.55, 1.2, 0.1, 0.55], paint: (d) => paintPlaqueFrame(d, 2.0, 0.7, { style: 'dark' }), mw: 2.0, mh: 0.7, face: 'S', origin: 'center' },
+    { key: 'plaque_wood', geo: [-1.2, -0.1, -0.55, 1.2, 0.1, 0.55], paint: (d) => paintPlaqueFrame(d, 2.0, 0.7, { style: 'wood' }), mw: 2.0, mh: 0.7, face: 'S', origin: 'center' },
+    { key: 'vsign_board', geo: [-0.35, -0.08, -1.1, 0.35, 0.08, 0.15], paint: (d) => paintVsignBoard(d, 0.5, 1.9), mw: 0.5, mh: 2.0, face: 'S', origin: 'top' },
+    { key: 'banner_red', geo: [-0.3, -0.05, -1.7, 0.3, 0.05, 0.1], paint: (d) => paintBanner(d, 0.55, 1.5, '#c8322c'), mw: 0.55, mh: 1.7, face: 'S', origin: 'top' },
+    { key: 'banner_green', geo: [-0.3, -0.05, -1.7, 0.3, 0.05, 0.1], paint: (d) => paintBanner(d, 0.55, 1.5, '#2f6a58'), mw: 0.55, mh: 1.7, face: 'S', origin: 'top' },
+    { key: 'banner_blue', geo: [-0.3, -0.05, -1.7, 0.3, 0.05, 0.1], paint: (d) => paintBanner(d, 0.55, 1.5, '#2f4f86'), mw: 0.55, mh: 1.7, face: 'S', origin: 'top' },
+    { key: 'banner_cream', geo: [-0.3, -0.05, -1.7, 0.3, 0.05, 0.1], paint: (d) => paintBanner(d, 0.55, 1.5, '#e8dcc0'), mw: 0.55, mh: 1.7, face: 'S', origin: 'top' },
+    { key: 'lantern', geo: [-0.35, -0.35, -0.9, 0.35, 0.35, 0.1], paint: (d) => paintLantern(d, 0.22), mw: 0.7, mh: 1.0, face: 'C', origin: 'top' },
+    { key: 'tile_eave_S', geo: [0, -0.08, -0.12, 1.0, 0.05, 0.38], paint: (d) => paintTileStripS(d, 1.0), mw: 1.0, mh: 0.38, face: 'S' },
+    { key: 'tile_course_S', geo: [0, -0.05, 0, 1.0, 0.05, 0.22], paint: (d) => paintTileCourseS(d, 1.0), mw: 1.0, mh: 0.22, face: 'S' },
+    { key: 'tile_ridge_S', geo: [0, -0.12, 0, 1.0, 0.12, 0.28], paint: (d) => paintTileRidgeS(d, 1.0), mw: 1.0, mh: 0.28, face: 'S' },
+    { key: 'tile_wadang_S', geo: [0, -0.08, -0.05, 0.9, 0.05, 0.28], paint: (d) => paintWadangS(d, 0.9), mw: 0.9, mh: 0.28, face: 'S' },
+    { key: 'tile_drip_S', geo: [0, -0.1, -0.12, 0.9, 0.05, 0.32], paint: (d) => paintDripS(d, 0.9), mw: 0.9, mh: 0.32, face: 'S' },
+    { key: 'chiwen_S', geo: [0, -0.2, 0, 0.85, 0.15, 1.1], paint: (d) => paintChiwenS(d, 0.85), mw: 0.85, mh: 1.1, face: 'S' },
+    { key: 'chiwen_flip_S', geo: [0, -0.2, 0, 0.85, 0.15, 1.1], paint: (d) => paintChiwenS(d, 0.85, { flip: true }), mw: 0.85, mh: 1.1, face: 'S' },
+    /* Site205 roof-tiles densify */
+    { key: 'tile_wadang', geo: [0, -0.08, -0.05, 0.95, 0.05, 0.3], paint: (d) => paintWadangDenseS(d, 0.95), mw: 0.95, mh: 0.3, face: 'S' },
+    { key: 'tile_dishui', geo: [0, -0.1, -0.14, 0.95, 0.05, 0.34], paint: (d) => paintDishuiS(d, 0.95), mw: 0.95, mh: 0.34, face: 'S' },
+    { key: 'tile_walong', geo: [0, -0.06, 0, 1.0, 0.05, 0.28], paint: (d) => paintWalongS(d, 1.0), mw: 1.0, mh: 0.28, face: 'S' },
+    { key: 'eave_yankou', geo: [0, -0.1, -0.1, 1.05, 0.06, 0.32], paint: (d) => paintYankouS(d, 1.05), mw: 1.05, mh: 0.32, face: 'S' },
+    /* Site207 rail/queti/gualuo/baluster */
+    { key: 'rail_xunzhang', geo: [0, -0.08, 0, 1.4, 0.12, 1.3], paint: (d) => paintRailXunzhang(d, 1.4), mw: 1.4, mh: 1.3, face: 'S' },
+    { key: 'ornament_queti', geo: [0, -0.22, 0, 1.1, 0.3, 0.82], paint: (d) => paintOrnamentQueti(d), mw: 1.1, mh: 0.82, face: 'S' },
+    { key: 'hanging_gualuo', geo: [0, -0.08, 0, 1.6, 0.12, 0.85], paint: (d) => paintHangingGualuo(d, 1.6, 0.85), mw: 1.6, mh: 0.85, face: 'S' },
+    { key: 'baluster_xiaozhu', geo: [-0.18, -0.18, 0, 0.18, 0.18, 1.42], paint: (d) => paintBalusterXiaozhu(d), mw: 0.36, mh: 1.42, face: 'C', origin: 'center' },
+    /* Site209 door hardware */
+    { key: 'door_mending', geo: [0, -0.08, 0, 1.0, 0.12, 2.2], paint: (d) => paintDoorMending(d, 1.0, 2.2), mw: 1.0, mh: 2.2, face: 'S' },
+    { key: 'knocker_pushou', geo: [-0.32, -0.16, -0.25, 0.32, 0.14, 0.58], paint: (d) => paintKnockerPushou(d), mw: 0.64, mh: 0.83, face: 'S', origin: 'center' },
+    { key: 'sill_menkan', geo: [0, -0.2, 0, 1.4, 0.24, 0.3], paint: (d) => paintSillMenkan(d, 1.4), mw: 1.4, mh: 0.3, face: 'S' },
+    { key: 'stone_baogu', geo: [-0.45, -0.35, 0, 0.45, 0.48, 1.22], paint: (d) => paintStoneBaogu(d), mw: 0.9, mh: 1.22, face: 'C', origin: 'center' },
+    { key: 'dougong', geo: [-0.85, -0.7, 0, 0.85, 0.35, 0.55], paint: (d) => paintDougong(d), mw: 1.7, mh: 0.55, face: 'S', origin: 'center' },
+    { key: 'dougong_large', geo: [-1.1, -0.85, 0, 1.1, 0.35, 0.7], paint: (d) => paintDougong(d, { large: true }), mw: 2.2, mh: 0.7, face: 'S', origin: 'center' },
+    { key: 'efang_unit', geo: [0, -0.1, 0, 2.8, 0.25, 0.4], paint: (d) => paintEfangUnit(d, 2.8), mw: 2.8, mh: 0.4, face: 'S' },
+    /* Site198 wall-merlon */
+    { key: 'city_brick_S', geo: [0, -0.05, 0, 1.6, 0.1, 1.8], paint: (d) => paintCityBrickS(d, 1.6, 1.8), mw: 1.6, mh: 1.8, face: 'S' },
+    { key: 'city_brick_W', geo: [-0.05, 0, 0, 0.1, 1.6, 1.8], paint: (d) => paintCityBrickW(d, 1.6, 1.8), mw: 1.6, mh: 1.8, face: 'W' },
+    { key: 'city_stone_S', geo: [0, -0.05, 0, 1.6, 0.1, 1.2], paint: (d) => paintCityStoneS(d, 1.6, 1.2), mw: 1.6, mh: 1.2, face: 'S' },
+    { key: 'merlon_S', geo: [0, -0.02, 0, 1.05, 0.55, 1.76], paint: (d) => paintMerlon(d, { w: 1.05, d: 0.55, h: 1.7 }), mw: 1.05, mh: 1.7, face: 'S' },
+    { key: 'crenel_S', geo: [0, -0.02, 0, 0.55, 0.55, 1.04], paint: (d) => paintCrenel(d, { w: 0.55, d: 0.55, h: 1.0 }), mw: 0.55, mh: 1.0, face: 'S' },
+    { key: 'parapet_S', geo: [0, -0.02, 0, 1.6, 0.6, 1.2], paint: (d) => paintParapet(d, { w: 1.6, d: 0.6, h: 1.1 }), mw: 1.6, mh: 1.1, face: 'S' },
+    { key: 'walk_top', geo: [0, 0, 0, 1.6, 1.6, 0.08], paint: (d) => paintWalkTop(d, 1.6, 1.6), mw: 1.6, mh: 1.6, face: 'C' },
+    /* Site202 paving */
+    { key: 'pave_fangzhuan', geo: [0, 0, 0, 1.6, 1.6, 0.06], paint: (d) => paintPaveFangzhuan(d, 1.6, 1.6), mw: 1.6, mh: 1.6, face: 'C' },
+    { key: 'pave_tiaoshi', geo: [0, 0, 0, 1.6, 1.6, 0.06], paint: (d) => paintPaveTiaoshi(d, 1.6, 1.6), mw: 1.6, mh: 1.6, face: 'C' },
+    { key: 'pave_xiewen', geo: [0, 0, 0, 1.6, 1.6, 0.06], paint: (d) => paintPaveXiewen(d, 1.6, 1.6), mw: 1.6, mh: 1.6, face: 'C' },
+    { key: 'drain_gutter', geo: [0, 0, -0.05, 0.7, 0.7, 0.18], paint: (d) => paintDrainGutter(d), mw: 0.7, mh: 0.7, face: 'C' },
+    { key: 'curb_stone', geo: [0, 0, 0, 0.95, 0.32, 0.25], paint: (d) => paintCurbStone(d), mw: 0.95, mh: 0.32, face: 'C' },
+    /* Site204 street props */
+    { key: 'prop_shideng', geo: [-0.55, -0.55, 0, 0.55, 0.55, 2.2], paint: (d) => paintPropShideng(d), mw: 1.1, mh: 2.2, face: 'C', origin: 'center' },
+    { key: 'prop_shiteng', geo: [-0.8, -0.4, 0, 0.8, 0.4, 0.6], paint: (d) => paintPropShiteng(d), mw: 1.6, mh: 0.6, face: 'C', origin: 'center' },
+    { key: 'prop_huagang', geo: [-0.5, -0.5, 0, 0.5, 0.5, 1.4], paint: (d) => paintPropHuagang(d), mw: 1.0, mh: 1.4, face: 'C', origin: 'center' },
+    { key: 'prop_lamp_pole', geo: [-0.35, -1.1, 0, 0.35, 0.35, 3.8], paint: (d) => paintPropLampPole(d), mw: 0.7, mh: 3.8, face: 'C', origin: 'center' },
+    /* Site206 gable/brick/chitou/cap */
+    { key: 'wall_shangqiang', geo: [0, -0.05, 0, 1.2, 0.1, 2.6], paint: (d) => paintShangqiang(d, 1.2, 2.6), mw: 1.2, mh: 2.6, face: 'S' },
+    { key: 'brick_qingshui', geo: [0, -0.05, 0, 1.2, 0.1, 1.4], paint: (d) => paintQingshuiBrick(d, 1.2, 1.4), mw: 1.2, mh: 1.4, face: 'S' },
+    { key: 'ornament_chitou', geo: [0, -0.05, 0, 0.7, 0.55, 1.0], paint: (d) => paintChitou(d, { w: 0.7, d: 0.55, h: 0.95 }), mw: 0.7, mh: 0.95, face: 'S' },
+    { key: 'wall_cap', geo: [0, 0, 0, 1.2, 0.45, 0.32], paint: (d) => paintWallCap(d, 1.2, 0.45), mw: 1.2, mh: 0.45, face: 'C' },
+    /* Site210 soft decor: qifan/weiman/liusu/hang */
+    { key: 'banner_qifan', geo: [-0.3, -0.08, -1.7, 0.3, 0.08, 0.12], paint: (d) => paintBannerQifan(d), mw: 0.55, mh: 1.75, face: 'S', origin: 'top' },
+    { key: 'curtain_weiman', geo: [0, -0.1, 0, 2.2, 0.2, 1.0], paint: (d) => paintCurtainWeiman(d, 2.2), mw: 2.2, mh: 1.0, face: 'S' },
+    { key: 'tassel_liusu', geo: [-0.28, -0.12, -0.15, 0.28, 0.12, 1.0], paint: (d) => paintTasselLiusu(d), mw: 0.56, mh: 1.15, face: 'S', origin: 'top' },
+    { key: 'hang_ornament', geo: [-0.22, -0.1, 0, 0.22, 0.1, 1.2], paint: (d) => paintHangOrnament(d), mw: 0.44, mh: 1.2, face: 'S', origin: 'top' },
+    /* Site212 yingbi/zhaobi/huaxin/base */
+    { key: 'wall_yingbi', geo: [0, -0.22, 0, 2.4, 0.28, 2.8], paint: (d) => paintWallYingbi(d, 2.4, 2.8), mw: 2.4, mh: 2.8, face: 'S' },
+    { key: 'wall_zhaobi', geo: [0, -0.24, 0, 2.8, 0.3, 3.2], paint: (d) => paintWallZhaobi(d, 2.8, 3.2), mw: 2.8, mh: 3.2, face: 'S' },
+    { key: 'brick_huaxin', geo: [-0.55, -0.14, -0.55, 0.55, 0.14, 0.55], paint: (d) => paintBrickHuaxin(d), mw: 1.1, mh: 1.1, face: 'S', origin: 'center' },
+    { key: 'screen_base', geo: [0, -0.36, 0, 2.6, 0.36, 0.55], paint: (d) => paintScreenBase(d, 2.6), mw: 2.6, mh: 0.55, face: 'S' },
+    /* Site214 screens/partitions/moon/frame */
+    { key: 'screen_luodizhao', geo: [0, -0.2, 0, 2.6, 0.26, 3.4], paint: (d) => paintScreenLuodizhao(d, 2.6, 3.4), mw: 2.6, mh: 3.4, face: 'S' },
+    { key: 'partition_geshan', geo: [0, -0.16, 0, 2.4, 0.22, 2.8], paint: (d) => paintPartitionGeshan(d, 2.4, 2.8), mw: 2.4, mh: 2.8, face: 'S' },
+    { key: 'moon_yuedong', geo: [0, -0.18, 0, 2.8, 0.28, 3.0], paint: (d) => paintMoonYuedong(d, 2.8, 3.0), mw: 2.8, mh: 3.0, face: 'S' },
+    { key: 'frame_menkuang', geo: [0, -0.22, 0, 2.2, 0.28, 3.2], paint: (d) => paintFrameMenkuang(d, 2.2, 3.2), mw: 2.2, mh: 3.2, face: 'S' },
+    /* Site208 caihua beam/efang/dougong/eave */
+    { key: 'beam_efang', geo: [0, -0.1, 0, 2.6, 0.25, 0.45], paint: (d) => paintBeamEfang(d, 2.6), mw: 2.6, mh: 0.45, face: 'S' },
+    { key: 'caihua_band', geo: [0, -0.08, 0, 2.4, 0.2, 0.3], paint: (d) => paintCaihuaBand(d, 2.4), mw: 2.4, mh: 0.3, face: 'S' },
+    { key: 'dougong_block', geo: [-0.8, -0.65, 0, 0.8, 0.32, 0.55], paint: (d) => paintDougongBlock(d), mw: 1.6, mh: 0.55, face: 'S', origin: 'center' },
+    { key: 'eave_board', geo: [0, -0.1, 0, 2.2, 0.22, 0.35], paint: (d) => paintEaveBoard(d, 2.2), mw: 2.2, mh: 0.35, face: 'S' },
+    /* Site211 platform taiji/tiaotiao/chuidai/taduo */
+    { key: 'base_taiji', geo: [0, -0.24, 0, 1.6, 0.24, 1.1], paint: (d) => paintBaseTaiji(d, 1.6, 1.1), mw: 1.6, mh: 1.1, face: 'S' },
+    { key: 'step_tiaotiao', geo: [0, -0.3, 0, 1.6, 0.34, 0.3], paint: (d) => paintStepTiaotiao(d, 1.6), mw: 1.6, mh: 0.3, face: 'S' },
+    { key: 'ramp_chuidai', geo: [-0.08, -1.5, 0, 0.5, 0.3, 1.22], paint: (d) => paintRampChuidai(d), mw: 0.58, mh: 1.22, face: 'S' },
+    { key: 'stair_taduo', geo: [0, -0.3, 0, 1.4, 0.3, 0.34], paint: (d) => paintStairTaduo(d, 1.4), mw: 1.4, mh: 0.34, face: 'S' },
+    /* Site213 ridge beasts: chiwen/zoushou/ornament/chuiji */
+    { key: 'ridge_chiwen', geo: [0, -0.24, 0, 0.95, 0.18, 1.32], paint: (d) => paintRidgeChiwen(d, 0.95), mw: 0.95, mh: 1.32, face: 'S' },
+    { key: 'beast_zoushou', geo: [-0.28, -0.24, 0, 0.28, 0.18, 1.1], paint: (d) => paintBeastZoushou(d), mw: 0.56, mh: 1.1, face: 'S', origin: 'center' },
+    { key: 'ridge_ornament', geo: [-0.32, -0.2, 0, 0.32, 0.2, 1.1], paint: (d) => paintRidgeOrnament(d), mw: 0.64, mh: 1.1, face: 'S', origin: 'center' },
+    { key: 'hip_chuiji', geo: [0, -0.16, 0, 1.2, 0.16, 0.4], paint: (d) => paintHipChuiji(d, 1.2), mw: 1.2, mh: 0.4, face: 'S' },
+    /* Site215 hitching: shuanma/shangma/ganddang/curb_marker */
+    { key: 'post_shuanma', geo: [-0.4, -0.4, 0, 0.4, 0.4, 2.55], paint: (d) => paintPostShuanma(d), mw: 0.8, mh: 2.55, face: 'C', origin: 'center' },
+    { key: 'stone_shangma', geo: [-0.75, -0.5, 0, 0.75, 0.5, 0.85], paint: (d) => paintStoneShangma(d), mw: 1.5, mh: 0.85, face: 'C', origin: 'center' },
+    { key: 'stone_ganddang', geo: [-0.45, -0.3, 0, 0.45, 0.3, 2.0], paint: (d) => paintStoneGanddang(d), mw: 0.9, mh: 2.0, face: 'C', origin: 'center' },
+    { key: 'curb_marker', geo: [-0.3, -0.3, 0, 0.3, 0.3, 1.0], paint: (d) => paintCurbMarker(d), mw: 0.6, mh: 1.0, face: 'C', origin: 'center' },
+    /* Site216 louwindow: window_lou/wall_huaziang/brick_toukong/lattice_wall */
+    { key: 'window_lou', geo: [0, -0.18, 0, 1.8, 0.24, 2.0], paint: (d) => paintWindowLou(d, 1.8, 2.0), mw: 1.8, mh: 2.0, face: 'S' },
+    { key: 'wall_huaziang', geo: [0, -0.2, 0, 3.2, 0.28, 2.6], paint: (d) => paintWallHuaziang(d, 3.2, 2.6), mw: 3.2, mh: 2.6, face: 'S' },
+    { key: 'brick_toukong', geo: [-0.7, -0.16, -0.7, 0.7, 0.16, 0.7], paint: (d) => paintBrickToukong(d), mw: 1.4, mh: 1.4, face: 'S', origin: 'center' },
+    { key: 'lattice_wall', geo: [0, -0.16, 0, 2.4, 0.22, 2.4], paint: (d) => paintLatticeWall(d, 2.4, 2.4), mw: 2.4, mh: 2.4, face: 'S' },
+    /* Site217 pavilions: jingting/luting/paifang_s/roof_ting */
+    { key: 'pavilion_jingting', geo: [-1.4, -1.4, 0, 1.4, 1.4, 4.0], paint: (d) => paintPavilionJingting(d), mw: 2.8, mh: 4.0, face: 'C', origin: 'center' },
+    { key: 'pavilion_luting', geo: [-1.6, -1.3, 0, 1.6, 1.3, 4.0], paint: (d) => paintPavilionLuting(d), mw: 3.2, mh: 4.0, face: 'C', origin: 'center' },
+    { key: 'gate_paifang_s', geo: [-1.95, -0.6, 0, 1.95, 0.6, 4.8], paint: (d) => paintGatePaifangS(d), mw: 3.9, mh: 4.8, face: 'C', origin: 'center' },
+    { key: 'roof_ting', geo: [-1.45, -1.45, 0, 1.45, 1.45, 1.45], paint: (d) => paintRoofTing(d), mw: 2.9, mh: 1.45, face: 'C', origin: 'center' },
+    /* Site218 chuihuamen: gate_chuihua/gate_menlou_s/eave_menzhao/post_menzhu */
+    { key: 'gate_chuihua', geo: [-1.8, -0.6, 0, 1.8, 0.6, 4.5], paint: (d) => paintGateChuihua(d), mw: 3.6, mh: 4.5, face: 'C', origin: 'center' },
+    { key: 'gate_menlou_s', geo: [-1.6, -0.75, 0, 1.6, 0.75, 4.65], paint: (d) => paintGateMenlouS(d), mw: 3.2, mh: 4.65, face: 'C', origin: 'center' },
+    { key: 'eave_menzhao', geo: [-1.45, -0.4, 0, 1.45, 0.5, 2.1], paint: (d) => paintEaveMenzhao(d), mw: 2.9, mh: 2.1, face: 'C', origin: 'center' },
+    { key: 'post_menzhu', geo: [-0.45, -0.45, 0, 0.45, 0.45, 2.4], paint: (d) => paintPostMenzhu(d), mw: 0.9, mh: 2.4, face: 'C', origin: 'center' },
+    /* Site219 rockery: rock_taihu/rock_dieshi/rock_peak_s/plant_rock_moss */
+    { key: 'rock_taihu', geo: [-1.0, -0.8, 0, 1.0, 0.8, 3.65], paint: (d) => paintRockTaihu(d), mw: 2.0, mh: 3.65, face: 'C', origin: 'center' },
+    { key: 'rock_dieshi', geo: [-1.45, -1.1, 0, 1.45, 1.1, 3.95], paint: (d) => paintRockDieshi(d), mw: 2.9, mh: 3.95, face: 'C', origin: 'center' },
+    { key: 'rock_peak_s', geo: [-0.6, -0.5, 0, 0.6, 0.5, 3.25], paint: (d) => paintRockPeakS(d), mw: 1.2, mh: 3.25, face: 'C', origin: 'center' },
+    { key: 'plant_rock_moss', geo: [-0.6, -0.45, 0, 0.6, 0.45, 1.45], paint: (d) => paintPlantRockMoss(d), mw: 1.2, mh: 1.45, face: 'C', origin: 'center' },
+    /* Site220 meirenkao: seat_meirenkao/seat_feilaichi/rail_zuokan/bench_lang */
+    { key: 'seat_meirenkao', geo: [-1.4, -0.4, 0, 1.4, 0.45, 1.5], paint: (d) => paintSeatMeirenkao(d), mw: 2.8, mh: 1.5, face: 'C', origin: 'center' },
+    { key: 'seat_feilaichi', geo: [-0.6, -0.5, 0, 0.6, 0.6, 1.6], paint: (d) => paintSeatFeilaichi(d), mw: 1.2, mh: 1.6, face: 'C', origin: 'center' },
+    { key: 'rail_zuokan', geo: [-1.25, -0.3, 0, 1.25, 0.35, 1.3], paint: (d) => paintRailZuokan(d), mw: 2.5, mh: 1.3, face: 'C', origin: 'center' },
+    { key: 'bench_lang', geo: [-1.1, -0.4, 0, 1.1, 0.4, 0.75], paint: (d) => paintBenchLang(d), mw: 2.2, mh: 0.75, face: 'C', origin: 'center' },
+    /* Site221 biane: sign_biane/sign_duilian/sign_zhaopai_s/sign_hanging */
+    { key: 'sign_biane', geo: [-1.4, -0.22, -0.5, 1.4, 0.22, 0.55], paint: (d) => paintSignBiane(d), mw: 2.8, mh: 1.05, face: 'S', origin: 'center' },
+    { key: 'sign_duilian', geo: [-0.28, -0.14, 0, 0.28, 0.14, 2.5], paint: (d) => paintSignDuilian(d), mw: 0.56, mh: 2.5, face: 'S', origin: 'center' },
+    { key: 'sign_zhaopai_s', geo: [-0.65, -0.16, -0.1, 0.65, 0.14, 0.6], paint: (d) => paintSignZhaopaiS(d), mw: 1.3, mh: 0.7, face: 'S', origin: 'center' },
+    { key: 'sign_hanging', geo: [-0.45, -0.14, -0.2, 0.45, 0.14, 1.7], paint: (d) => paintSignHanging(d), mw: 0.9, mh: 1.9, face: 'S', origin: 'top' },
+    /* Site222 baogu densify: stone_baogu(reuse site209)/stone_mendun/stone_lu */
+    { key: 'stone_mendun', geo: [-0.5, -0.42, 0, 0.5, 0.42, 1.25], paint: (d) => paintStoneMendun(d), mw: 1.0, mh: 1.25, face: 'C', origin: 'center' },
+    { key: 'stone_lu', geo: [-0.38, -0.32, 0, 0.38, 0.32, 1.28], paint: (d) => paintStoneLu(d), mw: 0.76, mh: 1.28, face: 'C', origin: 'center' },
+    /* Site223 penjing: pot_penjing/bed_huatan/stone_shitai */
+    { key: 'pot_penjing', geo: [-0.55, -0.55, 0, 0.55, 0.55, 2.85], paint: (d) => paintPotPenjing(d), mw: 1.1, mh: 2.85, face: 'C', origin: 'center' },
+    { key: 'bed_huatan', geo: [-0.95, -0.7, 0, 0.95, 0.7, 1.45], paint: (d) => paintBedHuatan(d), mw: 1.9, mh: 1.45, face: 'C', origin: 'center' },
+    { key: 'stone_shitai', geo: [-1.05, -0.5, 0, 1.05, 0.5, 0.85], paint: (d) => paintStoneShitai(d), mw: 2.1, mh: 0.85, face: 'C', origin: 'center' },
+    /* Site224 shishi densify: stone_shishi / stone_shishi_s（门兽≠屋脊兽） */
+    { key: 'stone_shishi', geo: [-0.58, -0.5, 0, 0.58, 0.5, 1.62], paint: (d) => paintStoneShishi(d), mw: 1.16, mh: 1.62, face: 'C', origin: 'center' },
+    { key: 'stone_shishi_s', geo: [-0.4, -0.34, 0, 0.4, 0.34, 1.12], paint: (d) => paintStoneShishiS(d), mw: 0.8, mh: 1.12, face: 'C', origin: 'center' },
+    /* Site225 gongdeng densify: lantern_gong / lantern_sha / lantern_stand */
+    { key: 'lantern_gong', geo: [-0.45, -0.45, 0.5, 0.45, 0.45, 2.6], paint: (d) => paintLanternGong(d), mw: 0.9, mh: 2.1, face: 'C', origin: 'center' },
+    { key: 'lantern_sha', geo: [-0.4, -0.4, 0.4, 0.4, 0.4, 2.2], paint: (d) => paintLanternSha(d), mw: 0.8, mh: 1.8, face: 'C', origin: 'center' },
+    { key: 'lantern_stand', geo: [-0.35, -0.95, 0, 0.35, 0.35, 2.5], paint: (d) => paintLanternStand(d), mw: 0.7, mh: 2.5, face: 'C', origin: 'center' },
+    /* Site226 zhuli densify: fence_zhuli / fence_huali / gate_chaifei（室外篱门≠漏窗/内隔断） */
+    { key: 'fence_zhuli', geo: [-1.1, -0.2, 0, 1.1, 0.2, 1.5], paint: (d) => paintFenceZhuli(d), mw: 2.2, mh: 1.5, face: 'C', origin: 'center' },
+    { key: 'fence_huali', geo: [-1.2, -0.22, 0, 1.2, 0.22, 1.85], paint: (d) => paintFenceHuali(d), mw: 2.4, mh: 1.85, face: 'C', origin: 'center' },
+    { key: 'gate_chaifei', geo: [-1.05, -0.24, 0, 1.05, 0.24, 2.1], paint: (d) => paintGateChaifei(d), mw: 2.1, mh: 2.1, face: 'C', origin: 'center' },
+    /* Site227 huotan densify: stall_huotan / rack_huojia / pole_liangshai */
+    { key: 'stall_huotan', geo: [-1.1, -0.65, 0, 1.1, 0.6, 2.25], paint: (d) => paintStallHuotan(d), mw: 2.2, mh: 2.25, face: 'C', origin: 'center' },
+    { key: 'rack_huojia', geo: [-0.8, -0.35, 0, 0.8, 0.35, 2.6], paint: (d) => paintRackHuojia(d), mw: 1.6, mh: 2.6, face: 'C', origin: 'center' },
+    { key: 'pole_liangshai', geo: [-1.25, -0.4, 0, 1.25, 0.4, 2.9], paint: (d) => paintPoleLiangshai(d), mw: 2.5, mh: 2.9, face: 'C', origin: 'center' },
+    /* Site228 shizhuo densify: seat_shizhuo / seat_shideng / seat_qiping（庭院闲坐对弈≠廊边美人靠/简易街具） */
+    { key: 'seat_shizhuo', geo: [-1.0, -0.8, 0, 1.0, 0.8, 0.95], paint: (d) => paintSeatShizhuo(d), mw: 2.0, mh: 0.95, face: 'C', origin: 'center' },
+    { key: 'seat_shideng', geo: [-0.55, -0.55, 0, 0.55, 0.55, 0.85], paint: (d) => paintSeatShideng(d), mw: 1.1, mh: 0.85, face: 'C', origin: 'center' },
+    { key: 'seat_qiping', geo: [-0.9, -0.9, 0, 0.9, 0.9, 1.0], paint: (d) => paintSeatQiping(d), mw: 1.8, mh: 1.0, face: 'C', origin: 'center' },
+    /* Site229 shuigang densify: prop_shuigang / prop_jinglan / prop_shuitong */
+    { key: 'prop_shuigang', geo: [-0.55, -0.55, 0, 0.55, 0.55, 1.35], paint: (d) => paintPropShuigang(d), mw: 1.1, mh: 1.35, face: 'C', origin: 'center' },
+    { key: 'prop_jinglan', geo: [-0.9, -0.9, 0, 0.9, 0.9, 1.65], paint: (d) => paintPropJinglan(d), mw: 1.8, mh: 1.65, face: 'C', origin: 'center' },
+    { key: 'prop_shuitong', geo: [-0.4, -0.4, 0, 0.4, 0.4, 1.3], paint: (d) => paintPropShuitong(d), mw: 0.8, mh: 1.3, face: 'C', origin: 'center' },
+    /* Site230 xianglu densify: prop_xianglu / prop_zhutai / prop_gongan_s（香火案几≠影壁/匾额/门侧小石炉） */
+    { key: 'prop_xianglu', geo: [-0.5, -0.42, 0, 0.5, 0.42, 2.1], paint: (d) => paintPropXianglu(d), mw: 1.0, mh: 2.1, face: 'C', origin: 'center' },
+    { key: 'prop_zhutai', geo: [-0.35, -0.3, 0, 0.35, 0.3, 2.0], paint: (d) => paintPropZhutai(d), mw: 0.7, mh: 2.0, face: 'C', origin: 'center' },
+    { key: 'prop_gongan_s', geo: [-1.0, -0.45, 0, 1.0, 0.45, 1.25], paint: (d) => paintPropGonganS(d), mw: 2.0, mh: 1.25, face: 'C', origin: 'center' },
+    /* Site231 chaidui densify: prop_chaidui / prop_caoduo / prop_liangdai（柴草粮储≠货摊/水缸） */
+    { key: 'prop_chaidui', geo: [-0.95, -0.5, 0, 0.95, 0.5, 1.2], paint: (d) => paintPropChaidui(d), mw: 1.9, mh: 1.2, face: 'C', origin: 'center' },
+    { key: 'prop_caoduo', geo: [-1.0, -0.9, 0, 1.0, 0.9, 1.9], paint: (d) => paintPropCaoduo(d), mw: 2.0, mh: 1.9, face: 'C', origin: 'center' },
+    { key: 'prop_liangdai', geo: [-0.75, -0.5, 0, 0.75, 0.5, 2.0], paint: (d) => paintPropLiangdai(d), mw: 1.5, mh: 2.0, face: 'C', origin: 'center' },
+  ];
+
+  function ensure(makeCanvas) {
+    if (ready) return;
+    makeCanvas = makeCanvas || defaultMake;
+    const pack = [];
+    for (const m of MODULES) {
+      const b = boundsOf(m.geo, 6);
+      pack.push({ m, w: b[2] - b[0], h: b[3] - b[1], ox: -b[0], oy: -b[1], bx: b });
+    }
+    const WIDTH = 2048;
+    let x = 2, y = 2, rowH = 0, totalH = 0;
+    const placed = [];
+    for (const it of pack) {
+      if (x + it.w + 2 > WIDTH) { y += rowH + 2; x = 2; rowH = 0; }
+      it.x = x; it.y = y;
+      x += it.w + 2; rowH = Math.max(rowH, it.h);
+      totalH = Math.max(totalH, y + rowH + 2);
+      placed.push(it);
+    }
+    atlas = makeCanvas(WIDTH, Math.max(64, totalH));
+    ag = atlas.getContext('2d');
+    ag.clearRect(0, 0, WIDTH, totalH);
+    frames = {};
+    for (const it of placed) {
+      ag.save(); ag.beginPath(); ag.rect(it.x, it.y, it.w, it.h); ag.clip();
+      const d = painter(ag, it.x + it.ox, it.y + it.oy);
+      it.m.paint(d);
+      ag.restore();
+      // hard edges
+      try {
+        const im = ag.getImageData(it.x, it.y, it.w, it.h), a = im.data;
+        for (let i = 3; i < a.length; i += 4) a[i] = a[i] >= 110 ? 255 : 0;
+        ag.putImageData(im, it.x, it.y);
+      } catch (_) {}
+      frames[it.m.key] = {
+        x: it.x, y: it.y, w: it.w, h: it.h, ox: it.ox, oy: it.oy,
+        mw: it.m.mw, mh: it.m.mh, face: it.m.face, origin: it.m.origin || 'bay',
+        geo: it.m.geo.slice(),
+      };
+    }
+    ready = true;
+  }
+
+  /** Blit one module so its local origin lands at world (x,y,z). */
+  function stamp(d, key, x, y, z, o = {}) {
+    ensure();
+    const f = frames[key]; if (!f) return;
+    const p = d.P(x, y, z);
+    const g = d.g;
+    const sx = o.sx || 1, sy = o.sy || 1;
+    const dw = Math.round(f.w * sx), dh = Math.round(f.h * sy);
+    g.save();
+    if (o.alpha != null) g.globalAlpha = o.alpha;
+    g.imageSmoothingEnabled = false;
+    g.drawImage(atlas, f.x, f.y, f.w, f.h, Math.round(p[0] - f.ox * sx), Math.round(p[1] - f.oy * sy), dw, dh);
+    g.restore();
+  }
+
+  /** Tile-fill a south-face rectangle with repeating modules (like jinghuaili wall bays). */
+  function fillS(d, key, y, x0, z0, x1, z1, o = {}) {
+    ensure();
+    const f = frames[key]; if (!f) return;
+    const mw = o.mw || f.mw, mh = o.mh || f.mh;
+    const sx = (x1 - x0) > 0 ? Math.min(1.25, Math.max(0.55, (x1 - x0) / Math.max(1, Math.ceil((x1 - x0) / mw)) / mw)) : 1;
+    // prefer integer tiles along x; scale slightly to fit
+    const n = Math.max(1, Math.round((x1 - x0) / mw));
+    const tw = (x1 - x0) / n;
+    const m = Math.max(1, Math.round((z1 - z0) / mh));
+    const th = (z1 - z0) / m;
+    for (let i = 0; i < n; i++) for (let j = 0; j < m; j++) {
+      stamp(d, key, x0 + i * tw, y, z0 + j * th, { sx: tw / mw, sy: th / mh });
+    }
+  }
+
+  function fillW(d, key, x, y0, z0, y1, z1, o = {}) {
+    ensure();
+    const f = frames[key]; if (!f) return;
+    const mw = o.mw || f.mw, mh = o.mh || f.mh;
+    const n = Math.max(1, Math.round((y1 - y0) / mw));
+    const tw = (y1 - y0) / n;
+    const m = Math.max(1, Math.round((z1 - z0) / mh));
+    const th = (z1 - z0) / m;
+    for (let i = 0; i < n; i++) for (let j = 0; j < m; j++) {
+      stamp(d, key, x, y0 + i * tw, z0 + j * th, { sx: tw / mw, sy: th / mh });
+    }
+  }
+
+  /** Stamp tile eave modules along a polyline of world points (S-eave).
+   * Site198 denser + 瓦当/滴水；Site205 再加密瓦当/滴水/檐口. */
+  function stampEaveTiles(d, pts, o = {}) {
+    ensure();
+    if (!pts || pts.length < 2) return;
+    const site205 = o.site205 !== false;
+    const pitch = site205 ? ((o && o.dense) ? 0.48 : 0.58) : ((o && o.dense) ? 0.65 : 0.78);
+    let acc = 0;
+    for (let i = 0; i < pts.length - 1; i++) {
+      const a = pts[i], b = pts[i + 1];
+      const dx = b[0] - a[0], dy = b[1] - a[1], dz = b[2] - a[2];
+      const len = Math.sqrt(dx * dx + dy * dy) || 0.001;
+      const steps = Math.max(1, Math.round(len / pitch));
+      for (let s = 0; s < steps; s++) {
+        const t = s / steps;
+        const px = a[0] + dx * t, py = a[1] + dy * t, pz = a[2] + dz * t;
+        stamp(d, 'tile_eave_S', px, py, pz, { sx: len / steps, sy: 1 });
+        if (site205) {
+          /* 檐口 fascia every step */
+          stamp(d, 'eave_yankou', px, py + 0.01, pz + 0.02, { sx: Math.min(1.1, len / steps), sy: 0.95 });
+          if (s % 2 === 0) stamp(d, 'tile_wadang', px, py - 0.025, pz - 0.05, { sx: 0.9, sy: 0.95 });
+          else stamp(d, 'tile_dishui', px, py - 0.035, pz - 0.08, { sx: 0.9, sy: 1.0 });
+          /* denser: also overlay Site198 modules every 3rd */
+          if (s % 3 === 0) stamp(d, 'tile_wadang_S', px + 0.08, py - 0.015, pz - 0.03, { sx: 0.7, sy: 0.8 });
+          if (s % 3 === 1) stamp(d, 'tile_drip_S', px + 0.06, py - 0.02, pz - 0.05, { sx: 0.7, sy: 0.85 });
+        } else {
+          if (s % 2 === 0) stamp(d, 'tile_wadang_S', px, py - 0.02, pz - 0.04, { sx: 0.85, sy: 0.9 });
+          else stamp(d, 'tile_drip_S', px, py - 0.03, pz - 0.06, { sx: 0.85, sy: 0.95 });
+        }
+      }
+      acc += len;
+    }
+  }
+  /** Site205：沿屋面坡 stamp 瓦垄 modules. */
+  function stampWalong(d, pts, o = {}) {
+    ensure();
+    if (!pts || pts.length < 2) return;
+    const pitch = (o && o.dense) ? 0.55 : 0.7;
+    for (let i = 0; i < pts.length - 1; i++) {
+      const a = pts[i], b = pts[i + 1];
+      const dx = b[0] - a[0], dy = b[1] - a[1], dz = b[2] - a[2];
+      const len = Math.sqrt(dx * dx + dy * dy) || 0.001;
+      const steps = Math.max(1, Math.round(len / pitch));
+      for (let s = 0; s < steps; s++) {
+        const t = s / steps;
+        stamp(d, 'tile_walong', a[0] + dx * t, a[1] + dy * t, a[2] + dz * t, {
+          sx: (o.sx || (len / steps)), sy: o.sy || 0.9,
+        });
+      }
+    }
+  }
+  /** Stamp 鸱吻 at ridge ends (atlas kitbash). */
+  function stampChiwen(d, x, y, z, o = {}) {
+    ensure();
+    const key = o.flip ? 'chiwen_flip_S' : 'chiwen_S';
+    stamp(d, key, x, y, z, { sx: o.sx || 1, sy: o.sy || 1 });
+  }
+
+  /** Site207：沿栏杆 polyline stamp 寻杖 + 小柱；可选雀替/挂落。少改宏观布局. */
+  function stampRailQueti(d, pts, o = {}) {
+    ensure();
+    if (!pts || pts.length < 2) return;
+    const pitch = (o && o.dense) ? 0.7 : 0.95;
+    const zOff = o.zOff || 0;
+    for (let i = 0; i < pts.length - 1; i++) {
+      const a = pts[i], b = pts[i + 1];
+      const dx = b[0] - a[0], dy = b[1] - a[1], dz = (b[2] || 0) - (a[2] || 0);
+      const len = Math.sqrt(dx * dx + dy * dy) || 0.001;
+      const steps = Math.max(1, Math.round(len / pitch));
+      for (let s = 0; s < steps; s++) {
+        const t = s / steps;
+        const px = a[0] + dx * t, py = a[1] + dy * t, pz = (a[2] || 0) + dz * t + zOff;
+        stamp(d, 'rail_xunzhang', px, py, pz, { sx: Math.min(1.15, (len / steps) / 1.4 * (o.sx || 1.05)), sy: o.sy || 0.95 });
+        if (s % 2 === 0) stamp(d, 'baluster_xiaozhu', px, py - 0.02, pz, { sx: 0.85, sy: 0.9 });
+      }
+      /* 雀替 at segment ends (column joints) */
+      if (o.queti !== false) {
+        stamp(d, 'ornament_queti', a[0], a[1] - 0.04, (a[2] || 0) + (o.quetiZ || 0.85), { sx: 0.75, sy: 0.8 });
+        stamp(d, 'ornament_queti', b[0], b[1] - 0.04, (b[2] || 0) + (o.quetiZ || 0.85), { sx: 0.75, sy: 0.8 });
+      }
+    }
+  }
+  /** Site207：柱间挂落 stamp（水平带） */
+  function stampGualuo(d, x0, y, z, x1, o = {}) {
+    ensure();
+    const span = Math.abs(x1 - x0);
+    const n = Math.max(1, Math.round(span / 1.5));
+    const tw = span / n;
+    const xStart = Math.min(x0, x1);
+    for (let i = 0; i < n; i++) {
+      stamp(d, 'hanging_gualuo', xStart + i * tw, y, z, { sx: tw / 1.6, sy: o.sy || 0.95 });
+    }
+  }
+
+
+  /** Site209：大门门钉/铺首/门槛/抱鼓 stamp（少改宏观布局） */
+  function stampDoorHardware(d, x0, y, z0, x1, z1, o = {}) {
+    ensure();
+    const w = Math.abs(x1 - x0) || 1;
+    const h = Math.max(0.8, Math.abs(z1 - z0) || 2);
+    const xMid = (x0 + x1) / 2;
+    const dense = o.dense !== false;
+    /* 门钉面板 densify */
+    if (o.mending !== false) {
+      const n = dense ? Math.max(2, Math.round(w / 0.55)) : Math.max(1, Math.round(w / 0.85));
+      const tw = w / n;
+      const xStart = Math.min(x0, x1);
+      for (let i = 0; i < n; i++) {
+        stamp(d, 'door_mending', xStart + i * tw, y, z0, { sx: tw / 1.0, sy: h / 2.2 });
+      }
+    }
+    /* 铺首衔环 center (or dual for wide) */
+    if (o.pushou !== false) {
+      const pz = z0 + h * (o.pushouT || 0.52);
+      stamp(d, 'knocker_pushou', xMid, y - 0.04, pz, { sx: o.pushouSx || 0.95, sy: o.pushouSy || 0.95 });
+      if (dense && w > 2.2) {
+        stamp(d, 'knocker_pushou', x0 + w * 0.28, y - 0.04, pz, { sx: 0.75, sy: 0.8 });
+        stamp(d, 'knocker_pushou', x0 + w * 0.72, y - 0.04, pz, { sx: 0.75, sy: 0.8 });
+      }
+    }
+    /* 门槛 */
+    if (o.menkan !== false) {
+      stamp(d, 'sill_menkan', Math.min(x0, x1), y - 0.02, z0 - 0.02, { sx: w / 1.4, sy: o.menkanSy || 1.05 });
+    }
+    /* 抱鼓石 pair */
+    if (o.baogu !== false) {
+      const bz = o.baoguZ != null ? o.baoguZ : Math.max(0, z0 - 0.05);
+      const inset = o.baoguInset != null ? o.baoguInset : 0.15;
+      stamp(d, 'stone_baogu', Math.min(x0, x1) - inset, y - 0.08, bz, { sx: o.baoguSx || 0.85, sy: o.baoguSy || 0.9 });
+      stamp(d, 'stone_baogu', Math.max(x0, x1) + inset, y - 0.08, bz, { sx: o.baoguSx || 0.85, sy: o.baoguSy || 0.9 });
+    }
+  }
+
+
+  /** Site212：影壁/照壁/砖雕花心/基座 stamp（入口点景；少改宏观布局） */
+  function stampYingbi(d, x, y, z, o = {}) {
+    ensure();
+    const kind = o.kind || 'yingbi';
+    const sx = o.sx || 1, sy = o.sy || 1;
+    const baseKey = 'screen_base';
+    const wallKey = kind === 'zhaobi' ? 'wall_zhaobi' : 'wall_yingbi';
+    const wallMw = kind === 'zhaobi' ? 2.8 : 2.4;
+    const wallMh = kind === 'zhaobi' ? 3.2 : 2.8;
+    if (o.base !== false) {
+      stamp(d, baseKey, x - (wallMw * sx) / 2, y, z, { sx: (wallMw * sx) / 2.6, sy: o.baseSy || 1.0 });
+    }
+    const wz = z + (o.base !== false ? 0.48 * (o.baseSy || 1) : 0);
+    stamp(d, wallKey, x - (wallMw * sx) / 2, y - 0.02, wz, { sx: sx, sy: sy });
+    if (o.huaxin !== false) {
+      const hz = wz + wallMh * sy * (o.huaxinT || 0.52);
+      stamp(d, 'brick_huaxin', x, y - 0.06, hz, { sx: o.hsx || 0.85, sy: o.hsy || 0.85 });
+    }
+  }
+
+  /** Site210：旗幡/帷幔/流苏/挂饰 stamp（檐下点缀；与幌子/灯笼错位） */
+  function stampSoftDecor(d, x0, y, z, x1, o = {}) {
+    ensure();
+    const span = Math.abs(x1 - x0);
+    const xStart = Math.min(x0, x1);
+    if (o.weiman !== false) {
+      const n = Math.max(1, Math.round(span / 2.0));
+      const tw = span / n;
+      for (let i = 0; i < n; i++) {
+        stamp(d, 'curtain_weiman', xStart + i * tw, y, z, { sx: tw / 2.2, sy: o.weimanSy || 0.85 });
+      }
+    }
+    if (o.tassel !== false) {
+      const step = o.tasselStep || 1.15;
+      for (let x = xStart + 0.35; x < xStart + span - 0.2; x += step) {
+        stamp(d, 'tassel_liusu', x, y - 0.02, z + (o.tasselZ || 0.05), { sx: o.tsx || 0.75, sy: o.tsy || 0.8 });
+      }
+    }
+    if (o.hang !== false) {
+      const step = o.hangStep || 1.6;
+      for (let x = xStart + 0.7; x < xStart + span - 0.3; x += step) {
+        stamp(d, 'hang_ornament', x, y - 0.04, z + (o.hangZ || 0.15), { sx: o.hsx || 0.7, sy: o.hsy || 0.75 });
+      }
+    }
+    if (o.qifan) {
+      const qx = o.qifanX != null ? o.qifanX : xStart + span * 0.5;
+      stamp(d, 'banner_qifan', qx, y - 0.08, z + (o.qifanZ || 0.55), { sx: o.qsx || 0.85, sy: o.qsy || 0.9 });
+    }
+  }
+
+  /** Site211：台基/阶条石/垂带/踏垛 stamp（贴在已有 platform 体量上；不改 footprint；不碰铺地） */
+  function stampPlatform(d, x0, y0, x1, y1, z1, o = {}) {
+    ensure();
+    const w = Math.abs(x1 - x0) || 1;
+    const zTop = Math.max(0.2, z1 || 0.4);
+    const dense = o.dense !== false;
+    const yFront = Math.min(y0, y1);
+    /* 台基南立面 densify */
+    if (o.taiji !== false) {
+      const n = dense ? Math.max(2, Math.round(w / 0.95)) : Math.max(1, Math.round(w / 1.4));
+      const tw = w / n;
+      const xStart = Math.min(x0, x1);
+      for (let i = 0; i < n; i++) {
+        stamp(d, 'base_taiji', xStart + i * tw, yFront - 0.02, 0, { sx: tw / 1.6, sy: zTop / 1.1 });
+      }
+    }
+    /* 阶条石顶缘 */
+    if (o.tiaotiao !== false) {
+      const n = dense ? Math.max(2, Math.round(w / 1.1)) : Math.max(1, Math.round(w / 1.5));
+      const tw = w / n;
+      const xStart = Math.min(x0, x1);
+      for (let i = 0; i < n; i++) {
+        stamp(d, 'step_tiaotiao', xStart + i * tw, yFront - 0.04, zTop - 0.02, { sx: tw / 1.6, sy: 1.05 });
+      }
+    }
+    /* 踏垛 + 垂带（沿 o.steps 或默认中轴） */
+    const steps = o.steps || [];
+    const doStairs = o.taduo !== false && (steps.length || o.forceStairs);
+    if (doStairs) {
+      const list = steps.length ? steps : [[(x0 + x1) / 2, Math.min(w * 0.4, 3.6)]];
+      for (const st of list) {
+        const cx = st[0], sw = st[1] || 3.2;
+        const n = Math.max(2, Math.round(zTop / 0.16));
+        const dz = zTop / n;
+        for (let k = 0; k < n; k++) {
+          const yy = yFront - (n - k) * 0.3;
+          const zz = dz * k;
+          stamp(d, 'stair_taduo', cx - sw / 2, yy - 0.02, zz, { sx: sw / 1.4, sy: Math.max(0.85, dz / 0.28) });
+        }
+        if (o.chuidai !== false) {
+          const n2 = n;
+          stamp(d, 'ramp_chuidai', cx - sw / 2 - 0.15, yFront - n2 * 0.3, 0, { sx: 0.95, sy: Math.max(0.85, zTop / 1.15) });
+          stamp(d, 'ramp_chuidai', cx + sw / 2 - 0.25, yFront - n2 * 0.3, 0, { sx: 0.95, sy: Math.max(0.85, zTop / 1.15) });
+        }
+      }
+    } else if (o.chuidai && steps.length) {
+      for (const st of steps) {
+        const cx = st[0], sw = st[1] || 3.2;
+        const n = Math.max(2, Math.round(zTop / 0.16));
+        stamp(d, 'ramp_chuidai', cx - sw / 2 - 0.15, yFront - n * 0.3, 0, { sx: 0.9, sy: zTop / 1.15 });
+        stamp(d, 'ramp_chuidai', cx + sw / 2 - 0.25, yFront - n * 0.3, 0, { sx: 0.9, sy: zTop / 1.15 });
+      }
+    }
+  }
+
+
+  /** Site213：正脊鸱吻 densify + 正脊饰 + 垂脊走兽 + 垂脊瓦带（少改宏观布局；与瓦当衔接） */
+  function stampRidgeBeasts(d, o = {}) {
+    ensure();
+    const ym = o.ym, Ht = o.Ht, rh = o.rh || 0.35;
+    const rx0 = o.rx0, rx1 = o.rx1;
+    if (ym == null || Ht == null || rx0 == null || rx1 == null) return;
+    const dense = o.dense !== false;
+    /* denser 鸱吻 overlay at ridge ends */
+    if (o.chiwen !== false) {
+      for (const [x, flip] of [[rx0, true], [rx1, false]]) {
+        const key = flip ? 'ridge_chiwen' : 'ridge_chiwen';
+        stamp(d, key, x - (flip ? 0.05 : 0.85), ym - 0.18, Ht + rh * 0.02, {
+          sx: Math.max(0.9, Math.min(1.45, 0.6 + rh)),
+          sy: Math.max(0.9, Math.min(1.5, 0.75 + rh)),
+        });
+        /* also keep classic chiwen underlay slightly inset for kitbash density */
+        if (dense) stampChiwen(d, x - (flip ? 0.02 : 0.7), ym - 0.14, Ht + rh * 0.08, {
+          flip, sx: Math.max(0.75, Math.min(1.2, 0.5 + rh * 0.85)), sy: Math.max(0.75, Math.min(1.25, 0.6 + rh * 0.85)),
+        });
+      }
+    }
+    /* 正脊饰 along main ridge */
+    if (o.ornament !== false && rh > 0.12) {
+      const span = Math.abs(rx1 - rx0);
+      const step = dense ? 1.35 : 1.9;
+      const margin = 0.85;
+      for (let x = rx0 + margin; x < rx1 - margin; x += step) {
+        stamp(d, 'ridge_ornament', x, ym - 0.08, Ht + rh * 0.55, { sx: o.osx || 0.75, sy: o.osy || 0.8 });
+      }
+      /* center finial if long enough */
+      if (span > 4.5) {
+        stamp(d, 'ridge_ornament', (rx0 + rx1) / 2, ym - 0.1, Ht + rh * 0.7, { sx: 0.95, sy: 1.05 });
+      }
+    }
+    /* 垂脊瓦带 + 走兽 along hip rays */
+    const hips = o.hips || [];
+    for (const hip of hips) {
+      const [a, b] = hip; /* a near ridge, b near eave corner */
+      if (!a || !b) continue;
+      const dx = b[0] - a[0], dy = b[1] - a[1], dz = (b[2] || 0) - (a[2] || 0);
+      const len = Math.sqrt(dx * dx + dy * dy) || 0.001;
+      /* hip_chuiji tiles */
+      if (o.chuiji !== false) {
+        const pitch = dense ? 0.55 : 0.75;
+        const steps = Math.max(1, Math.round(len / pitch));
+        for (let s = 0; s < steps; s++) {
+          const t = (s + 0.15) / steps;
+          stamp(d, 'hip_chuiji', a[0] + dx * t, a[1] + dy * t, (a[2] || 0) + dz * t, {
+            sx: Math.min(1.1, (len / steps) / 1.2), sy: 0.9,
+          });
+        }
+      }
+      /* 走兽 along hip (toward eave) */
+      const nBeast = o.beasts != null ? o.beasts : (dense ? 3 : 2);
+      if (o.zoushou !== false && nBeast > 0) {
+        for (let k = 1; k <= nBeast; k++) {
+          const t = Math.min(0.92, 0.18 + k * (0.7 / (nBeast + 1)));
+          stamp(d, 'beast_zoushou', a[0] + dx * t, a[1] + dy * t - 0.04, (a[2] || 0) + dz * t + 0.06, {
+            sx: 0.7 + k * 0.05, sy: 0.75 + k * 0.04,
+          });
+        }
+      }
+    }
+  }
+
+  /** Site214：落地罩/隔扇屏/月洞/门框 stamp（开敞门厅·廊口；少改宏观布局；与格扇互补） */
+  function stampScreens(d, x, y, z, o = {}) {
+    ensure();
+    const kind = o.kind || 'luodizhao';
+    const sx = o.sx || 1, sy = o.sy || 1;
+    if (kind === 'geshan' || kind === 'partition') {
+      stamp(d, 'partition_geshan', x - (2.4 * sx) / 2, y, z, { sx: sx, sy: sy });
+      return;
+    }
+    if (kind === 'yuedong' || kind === 'moon') {
+      stamp(d, 'moon_yuedong', x - (2.8 * sx) / 2, y, z, { sx: sx, sy: sy });
+      return;
+    }
+    if (kind === 'menkuang' || kind === 'frame') {
+      stamp(d, 'frame_menkuang', x - (2.2 * sx) / 2, y, z, { sx: sx, sy: sy });
+      return;
+    }
+    if (kind === 'combo') {
+      stamp(d, 'frame_menkuang', x - (2.2 * sx) / 2, y - 0.02, z, { sx: sx * 0.95, sy: sy * 0.9 });
+      if (o.moon !== false) stamp(d, 'moon_yuedong', x - (2.8 * sx * 0.7) / 2, y + 0.35, z + 0.15, { sx: sx * 0.7, sy: sy * 0.72 });
+      return;
+    }
+    /* default luodizhao */
+    stamp(d, 'screen_luodizhao', x - (2.6 * sx) / 2, y, z, { sx: sx, sy: sy });
+    if (o.withGeshan) {
+      stamp(d, 'partition_geshan', x - (2.4 * sx * 0.75) / 2, y + 0.08, z + 0.05, { sx: sx * 0.75, sy: sy * 0.7 });
+    }
+  }
+
+
+  /** Site216：漏窗/花墙/透空砖雕/花格墙 stamp（艮岳·豪宅侧墙·巷墙；少改宏观布局；与格扇/影壁互补） */
+  function stampLouwindow(d, x, y, z, o = {}) {
+    ensure();
+    const kind = o.kind || 'lou';
+    const sx = o.sx || 1, sy = o.sy || 1;
+    if (kind === 'huaziang' || kind === 'flowerwall') {
+      stamp(d, 'wall_huaziang', x - (3.2 * sx) / 2, y, z, { sx: sx, sy: sy });
+      if (o.toukong !== false) {
+        stamp(d, 'brick_toukong', x, y - 0.04, z + 2.6 * sy * (o.toukongT || 0.48), { sx: o.tsx || 0.75, sy: o.tsy || 0.75 });
+      }
+      return;
+    }
+    if (kind === 'toukong' || kind === 'brick') {
+      stamp(d, 'brick_toukong', x, y, z, { sx: sx, sy: sy });
+      return;
+    }
+    if (kind === 'lattice' || kind === 'lattice_wall') {
+      stamp(d, 'lattice_wall', x - (2.4 * sx) / 2, y, z, { sx: sx, sy: sy });
+      return;
+    }
+    if (kind === 'combo') {
+      stamp(d, 'wall_huaziang', x - (3.2 * sx) / 2, y, z, { sx: sx, sy: sy });
+      stamp(d, 'window_lou', x - (1.8 * sx * 0.7) / 2, y + 0.02, z + 0.35, { sx: sx * 0.7, sy: sy * 0.65 });
+      return;
+    }
+    /* default lou */
+    stamp(d, 'window_lou', x - (1.8 * sx) / 2, y, z, { sx: sx, sy: sy });
+    if (o.withToukong) {
+      stamp(d, 'brick_toukong', x, y - 0.04, z + 1.0 * sy, { sx: 0.65, sy: 0.65 });
+    }
+  }
+
+  function getAtlas() { ensure(); return atlas; }
+  function getFrames() { ensure(); return frames; }
+  function getModules() { return MODULES.map((m) => m.key); }
+
+  // Hook paint so atlas is ready before any ancient draw
+  if (A && A.paint && !A._ancientAtlasHooked) {
+    const _paint = A.paint.bind(A);
+    A.paint = function (makeCanvas, only, used) {
+      _makeCanvas = makeCanvas;
+      ensure(makeCanvas);
+      return _paint(makeCanvas, only, used);
+    };
+    A._ancientAtlasHooked = true;
+  }
+
+
+  /** Site215：拴马桩/上马石/石敢当/路牙石标 stamp（点缀；不改 footprint） */
+  function stampHitching(d, x, y, z, o = {}) {
+    ensure();
+    const kind = o.kind || 'shuanma';
+    const map = {
+      shuanma: 'post_shuanma',
+      shangma: 'stone_shangma',
+      ganddang: 'stone_ganddang',
+      curb: 'curb_marker',
+    };
+    const key = map[kind] || 'post_shuanma';
+    stamp(d, key, x, y, z, { sx: o.sx || 1, sy: o.sy || 1 });
+  }
+
+
+  /** Site217：井亭/路亭/小牌坊/亭顶 stamp（点景；不改 footprint） */
+
+  /** Site219：太湖石/叠石/小峰石/石附苔 stamp（庭院·艮岳外围点景；不改 footprint） */
+  function stampRockery(d, x, y, z, o = {}) {
+    ensure();
+    const kind = o.kind || 'taihu';
+    const map = {
+      taihu: 'rock_taihu',
+      dieshi: 'rock_dieshi',
+      peak: 'rock_peak_s',
+      peak_s: 'rock_peak_s',
+      moss: 'plant_rock_moss',
+      rock_moss: 'plant_rock_moss',
+    };
+    const key = map[kind] || 'rock_taihu';
+    stamp(d, key, x, y, z, { sx: o.sx || 1, sy: o.sy || 1 });
+  }
+
+  function stampPavilions(d, x, y, z, o = {}) {
+    ensure();
+    const kind = o.kind || 'jingting';
+    const map = {
+      jingting: 'pavilion_jingting',
+      luting: 'pavilion_luting',
+      paifang: 'gate_paifang_s',
+      paifang_s: 'gate_paifang_s',
+      roof: 'roof_ting',
+    };
+    const key = map[kind] || 'pavilion_jingting';
+    stamp(d, key, x, y, z, { sx: o.sx || 1, sy: o.sy || 1 });
+  }
+
+  /** Site218：垂花门/小门楼/门罩/门柱石 stamp（宅院入口点景；不改 footprint） */
+  function stampChuihuamen(d, x, y, z, o = {}) {
+    ensure();
+    const kind = o.kind || 'chuihua';
+    const map = {
+      chuihua: 'gate_chuihua',
+      menlou: 'gate_menlou_s',
+      menlou_s: 'gate_menlou_s',
+      menzhao: 'eave_menzhao',
+      menzhu: 'post_menzhu',
+    };
+    const key = map[kind] || 'gate_chuihua';
+    stamp(d, key, x, y, z, { sx: o.sx || 1, sy: o.sy || 1 });
+  }
+
+
+  /** Site220：美人靠/飞来椅/坐槛/廊凳 stamp（廊边亭边点景；不改 footprint） */
+  /** Site221：匾额/对联/小字牌/垂挂牌 stamp（店铺门楣·宅门·巷口·亭侧点景；不改 footprint） */
+  function stampBiane(d, x, y, z, o = {}) {
+    ensure();
+    const kind = o.kind || 'biane';
+    const map = {
+      biane: 'sign_biane',
+      duilian: 'sign_duilian',
+      zhaopai: 'sign_zhaopai_s',
+      zhaopai_s: 'sign_zhaopai_s',
+      hanging: 'sign_hanging',
+      hang: 'sign_hanging',
+    };
+    const key = map[kind] || 'sign_biane';
+    stamp(d, key, x, y, z, { sx: o.sx || 1, sy: o.sy || 1 });
+  }
+
+  /** Site223：盆景/砖花坛/石台 stamp（宅院·巷口·桥头·亭侧·门前点景；不改 footprint） */
+  function stampPenjing(d, x, y, z, o = {}) {
+    ensure();
+    const kind = o.kind || 'penjing';
+    const map = {
+      penjing: 'pot_penjing',
+      pot: 'pot_penjing',
+      pot_penjing: 'pot_penjing',
+      huatan: 'bed_huatan',
+      bed: 'bed_huatan',
+      bed_huatan: 'bed_huatan',
+      shitai: 'stone_shitai',
+      stone: 'stone_shitai',
+      stone_shitai: 'stone_shitai',
+    };
+    const key = map[kind] || 'pot_penjing';
+    stamp(d, key, x, y, z, { sx: o.sx || 1, sy: o.sy || 1 });
+  }
+
+  /** Site224：石狮/小蹲兽 stamp（宅门·桥头·广场/衙署庙前点景；门兽≠屋脊兽；不改 footprint） */
+  function stampShishi(d, x, y, z, o = {}) {
+    ensure();
+    const kind = o.kind || 'shishi';
+    const map = {
+      shishi: 'stone_shishi',
+      stone_shishi: 'stone_shishi',
+      shishi_s: 'stone_shishi_s',
+      stone_shishi_s: 'stone_shishi_s',
+      s: 'stone_shishi_s',
+    };
+    const key = map[kind] || 'stone_shishi';
+    stamp(d, key, x, y, z, { sx: o.sx || 1, sy: o.sy || 1 });
+  }
+
+
+  function stampMeirenkao(d, x, y, z, o = {}) {
+    ensure();
+    const kind = o.kind || 'meirenkao';
+    const map = {
+      meirenkao: 'seat_meirenkao',
+      feilaichi: 'seat_feilaichi',
+      zuokan: 'rail_zuokan',
+      lang: 'bench_lang',
+      bench_lang: 'bench_lang',
+    };
+    const key = map[kind] || 'seat_meirenkao';
+    stamp(d, key, x, y, z, { sx: o.sx || 1, sy: o.sy || 1 });
+  }
+
+  /** Site222：抱鼓石/方门墩/小石炉 stamp（宅门·巷口点景；不改 footprint；stone_baogu 复用 site209） */
+  function stampBaogu(d, x, y, z, o = {}) {
+    ensure();
+    const kind = o.kind || 'baogu';
+    const map = {
+      baogu: 'stone_baogu',
+      stone_baogu: 'stone_baogu',
+      mendun: 'stone_mendun',
+      stone_mendun: 'stone_mendun',
+      lu: 'stone_lu',
+      stone_lu: 'stone_lu',
+    };
+    const key = map[kind] || 'stone_baogu';
+    stamp(d, key, x, y, z, { sx: o.sx || 1, sy: o.sy || 1 });
+  }
+
+/** Site225：宫灯/纱灯/立灯 stamp（门楣·亭角·桥栏·巷口·富户廊前点景；与#113 lanternGlow互补；不改 footprint） */
+  function stampGongdeng(d, x, y, z, o = {}) {
+    ensure();
+    const kind = o.kind || 'gong';
+    const map = {
+      gong: 'lantern_gong',
+      lantern_gong: 'lantern_gong',
+      gongdeng: 'lantern_gong',
+      sha: 'lantern_sha',
+      lantern_sha: 'lantern_sha',
+      stand: 'lantern_stand',
+      lantern_stand: 'lantern_stand',
+      lideng: 'lantern_stand',
+    };
+    const key = map[kind] || 'lantern_gong';
+    stamp(d, key, x, y, z, { sx: o.sx || 1, sy: o.sy || 1 });
+  }
+
+/** Site226：竹篱/花篱/柴扉 stamp（巷口·宅侧·园边·桥头小径点景；与漏窗#131、隔断#129互补；不改 footprint） */
+  function stampZhuli(d, x, y, z, o = {}) {
+    ensure();
+    const kind = o.kind || 'zhuli';
+    const map = {
+      zhuli: 'fence_zhuli',
+      fence_zhuli: 'fence_zhuli',
+      bamboo: 'fence_zhuli',
+      huali: 'fence_huali',
+      fence_huali: 'fence_huali',
+      flower: 'fence_huali',
+      chaifei: 'gate_chaifei',
+      gate_chaifei: 'gate_chaifei',
+      gate: 'gate_chaifei',
+    };
+    const key = map[kind] || 'fence_zhuli';
+    stamp(d, key, x, y, z, { sx: o.sx || 1, sy: o.sy || 1 });
+  }
+
+
+/** Site229：水缸/井栏/水桶 stamp（宅院角·巷口·井边·厨后·桥头点景；与井亭#130互补；不改 footprint） */
+  function stampShuigang(d, x, y, z, o = {}) {
+    ensure();
+    const kind = o.kind || 'shuigang';
+    const map = {
+      shuigang: 'prop_shuigang',
+      prop_shuigang: 'prop_shuigang',
+      jar: 'prop_shuigang',
+      jinglan: 'prop_jinglan',
+      prop_jinglan: 'prop_jinglan',
+      well: 'prop_jinglan',
+      shuitong: 'prop_shuitong',
+      prop_shuitong: 'prop_shuitong',
+      bucket: 'prop_shuitong',
+    };
+    const key = map[kind] || 'prop_shuigang';
+    stamp(d, key, x, y, z, { sx: o.sx || 1, sy: o.sy || 1 });
+  }
+
+
+/** Site231：柴堆/草垛/粮袋 stamp（宅后·厨侧·巷口·码头边·厩旁点景；与货摊#141、水缸#143互补；不改 footprint） */
+  function stampChaidui(d, x, y, z, o = {}) {
+    ensure();
+    const kind = o.kind || 'chaidui';
+    const map = {
+      chaidui: 'prop_chaidui',
+      prop_chaidui: 'prop_chaidui',
+      wood: 'prop_chaidui',
+      firewood: 'prop_chaidui',
+      caoduo: 'prop_caoduo',
+      prop_caoduo: 'prop_caoduo',
+      hay: 'prop_caoduo',
+      straw: 'prop_caoduo',
+      liangdai: 'prop_liangdai',
+      prop_liangdai: 'prop_liangdai',
+      sack: 'prop_liangdai',
+      grain: 'prop_liangdai',
+    };
+    const key = map[kind] || 'prop_chaidui';
+    stamp(d, key, x, y, z, { sx: o.sx || 1, sy: o.sy || 1 });
+  }
+
+/** Site227：货摊/货架/晾晒 stamp（主街两侧·巷口·桥头·宅前点景；与招牌#115/街具#118互补；不改 footprint） */
+  function stampHuotan(d, x, y, z, o = {}) {
+    ensure();
+    const kind = o.kind || 'huotan';
+    const map = {
+      huotan: 'stall_huotan',
+      stall: 'stall_huotan',
+      stall_huotan: 'stall_huotan',
+      huojia: 'rack_huojia',
+      rack: 'rack_huojia',
+      rack_huojia: 'rack_huojia',
+      liangshai: 'pole_liangshai',
+      pole: 'pole_liangshai',
+      pole_liangshai: 'pole_liangshai',
+    };
+    const key = map[kind] || 'stall_huotan';
+    stamp(d, key, x, y, z, { sx: o.sx || 1, sy: o.sy || 1 });
+  }
+
+/** Site230：香炉/烛台/小供案 stamp（影壁前·宅门内·亭侧·巷口小龛·庭院角；与影壁#126、匾额#135互补；≠stone_lu；不改 footprint） */
+  function stampXianglu(d, x, y, z, o = {}) {
+    ensure();
+    const kind = o.kind || 'xianglu';
+    const map = {
+      xianglu: 'prop_xianglu',
+      prop_xianglu: 'prop_xianglu',
+      incense: 'prop_xianglu',
+      zhutai: 'prop_zhutai',
+      prop_zhutai: 'prop_zhutai',
+      candle: 'prop_zhutai',
+      gongan: 'prop_gongan_s',
+      gongan_s: 'prop_gongan_s',
+      prop_gongan_s: 'prop_gongan_s',
+      altar: 'prop_gongan_s',
+    };
+    const key = map[kind] || 'prop_xianglu';
+    stamp(d, key, x, y, z, { sx: o.sx || 1, sy: o.sy || 1 });
+  }
+
+/** Site228：石桌/石凳/棋枰 stamp（庭院·巷角·亭侧·桥头·树下点景；与美人靠#134、街具#118互补；不改 footprint） */
+  function stampShizhuo(d, x, y, z, o = {}) {
+    ensure();
+    const kind = o.kind || 'shizhuo';
+    const map = {
+      shizhuo: 'seat_shizhuo',
+      seat_shizhuo: 'seat_shizhuo',
+      table: 'seat_shizhuo',
+      shideng: 'seat_shideng',
+      seat_shideng: 'seat_shideng',
+      stool: 'seat_shideng',
+      qiping: 'seat_qiping',
+      seat_qiping: 'seat_qiping',
+      chess: 'seat_qiping',
+    };
+    const key = map[kind] || 'seat_shizhuo';
+    stamp(d, key, x, y, z, { sx: o.sx || 1, sy: o.sy || 1 });
+  }
+
+  const AncientAtlas = {
+    ensure, stamp, fillS, fillW, stampEaveTiles, stampChiwen, stampWalong, stampRailQueti, stampGualuo, stampDoorHardware, stampSoftDecor, stampPlatform, stampYingbi, stampRidgeBeasts, stampScreens, stampHitching, stampLouwindow, stampPavilions, stampChuihuamen, stampRockery, stampMeirenkao, stampBiane, stampBaogu, stampPenjing, stampShishi, stampGongdeng, stampZhuli, stampHuotan, stampShizhuo, stampShuigang, stampXianglu, stampChaidui, getAtlas, getFrames, getModules, MODULES,
+    site201: { signboards: true, plaqueWood: true, vsignBoard: true, bannerCream: true, kitbash: true },
+    site202: { paving: true, fangzhuan: true, tiaoshi: true, xiewen: true, drain: true, curb: true, kitbash: true },
+    site203: { lattice: true, latticeGeshan: true, huachuang: true, geshanBubujin: true, kanchuang: true, kitbash: true },
+    site204: { streetProps: true, shideng: true, shiteng: true, huagang: true, lampPole: true, kitbash: true },
+    site205: { roofTiles: true, wadang: true, dishui: true, walong: true, yankou: true, kitbash: true },
+    site206: { gableBrick: true, shangqiang: true, qingshui: true, chitou: true, wallCap: true, kitbash: true },
+    site207: { railQueti: true, xunzhang: true, queti: true, gualuo: true, xiaozhu: true, kitbash: true },
+    site208: { caihua: true, beamEfang: true, caihuaBand: true, dougongBlock: true, eaveBoard: true, kitbash: true },
+    site209: { doorHardware: true, mending: true, pushou: true, menkan: true, baogu: true, kitbash: true },
+    site210: { banners: true, qifan: true, weiman: true, liusu: true, hangOrnament: true, kitbash: true },
+    site211: { platform: true, taiji: true, tiaotiao: true, chuidai: true, taduo: true, kitbash: true },
+    site212: { yingbi: true, zhaobi: true, huaxin: true, screenBase: true, kitbash: true },
+    site213: { ridgeBeasts: true, chiwen: true, zoushou: true, ornament: true, chuiji: true, kitbash: true },
+    site214: { screens: true, luodizhao: true, partitionGeshan: true, yuedong: true, menkuang: true, kitbash: true },
+    site215: { hitching: true, shuanma: true, shangma: true, ganddang: true, curbMarker: true, kitbash: true },
+    site216: { louwindow: true, windowLou: true, wallHuaziang: true, brickToukong: true, latticeWall: true, kitbash: true },
+    site217: { pavilions: true, jingting: true, luting: true, paifangS: true, roofTing: true, kitbash: true },
+    site218: { chuihuamen: true, chuihua: true, menlouS: true, menzhao: true, menzhu: true, kitbash: true },
+    site219: { rockery: true, rockTaihu: true, rockDieshi: true, rockPeakS: true, plantRockMoss: true, kitbash: true },
+    site220: { meirenkao: true, feilaichi: true, zuokan: true, benchLang: true, kitbash: true },
+    site221: { biane: true, duilian: true, zhaopaiS: true, hanging: true, kitbash: true },
+    site222: { baogu: true, stoneBaogu: true, stoneMendun: true, stoneLu: true, kitbash: true },
+    site223: { penjing: true, potPenjing: true, bedHuatan: true, stoneShitai: true, kitbash: true },
+    site224: { shishi: true, stoneShishi: true, stoneShishiS: true, kitbash: true },
+    site225: { gongdeng: true, lanternGong: true, lanternSha: true, lanternStand: true, kitbash: true },
+    site226: { zhuli: true, fenceZhuli: true, fenceHuali: true, gateChaifei: true, kitbash: true },
+    site227: { huotan: true, stallHuotan: true, rackHuojia: true, poleLiangshai: true, kitbash: true },
+    site228: { shizhuo: true, seatShizhuo: true, seatShideng: true, seatQiping: true, kitbash: true },
+    site229: { shuigang: true, propShuigang: true, propJinglan: true, propShuitong: true, kitbash: true },
+    site230: { xianglu: true, propXianglu: true, propZhutai: true, propGonganS: true, kitbash: true },
+    site231: { chaidui: true, propChaidui: true, propCaoduo: true, propLiangdai: true, kitbash: true },
+    get _makeCanvas() { return _makeCanvas; },
+    set _makeCanvas(v) { _makeCanvas = v; },
+  };
+  root.AncientAtlas = AncientAtlas;
+})(typeof window !== 'undefined' ? window : globalThis);
