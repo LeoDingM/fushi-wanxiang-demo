@@ -1122,6 +1122,7 @@
     const CX = (ctx && ctx.CX) != null ? ctx.CX : 72;
     const counts = { shideng: 0, shiteng: 0, huagang: 0, lamp_pole: 0, yingbi: 0, zhaobi: 0, shuanma: 0, shangma: 0, ganddang: 0, curb_marker: 0, jingting: 0, luting: 0, paifang_s: 0 , window_lou: 0, wall_huaziang: 0, brick_toukong: 0, lattice_wall: 0, chuihua: 0, menlou_s: 0, menzhao: 0, menzhu: 0, rock_taihu: 0, rock_dieshi: 0, rock_peak_s: 0, rock_moss: 0, meirenkao: 0, feilaichi: 0, zuokan: 0, bench_lang: 0, biane: 0, duilian: 0, zhaopai_s: 0, hanging_sign: 0, baogu: 0, mendun: 0, stone_lu: 0, penjing: 0, huatan: 0, shitai: 0 , shishi: 0, shishi_s: 0, gongdeng: 0, shadeng: 0, lideng: 0, zhuli: 0, huali: 0, chaifei: 0, huotan: 0, huojia: 0, liangshai: 0, shizhuo: 0, seat_shideng: 0, qiping: 0, shuigang: 0, jinglan: 0, shuitong: 0, xianglu: 0, zhutai: 0, gongan_s: 0, chaidui: 0, caoduo: 0, liangdai: 0 };
     function add(kind, type, lx, ly, more) {
+      if (counts[kind] == null) counts[kind] = 0;
       put('sp_' + kind + '_' + counts[kind], type, lx, ly, more || {});
       counts[kind]++;
     }
