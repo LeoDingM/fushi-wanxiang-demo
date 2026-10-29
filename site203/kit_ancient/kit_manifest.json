@@ -1,0 +1,440 @@
+{
+  "doc": "鹰山宋城 Song module atlas — kitbash. Site197 facade-detail + Site198 wall-merlon（城砖/垛口/女墙）+ Site198 roof-ridge（瓦当/鸱吻/滴水）+ Site200 lantern/banner dusk glow + Site201 signboards（匾额/竖招/幌子边框）+ Site202 paving（方砖/条石/席纹/排水沟/路牙）+ Site203 lattice（格扇/花窗/隔扇/槛窗）。未经确认.",
+  "projection": {
+    "view": "dimetric-2:1",
+    "px_x_per_m": 32,
+    "px_y_per_m": 16,
+    "px_z_per_m": 39.1918
+  },
+  "site197": {
+    "facadeDetail": true,
+    "unconfirmed": true
+  },
+  "site198": {
+    "wallMerlon": true,
+    "roofRidge": true,
+    "wadang": true,
+    "chiwen": true,
+    "drip": true,
+    "unconfirmed": true
+  },
+  "site200": {
+    "lanternGlow": true,
+    "bannerGlow": true,
+    "warmHalo": true,
+    "unconfirmed": true
+  },
+  "site201": {
+    "signboards": true,
+    "plaqueWood": true,
+    "vsignBoard": true,
+    "bannerCream": true,
+    "kitbash": true,
+    "unconfirmed": true
+  },
+  "site202": {
+    "paving": true,
+    "fangzhuan": true,
+    "tiaoshi": true,
+    "xiewen": true,
+    "drain": true,
+    "curb": true,
+    "kitbash": true,
+    "unconfirmed": true
+  },
+  "site203": {
+    "lattice": true,
+    "latticeGeshan": true,
+    "huachuang": true,
+    "geshanBubujin": true,
+    "kanchuang": true,
+    "kitbash": true,
+    "unconfirmed": true
+  },
+  "frames": {
+    "aqm_wall_plaster_S/base/main/default/0": [
+      2,
+      2,
+      66,
+      133,
+      10,
+      126
+    ],
+    "aqm_wall_brick_S/base/main/default/0": [
+      70,
+      2,
+      66,
+      86,
+      10,
+      79
+    ],
+    "aqm_wall_plaster_W/base/main/default/0": [
+      138,
+      2,
+      66,
+      133,
+      56,
+      126
+    ],
+    "aqm_wall_brick_W/base/main/default/0": [
+      206,
+      2,
+      66,
+      86,
+      56,
+      79
+    ],
+    "aqm_win_grid_S/base/main/default/0": [
+      274,
+      2,
+      50,
+      86,
+      10,
+      79
+    ],
+    "aqm_win_diamond_S/base/main/default/0": [
+      326,
+      2,
+      50,
+      86,
+      10,
+      79
+    ],
+    "aqm_win_bubujin_S/base/main/default/0": [
+      378,
+      2,
+      50,
+      86,
+      10,
+      79
+    ],
+    "aqm_win_wanzi_S/base/main/default/0": [
+      430,
+      2,
+      50,
+      86,
+      10,
+      79
+    ],
+    "aqm_win_vbars_S/base/main/default/0": [
+      482,
+      2,
+      50,
+      55,
+      10,
+      48
+    ],
+    "aqm_door_geshan_S/base/main/default/0": [
+      534,
+      2,
+      40,
+      124,
+      10,
+      117
+    ],
+    "aqm_door_geshan_carved_S/base/main/default/0": [
+      576,
+      2,
+      40,
+      124,
+      10,
+      117
+    ],
+    "aqm_door_ban_S/base/main/default/0": [
+      618,
+      2,
+      45,
+      127,
+      10,
+      120
+    ],
+    "aqm_threshold_S/base/main/default/0": [
+      665,
+      2,
+      50,
+      39,
+      10,
+      32
+    ],
+    "aqm_lattice_geshan_S/base/main/default/0": [
+      717,
+      2,
+      53,
+      72,
+      10,
+      65
+    ],
+    "aqm_window_huachuang_S/base/main/default/0": [
+      772,
+      2,
+      53,
+      91,
+      10,
+      84
+    ],
+    "aqm_door_geshan_bubujin_S/base/main/default/0": [
+      827,
+      2,
+      40,
+      124,
+      10,
+      117
+    ],
+    "aqm_sill_kanchuang_S/base/main/default/0": [
+      869,
+      2,
+      56,
+      97,
+      10,
+      90
+    ],
+    "aqm_column_red/base/main/default/0": [
+      927,
+      2,
+      38,
+      163,
+      19,
+      150
+    ],
+    "aqm_plaque_frame/base/main/default/0": [
+      967,
+      2,
+      96,
+      98,
+      48,
+      49
+    ],
+    "aqm_plaque_wood/base/main/default/0": [
+      1065,
+      2,
+      96,
+      98,
+      48,
+      49
+    ],
+    "aqm_vsign_board/base/main/default/0": [
+      1163,
+      2,
+      40,
+      75,
+      20,
+      19
+    ],
+    "aqm_banner_red/base/main/default/0": [
+      1205,
+      2,
+      36,
+      95,
+      18,
+      16
+    ],
+    "aqm_banner_green/base/main/default/0": [
+      1243,
+      2,
+      36,
+      95,
+      18,
+      16
+    ],
+    "aqm_banner_blue/base/main/default/0": [
+      1281,
+      2,
+      36,
+      95,
+      18,
+      16
+    ],
+    "aqm_banner_cream/base/main/default/0": [
+      1319,
+      2,
+      36,
+      95,
+      18,
+      16
+    ],
+    "aqm_lantern/base/main/default/0": [
+      1357,
+      2,
+      58,
+      75,
+      29,
+      22
+    ],
+    "aqm_tile_eave_S/base/main/default/0": [
+      1417,
+      2,
+      49,
+      50,
+      8,
+      38
+    ],
+    "aqm_tile_course_S/base/main/default/0": [
+      1468,
+      2,
+      48,
+      39,
+      8,
+      32
+    ],
+    "aqm_tile_ridge_S/base/main/default/0": [
+      1518,
+      2,
+      52,
+      43,
+      10,
+      35
+    ],
+    "aqm_tile_wadang_S/base/main/default/0": [
+      1572,
+      2,
+      46,
+      43,
+      8,
+      33
+    ],
+    "aqm_tile_drip_S/base/main/default/0": [
+      1620,
+      2,
+      46,
+      47,
+      8,
+      34
+    ],
+    "aqm_chiwen_S/base/main/default/0": [
+      1668,
+      2,
+      51,
+      76,
+      11,
+      66
+    ],
+    "aqm_chiwen_flip_S/base/main/default/0": [
+      1721,
+      2,
+      51,
+      76,
+      11,
+      66
+    ],
+    "aqm_dougong/base/main/default/0": [
+      1774,
+      2,
+      101,
+      78,
+      45,
+      47
+    ],
+    "aqm_dougong_large/base/main/default/0": [
+      1877,
+      2,
+      122,
+      95,
+      53,
+      57
+    ],
+    "aqm_efang_unit/base/main/default/0": [
+      2,
+      167,
+      113,
+      79,
+      14,
+      71
+    ],
+    "aqm_city_brick_S/base/main/default/0": [
+      117,
+      167,
+      69,
+      111,
+      10,
+      104
+    ],
+    "aqm_city_brick_W/base/main/default/0": [
+      188,
+      167,
+      69,
+      111,
+      59,
+      104
+    ],
+    "aqm_city_stone_S/base/main/default/0": [
+      259,
+      167,
+      69,
+      88,
+      10,
+      81
+    ],
+    "aqm_merlon_S/base/main/default/0": [
+      330,
+      167,
+      65,
+      108,
+      24,
+      101
+    ],
+    "aqm_crenel_S/base/main/default/0": [
+      397,
+      167,
+      49,
+      72,
+      24,
+      65
+    ],
+    "aqm_parapet_S/base/main/default/0": [
+      448,
+      167,
+      84,
+      96,
+      26,
+      89
+    ],
+    "aqm_walk_top/base/main/default/0": [
+      534,
+      167,
+      116,
+      67,
+      58,
+      61
+    ],
+    "aqm_pave_fangzhuan/base/main/default/0": [
+      652,
+      167,
+      116,
+      66,
+      58,
+      60
+    ],
+    "aqm_pave_tiaoshi/base/main/default/0": [
+      770,
+      167,
+      116,
+      66,
+      58,
+      60
+    ],
+    "aqm_pave_xiewen/base/main/default/0": [
+      888,
+      167,
+      116,
+      66,
+      58,
+      60
+    ],
+    "aqm_drain_gutter/base/main/default/0": [
+      1006,
+      167,
+      58,
+      44,
+      29,
+      36
+    ],
+    "aqm_curb_stone/base/main/default/0": [
+      1066,
+      167,
+      54,
+      43,
+      17,
+      37
+    ]
+  }
+}
