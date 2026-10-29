@@ -1,0 +1,7592 @@
+{
+  "version": 1,
+  "doc": "frame key = piece/variant/part/state/rot ; frames[key] = [x, y, w, h, anchorX, anchorY] in kit_atlas.png (anchor = pixel of the piece origin); key#shadow = ground shadow frame; emit[] = keys with pixels in kit_emit.png; masks[key] = [cols, rows, base64 packbits] opaque 4px cells for occluder fade tests. Units: metres, x east, y north, z up.",
+  "projection": {
+    "view": "dimetric-2:1",
+    "yaw_deg": 45,
+    "pitch_deg": 30,
+    "px_per_m": 45.2548,
+    "px_x_per_m": 32,
+    "px_y_per_m": 16,
+    "px_z_per_m": 39.1918,
+    "chunk_m": 2,
+    "chunk_px": [
+      128,
+      64
+    ],
+    "grid_m": 0.5,
+    "grid_px": [
+      16,
+      8
+    ],
+    "sun_cam": [
+      0.5,
+      -0.62,
+      0.75
+    ],
+    "sun_world": [
+      -0.0776,
+      -0.7239,
+      0.6855
+    ],
+    "screen": "sx = (x - y) * 32 ; sy = -((x + y) * 16 + z * px_z_per_m)  (y down)"
+  },
+  "atlas": "kit_atlas.png",
+  "emit_atlas": "kit_emit.png",
+  "atlas_size": [
+    2048,
+    4096
+  ],
+  "mask_cell": 4,
+  "frames": {
+    "b_roof_a/base/main/default/0": [
+      0,
+      0,
+      870,
+      579,
+      387,
+      571
+    ],
+    "b_roof_deck/base/main/default/0": [
+      871,
+      0,
+      870,
+      524,
+      387,
+      476
+    ],
+    "b_roof_b/c/main/default/0": [
+      0,
+      580,
+      678,
+      381,
+      291,
+      373
+    ],
+    "b_roof_b/base/main/default/0": [
+      679,
+      580,
+      678,
+      375,
+      291,
+      367
+    ],
+    "p_pole/base/main/default/0": [
+      1358,
+      580,
+      91,
+      364,
+      30,
+      356
+    ],
+    "p_pole/base/main/default/2": [
+      1450,
+      580,
+      91,
+      364,
+      30,
+      356
+    ],
+    "p_pole/base/main/default/4": [
+      1542,
+      580,
+      91,
+      364,
+      61,
+      356
+    ],
+    "p_pole/base/main/default/6": [
+      1634,
+      580,
+      91,
+      364,
+      61,
+      356
+    ],
+    "p_bus/base/main/normal/6": [
+      0,
+      962,
+      423,
+      311,
+      215,
+      218
+    ],
+    "p_tree/t2.autumn/trunk/default/0": [
+      424,
+      962,
+      83,
+      190,
+      38,
+      185
+    ],
+    "p_tree/t2.spring/trunk/default/0": [
+      508,
+      962,
+      83,
+      190,
+      38,
+      185
+    ],
+    "p_tree/t2/trunk/default/0": [
+      592,
+      962,
+      83,
+      190,
+      38,
+      185
+    ],
+    "p_tree/autumn/trunk/default/0": [
+      676,
+      962,
+      115,
+      189,
+      67,
+      184
+    ],
+    "p_tree/base/trunk/default/0": [
+      792,
+      962,
+      115,
+      189,
+      67,
+      184
+    ],
+    "p_tree/spring/trunk/default/0": [
+      908,
+      962,
+      115,
+      189,
+      67,
+      184
+    ],
+    "i_roofhut/base/main/closed/0": [
+      1024,
+      962,
+      172,
+      188,
+      97,
+      151
+    ],
+    "i_roofhut/base/main/open/0": [
+      1197,
+      962,
+      172,
+      188,
+      97,
+      151
+    ],
+    "p_busstop/base/base/default/0": [
+      1370,
+      962,
+      144,
+      187,
+      94,
+      145
+    ],
+    "p_tree/autumn/canopy/default/0": [
+      1515,
+      962,
+      203,
+      178,
+      101,
+      265
+    ],
+    "p_tree/base/canopy/default/0": [
+      1719,
+      962,
+      203,
+      178,
+      101,
+      265
+    ],
+    "p_tree/spring/canopy/default/0": [
+      0,
+      1274,
+      203,
+      178,
+      101,
+      265
+    ],
+    "f_balcony/b1/main/default/6": [
+      204,
+      1274,
+      122,
+      177,
+      27,
+      110
+    ],
+    "f_balcony/b1/main/laundry/6": [
+      327,
+      1274,
+      135,
+      177,
+      40,
+      110
+    ],
+    "f_balcony/b2/main/default/6": [
+      463,
+      1274,
+      122,
+      177,
+      27,
+      110
+    ],
+    "f_balcony/b2/main/laundry/6": [
+      586,
+      1274,
+      135,
+      177,
+      40,
+      110
+    ],
+    "f_balcony/base/main/default/6": [
+      722,
+      1274,
+      122,
+      177,
+      27,
+      110
+    ],
+    "f_balcony/base/main/laundry/6": [
+      845,
+      1274,
+      135,
+      177,
+      40,
+      110
+    ],
+    "p_lamp/base/main/broken/0": [
+      981,
+      1274,
+      52,
+      175,
+      11,
+      169
+    ],
+    "p_lamp/base/main/ok/0": [
+      1034,
+      1274,
+      53,
+      175,
+      11,
+      169
+    ],
+    "p_tree/t2.autumn/canopy/default/0": [
+      1088,
+      1274,
+      161,
+      175,
+      84,
+      302
+    ],
+    "p_tree/t2.spring/canopy/default/0": [
+      1250,
+      1274,
+      161,
+      175,
+      84,
+      302
+    ],
+    "p_tree/t2/canopy/default/0": [
+      1412,
+      1274,
+      161,
+      175,
+      84,
+      302
+    ],
+    "f_shop/base/main/door/0": [
+      1574,
+      1274,
+      114,
+      173,
+      13,
+      172
+    ],
+    "f_shop/base/main/door/6": [
+      1689,
+      1274,
+      114,
+      173,
+      5,
+      124
+    ],
+    "f_shop/base/main/shut/0": [
+      1804,
+      1274,
+      114,
+      173,
+      13,
+      172
+    ],
+    "f_shop/base/main/shut/6": [
+      1919,
+      1274,
+      114,
+      173,
+      5,
+      124
+    ],
+    "f_shop/base/main/window/0": [
+      0,
+      1453,
+      114,
+      173,
+      13,
+      172
+    ],
+    "f_shop/base/main/window/6": [
+      115,
+      1453,
+      114,
+      173,
+      5,
+      124
+    ],
+    "f_balcony/b1/main/default/0": [
+      230,
+      1453,
+      119,
+      171,
+      -4,
+      155
+    ],
+    "f_balcony/b1/main/laundry/0": [
+      350,
+      1453,
+      131,
+      171,
+      -4,
+      155
+    ],
+    "f_balcony/b2/main/default/0": [
+      482,
+      1453,
+      139,
+      171,
+      -4,
+      155
+    ],
+    "f_balcony/b2/main/laundry/0": [
+      622,
+      1453,
+      139,
+      171,
+      -4,
+      155
+    ],
+    "f_balcony/base/main/default/0": [
+      762,
+      1453,
+      119,
+      171,
+      -4,
+      155
+    ],
+    "f_balcony/base/main/laundry/0": [
+      882,
+      1453,
+      131,
+      171,
+      -4,
+      155
+    ],
+    "f_wall/base/main/ground/0": [
+      1014,
+      1453,
+      108,
+      171,
+      11,
+      171
+    ],
+    "f_wall/base/main/ground/6": [
+      1123,
+      1453,
+      108,
+      171,
+      1,
+      123
+    ],
+    "f_wall/base/main/upper/0": [
+      1232,
+      1453,
+      108,
+      171,
+      11,
+      171
+    ],
+    "f_wall/base/main/upper/6": [
+      1341,
+      1453,
+      108,
+      171,
+      1,
+      123
+    ],
+    "f_wall/p1/main/ground/0": [
+      1450,
+      1453,
+      108,
+      171,
+      11,
+      171
+    ],
+    "f_wall/p1/main/ground/6": [
+      1559,
+      1453,
+      108,
+      171,
+      1,
+      123
+    ],
+    "f_wall/p1/main/upper/0": [
+      1668,
+      1453,
+      108,
+      171,
+      11,
+      171
+    ],
+    "f_wall/p1/main/upper/6": [
+      1777,
+      1453,
+      108,
+      171,
+      1,
+      123
+    ],
+    "f_wall/w1/main/ground/0": [
+      1886,
+      1453,
+      108,
+      171,
+      11,
+      171
+    ],
+    "f_wall/w1/main/ground/6": [
+      0,
+      1627,
+      108,
+      171,
+      1,
+      123
+    ],
+    "f_wall/w1/main/upper/0": [
+      109,
+      1627,
+      108,
+      171,
+      11,
+      171
+    ],
+    "f_wall/w1/main/upper/6": [
+      218,
+      1627,
+      108,
+      171,
+      1,
+      123
+    ],
+    "f_wall/w2/main/ground/0": [
+      327,
+      1627,
+      108,
+      171,
+      11,
+      171
+    ],
+    "f_wall/w2/main/ground/6": [
+      436,
+      1627,
+      108,
+      171,
+      1,
+      123
+    ],
+    "f_wall/w2/main/upper/0": [
+      545,
+      1627,
+      108,
+      171,
+      11,
+      171
+    ],
+    "f_wall/w2/main/upper/6": [
+      654,
+      1627,
+      108,
+      171,
+      1,
+      123
+    ],
+    "p_pole/base/main/default/0#shadow": [
+      763,
+      1627,
+      269,
+      171,
+      281,
+      172
+    ],
+    "p_pole/base/main/default/2#shadow": [
+      1033,
+      1627,
+      269,
+      171,
+      281,
+      172
+    ],
+    "p_pole/base/main/default/4#shadow": [
+      1303,
+      1627,
+      269,
+      171,
+      281,
+      172
+    ],
+    "p_pole/base/main/default/6#shadow": [
+      1573,
+      1627,
+      269,
+      171,
+      281,
+      172
+    ],
+    "p_bus/base/main/normal/6#shadow": [
+      0,
+      1799,
+      481,
+      167,
+      285,
+      69
+    ],
+    "f_door/base/main/closed/6": [
+      482,
+      1799,
+      117,
+      156,
+      16,
+      108
+    ],
+    "f_door/base/main/open/6": [
+      600,
+      1799,
+      117,
+      156,
+      16,
+      108
+    ],
+    "p_tree/t2/trunk/default/0#shadow": [
+      718,
+      1799,
+      244,
+      153,
+      252,
+      152
+    ],
+    "fx/soot": [
+      963,
+      1799,
+      93,
+      150,
+      49,
+      149
+    ],
+    "p_stall/base/base/default/6": [
+      1057,
+      1799,
+      142,
+      149,
+      62,
+      111
+    ],
+    "f_door/base/main/closed/0": [
+      1200,
+      1799,
+      117,
+      142,
+      5,
+      152
+    ],
+    "f_door/base/main/open/0": [
+      1318,
+      1799,
+      117,
+      142,
+      5,
+      152
+    ],
+    "p_stall/base/base/default/0": [
+      1436,
+      1799,
+      138,
+      142,
+      60,
+      111
+    ],
+    "p_locker/base/main/default/0": [
+      1575,
+      1799,
+      109,
+      141,
+      52,
+      116
+    ],
+    "p_locker/base/main/default/6": [
+      1685,
+      1799,
+      109,
+      141,
+      57,
+      116
+    ],
+    "p_busstop/base/base/default/0#shadow": [
+      1795,
+      1799,
+      205,
+      139,
+      179,
+      99
+    ],
+    "p_tree/base/trunk/default/0#shadow": [
+      0,
+      1967,
+      228,
+      139,
+      236,
+      138
+    ],
+    "p_antenna/base/main/default/0": [
+      229,
+      1967,
+      67,
+      132,
+      46,
+      125
+    ],
+    "f_window/w2/main/intact/6": [
+      297,
+      1967,
+      84,
+      129,
+      -3,
+      97
+    ],
+    "f_window/w2/main/lit/6": [
+      382,
+      1967,
+      84,
+      129,
+      -3,
+      97
+    ],
+    "i_roofhut/base/main/open/0#shadow": [
+      467,
+      1967,
+      224,
+      127,
+      174,
+      93
+    ],
+    "f_window/base/main/boarded/6": [
+      692,
+      1967,
+      84,
+      125,
+      -3,
+      97
+    ],
+    "f_window/base/main/broken/6": [
+      777,
+      1967,
+      84,
+      125,
+      -3,
+      97
+    ],
+    "f_window/base/main/intact/6": [
+      862,
+      1967,
+      84,
+      125,
+      -3,
+      97
+    ],
+    "f_window/base/main/lit/6": [
+      947,
+      1967,
+      84,
+      125,
+      -3,
+      97
+    ],
+    "f_window/base/main/scorched/6": [
+      1032,
+      1967,
+      84,
+      125,
+      -3,
+      97
+    ],
+    "f_window/w1/main/intact/6": [
+      1117,
+      1967,
+      84,
+      125,
+      -3,
+      97
+    ],
+    "f_window/w1/main/lit/6": [
+      1202,
+      1967,
+      84,
+      125,
+      -3,
+      97
+    ],
+    "p_tank/base/main/default/0": [
+      1287,
+      1967,
+      80,
+      125,
+      40,
+      105
+    ],
+    "f_pipe/base/main/default/6": [
+      1368,
+      1967,
+      19,
+      124,
+      13,
+      121
+    ],
+    "p_car/base/main/normal/7": [
+      1388,
+      1967,
+      94,
+      124,
+      47,
+      83
+    ],
+    "p_car/red/main/normal/7": [
+      1483,
+      1967,
+      94,
+      124,
+      47,
+      83
+    ],
+    "p_car/taxi/main/normal/7": [
+      1578,
+      1967,
+      94,
+      124,
+      47,
+      83
+    ],
+    "w_wall/base/main/plain/0": [
+      1673,
+      1967,
+      76,
+      124,
+      38,
+      105
+    ],
+    "w_wall/base/main/plain/6": [
+      1750,
+      1967,
+      76,
+      124,
+      38,
+      105
+    ],
+    "w_wall/base/main/poster/0": [
+      1827,
+      1967,
+      76,
+      124,
+      38,
+      105
+    ],
+    "w_wall/base/main/poster/6": [
+      1904,
+      1967,
+      76,
+      124,
+      38,
+      105
+    ],
+    "w_wall/base/main/torn/0": [
+      0,
+      2107,
+      76,
+      124,
+      38,
+      105
+    ],
+    "w_wall/base/main/torn/6": [
+      77,
+      2107,
+      76,
+      124,
+      38,
+      105
+    ],
+    "p_car/base/main/crashed/6": [
+      154,
+      2107,
+      192,
+      122,
+      90,
+      82
+    ],
+    "p_car/base/main/crashed/7": [
+      347,
+      2107,
+      94,
+      122,
+      47,
+      83
+    ],
+    "p_car/base/main/normal/0": [
+      442,
+      2107,
+      205,
+      122,
+      102,
+      82
+    ],
+    "p_car/base/main/normal/6": [
+      648,
+      2107,
+      205,
+      122,
+      103,
+      82
+    ],
+    "p_car/red/main/crashed/6": [
+      854,
+      2107,
+      192,
+      122,
+      90,
+      82
+    ],
+    "p_car/red/main/crashed/7": [
+      1047,
+      2107,
+      94,
+      122,
+      47,
+      83
+    ],
+    "p_car/red/main/normal/0": [
+      1142,
+      2107,
+      205,
+      122,
+      102,
+      82
+    ],
+    "p_car/red/main/normal/6": [
+      1348,
+      2107,
+      205,
+      122,
+      103,
+      82
+    ],
+    "p_car/taxi/main/crashed/6": [
+      1554,
+      2107,
+      192,
+      122,
+      90,
+      82
+    ],
+    "p_car/taxi/main/crashed/7": [
+      1747,
+      2107,
+      94,
+      122,
+      47,
+      83
+    ],
+    "p_car/taxi/main/normal/0": [
+      1842,
+      2107,
+      205,
+      122,
+      102,
+      82
+    ],
+    "p_car/taxi/main/normal/6": [
+      0,
+      2232,
+      205,
+      122,
+      103,
+      82
+    ],
+    "w_pillar/base/main/default/0": [
+      206,
+      2232,
+      42,
+      122,
+      21,
+      113
+    ],
+    "p_car/base/main/normal/3": [
+      249,
+      2232,
+      94,
+      121,
+      47,
+      80
+    ],
+    "p_car/red/main/normal/3": [
+      344,
+      2232,
+      94,
+      121,
+      47,
+      80
+    ],
+    "p_car/taxi/main/normal/3": [
+      439,
+      2232,
+      94,
+      121,
+      47,
+      80
+    ],
+    "f_pipe/base/main/default/0": [
+      534,
+      2232,
+      8,
+      120,
+      2,
+      117
+    ],
+    "f_shopsign/base/main/default/6": [
+      543,
+      2232,
+      182,
+      120,
+      96,
+      65
+    ],
+    "p_car/base/main/normal/2": [
+      726,
+      2232,
+      205,
+      119,
+      102,
+      79
+    ],
+    "p_car/base/main/normal/4": [
+      932,
+      2232,
+      205,
+      119,
+      103,
+      79
+    ],
+    "p_car/red/main/normal/2": [
+      1138,
+      2232,
+      205,
+      119,
+      102,
+      79
+    ],
+    "p_car/red/main/normal/4": [
+      1344,
+      2232,
+      205,
+      119,
+      103,
+      79
+    ],
+    "p_car/taxi/main/normal/2": [
+      1550,
+      2232,
+      205,
+      119,
+      102,
+      79
+    ],
+    "p_car/taxi/main/normal/4": [
+      1756,
+      2232,
+      205,
+      119,
+      103,
+      79
+    ],
+    "p_car/base/main/crashed/0": [
+      0,
+      2355,
+      192,
+      117,
+      102,
+      82
+    ],
+    "p_car/red/main/crashed/0": [
+      193,
+      2355,
+      192,
+      117,
+      102,
+      82
+    ],
+    "p_car/taxi/main/crashed/0": [
+      386,
+      2355,
+      192,
+      117,
+      102,
+      82
+    ],
+    "p_busstop/base/roof/default/0": [
+      579,
+      2355,
+      197,
+      113,
+      95,
+      157
+    ],
+    "f_shopsign/base/main/default/0": [
+      777,
+      2355,
+      180,
+      112,
+      86,
+      62
+    ],
+    "p_car/base/main/crashed/2": [
+      958,
+      2355,
+      192,
+      112,
+      102,
+      72
+    ],
+    "p_car/base/main/crashed/3": [
+      1151,
+      2355,
+      94,
+      112,
+      47,
+      71
+    ],
+    "p_car/base/main/crashed/4": [
+      1246,
+      2355,
+      192,
+      112,
+      90,
+      72
+    ],
+    "p_car/red/main/crashed/2": [
+      1439,
+      2355,
+      192,
+      112,
+      102,
+      72
+    ],
+    "p_car/red/main/crashed/3": [
+      1632,
+      2355,
+      94,
+      112,
+      47,
+      71
+    ],
+    "p_car/red/main/crashed/4": [
+      1727,
+      2355,
+      192,
+      112,
+      90,
+      72
+    ],
+    "p_car/taxi/main/crashed/2": [
+      0,
+      2473,
+      192,
+      112,
+      102,
+      72
+    ],
+    "p_car/taxi/main/crashed/3": [
+      193,
+      2473,
+      94,
+      112,
+      47,
+      71
+    ],
+    "p_car/taxi/main/crashed/4": [
+      288,
+      2473,
+      192,
+      112,
+      90,
+      72
+    ],
+    "p_stall/base/base/default/6#shadow": [
+      481,
+      2473,
+      205,
+      112,
+      130,
+      77
+    ],
+    "f_ac/a2/main/default/6": [
+      687,
+      2473,
+      44,
+      110,
+      29,
+      29
+    ],
+    "f_window/w2/main/intact/0": [
+      732,
+      2473,
+      71,
+      110,
+      -17,
+      141
+    ],
+    "f_window/w2/main/lit/0": [
+      804,
+      2473,
+      71,
+      110,
+      -17,
+      141
+    ],
+    "p_car/base/main/normal/7#shadow": [
+      876,
+      2473,
+      106,
+      110,
+      75,
+      64
+    ],
+    "p_car/base/main/normal/3#shadow": [
+      983,
+      2473,
+      106,
+      109,
+      75,
+      63
+    ],
+    "f_window/base/main/boarded/0": [
+      1090,
+      2473,
+      71,
+      108,
+      -17,
+      141
+    ],
+    "f_window/base/main/broken/0": [
+      1162,
+      2473,
+      71,
+      108,
+      -17,
+      141
+    ],
+    "f_window/base/main/intact/0": [
+      1234,
+      2473,
+      71,
+      108,
+      -17,
+      141
+    ],
+    "f_window/base/main/lit/0": [
+      1306,
+      2473,
+      71,
+      108,
+      -17,
+      141
+    ],
+    "f_window/base/main/scorched/0": [
+      1378,
+      2473,
+      71,
+      108,
+      -17,
+      141
+    ],
+    "f_window/w1/main/intact/0": [
+      1450,
+      2473,
+      71,
+      108,
+      -17,
+      141
+    ],
+    "f_window/w1/main/lit/0": [
+      1522,
+      2473,
+      71,
+      108,
+      -17,
+      141
+    ],
+    "p_stall/base/base/default/0#shadow": [
+      1594,
+      2473,
+      209,
+      106,
+      137,
+      77
+    ],
+    "p_car/base/main/crashed/7#shadow": [
+      1804,
+      2473,
+      109,
+      105,
+      75,
+      64
+    ],
+    "p_notice/base/main/default/0": [
+      1914,
+      2473,
+      63,
+      104,
+      30,
+      91
+    ],
+    "p_notice/base/main/default/6": [
+      1978,
+      2473,
+      63,
+      104,
+      33,
+      91
+    ],
+    "p_solar/base/main/default/0": [
+      0,
+      2586,
+      110,
+      104,
+      60,
+      79
+    ],
+    "p_vending/base/main/broken/0": [
+      111,
+      2586,
+      56,
+      103,
+      28,
+      89
+    ],
+    "p_vending/base/main/ok/0": [
+      168,
+      2586,
+      56,
+      103,
+      28,
+      89
+    ],
+    "w_fence/base/main/default/0": [
+      225,
+      2586,
+      76,
+      103,
+      38,
+      84
+    ],
+    "w_fence/base/main/default/6": [
+      302,
+      2586,
+      76,
+      103,
+      38,
+      84
+    ],
+    "w_gate_l/base/main/closed/0": [
+      379,
+      2586,
+      56,
+      101,
+      1,
+      103
+    ],
+    "w_gate_l/base/main/closed/6": [
+      436,
+      2586,
+      56,
+      101,
+      1,
+      76
+    ],
+    "w_gate_l/base/main/open/0": [
+      493,
+      2586,
+      56,
+      101,
+      55,
+      103
+    ],
+    "w_gate_l/base/main/open/6": [
+      550,
+      2586,
+      56,
+      101,
+      1,
+      103
+    ],
+    "w_gate_r/base/main/closed/0": [
+      607,
+      2586,
+      56,
+      101,
+      55,
+      76
+    ],
+    "w_gate_r/base/main/closed/6": [
+      664,
+      2586,
+      56,
+      101,
+      55,
+      103
+    ],
+    "w_gate_r/base/main/open/0": [
+      721,
+      2586,
+      56,
+      101,
+      55,
+      103
+    ],
+    "w_gate_r/base/main/open/6": [
+      778,
+      2586,
+      56,
+      101,
+      1,
+      103
+    ],
+    "p_car/base/main/crashed/3#shadow": [
+      835,
+      2586,
+      106,
+      100,
+      75,
+      54
+    ],
+    "f_ac/a2/main/default/0": [
+      942,
+      2586,
+      39,
+      98,
+      12,
+      27
+    ],
+    "p_car/base/main/normal/0#shadow": [
+      982,
+      2586,
+      212,
+      93,
+      120,
+      48
+    ],
+    "p_car/base/main/normal/6#shadow": [
+      1195,
+      2586,
+      209,
+      93,
+      118,
+      48
+    ],
+    "f_ac/a1/main/default/6": [
+      1405,
+      2586,
+      44,
+      92,
+      29,
+      29
+    ],
+    "p_car/base/main/crashed/1": [
+      1450,
+      2586,
+      193,
+      92,
+      105,
+      72
+    ],
+    "p_car/base/main/crashed/5": [
+      1644,
+      2586,
+      193,
+      92,
+      88,
+      72
+    ],
+    "p_car/base/main/normal/1": [
+      0,
+      2691,
+      211,
+      92,
+      105,
+      72
+    ],
+    "p_car/base/main/normal/5": [
+      212,
+      2691,
+      211,
+      92,
+      106,
+      72
+    ],
+    "p_car/red/main/crashed/1": [
+      424,
+      2691,
+      193,
+      92,
+      105,
+      72
+    ],
+    "p_car/red/main/crashed/5": [
+      618,
+      2691,
+      193,
+      92,
+      88,
+      72
+    ],
+    "p_car/red/main/normal/1": [
+      812,
+      2691,
+      211,
+      92,
+      105,
+      72
+    ],
+    "p_car/red/main/normal/5": [
+      1024,
+      2691,
+      211,
+      92,
+      106,
+      72
+    ],
+    "p_car/taxi/main/crashed/1": [
+      1236,
+      2691,
+      193,
+      92,
+      105,
+      72
+    ],
+    "p_car/taxi/main/crashed/5": [
+      1430,
+      2691,
+      193,
+      92,
+      88,
+      72
+    ],
+    "p_car/taxi/main/normal/1": [
+      1624,
+      2691,
+      211,
+      92,
+      105,
+      72
+    ],
+    "p_car/taxi/main/normal/5": [
+      1836,
+      2691,
+      211,
+      92,
+      106,
+      72
+    ],
+    "p_car/base/main/normal/4#shadow": [
+      0,
+      2784,
+      209,
+      91,
+      118,
+      46
+    ],
+    "p_stall/base/awning/default/0": [
+      210,
+      2784,
+      141,
+      91,
+      70,
+      125
+    ],
+    "p_stall/base/awning/default/6": [
+      352,
+      2784,
+      141,
+      91,
+      71,
+      125
+    ],
+    "p_car/base/main/crashed/6#shadow": [
+      494,
+      2784,
+      196,
+      90,
+      105,
+      48
+    ],
+    "i_roofhut/base/main/closed/0#shadow": [
+      691,
+      2784,
+      80,
+      87,
+      174,
+      93
+    ],
+    "f_sign/base/main/default/6": [
+      772,
+      2784,
+      94,
+      86,
+      51,
+      49
+    ],
+    "p_car/base/main/crashed/0#shadow": [
+      867,
+      2784,
+      204,
+      85,
+      120,
+      48
+    ],
+    "p_car/base/main/crashed/4#shadow": [
+      1072,
+      2784,
+      196,
+      84,
+      105,
+      39
+    ],
+    "p_car/base/main/crashed/2#shadow": [
+      1269,
+      2784,
+      181,
+      83,
+      120,
+      38
+    ],
+    "p_car/base/main/normal/2#shadow": [
+      1451,
+      2784,
+      212,
+      83,
+      120,
+      38
+    ],
+    "p_post/base/main/default/0": [
+      1664,
+      2784,
+      20,
+      83,
+      10,
+      79
+    ],
+    "p_parapet/base/main/default/0": [
+      1685,
+      2784,
+      78,
+      81,
+      39,
+      62
+    ],
+    "p_parapet/base/main/default/2": [
+      1764,
+      2784,
+      78,
+      81,
+      39,
+      62
+    ],
+    "p_lamp/base/main/broken/0#shadow": [
+      1843,
+      2784,
+      119,
+      80,
+      130,
+      81
+    ],
+    "p_lamp/base/main/ok/0#shadow": [
+      0,
+      2876,
+      119,
+      80,
+      130,
+      81
+    ],
+    "f_ac/a1/main/default/0": [
+      120,
+      2876,
+      39,
+      79,
+      12,
+      27
+    ],
+    "p_locker/base/main/default/0#shadow": [
+      160,
+      2876,
+      71,
+      75,
+      119,
+      61
+    ],
+    "p_bikes/base/main/default/0": [
+      232,
+      2876,
+      100,
+      74,
+      50,
+      52
+    ],
+    "p_bikes/base/main/default/6": [
+      333,
+      2876,
+      100,
+      74,
+      50,
+      52
+    ],
+    "p_hedge/base/main/default/6": [
+      434,
+      2876,
+      88,
+      73,
+      45,
+      56
+    ],
+    "p_tank/base/main/default/0#shadow": [
+      523,
+      2876,
+      129,
+      73,
+      97,
+      57
+    ],
+    "p_bike/base/main/parked/3": [
+      653,
+      2876,
+      26,
+      72,
+      13,
+      57
+    ],
+    "p_hedge/base/main/default/0": [
+      680,
+      2876,
+      93,
+      72,
+      48,
+      56
+    ],
+    "p_bins/base/main/default/0": [
+      774,
+      2876,
+      68,
+      70,
+      34,
+      57
+    ],
+    "f_sign/base/main/default/0": [
+      843,
+      2876,
+      83,
+      69,
+      40,
+      46
+    ],
+    "p_bike/base/main/parked/2": [
+      927,
+      2876,
+      59,
+      66,
+      29,
+      55
+    ],
+    "p_ebike/base/main/default/0": [
+      987,
+      2876,
+      59,
+      65,
+      28,
+      54
+    ],
+    "p_ebike/base/main/default/2": [
+      1047,
+      2876,
+      59,
+      65,
+      31,
+      54
+    ],
+    "g_asphalt/base/main/a/0": [
+      1107,
+      2876,
+      128,
+      64,
+      64,
+      64
+    ],
+    "g_asphalt/base/main/b/0": [
+      1236,
+      2876,
+      128,
+      64,
+      64,
+      64
+    ],
+    "g_concrete/base/main/default/0": [
+      1365,
+      2876,
+      128,
+      64,
+      64,
+      64
+    ],
+    "g_court/base/main/default/0": [
+      1494,
+      2876,
+      128,
+      64,
+      64,
+      64
+    ],
+    "g_grass/base/main/default/0": [
+      1623,
+      2876,
+      128,
+      64,
+      64,
+      64
+    ],
+    "g_sidewalk/base/main/default/0": [
+      1752,
+      2876,
+      128,
+      64,
+      64,
+      64
+    ],
+    "g_treepit/base/main/default/0": [
+      1881,
+      2876,
+      128,
+      64,
+      64,
+      64
+    ],
+    "p_bike/base/main/parked/7": [
+      2010,
+      2876,
+      26,
+      63,
+      13,
+      48
+    ],
+    "d_stopline/base/main/default/0": [
+      0,
+      2957,
+      124,
+      62,
+      62,
+      31
+    ],
+    "d_stopline/base/main/default/2": [
+      125,
+      2957,
+      124,
+      62,
+      62,
+      31
+    ],
+    "d_stripe/base/main/default/0": [
+      250,
+      2957,
+      126,
+      62,
+      63,
+      31
+    ],
+    "d_stripe/base/main/default/2": [
+      377,
+      2957,
+      126,
+      62,
+      63,
+      31
+    ],
+    "f_steps/base/main/default/0": [
+      504,
+      2957,
+      100,
+      61,
+      37,
+      30
+    ],
+    "f_steps/base/main/default/6": [
+      605,
+      2957,
+      100,
+      61,
+      63,
+      30
+    ],
+    "p_pot/base/main/grown/0": [
+      706,
+      2957,
+      41,
+      61,
+      20,
+      55
+    ],
+    "p_notice/base/main/default/0#shadow": [
+      748,
+      2957,
+      106,
+      60,
+      87,
+      50
+    ],
+    "p_notice/base/main/default/6#shadow": [
+      855,
+      2957,
+      109,
+      60,
+      90,
+      50
+    ],
+    "f_ac/base/main/default/6": [
+      965,
+      2957,
+      43,
+      59,
+      29,
+      29
+    ],
+    "fx/fire/0": [
+      1009,
+      2957,
+      40,
+      58,
+      20,
+      56
+    ],
+    "fx/fire/1": [
+      1050,
+      2957,
+      40,
+      58,
+      20,
+      56
+    ],
+    "fx/fire/2": [
+      1091,
+      2957,
+      39,
+      58,
+      20,
+      56
+    ],
+    "fx/fire/3": [
+      1131,
+      2957,
+      40,
+      58,
+      20,
+      56
+    ],
+    "fx/fire/4": [
+      1172,
+      2957,
+      40,
+      58,
+      20,
+      56
+    ],
+    "fx/fire/5": [
+      1213,
+      2957,
+      37,
+      58,
+      18,
+      56
+    ],
+    "fx/fire/6": [
+      1251,
+      2957,
+      39,
+      58,
+      20,
+      56
+    ],
+    "fx/fire/7": [
+      1291,
+      2957,
+      38,
+      58,
+      19,
+      56
+    ],
+    "p_antenna/base/main/default/0#shadow": [
+      1330,
+      2957,
+      84,
+      58,
+      96,
+      59
+    ],
+    "p_bike/base/main/parked/6": [
+      1415,
+      2957,
+      59,
+      58,
+      30,
+      47
+    ],
+    "p_solar/base/main/default/0#shadow": [
+      1475,
+      2957,
+      81,
+      56,
+      94,
+      38
+    ],
+    "p_trashbin/base/main/upright/0": [
+      1557,
+      2957,
+      40,
+      56,
+      20,
+      46
+    ],
+    "p_car/base/main/crashed/1#shadow": [
+      1598,
+      2957,
+      197,
+      54,
+      123,
+      35
+    ],
+    "p_planter/base/main/default/6": [
+      1796,
+      2957,
+      49,
+      54,
+      25,
+      43
+    ],
+    "p_bikes/base/main/default/6#shadow": [
+      1846,
+      2957,
+      117,
+      53,
+      74,
+      32
+    ],
+    "p_car/base/main/crashed/5#shadow": [
+      0,
+      3020,
+      196,
+      53,
+      102,
+      34
+    ],
+    "p_car/base/main/normal/1#shadow": [
+      197,
+      3020,
+      218,
+      53,
+      123,
+      35
+    ],
+    "p_locker/base/main/default/6#shadow": [
+      416,
+      3020,
+      76,
+      53,
+      124,
+      68
+    ],
+    "p_car/base/main/normal/5#shadow": [
+      493,
+      3020,
+      215,
+      52,
+      121,
+      34
+    ],
+    "p_hedge/base/main/default/6#shadow": [
+      709,
+      3020,
+      97,
+      52,
+      66,
+      34
+    ],
+    "p_bike/base/main/knocked/2": [
+      807,
+      3020,
+      67,
+      51,
+      44,
+      39
+    ],
+    "p_bike/base/main/parked/1": [
+      875,
+      3020,
+      80,
+      51,
+      40,
+      49
+    ],
+    "p_bike/base/main/parked/5": [
+      956,
+      3020,
+      80,
+      51,
+      40,
+      49
+    ],
+    "p_bike/base/main/parked/3#shadow": [
+      1037,
+      3020,
+      43,
+      50,
+      44,
+      35
+    ],
+    "p_bikes/base/main/default/0#shadow": [
+      1081,
+      3020,
+      96,
+      50,
+      62,
+      33
+    ],
+    "p_ebike/base/main/default/4": [
+      1178,
+      3020,
+      59,
+      50,
+      31,
+      39
+    ],
+    "p_ebike/base/main/default/6": [
+      1238,
+      3020,
+      59,
+      50,
+      28,
+      39
+    ],
+    "f_ac/base/main/default/0": [
+      1298,
+      3020,
+      39,
+      49,
+      12,
+      27
+    ],
+    "p_planter/base/main/default/0": [
+      1338,
+      3020,
+      47,
+      49,
+      24,
+      38
+    ],
+    "p_bike/base/main/knocked/3": [
+      1386,
+      3020,
+      51,
+      48,
+      49,
+      29
+    ],
+    "p_vending/base/main/broken/0#shadow": [
+      1438,
+      3020,
+      56,
+      48,
+      83,
+      48
+    ],
+    "p_vending/base/main/ok/0#shadow": [
+      1495,
+      3020,
+      56,
+      48,
+      83,
+      48
+    ],
+    "p_pot/base/main/small/0": [
+      1552,
+      3020,
+      28,
+      47,
+      14,
+      41
+    ],
+    "p_trashbin/base/main/knocked/0": [
+      1581,
+      3020,
+      58,
+      45,
+      27,
+      31
+    ],
+    "p_ebike/base/main/default/0#shadow": [
+      1640,
+      3020,
+      56,
+      44,
+      43,
+      33
+    ],
+    "p_bike/base/main/parked/2#shadow": [
+      1697,
+      3020,
+      54,
+      43,
+      43,
+      33
+    ],
+    "p_bike/base/main/knocked/6": [
+      1752,
+      3020,
+      67,
+      42,
+      23,
+      14
+    ],
+    "p_bike/base/main/knocked/7": [
+      1820,
+      3020,
+      51,
+      42,
+      2,
+      23
+    ],
+    "p_bike/base/main/parked/7#shadow": [
+      1872,
+      3020,
+      43,
+      42,
+      44,
+      27
+    ],
+    "p_bins/base/main/default/0#shadow": [
+      1916,
+      3020,
+      73,
+      42,
+      62,
+      29
+    ],
+    "p_hedge/base/main/default/0#shadow": [
+      0,
+      3074,
+      99,
+      42,
+      62,
+      25
+    ],
+    "p_hydrant/base/main/ok/0": [
+      100,
+      3074,
+      20,
+      42,
+      10,
+      37
+    ],
+    "fx/umbrella/0": [
+      121,
+      3074,
+      37,
+      40,
+      18,
+      39
+    ],
+    "fx/umbrella/1": [
+      159,
+      3074,
+      37,
+      40,
+      18,
+      39
+    ],
+    "fx/umbrella/2": [
+      197,
+      3074,
+      37,
+      40,
+      18,
+      39
+    ],
+    "fx/umbrella/3": [
+      235,
+      3074,
+      37,
+      40,
+      18,
+      39
+    ],
+    "p_bike/base/main/knocked/1": [
+      273,
+      3074,
+      80,
+      40,
+      40,
+      39
+    ],
+    "p_bike/base/main/knocked/3#shadow": [
+      354,
+      3074,
+      37,
+      40,
+      58,
+      22
+    ],
+    "p_curb/base/main/default/0": [
+      392,
+      3074,
+      70,
+      40,
+      35,
+      23
+    ],
+    "p_curb/base/main/default/2": [
+      463,
+      3074,
+      70,
+      40,
+      35,
+      23
+    ],
+    "p_ebike/base/main/default/2#shadow": [
+      534,
+      3074,
+      69,
+      40,
+      58,
+      33
+    ],
+    "p_hydrant/base/main/broken/0": [
+      604,
+      3074,
+      38,
+      40,
+      10,
+      35
+    ],
+    "p_bike/base/main/knocked/2#shadow": [
+      643,
+      3074,
+      43,
+      39,
+      48,
+      31
+    ],
+    "p_post/base/main/default/0#shadow": [
+      687,
+      3074,
+      58,
+      38,
+      65,
+      39
+    ],
+    "fx/leaves/0": [
+      746,
+      3074,
+      73,
+      37,
+      39,
+      19
+    ],
+    "fx/leaves/2": [
+      820,
+      3074,
+      70,
+      37,
+      37,
+      20
+    ],
+    "fx/leaves/1": [
+      891,
+      3074,
+      74,
+      36,
+      37,
+      18
+    ],
+    "p_parapet/base/main/default/0#shadow": [
+      966,
+      3074,
+      32,
+      35,
+      69,
+      22
+    ],
+    "d_edge_line/base/main/default/0": [
+      999,
+      3074,
+      66,
+      34,
+      33,
+      17
+    ],
+    "d_edge_line/base/main/default/2": [
+      1066,
+      3074,
+      66,
+      34,
+      33,
+      17
+    ],
+    "fx/petals/1": [
+      1133,
+      3074,
+      74,
+      34,
+      39,
+      17
+    ],
+    "fx/petals/0": [
+      1208,
+      3074,
+      72,
+      33,
+      35,
+      18
+    ],
+    "p_bike/base/main/parked/6#shadow": [
+      1281,
+      3074,
+      70,
+      33,
+      59,
+      23
+    ],
+    "p_ebike/base/main/default/4#shadow": [
+      1352,
+      3074,
+      71,
+      33,
+      58,
+      22
+    ],
+    "p_planter/base/main/default/6#shadow": [
+      1424,
+      3074,
+      50,
+      33,
+      44,
+      26
+    ],
+    "p_pot/base/main/grown/0#shadow": [
+      1475,
+      3074,
+      41,
+      32,
+      51,
+      30
+    ],
+    "fx/crash_decal": [
+      1517,
+      3074,
+      125,
+      31,
+      63,
+      17
+    ],
+    "p_ebike/base/main/default/6#shadow": [
+      1643,
+      3074,
+      54,
+      31,
+      43,
+      24
+    ],
+    "p_bike/base/main/knocked/5": [
+      1698,
+      3074,
+      80,
+      28,
+      40,
+      3
+    ],
+    "p_bike/base/main/knocked/6#shadow": [
+      1779,
+      3074,
+      58,
+      28,
+      23,
+      5
+    ],
+    "p_bike/base/main/knocked/7#shadow": [
+      1838,
+      3074,
+      31,
+      27,
+      -12,
+      12
+    ],
+    "p_bike/base/main/parked/5#shadow": [
+      1870,
+      3074,
+      79,
+      26,
+      63,
+      26
+    ],
+    "p_planter/base/main/default/0#shadow": [
+      1950,
+      3074,
+      28,
+      26,
+      46,
+      19
+    ],
+    "fx/smoke/2": [
+      1979,
+      3074,
+      26,
+      25,
+      13,
+      12
+    ],
+    "p_pot/base/main/broken/0": [
+      0,
+      3117,
+      45,
+      25,
+      21,
+      13
+    ],
+    "fx/scorch": [
+      46,
+      3117,
+      96,
+      24,
+      48,
+      12
+    ],
+    "p_bike/base/main/knocked/1#shadow": [
+      143,
+      3117,
+      58,
+      24,
+      41,
+      30
+    ],
+    "p_parapet/base/main/default/2#shadow": [
+      202,
+      3117,
+      32,
+      24,
+      69,
+      39
+    ],
+    "p_trashbin/base/main/upright/0#shadow": [
+      235,
+      3117,
+      28,
+      24,
+      46,
+      26
+    ],
+    "p_bike/base/main/parked/1#shadow": [
+      264,
+      3117,
+      67,
+      23,
+      51,
+      23
+    ],
+    "p_pot/base/main/small/0#shadow": [
+      332,
+      3117,
+      25,
+      23,
+      35,
+      21
+    ],
+    "d_center_dash/base/main/default/0": [
+      358,
+      3117,
+      42,
+      22,
+      21,
+      11
+    ],
+    "d_center_dash/base/main/default/2": [
+      401,
+      3117,
+      42,
+      22,
+      21,
+      11
+    ],
+    "fx/skid": [
+      444,
+      3117,
+      170,
+      21,
+      0,
+      7
+    ],
+    "fx/litter": [
+      615,
+      3117,
+      78,
+      20,
+      40,
+      11
+    ],
+    "p_bike/base/main/knocked/5#shadow": [
+      694,
+      3117,
+      53,
+      19,
+      41,
+      -3
+    ],
+    "d_manhole/base/main/default/0": [
+      748,
+      3117,
+      34,
+      18,
+      17,
+      9
+    ],
+    "fx/smoke/1": [
+      783,
+      3117,
+      17,
+      18,
+      8,
+      9
+    ],
+    "p_hydrant/base/main/broken/0#shadow": [
+      801,
+      3117,
+      47,
+      18,
+      28,
+      20
+    ],
+    "fx/glass_decal": [
+      849,
+      3117,
+      70,
+      17,
+      35,
+      10
+    ],
+    "fx/leafpile/0": [
+      920,
+      3117,
+      34,
+      17,
+      17,
+      13
+    ],
+    "fx/leafpile/1": [
+      955,
+      3117,
+      32,
+      17,
+      15,
+      13
+    ],
+    "p_hydrant/base/main/ok/0#shadow": [
+      988,
+      3117,
+      23,
+      16,
+      30,
+      18
+    ],
+    "p_trashbin/base/main/knocked/0#shadow": [
+      1012,
+      3117,
+      14,
+      16,
+      41,
+      12
+    ],
+    "fx/triangle": [
+      1027,
+      3117,
+      15,
+      13,
+      7,
+      12
+    ],
+    "fx/smoke/0": [
+      1043,
+      3117,
+      12,
+      12,
+      6,
+      6
+    ],
+    "fx/can": [
+      1056,
+      3117,
+      4,
+      6,
+      2,
+      5
+    ],
+    "p_pot/base/main/broken/0#shadow": [
+      1061,
+      3117,
+      4,
+      6,
+      16,
+      7
+    ],
+    "fx/shard/0": [
+      1066,
+      3117,
+      3,
+      3,
+      1,
+      1
+    ],
+    "fx/shard/1": [
+      1070,
+      3117,
+      3,
+      3,
+      1,
+      1
+    ],
+    "fx/bit/0": [
+      1074,
+      3117,
+      2,
+      2,
+      1,
+      1
+    ],
+    "fx/bit/1": [
+      1077,
+      3117,
+      3,
+      2,
+      1,
+      1
+    ],
+    "fx/bit/2": [
+      1081,
+      3117,
+      2,
+      2,
+      1,
+      1
+    ],
+    "fx/shard/2": [
+      1084,
+      3117,
+      2,
+      2,
+      1,
+      1
+    ]
+  },
+  "emit": [
+    "p_pole/base/main/default/0",
+    "p_pole/base/main/default/2",
+    "p_pole/base/main/default/4",
+    "p_pole/base/main/default/6",
+    "p_bus/base/main/normal/6",
+    "i_roofhut/base/main/closed/0",
+    "i_roofhut/base/main/open/0",
+    "p_busstop/base/base/default/0",
+    "p_lamp/base/main/ok/0",
+    "f_shop/base/main/door/0",
+    "f_shop/base/main/door/6",
+    "f_shop/base/main/shut/0",
+    "f_shop/base/main/shut/6",
+    "f_shop/base/main/window/0",
+    "f_shop/base/main/window/6",
+    "p_locker/base/main/default/0",
+    "p_locker/base/main/default/6",
+    "p_antenna/base/main/default/0",
+    "f_window/w2/main/lit/6",
+    "f_window/base/main/lit/6",
+    "f_window/w1/main/lit/6",
+    "p_car/base/main/normal/7",
+    "p_car/red/main/normal/7",
+    "p_car/taxi/main/normal/7",
+    "p_car/base/main/crashed/6",
+    "p_car/base/main/crashed/7",
+    "p_car/base/main/normal/0",
+    "p_car/base/main/normal/6",
+    "p_car/red/main/crashed/6",
+    "p_car/red/main/crashed/7",
+    "p_car/red/main/normal/0",
+    "p_car/red/main/normal/6",
+    "p_car/taxi/main/crashed/6",
+    "p_car/taxi/main/crashed/7",
+    "p_car/taxi/main/normal/0",
+    "p_car/taxi/main/normal/6",
+    "p_car/base/main/normal/3",
+    "p_car/red/main/normal/3",
+    "p_car/taxi/main/normal/3",
+    "f_shopsign/base/main/default/6",
+    "p_car/base/main/normal/2",
+    "p_car/base/main/normal/4",
+    "p_car/red/main/normal/2",
+    "p_car/red/main/normal/4",
+    "p_car/taxi/main/normal/2",
+    "p_car/taxi/main/normal/4",
+    "p_car/base/main/crashed/0",
+    "p_car/red/main/crashed/0",
+    "p_car/taxi/main/crashed/0",
+    "f_shopsign/base/main/default/0",
+    "p_car/base/main/crashed/2",
+    "p_car/base/main/crashed/3",
+    "p_car/base/main/crashed/4",
+    "p_car/red/main/crashed/2",
+    "p_car/red/main/crashed/3",
+    "p_car/red/main/crashed/4",
+    "p_car/taxi/main/crashed/2",
+    "p_car/taxi/main/crashed/3",
+    "p_car/taxi/main/crashed/4",
+    "f_window/w2/main/lit/0",
+    "f_window/base/main/lit/0",
+    "f_window/w1/main/lit/0",
+    "p_vending/base/main/broken/0",
+    "p_vending/base/main/ok/0",
+    "p_car/base/main/crashed/1",
+    "p_car/base/main/crashed/5",
+    "p_car/base/main/normal/1",
+    "p_car/base/main/normal/5",
+    "p_car/red/main/crashed/1",
+    "p_car/red/main/crashed/5",
+    "p_car/red/main/normal/1",
+    "p_car/red/main/normal/5",
+    "p_car/taxi/main/crashed/1",
+    "p_car/taxi/main/crashed/5",
+    "p_car/taxi/main/normal/1",
+    "p_car/taxi/main/normal/5",
+    "p_ebike/base/main/default/4",
+    "p_ebike/base/main/default/6"
+  ],
+  "snow_atlas": "kit_snow.png",
+  "snow": {
+    "b_roof_a/base/main/default/0": [
+      0,
+      0,
+      1,
+      1,
+      868,
+      542,
+      1
+    ],
+    "b_roof_deck/base/main/default/0": [
+      868,
+      0,
+      1,
+      1,
+      868,
+      475,
+      1
+    ],
+    "b_roof_b/c/main/default/0": [
+      0,
+      1630,
+      1,
+      2,
+      676,
+      343,
+      0
+    ],
+    "b_roof_b/base/main/default/0": [
+      0,
+      1974,
+      1,
+      1,
+      676,
+      338,
+      0
+    ],
+    "p_bus/base/main/normal/6": [
+      0,
+      2313,
+      10,
+      1,
+      410,
+      296,
+      0
+    ],
+    "i_roofhut/base/main/closed/0": [
+      1233,
+      2313,
+      1,
+      1,
+      169,
+      174,
+      0
+    ],
+    "p_lamp/base/main/ok/0": [
+      1743,
+      2313,
+      1,
+      1,
+      51,
+      164,
+      0
+    ],
+    "f_balcony/b1/main/default/0": [
+      0,
+      2610,
+      1,
+      0,
+      117,
+      162,
+      0
+    ],
+    "f_balcony/b1/main/default/6": [
+      354,
+      2610,
+      1,
+      3,
+      117,
+      162,
+      0
+    ],
+    "f_balcony/b2/main/default/0": [
+      708,
+      2610,
+      1,
+      0,
+      138,
+      162,
+      0
+    ],
+    "f_balcony/b2/main/default/6": [
+      1125,
+      2610,
+      1,
+      3,
+      117,
+      162,
+      0
+    ],
+    "f_balcony/base/main/default/0": [
+      1479,
+      2610,
+      1,
+      0,
+      117,
+      162,
+      0
+    ],
+    "f_balcony/base/main/default/6": [
+      0,
+      2773,
+      1,
+      3,
+      117,
+      162,
+      0
+    ],
+    "p_tree/base/canopy/default/0": [
+      354,
+      2773,
+      1,
+      1,
+      201,
+      162,
+      0
+    ],
+    "p_busstop/base/base/default/0": [
+      960,
+      2773,
+      2,
+      1,
+      141,
+      156,
+      0
+    ],
+    "p_tree/t2/canopy/default/0": [
+      1386,
+      2773,
+      2,
+      1,
+      156,
+      151,
+      0
+    ],
+    "p_stall/base/base/default/6": [
+      0,
+      2936,
+      3,
+      1,
+      138,
+      133,
+      0
+    ],
+    "p_antenna/base/main/default/0": [
+      417,
+      2936,
+      25,
+      4,
+      41,
+      121,
+      0
+    ],
+    "p_stall/base/base/default/0": [
+      543,
+      2936,
+      1,
+      1,
+      136,
+      121,
+      0
+    ],
+    "p_locker/base/main/default/0": [
+      954,
+      2936,
+      1,
+      1,
+      107,
+      118,
+      0
+    ],
+    "p_locker/base/main/default/6": [
+      1278,
+      2936,
+      1,
+      1,
+      107,
+      118,
+      0
+    ],
+    "p_car/base/main/normal/7": [
+      1602,
+      2936,
+      2,
+      1,
+      90,
+      117,
+      0
+    ],
+    "f_shop/base/main/window/0": [
+      0,
+      3070,
+      22,
+      45,
+      82,
+      115,
+      0
+    ],
+    "f_shop/base/main/window/6": [
+      249,
+      3070,
+      10,
+      45,
+      82,
+      115,
+      0
+    ],
+    "p_car/base/main/normal/0": [
+      498,
+      3070,
+      2,
+      1,
+      200,
+      114,
+      0
+    ],
+    "p_car/base/main/normal/6": [
+      1101,
+      3070,
+      3,
+      1,
+      200,
+      114,
+      0
+    ],
+    "p_car/base/main/normal/3": [
+      1704,
+      3070,
+      2,
+      1,
+      90,
+      113,
+      0
+    ],
+    "p_car/base/main/normal/2": [
+      0,
+      3186,
+      2,
+      1,
+      200,
+      111,
+      0
+    ],
+    "p_car/base/main/normal/4": [
+      603,
+      3186,
+      3,
+      1,
+      200,
+      111,
+      0
+    ],
+    "w_wall/base/main/plain/0": [
+      1206,
+      3186,
+      1,
+      1,
+      74,
+      110,
+      0
+    ],
+    "w_wall/base/main/plain/6": [
+      1431,
+      3186,
+      1,
+      1,
+      74,
+      110,
+      0
+    ],
+    "w_pillar/base/main/default/0": [
+      1656,
+      3186,
+      1,
+      1,
+      40,
+      107,
+      0
+    ],
+    "p_busstop/base/roof/default/0": [
+      0,
+      3298,
+      2,
+      1,
+      193,
+      104,
+      0
+    ],
+    "p_tree/base/trunk/default/0": [
+      582,
+      3298,
+      1,
+      1,
+      113,
+      103,
+      0
+    ],
+    "p_solar/base/main/default/0": [
+      924,
+      3298,
+      1,
+      1,
+      108,
+      99,
+      0
+    ],
+    "p_vending/base/main/ok/0": [
+      1251,
+      3298,
+      2,
+      1,
+      52,
+      99,
+      0
+    ],
+    "f_door/base/main/closed/0": [
+      1410,
+      3298,
+      1,
+      0,
+      116,
+      98,
+      0
+    ],
+    "f_door/base/main/closed/6": [
+      0,
+      3403,
+      0,
+      4,
+      116,
+      98,
+      0
+    ],
+    "w_gate_l/base/main/closed/0": [
+      351,
+      3403,
+      1,
+      1,
+      53,
+      95,
+      0
+    ],
+    "w_gate_l/base/main/closed/6": [
+      513,
+      3403,
+      1,
+      1,
+      54,
+      95,
+      0
+    ],
+    "w_gate_r/base/main/closed/0": [
+      678,
+      3403,
+      1,
+      1,
+      54,
+      95,
+      0
+    ],
+    "w_gate_r/base/main/closed/6": [
+      843,
+      3403,
+      2,
+      1,
+      53,
+      95,
+      0
+    ],
+    "p_tree/t2/trunk/default/0": [
+      1005,
+      3403,
+      1,
+      1,
+      81,
+      88,
+      0
+    ],
+    "p_tank/base/main/default/0": [
+      1251,
+      3403,
+      1,
+      3,
+      78,
+      85,
+      0
+    ],
+    "w_fence/base/main/default/0": [
+      1488,
+      3403,
+      1,
+      1,
+      73,
+      81,
+      0
+    ],
+    "w_fence/base/main/default/6": [
+      1710,
+      3403,
+      2,
+      1,
+      73,
+      81,
+      0
+    ],
+    "p_stall/base/awning/default/0": [
+      0,
+      3502,
+      1,
+      1,
+      139,
+      79,
+      0
+    ],
+    "p_stall/base/awning/default/6": [
+      420,
+      3502,
+      1,
+      1,
+      139,
+      79,
+      0
+    ],
+    "p_post/base/main/default/0": [
+      840,
+      3502,
+      1,
+      1,
+      17,
+      76,
+      0
+    ],
+    "p_car/base/main/normal/1": [
+      894,
+      3502,
+      1,
+      1,
+      209,
+      74,
+      0
+    ],
+    "p_car/base/main/normal/5": [
+      0,
+      3582,
+      1,
+      1,
+      209,
+      74,
+      0
+    ],
+    "p_bikes/base/main/default/0": [
+      630,
+      3582,
+      3,
+      1,
+      95,
+      71,
+      0
+    ],
+    "p_bikes/base/main/default/6": [
+      918,
+      3582,
+      2,
+      1,
+      95,
+      71,
+      0
+    ],
+    "p_bins/base/main/default/0": [
+      1206,
+      3582,
+      1,
+      1,
+      66,
+      58,
+      0
+    ],
+    "p_hedge/base/main/default/6": [
+      1407,
+      3582,
+      1,
+      1,
+      86,
+      57,
+      0
+    ],
+    "p_hedge/base/main/default/0": [
+      1668,
+      3582,
+      2,
+      1,
+      90,
+      56,
+      0
+    ],
+    "f_steps/base/main/default/0": [
+      0,
+      3657,
+      1,
+      0,
+      98,
+      55,
+      0
+    ],
+    "f_steps/base/main/default/6": [
+      297,
+      3657,
+      1,
+      0,
+      98,
+      55,
+      0
+    ],
+    "p_bike/base/main/parked/3": [
+      594,
+      3657,
+      1,
+      1,
+      24,
+      54,
+      0
+    ],
+    "p_ebike/base/main/default/0": [
+      669,
+      3657,
+      1,
+      1,
+      56,
+      52,
+      0
+    ],
+    "p_ebike/base/main/default/2": [
+      840,
+      3657,
+      2,
+      1,
+      56,
+      52,
+      0
+    ],
+    "p_trashbin/base/main/upright/0": [
+      1011,
+      3657,
+      1,
+      1,
+      38,
+      52,
+      0
+    ],
+    "p_bike/base/main/parked/2": [
+      1128,
+      3657,
+      1,
+      1,
+      56,
+      51,
+      0
+    ],
+    "p_bike/base/main/parked/7": [
+      1299,
+      3657,
+      1,
+      1,
+      24,
+      45,
+      0
+    ],
+    "p_bike/base/main/parked/6": [
+      1374,
+      3657,
+      2,
+      1,
+      55,
+      43,
+      0
+    ],
+    "p_planter/base/main/default/6": [
+      1542,
+      3657,
+      1,
+      1,
+      47,
+      43,
+      0
+    ],
+    "f_ac/a2/main/default/6": [
+      1686,
+      3657,
+      3,
+      3,
+      36,
+      40,
+      0
+    ],
+    "p_hydrant/base/main/ok/0": [
+      1797,
+      3657,
+      1,
+      1,
+      18,
+      39,
+      0
+    ],
+    "f_ac/a1/main/default/0": [
+      1854,
+      3657,
+      2,
+      1,
+      36,
+      38,
+      0
+    ],
+    "f_ac/a1/main/default/6": [
+      0,
+      3713,
+      3,
+      3,
+      36,
+      38,
+      0
+    ],
+    "f_ac/a2/main/default/0": [
+      111,
+      3713,
+      2,
+      1,
+      36,
+      38,
+      0
+    ],
+    "f_ac/base/main/default/0": [
+      222,
+      3713,
+      2,
+      1,
+      36,
+      38,
+      0
+    ],
+    "f_ac/base/main/default/6": [
+      333,
+      3713,
+      3,
+      3,
+      36,
+      38,
+      0
+    ],
+    "p_ebike/base/main/default/4": [
+      444,
+      3713,
+      2,
+      1,
+      56,
+      37,
+      0
+    ],
+    "p_ebike/base/main/default/6": [
+      615,
+      3713,
+      1,
+      1,
+      56,
+      37,
+      0
+    ],
+    "p_parapet/base/main/default/0": [
+      786,
+      3713,
+      2,
+      1,
+      74,
+      37,
+      0
+    ],
+    "p_parapet/base/main/default/2": [
+      1011,
+      3713,
+      2,
+      1,
+      74,
+      37,
+      0
+    ],
+    "p_planter/base/main/default/0": [
+      1236,
+      3713,
+      1,
+      1,
+      45,
+      37,
+      0
+    ],
+    "p_bike/base/main/parked/1": [
+      1374,
+      3713,
+      2,
+      1,
+      76,
+      34,
+      0
+    ],
+    "p_bike/base/main/parked/5": [
+      1605,
+      3713,
+      2,
+      1,
+      76,
+      34,
+      0
+    ],
+    "p_pot/base/main/small/0": [
+      1836,
+      3713,
+      1,
+      1,
+      26,
+      27,
+      0
+    ]
+  },
+  "masks": {
+    "b_roof_a/base/main/default/0": [
+      218,
+      145,
+      "AAAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADyAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAvwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD8YAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAzeAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAADAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/wD4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH//D/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH////+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/////4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAH//////gAAAAAAAAAAAAAAAAAAAAAAAAAAAAH//////+AAAAAAAAAAAAAAAAAAAAAAAAAAAAH///////4AAAAAAAAAAAAAAAAAAAAAAAAAAAH////////gAAAAAAAAAAAAAAAAAAAAAAAAAAH////////+AAAAAAAAAAAAAAAAAAAAAAAAAAH/////////4AAAAAAAAAAAAAAAAAAAAAAAAAD//////////gAAAAAAAAAAAAAAAAAAAAAAAAB//////////+AAAAAAAAAAAAAAAAAAAAAAAAAf//////////4AAAAAAAAAAAAAAAAAAAAAAAAD///////////gAAAAAAAAAAAAAAAAAAAAAAAAP//////////+AAAAAAAAAAAAAAAAAAAAAAAAD///////////4AAAAAAAAAAAAAAAAAAAAAAAA////////////gAAAAAAAAAAAAAAAAAAAAAAAP///////////+AAAAAAAAAAAAAAAAAAAAAAAD////////////4AAAAAAAAAAAAAAAAAAAAAAD/////////////gAAAAAAAAAAAAAAAAAAAAAD/////////////+AAAAAAAAAAAAAAAAAAAAAD//////////////4AAAAAAAAAAAAAAAAAAAAD///////////////gAAAAAAAAAAAAAAAAAAAD///////////////+AAAAAAAAAAAAAAAAAAAD////////////////4AAAAAAAAAAAAAAAAAAD/////////////////gAAAAAAAAAAAAAAAAAD/////////////////+AAAAAAAAAAAAAAAAAD//////////////////4AAAAAAAAAAAAAAAAD///////////////////gAAAAAAAAAAAAAAAD///////////////////+AAAAAAAAAAAAAAAD////////////////////4AAAAAAAAAAAAAAD/////////////////////gAAAAAAAAAAAAAD/////////////////////+AAAAAAAAAAAAAD//////////////////////4AAAAAAAAAAAAD///////////////////////gAAAAAAAAAAAD///////////////////////+AAAAAAAAAAAD////////////////////////4AAAAAAAAAAD/////////////////////////gAAAAAAAAAD/////////////////////////+AAAAAAAAAD//////////////////////////4AAAAAAAAD///////////////////////////gAAAAAAAD///////////////////////////+AAAAAAAD////////////////////////////4AAAAAAD/////////////////////////////gAAAAAD/////////////////////////////+AAAAAD//////////////////////////////4AAAAD///////////////////////////////gAAAD///////////////////////////////+AAAD////////////////////////////////wAAD////////////////////////////////8AAD////////////////////////////////+AAD/////////////////////////////////gAD/////////////////////////////////4AD/////////////////////////////////+AD//////////////////////////////////gD//////////////////////////////////4D//////////////////////////////////+D///////////////////////////////////j///////////////////////////////////z///////////////////////////////////w///////////////////////////////////wP//////////////////////////////////wD//////////////////////////////////wA//////////////////////////////////wAP/////////////////////////////////wAD/////////////////////////////////wAA/////////////////////////////////wAAP////////////////////////////////wAAD////////////////////////////////wAAA////////////////////////////////wAAAH///////////////////////////////wAAAAf//////////////////////////////wAAAAB//////////////////////////////wAAAAAH/////////////////////////////wAAAAAAf////////////////////////////wAAAAAAB////////////////////////////wAAAAAAAH///////////////////////////wAAAAAAAAf//////////////////////////wAAAAAAAAB//////////////////////////wAAAAAAAAAH/////////////////////////wAAAAAAAAAAf////////////////////////wAAAAAAAAAAB////////////////////////wAAAAAAAAAAAH///////////////////////wAAAAAAAAAAAAf//////////////////////wAAAAAAAAAAAAB//////////////////////wAAAAAAAAAAAAAH/////////////////////wAAAAAAAAAAAAAAf////////////////////wAAAAAAAAAAAAAAB////////////////////wAAAAAAAAAAAAAAAH///////////////////wAAAAAAAAAAAAAAAAf//////////////////wAAAAAAAAAAAAAAAAB//////////////////wAAAAAAAAAAAAAAAAAH/////////////////wAAAAAAAAAAAAAAAAAAf////////////////wAAAAAAAAAAAAAAAAAAB////////////////wAAAAAAAAAAAAAAAAAAAH///////////////wAAAAAAAAAAAAAAAAAAAAf//////////////wAAAAAAAAAAAAAAAAAAAAB//////////////wAAAAAAAAAAAAAAAAAAAAAH/////////////wAAAAAAAAAAAAAAAAAAAAAAf////////////wAAAAAAAAAAAAAAAAAAAAAAB////////////wAAAAAAAAAAAAAAAAAAAAAAAH///////////wAAAAAAAAAAAAAAAAAAAAAAAAf//////////wAAAAAAAAAAAAAAAAAAAAAAAAB//////////wAAAAAAAAAAAAAAAAAAAAAAAAAH/////////wAAAAAAAAAAAAAAAAAAAAAAAAAAf////////wAAAAAAAAAAAAAAAAAAAAAAAAAAB////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAH///////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAf//////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAB//////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB//wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAfwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAAAAAAAA=="
+    ],
+    "b_roof_deck/base/main/default/0": [
+      218,
+      131,
+      "AAAAAAAAAAAAAAAAAAAD4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD////4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/////gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/////+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAD//////4AAAAAAAAAAAAAAAAAAAAAAAAAAAAD///////gAAAAAAAAAAAAAAAAAAAAAAAAAAAD///////+AAAAAAAAAAAAAAAAAAAAAAAAAAAD////////4AAAAAAAAAAAAAAAAAAAAAAAAAAD/////////gAAAAAAAAAAAAAAAAAAAAAAAAAD/////////+AAAAAAAAAAAAAAAAAAAAAAAAAD//////////4AAAAAAAAAAAAAAAAAAAAAAAAD///////////gAAAAAAAAAAAAAAAAAAAAAAAD///////////+AAAAAAAAAAAAAAAAAAAAAAAD////////////4AAAAAAAAAAAAAAAAAAAAAAD/////////////gAAAAAAAAAAAAAAAAAAAAAD/////////////+AAAAAAAAAAAAAAAAAAAAAD//////////////4AAAAAAAAAAAAAAAAAAAAD///////////////gAAAAAAAAAAAAAAAAAAAD///////////////+AAAAAAAAAAAAAAAAAAAD////////////////4AAAAAAAAAAAAAAAAAAD/////////////////gAAAAAAAAAAAAAAAAAD/////////////////+AAAAAAAAAAAAAAAAAD//////////////////4AAAAAAAAAAAAAAAAD///////////////////gAAAAAAAAAAAAAAAD///////////////////+AAAAAAAAAAAAAAAD////////////////////4AAAAAAAAAAAAAAD/////////////////////gAAAAAAAAAAAAAD/////////////////////+AAAAAAAAAAAAAD//////////////////////4AAAAAAAAAAAAD///////////////////////gAAAAAAAAAAAD///////////////////////+AAAAAAAAAAAD////////////////////////4AAAAAAAAAAD/////////////////////////gAAAAAAAAAD/////////////////////////+AAAAAAAAAD//////////////////////////4AAAAAAAAD///////////////////////////gAAAAAAAD///////////////////////////+AAAAAAAD////////////////////////////4AAAAAAD/////////////////////////////gAAAAAD/////////////////////////////+AAAAAD//////////////////////////////4AAAAD///////////////////////////////gAAAD///////////////////////////////+AAAD////////////////////////////////wAAD////////////////////////////////8AAD////////////////////////////////+AAD/////////////////////////////////gAD/////////////////////////////////4AD/////////////////////////////////+AD//////////////////////////////////gD//////////////////////////////////4D//////////////////////////////////+D///////////////////////////////////j///////////////////////////////////7///////////////////////////////////+////////////////////////////////////v///////////////////////////////////7///////////////////////////////////+////////////////////////////////////v///////////////////////////////////7///////////////////////////////////+////////////////////////////////////v///////////////////////////////////7///////////////////////////////////+////////////////////////////////////v///////////////////////////////////7///////////////////////////////////+///////////////////////////////////+P//////////////////////////////////+D//////////////////////////////////+A//////////////////////////////////+AP/////////////////////////////////+AD/////////////////////////////////+AA/////////////////////////////////+AAP////////////////////////////////+AAD////////////////////////////////+AAA////////////////////////////////+AAAP///////////////////////////////+AAAB///////////////////////////////+AAAAH//////////////////////////////+AAAAAf/////////////////////////////+AAAAAB/////////////////////////////+AAAAAAH////////////////////////////+AAAAAAAf///////////////////////////+AAAAAAAB///////////////////////////+AAAAAAAAH//////////////////////////+AAAAAAAAAf/////////////////////////+AAAAAAAAAB/////////////////////////+AAAAAAAAAAH////////////////////////+AAAAAAAAAAAf///////////////////////+AAAAAAAAAAAB///////////////////////+AAAAAAAAAAAAH//////////////////////+AAAAAAAAAAAAAf/////////////////////+AAAAAAAAAAAAAB/////////////////////+AAAAAAAAAAAAAAH////////////////////+AAAAAAAAAAAAAAAf///////////////////+AAAAAAAAAAAAAAAB///////////////////+AAAAAAAAAAAAAAAAH//////////////////+AAAAAAAAAAAAAAAAAf/////////////////+AAAAAAAAAAAAAAAAAB/////////////////+AAAAAAAAAAAAAAAAAAH////////////////+AAAAAAAAAAAAAAAAAAAf///////////////+AAAAAAAAAAAAAAAAAAAB///////////////+AAAAAAAAAAAAAAAAAAAAH//////////////+AAAAAAAAAAAAAAAAAAAAAf/////////////+AAAAAAAAAAAAAAAAAAAAAB/////////////+AAAAAAAAAAAAAAAAAAAAAAH////////////+AAAAAAAAAAAAAAAAAAAAAAAf///////////+AAAAAAAAAAAAAAAAAAAAAAAB///////////+AAAAAAAAAAAAAAAAAAAAAAAAH//////////+AAAAAAAAAAAAAAAAAAAAAAAAAf/////////+AAAAAAAAAAAAAAAAAAAAAAAAAB/////////+AAAAAAAAAAAAAAAAAAAAAAAAAAH////////+AAAAAAAAAAAAAAAAAAAAAAAAAAAf///////+AAAAAAAAAAAAAAAAAAAAAAAAAAAB///////+AAAAAAAAAAAAAAAAAAAAAAAAAAAAH//////+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/////+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB/////+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH////+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf///+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB///+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH//+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB/+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAeAAAAAAAAAAAAAAAAAAAA"
+    ],
+    "b_roof_b/c/main/default/0": [
+      170,
+      96,
+      "AAAAAAAAAA8AAAAP+AAAAAAAAAAAAAAAAAAAAAfAAAAH/4AAAAAAAAAAAAAAAAAAAAPAAAAD/+AAAAAAAAAAAAAAAAAAAAD2AAAA//wAAAAAAAAAAAAAAAAAAAAPgAAAf/8AAAAAAAAAAAAAAAAAAAAHwAAAf//wAAAAAAAAAAAAAAAAAAAHwAAAf///AAAAAAAAAAAAAAAAAAAD8AAAf///8AAAAAAAAAAAAAAAAAAATeAA/////wAAAAAAAAAAAAAAAAAAA/AAf/////AAAAAAAAAAAAAAAAAAAfAAf/////8AAAAAAAAAAAAAAAAAAfAAf//////wAAAAAAAAAAAAAAAAAfwAf///////AAAAAAAAAAAAAAAAAHMAf///////8AAAAAAAAAAAAAAAAADAf////////wAAAAAAAAAAAAAAAAAwf/////////AAAAAAAAAAAAAAAAAMf/////////8AAAAAAAAAAAAAAAADf//////////wAAAAAAAAAAAAAAAA////////////AAAAAAAAAAAAAAAAf///////////8AAAAAAAAAAAAAAAf////////////wAAAAAAAAAAAAAAf/////////////AAAAAAAAAAAAAAf/////////////8AAAAAAAAAAAAAf//////////////wAAAAAAAAAAAAf///////////////AAAAAAAAAAAAf///////////////8AAAAAAAAAAAf////////////////wAAAAAAAAAAf/////////////////AAAAAAAAAAf/////////////////8AAAAAAAAAf//////////////////wAAAAAAAAf///////////////////AAAAAAAAf///////////////////8AAAAAAAf////////////////////wAAAAAAf/////////////////////AAAAAAf/////////////////////8AAAAAf//////////////////////wAAAAf///////////////////////AAAAf///////////////////////8AAAf////////////////////////AAAf////////////////////////gAAf////////////////////////4AAf////////////////////////+AAf/////////////////////////gAf/////////////////////////4Af/////////////////////////+Af//////////////////////////gf//////////////////////////4f//////////////////////////+f//////////////////////////+P//////////////////////////+D//////////////////////////+A//////////////////////////+AP/////////////////////////+AD/////////////////////////+AA/////////////////////////+AAP////////////////////////+AAD////////////////////////+AAA////////////////////////+AAAP///////////////////////+AAAD///////////////////////+AAAAP//////////////////////+AAAAA//////////////////////+AAAAAD/////////////////////+AAAAAAP////////////////////+AAAAAAA////////////////////+AAAAAAAD///////////////////+AAAAAAAAP//////////////////+AAAAAAAAA//////////////////+AAAAAAAAAD/////////////////+AAAAAAAAAAP////////////////+AAAAAAAAAAA////////////////+AAAAAAAAAAAD///////////////+AAAAAAAAAAAAP//////////////+AAAAAAAAAAAAA//////////////+AAAAAAAAAAAAAD/////////////+AAAAAAAAAAAAAAP////////////+AAAAAAAAAAAAAAA////////////+AAAAAAAAAAAAAAAD///////////+AAAAAAAAAAAAAAAAP//////////+AAAAAAAAAAAAAAAAA//////////+AAAAAAAAAAAAAAAAAD/////////+AAAAAAAAAAAAAAAAAAP////////+AAAAAAAAAAAAAAAAAAA////////+AAAAAAAAAAAAAAAAAAAD///////+AAAAAAAAAAAAAAAAAAAAP//////+AAAAAAAAAAAAAAAAAAAAA//////+AAAAAAAAAAAAAAAAAAAAAD/////+AAAAAAAAAAAAAAAAAAAAAAP////+AAAAAAAAAAAAAAAAAAAAAAA////+AAAAAAAAAAAAAAAAAAAAAAAD///+AAAAAAAAAAAAAAAAAAAAAAAAP//+AAAAAAAAAAAAAAAAAAAAAAAAA//+AAAAAAAAAAAAAAAAAAAAAAAAAD/+AAAAAAAAAAAAAAAAAAAAAAAAAAP+AAAAAAAAAAAAAAAAAAAAAAAAAAA+AAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAA"
+    ],
+    "b_roof_b/base/main/default/0": [
+      170,
+      94,
+      "AAAAAAAAAAAAAAAD4AAAAAAAAAAAAAAAAAAAAAAAAAAD/wAAAAAAAAAAAAAAAAAAAAAAAAAD/+AAAAAAAAAAAAAAAAAAAAAAAAAD//4AAAAAAAAAAAAAAAAAAAAAAAAD///gAAAAAAAAAAAAAAAAAAAAAAAD///+AAAAAAAAAAAAAAAAAAAAAAAD////4AAAAAAAAAAAAAAAAAAAAAAD/////gAAAAAAAAAAAAAAAAAAAAAD/////+AAAAAAAAAAAAAAAAAAAAAD//////4AAAAAAAAAAAAAAAAAAAAD///////gAAAAAAAAAAAAAAAAAAAD///////+AAAAAAAAAAAAAAAAAAAD////////4AAAAAAAAAAAAAAAAAAD/////////gAAAAAAAAAAAAAAAAAD/////////+AAAAAAAAAAAAAAAAAD//////////4AAAAAAAAAAAAAAAAD///////////gAAAAAAAAAAAAAAAD///////////+AAAAAAAAAAAAAAAD////////////4AAAAAAAAAAAAAAD/////////////gAAAAAAAAAAAAAD/////////////+AAAAAAAAAAAAAD//////////////4AAAAAAAAAAAAD///////////////gAAAAAAAAAAAD///////////////+AAAAAAAAAAAD////////////////4AAAAAAAAAAD/////////////////gAAAAAAAAAD/////////////////+AAAAAAAAAD//////////////////4AAAAAAAAD///////////////////gAAAAAAAD///////////////////+AAAAAAAD////////////////////4AAAAAAD/////////////////////gAAAAAD/////////////////////+AAAAAD//////////////////////4AAAAD///////////////////////gAAAD///////////////////////+AAAD////////////////////////wAAD////////////////////////8AAD////////////////////////+AAD/////////////////////////gAD/////////////////////////4AD/////////////////////////+AD//////////////////////////gD//////////////////////////4D//////////////////////////+D///////////////////////////j///////////////////////////z///////////////////////////w///////////////////////////wP//////////////////////////wD//////////////////////////wA//////////////////////////wAP/////////////////////////wAD/////////////////////////wAA/////////////////////////wAAP////////////////////////wAAD////////////////////////wAAA////////////////////////wAAAH///////////////////////wAAAAf//////////////////////wAAAAB//////////////////////wAAAAAH/////////////////////wAAAAAAf////////////////////wAAAAAAB////////////////////wAAAAAAAH///////////////////wAAAAAAAAf//////////////////wAAAAAAAAB//////////////////wAAAAAAAAAH/////////////////wAAAAAAAAAAf////////////////wAAAAAAAAAAB////////////////wAAAAAAAAAAAH///////////////wAAAAAAAAAAAAf//////////////wAAAAAAAAAAAAB//////////////wAAAAAAAAAAAAAH/////////////wAAAAAAAAAAAAAAf////////////wAAAAAAAAAAAAAAB////////////wAAAAAAAAAAAAAAAH///////////wAAAAAAAAAAAAAAAAf//////////wAAAAAAAAAAAAAAAAB//////////wAAAAAAAAAAAAAAAAAH/////////wAAAAAAAAAAAAAAAAAAf////////wAAAAAAAAAAAAAAAAAAB////////wAAAAAAAAAAAAAAAAAAAH///////wAAAAAAAAAAAAAAAAAAAAf//////wAAAAAAAAAAAAAAAAAAAAB//////wAAAAAAAAAAAAAAAAAAAAAH/////wAAAAAAAAAAAAAAAAAAAAAAf////wAAAAAAAAAAAAAAAAAAAAAAB////wAAAAAAAAAAAAAAAAAAAAAAAH///wAAAAAAAAAAAAAAAAAAAAAAAAf//wAAAAAAAAAAAAAAAAAAAAAAAAB//wAAAAAAAAAAAAAAAAAAAAAAAAAH/wAAAAAAAAAAAAAAAAAAAAAAAAAAfwAAAAAAAAAAAAAAAAAAAAAAAAAABwAAAAAAAAAAAAAAAA"
+    ],
+    "p_pole/base/main/default/0": [
+      23,
+      91,
+      "A4AABwAADjgAHHAAP+AAf4AD/AAH4AD/gAH/AAPOAAYcAAA4AABwAADgAAHAAAOAAAcAAA4AABwAADgAAHAAAOAAAcAAA/5gB//wDh/4HA/wOAfgcAOA4AABwAADgAAHAAAOAAA+AAB8AAD4AAHwAAPgAAfAAB+AAP8AAf4AA/wAB/gAD/AAH+AAP8AAf4AAPwAAPgAAfAAA+AAB8AAD4AAHwAAPgAAfAAA+AAB8AAD4AAHwAAPgAAfgAA/AAB+AAD8AAHwAAPgAAfAAA+AAB8AAD4AAHwAAPgAAfAAA+AAB8AAD4AAHwAAPgAAfAAA+AAB8AAH8AAf8AA/4AB/wAD/gAB8AAA=="
+    ],
+    "p_pole/base/main/default/2": [
+      23,
+      91,
+      "A4AABwADjgAHHAAP+AAP8AAH+AAD8AAD/gAH/AAOeAAcMAA4AABwB8DgP4HA/wOB/AcH4A4cABxwADvAAH8AAPwAAfAAA4AABwAADgAAHAAAOAAAcAAA4AABwAADgAAHAAAOAAA+AAB8AAD4AAHwAAPgAAfAAA+AAB8AAH4AA/wAB/gAD/AAH+AAP8AAf4AA/wAB/gAA/AAA+AAB8AAD4AAHwAAPgAAfAAA+AAB8AAD4AAHwAAPgAAfgAA/AAB+AAD8AAHwAAPgAAfAAA+AAB8AAD4AAHwAAPgAAfAAA+AAB8AAD4AAHwAAPgAAfAAA+AAB8AAH8AAf8AA/4AB/wAD/gAB8AAA=="
+    ],
+    "p_pole/base/main/default/4": [
+      23,
+      91,
+      "AAeAAA8AAB4wADxwAH/gAP+AA/wAB+AA/4AB/wAH3gAGPAAAeB4A8D8B4H+DwH8HgD8PAA8eAAc8AAd4AAfwAAfgAAfAAAeAAA8AAB4AADwAAHgAAPAAAeAAA8AAB4AADwAAHgAAPAAAeAAA8AAB4AADwAAHgAAPAAAeAAA/AAB/gAD/AAH+AAP8AAf4AA/wAB/gAD+AAHwAAPAAAeAAA8AAB4AADwAAHgAAPAAAeAAA8AAB4AADwAAPgAAfAAA+AAB8AAB4AADwAAHgAAPAAAeAAA8AAB8AAD4AAHwAAPgAAfAAA+AAB8AAD4AAHwAAPgAAfAAB/AAH/AAP+AAf8AA/wAAfAA=="
+    ],
+    "p_pole/base/main/default/6": [
+      23,
+      91,
+      "AAOAAA8AAx4ADzwAH/gAH/AAD/gAB/AAB/wAD/wAHvgAPHAAeAAA8AAB4AADwAAHgAAPAAAeAAA8AAB4AADwAAHgAAPADP+Af/8D/x4H8DwPwHgOAPAAAeAAA8AAB4AADwAAHgAAPAAAeAAA8AAB4AADwAAHgAAPwAAf4AA/wAB/gAD/AAH+AAP8AAf4AA/wAB+AADwAAHgAAPAAAeAAA8AAB4AADwAAHgAAPAAAeAAA8AAB4AADwAAPgAAfAAA+AAB8AAB4AADwAAHgAAPAAAeAAA+AAB8AAD4AAHwAAPgAAfAAA+AAB8AAD4AAHwAAPgAAfAAB/AAH/AAP+AAf8AA/wAAfAA=="
+    ],
+    "p_bus/base/main/normal/6": [
+      106,
+      78,
+      "AAAAAAAAAAAAAB4AAAAAAAAAAAAAAAAf4AAAAAAAAAAAAAAAH/4AAAAAAAAAAAAAAB//4AAAAAAAAAAAAAAf//4AAAAAAAAAAAAAH///4AAAAAAAAAAAAB////4AAAAAAAAAAAAf////4AAAAAAAAAAAH/////4AAAAAAAAAAB//////4AAAAAAAAAAf//////wAAAAAAAAAH///////AAAAAAAAAB///////8AAAAAAAAAf///////wAAAAAAAAH////////AAAAAAAAB////////4AAAAAAAAf////////AAAAAAAAH////////8AAAAAAAB/////////wAAAAAAAf/////////AAAAAAAH/////////8AAAAAAB//////////wAAAAAAf//////////AAAAAAH//////////8AAAAAB///////////wAAAAAf///////////wAAAAH////////////AAAAB////////////8AAAAf////////////wAAAH/////////////AAAB/////////////8AAAf/////////////wAAH//////////////AAB//////////////8AAf//////////////wAH///////////////AB///////////////4Af//////////////+AH///////////////gB///////////////4AP//////////////+AA///////////////gAD//////////////4AAP/////////////+AAA//////////////wAAH/////////////+AAD//////////////4AAO//////////////AAA7/////////////4AADv///////////+GAAAO////////////gAAAA////////////4AAAAD///////////+AAAAAB///////////gAAAAAH//////////4AAAAAAf/////////+AAAAAAD//////////gAAAAAAP/////////4AAAAAAA/////////+AAAAAAAD/////////gAAAAAAAP////////4AAAAAAAA////////+AAAAAAAAD////////gAAAAAAAAP///////4AAAAAAAAB///////+AAAAAAAAAH///////gAAAAAAAAAf//////4AAAAAAAAAB///////AAAAAAAAAAD//////8AAAAAAAAAAD//////gAAAAAAAAAAD/////8AAAAAAAAAAAD/////gAAAAAAAAAAAD///4IAAAAAAAAAAAAD//+AAAAAAAAAAAAAAD//gAAAAAAAAAAAAAAD/4AAAAAAAAAAAAAAAD+AAAAAAAAAAAAAAAADwAAAAAAAAAAAAAA="
+    ],
+    "p_tree/t2.autumn/trunk/default/0": [
+      21,
+      48,
+      "wAAHGAA4wADmAQO4HZ/A3H4PxfB8f4fh/z4P/+A//gD/4AP/AB/wAH8AAfAAB4AAPAAB4AAPAAB4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAABwA"
+    ],
+    "p_tree/t2.spring/trunk/default/0": [
+      21,
+      48,
+      "wAAHGAA4wADmAQO4HZ/A3H4PxfB8f4fh/z4P/+A//gD/4AP/AB/wAH8AAfAAB4AAPAAB4AAPAAB4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAABwA"
+    ],
+    "p_tree/t2/trunk/default/0": [
+      21,
+      48,
+      "wAAHGAA4wADmAQO4HZ/A3H4PxfB8f4fh/z4P/+A//gD/4AP/AB/wAH8AAfAAB4AAPAAB4AAPAAB4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAAD4AAfAABwA"
+    ],
+    "p_tree/autumn/trunk/default/0": [
+      29,
+      48,
+      "AAYAAAAwAAABgAAADAAAAGAAAAOAAgAcABwA4APwAwA54BwDh4DgHB8HAcA8OBwA+cDgA+cPgAf4/AAf58AAf34eAf/w/wP+Af+f4AD//gAA/8AAAP4AAAHgAAAPAAAAeAAAA8AAAB4AAADwAAAHgAAAPAAAAeAAAA8AAAD4AAAHwAAAPgAAAfAAAA+AAAB8AAAD4AAAHwAAAPgAAAfAAAA+AAAB8AAAD4AAABgA"
+    ],
+    "p_tree/base/trunk/default/0": [
+      29,
+      48,
+      "AAYAAAAwAAABgAAADAAAAGAAAAOAAgAcABwA4APwAwA54BwDh4DgHB8HAcA8OBwA+cDgA+cPgAf4/AAf58AAf34eAf/w/wP+Af+f4AD//gAA/8AAAP4AAAHgAAAPAAAAeAAAA8AAAB4AAADwAAAHgAAAPAAAAeAAAA8AAAD4AAAHwAAAPgAAAfAAAA+AAAB8AAAD4AAAHwAAAPgAAAfAAAA+AAAB8AAAD4AAABgA"
+    ],
+    "p_tree/spring/trunk/default/0": [
+      29,
+      48,
+      "AAYAAAAwAAABgAAADAAAAGAAAAOAAgAcABwA4APwAwA54BwDh4DgHB8HAcA8OBwA+cDgA+cPgAf4/AAf58AAf34eAf/w/wP+Af+f4AD//gAA/8AAAP4AAAHgAAAPAAAAeAAAA8AAAB4AAADwAAAHgAAAPAAAAeAAAA8AAAD4AAAHwAAAPgAAAfAAAA+AAAB8AAAD4AAAHwAAAPgAAAfAAAA+AAAB8AAAD4AAABgA"
+    ],
+    "i_roofhut/base/main/closed/0": [
+      43,
+      47,
+      "AAAPAAAAAAf4AAAAA//AAAAB//4AAAD///AAAH///4AAP////AAf////4A//////B//////7/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////v//////h/////+AP////8AB////4AAP///wAAB///gAAAP//AAAAB/+AAAAAP8AAAAAB4AAAA=="
+    ],
+    "i_roofhut/base/main/open/0": [
+      43,
+      47,
+      "AAAPAAAAAAf4AAAAA//AAAAB//4AAAD///AAAH///4AAP////AAf////4A//////B//////7/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////v//////h/////+AP////+AB/////AAP////gAB////wAAP//H4AAB/+A8AAAP8AOAAAB4ACAA=="
+    ],
+    "p_busstop/base/base/default/0": [
+      36,
+      47,
+      "AAAAAHAAAAAHAAAAAfAAAAB/AAAAH/AAAAH/AAAAP/AAAA//AAAD//AAAP//AAA///AAD///AAP///AA////AD////MP////P/////P///////////////////////////////////////////////////////////f////8f////wf///8Af///8Af///cAP//8MAP//wAAP//AAAP/8AAAP/wAAAP/AAAAP+AAAAPuAAAAOOAAAAOAAAAAOAAAAAOAAAAAOAAAAAOAAAAAOAAAAAA="
+    ],
+    "p_tree/autumn/canopy/default/0": [
+      51,
+      45,
+      "AAAAP4AAAAAAH/gAAAAAD/8AAAAAf//gAAAAD//8AAAAD///4AAAA////gAAAH////gAAA////8AAAH////gAAA////8AAAf////4AAD/////4AAf/////gAD/////+ACf/////8H///////x///////+f/////////////////////////////////////////7////////////////////////+////////z///////+f///////x///////+P///////x///////8P///////B///////wP//////+A///////AAj/////wAAf////8AAD/////gAAf////4AAD////8AAAP///wAAAAfH/+AAAAAAd/wAAAAAAA4AAA="
+    ],
+    "p_tree/base/canopy/default/0": [
+      51,
+      45,
+      "AAAAP4AAAAAAH/gAAAAAD/8AAAAAf//gAAAAD//8AAAAD///4AAAA////gAAAH////gAAA////8AAAH////gAAA////8AAAf////4AAD/////4AAf/////gAD/////+ACf/////8H///////x///////+f/////////////////////////////////////////7////////////////////////+////////z///////+f///////x///////+P///////x///////8P///////B///////wP//////+A///////AAj/////wAAf////8AAD/////gAAf////4AAD////8AAAP///wAAAAfH/+AAAAAAd/wAAAAAAA4AAA="
+    ],
+    "p_tree/spring/canopy/default/0": [
+      51,
+      45,
+      "AAAAP4AAAAAAH/gAAAAAD/8AAAAAf//gAAAAD//8AAAAD///4AAAA////gAAAH////gAAA////8AAAH////gAAA////8AAAf////4AAD/////4AAf/////gAD/////+ACf/////8H///////x///////+f/////////////////////////////////////////7////////////////////////+////////z///////+f///////x///////+P///////x///////8P///////B///////wP//////+A///////AAj/////wAAf////8AAD/////gAAf////4AAD////8AAAP///wAAAAfH/+AAAAAAd/wAAAAAAA4AAA="
+    ],
+    "f_balcony/b1/main/default/6": [
+      31,
+      45,
+      "AQAAAA+AAAB/wAAD/+AAD//wAB//+AA///wAP//+AH///wD///+B////w////+f////P////n////D///+B///8A///8Af//+AP///AH///gH///wB///4A///8Af//+AP///wH///+D////x////8////+/////f////v////x////4P///8B///+AP///AB///gAP//wAB//4AAP/wAAB/gAAAPAAAAAAAAAAAAA=="
+    ],
+    "f_balcony/b1/main/laundry/6": [
+      34,
+      45,
+      "ABAAAAAfAAAAH/AAAB//AAAf//AAB///AAH///AAP///AB////Af////DP////H////+f////5/////n////4f///+B////gH///8AP///wAP///AA///8AD///wAP///AA///8AD///4AP///4A////4D////4P////g////+H////4f////g////+A////4A////gA///+AA///4AA///gAA//+AAA//4AAA/+AAAA/gAAAA4AAAAAAAAAAAAA"
+    ],
+    "f_balcony/b2/main/default/6": [
+      31,
+      45,
+      "AQAAAA+AAAB/wAAD/+AAD//wAB//+AA///wAP//+AH///wD///+B////w////+f////P////n////D///+B///8A///8Af//+AP///AH///gH///wB///4A///8Af//+AP///wH///+D////x////8////+/////f////v////x////4P///8B///+AP///AB///gAP//wAB//4AAP/wAAB/gAAAPAAAAAAAAAAAAA=="
+    ],
+    "f_balcony/b2/main/laundry/6": [
+      34,
+      45,
+      "ABAAAAAfAAAAH/AAAB//AAAf//AAB///AAH///AAP///AB////Af////DP////H////+f////5/////n////4f///+B////gH///8Af///wAf///AA///8AD///wAP///AA///8AD///4AP///4A////4D////4P////g////+H////4f////g////+A////4A////gA///+AA///4AA///gAA//+AAA//4AAA/+AAAA/gAAAA4AAAAAAAAAAAAA"
+    ],
+    "f_balcony/base/main/default/6": [
+      31,
+      45,
+      "AQAAAA+AAAB/wAAD/+AAD//wAB//+AA///wAP//+AH///wD///+B////w////+f////P////n////D///+B///8A///8Af//+AP///AH///gH///wB///4A///8Af//+AP///wH///+D////x////8////+/////f////v////x////4P///8B///+AP///AB///gAP//wAB//4AAP/wAAB/gAAAPAAAAAAAAAAAAA=="
+    ],
+    "f_balcony/base/main/laundry/6": [
+      34,
+      45,
+      "ABAAAAAfAAAAH/AAAB//AAAf//AAB///AAH///AAP///AB////Af////DP////H////+f////5/////n////4f///+B////gB///8AD///wAP///AA///8AD///wAP///AA///8AD///4AP///4A////4D////4P////g////+H////4f////g////+A////4A////gA///+AA///4AA///gAA//+AAA//4AAA/+AAAA/gAAAA4AAAAAAAAAAAAA"
+    ],
+    "p_lamp/base/main/broken/0": [
+      13,
+      44,
+      "cAP/3/7n9z44ccCOAHADgBwA4AcAOAHADgBwA4AcAPAHgDwB4A4AcAOAHADgBwA4AcAOAHADgBwA4AcAOAHAH4D8B+A/AOAA"
+    ],
+    "p_lamp/base/main/ok/0": [
+      14,
+      44,
+      "cAH/h/+c/3P9x+cHHABwAcAHABwAcAHABwAcAHABwAcAHgB4AeAHgBwAcAHABwAcAHABwAcAHABwAcAHABwAcAHABwA/APwD8A/AHAA="
+    ],
+    "p_tree/t2.autumn/canopy/default/0": [
+      41,
+      44,
+      "AAAfAAAAAf/AAAAA//wAAAD//+AAAH//8AAAP//4AABf//wAAPf//wAAff//gAA8///AAH///+AAf///4AA////wAB////wAB////4AB////4AD////8Af////4A/////wH/////wP/////AP/////A/////+B/////+H/////9//////7//////3//////v//////f////////////9//////7//////j/////+H/////8P/////4f/////w//////Af////+A/////4A3////wAP///4AAP//wAAAAHwAAAA=="
+    ],
+    "p_tree/t2.spring/canopy/default/0": [
+      41,
+      44,
+      "AAAfAAAAAf/AAAAA//wAAAD//+AAAH//8AAAP//4AABf//wAAPf//wAAff//gAA8///AAH///+AAf///4AA////wAB////wAB////4AB////4AD////8Af////4A/////wH/////wP/////AP/////A/////+B/////+H/////9//////7//////3//////v//////f////////////9//////7//////j/////+H/////8P/////4f/////w//////Af////+A/////4A3////wAP///4AAP//wAAAAHwAAAA=="
+    ],
+    "p_tree/t2/canopy/default/0": [
+      41,
+      44,
+      "AAAfAAAAAf/AAAAA//wAAAD//+AAAH//8AAAP//4AABf//wAAPf//wAAff//gAA8///AAH///+AAf///4AA////wAB////wAB////4AB////4AD////8Af////4A/////wH/////wP/////AP/////A/////+B/////+H/////9//////7//////3//////v//////f////////////9//////7//////j/////+H/////8P/////4f/////w//////Af////+A/////4A3////wAP///4AAP//wAAAAHwAAAA=="
+    ],
+    "f_shop/base/main/door/0": [
+      29,
+      44,
+      "AAADwAAAf4AAD/4AAf/wAD//gAf//AD//+Af//8D///wf///j////f///+////9////7///v3//9fv//i/f/+F+//8L9//4X7//wv3//hfv//C/f/+F+//+L9///X7///v3////v////f///+////9////7////H///4P///Af//4A///AB//4AD//AAH/4AAP/AAAf4AAAfAAAAMAAAAA=="
+    ],
+    "f_shop/base/main/door/6": [
+      29,
+      44,
+      "PAAAB/gAAD/wAAH/4AAP/8AAf/+AA///AB///gD///wH///4P///8f///+//////////9/////////+f///8v///5////z////t///7b///23///tv///e///+////9///////////////////////////8////4f///wP///gH///AD//+AB//8AA//4AAf/wAAP/gAAH/AAAD4AAABAA=="
+    ],
+    "f_shop/base/main/shut/0": [
+      29,
+      44,
+      "AAADwAAAf4AAD/4AAf/wAD//gAf//AD//+Af//8D///wf///j////f///+////9////7////3////v////f///+////9////7////3////v////f///+////9////7////3////v////f///+////9////7////H///4P///Af//4A///AB//4AD//AAH/4AAP/AAAf4AAAfAAAAMAAAAA=="
+    ],
+    "f_shop/base/main/shut/6": [
+      29,
+      44,
+      "PAAAB/gAAD/wAAH/4AAP/8AAf/+AA///AB///gD///wH///4P///8f///+////////////////////////////////////////////////////////////////////////////////////////////////8////4f///wP///gH///AD//+AB//8AA//4AAf/wAAP/gAAH/AAAD4AAABAA=="
+    ],
+    "f_shop/base/main/window/0": [
+      29,
+      44,
+      "AAADwAAAf4AAD/4AAf/wAD//gAf//AD//+Af//8D///wf///j////f///+////9////7////3//8/v//n/f/+P+//8X9//5v7//zP3//mfv//M/f/+R+//+j9///H7///v3////v////f///+////9////7////H///4P///Af//4A///AB//4AD//AAH/4AAP/AAAf4AAAfAAAAMAAAAA=="
+    ],
+    "f_shop/base/main/window/6": [
+      29,
+      44,
+      "PAAAB/gAAD/wAAH/4AAP/8AAf/+AA///AB///gD///wH///4P///8f///+///////////////+////8f///4P///wf///g///+B///4D///wH///gP///A///+H///8///////////////////////////8////4f///wP///gH///AD//+AB//8AA//4AAf/wAAP/gAAH/AAAD4AAABAA=="
+    ],
+    "f_balcony/b1/main/default/0": [
+      30,
+      43,
+      "AAAPAAAA/wAAD/8AAP//AA///AD///AP//+A///+D///+P///+////+////+////+f///+H///+B///+Af//+Af//+Af//+Af//+Af//+Af//+Af//+Af//+B///+H///+f///+////+////+///////////////////8////w////A///8A///wA///AA//8AAP/wAAD/AAAA8AAAAAAAAA"
+    ],
+    "f_balcony/b1/main/laundry/0": [
+      33,
+      43,
+      "AAAPAAAAH+AAAD/8AAB//4AA///AAf//4AP//+AH///wD////h///////////////8/////j////8H////gP///8Af///gD///wAf//+AD///wAf//+AD///wAf//+AD///wB///+A////wf///+H////w////+H////4/////H////4////8H///+A////AH///gA///wAH//4AA//8AAB/+AAAD/AAAAHgAAAAAAAAAA=="
+    ],
+    "f_balcony/b2/main/default/0": [
+      35,
+      43,
+      "AAAPAAAAB/gAAAP/wAAB//4AAP//wAB///gAP//+AB///8AP///4B////wP////wf////7////++/////8f////4P////wH////gP////Af//+YA///8AB///4AD///wAH///gAP///AB///+AP///8B////4H////wP////gf////g/////B////+D////wH///+AP///wAf//+AA///wAB//+AAD//wAAB/+AAAA/wAAAAeAAAAAAAAAAA"
+    ],
+    "f_balcony/b2/main/laundry/0": [
+      35,
+      43,
+      "AAAPAAAAB/gAAAP/wAAB//4AAP//wAB///gAP//+AB///8AP///+B/////P////+f////7/////+/////8f////4P////wH////gP////Af//+YA///8AB///4AD///wAH///gAP///AB///+AP///8B////4H////wP////gf////g/////B////+D////wH///+AP///wAf//+AA///wAB//+AAD//wAAB/+AAAA/wAAAAeAAAAAAAAAAA"
+    ],
+    "f_balcony/base/main/default/0": [
+      30,
+      43,
+      "AAAPAAAA/wAAD/8AAP//AA///AD///AP//+A///+D///+P///+////+////+////+f///+H///+B///+Af//+Af//+Af//+Af//+Af//+Af//+Af//+Af//+B///+H///+f///+////+////+///////////////////8////w////A///8A///wA///AA//8AAP/wAAD/AAAA8AAAAAAAAA"
+    ],
+    "f_balcony/base/main/laundry/0": [
+      33,
+      43,
+      "AAAPAAAAH+AAAD/8AAB//4AA///AAf//4AP//+AH///wD////h///////////////8/////j////8H////gP///8Af///gD///8Af//+AD///wAf//+AD///wAf//+AD///wB///+A////wf///+H////w////+H////4/////H////4////8H///+A////AH///gA///wAH//4AA//8AAB/+AAAD/AAAAHgAAAAAAAAAA=="
+    ],
+    "f_wall/base/main/ground/0": [
+      27,
+      43,
+      "AAADwAAB/AAA/4AAf/AAP/4AH//AD//4B///A///4f///P//////////////////////////////////////////////////////////////////////////////////////////////////////n///w///4H//8A//+AH//AA//gAH/wAA/4AAH8AAAeAAAAA="
+    ],
+    "f_wall/base/main/ground/6": [
+      27,
+      43,
+      "eAAAH8AAA/4AAH/wAA//gAH//AA//+AH//8A///4H///w////n//////////////////////////////////////////////////////////////////////////////////////////////P///4f///A///4B///AD//4AH//AAP/4AAf/AAA/4AAB/AAADwA="
+    ],
+    "f_wall/base/main/upper/0": [
+      27,
+      43,
+      "AAADwAAB/AAA/4AAf/AAP/4AH//AD//4B///A///4f///P/////////////////////////////////////////////////////////////////////////////////////////////////+////H///g///wH//4A//8AH/+AA//AAH/gAA/wAAH4AAAcAAAAA="
+    ],
+    "f_wall/base/main/upper/6": [
+      27,
+      43,
+      "eAAAH8AAA/4AAH/wAA//gAH//AA//+AH//8A///4H///w////n/////////////////////////////////////////////////////////////////////////////////////////7////H///4P///Af//4A///AB//4AD//AAH/4AAP/AAAf4AAA/AAABwA="
+    ],
+    "f_wall/p1/main/ground/0": [
+      27,
+      43,
+      "AAADwAAB/AAA/4AAf/AAP/4AH//AD//4B///A///4f///P//////////////////////////////////////////////////////////////////////////////////////////////////////n///w///4H//8A//+AH//AA//gAH/wAA/4AAH8AAAeAAAAA="
+    ],
+    "f_wall/p1/main/ground/6": [
+      27,
+      43,
+      "eAAAH8AAA/4AAH/wAA//gAH//AA//+AH//8A///4H///w////n//////////////////////////////////////////////////////////////////////////////////////////////P///4f///A///4B///AD//4AH//AAP/4AAf/AAA/4AAB/AAADwA="
+    ],
+    "f_wall/p1/main/upper/0": [
+      27,
+      43,
+      "AAADwAAB/AAA/4AAf/AAP/4AH//AD//4B///A///4f///P/////////////////////////////////////////////////////////////////////////////////////////////////+////H///g///wH//4A//8AH/+AA//AAH/gAA/wAAH4AAAcAAAAA="
+    ],
+    "f_wall/p1/main/upper/6": [
+      27,
+      43,
+      "eAAAH8AAA/4AAH/wAA//gAH//AA//+AH//8A///4H///w////n/////////////////////////////////////////////////////////////////////////////////////////7////H///4P///Af//4A///AB//4AD//AAH/4AAP/AAAf4AAA/AAABwA="
+    ],
+    "f_wall/w1/main/ground/0": [
+      27,
+      43,
+      "AAADwAAB/AAA/4AAf/AAP/4AH//AD//4B///A///4f///P//////////////////////////////////////////////////////////////////////////////////////////////////////n///w///4H//8A//+AH//AA//gAH/wAA/4AAH8AAAeAAAAA="
+    ],
+    "f_wall/w1/main/ground/6": [
+      27,
+      43,
+      "eAAAH8AAA/4AAH/wAA//gAH//AA//+AH//8A///4H///w////n//////////////////////////////////////////////////////////////////////////////////////////////P///4f///A///4B///AD//4AH//AAP/4AAf/AAA/4AAB/AAADwA="
+    ],
+    "f_wall/w1/main/upper/0": [
+      27,
+      43,
+      "AAADwAAB/AAA/4AAf/AAP/4AH//AD//4B///A///4f///P/////////////////////////////////////////////////////////////////////////////////////////////////+////H///g///wH//4A//8AH/+AA//AAH/gAA/wAAH4AAAcAAAAA="
+    ],
+    "f_wall/w1/main/upper/6": [
+      27,
+      43,
+      "eAAAH8AAA/4AAH/wAA//gAH//AA//+AH//8A///4H///w////n/////////////////////////////////////////////////////////////////////////////////////////7////H///4P///Af//4A///AB//4AD//AAH/4AAP/AAAf4AAA/AAABwA="
+    ],
+    "f_wall/w2/main/ground/0": [
+      27,
+      43,
+      "AAADwAAB/AAA/4AAf/AAP/4AH//AD//4B///A///4f///P//////////////////////////////////////////////////////////////////////////////////////////////////////n///w///4H//8A//+AH//AA//gAH/wAA/4AAH8AAAeAAAAA="
+    ],
+    "f_wall/w2/main/ground/6": [
+      27,
+      43,
+      "eAAAH8AAA/4AAH/wAA//gAH//AA//+AH//8A///4H///w////n//////////////////////////////////////////////////////////////////////////////////////////////P///4f///A///4B///AD//4AH//AAP/4AAf/AAA/4AAB/AAADwA="
+    ],
+    "f_wall/w2/main/upper/0": [
+      27,
+      43,
+      "AAADwAAB/AAA/4AAf/AAP/4AH//AD//4B///A///4f///P/////////////////////////////////////////////////////////////////////////////////////////////////+////H///g///wH//4A//8AH/+AA//AAH/gAA/wAAH4AAAcAAAAA="
+    ],
+    "f_wall/w2/main/upper/6": [
+      27,
+      43,
+      "eAAAH8AAA/4AAH/wAA//gAH//AA//+AH//8A///4H///w////n/////////////////////////////////////////////////////////////////////////////////////////7////H///4P///Af//4A///AB//4AD//AAH/4AAP/AAAf4AAA/AAABwA="
+    ],
+    "f_door/base/main/closed/6": [
+      30,
+      39,
+      "AAAAAB8AAAH/AAAf/wAA//8AA///AA///wAP//8AD///AA///gAP//gAP//AAP//AAP//AAf//AAf/+AAf/+AAP/+AAP/+AAP//AAP//wAP//4AP//4AP//4AP//6AP//7AP/+7AP/+DAP/+DAP/+DAH/+DAAf+DAAH+CAAB+AAAAeAAAAOAAAAGAAAAAAAAAAAA"
+    ],
+    "f_door/base/main/open/6": [
+      30,
+      39,
+      "AAAAAB8AAAH/AAAf/wAA//8AA///AA///wAP//8AD///AA///gAP//gAP//AAP//AAP//AAf//AAf/+AAf/+AAP/+AAP/+AAP//AAP//wAP//4AP//4AP//4AP//6AP//7AP/+7AP/+DAP/+DAP/+DAHP+DAAD+DAAA+CAAAOAAAAOAAAAOAAAAGAAAAAAAAAAAA"
+    ],
+    "p_stall/base/base/default/6": [
+      36,
+      38,
+      "AAwAAAAAwAAAAAwAAAAAwAAAAAwAAAAAwAAAwAwAAAwAwAAAwAwABgwAwABgwBwABgwHwABgwf8ABgw//ABgw//gBgw//+Bg8//+Bg///+Bg9//+Bg9///Bg9///hg9///xg9///xg9///xg9////g8////wwf///8AB///+AAf//+AAH/f+AAB/HuAAB/HfAAB9DfAAB9DfAAB9DfAAB8DfAAAADPAAAADA"
+    ],
+    "f_door/base/main/closed/0": [
+      30,
+      36,
+      "AAAfAAAB/wAAH/8AAf//AB///AH//+Af//4B///gB//+AB//5gB///gB///gB///gB///gA///gA///gA//+AA//4AA//4AA//4AA//4AD//4AD//4Az//4Az//4Aw//4Aw//4Aw//4Aw//4Aw//wAw/8AAQ/wAAA/AAAA8AAAA4AAAAwAAA"
+    ],
+    "f_door/base/main/open/0": [
+      30,
+      36,
+      "AAAfAAAB/wAAH/8AAf//AB///AH//+Af//4B///gB//+AB//5gB///gB///gB///gB///gA///gA///gA//+AA//4AA//4AA//4AA//4AD//4AD//4Az//4Az//4Aw//4Aw//4Aw//4Aw//4Aw/5wAw/gAAQ+AAAA4AAAA4AAAA4AAAAwAAA"
+    ],
+    "p_stall/base/base/default/0": [
+      35,
+      36,
+      "AADAAAAAGAAAAAMAAAAAYAAAAAwAAAABgAAAADADAAAGAGCAAMAMGAAYAYMAAwAwYAB+HwwAH+/5gAv///AH///+A////sH////Yf//3+w///n9h///P7H//+fWP//8+sf//54Y///zwx///nxj//+PjH//8MGP/8AAMP/gAAQf8AAAAfwAAAA/gAAAB/AAAAD+AAAAD8AAAAGQAAAA="
+    ],
+    "p_locker/base/main/default/0": [
+      28,
+      36,
+      "AAAeAAAH+AAB/+AAf/8AH//wB///Af//4H///B///4f///j///+P///4////j///+H///4f///h///+H///4f///h///+H///4f///h///+H///4f///h///+H///wf//8B///AH//wAf/8AB//AAH/wAAf8AAAfAAAAQAAA"
+    ],
+    "p_locker/base/main/default/6": [
+      28,
+      36,
+      "DwAAA/wAAP/wAA//wAD//wAP//wA///wA///wD///wP///w////z////P///8////z///+P///4////j///+P///4////j///+P///4////j///+P///4////h///+B///4B///gB//+AB//4AB//gAB/+AAB/wAAB8AAABA"
+    ],
+    "p_antenna/base/main/default/0": [
+      17,
+      33,
+      "ADAADgAfgD/AD/AH+Af8Af8AvgH+AP4AGwANgATABnADIAMQAYoAhQDCgEFgYKAwWDAgGBIICQwEBAIGB8MH8wP5gfyAfAA="
+    ],
+    "f_window/w2/main/intact/6": [
+      21,
+      33,
+      "AAAB4AAfwAD/gAf/AD/+Af/8D//4f//j//8f//j//8f//j//8f//j//8f//j//8f//j//8H//gP/8Bf/gA/8AF/gAj8AAPgABwAAOAABwAAEAAAgAAEA"
+    ],
+    "f_window/w2/main/lit/6": [
+      21,
+      33,
+      "AAAB4AAfwAD/gAf/AD/+Af/8D//4f//j//8f//j//8f//j//8f//j//8f//j//8f//j//8H//gP/8Bf/gA/8AF/gAj8AAPgABwAAOAABwAAEAAAgAAEA"
+    ],
+    "f_window/base/main/boarded/6": [
+      21,
+      32,
+      "AAAB4AAfwAD/gAf/AD/+Af/8D//4f//j//8f//j//8f//j//8f//j//8f//j//8f//j//8H//gP/8Af/gA/8AB/gAD8AAHgAAAAAAAAAAAAAAAAA"
+    ],
+    "f_window/base/main/broken/6": [
+      21,
+      32,
+      "AAAB4AAfwAD/gAf/AD/+Af/8D//4f//j//8f//j//8f//j//8f//j//8f//j//8f//j//8H//gP/8Af/gA/8AB/gAD8AAHgAAAAAAAAAAAAAAAAA"
+    ],
+    "f_window/base/main/intact/6": [
+      21,
+      32,
+      "AAAB4AAfwAD/gAf/AD/+Af/8D//4f//j//8f//j//8f//j//8f//j//8f//j//8f//j//8H//gP/8Af/gA/8AB/gAD8AAHgAAAAAAAAAAAAAAAAA"
+    ],
+    "f_window/base/main/lit/6": [
+      21,
+      32,
+      "AAAB4AAfwAD/gAf/AD/+Af/8D//4f//j//8f//j//8f//j//8f//j//8f//j//8f//j//8H//gP/8Af/gA/8AB/gAD8AAHgAAAAAAAAAAAAAAAAA"
+    ],
+    "f_window/base/main/scorched/6": [
+      21,
+      32,
+      "AAAB4AAfwAD/gAf/AD/+Af/8D//4f//j//8f//j//8f//j//8f//j//8f//j//8f//j//8H//gP/8Af/gA/8AB/gAD8AAHgAAAAAAAAAAAAAAAAA"
+    ],
+    "f_window/w1/main/intact/6": [
+      21,
+      32,
+      "AAAB4AAfwAD/gAf/AD/+Af/8D//4f//j//8f//j//8f//j//8f//j//8f//j//8f//j//8H//gP/8Af/gA/8AD/gAX8ACvgAEAAAAAAAAAAAAAAA"
+    ],
+    "f_window/w1/main/lit/6": [
+      21,
+      32,
+      "AAAB4AAfwAD/gAf/AD/+Af/8D//4f//j//8f//j//8f//j//8f//j//8f//j//8f//j//8H//gP/8Af/gA/8AD/gAX8ACvgAEAAAAAAAAAAAAAAA"
+    ],
+    "p_tank/base/main/default/0": [
+      20,
+      32,
+      "B/4B//gf/4P//D//w//8P//D//w//8P//D//w//8P//D//w//8P//n/////////////f/vx/j8Hw/AwPwMD8DA/AwPQMAADAAAwAAMAABAA="
+    ],
+    "f_pipe/base/main/default/6": [
+      5,
+      31,
+      "AxjGOcxjGMYxjnMYxjGMY5jGMYA="
+    ],
+    "p_car/base/main/normal/7": [
+      24,
+      31,
+      "P//8P//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8////////////f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8"
+    ],
+    "p_car/red/main/normal/7": [
+      24,
+      31,
+      "P//8P//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8////////////f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8"
+    ],
+    "p_car/taxi/main/normal/7": [
+      24,
+      31,
+      "P//8P//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8////////////f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8"
+    ],
+    "w_wall/base/main/plain/0": [
+      19,
+      31,
+      "AAPAAfwA/4B/8D/+H//P//////////////////////////////////////////////////////////+f/8P/4H/wD/gB/AA+AAA="
+    ],
+    "w_wall/base/main/plain/6": [
+      19,
+      31,
+      "eAAfwAP+AH/wD/+B//w//+f/////////////////////////////////////////////////////P//h//wP/4B/8AP+AB/AAPg="
+    ],
+    "w_wall/base/main/poster/0": [
+      19,
+      31,
+      "AAPAAfwA/4B/8D/+H//P//////////////////////////////////////////////////////////+f/8P/4H/wD/gB/AA+AAA="
+    ],
+    "w_wall/base/main/poster/6": [
+      19,
+      31,
+      "eAAfwAP+AH/wD/+B//w//+f/////////////////////////////////////////////////////P//h//wP/4B/8AP+AB/AAPg="
+    ],
+    "w_wall/base/main/torn/0": [
+      19,
+      31,
+      "AAPAAfwA/4B/8D/+H//P//////////////////////////////////////////////////////////+f/8P/4H/wD/gB/AA+AAA="
+    ],
+    "w_wall/base/main/torn/6": [
+      19,
+      31,
+      "eAAfwAP+AH/wD/+B//w//+f/////////////////////////////////////////////////////P//h//wP/4B/8AP+AB/AAPg="
+    ],
+    "p_car/base/main/crashed/6": [
+      48,
+      31,
+      "AAAD4eAAAAAP//gAAAA///4AAAD///+AAAP////gAAP////4AAf////+AA/////+AB/////+AP//////AP//////AP//////Af//////B//////4D//////gP//////gf//////gf//////A/////+eA/////4AA/////gAA////+AAAP///4AAAH///gAAAB//+AAAAA//8AAAAAf/8AAAAAH/4AAAAAD/4AAAAAA8wAAAAAAYAAAAA"
+    ],
+    "p_car/base/main/crashed/7": [
+      24,
+      31,
+      "P//8P//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8////////////f//8f//8f//8f//8///8///+///+///+f//+f//+f//+P//8AB/8AAA8"
+    ],
+    "p_car/base/main/normal/0": [
+      52,
+      31,
+      "AAeHwAAAAAH//wAAAAB///wAAAAf///wAAAH////wAAB/////AAAf////+AAB/////8AAH/////4AA//////8AD//////wAP//////AA//////+AAf/////+AAf/////+AB//////8AH//////8AP//////8Aef/////wAAf/////AAAf////+AAAf////8AAAf////wAAAf////AAAAf///wAAAA///8AAAAD///AAAAAH//wAAAAAf/8AAAAAA8fAAAAAAAAwAAA=="
+    ],
+    "p_car/base/main/normal/6": [
+      52,
+      31,
+      "AAAAPDwAAAAAD//wAAAAA///wAAAAP///wAAAD////wAAAf////wAAD/////wAAf/////gAB/////+AB//////4AH//////wAf//////AD//////4A//////+AH//////gB//////8Af//////wD///////Af/////74B/////+AAH/////gAA/////4AAD////+AAAP////gAAAf///4AAAAf//+AAAAAf//4AAAAAf//AAAAAAf/8AAAAAAfngAAAAAAcAAAAAAA=="
+    ],
+    "p_car/red/main/crashed/6": [
+      48,
+      31,
+      "AAAD4eAAAAAP//gAAAA///4AAAD///+AAAP////gAAP////4AAf////+AA/////+AB/////+AP//////AP//////AP//////Af//////B//////4D//////gP//////gf//////gf//////A/////+eA/////4AA/////gAA////+AAAP///4AAAH///gAAAB//+AAAAA//8AAAAAf/8AAAAAH/4AAAAAD/4AAAAAA8wAAAAAAYAAAAA"
+    ],
+    "p_car/red/main/crashed/7": [
+      24,
+      31,
+      "P//8P//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8////////////f//8f//8f//8f//8///8///+///+///+f//+f//+f//+P//8AB/8AAA8"
+    ],
+    "p_car/red/main/normal/0": [
+      52,
+      31,
+      "AAeHwAAAAAH//wAAAAB///wAAAAf///wAAAH////wAAB/////AAAf////+AAB/////8AAH/////4AA//////8AD//////wAP//////AA//////+AAf/////+AAf/////+AB//////8AH//////8AP//////8Aef/////wAAf/////AAAf////+AAAf////8AAAf////wAAAf////AAAAf///wAAAA///8AAAAD///AAAAAH//wAAAAAf/8AAAAAA8fAAAAAAAAwAAA=="
+    ],
+    "p_car/red/main/normal/6": [
+      52,
+      31,
+      "AAAAPDwAAAAAD//wAAAAA///wAAAAP///wAAAD////wAAAf////wAAD/////wAAf/////gAB/////+AB//////4AH//////wAf//////AD//////4A//////+AH//////gB//////8Af//////wD///////Af/////74B/////+AAH/////gAA/////4AAD////+AAAP////gAAAf///4AAAAf//+AAAAAf//4AAAAAf//AAAAAAf/8AAAAAAfngAAAAAAcAAAAAAA=="
+    ],
+    "p_car/taxi/main/crashed/6": [
+      48,
+      31,
+      "AAAD4eAAAAAP//gAAAA///4AAAD///+AAAP////gAAP////4AAf////+AA/////+AB/////+AP//////AP//////AP//////Af//////B//////4D//////gP//////gf//////gf//////A/////+eA/////4AA/////gAA////+AAAP///4AAAH///gAAAB//+AAAAA//8AAAAAf/8AAAAAH/4AAAAAD/4AAAAAA8wAAAAAAYAAAAA"
+    ],
+    "p_car/taxi/main/crashed/7": [
+      24,
+      31,
+      "P//8P//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8////////////f//8f//8f//8f//8///8///+///+///+f//+f//+f//+P//8AB/8AAA8"
+    ],
+    "p_car/taxi/main/normal/0": [
+      52,
+      31,
+      "AAeHwAAAAAH//wAAAAB///wAAAAf///wAAAH////wAAB/////AAAf////+AAB/////8AAH/////4AA//////8AD//////wAP//////AA//////+AAf/////+AAf/////+AB//////8AH//////8AP//////8Aef/////wAAf/////AAAf////+AAAf////8AAAf////wAAAf////AAAAf///wAAAA///8AAAAD///AAAAAH//wAAAAAf/8AAAAAA8fAAAAAAAAwAAA=="
+    ],
+    "p_car/taxi/main/normal/6": [
+      52,
+      31,
+      "AAAAPDwAAAAAD//wAAAAA///wAAAAP///wAAAD////wAAAf////wAAD/////wAAf/////gAB/////+AB//////4AH//////wAf//////AD//////4A//////+AH//////gB//////8Af//////wD///////Af/////74B/////+AAH/////gAA/////4AAD////+AAAP////gAAAf///4AAAAf//+AAAAAf//4AAAAAf//AAAAAAf/8AAAAAAfngAAAAAAcAAAAAAA=="
+    ],
+    "w_pillar/base/main/default/0": [
+      11,
+      31,
+      "Hw/7/////P+f8/5/z/n/P+f8/5/z/n/P+f8/5/z/n/P+/9/7/3/v/H8DgA=="
+    ],
+    "p_car/base/main/normal/3": [
+      24,
+      31,
+      "P//8f//8f//8f//8f//8f//8////////////f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8"
+    ],
+    "p_car/red/main/normal/3": [
+      24,
+      31,
+      "P//8f//8f//8f//8f//8f//8////////////f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8"
+    ],
+    "p_car/taxi/main/normal/3": [
+      24,
+      31,
+      "P//8f//8f//8f//8f//8f//8////////////f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8"
+    ],
+    "f_pipe/base/main/default/0": [
+      2,
+      30,
+      "//////////A="
+    ],
+    "f_shopsign/base/main/default/6": [
+      46,
+      30,
+      "wAAAAAADwAAAAAAPwAAAAAA/wAAAAAD/wAAAAAP/wAAAAA//wAAAAA//wAAAAA//wAAAAA//wAAAAA//wAAAAA//wAAAAA//wAAAAA//wAAAAA//wAAAAA//wAAAAA//wAAAAA//wAAAAA//wAAAAA//wAAAAA//wAAAAA//wAAAAA//gAAAAA/+AAAAAA/4AAAAAA/gAAAAAA+AAAAAAA4AAAAAAAgAAAAAAAA="
+    ],
+    "p_car/base/main/normal/2": [
+      52,
+      30,
+      "AAAAAHwAAAAAIB/wAAAAD4f/wAAAA////wAAAP////wAAD/////wAA//////wAH//////AAf/////8AD//////8Af//////wB///////AP//////gD//////4A///////AP//////8B///////gH//////8Af/////hgD/////4AAP////+AAA/////gAAD////4AAAH///+AAAAH///gAAAAH//8AAAAAH//wAAAAAH//AAAAAAH74AAAAAAHAAAAAA"
+    ],
+    "p_car/base/main/normal/4": [
+      52,
+      30,
+      "AAfAAAAAAAH/AIAAAAB//j4AAAAf///4AAAH////4AAB/////4AAf/////4AB//////wAH//////AA//////+AD//////8AP//////wAP//////gAP//////gAf//////gA///////gD///////AH//////8AMP/////4AAP/////gAAP////+AAAP////8AAAP////wAAAP///+AAAAP///gAAAAf//4AAAAB//+AAAAAD//gAAAAAHv4AAAAAAAOAA"
+    ],
+    "p_car/red/main/normal/2": [
+      52,
+      30,
+      "AAAAAHwAAAAAIB/wAAAAD4f/wAAAA////wAAAP////wAAD/////wAA//////wAH//////AAf/////8AD//////8Af//////wB///////AP//////gD//////4A///////AP//////8B///////gH//////8Af/////hgD/////4AAP////+AAA/////gAAD////4AAAH///+AAAAH///gAAAAH//8AAAAAH//wAAAAAH//AAAAAAH74AAAAAAHAAAAAA"
+    ],
+    "p_car/red/main/normal/4": [
+      52,
+      30,
+      "AAfAAAAAAAH/AIAAAAB//j4AAAAf///4AAAH////4AAB/////4AAf/////4AB//////wAH//////AA//////+AD//////8AP//////wAP//////gAP//////gAf//////gA///////gD///////AH//////8AMP/////4AAP/////gAAP////+AAAP////8AAAP////wAAAP///+AAAAP///gAAAAf//4AAAAB//+AAAAAD//gAAAAAHv4AAAAAAAOAA"
+    ],
+    "p_car/taxi/main/normal/2": [
+      52,
+      30,
+      "AAAAAHwAAAAAIB/wAAAAD4f/wAAAA////wAAAP////wAAD/////wAA//////wAH//////AAf/////8AD//////8Af//////wB///////AP//////gD//////4A///////AP//////8B///////gH//////8Af/////hgD/////4AAP////+AAA/////gAAD////4AAAH///+AAAAH///gAAAAH//8AAAAAH//wAAAAAH//AAAAAAH74AAAAAAHAAAAAA"
+    ],
+    "p_car/taxi/main/normal/4": [
+      52,
+      30,
+      "AAfAAAAAAAH/AIAAAAB//j4AAAAf///4AAAH////4AAB/////4AAf/////4AB//////wAH//////AA//////+AD//////8AP//////wAP//////gAP//////gAf//////gA///////gD///////AH//////8AMP/////4AAP/////gAAP////+AAAP////8AAAP////wAAAP///+AAAAP///gAAAAf//4AAAAB//+AAAAAD//gAAAAAHv4AAAAAAAOAA"
+    ],
+    "p_car/base/main/crashed/0": [
+      48,
+      30,
+      "AAeHwAAAAB//8AAAAH///AAAAf///wAAB////8AAH////8AAf////+AAf/////AAf/////gA//////8A//////8A//////8A//////+AH//////gB//////wB//////8B//////+A//////+Aef////+AAH////+AAB////+AAAf////AAAH////AAAB////AAAAf//+AAAAf//gAAAAf/8AAAAAP/AAAAAAHwAAAAAABAAA"
+    ],
+    "p_car/red/main/crashed/0": [
+      48,
+      30,
+      "AAeHwAAAAB//8AAAAH///AAAAf///wAAB////8AAH////8AAf////+AAf/////AAf/////gA//////8A//////8A//////8A//////+AH//////gB//////wB//////8B//////+A//////+Aef////+AAH////+AAB////+AAAf////AAAH////AAAB////AAAAf//+AAAAf//gAAAAf/8AAAAAP/AAAAAAHwAAAAAABAAA"
+    ],
+    "p_car/taxi/main/crashed/0": [
+      48,
+      30,
+      "AAeHwAAAAB//8AAAAH///AAAAf///wAAB////8AAH////8AAf////+AAf/////AAf/////gA//////8A//////8A//////8A//////+AH//////gB//////wB//////8B//////+A//////+Aef////+AAH////+AAB////+AAAf////AAAH////AAAB////AAAAf//+AAAAf//gAAAAf/8AAAAAP/AAAAAAHwAAAAAABAAA"
+    ],
+    "p_busstop/base/roof/default/0": [
+      50,
+      29,
+      "AAAAAHAAAAAAAH8AAAAAAH/wAAAAAH/+AAAAAH//4AAAAH///gAAAH///8AAAH////wAAH////+AAH/////wAH/////8AH/////+AH/////+AH/////+AH/////+AH/////+AH/////+AD/////+AA/////+AAH////+AAAf///+AAAD///+AAAAP//+AAAAA//+AAAAAH/+AAAAAAf+AAAAAAD+AAAAAAAeAAAAAAACAAAAAAA="
+    ],
+    "f_shopsign/base/main/default/0": [
+      45,
+      28,
+      "AAAAAAA4AAAAAAfAAAAAAP4AAAAAH/AAAAAD/4AAAAB//AAAAA//wAAAAf/4AAAAP/8AAAAH/+AAAAD//AAAAB//gAAAA//wAAAAf/4AAAAP/8AAAAH/+AAAAD//AAAAB//gAAAA//wAAAAf/4AAAAP/8AAAAH/+AAAAA//AAAAAH/gAAAAA/wAAAAAH4AAAAAA8AAAAAACAAAAAAAA="
+    ],
+    "p_car/base/main/crashed/2": [
+      48,
+      28,
+      "AAAPg+AAAAA///gAAAD///4AAAP///+AAA/////gAA/////4AB/////+AD/////+AD//////AH//////AP//////A//////8B//////4H//////wf//////wf//////wf/////vg/////+AA/////4AA/////gAA////+AAA////4AAAP///gAAAD///AAAAA///AAAAAP//AAAAAD++AAAAAA8cAAAA"
+    ],
+    "p_car/base/main/crashed/3": [
+      24,
+      28,
+      "P//8P//8f//8///+///////////+///+///+f//+f//+f//+f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8"
+    ],
+    "p_car/base/main/crashed/4": [
+      48,
+      28,
+      "AAfB8AAAAB///AAAAH///wAAAf///8AAB/////AAH/////AAf/////gAf/////wAf/////wAf/////4A//////8A///////A///////gX//////4H//////+H//////+D5/////+AAf/////AAH/////AAB/////AAAf////AAAH////AAAB///8AAAA///wAAAA///AAAAA//8AAAAAffwAAAAAOPAA"
+    ],
+    "p_car/red/main/crashed/2": [
+      48,
+      28,
+      "AAAPg+AAAAA///gAAAD///4AAAP///+AAA/////gAA/////4AB/////+AD/////+AD//////AH//////AP//////A//////8B//////4H//////wf//////wf//////wf/////vg/////+AA/////4AA/////gAA////+AAA////4AAAP///gAAAD///AAAAA///AAAAAP//AAAAAD++AAAAAA8cAAAA"
+    ],
+    "p_car/red/main/crashed/3": [
+      24,
+      28,
+      "P//8P//8f//8///+///////////+///+///+f//+f//+f//+f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8"
+    ],
+    "p_car/red/main/crashed/4": [
+      48,
+      28,
+      "AAfB8AAAAB///AAAAH///wAAAf///8AAB/////AAH/////AAf/////gAf/////wAf/////wAf/////4A//////8A///////A///////gX//////4H//////+H//////+D5/////+AAf/////AAH/////AAB/////AAAf////AAAH////AAAB///8AAAA///wAAAA///AAAAA//8AAAAAffwAAAAAOPAA"
+    ],
+    "p_car/taxi/main/crashed/2": [
+      48,
+      28,
+      "AAAPg+AAAAA///gAAAD///4AAAP///+AAA/////gAA/////4AB/////+AD/////+AD//////AH//////AP//////A//////8B//////4H//////wf//////wf//////wf/////vg/////+AA/////4AA/////gAA////+AAA////4AAAP///gAAAD///AAAAA///AAAAAP//AAAAAD++AAAAAA8cAAAA"
+    ],
+    "p_car/taxi/main/crashed/3": [
+      24,
+      28,
+      "P//8P//8f//8///+///////////+///+///+f//+f//+f//+f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8f//8"
+    ],
+    "p_car/taxi/main/crashed/4": [
+      48,
+      28,
+      "AAfB8AAAAB///AAAAH///wAAAf///8AAB/////AAH/////AAf/////gAf/////wAf/////wAf/////4A//////8A///////A///////gX//////4H//////+H//////+D5/////+AAf/////AAH/////AAB/////AAAf////AAAH////AAAB///8AAAA///wAAAA///AAAAA//8AAAAAffwAAAAAOPAA"
+    ],
+    "f_ac/a2/main/default/6": [
+      11,
+      28,
+      "MB+D/H/v/f+/9/7/4/w/hPCOEcI4RwjgHAOAMAYAwBgDAGAMAYAw"
+    ],
+    "f_window/w2/main/intact/0": [
+      18,
+      28,
+      "AAeAB/AH/Af/B//H//f////////////////////////////////////////8//w//w/9w/xw/hA9BARBAQBA"
+    ],
+    "f_window/w2/main/lit/0": [
+      18,
+      28,
+      "AAeAB/AH/Af/B//H//f////////////////////////////////////////8//w//w/9w/xw/hA9BARBAQBA"
+    ],
+    "f_window/base/main/boarded/0": [
+      18,
+      27,
+      "AAeAB/AH/Af/B//H//f////////////////////////////////////////8//w//A/8A/wA/AA8AAAAAA=="
+    ],
+    "f_window/base/main/broken/0": [
+      18,
+      27,
+      "AAeAB/AH/Af/B//H//f////////////////////////////////////////8//w//A/8A/wA/AA8AAAAAA=="
+    ],
+    "f_window/base/main/intact/0": [
+      18,
+      27,
+      "AAeAB/AH/Af/B//H//f////////////////////////////////////////8//w//A/8A/wA/AA8AAAAAA=="
+    ],
+    "f_window/base/main/lit/0": [
+      18,
+      27,
+      "AAeAB/AH/Af/B//H//f////////////////////////////////////////8//w//A/8A/wA/AA8AAAAAA=="
+    ],
+    "f_window/base/main/scorched/0": [
+      18,
+      27,
+      "AAeAB/AH/Af/B//H//f////////////////////////////////////////8//w//A/8A/wA/AA8AAAAAA=="
+    ],
+    "f_window/w1/main/intact/0": [
+      18,
+      27,
+      "AAeAB/AH/Af/B//H//f////////////////////////////////////////8//w//A/+A/2A/kA8AAAAAA=="
+    ],
+    "f_window/w1/main/lit/0": [
+      18,
+      27,
+      "AAeAB/AH/Af/B//H//f////////////////////////////////////////8//w//A/+A/2A/kA8AAAAAA=="
+    ],
+    "p_notice/base/main/default/0": [
+      16,
+      26,
+      "AB8AfwH/B/4f/n/+//7//n/+f/5//n/+f/x//H/Mfwx8DHAMYAxgDGAMYABgAGAAYABgAA=="
+    ],
+    "p_notice/base/main/default/6": [
+      16,
+      26,
+      "+AD+AP+Af+B/+H/+f/9//3/+f/5//n/+P/4//jP+MP4wPjAOMAYwBjAGAAYABgAGAAYABg=="
+    ],
+    "p_solar/base/main/default/0": [
+      28,
+      26,
+      "AAPgAAD+AAA/8AAP/wAD/+AA//8AP//wD///gP///A///8D///4P///wf///g///+D///8N///8z///zP///Mf//8w//8Dh//AHj/4AHv9AAH/AAAHwAAAHAAA=="
+    ],
+    "p_vending/base/main/broken/0": [
+      14,
+      26,
+      "B8B/x////////////////////////////////////////////////9/8H8AcAA=="
+    ],
+    "p_vending/base/main/ok/0": [
+      14,
+      26,
+      "B8B/x////////////////////////////////////////////////9/8H8AcAA=="
+    ],
+    "w_fence/base/main/default/0": [
+      19,
+      26,
+      "AAHAAPgAfwA/4B/8D/+H//P//n//z//5//8//+f//v//3//7//9//+//////f/+P/8H/4D/wB/gA/AAOAAA="
+    ],
+    "w_fence/base/main/default/6": [
+      19,
+      26,
+      "cAAPgAH8AD/gB/8A//gf/8P//n//z//5//8//+///f//v//3//7//9//+f//j//wf/4D/8Af+AD/AAfgADg="
+    ],
+    "w_gate_l/base/main/closed/0": [
+      14,
+      26,
+      "ABwB8D/D/x/9//////////////////////////////////7/4/4P4D4A4AIAAA=="
+    ],
+    "w_gate_l/base/main/closed/6": [
+      14,
+      26,
+      "4APgD/A/8P/j/+//////////////////////////////3/8f/B/wH8AfABwAEA=="
+    ],
+    "w_gate_l/base/main/open/0": [
+      14,
+      26,
+      "4APgD/A/8P/j/+//////////////////////////////3/8f/B/wH8AfABwAEA=="
+    ],
+    "w_gate_l/base/main/open/6": [
+      14,
+      26,
+      "ABwB8D/D/x/9//////////////////////////////////7/4/4P4D4A4AIAAA=="
+    ],
+    "w_gate_r/base/main/closed/0": [
+      14,
+      26,
+      "ABwB8D/D/x/9//////////////////////////////////7/4/4P4D4A4AIAAA=="
+    ],
+    "w_gate_r/base/main/closed/6": [
+      14,
+      26,
+      "4APgD/A/8P/j/+//////////////////////////////3/8f/B/wH8AfABwAEA=="
+    ],
+    "w_gate_r/base/main/open/0": [
+      14,
+      26,
+      "4APgD/A/8P/j/+//////////////////////////////3/8f/B/wH8AfABwAEA=="
+    ],
+    "w_gate_r/base/main/open/6": [
+      14,
+      26,
+      "ABwB8D/D/x/9//////////////////////////////////7/4/4P4D4A4AIAAA=="
+    ],
+    "f_ac/a2/main/default/0": [
+      10,
+      25,
+      "B4f3//////////+/z9M0jSNI0jSMIwjCMIwhCEAQBAA="
+    ],
+    "f_ac/a1/main/default/6": [
+      11,
+      23,
+      "MB+D/H/v/f+/9/7/4/w/hPCOEcA4BwDgHAGAMAYAwBg="
+    ],
+    "p_car/base/main/crashed/1": [
+      49,
+      23,
+      "AAP//gAAAAP//4AAAAP///gAAAP///wAA//////wA///////8///////+f///////P///////n///////z////////////////////////////////////////////////////////9///////+////////f///////sH+AAAP8AD/AAAH8AA/AAAB+A"
+    ],
+    "p_car/base/main/crashed/5": [
+      49,
+      23,
+      "AAB//8AAAAB///AAAAH///wAAAD///8AAA//////4f//////8f///////f///////v///////3///////7////////////////////////////////////////////////7///////9///////+////////f///////u/wAAB/g2P4AAAfwAD4AAAHwA"
+    ],
+    "p_car/base/main/normal/1": [
+      53,
+      23,
+      "AAP//gAAAAA///gAAAAD///4AAAAP///wAAD//////wAP///////8////////9////////7//////////////////////////////////////////////////////////////////////////////////////////////////////////B/gAAB/g4D/AAAB/AAD8AAAD8AA"
+    ],
+    "p_car/base/main/normal/5": [
+      53,
+      23,
+      "AAAD//wAAAAAf//wAAAAH///wAAAAP///wAAA//////+P///////+f///////8////////7//////////////////////////////////////////////////////////////////////////////////////////////////////////B/gAAA/wYB/AAAB/gAB8AAAB+AA"
+    ],
+    "p_car/red/main/crashed/1": [
+      49,
+      23,
+      "AAP//gAAAAP//4AAAAP///gAAAP///wAA//////wA///////8///////+f///////P///////n///////z////////////////////////////////////////////////////////9///////+////////f///////sH+AAAP8AD/AAAH8AA/AAAB+A"
+    ],
+    "p_car/red/main/crashed/5": [
+      49,
+      23,
+      "AAB//8AAAAB///AAAAH///wAAAD///8AAA//////4f//////8f///////f///////v///////3///////7////////////////////////////////////////////////7///////9///////+////////f///////u/wAAB/g2P4AAAfwAD4AAAHwA"
+    ],
+    "p_car/red/main/normal/1": [
+      53,
+      23,
+      "AAP//gAAAAA///gAAAAD///4AAAAP///wAAD//////wAP///////8////////9////////7//////////////////////////////////////////////////////////////////////////////////////////////////////////B/gAAB/g4D/AAAB/AAD8AAAD8AA"
+    ],
+    "p_car/red/main/normal/5": [
+      53,
+      23,
+      "AAAD//wAAAAAf//wAAAAH///wAAAAP///wAAA//////+P///////+f///////8////////7//////////////////////////////////////////////////////////////////////////////////////////////////////////B/gAAA/wYB/AAAB/gAB8AAAB+AA"
+    ],
+    "p_car/taxi/main/crashed/1": [
+      49,
+      23,
+      "AAP//gAAAAP//4AAAAP///gAAAP///wAA//////wA///////8///////+f///////P///////n///////z////////////////////////////////////////////////////////9///////+////////f///////sH+AAAP8AD/AAAH8AA/AAAB+A"
+    ],
+    "p_car/taxi/main/crashed/5": [
+      49,
+      23,
+      "AAB//8AAAAB///AAAAH///wAAAD///8AAA//////4f//////8f///////f///////v///////3///////7////////////////////////////////////////////////7///////9///////+////////f///////u/wAAB/g2P4AAAfwAD4AAAHwA"
+    ],
+    "p_car/taxi/main/normal/1": [
+      53,
+      23,
+      "AAP//gAAAAA///gAAAAD///4AAAAP///wAAD//////wAP///////8////////9////////7//////////////////////////////////////////////////////////////////////////////////////////////////////////B/gAAB/g4D/AAAB/AAD8AAAD8AA"
+    ],
+    "p_car/taxi/main/normal/5": [
+      53,
+      23,
+      "AAAD//wAAAAAf//wAAAAH///wAAAAP///wAAA//////+P///////+f///////8////////7//////////////////////////////////////////////////////////////////////////////////////////////////////////B/gAAA/wYB/AAAB/gAB8AAAB+AA"
+    ],
+    "p_stall/base/awning/default/0": [
+      36,
+      23,
+      "AAB4AAAAH+AAAAf/AAAB//wAAH//4AAf//+AB////AH////wf////4/////+//////f/////P/////D////+B////4Af///gAP//+AAD//4AAA//gAAAf+AAAAH4AAAAHgAAAAGAAAA="
+    ],
+    "p_stall/base/awning/default/6": [
+      36,
+      23,
+      "AAPAAAAA/wAAAB/8AAAH//AAAP//wAA///8AB////AH////wP////8/////////////////8/////4/////gP////AD///8AA///4AAP//gAAD//AAAA/8AAAAP4AAAAD4AAAAA4AAA="
+    ],
+    "f_sign/base/main/default/6": [
+      24,
+      22,
+      "MAAAPAAAPwAAP8AAP/AAP/wAP/8AP//AP//wD//8A//+AP/+AD/+AA/+AAP+AAD+AAA+AAAOAAAAAAAAAAAAAAAA"
+    ],
+    "p_post/base/main/default/0": [
+      5,
+      21,
+      "585CEIQhCEIQhCO/9wA="
+    ],
+    "p_parapet/base/main/default/0": [
+      20,
+      21,
+      "AAHgAH8AH/AH/gH/4H/+H//n//7//+///v//7//+///v//j//g//gP/gD/gA/gAPgAAgAAA="
+    ],
+    "p_parapet/base/main/default/2": [
+      20,
+      21,
+      "eAAP4AD/gA/+AP/4D//g//+P//7/////////7//+///j//4P/+A//gD/4AP+AA/gAD4AAIA="
+    ],
+    "f_ac/a1/main/default/0": [
+      10,
+      20,
+      "B4f3//////////+/j+M4jiOI4jgGAYBgGA=="
+    ],
+    "p_bikes/base/main/default/0": [
+      25,
+      19,
+      "AAHAAAfzgA//gA97gD/9wH//8Dv//f//////38///3///z////7//3vl+YBj98AB+cAA7AAAPgAABgAA"
+    ],
+    "p_bikes/base/main/default/6": [
+      25,
+      19,
+      "AcAAOfwAP/+AH73gD9/+B///wf/+4f////3//9///mf9///+//9//7gz9PgffjAHPwAAG4AAD4AAAwAA"
+    ],
+    "p_hedge/base/main/default/6": [
+      22,
+      19,
+      "PAAB+AAP/AA//4D//4P//g///j///v//+f//8///x///B//8B//wA//AD/8AB/wAD+AAHAA="
+    ],
+    "p_bike/base/main/parked/3": [
+      7,
+      18,
+      "ff/74wcOGDBg4cOGDBgwYA=="
+    ],
+    "p_hedge/base/main/default/0": [
+      24,
+      18,
+      "AAD4AAf8AD/8AH/8AP/8Af/+A//+H///H///P//+///+///4///g//8A//4A//AAf+AAPwAA"
+    ],
+    "p_bins/base/main/default/0": [
+      17,
+      18,
+      "AHgA/wH/4//3////////////////////////9//z/+H/wB+AAwAA"
+    ],
+    "f_sign/base/main/default/0": [
+      21,
+      18,
+      "AAB4AA/AAf4AP/AH/4D//B//4///f//n//w//4H/8A/+AH/AA/gAHwAA4AAAAAAA"
+    ],
+    "p_bike/base/main/parked/2": [
+      15,
+      17,
+      "AfwD/AH4A/H/w//Dv4f/P/7/+f/398/DH4A/AHwAcAA="
+    ],
+    "p_ebike/base/main/default/0": [
+      15,
+      17,
+      "APAA+AH4A/AHgA8Dnx/+f/3/+f/3/8/gH4A+AHwAYAA="
+    ],
+    "p_ebike/base/main/default/2": [
+      15,
+      17,
+      "HgD4A+AH4APAB4AfOH78//z/+f/x/+Af4A/AD4AfABg="
+    ],
+    "p_bike/base/main/parked/7": [
+      7,
+      16,
+      "OHDn98+fPjBgwYMGDBg="
+    ],
+    "p_pot/base/main/grown/0": [
+      11,
+      16,
+      "P4/7/3///f8Pw/x/j/H+H4Pwfg/AYA=="
+    ],
+    "f_ac/base/main/default/6": [
+      11,
+      15,
+      "MB+D/H/v/f+/9/7/4/wfgPAEAAAA"
+    ],
+    "p_bike/base/main/parked/6": [
+      15,
+      15,
+      "APBz4P/3///v/////5//f/388/jH4A/AHwAcAAA="
+    ],
+    "p_trashbin/base/main/upright/0": [
+      10,
+      14,
+      "Hh/v////////////////f4eA"
+    ],
+    "p_planter/base/main/default/6": [
+      13,
+      14,
+      "fAPwH8H/j/x/+//////3/5/8H+B/AHA="
+    ],
+    "p_bike/base/main/knocked/2": [
+      17,
+      13,
+      "B+AD8AH4Af/G///v////////nn/AP+AP4APgAA=="
+    ],
+    "p_bike/base/main/parked/1": [
+      20,
+      13,
+      "AAYAOH4Hh+B//gP/4/n+f//v////7//8//8P9/D+PAPA"
+    ],
+    "p_bike/base/main/parked/5": [
+      20,
+      13,
+      "BgAH4cB+Hgf/4H/8B/n8f//v////f//z//8P9/D+PAPA"
+    ],
+    "p_ebike/base/main/default/4": [
+      15,
+      13,
+      "wH3j+f/7//P/5//P/7/+f5H4A/ADwAMAAA=="
+    ],
+    "p_ebike/base/main/default/6": [
+      15,
+      13,
+      "fAb+P/33/8//n/8//j/+M/wB+AHwA+ADgA=="
+    ],
+    "f_ac/base/main/default/0": [
+      10,
+      13,
+      "B4f3//////////+/D4MAAAA="
+    ],
+    "p_planter/base/main/default/0": [
+      12,
+      13,
+      "B8D/////////f////+/4/4+AcAA="
+    ],
+    "p_bike/base/main/knocked/3": [
+      13,
+      12,
+      "8AefPf/////f/f+f/N/4f8P+B/A="
+    ],
+    "p_pot/base/main/small/0": [
+      7,
+      12,
+      "fP3/////////++A="
+    ],
+    "p_trashbin/base/main/knocked/0": [
+      15,
+      12,
+      "A4A/wf/H/4///////3/8//H/APgAQAA="
+    ],
+    "p_bike/base/main/knocked/6": [
+      17,
+      11,
+      "AH8Af8A/4B/3///////t/+B/8AH4AHAA"
+    ],
+    "p_bike/base/main/knocked/7": [
+      13,
+      11,
+      "fwf5v/3/9/+P/f////9/+98A"
+    ],
+    "p_hydrant/base/main/ok/0": [
+      5,
+      11,
+      "d/7//////g=="
+    ],
+    "p_bike/base/main/knocked/1": [
+      20,
+      10,
+      "AAYAAH4Hh+B//j//5//+////////D/fw/g=="
+    ],
+    "p_hydrant/base/main/broken/0": [
+      10,
+      10,
+      "8DwPg+D4PA+b7/m+AA=="
+    ],
+    "p_bike/base/main/knocked/5": [
+      20,
+      7,
+      "/w///////////3//x+HgfhwA"
+    ],
+    "p_pot/base/main/broken/0": [
+      12,
+      7,
+      "P+P+P//+/4PgEAA="
+    ]
+  },
+  "pieces": {
+    "b_roof_a": {
+      "layer": "sorted",
+      "catcher": null,
+      "states": [
+        "default"
+      ],
+      "origin": "building SW corner at roof level",
+      "z_order": 10,
+      "sort_box": [
+        0,
+        0,
+        15,
+        12
+      ],
+      "sort_z": [
+        0,
+        6
+      ],
+      "size": [
+        15,
+        12
+      ],
+      "fadeable": true,
+      "geo": {
+        "default": {
+          "main": [
+            -0.04,
+            -0.04,
+            -0.18,
+            15.04,
+            12.04,
+            5.8
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "b_roof_b": {
+      "layer": "sorted",
+      "catcher": null,
+      "states": [
+        "default"
+      ],
+      "origin": "building SW corner at roof level",
+      "z_order": 10,
+      "sort_box": [
+        0,
+        0,
+        12,
+        9
+      ],
+      "sort_z": [
+        0,
+        2.2
+      ],
+      "size": [
+        12,
+        9
+      ],
+      "fadeable": true,
+      "vars": [
+        "c"
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            -0.04,
+            -0.04,
+            -0.18,
+            12.04,
+            9.04,
+            2.08
+          ]
+        }
+      },
+      "geo_var": {
+        "c": {
+          "default": {
+            "main": [
+              -0.04,
+              -0.04,
+              -0.18,
+              12.04,
+              9.04,
+              3.4
+            ]
+          }
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base",
+        "c"
+      ]
+    },
+    "b_roof_deck": {
+      "layer": "sorted",
+      "catcher": null,
+      "states": [
+        "default"
+      ],
+      "origin": "building SW corner at roof level",
+      "z_order": 10,
+      "sort_box": [
+        0,
+        0,
+        15,
+        12
+      ],
+      "sort_z": [
+        -0.2,
+        0.0
+      ],
+      "size": [
+        15,
+        12
+      ],
+      "fadeable": true,
+      "geo": {
+        "default": {
+          "main": [
+            -0.03,
+            -0.03,
+            -1.2,
+            15.03,
+            12.03,
+            1.08
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "d_center_dash": {
+      "layer": "decal",
+      "catcher": null,
+      "states": [
+        "default"
+      ],
+      "rots": [
+        0,
+        2
+      ],
+      "origin": "center",
+      "geo": {
+        "default": {
+          "main": [
+            -0.6,
+            -0.07,
+            0.0,
+            0.6,
+            0.07,
+            0.0
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "d_edge_line": {
+      "layer": "decal",
+      "catcher": null,
+      "states": [
+        "default"
+      ],
+      "rots": [
+        0,
+        2
+      ],
+      "origin": "center",
+      "geo": {
+        "default": {
+          "main": [
+            -1.0,
+            -0.06,
+            0.0,
+            1.0,
+            0.06,
+            0.0
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "d_manhole": {
+      "layer": "decal",
+      "catcher": null,
+      "states": [
+        "default"
+      ],
+      "rots": [
+        0
+      ],
+      "origin": "center",
+      "geo": {
+        "default": {
+          "main": [
+            -0.38,
+            -0.38,
+            -0.01,
+            0.38,
+            0.38,
+            0.005
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "d_stopline": {
+      "layer": "decal",
+      "catcher": null,
+      "states": [
+        "default"
+      ],
+      "rots": [
+        0,
+        2
+      ],
+      "origin": "center",
+      "geo": {
+        "default": {
+          "main": [
+            -0.15,
+            -1.8,
+            0.0,
+            0.15,
+            1.8,
+            0.0
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "d_stripe": {
+      "layer": "decal",
+      "catcher": null,
+      "states": [
+        "default"
+      ],
+      "rots": [
+        0,
+        2
+      ],
+      "origin": "center",
+      "geo": {
+        "default": {
+          "main": [
+            -0.22,
+            -1.75,
+            0.0,
+            0.22,
+            1.75,
+            0.0
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_ac": {
+      "layer": "sorted",
+      "catcher": "wall",
+      "states": [
+        "default"
+      ],
+      "origin": "mount-center",
+      "z_order": 2,
+      "rots": [
+        0,
+        6
+      ],
+      "sort_box": [
+        -0.45,
+        -0.46,
+        0.45,
+        0
+      ],
+      "sort_line": [
+        [
+          -0.45,
+          0
+        ],
+        [
+          0.45,
+          0
+        ]
+      ],
+      "fadeable": true,
+      "vars": [
+        "a1",
+        "a2"
+      ],
+      "sort_z": [
+        -0.35,
+        0.56
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            -0.4,
+            -0.45,
+            -0.35,
+            0.4,
+            0.0,
+            0.56
+          ]
+        }
+      },
+      "geo_var": {
+        "a1": {
+          "default": {
+            "main": [
+              -0.4,
+              -0.45,
+              -1.451,
+              0.4,
+              0.0,
+              0.56
+            ]
+          }
+        },
+        "a2": {
+          "default": {
+            "main": [
+              -0.4,
+              -0.45,
+              -1.919,
+              0.4,
+              0.0,
+              0.56
+            ]
+          }
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base",
+        "a1",
+        "a2"
+      ]
+    },
+    "f_balcony": {
+      "catcher": "wall",
+      "states": [
+        "default",
+        "laundry"
+      ],
+      "layer": "sorted",
+      "origin": "bay-bottom-left",
+      "sort_line": [
+        [
+          0,
+          0
+        ],
+        [
+          3,
+          0
+        ]
+      ],
+      "fadeable": true,
+      "rots": [
+        0,
+        6
+      ],
+      "z_order": 2,
+      "sort_box": [
+        0,
+        -1.7,
+        3,
+        0
+      ],
+      "vars": [
+        "b1",
+        "b2"
+      ],
+      "sort_z": [
+        0,
+        2.8
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            0.14,
+            -0.98,
+            0.0,
+            2.86,
+            0.0,
+            2.78
+          ]
+        },
+        "laundry": {
+          "main": [
+            0.14,
+            -1.65,
+            0.0,
+            2.86,
+            0.0,
+            2.78
+          ]
+        }
+      },
+      "geo_var": {
+        "b1": {
+          "default": {
+            "main": [
+              0.14,
+              -1.02,
+              0.0,
+              2.86,
+              0.0,
+              2.78
+            ]
+          },
+          "laundry": {
+            "main": [
+              0.14,
+              -1.65,
+              0.0,
+              2.86,
+              0.0,
+              2.78
+            ]
+          }
+        },
+        "b2": {
+          "default": {
+            "main": [
+              0.14,
+              -1.801,
+              0.0,
+              2.86,
+              0.0,
+              2.78
+            ]
+          },
+          "laundry": {
+            "main": [
+              0.14,
+              -1.801,
+              0.0,
+              2.86,
+              0.0,
+              2.78
+            ]
+          }
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base",
+        "b1",
+        "b2"
+      ]
+    },
+    "f_door": {
+      "catcher": "wall",
+      "states": [
+        "closed",
+        "open"
+      ],
+      "layer": "sorted",
+      "origin": "bay-bottom-left",
+      "sort_line": [
+        [
+          0,
+          0
+        ],
+        [
+          3,
+          0
+        ]
+      ],
+      "fadeable": true,
+      "rots": [
+        0,
+        6
+      ],
+      "z_order": 1,
+      "sort_box": [
+        0,
+        -0.95,
+        3,
+        0.35
+      ],
+      "footprint_states": {
+        "closed": [
+          [
+            0.85,
+            -0.05,
+            2.15,
+            0.4
+          ]
+        ]
+      },
+      "sort_z": [
+        0,
+        2.9
+      ],
+      "geo": {
+        "closed": {
+          "main": [
+            0.43,
+            -0.95,
+            0.0,
+            2.85,
+            1.0,
+            2.86
+          ]
+        },
+        "open": {
+          "main": [
+            0.43,
+            -0.95,
+            0.0,
+            2.85,
+            1.0,
+            2.86
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_pipe": {
+      "layer": "sorted",
+      "catcher": "wall",
+      "states": [
+        "default"
+      ],
+      "origin": "mount-center",
+      "z_order": 2,
+      "rots": [
+        0,
+        6
+      ],
+      "sort_box": [
+        -0.08,
+        -0.16,
+        0.08,
+        0
+      ],
+      "sort_line": [
+        [
+          -0.1,
+          0
+        ],
+        [
+          0.1,
+          0
+        ]
+      ],
+      "fadeable": true,
+      "sort_z": [
+        0,
+        3.0
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            -0.07,
+            -0.15,
+            0.0,
+            0.07,
+            0.0,
+            3.0
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_shop": {
+      "catcher": "wall",
+      "states": [
+        "window",
+        "door",
+        "shut"
+      ],
+      "layer": "sorted",
+      "origin": "bay-bottom-left",
+      "sort_line": [
+        [
+          0,
+          0
+        ],
+        [
+          3,
+          0
+        ]
+      ],
+      "fadeable": true,
+      "rots": [
+        0,
+        6
+      ],
+      "z_order": 1,
+      "sort_box": [
+        0,
+        -0.12,
+        3,
+        0.4
+      ],
+      "footprint": [
+        [
+          0,
+          0,
+          3,
+          0.4
+        ]
+      ],
+      "clip_face": [
+        0,
+        3,
+        0,
+        3.0,
+        -0.16,
+        0.4
+      ],
+      "geo": {
+        "window": {
+          "main": [
+            0.0,
+            -0.15,
+            0.0,
+            3.0,
+            1.9,
+            3.0
+          ]
+        },
+        "door": {
+          "main": [
+            0.0,
+            -0.3,
+            0.0,
+            3.0,
+            1.9,
+            3.0
+          ]
+        },
+        "shut": {
+          "main": [
+            0.0,
+            -0.15,
+            0.0,
+            3.0,
+            1.9,
+            3.0
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_shopsign": {
+      "layer": "sorted",
+      "catcher": "wall",
+      "states": [
+        "default"
+      ],
+      "origin": "mount-center",
+      "z_order": 3,
+      "rots": [
+        0,
+        6
+      ],
+      "sort_box": [
+        -2.7,
+        -0.2,
+        2.7,
+        0
+      ],
+      "sort_line": [
+        [
+          -2.7,
+          0
+        ],
+        [
+          2.7,
+          0
+        ]
+      ],
+      "fadeable": true,
+      "text": "24便利店",
+      "text_board": "shop_sign",
+      "text_ink": "shop_ink",
+      "sort_z": [
+        0,
+        0.5
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            -2.72,
+            -0.2,
+            0.0,
+            2.72,
+            -0.15,
+            0.52
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_sign": {
+      "layer": "sorted",
+      "catcher": "wall",
+      "states": [
+        "default"
+      ],
+      "origin": "mount-center",
+      "z_order": 3,
+      "rots": [
+        0,
+        6
+      ],
+      "sort_box": [
+        -1.22,
+        -0.11,
+        1.22,
+        0
+      ],
+      "sort_line": [
+        [
+          -1.2,
+          0
+        ],
+        [
+          1.2,
+          0
+        ]
+      ],
+      "fadeable": true,
+      "text": "井槐里12号",
+      "sort_z": [
+        0,
+        0.66
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            -1.22,
+            -0.11,
+            0.0,
+            1.22,
+            0.0,
+            0.66
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_steps": {
+      "layer": "low",
+      "catcher": null,
+      "states": [
+        "default"
+      ],
+      "origin": "facade-center",
+      "rots": [
+        0,
+        6
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            -1.15,
+            -0.81,
+            0.0,
+            1.15,
+            0.0,
+            0.3
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "f_wall": {
+      "catcher": null,
+      "states": [
+        "upper",
+        "ground"
+      ],
+      "layer": "sorted",
+      "origin": "bay-bottom-left",
+      "sort_line": [
+        [
+          0,
+          0
+        ],
+        [
+          3,
+          0
+        ]
+      ],
+      "fadeable": true,
+      "rots": [
+        0,
+        6
+      ],
+      "z_order": 0,
+      "sort_box": [
+        0,
+        0,
+        3,
+        0.35
+      ],
+      "footprint_states": {
+        "ground": [
+          [
+            0,
+            0,
+            3,
+            0.4
+          ]
+        ]
+      },
+      "vars": [
+        "w1",
+        "w2",
+        "p1"
+      ],
+      "sort_z": [
+        0,
+        3.0
+      ],
+      "geo": {
+        "upper": {
+          "main": [
+            0.0,
+            -0.04,
+            0.0,
+            3.0,
+            0.35,
+            3.0
+          ]
+        },
+        "ground": {
+          "main": [
+            0.0,
+            -0.04,
+            0.0,
+            3.0,
+            0.35,
+            3.0
+          ]
+        }
+      },
+      "geo_var": {
+        "w1": {
+          "upper": {
+            "main": [
+              0.0,
+              -0.04,
+              0.0,
+              3.0,
+              0.35,
+              3.0
+            ]
+          },
+          "ground": {
+            "main": [
+              0.0,
+              -0.04,
+              0.0,
+              3.0,
+              0.35,
+              3.0
+            ]
+          }
+        },
+        "w2": {
+          "upper": {
+            "main": [
+              0.0,
+              -0.04,
+              0.0,
+              3.0,
+              0.35,
+              3.0
+            ]
+          },
+          "ground": {
+            "main": [
+              0.0,
+              -0.04,
+              0.0,
+              3.0,
+              0.35,
+              3.0
+            ]
+          }
+        },
+        "p1": {
+          "upper": {
+            "main": [
+              0.0,
+              -0.04,
+              0.0,
+              3.0,
+              0.35,
+              3.0
+            ]
+          },
+          "ground": {
+            "main": [
+              0.0,
+              -0.04,
+              0.0,
+              3.0,
+              0.35,
+              3.0
+            ]
+          }
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base",
+        "p1",
+        "w1",
+        "w2"
+      ]
+    },
+    "f_window": {
+      "catcher": "wall",
+      "states": [
+        "intact",
+        "lit",
+        "broken",
+        "boarded",
+        "scorched"
+      ],
+      "layer": "sorted",
+      "origin": "bay-bottom-left",
+      "sort_line": [
+        [
+          0,
+          0
+        ],
+        [
+          3,
+          0
+        ]
+      ],
+      "fadeable": true,
+      "rots": [
+        0,
+        6
+      ],
+      "z_order": 1,
+      "sort_box": [
+        0,
+        -0.3,
+        3,
+        0.12
+      ],
+      "vars": [
+        "w1",
+        "w2"
+      ],
+      "var_states": [
+        "intact",
+        "lit"
+      ],
+      "sort_z": [
+        0.3,
+        2.75
+      ],
+      "geo": {
+        "intact": {
+          "main": [
+            0.55,
+            -0.31,
+            0.8,
+            2.45,
+            0.32,
+            2.62
+          ]
+        },
+        "lit": {
+          "main": [
+            0.55,
+            -0.31,
+            0.8,
+            2.45,
+            0.32,
+            2.62
+          ]
+        },
+        "broken": {
+          "main": [
+            0.55,
+            -0.31,
+            0.8,
+            2.45,
+            0.32,
+            2.62
+          ]
+        },
+        "boarded": {
+          "main": [
+            0.55,
+            -0.31,
+            0.8,
+            2.45,
+            0.32,
+            2.62
+          ]
+        },
+        "scorched": {
+          "main": [
+            0.55,
+            -0.31,
+            0.8,
+            2.45,
+            0.32,
+            2.62
+          ]
+        }
+      },
+      "geo_var": {
+        "w1": {
+          "intact": {
+            "main": [
+              0.55,
+              -0.31,
+              0.258,
+              2.45,
+              0.32,
+              2.62
+            ]
+          },
+          "lit": {
+            "main": [
+              0.55,
+              -0.31,
+              0.258,
+              2.45,
+              0.32,
+              2.62
+            ]
+          }
+        },
+        "w2": {
+          "intact": {
+            "main": [
+              0.55,
+              -0.31,
+              -0.02,
+              2.45,
+              0.32,
+              2.62
+            ]
+          },
+          "lit": {
+            "main": [
+              0.55,
+              -0.31,
+              -0.02,
+              2.45,
+              0.32,
+              2.62
+            ]
+          }
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base",
+        "w1",
+        "w2"
+      ]
+    },
+    "g_asphalt": {
+      "states": [
+        "a",
+        "b"
+      ],
+      "layer": "ground",
+      "catcher": null,
+      "origin": "sw-corner (bottom vertex)",
+      "geo": {
+        "a": {
+          "main": [
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            0.0
+          ]
+        },
+        "b": {
+          "main": [
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            0.0
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "g_concrete": {
+      "states": [
+        "default"
+      ],
+      "layer": "ground",
+      "catcher": null,
+      "origin": "sw-corner (bottom vertex)",
+      "geo": {
+        "default": {
+          "main": [
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            0.0
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "g_court": {
+      "states": [
+        "default"
+      ],
+      "layer": "ground",
+      "catcher": null,
+      "origin": "sw-corner (bottom vertex)",
+      "geo": {
+        "default": {
+          "main": [
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            0.0
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "g_grass": {
+      "states": [
+        "default"
+      ],
+      "layer": "ground",
+      "catcher": null,
+      "origin": "sw-corner (bottom vertex)",
+      "geo": {
+        "default": {
+          "main": [
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            0.0
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "g_sidewalk": {
+      "states": [
+        "default"
+      ],
+      "layer": "ground",
+      "catcher": null,
+      "origin": "sw-corner (bottom vertex)",
+      "geo": {
+        "default": {
+          "main": [
+            0.0,
+            0.0,
+            0.0,
+            2.0,
+            2.0,
+            0.0
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "g_treepit": {
+      "states": [
+        "default"
+      ],
+      "layer": "ground",
+      "catcher": null,
+      "origin": "sw-corner (bottom vertex)",
+      "geo": {
+        "default": {
+          "main": [
+            0.0,
+            0.0,
+            -0.02,
+            2.0,
+            2.0,
+            0.04
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "i_roofhut": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "closed",
+        "open"
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -1.3,
+          -0.9,
+          1.3,
+          1.6
+        ]
+      ],
+      "fadeable": true,
+      "light": [
+        0.55,
+        -0.98,
+        2.15
+      ],
+      "geo": {
+        "closed": {
+          "main": [
+            -1.35,
+            -1.034,
+            0.0,
+            1.35,
+            1.65,
+            2.6
+          ]
+        },
+        "open": {
+          "main": [
+            -1.35,
+            -1.885,
+            0.0,
+            1.35,
+            1.65,
+            2.6
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "p_antenna": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "default"
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -0.2,
+          -0.2,
+          0.2,
+          0.2
+        ]
+      ],
+      "fadeable": true,
+      "geo": {
+        "default": {
+          "main": [
+            -0.905,
+            -0.2,
+            -0.001,
+            0.905,
+            0.503,
+            3.16
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "p_bike": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "parked",
+        "knocked"
+      ],
+      "rots": [
+        1,
+        2,
+        3,
+        5,
+        6,
+        7
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -0.14,
+          -0.8,
+          0.14,
+          0.8
+        ]
+      ],
+      "footprint_states": {
+        "knocked": [
+          [
+            -0.35,
+            -0.85,
+            0.75,
+            0.85
+          ]
+        ]
+      },
+      "fadeable": false,
+      "geo": {
+        "parked": {
+          "main": [
+            -0.26,
+            -0.85,
+            0.0,
+            0.26,
+            0.85,
+            1.076
+          ]
+        },
+        "knocked": {
+          "main": [
+            -0.023,
+            -0.85,
+            -0.131,
+            1.077,
+            0.85,
+            0.389
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "p_bikes": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "default"
+      ],
+      "origin": "center",
+      "rots": [
+        0,
+        6
+      ],
+      "footprint": [
+        [
+          -1.05,
+          -0.62,
+          1.05,
+          0.62
+        ]
+      ],
+      "sort_z": [
+        0,
+        1.1
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            -0.94,
+            -0.829,
+            -0.002,
+            0.94,
+            0.829,
+            0.98
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "p_bins": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "default"
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -0.7,
+          -0.35,
+          0.7,
+          0.35
+        ]
+      ],
+      "fadeable": false,
+      "sort_z": [
+        0,
+        1.05
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            -0.67,
+            -0.38,
+            0.0,
+            0.67,
+            0.36,
+            1.02
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "p_bus": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "normal"
+      ],
+      "rots": [
+        6
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -1.25,
+          -5.2,
+          1.25,
+          5.2
+        ]
+      ],
+      "sort_z": [
+        0,
+        3.25
+      ],
+      "fadeable": false,
+      "lights": {
+        "head": [
+          [
+            -0.95,
+            -5.2,
+            0.68
+          ],
+          [
+            0.95,
+            -5.2,
+            0.68
+          ]
+        ],
+        "tail": [
+          [
+            -1.0,
+            5.2,
+            0.8
+          ],
+          [
+            1.0,
+            5.2,
+            0.8
+          ]
+        ]
+      },
+      "geo": {
+        "normal": {
+          "main": [
+            -1.52,
+            -5.2,
+            0.0,
+            1.52,
+            5.24,
+            3.22
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "p_busstop": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "default"
+      ],
+      "origin": "center",
+      "parts": [
+        "base",
+        "roof"
+      ],
+      "fade_parts": [
+        "roof"
+      ],
+      "footprint": [
+        [
+          -2.0,
+          0.45,
+          1.95,
+          0.75
+        ],
+        [
+          -1.55,
+          0.12,
+          0.85,
+          0.45
+        ],
+        [
+          -2.62,
+          -0.12,
+          -2.38,
+          0.12
+        ]
+      ],
+      "text": "公交站",
+      "fadeable": false,
+      "rots": [
+        0
+      ],
+      "geo": {
+        "default": {
+          "base": [
+            -2.85,
+            -0.05,
+            0.0,
+            2.0,
+            0.74,
+            2.95
+          ],
+          "roof": [
+            -2.15,
+            -1.0,
+            2.42,
+            2.15,
+            0.78,
+            2.78
+          ]
+        }
+      },
+      "variants": [
+        "base"
+      ]
+    },
+    "p_car": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "normal",
+        "crashed"
+      ],
+      "rots": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -0.98,
+          -2.3,
+          0.98,
+          2.3
+        ]
+      ],
+      "footprint_states": {
+        "crashed": [
+          [
+            -0.98,
+            -1.95,
+            0.98,
+            2.3
+          ]
+        ]
+      },
+      "fadeable": false,
+      "lights": {
+        "head": [
+          [
+            -0.6,
+            -2.2,
+            0.62
+          ],
+          [
+            0.6,
+            -2.2,
+            0.62
+          ]
+        ],
+        "tail": [
+          [
+            -0.66,
+            2.2,
+            0.66
+          ],
+          [
+            0.66,
+            2.2,
+            0.66
+          ]
+        ]
+      },
+      "sort_z": [
+        0,
+        1.45
+      ],
+      "geo": {
+        "normal": {
+          "main": [
+            -1.01,
+            -2.31,
+            0.008,
+            1.01,
+            2.29,
+            1.41
+          ]
+        },
+        "crashed": {
+          "main": [
+            -1.01,
+            -1.926,
+            0.004,
+            1.01,
+            2.29,
+            1.41
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base",
+        "taxi",
+        "red"
+      ]
+    },
+    "p_curb": {
+      "layer": "low",
+      "catcher": null,
+      "states": [
+        "default"
+      ],
+      "rots": [
+        0,
+        2
+      ],
+      "origin": "center",
+      "footprint": null,
+      "size": [
+        2,
+        0.2
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            -1.0,
+            -0.101,
+            0.0,
+            1.0,
+            0.101,
+            0.151
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "p_ebike": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "default"
+      ],
+      "rots": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -0.82,
+          -0.28,
+          0.82,
+          0.28
+        ]
+      ],
+      "sort_z": [
+        0,
+        1.1
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            -0.794,
+            -0.32,
+            0.0,
+            0.794,
+            0.32,
+            0.99
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "p_hedge": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "default"
+      ],
+      "rots": [
+        0,
+        6
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -1,
+          -0.38,
+          1,
+          0.38
+        ]
+      ],
+      "sort_z": [
+        0,
+        1.0
+      ],
+      "noline": true,
+      "geo": {
+        "default": {
+          "main": [
+            -1.278,
+            -0.489,
+            -0.034,
+            1.151,
+            0.484,
+            1.043
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "p_hydrant": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "ok",
+        "broken"
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -0.16,
+          -0.16,
+          0.16,
+          0.16
+        ]
+      ],
+      "fadeable": false,
+      "geo": {
+        "ok": {
+          "main": [
+            -0.2,
+            -0.2,
+            0.0,
+            0.2,
+            0.2,
+            0.92
+          ]
+        },
+        "broken": {
+          "main": [
+            -0.19,
+            -0.3,
+            0.0,
+            0.55,
+            0.285,
+            0.749
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "p_lamp": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "ok",
+        "broken"
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -0.14,
+          -0.14,
+          0.14,
+          0.14
+        ]
+      ],
+      "fadeable": true,
+      "light": [
+        0,
+        -0.95,
+        4.05
+      ],
+      "geo": {
+        "ok": {
+          "main": [
+            -0.16,
+            -1.15,
+            0.0,
+            0.16,
+            0.16,
+            4.36
+          ]
+        },
+        "broken": {
+          "main": [
+            -0.177,
+            -1.139,
+            0.0,
+            0.165,
+            0.16,
+            4.613
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "p_locker": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "default"
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -1.2,
+          -0.3,
+          1.2,
+          0.3
+        ]
+      ],
+      "fadeable": true,
+      "rots": [
+        0,
+        6
+      ],
+      "sort_z": [
+        0,
+        2.3
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            -1.3,
+            -0.46,
+            0.0,
+            1.3,
+            0.3,
+            2.28
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "p_notice": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "default"
+      ],
+      "rots": [
+        0,
+        6
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -0.8,
+          -0.12,
+          0.8,
+          0.12
+        ]
+      ],
+      "sort_z": [
+        0,
+        2.05
+      ],
+      "text": "社区通知",
+      "fadeable": true,
+      "geo": {
+        "default": {
+          "main": [
+            -0.82,
+            -0.2,
+            0.0,
+            0.82,
+            0.08,
+            1.95
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "p_parapet": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "default"
+      ],
+      "rots": [
+        0,
+        2
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -1.0,
+          -0.12,
+          1.0,
+          0.12
+        ]
+      ],
+      "fadeable": true,
+      "geo": {
+        "default": {
+          "main": [
+            -1.02,
+            -0.15,
+            0.0,
+            1.02,
+            0.15,
+            1.08
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "p_planter": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "default"
+      ],
+      "rots": [
+        0,
+        6
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -0.62,
+          -0.26,
+          0.62,
+          0.26
+        ]
+      ],
+      "sort_z": [
+        0,
+        0.9
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            -0.617,
+            -0.33,
+            0.0,
+            0.61,
+            0.275,
+            0.918
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "p_pole": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "default"
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -0.2,
+          -0.2,
+          0.2,
+          0.2
+        ]
+      ],
+      "fadeable": true,
+      "wire_anchors": [
+        [
+          -0.75,
+          0,
+          8.45
+        ],
+        [
+          0.75,
+          0,
+          8.45
+        ]
+      ],
+      "rots": [
+        0,
+        2,
+        4,
+        6
+      ],
+      "sort_z": [
+        0,
+        9.0
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            -0.85,
+            -1.75,
+            0.0,
+            0.85,
+            0.45,
+            9.0
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "p_post": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "default"
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -0.08,
+          -0.08,
+          0.08,
+          0.08
+        ]
+      ],
+      "fadeable": false,
+      "geo": {
+        "default": {
+          "main": [
+            -0.1,
+            -0.25,
+            0.0,
+            0.1,
+            0.25,
+            1.95
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "p_pot": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "small",
+        "grown",
+        "broken"
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -0.28,
+          -0.28,
+          0.28,
+          0.28
+        ]
+      ],
+      "footprint_states": {
+        "broken": [
+          [
+            -0.2,
+            -0.2,
+            0.2,
+            0.2
+          ]
+        ]
+      },
+      "fadeable": false,
+      "geo": {
+        "small": {
+          "main": [
+            -0.3,
+            -0.3,
+            0.0,
+            0.3,
+            0.3,
+            1.0
+          ]
+        },
+        "grown": {
+          "main": [
+            -0.418,
+            -0.43,
+            0.0,
+            0.489,
+            0.384,
+            1.288
+          ]
+        },
+        "broken": {
+          "main": [
+            -0.45,
+            -0.3,
+            0.0,
+            0.541,
+            0.292,
+            0.18
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "p_solar": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "default"
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -0.9,
+          -0.6,
+          0.9,
+          0.6
+        ]
+      ],
+      "fadeable": true,
+      "geo": {
+        "default": {
+          "main": [
+            -0.97,
+            -0.6,
+            -0.009,
+            0.97,
+            0.885,
+            1.305
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "p_stall": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "default"
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -1.22,
+          -1.0,
+          1.22,
+          0.97
+        ],
+        [
+          1.22,
+          -0.8,
+          2.35,
+          0.45
+        ],
+        [
+          -1.4,
+          -0.62,
+          -1.22,
+          -0.4
+        ]
+      ],
+      "parts": [
+        "base",
+        "awning"
+      ],
+      "fade_parts": [
+        "awning"
+      ],
+      "light": [
+        0,
+        -0.4,
+        1.95
+      ],
+      "rots": [
+        0,
+        6
+      ],
+      "sort_box": [
+        -1.2,
+        -0.95,
+        2.3,
+        0.95
+      ],
+      "part_sort": {
+        "base": {
+          "box": [
+            -1.4,
+            -1.0,
+            2.35,
+            0.97
+          ],
+          "z": [
+            0,
+            1.75
+          ]
+        },
+        "awning": {
+          "box": [
+            -1.22,
+            -0.97,
+            1.22,
+            0.97
+          ],
+          "z": [
+            1.78,
+            2.3
+          ]
+        }
+      },
+      "geo": {
+        "default": {
+          "base": [
+            -1.35,
+            -0.775,
+            -0.001,
+            2.302,
+            0.775,
+            2.05
+          ],
+          "awning": [
+            -1.2,
+            -0.97,
+            1.78,
+            1.2,
+            0.95,
+            2.29
+          ]
+        }
+      },
+      "variants": [
+        "base"
+      ]
+    },
+    "p_tank": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "default"
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -0.75,
+          -0.65,
+          0.75,
+          0.65
+        ]
+      ],
+      "fadeable": true,
+      "geo": {
+        "default": {
+          "main": [
+            -0.66,
+            -0.64,
+            0.0,
+            0.66,
+            0.635,
+            2.42
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "p_trashbin": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "upright",
+        "knocked"
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -0.3,
+          -0.3,
+          0.3,
+          0.3
+        ]
+      ],
+      "footprint_states": {
+        "knocked": [
+          [
+            -0.45,
+            -0.32,
+            0.6,
+            0.3
+          ]
+        ]
+      },
+      "fadeable": false,
+      "geo": {
+        "upright": {
+          "main": [
+            -0.3,
+            -0.3,
+            0.0,
+            0.3,
+            0.3,
+            0.93
+          ]
+        },
+        "knocked": {
+          "main": [
+            -0.57,
+            -0.3,
+            -0.05,
+            0.733,
+            0.35,
+            0.539
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "p_tree": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "default"
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -0.2,
+          -0.2,
+          0.2,
+          0.2
+        ]
+      ],
+      "parts": [
+        "trunk",
+        "canopy"
+      ],
+      "fade_parts": [
+        "canopy"
+      ],
+      "vars": [
+        "t2"
+      ],
+      "recolor_all": true,
+      "seasons": [
+        "summer",
+        "autumn",
+        "spring",
+        "winter"
+      ],
+      "geo": {
+        "default": {
+          "trunk": [
+            -1.537,
+            -1.49,
+            -0.003,
+            1.412,
+            1.181,
+            3.951
+          ],
+          "canopy": [
+            -2.382,
+            -2.419,
+            2.787,
+            2.616,
+            2.336,
+            6.635
+          ]
+        }
+      },
+      "geo_var": {
+        "t2": {
+          "default": {
+            "trunk": [
+              -0.758,
+              -0.88,
+              -0.003,
+              1.181,
+              0.831,
+              4.482
+            ],
+            "canopy": [
+              -1.996,
+              -1.505,
+              3.507,
+              1.838,
+              1.668,
+              7.686
+            ]
+          }
+        }
+      },
+      "rots": [
+        0
+      ],
+      "variants": [
+        "base",
+        "t2",
+        "autumn",
+        "spring",
+        "t2.autumn",
+        "t2.spring"
+      ]
+    },
+    "p_vending": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "ok",
+        "broken"
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -0.46,
+          -0.4,
+          0.46,
+          0.4
+        ]
+      ],
+      "fadeable": true,
+      "geo": {
+        "ok": {
+          "main": [
+            -0.45,
+            -0.4,
+            0.0,
+            0.45,
+            0.38,
+            1.92
+          ]
+        },
+        "broken": {
+          "main": [
+            -0.45,
+            -0.4,
+            0.0,
+            0.45,
+            0.38,
+            1.92
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "w_fence": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "default"
+      ],
+      "rots": [
+        0,
+        6
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -1,
+          -0.13,
+          1,
+          0.13
+        ]
+      ],
+      "sort_z": [
+        0,
+        1.75
+      ],
+      "fadeable": true,
+      "geo": {
+        "default": {
+          "main": [
+            -1.0,
+            -0.15,
+            0.0,
+            1.0,
+            0.15,
+            1.74
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "w_gate_l": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "closed",
+        "open"
+      ],
+      "origin": "hinge",
+      "footprint": [
+        [
+          0,
+          -0.06,
+          1.65,
+          0.06
+        ]
+      ],
+      "footprint_states": {
+        "closed": [
+          [
+            0,
+            -0.06,
+            1.65,
+            0.06
+          ]
+        ],
+        "open": [
+          [
+            -0.06,
+            0.0,
+            0.06,
+            1.65
+          ]
+        ]
+      },
+      "fadeable": true,
+      "rots": [
+        0,
+        6
+      ],
+      "sort_z": [
+        0,
+        2.0
+      ],
+      "geo": {
+        "closed": {
+          "main": [
+            0.03,
+            -0.03,
+            0.08,
+            1.65,
+            0.03,
+            1.97
+          ]
+        },
+        "open": {
+          "main": [
+            -0.03,
+            0.03,
+            0.08,
+            0.03,
+            1.65,
+            1.97
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "w_gate_r": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "closed",
+        "open"
+      ],
+      "origin": "hinge",
+      "footprint": [
+        [
+          -1.65,
+          -0.06,
+          0,
+          0.06
+        ]
+      ],
+      "footprint_states": {
+        "closed": [
+          [
+            -1.65,
+            -0.06,
+            0,
+            0.06
+          ]
+        ],
+        "open": [
+          [
+            -0.06,
+            0.0,
+            0.06,
+            1.65
+          ]
+        ]
+      },
+      "fadeable": true,
+      "rots": [
+        0,
+        6
+      ],
+      "sort_z": [
+        0,
+        2.0
+      ],
+      "geo": {
+        "closed": {
+          "main": [
+            -1.65,
+            -0.03,
+            0.08,
+            -0.03,
+            0.03,
+            1.97
+          ]
+        },
+        "open": {
+          "main": [
+            -0.03,
+            0.03,
+            0.08,
+            0.03,
+            1.65,
+            1.97
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "w_pillar": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "default"
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -0.27,
+          -0.27,
+          0.27,
+          0.27
+        ]
+      ],
+      "fadeable": true,
+      "sort_z": [
+        0,
+        2.82
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            -0.32,
+            -0.32,
+            0.0,
+            0.32,
+            0.32,
+            2.82
+          ]
+        }
+      },
+      "rots": [
+        0
+      ],
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    },
+    "w_wall": {
+      "layer": "sorted",
+      "catcher": "ground",
+      "states": [
+        "plain",
+        "poster",
+        "torn"
+      ],
+      "rots": [
+        0,
+        6
+      ],
+      "origin": "center",
+      "footprint": [
+        [
+          -1,
+          -0.15,
+          1,
+          0.15
+        ]
+      ],
+      "fadeable": true,
+      "sort_z": [
+        0,
+        2.2
+      ],
+      "geo": {
+        "plain": {
+          "main": [
+            -1.0,
+            -0.18,
+            0.0,
+            1.0,
+            0.18,
+            2.2
+          ]
+        },
+        "poster": {
+          "main": [
+            -1.0,
+            -0.18,
+            0.0,
+            1.0,
+            0.18,
+            2.2
+          ]
+        },
+        "torn": {
+          "main": [
+            -1.0,
+            -0.18,
+            0.0,
+            1.0,
+            0.18,
+            2.2
+          ]
+        }
+      },
+      "parts": [
+        "main"
+      ],
+      "variants": [
+        "base"
+      ]
+    }
+  },
+  "fx": {
+    "fire_frames": 8,
+    "fire_fps": 12,
+    "smoke_sizes": 3
+  }
+}

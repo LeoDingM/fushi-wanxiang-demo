@@ -1,0 +1,1543 @@
+{
+  "version": 1,
+  "atlas_size": [
+    2048,
+    1228
+  ],
+  "frames": {
+    "modern_balcony_rail/base/main/default/0": [
+      0,
+      0,
+      126,
+      93,
+      -9,
+      89
+    ],
+    "modern_intwall/base/main/plain/0": [
+      129,
+      0,
+      47,
+      132,
+      7,
+      126
+    ],
+    "modern_intwall/base/main/plain/6": [
+      179,
+      0,
+      47,
+      132,
+      7,
+      110
+    ],
+    "modern_intwall/base/main/cut/0": [
+      229,
+      0,
+      47,
+      48,
+      7,
+      42
+    ],
+    "modern_intwall/base/main/cut/6": [
+      279,
+      0,
+      47,
+      48,
+      7,
+      26
+    ],
+    "modern_intwall/base/main/tile/0": [
+      329,
+      0,
+      47,
+      132,
+      7,
+      126
+    ],
+    "modern_intwall/base/main/tile/6": [
+      379,
+      0,
+      47,
+      132,
+      7,
+      110
+    ],
+    "modern_intdoor/base/main/closed/0": [
+      429,
+      0,
+      47,
+      82,
+      5,
+      77
+    ],
+    "modern_intdoor/base/main/closed/6": [
+      479,
+      0,
+      47,
+      82,
+      5,
+      59
+    ],
+    "modern_intdoor/base/main/open/0": [
+      529,
+      0,
+      47,
+      94,
+      5,
+      77
+    ],
+    "modern_intdoor/base/main/open/6": [
+      579,
+      0,
+      72,
+      82,
+      30,
+      59
+    ],
+    "modern_entry_marker/base/main/default/0": [
+      654,
+      0,
+      9,
+      9,
+      4,
+      4
+    ],
+    "modern_ground_half/base/main/default/0": [
+      666,
+      0,
+      56,
+      149,
+      3,
+      145
+    ],
+    "modern_stairflight/base/main/default/0": [
+      725,
+      0,
+      117,
+      124,
+      55,
+      120
+    ],
+    "modern_facade/a/main/ground/0": [
+      845,
+      0,
+      104,
+      173,
+      3,
+      169
+    ],
+    "modern_facade/a/main/ground/6": [
+      952,
+      0,
+      104,
+      174,
+      4,
+      121
+    ],
+    "modern_facade/a/main/entry/0": [
+      1059,
+      0,
+      147,
+      184,
+      7,
+      171
+    ],
+    "modern_facade/a/main/entry/6": [
+      1209,
+      0,
+      147,
+      184,
+      43,
+      123
+    ],
+    "modern_facade/a/main/upper/0": [
+      1359,
+      0,
+      104,
+      173,
+      3,
+      169
+    ],
+    "modern_facade/a/main/upper/6": [
+      1466,
+      0,
+      104,
+      174,
+      4,
+      121
+    ],
+    "modern_facade/a/main/lit/0": [
+      1573,
+      0,
+      104,
+      173,
+      3,
+      169
+    ],
+    "modern_facade/a/main/lit/6": [
+      1680,
+      0,
+      104,
+      174,
+      4,
+      121
+    ],
+    "modern_facade/a/main/balcony/0": [
+      1787,
+      0,
+      142,
+      183,
+      3,
+      169
+    ],
+    "modern_facade/a/main/balcony/6": [
+      0,
+      187,
+      142,
+      183,
+      42,
+      121
+    ],
+    "modern_facade/a/main/balcony_lit/0": [
+      145,
+      187,
+      142,
+      183,
+      3,
+      169
+    ],
+    "modern_facade/a/main/balcony_lit/6": [
+      290,
+      187,
+      142,
+      183,
+      42,
+      121
+    ],
+    "modern_facade/b/main/ground/0": [
+      435,
+      187,
+      104,
+      173,
+      3,
+      169
+    ],
+    "modern_facade/b/main/ground/6": [
+      542,
+      187,
+      104,
+      174,
+      4,
+      121
+    ],
+    "modern_facade/b/main/entry/0": [
+      649,
+      187,
+      147,
+      184,
+      7,
+      171
+    ],
+    "modern_facade/b/main/entry/6": [
+      799,
+      187,
+      147,
+      184,
+      43,
+      123
+    ],
+    "modern_facade/b/main/upper/0": [
+      949,
+      187,
+      104,
+      173,
+      3,
+      169
+    ],
+    "modern_facade/b/main/upper/6": [
+      1056,
+      187,
+      104,
+      174,
+      4,
+      121
+    ],
+    "modern_facade/b/main/lit/0": [
+      1163,
+      187,
+      104,
+      173,
+      3,
+      169
+    ],
+    "modern_facade/b/main/lit/6": [
+      1270,
+      187,
+      104,
+      174,
+      4,
+      121
+    ],
+    "modern_facade/b/main/balcony/0": [
+      1377,
+      187,
+      142,
+      183,
+      3,
+      169
+    ],
+    "modern_facade/b/main/balcony/6": [
+      1522,
+      187,
+      142,
+      183,
+      42,
+      121
+    ],
+    "modern_facade/b/main/balcony_lit/0": [
+      1667,
+      187,
+      142,
+      183,
+      3,
+      169
+    ],
+    "modern_facade/b/main/balcony_lit/6": [
+      1812,
+      187,
+      142,
+      183,
+      42,
+      121
+    ],
+    "modern_facade/c/main/ground/0": [
+      0,
+      374,
+      104,
+      173,
+      3,
+      169
+    ],
+    "modern_facade/c/main/ground/6": [
+      107,
+      374,
+      104,
+      174,
+      4,
+      121
+    ],
+    "modern_facade/c/main/entry/0": [
+      214,
+      374,
+      147,
+      184,
+      7,
+      171
+    ],
+    "modern_facade/c/main/entry/6": [
+      364,
+      374,
+      147,
+      184,
+      43,
+      123
+    ],
+    "modern_facade/c/main/upper/0": [
+      514,
+      374,
+      104,
+      173,
+      3,
+      169
+    ],
+    "modern_facade/c/main/upper/6": [
+      621,
+      374,
+      104,
+      174,
+      4,
+      121
+    ],
+    "modern_facade/c/main/lit/0": [
+      728,
+      374,
+      104,
+      173,
+      3,
+      169
+    ],
+    "modern_facade/c/main/lit/6": [
+      835,
+      374,
+      104,
+      174,
+      4,
+      121
+    ],
+    "modern_facade/c/main/balcony/0": [
+      942,
+      374,
+      142,
+      183,
+      3,
+      169
+    ],
+    "modern_facade/c/main/balcony/6": [
+      1087,
+      374,
+      142,
+      183,
+      42,
+      121
+    ],
+    "modern_facade/c/main/balcony_lit/0": [
+      1232,
+      374,
+      142,
+      183,
+      3,
+      169
+    ],
+    "modern_facade/c/main/balcony_lit/6": [
+      1377,
+      374,
+      142,
+      183,
+      42,
+      121
+    ],
+    "modern_facade/d/main/ground/0": [
+      1522,
+      374,
+      104,
+      173,
+      3,
+      169
+    ],
+    "modern_facade/d/main/ground/6": [
+      1629,
+      374,
+      104,
+      174,
+      4,
+      121
+    ],
+    "modern_facade/d/main/entry/0": [
+      1736,
+      374,
+      147,
+      184,
+      7,
+      171
+    ],
+    "modern_facade/d/main/entry/6": [
+      1886,
+      374,
+      147,
+      184,
+      43,
+      123
+    ],
+    "modern_facade/d/main/upper/0": [
+      0,
+      561,
+      104,
+      173,
+      3,
+      169
+    ],
+    "modern_facade/d/main/upper/6": [
+      107,
+      561,
+      104,
+      174,
+      4,
+      121
+    ],
+    "modern_facade/d/main/lit/0": [
+      214,
+      561,
+      104,
+      173,
+      3,
+      169
+    ],
+    "modern_facade/d/main/lit/6": [
+      321,
+      561,
+      104,
+      174,
+      4,
+      121
+    ],
+    "modern_facade/d/main/balcony/0": [
+      428,
+      561,
+      142,
+      183,
+      3,
+      169
+    ],
+    "modern_facade/d/main/balcony/6": [
+      573,
+      561,
+      142,
+      183,
+      42,
+      121
+    ],
+    "modern_facade/d/main/balcony_lit/0": [
+      718,
+      561,
+      142,
+      183,
+      3,
+      169
+    ],
+    "modern_facade/d/main/balcony_lit/6": [
+      863,
+      561,
+      142,
+      183,
+      42,
+      121
+    ],
+    "modern_roof/base/main/default/0": [
+      1008,
+      561,
+      971,
+      519,
+      389,
+      515
+    ],
+    "modern_condenser/base/main/off/0": [
+      1982,
+      561,
+      60,
+      64,
+      26,
+      44
+    ],
+    "modern_condenser/base/main/on/0": [
+      0,
+      1083,
+      60,
+      64,
+      26,
+      44
+    ],
+    "modern_lift/base/main/closed/0": [
+      63,
+      1083,
+      76,
+      142,
+      7,
+      138
+    ],
+    "modern_lift/base/main/open/0": [
+      142,
+      1083,
+      76,
+      142,
+      7,
+      138
+    ],
+    "modern_sofa/base/main/default/0": [
+      221,
+      1083,
+      102,
+      88,
+      51,
+      67
+    ],
+    "modern_parking/base/main/default/0": [
+      326,
+      1083,
+      242,
+      126,
+      161,
+      123
+    ]
+  },
+  "masks": {
+    "modern_balcony_rail/base/main/default/0": [
+      32,
+      24,
+      "AAAAAAAAAAYAAAAeAAAAfgAAAf4AAAf+AAAf/mAAf/54Af/+fgf//n+f//5////+f////n////B////Af///AH///AB///gAH//AAAf/AAAB/AAAAHAAAAAgAAAAAAAA"
+    ],
+    "modern_intwall/base/main/plain/0": [
+      12,
+      33,
+      "AAAeB+H+f+f+f+f+f+f+f+f+f+f+f+f+f+f+f+f+f+f+f+f+f+f+f+f+f8fwfAcAAAA="
+    ],
+    "modern_intwall/base/main/plain/6": [
+      12,
+      33,
+      "AAcAfAf4f+f+f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8H8B8AcAAA="
+    ],
+    "modern_intwall/base/main/cut/0": [
+      12,
+      12,
+      "AEAeB+H+f+f+f+f8fwfAcAAA"
+    ],
+    "modern_intwall/base/main/cut/6": [
+      12,
+      12,
+      "IAeAfgf4f+f+f8f8H8B8AcAA"
+    ],
+    "modern_intwall/base/main/tile/0": [
+      12,
+      33,
+      "AAAeB+H+f+f+f+f+f+f+f+f+f+f+f+f+f+f+f+f+f+f+f+f+f+f+f+f+f8fwfAcAAAA="
+    ],
+    "modern_intwall/base/main/tile/6": [
+      12,
+      33,
+      "AAcAfAf4f+f+f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8f8H8B8AcAAA="
+    ],
+    "modern_intdoor/base/main/closed/0": [
+      12,
+      21,
+      "AEAGAeB+H+/+/+/+/+/+/+/+/+/+/+/+/w/A8A4AAAA="
+    ],
+    "modern_intdoor/base/main/closed/6": [
+      12,
+      21,
+      "QA4A+A/g/4/+/+/+/+/+/+/+/+/+/+/+D+B+AeAEAAA="
+    ],
+    "modern_intdoor/base/main/open/0": [
+      12,
+      24,
+      "AEAGAGAGAG4G+G/m/+/+/+/+/+/+/+/+/8/8/8/8D8A8AMAA"
+    ],
+    "modern_intdoor/base/main/open/6": [
+      18,
+      21,
+      "AIAAYAA4AD4AP4A/4G/4G/4G/4G/4G/4G/4G/4G/4G/4G/wG/AG8AGwAGAAGAAAA"
+    ],
+    "modern_entry_marker/base/main/default/0": [
+      3,
+      3,
+      "CAA="
+    ],
+    "modern_ground_half/base/main/default/0": [
+      14,
+      38,
+      "AAgA8A/A/g/4/+//v/7/+//v/7/+//v/7/+//v/7/+//v/7/+//v/7/+//v/7/+//v/7/+//v/z/w/wPwDwAwAAAAA=="
+    ],
+    "modern_stairflight/base/main/default/0": [
+      30,
+      31,
+      "AACAAAACAAAACAAAACAAAACAAAAOAAAA/AAMD/AAMP/gAMf/jAN//7AP//7Af///Af///Af///wf///8f///uf///2f///2f///+f///+f///+f///+f///8f///wH///AB//8AAf/wAAH/AAAB8AAAAQAAA"
+    ],
+    "modern_facade/a/main/ground/0": [
+      26,
+      44,
+      "AAAAgAAA8AAA/AAA/gAA/4AA/+AA//gA//4A//+A///g///4///+////v///7///+////v///7///+////v///7///+////v///7///+////v///7///+////v///7///+////v///z///w///wP//wD//wA//wAP/wAD/wAA/wAAPwAADwAAAwAAAAAAAA="
+    ],
+    "modern_facade/a/main/ground/6": [
+      26,
+      44,
+      "QAAAPAAAD8AAAfwAAH/AAB/8AAf/wAH//AB//8Af//wH///B///8f///3///9////f///3///9////f///3///9////f///3///9////f///3///9////f///3///9////f///z///8P///A///wD//8AP//AA//wAD/8AAP/AAA/wAAD8AAAPAAAAwAAAA="
+    ],
+    "modern_facade/a/main/entry/0": [
+      37,
+      46,
+      "AAAAAAAAAA8AAAAB/gAAAD/8AAAH//gAAP//8AAf///AA////gB////AD///+AH///8AP///4Af///4AP///8AH///+AD////AB////gA////wAf///4AP///8AH///+AD////AB////gA////wAf///4AP///8AH///+AD////AB////gA////wAf///4AP///+AH////gD////8B////+A/////Af///+AP///8AH///wAD///gAB///AAA//+AAAf/8AAABf4AAAADwAAAAAAAAAA"
+    ],
+    "modern_facade/a/main/entry/6": [
+      37,
+      46,
+      "AAAAAAAB4AAAAD/AAAAH/4AAAP//AAAf//4AAf///AAP///4AB////AAP///4AB////AAP///4AH////AD////gB////gA////wAf///4AP///8AH///+AD////AB////gA////wAf///4AP///8AH///+AD////AB////gA////wAf///4AP///8AH///+AD////AD////gH////wD////4B////8AP///+AB////AAP///gAB///wAAP//4AAB//8AAAP/+AAAA/EAAAAGAAAAAAAA"
+    ],
+    "modern_facade/a/main/upper/0": [
+      26,
+      44,
+      "AAAAgAAA8AAA/AAA/gAA/4AA/+AA//gA//4A//+A///g///4///+////v///7///+////v///7///+////v///7///+////v///7///+////v///7///+////v///7///+////v///z///w///wP//wD//wA//wAP/wAD/wAA/wAAPwAADwAAAwAAAAAAAA="
+    ],
+    "modern_facade/a/main/upper/6": [
+      26,
+      44,
+      "QAAAPAAAD8AAAfwAAH/AAB/8AAf/wAH//AB//8Af//wH///B///8f///3///9////f///3///9////f///3///9////f///3///9////f///3///9////f///3///9////f///z///8P///A///wD//8AP//AA//wAD/8AAP/AAA/wAAD8AAAPAAAAwAAAA="
+    ],
+    "modern_facade/a/main/lit/0": [
+      26,
+      44,
+      "AAAAgAAA8AAA/AAA/gAA/4AA/+AA//gA//4A//+A///g///4///+////v///7///+////v///7///+////v///7///+////v///7///+////v///7///+////v///7///+////v///z///w///wP//wD//wA//wAP/wAD/wAA/wAAPwAADwAAAwAAAAAAAA="
+    ],
+    "modern_facade/a/main/lit/6": [
+      26,
+      44,
+      "QAAAPAAAD8AAAfwAAH/AAB/8AAf/wAH//AB//8Af//wH///B///8f///3///9////f///3///9////f///3///9////f///3///9////f///3///9////f///3///9////f///z///8P///A///wD//8AP//AA//wAD/8AAP/AAA/wAAD8AAAPAAAAwAAAA="
+    ],
+    "modern_facade/a/main/balcony/0": [
+      36,
+      46,
+      "AAAAgAAAADwAAAAPwAAAA/gAAAD/gAAAP/gAAA//gAAD//gAAP//gAA///gAD///gAP///gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////4A////+A/////g/////w/////8/////+/////+/////+/////4/////g////+A////4A////gA///+AA///4AAwf/gAAAH+AAAAB4AAAAAAAAA"
+    ],
+    "modern_facade/a/main/balcony/6": [
+      36,
+      46,
+      "ACAAAAADgAAAAD4AAAAD+AAAAD/gAAAD/4AAAD/+AAAD//gAAD//4AAD//+AAD///gAD///4AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AP///+Af///+D////+P////+/////+/////+/////+/////+P////+D////+A////+AP///+AD///+AAf/9+AAH/weAAB/ACAAAeAAAAAGAAAAAAAA"
+    ],
+    "modern_facade/a/main/balcony_lit/0": [
+      36,
+      46,
+      "AAAAgAAAADwAAAAPwAAAA/gAAAD/gAAAP/gAAA//gAAD//gAAP//gAA///gAD///gAP///gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////4A////+A/////g/////w/////8/////+/////+/////+/////4/////g////+A////4A////gA///+AA///4AAwf/gAAAH+AAAAB4AAAAAAAAA"
+    ],
+    "modern_facade/a/main/balcony_lit/6": [
+      36,
+      46,
+      "ACAAAAADgAAAAD4AAAAD+AAAAD/gAAAD/4AAAD/+AAAD//gAAD//4AAD//+AAD///gAD///4AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AP///+Af///+D////+P////+/////+/////+/////+/////+P////+D////+A////+AP///+AD///+AAf/9+AAH/weAAB/ACAAAeAAAAAGAAAAAAAA"
+    ],
+    "modern_facade/b/main/ground/0": [
+      26,
+      44,
+      "AAAAgAAA8AAA/AAA/gAA/4AA/+AA//gA//4A//+A///g///4///+////v///7///+////v///7///+////v///7///+////v///7///+////v///7///+////v///7///+////v///z///w///wP//wD//wA//wAP/wAD/wAA/wAAPwAADwAAAwAAAAAAAA="
+    ],
+    "modern_facade/b/main/ground/6": [
+      26,
+      44,
+      "QAAAPAAAD8AAAfwAAH/AAB/8AAf/wAH//AB//8Af//wH///B///8f///3///9////f///3///9////f///3///9////f///3///9////f///3///9////f///3///9////f///z///8P///A///wD//8AP//AA//wAD/8AAP/AAA/wAAD8AAAPAAAAwAAAA="
+    ],
+    "modern_facade/b/main/entry/0": [
+      37,
+      46,
+      "AAAAAAAAAA8AAAAB/gAAAD/8AAAH//gAAP//8AAf///AA////gB////AD///+AH///8AP///4Af///4AP///8AH///+AD////AB////gA////wAf///4AP///8AH///+AD////AB////gA////wAf///4AP///8AH///+AD////AB////gA////wAf///4AP///+AH////gD////8B////+A/////Af///+AP///8AH///wAD///gAB///AAA//+AAAf/8AAABf4AAAADwAAAAAAAAAA"
+    ],
+    "modern_facade/b/main/entry/6": [
+      37,
+      46,
+      "AAAAAAAB4AAAAD/AAAAH/4AAAP//AAAf//4AAf///AAP///4AB////AAP///4AB////AAP///4AH////AD////gB////gA////wAf///4AP///8AH///+AD////AB////gA////wAf///4AP///8AH///+AD////AB////gA////wAf///4AP///8AH///+AD////AD////gH////wD////4B////8AP///+AB////AAP///gAB///wAAP//4AAB//8AAAP/+AAAA/EAAAAGAAAAAAAA"
+    ],
+    "modern_facade/b/main/upper/0": [
+      26,
+      44,
+      "AAAAgAAA8AAA/AAA/gAA/4AA/+AA//gA//4A//+A///g///4///+////v///7///+////v///7///+////v///7///+////v///7///+////v///7///+////v///7///+////v///z///w///wP//wD//wA//wAP/wAD/wAA/wAAPwAADwAAAwAAAAAAAA="
+    ],
+    "modern_facade/b/main/upper/6": [
+      26,
+      44,
+      "QAAAPAAAD8AAAfwAAH/AAB/8AAf/wAH//AB//8Af//wH///B///8f///3///9////f///3///9////f///3///9////f///3///9////f///3///9////f///3///9////f///z///8P///A///wD//8AP//AA//wAD/8AAP/AAA/wAAD8AAAPAAAAwAAAA="
+    ],
+    "modern_facade/b/main/lit/0": [
+      26,
+      44,
+      "AAAAgAAA8AAA/AAA/gAA/4AA/+AA//gA//4A//+A///g///4///+////v///7///+////v///7///+////v///7///+////v///7///+////v///7///+////v///7///+////v///z///w///wP//wD//wA//wAP/wAD/wAA/wAAPwAADwAAAwAAAAAAAA="
+    ],
+    "modern_facade/b/main/lit/6": [
+      26,
+      44,
+      "QAAAPAAAD8AAAfwAAH/AAB/8AAf/wAH//AB//8Af//wH///B///8f///3///9////f///3///9////f///3///9////f///3///9////f///3///9////f///3///9////f///z///8P///A///wD//8AP//AA//wAD/8AAP/AAA/wAAD8AAAPAAAAwAAAA="
+    ],
+    "modern_facade/b/main/balcony/0": [
+      36,
+      46,
+      "AAAAgAAAADwAAAAPwAAAA/gAAAD/gAAAP/gAAA//gAAD//gAAP//gAA///gAD///gAP///gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////4A////+A/////g/////w/////8/////+/////+/////+/////4/////g////+A////4A////gA///+AA///4AAwf/gAAAH+AAAAB4AAAAAAAAA"
+    ],
+    "modern_facade/b/main/balcony/6": [
+      36,
+      46,
+      "ACAAAAADgAAAAD4AAAAD+AAAAD/gAAAD/4AAAD/+AAAD//gAAD//4AAD//+AAD///gAD///4AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AP///+Af///+D////+P////+/////+/////+/////+/////+P////+D////+A////+AP///+AD///+AAf/9+AAH/weAAB/ACAAAeAAAAAGAAAAAAAA"
+    ],
+    "modern_facade/b/main/balcony_lit/0": [
+      36,
+      46,
+      "AAAAgAAAADwAAAAPwAAAA/gAAAD/gAAAP/gAAA//gAAD//gAAP//gAA///gAD///gAP///gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////4A////+A/////g/////w/////8/////+/////+/////+/////4/////g////+A////4A////gA///+AA///4AAwf/gAAAH+AAAAB4AAAAAAAAA"
+    ],
+    "modern_facade/b/main/balcony_lit/6": [
+      36,
+      46,
+      "ACAAAAADgAAAAD4AAAAD+AAAAD/gAAAD/4AAAD/+AAAD//gAAD//4AAD//+AAD///gAD///4AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AP///+Af///+D////+P////+/////+/////+/////+/////+P////+D////+A////+AP///+AD///+AAf/9+AAH/weAAB/ACAAAeAAAAAGAAAAAAAA"
+    ],
+    "modern_facade/c/main/ground/0": [
+      26,
+      44,
+      "AAAAgAAA8AAA/AAA/gAA/4AA/+AA//gA//4A//+A///g///4///+////v///7///+////v///7///+////v///7///+////v///7///+////v///7///+////v///7///+////v///z///w///wP//wD//wA//wAP/wAD/wAA/wAAPwAADwAAAwAAAAAAAA="
+    ],
+    "modern_facade/c/main/ground/6": [
+      26,
+      44,
+      "QAAAPAAAD8AAAfwAAH/AAB/8AAf/wAH//AB//8Af//wH///B///8f///3///9////f///3///9////f///3///9////f///3///9////f///3///9////f///3///9////f///z///8P///A///wD//8AP//AA//wAD/8AAP/AAA/wAAD8AAAPAAAAwAAAA="
+    ],
+    "modern_facade/c/main/entry/0": [
+      37,
+      46,
+      "AAAAAAAAAA8AAAAB/gAAAD/8AAAH//gAAP//8AAf///AA////gB////AD///+AH///8AP///4Af///4AP///8AH///+AD////AB////gA////wAf///4AP///8AH///+AD////AB////gA////wAf///4AP///8AH///+AD////AB////gA////wAf///4AP///+AH////gD////8B////+A/////Af///+AP///8AH///wAD///gAB///AAA//+AAAf/8AAABf4AAAADwAAAAAAAAAA"
+    ],
+    "modern_facade/c/main/entry/6": [
+      37,
+      46,
+      "AAAAAAAB4AAAAD/AAAAH/4AAAP//AAAf//4AAf///AAP///4AB////AAP///4AB////AAP///4AH////AD////gB////gA////wAf///4AP///8AH///+AD////AB////gA////wAf///4AP///8AH///+AD////AB////gA////wAf///4AP///8AH///+AD////AD////gH////wD////4B////8AP///+AB////AAP///gAB///wAAP//4AAB//8AAAP/+AAAA/EAAAAGAAAAAAAA"
+    ],
+    "modern_facade/c/main/upper/0": [
+      26,
+      44,
+      "AAAAgAAA8AAA/AAA/gAA/4AA/+AA//gA//4A//+A///g///4///+////v///7///+////v///7///+////v///7///+////v///7///+////v///7///+////v///7///+////v///z///w///wP//wD//wA//wAP/wAD/wAA/wAAPwAADwAAAwAAAAAAAA="
+    ],
+    "modern_facade/c/main/upper/6": [
+      26,
+      44,
+      "QAAAPAAAD8AAAfwAAH/AAB/8AAf/wAH//AB//8Af//wH///B///8f///3///9////f///3///9////f///3///9////f///3///9////f///3///9////f///3///9////f///z///8P///A///wD//8AP//AA//wAD/8AAP/AAA/wAAD8AAAPAAAAwAAAA="
+    ],
+    "modern_facade/c/main/lit/0": [
+      26,
+      44,
+      "AAAAgAAA8AAA/AAA/gAA/4AA/+AA//gA//4A//+A///g///4///+////v///7///+////v///7///+////v///7///+////v///7///+////v///7///+////v///7///+////v///z///w///wP//wD//wA//wAP/wAD/wAA/wAAPwAADwAAAwAAAAAAAA="
+    ],
+    "modern_facade/c/main/lit/6": [
+      26,
+      44,
+      "QAAAPAAAD8AAAfwAAH/AAB/8AAf/wAH//AB//8Af//wH///B///8f///3///9////f///3///9////f///3///9////f///3///9////f///3///9////f///3///9////f///z///8P///A///wD//8AP//AA//wAD/8AAP/AAA/wAAD8AAAPAAAAwAAAA="
+    ],
+    "modern_facade/c/main/balcony/0": [
+      36,
+      46,
+      "AAAAgAAAADwAAAAPwAAAA/gAAAD/gAAAP/gAAA//gAAD//gAAP//gAA///gAD///gAP///gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////4A////+A/////g/////w/////8/////+/////+/////+/////4/////g////+A////4A////gA///+AA///4AAwf/gAAAH+AAAAB4AAAAAAAAA"
+    ],
+    "modern_facade/c/main/balcony/6": [
+      36,
+      46,
+      "ACAAAAADgAAAAD4AAAAD+AAAAD/gAAAD/4AAAD/+AAAD//gAAD//4AAD//+AAD///gAD///4AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AP///+Af///+D////+P////+/////+/////+/////+/////+P////+D////+A////+AP///+AD///+AAf/9+AAH/weAAB/ACAAAeAAAAAGAAAAAAAA"
+    ],
+    "modern_facade/c/main/balcony_lit/0": [
+      36,
+      46,
+      "AAAAgAAAADwAAAAPwAAAA/gAAAD/gAAAP/gAAA//gAAD//gAAP//gAA///gAD///gAP///gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////4A////+A/////g/////w/////8/////+/////+/////+/////4/////g////+A////4A////gA///+AA///4AAwf/gAAAH+AAAAB4AAAAAAAAA"
+    ],
+    "modern_facade/c/main/balcony_lit/6": [
+      36,
+      46,
+      "ACAAAAADgAAAAD4AAAAD+AAAAD/gAAAD/4AAAD/+AAAD//gAAD//4AAD//+AAD///gAD///4AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AP///+Af///+D////+P////+/////+/////+/////+/////+P////+D////+A////+AP///+AD///+AAf/9+AAH/weAAB/ACAAAeAAAAAGAAAAAAAA"
+    ],
+    "modern_facade/d/main/ground/0": [
+      26,
+      44,
+      "AAAAgAAA8AAA/AAA/gAA/4AA/+AA//gA//4A//+A///g///4///+////v///7///+////v///7///+////v///7///+////v///7///+////v///7///+////v///7///+////v///z///w///wP//wD//wA//wAP/wAD/wAA/wAAPwAADwAAAwAAAAAAAA="
+    ],
+    "modern_facade/d/main/ground/6": [
+      26,
+      44,
+      "QAAAPAAAD8AAAfwAAH/AAB/8AAf/wAH//AB//8Af//wH///B///8f///3///9////f///3///9////f///3///9////f///3///9////f///3///9////f///3///9////f///z///8P///A///wD//8AP//AA//wAD/8AAP/AAA/wAAD8AAAPAAAAwAAAA="
+    ],
+    "modern_facade/d/main/entry/0": [
+      37,
+      46,
+      "AAAAAAAAAA8AAAAB/gAAAD/8AAAH//gAAP//8AAf///AA////gB////AD///+AH///8AP///4Af///4AP///8AH///+AD////AB////gA////wAf///4AP///8AH///+AD////AB////gA////wAf///4AP///8AH///+AD////AB////gA////wAf///4AP///+AH////gD////8B////+A/////Af///+AP///8AH///wAD///gAB///AAA//+AAAf/8AAABf4AAAADwAAAAAAAAAA"
+    ],
+    "modern_facade/d/main/entry/6": [
+      37,
+      46,
+      "AAAAAAAB4AAAAD/AAAAH/4AAAP//AAAf//4AAf///AAP///4AB////AAP///4AB////AAP///4AH////AD////gB////gA////wAf///4AP///8AH///+AD////AB////gA////wAf///4AP///8AH///+AD////AB////gA////wAf///4AP///8AH///+AD////AD////gH////wD////4B////8AP///+AB////AAP///gAB///wAAP//4AAB//8AAAP/+AAAA/EAAAAGAAAAAAAA"
+    ],
+    "modern_facade/d/main/upper/0": [
+      26,
+      44,
+      "AAAAgAAA8AAA/AAA/gAA/4AA/+AA//gA//4A//+A///g///4///+////v///7///+////v///7///+////v///7///+////v///7///+////v///7///+////v///7///+////v///z///w///wP//wD//wA//wAP/wAD/wAA/wAAPwAADwAAAwAAAAAAAA="
+    ],
+    "modern_facade/d/main/upper/6": [
+      26,
+      44,
+      "QAAAPAAAD8AAAfwAAH/AAB/8AAf/wAH//AB//8Af//wH///B///8f///3///9////f///3///9////f///3///9////f///3///9////f///3///9////f///3///9////f///z///8P///A///wD//8AP//AA//wAD/8AAP/AAA/wAAD8AAAPAAAAwAAAA="
+    ],
+    "modern_facade/d/main/lit/0": [
+      26,
+      44,
+      "AAAAgAAA8AAA/AAA/gAA/4AA/+AA//gA//4A//+A///g///4///+////v///7///+////v///7///+////v///7///+////v///7///+////v///7///+////v///7///+////v///z///w///wP//wD//wA//wAP/wAD/wAA/wAAPwAADwAAAwAAAAAAAA="
+    ],
+    "modern_facade/d/main/lit/6": [
+      26,
+      44,
+      "QAAAPAAAD8AAAfwAAH/AAB/8AAf/wAH//AB//8Af//wH///B///8f///3///9////f///3///9////f///3///9////f///3///9////f///3///9////f///3///9////f///z///8P///A///wD//8AP//AA//wAD/8AAP/AAA/wAAD8AAAPAAAAwAAAA="
+    ],
+    "modern_facade/d/main/balcony/0": [
+      36,
+      46,
+      "AAAAgAAAADwAAAAPwAAAA/gAAAD/gAAAP/gAAA//gAAD//gAAP//gAA///gAD///gAP///gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////4A////+A/////g/////w/////8/////+/////+/////+/////4/////g////+A////4A////gA///+AA///4AAwf/gAAAH+AAAAB4AAAAAAAAA"
+    ],
+    "modern_facade/d/main/balcony/6": [
+      36,
+      46,
+      "ACAAAAADgAAAAD4AAAAD+AAAAD/gAAAD/4AAAD/+AAAD//gAAD//4AAD//+AAD///gAD///4AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AP///+Af///+D////+P////+/////+/////+/////+/////+P////+D////+A////+AP///+AD///+AAf/9+AAH/weAAB/ACAAAeAAAAAGAAAAAAAA"
+    ],
+    "modern_facade/d/main/balcony_lit/0": [
+      36,
+      46,
+      "AAAAgAAAADwAAAAPwAAAA/gAAAD/gAAAP/gAAA//gAAD//gAAP//gAA///gAD///gAP///gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////gA////4A////+A/////g/////w/////8/////+/////+/////+/////4/////g////+A////4A////gA///+AA///4AAwf/gAAAH+AAAAB4AAAAAAAAA"
+    ],
+    "modern_facade/d/main/balcony_lit/6": [
+      36,
+      46,
+      "ACAAAAADgAAAAD4AAAAD+AAAAD/gAAAD/4AAAD/+AAAD//gAAD//4AAD//+AAD///gAD///4AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AD///+AP///+Af///+D////+P////+/////+/////+/////+/////+P////+D////+A////+AP///+AD///+AAf/9+AAH/weAAB/ACAAAeAAAAAGAAAAAAAA"
+    ],
+    "modern_roof/base/main/default/0": [
+      243,
+      130,
+      "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAPAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB//4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA///wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf///gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH////+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB//////4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA///////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf///////gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH////////+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD/////////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAB//////////4AAAAAAAAAAAAAAAAAAAAAAAAAAAAA///////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAf///////////gAAAAAAAAAAAAAAAAAAAAAAAAAAAP////////////AAAAAAAAAAAAAAAAAAAAAAAAAAAH////////////+AAAAAAAAAAAAAAAAAAAAAAAAAAD/////////////8AAAAAAAAAAAAAAAAAAAAAAAAAB//////////////4AAAAAAAAAAAAAAAAAAAAAAAAA///////////////wAAAAAAAAAAAAAAAAAAAAAAAAf///////////////gAAAAAAAAAAAAAAAAAAAAAAAP////////////////AAAAAAAAAAAAAAAAAAAAAAAH////////////////+AAAAAAAAAAAAAAAAAAAAAAD/////////////////8AAAAAAAAAAAAAAAAAAAAAB//////////////////4AAAAAAAAAAAAAAAAAAAAA///////////////////wAAAAAAAAAAAAAAAAAAAAf///////////////////gAAAAAAAAAAAAAAAAAAAP////////////////////AAAAAAAAAAAAAAAAAAAH////////////////////+AAAAAAAAAAAAAAAAAAD/////////////////////8AAAAAAAAAAAAAAAAAB//////////////////////4AAAAAAAAAAAAAAAAA///////////////////////wAAAAAAAAAAAAAAAAf///////////////////////wAAAAAAAAAAAAAAAP////////////////////////gAAAAAAAAAAAAAAH/////////////////////////AAAAAAAAAAAAAAD/////////////////////////+AAAAAAAAAAAAAB//////////////////////////8AAAAAAAAAAAAA///////////////////////////4AAAAAAAAAAAAf///////////////////////////wAAAAAAAAAAAP////////////////////////////gAAAAAAAAAAH/////////////////////////////AAAAAAAAAAD/////////////////////////////+AAAAAAAAAB//////////////////////////////8AAAAAAAAA///////////////////////////////4AAAAAAAAf///////////////////////////////gAAAAAAAP///////////////////////////////+AAAAAAAH////////////////////////////////wAAAAAAD////////////////////////////////+AAAAAAB/////////////////////////////////wAAAAAA/////////////////////////////////+AAAAAAf/////////////////////////////////wAAAAAP/////////////////////////////////+AAAAAH//////////////////////////////////wAAAAD//////////////////////////////////8AAAAB//////////////////////////////////+AAAAA///////////////////////////////////AAAAAf//////////////////////////////////gAAAAP//////////////////////////////////wAAAAH//////////////////////////////////4AAAAD//////////////////////////////////8AAAAB//////////////////////////////////+AAAAA///////////////////////////////////AAAAAf//////////////////////////////////gAAAAP//////////////////////////////////wAAAAH//////////////////////////////////4AAAAD//////////////////////////////////8AAAAB//////////////////////////////////+AAAAA///////////////////////////////////AAAAAf//////////////////////////////////gAAAAH//////////////////////////////////wAAAAA//////////////////////////////////4AAAAAD/////////////////////////////////8AAAAAAf////////////////////////////////+AAAAAAD/////////////////////////////////AAAAAAAf////////////////////////////////gAAAAAAD////////////////////////////////wAAAAAAAf///////////////////////////////4AAAAAAAD///////////////////////////////8AAAAAAAAH//////////////////////////////+AAAAAAAAAP//////////////////////////////AAAAAAAAAAf/////////////////////////////gAAAAAAAAAA/////////////////////////////wAAAAAAAAAAB////////////////////////////4AAAAAAAAAAAD///////////////////////////8AAAAAAAAAAAAH//////////////////////////+AAAAAAAAAAAAAP//////////////////////////AAAAAAAAAAAAAAf/////////////////////////gAAAAAAAAAAAAAA/////////////////////////wAAAAAAAAAAAAAAB////////////////////////4AAAAAAAAAAAAAAAD///////////////////////8AAAAAAAAAAAAAAAAH//////////////////////+AAAAAAAAAAAAAAAAAP//////////////////////AAAAAAAAAAAAAAAAAAf/////////////////////gAAAAAAAAAAAAAAAAAA/////////////////////wAAAAAAAAAAAAAAAAAAB////////////////////4AAAAAAAAAAAAAAAAAAAD///////////////////8AAAAAAAAAAAAAAAAAAAAH//////////////////+AAAAAAAAAAAAAAAAAAAAAP//////////////////AAAAAAAAAAAAAAAAAAAAAAf/////////////////gAAAAAAAAAAAAAAAAAAAAAA/////////////////wAAAAAAAAAAAAAAAAAAAAAAB////////////////4AAAAAAAAAAAAAAAAAAAAAAAD///////////////8AAAAAAAAAAAAAAAAAAAAAAAAH//////////////+AAAAAAAAAAAAAAAAAAAAAAAAAP//////////////AAAAAAAAAAAAAAAAAAAAAAAAAAf/////////////gAAAAAAAAAAAAAAAAAAAAAAAAAA/////////////wAAAAAAAAAAAAAAAAAAAAAAAAAAB////////////4AAAAAAAAAAAAAAAAAAAAAAAAAAAD///////////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAH//////////+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//////////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/////////gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB////////4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///////8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH//////+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//////AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/////gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/////wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB////4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD///8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAH//+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP//AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAf/gAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA/wAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAB4AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=="
+    ],
+    "modern_condenser/base/main/off/0": [
+      15,
+      16,
+      "AEAD4B/w/+f/3/+f/z/+f/z/+f/z/2f4A+ABwAAA"
+    ],
+    "modern_condenser/base/main/on/0": [
+      15,
+      16,
+      "AEAD4B/w/+f/3/+f/z/+f/z/+f/z/2f4A+ABwAAA"
+    ],
+    "modern_lift/base/main/closed/0": [
+      19,
+      36,
+      "AAAAAPAAfgA/wA/4B/8D/+H//H//j//x//4//8f/+P//3//7//9//+///f/+P//H//j//x//4//8f/+P//H//j//x//g//Af+AP8AH4ADwABgAAAAAA="
+    ],
+    "modern_lift/base/main/open/0": [
+      19,
+      36,
+      "AAAAAPAAfgA/wA/4B/8D/+H//H//j//x//4//8f/+P//3//7//9//+///f/+P//H//j//x//4//8f/+P//H//j//x//g//Af+AP8AH4ADwABgAAAAAA="
+    ],
+    "modern_sofa/base/main/default/0": [
+      26,
+      22,
+      "AAAAAAB4AAB+AAB/gAB/4AB//gB//+B///5///+////v///7///+////v///z///4///4H//4B//4AP/4AA/4AAD4AAAIAAA"
+    ],
+    "modern_parking/base/main/default/0": [
+      61,
+      32,
+      "AAAAAAAAAAAAAeAAAAAAAAA9wAAAAAAAB4OAAAAAAADwBwAAAAAAHgAOAAAAAAOAABwAAAAAcAAAOAAAAA4AAABwAAABwAAAAOAAABgAAAABwAAA4AAAAAOAAAHAAAAABwAAA4AAAAAOAAAHAAAAABwAAA4AAAAAOAAAHAAAAABwAAA4AAAAAOAAAHAAAAABwAAA4AAAAAOAAAHAAAAABwAAA4AAAAAAAAAHAAAAAAAAAA4AAAAAAAAAHAAAAAAAAAA4AAAAAAAAAHAAAAAAAAAA4AAAAAAAAAHAAAAAAAAAA4AAAAAAAAAGAAAAAAAAAAAAAA=="
+    ]
+  },
+  "emit": [
+    "modern_facade/a/main/entry/0",
+    "modern_facade/a/main/entry/6",
+    "modern_facade/a/main/lit/0",
+    "modern_facade/a/main/lit/6",
+    "modern_facade/a/main/balcony_lit/0",
+    "modern_facade/a/main/balcony_lit/6",
+    "modern_facade/b/main/entry/0",
+    "modern_facade/b/main/entry/6",
+    "modern_facade/b/main/lit/0",
+    "modern_facade/b/main/lit/6",
+    "modern_facade/b/main/balcony_lit/0",
+    "modern_facade/b/main/balcony_lit/6",
+    "modern_facade/c/main/entry/0",
+    "modern_facade/c/main/entry/6",
+    "modern_facade/c/main/lit/0",
+    "modern_facade/c/main/lit/6",
+    "modern_facade/c/main/balcony_lit/0",
+    "modern_facade/c/main/balcony_lit/6",
+    "modern_facade/d/main/entry/0",
+    "modern_facade/d/main/entry/6",
+    "modern_facade/d/main/lit/0",
+    "modern_facade/d/main/lit/6",
+    "modern_facade/d/main/balcony_lit/0",
+    "modern_facade/d/main/balcony_lit/6",
+    "modern_condenser/base/main/on/0",
+    "modern_lift/base/main/closed/0",
+    "modern_lift/base/main/open/0"
+  ],
+  "pieces": {
+    "modern_balcony_rail": {
+      "layer": "sorted",
+      "states": [
+        "default"
+      ],
+      "parts": [
+        "main"
+      ],
+      "rots": [
+        0
+      ],
+      "variants": [
+        "base"
+      ],
+      "sort_box": [
+        0.14,
+        -1.36,
+        2.86,
+        -0.1
+      ],
+      "sort_z": [
+        0.45,
+        1.6
+      ],
+      "z_order": 2,
+      "fadeable": true,
+      "footprint": [],
+      "geo": {
+        "default": {
+          "main": [
+            0.14,
+            -1.36,
+            0.45,
+            2.86,
+            -0.1,
+            1.6
+          ]
+        }
+      }
+    },
+    "modern_intwall": {
+      "layer": "sorted",
+      "states": [
+        "plain",
+        "cut",
+        "tile"
+      ],
+      "parts": [
+        "main"
+      ],
+      "rots": [
+        0,
+        6
+      ],
+      "variants": [
+        "base"
+      ],
+      "sort_box": [
+        0,
+        -0.07,
+        1,
+        0.07
+      ],
+      "sort_z": [
+        0,
+        2.65
+      ],
+      "z_order": 0,
+      "fadeable": true,
+      "footprint": [],
+      "geo": {
+        "plain": {
+          "main": [
+            0,
+            -0.07,
+            0,
+            1,
+            0.07,
+            2.65
+          ]
+        },
+        "cut": {
+          "main": [
+            0,
+            -0.07,
+            0,
+            1,
+            0.07,
+            2.65
+          ]
+        },
+        "tile": {
+          "main": [
+            0,
+            -0.07,
+            0,
+            1,
+            0.07,
+            2.65
+          ]
+        }
+      }
+    },
+    "modern_intdoor": {
+      "layer": "sorted",
+      "states": [
+        "closed",
+        "open"
+      ],
+      "parts": [
+        "main"
+      ],
+      "rots": [
+        0,
+        6
+      ],
+      "variants": [
+        "base"
+      ],
+      "sort_box": [
+        0,
+        -0.1,
+        1.1,
+        0.1
+      ],
+      "sort_z": [
+        0,
+        1.4
+      ],
+      "z_order": 0,
+      "fadeable": true,
+      "footprint": [],
+      "geo": {
+        "closed": {
+          "main": [
+            0,
+            -0.1,
+            0,
+            1.1,
+            0.1,
+            1.4
+          ]
+        },
+        "open": {
+          "main": [
+            0,
+            -0.1,
+            0,
+            1.1,
+            0.1,
+            1.4
+          ]
+        }
+      }
+    },
+    "modern_entry_marker": {
+      "layer": "sorted",
+      "states": [
+        "default"
+      ],
+      "parts": [
+        "main"
+      ],
+      "rots": [
+        0
+      ],
+      "variants": [
+        "base"
+      ],
+      "sort_box": [
+        -0.01,
+        -0.01,
+        0.01,
+        0.01
+      ],
+      "sort_z": [
+        0,
+        0.01
+      ],
+      "z_order": 0,
+      "fadeable": true,
+      "footprint": [],
+      "geo": {
+        "default": {
+          "main": [
+            -0.01,
+            -0.01,
+            0,
+            0.01,
+            0.01,
+            0.01
+          ]
+        }
+      }
+    },
+    "modern_ground_half": {
+      "layer": "sorted",
+      "states": [
+        "default"
+      ],
+      "parts": [
+        "main"
+      ],
+      "rots": [
+        0
+      ],
+      "variants": [
+        "base"
+      ],
+      "sort_box": [
+        0,
+        -0.22,
+        1.5,
+        0.25
+      ],
+      "sort_z": [
+        0,
+        3
+      ],
+      "z_order": 0,
+      "fadeable": true,
+      "footprint": [],
+      "geo": {
+        "default": {
+          "main": [
+            0,
+            -0.22,
+            0,
+            1.5,
+            0.25,
+            3
+          ]
+        }
+      }
+    },
+    "modern_stairflight": {
+      "layer": "sorted",
+      "states": [
+        "default"
+      ],
+      "parts": [
+        "main"
+      ],
+      "rots": [
+        0
+      ],
+      "variants": [
+        "base"
+      ],
+      "sort_box": [
+        0,
+        0,
+        1.8,
+        1.6
+      ],
+      "sort_z": [
+        0,
+        1.5
+      ],
+      "z_order": 0,
+      "fadeable": true,
+      "footprint": [],
+      "geo": {
+        "default": {
+          "main": [
+            0,
+            0,
+            0,
+            1.8,
+            1.6,
+            1.5
+          ]
+        }
+      }
+    },
+    "modern_facade": {
+      "layer": "sorted",
+      "states": [
+        "ground",
+        "entry",
+        "upper",
+        "lit",
+        "balcony",
+        "balcony_lit"
+      ],
+      "parts": [
+        "main"
+      ],
+      "rots": [
+        0,
+        6
+      ],
+      "variants": [
+        "a",
+        "b",
+        "c",
+        "d"
+      ],
+      "sort_box": [
+        0,
+        -1.4,
+        3,
+        0.3
+      ],
+      "sort_z": [
+        0,
+        3
+      ],
+      "z_order": 0,
+      "fadeable": true,
+      "footprint": [],
+      "geo": {
+        "ground": {
+          "main": [
+            0,
+            -1.4,
+            0,
+            3,
+            0.3,
+            3
+          ]
+        },
+        "entry": {
+          "main": [
+            0,
+            -1.4,
+            0,
+            3,
+            0.3,
+            3
+          ]
+        },
+        "upper": {
+          "main": [
+            0,
+            -1.4,
+            0,
+            3,
+            0.3,
+            3
+          ]
+        },
+        "lit": {
+          "main": [
+            0,
+            -1.4,
+            0,
+            3,
+            0.3,
+            3
+          ]
+        },
+        "balcony": {
+          "main": [
+            0,
+            -1.4,
+            0,
+            3,
+            0.3,
+            3
+          ]
+        },
+        "balcony_lit": {
+          "main": [
+            0,
+            -1.4,
+            0,
+            3,
+            0.3,
+            3
+          ]
+        }
+      }
+    },
+    "modern_roof": {
+      "layer": "sorted",
+      "states": [
+        "default"
+      ],
+      "parts": [
+        "main"
+      ],
+      "rots": [
+        0
+      ],
+      "variants": [
+        "base"
+      ],
+      "sort_box": [
+        -0.05,
+        -0.05,
+        18.05,
+        12.05
+      ],
+      "sort_z": [
+        0,
+        2.9
+      ],
+      "z_order": 10,
+      "fadeable": true,
+      "footprint": [],
+      "geo": {
+        "default": {
+          "main": [
+            -0.05,
+            -0.05,
+            0,
+            18.05,
+            12.05,
+            2.9
+          ]
+        }
+      }
+    },
+    "modern_condenser": {
+      "layer": "sorted",
+      "states": [
+        "off",
+        "on"
+      ],
+      "parts": [
+        "main"
+      ],
+      "rots": [
+        0
+      ],
+      "variants": [
+        "base"
+      ],
+      "sort_box": [
+        -0.58,
+        -0.5,
+        0.55,
+        0.2
+      ],
+      "sort_z": [
+        0,
+        0.8
+      ],
+      "z_order": 3,
+      "fadeable": true,
+      "footprint": [],
+      "geo": {
+        "off": {
+          "main": [
+            -0.58,
+            -0.5,
+            0,
+            0.55,
+            0.2,
+            0.8
+          ]
+        },
+        "on": {
+          "main": [
+            -0.58,
+            -0.5,
+            0,
+            0.55,
+            0.2,
+            0.8
+          ]
+        }
+      }
+    },
+    "modern_lift": {
+      "layer": "sorted",
+      "states": [
+        "closed",
+        "open"
+      ],
+      "parts": [
+        "main"
+      ],
+      "rots": [
+        0
+      ],
+      "variants": [
+        "base"
+      ],
+      "sort_box": [
+        0,
+        -0.2,
+        1.8,
+        0.15
+      ],
+      "sort_z": [
+        0,
+        2.65
+      ],
+      "z_order": 0,
+      "fadeable": true,
+      "footprint": [],
+      "geo": {
+        "closed": {
+          "main": [
+            0,
+            -0.2,
+            0,
+            1.8,
+            0.15,
+            2.65
+          ]
+        },
+        "open": {
+          "main": [
+            0,
+            -0.2,
+            0,
+            1.8,
+            0.15,
+            2.65
+          ]
+        }
+      }
+    },
+    "modern_sofa": {
+      "layer": "sorted",
+      "states": [
+        "default"
+      ],
+      "parts": [
+        "main"
+      ],
+      "rots": [
+        0
+      ],
+      "variants": [
+        "base"
+      ],
+      "sort_box": [
+        -1,
+        -0.45,
+        1,
+        0.5
+      ],
+      "sort_z": [
+        0,
+        1
+      ],
+      "z_order": 0,
+      "fadeable": true,
+      "footprint": [
+        [
+          -1,
+          -0.4,
+          1,
+          0.4
+        ]
+      ],
+      "geo": {
+        "default": {
+          "main": [
+            -1,
+            -0.45,
+            0,
+            1,
+            0.5,
+            1
+          ]
+        }
+      }
+    },
+    "modern_parking": {
+      "layer": "sorted",
+      "states": [
+        "default"
+      ],
+      "parts": [
+        "main"
+      ],
+      "rots": [
+        0
+      ],
+      "variants": [
+        "base"
+      ],
+      "sort_box": [
+        0,
+        0,
+        2.5,
+        5
+      ],
+      "sort_z": [
+        0,
+        0.02
+      ],
+      "z_order": 0,
+      "fadeable": true,
+      "footprint": [],
+      "geo": {
+        "default": {
+          "main": [
+            0,
+            0,
+            0,
+            2.5,
+            5,
+            0.02
+          ]
+        }
+      }
+    }
+  },
+  "mask_cell": 4
+}
