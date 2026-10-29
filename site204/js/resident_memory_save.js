@@ -1,0 +1,3 @@
+(function(root){'use strict';const SP=root.SP,own=(o,k)=>Object.prototype.hasOwnProperty.call(o,k),R=()=>SP.residentMemory;function checked(s,at,ps){const n=R()?.prepare(s,at,ps);if(!n)throw Error('本人经验记忆、来源或访问时间无效');return n;}
+ SP.residentMemorySave={captureState(ps,at){return checked(ps.residentMemory||R().fresh(at,ps),at,ps);},prepareState(ps,ext,at){const has=own(ps,'residentMemory'),mark=ext!==undefined&&own(ext||{},'residentMemory');if(has!==mark||mark&&ext.residentMemory!==1)throw Error('本人经验记忆扩展声明不一致');const migrated=!has||ps.residentMemory?.version<8;ps.residentMemory=checked(has?ps.residentMemory:R().fresh(at,ps),at,ps);return migrated;},applyCommitted(ps,at){ps.residentMemory=checked(ps.residentMemory,at,ps);R().resetRuntime();}};
+})(window);
