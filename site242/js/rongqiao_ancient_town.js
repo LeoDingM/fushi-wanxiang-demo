@@ -1,0 +1,3797 @@
+/* Site197–201 · 鹰山宋城：街巷密实 + 植物水系 + 艮岳/豪宅 + facade + 码头 + 城墙垛口 + 南广场市集 + 灯笼幌子光晕 + 汴河船灯渔火 Track。
+ * Site198 wall-merlon：南薰门/城墙垛口·女墙·城砖 atlas kitbash（不改大布局）。
+ * Site199：南薰门外南广场/瓮城口市集摊位再加密。
+ * Site197 facade-detail：atlas/parts/facade 门窗隔扇斗拱屋脊瓦细化；putShop 仅加 aq_f_dougong 与变体。
+ * Site198：屋脊/瓦当/鸱吻/滴水 atlas 增强（少改布局）。
+ * Site200：灯笼/幌子黄昏夜景光晕与暖色叠层（挂钩既有黄昏 grade；少改布局）。
+ * Site201：汴河码头黄昏渔火/船灯点光（复用 lanternGlow + 水面倒影；少改布局）。
+ * Site202：御街/广场铺地砖纹·排水沟·路牙 atlas kitbash（aq_gpave + aq_drain/aq_curb；少改布局）。
+ * Site203 lattice：格扇门窗/花窗/隔扇/槛窗 atlas 细化；putShop 门窗变体加 bubujin/huachuang/kanchuang；少改大布局。
+ * Site205 roof-tiles：瓦当/滴水/瓦垄/檐口 atlas 细化；店铺/民居/城楼屋顶 densify；少改大布局。
+ * site197Dock：汴河码头/船只/货箱（SongchengDock）。
+ * Site204：街具点景石灯笼/石凳/花缸/挂灯杆 atlas kitbash（SongchengStreetProps；site204StreetProps）。
+ * Site206：山墙/清水砖/墀头/墙帽 atlas 细化（wall_shangqiang/brick_qingshui/ornament_chitou/wall_cap；site206GableBrick）。
+ * Site207：栏杆寻杖/雀替/挂落/小柱 atlas 细化（rail_xunzhang/ornament_queti/hanging_gualuo/baluster_xiaozhu；site207RailQueti）。
+ * Site208：彩绘梁枋/额枋/斗拱色块 atlas（beam_efang/caihua_band/dougong_block/eave_board；site208Caihua）。
+ * Site209：门钉/铺首衔环/门槛/抱鼓石 atlas 细化（door_mending/knocker_pushou/sill_menkan/stone_baogu；site209DoorHardware）。
+ * Site210：旗幡/帷幔/流苏/挂饰 atlas（banner_qifan/curtain_weiman/tassel_liusu/hang_ornament；site210Banners）；与幌子互补。
+ * Site211：台基/阶条石/垂带踏垛 atlas 细化（base_taiji/step_tiaotiao/ramp_chuidai/stair_taduo；site211Platform）。
+ * Site212：影壁/照壁/砖雕花心 atlas（wall_yingbi/wall_zhaobi/brick_huaxin/screen_base；site212Yingbi）；南薰门内·府邸入口·巷口点景。
+ * Site213：屋脊鸱吻/垂脊走兽/正脊饰 atlas 细化（ridge_chiwen/beast_zoushou/ridge_ornament/hip_chuiji；site213RidgeBeasts）。
+ * Site214：落地罩/隔断屏/月洞门框 atlas（screen_luodizhao/partition_geshan/moon_yuedong/frame_menkuang；site214Screens）；茶坊·酒楼·豪宅门厅/廊口；与格扇互补。
+ * Site215：拴马桩/上马石/石敢当/路牙石标 atlas 细化（post_shuanma/stone_shangma/stone_ganddang/curb_marker；site215Hitching）；御街·南薰门外·府邸门前 densify；与街具#118、台基#125互补。
+ * Site216：漏窗/花墙/透空砖雕 atlas 细化（window_lou/wall_huaziang/brick_toukong/lattice_wall；site216Louwindow）；艮岳苑·豪宅侧墙·巷墙 densify；与格扇#117、影壁#126互补。
+ * Site217：井亭/路亭/小牌坊/亭顶 atlas 细化（pavilion_jingting/pavilion_luting/gate_paifang_s/roof_ting；site217Pavilions）；御街交叉口·汴河岸·艮岳苑入口 densify；点景小体量不堵路。
+ * Site218：垂花门/小门楼/门罩/门柱石 atlas 细化（gate_chuihua/gate_menlou_s/eave_menzhao/post_menzhu；site218Chuihuamen）；豪宅·四合院门前·横巷口 densify；点景不堵主路。
+ * Site219：太湖石/叠石假山/庭院石组 atlas 细化（rock_taihu/rock_dieshi/rock_peak_s/plant_rock_moss；site219Rockery）；豪宅庭院池边·艮岳苑外围·曲廊侧 densify；点景不堵御街。
+ * Site220：美人靠/飞来椅/坐槛/廊凳 atlas 细化（seat_meirenkao/seat_feilaichi/rail_zuokan/bench_lang；site220Meirenkao）；曲廊侧·井亭路亭旁·汴河岸观景 densify；点景不堵路。
+ * Site222：抱鼓石/方门墩/小石炉 atlas 点景（stone_baogu/stone_mendun/stone_lu；site222Baogu）；宅门两侧·垂花门前·巷口·富户院门 densify；与拴马石/太湖石互补。
+ * Site221：匾额/对联/小字牌/垂挂牌 atlas 细化（sign_biane/sign_duilian/sign_zhaopai_s/sign_hanging；site221Biane）；店铺门楣·宅门·巷口·亭侧 densify；与 site201 招牌互补；点景不堵主路。
+ * Site224：石狮/小蹲兽门兽 atlas 点景（stone_shishi/stone_shishi_s；site224Shishi）；宅门·桥头·广场入口·衙署/庙前 densify；与抱鼓石#136、脊兽#127互补（门兽≠屋脊兽）。
+ * Site226：竹篱/花篱/柴扉 atlas 点景（fence_zhuli/fence_huali/gate_chaifei；site226Zhuli）；巷口·宅侧·园边·桥头小径 densify；与漏窗#131、隔断#129互补（室外篱门≠漏窗/内隔断）。
+ * Site227：货摊/货架/晾晒 atlas 点景（stall_huotan/rack_huojia/pole_liangshai；site227Huotan）；主街两侧·巷口·桥头·宅前 densify；与招牌#115、街具#118互补。
+ * Site228：石桌/石凳/棋枰 atlas 点景（seat_shizhuo/seat_shideng/seat_qiping；site228Shizhuo）；庭院·巷角·亭侧·桥头·树下 densify；与美人靠#134、街具#118互补。
+ * Site229：水缸/井栏/水桶 atlas 点景（prop_shuigang/prop_jinglan/prop_shuitong；site229Shuigang）；宅院角·巷口·井边·厨后·桥头 densify；与井亭#130互补（取水储水点景≠井亭建筑）。
+ * Site230：香炉/烛台/小供案 atlas 点景（prop_xianglu/prop_zhutai/prop_gongan_s；site230Xianglu）；影壁前·宅门内·亭侧·巷口小龛·庭院角 densify；与影壁#126、匾额#135互补。
+ * Site231：柴堆/草垛/粮袋 atlas 点景（prop_chaidui/prop_caoduo/prop_liangdai；site231Chaidui）；宅后·厨侧·巷口·码头边·厩旁 densify；与货摊#141、水缸#143互补。
+ * Site232：酒坛/陶瓮/酒旗 atlas 点景（prop_jiutan/prop_taoweng/prop_jiuqi；site232Jiutan）；酒肆门前·宅侧巷口·码头边·厨房外·小院墙根 densify；与货摊#141、水缸#143、柴堆#145互补。
+ * Site233：石磨/碾盘/石臼 atlas 点景（prop_shima/prop_nianpan/prop_shijiu；site233Shima）；厨侧·宅后·磨坊巷口·粮袋旁·厩侧 densify；与柴堆#145、粮袋互补。
+ * Site234：晾衣杆/鱼篓/竹筐 atlas 点景（prop_liangyi/prop_yulou/prop_zhukuang；site234Liangyi）；宅后晾衣·巷口筐篓·码头鱼篓·厨侧 densify；与柴堆#145、货摊晾晒#141互补。
+ * Site235：鸡笼/鸟笼/鸭舍 atlas 点景（prop_jilong/prop_niaolong/prop_yashe；site235Jilong）；宅后·厩旁·巷口挂笼·厨侧 densify；与柴堆#145、晾衣#148、石磨#146互补。
+ * Site236：蒲团/茶灶/茶具 atlas 点景（prop_putuan/prop_chazao/prop_chaju；site236Putuan）；廊下·石桌旁·庭院·茶摊侧 densify；与石桌#142、货摊#141、鸡笼#149、晾衣#148互补。
+ * Site237：书案/棋盘/笔架砚台 atlas 点景（prop_shuan/prop_qipan/prop_bijia；site237Shuan）；廊下·庭院石桌旁·书房外檐·茶席侧 densify；与石桌#142、蒲团#150互补；≠棋枰。
+ * Site238：花架/竹几/小博古架 atlas 点景（prop_huajia/prop_zhuji/prop_bogu；site238Huajia）；庭院·廊下·豪宅侧院·茶席旁 densify；与盆景#137、蒲团#150、书案#151、抱鼓石#136互补；≠石桌/货架。
+ * Site239：市井串灯/布幌/招幌 atlas 点景（prop_chuanleng/prop_huangzi/prop_zhaohuang；site239Huangzi）；店门·巷口·酒肆茶摊檐下 densify；与宫灯#113、酒旗#147、匾额#120互补；rebase keep site237Shuan/site238Huajia if present。
+ * Site240：庭院石灯笼/水盆/洗手钵 atlas 点景（prop_tingdeng/prop_shuipen/prop_xishoubo；site240Tingdeng）；庭院·门前·廊下·影壁侧 densify；≠街灯/水缸/香炉；rebase keep site239Huangzi/site238Huajia/site237Shuan。
+ * Site241：蓑衣/斗笠/扁担 atlas 点景（prop_suoyi/prop_douli/prop_biandan；site241Suoyi）；宅后·巷口·码头边·厨侧 densify；与晾衣#148、柴堆#145、禽笼#149互补；rebase keep site240Tingdeng/site239Huangzi/site238Huajia。
+ * Site242：铜镜/梳妆匣/胭脂粉盒 atlas 点景（prop_tongjing/prop_shuzhuang/prop_yanzhi；site242Tongjing）；闺房外檐·廊侧案几·豪宅内院 densify；与花架#152、书案#151、博古架互补；≠酒坛/盆景；rebase keep site241Suoyi/site240Tingdeng。
+ * Site243：金鱼缸/多层花盆架/鹦鹉栖架 atlas 点景（prop_yugang/prop_huapenjia/prop_yingwujia；site243Yugang）；庭院·廊下·豪宅侧院 densify；与盆景#137、花架#152、水缸#143、鸡笼鸟笼#149互补；勿覆盖 prop_penjing；≠石桌/货架。
+ * Site244：纺车/绣绷/线筐 atlas 点景（prop_fangche/prop_xiubeng/prop_xiankuang；site244Fangche）；庭院·廊下·豪宅侧院 densify；与晾衣竹筐#148、花架#152、书案#151、庭灯#154、蓑衣#155互补；≠石磨/空竹筐。
+ * Site245：风铃/竹帘/纱幔 atlas 点景（prop_fengling/prop_zhulian/prop_shaman；site245Fengling）；庭院·廊下·豪宅侧院 densify；风铃亦可檐下/门侧；与宫灯#139、串灯布幌#153、晾衣#148、庭灯#154、蓑衣#155、铜镜#156、纺车#159互补；≠宫灯/幌/晾衣/铜镜/纺车。
+ * Site246：茶盘/食盒/果盘 atlas 点景（prop_chapan/prop_shihe/prop_guopan；site246Chapan）；庭院·廊下·店前·豪宅 densify；与茶具#150、货摊#141、石桌#142、金鱼缸#158互补；≠茶盏托盘/货架/盆景。
+ * Site248：糖葫芦/拨浪鼓/风筝 atlas 点景（prop_tanghulu/prop_bolanggu/prop_fengzheng；site248Tanghulu）；店前·巷口·广场边缘 densify；与货摊#141、幌子#153、宫灯#139互补；≠果盘货摊/幌子纱幔。
+ * Site223：盆景/砖花坛/石台 atlas 细化（pot_penjing/bed_huatan/stone_shitai；site223Penjing）；富户庭院·巷口·桥头·亭侧·门前 densify；与植物#106、太湖石#133互补；点景不堵主路。
+ * 接在河东东界（x1750 / 地面 1770）以东、澜海对岸：世界原点 OX=1920 OY=-160 = 规划局部 (0,0) 城墙西南内角。
+ * Track A/B/C + 水体已合入 site88。site197Street：街巷 putShop/道具 densify（竖招·披檐·横巷）。
+ * site197Plants：SongchengScenic 松柳芦苇假山竹丛 + 小池动态水。
+ * site197：艮岳苑（池塘假山柳亭廊）+ 豪宅院内唐宋庭院；院池接动态波纹；虹桥 ns 保持。
+ * 立面 aq_f_* atlas kitbash；不进学校/渔村/石驳岸。名称与尺寸未经 Leo 确认。 */
+(function () {
+  'use strict';
+  const D = window.SCENE_DATA, N = window.RONGQIAO_NORTH, root = window;
+  if (!D || !N || D.rongqiaoAncientTown || !root.RongqiaoArt) return;
+  if (!root.RongqiaoArt.DEFS || !root.RongqiaoArt.DEFS.get('aq_wall_gate')) return;
+  D.rongqiaoAncientTown = 1;
+
+  const OX = 1920, OY = -160;           // 规划局部原点 → 世界
+  const W = (lx, ly) => [OX + lx, OY + ly];
+  /* 收缩后的城：本地约 0..300 × -8..200；外缘缓冲略收 */
+  const CW = 300, CN = 200;
+  const CX = 150;                       // 御街中线 / 门洞中心
+  const BX0 = OX - 40, BX1 = OX + CW + 40, BY0 = OY - 160, BY1 = OY + CN + 40;
+  const GX1 = OX + CW + 60, GY0 = OY - 180;
+  const G = D.ground, CH = root.SCENE_CHUNKS || {};
+  /* Site194：宋城专用水面图例（D/E/I → aq_gwater），不改月河 rq_gwater 的 U/V/W */
+  G.legend = Object.assign({}, G.legend, {
+    D: 'aq_gwater:a',
+    E: 'aq_gwater:b',
+    I: 'aq_gwater:c',
+    /* Site202：宋城硬地改铺地砖纹（方砖/条石/席纹），替换现代 g_sidewalk */
+    S: 'aq_gpave:a',
+    P: 'aq_gpave:b',
+    R: 'aq_gpave:c',
+  });
+
+  const addE = Math.max(0, Math.round((GX1 - (G.origin[0] + G.cols * G.chunk)) / G.chunk));
+  if (addE) {
+    G.data_south_to_north = G.data_south_to_north.map((row) => row + 'K'.repeat(addE));
+    G.cols += addE;
+  }
+  const addR = Math.max(0, Math.round((G.origin[1] - GY0) / G.chunk));
+  if (addR) {
+    const rows = [];
+    for (let r = 0; r < addR; r++) rows.push('K'.repeat(G.cols));
+    G.data_south_to_north = rows.concat(G.data_south_to_north);
+    G.rows = G.data_south_to_north.length;
+    G.origin = [G.origin[0], G.origin[1] - addR * G.chunk];
+  }
+  D.bounds = Object.assign({}, D.bounds, {
+    x1: Math.max(D.bounds.x1 || 0, Math.max(BX1, 2440)),
+    y0: Math.min(D.bounds.y0 || 0, BY0),
+    y1: Math.max(D.bounds.y1 || 0, BY1),
+  });
+
+  function paint(rect, tile, fn) {
+    const [ox, oy] = G.origin, ch = G.chunk;
+    const c0 = Math.max(0, Math.floor((rect[0] - ox) / ch)), c1 = Math.min(G.cols, Math.ceil((rect[2] - ox) / ch));
+    const r0 = Math.max(0, Math.floor((rect[1] - oy) / ch)), r1 = Math.min(G.rows, Math.ceil((rect[3] - oy) / ch));
+    for (let r = r0; r < r1; r++) {
+      const a = G.data_south_to_north[r].split('');
+      for (let c = c0; c < c1; c++) {
+        const x = ox + (c + 0.5) * ch, y = oy + (r + 0.5) * ch;
+        if (x >= rect[0] && x < rect[2] && y >= rect[1] && y < rect[3]) {
+          const t = fn ? fn(x, y) : tile;
+          if (t) a[c] = t;
+        }
+      }
+      G.data_south_to_north[r] = a.join('');
+    }
+  }
+  const road = (x, y) => ((Math.round(x * 2 + y) % 5) < 3 ? 'A' : 'B');
+  /* Site194 写实水面：按距岸深浅选 D浅 / E中 / I深；近岸噪声咬出不规则岸线（不改建筑 footprint） */
+  const hash01 = (x, y) => {
+    const s = Math.sin(x * 12.9898 + y * 78.233) * 43758.5453;
+    return s - Math.floor(s);
+  };
+  const seaDepth = (x, y, rect) => {
+    const dx = Math.min(x - rect[0], rect[2] - x);
+    const dy = Math.min(y - rect[1], rect[3] - y);
+    const edge = Math.min(dx, dy);
+    const n = hash01(x * 0.5, y * 0.5);
+    const d = edge + (n - 0.5) * 1.8;           // 岸线抖动
+    const span = Math.min(rect[2] - rect[0], rect[3] - rect[1]);
+    const shallow = Math.min(2.6, span * 0.22);
+    const mid = Math.min(6.5, span * 0.42);
+    if (d < shallow) return 'D';
+    if (d < mid) return 'E';
+    /* 微扰：偶发中层纹理，避免整片纯平 */
+    return (Math.round(x + y) % 11 === 0 ? 'E' : 'I');
+  };
+  const paintSea = (rect, opts) => {
+    const pad = (opts && opts.pad) || 0;
+    const r = [rect[0] - pad, rect[1] - pad, rect[2] + pad, rect[3] + pad];
+    paint(r, null, (x, y) => {
+      const dx = Math.min(x - rect[0], rect[2] - x);
+      const dy = Math.min(y - rect[1], rect[3] - y);
+      const inside = x >= rect[0] && x < rect[2] && y >= rect[1] && y < rect[3];
+      const edge = Math.min(dx, dy);
+      const n = hash01(x, y);
+      if (!inside) {
+        /* 外扩浅滩：噪声决定是否铺浅水，形成碎石/泥岸凹凸 */
+        if (n > 0.55) return 'D';
+        return null;
+      }
+      /* 内侧近岸：偶尔留空，让草地/石板咬进水面（不规则岸） */
+      if (edge < 1.15 && n < 0.28) return null;
+      return seaDepth(x, y, rect);
+    });
+  };
+
+  /* 湾区缓冲仍是水面；内城几乎满铺石板；水体 paintSea→D/E/I 分层（不改 rq_gwater） */
+  paintSea([1770, BY0, OX - 16, BY1], { pad: 1.5 });
+  paint([OX - 16, BY0, GX1, BY1], 'G');
+  paint([OX, OY - 120, OX + CW, OY + CN], 'S');                 // 内城硬地（方砖 aq_gpave:a）
+  paint([OX + 80, OY - 120, OX + 220, OY - 72], 'S');           // 南广场底
+  /* Site202：南广场中心席纹装饰带 */
+  paint([OX + 110, OY - 108, OX + 190, OY - 84], 'R');
+  paint([OX + CX - 14, OY - 8, OX + CX + 14, OY + 100], null, road);
+  paint([OX + CX - 14, OY - 8, OX + CX + 14, OY + 100], 'P');   // 御街条石
+  paint([OX + 16, OY + 28, OX + CW - 16, OY + 40], 'S');        // 东西市南巷
+  paint([OX + 16, OY + 44, OX + CW - 16, OY + 54], 'S');        // 中市横巷
+  paint([OX + 16, OY + 58, OX + CW - 16, OY + 70], 'S');        // 东西市北巷
+  paint([OX + 16, OY + 116, OX + CW - 16, OY + 128], 'S');      // 汴河北岸河市
+  paint([OX + 40, OY + 130, OX + 260, OY + 190], 'S');          // 北部硬地（衙门/寺/宅）
+  paintSea([OX - 16, OY - 62, OX + CW + 16, OY - 46], { pad: 1.2 });  // 南护城河
+  paintSea([OX - 16, OY + CN, OX + CW + 16, OY + CN + 16], { pad: 1.2 });
+  paintSea([OX - 16, OY - 46, OX, OY + CN], { pad: 1.2 });
+  paintSea([OX + CW, OY - 46, OX + CW + 16, OY + CN], { pad: 1.2 });
+  paintSea([OX, OY + 96, OX + CW, OY + 114], { pad: 1.4 });           // 汴河（收窄）
+  /* Site197：艮岳苑主池 + 次池；豪宅院内小池（动态波纹覆盖，禁静态岸线装饰为主） */
+  paintSea([OX + 18, OY + 160, OX + 58, OY + 186], { pad: 1.0 });     // 艮岳主池
+  paintSea([OX + 62, OY + 174, OX + 76, OY + 186], { pad: 0.8 });     // 艮岳次池
+  paintSea([OX + 252, OY + 164, OX + 264, OY + 174], { pad: 0.6 });   // 东北豪宅院池
+  paintSea([OX + 136, OY + 176, OX + 148, OY + 186], { pad: 0.6 });   // 北宅院池
+  paintSea([OX + 98, OY + 178, OX + 110, OY + 188], { pad: 0.6 });     // 御街西宅院池
+  paint([OX + CX - 16, OY + 94, OX + CX + 16, OY + 116], 'S');  // 州桥落点
+  paint([OX + 90, OY - 102, OX + 120, OY - 88], 'S');           // 售票处前
+  /* 艮岳苑硬地环池（石板环岸，池心仍是水） */
+  paint([OX + 12, OY + 152, OX + 82, OY + 160], 'S');
+  paint([OX + 12, OY + 186, OX + 82, OY + 194], 'S');
+  paint([OX + 12, OY + 160, OX + 18, OY + 186], 'S');
+  paint([OX + 78, OY + 160, OX + 88, OY + 190], 'S');
+
+  /* Site197：小池接动态水（D/E/I）；艮岳布局 Track 可扩，本处只点景水景 */
+  let _scenicPonds = { waterRects: [] };
+  if (root.SongchengScenic && typeof root.SongchengScenic.paintPonds === 'function') {
+    _scenicPonds = root.SongchengScenic.paintPonds(paint, paintSea, { OX, OY, CX, CW, CN }) || _scenicPonds;
+  }
+
+  const solids = [], colliders = [];
+  const block = (id, rect) => { solids.push(rect.slice()); colliders.push({ id: 'aq_' + id, rect: rect.slice() }); };
+  block('bay', [1770, BY0, OX - 16, BY1]);
+  block('moat_s', [OX - 16, OY - 62, OX + CW + 16, OY - 46]);
+  block('moat_n', [OX - 16, OY + CN, OX + CW + 16, OY + CN + 16]);
+  block('moat_w', [OX - 16, OY - 46, OX, OY + CN]);
+  block('moat_e', [OX + CW, OY - 46, OX + CW + 16, OY + CN]);
+  block('bian_w', [OX, OY + 96, OX + CX - 16, OY + 114]);
+  block('bian_e', [OX + CX + 16, OY + 96, OX + CW, OY + 114]);
+  block('genyue_pond', [OX + 18, OY + 160, OX + 58, OY + 186]);
+  block('genyue_pond2', [OX + 62, OY + 174, OX + 76, OY + 186]);
+  block('hz_pond_ne', [OX + 252, OY + 164, OX + 264, OY + 174]);
+  block('hz_pond_n', [OX + 136, OY + 176, OX + 148, OY + 186]);
+  block('hz_pond_w', [OX + 98, OY + 178, OX + 110, OY + 188]);
+  /* 南墙门洞：aq_wall_gate 开口 13–17 @ putX → 中心 putX+15 = CX */
+  const gatePut = CX - 15;
+  block('wall_s_w', [OX, OY - 8, OX + gatePut + 13, OY]);
+  block('wall_s_e', [OX + gatePut + 17, OY - 8, OX + CW, OY]);
+  block('wall_n', [OX, OY + CN - 8, OX + CW, OY + CN]);
+  block('wall_w', [OX, OY, OX + 8, OY + CN - 8]);
+  block('wall_e', [OX + CW - 8, OY, OX + CW, OY + CN - 8]);
+  /* Site197 小池碰撞/水区（接动态水） */
+  if (_scenicPonds && _scenicPonds.waterRects) {
+    _scenicPonds.waterRects.forEach((r, i) => block('pond_' + i, r));
+  }
+
+  N.solids = (N.solids || []).concat(solids);
+  D.colliders = (D.colliders || []).concat(colliders);
+  N.water = (N.water || []).concat([
+    [1770, BY0, OX - 16, BY1],
+    [OX - 16, OY - 62, OX + CW + 16, OY - 46],
+    [OX - 16, OY + CN, OX + CW + 16, OY + CN + 16],
+    [OX - 16, OY - 46, OX, OY + CN],
+    [OX + CW, OY - 46, OX + CW + 16, OY + CN],
+    [OX, OY + 96, OX + CW, OY + 114],
+    [OX + 18, OY + 160, OX + 58, OY + 186],
+    [OX + 62, OY + 174, OX + 76, OY + 186],
+    [OX + 252, OY + 164, OX + 264, OY + 174],
+    [OX + 136, OY + 176, OX + 148, OY + 186],
+    [OX + 98, OY + 178, OX + 110, OY + 188],
+  ]);
+  if (_scenicPonds && _scenicPonds.waterRects && _scenicPonds.waterRects.length) {
+    N.water = N.water.concat(_scenicPonds.waterRects.map((r) => r.slice()));
+  }
+
+  const list = [];
+  function put(id, type, lx, ly, more) {
+    const o = Object.assign({
+      id: 'aq_' + id,
+      type,
+      x: +(OX + lx).toFixed(2),
+      y: +(OY + ly).toFixed(2),
+      fade_group: 'aq_songcheng',
+    }, more || {});
+    list.push(o);
+    return o;
+  }
+
+  const SHOP_KINDS = ['dangpu', 'yaopu', 'buzhuang', 'gaobing', 'zahuo'];
+  const BW = (root.AncientFacade && root.AncientFacade.BW) || 3.5;
+  /* 井槐里式拼装：壳 + 台基/立面/披檐/匾幌/竖招/灯笼。Site197 门面再密一档 + facade-detail。 */
+  function putShop(id, kind, lx, ly) {
+    const k = kind;
+    const bay = Math.abs(Math.floor(lx * 10 + ly)) % 4;
+    put(id, 'aq_shop_' + k, lx, ly);                         // depth shell + roof
+    put(id + '_base', 'aq_f_base', lx + 0.2, ly);            // 台基 strip
+    put(id + '_gable', 'aq_f_gable', lx - 0.05, ly);          // 硬山墀头（左端）
+    /* Site206：右端再 stamp 一处山墙/墀头，少改宏观布局 */
+    put(id + '_gable2', 'aq_f_gable', lx + 0.4 + BW * 2 - 0.15, ly);
+    if (k === 'dangpu') {
+      put(id + '_w0', 'aq_f_wall', lx + 0.4, ly, { variant: 'dang' });
+      /* Site203：隔扇变体含步步锦 */
+      const doorV = (['grid', 'carved', 'bubujin', 'ban', 'diamond'])[bay % 5];
+      put(id + '_d1', 'aq_f_door', lx + 0.4 + BW, ly, { variant: doorV });
+    } else {
+      put(id + '_s0', 'aq_f_shop', lx + 0.4, ly, { variant: k });
+      /* Site203：花窗/槛窗/万字轮换 */
+      const winV = (['grid', 'huachuang', 'wanzi', 'kanchuang', 'bubujin', 'diamond'])[bay % 6];
+      /* second bay: alternate open shop / lattice window for rhythm */
+      if (bay % 2 === 0) put(id + '_s1', 'aq_f_shop', lx + 0.4 + BW, ly, { variant: k });
+      else put(id + '_w1', 'aq_f_window', lx + 0.4 + BW, ly, { variant: winV });
+    }
+    put(id + '_awn0', 'aq_f_awning', lx + 0.4, ly);
+    put(id + '_awn1', 'aq_f_awning', lx + 0.4 + BW, ly);
+    put(id + '_plq', 'aq_f_plaque', lx + 3.5, ly, { variant: k });
+    put(id + '_ban', 'aq_f_banner', lx + 6.8, ly, { variant: k });
+    put(id + '_vsg', 'aq_f_vsign', lx + 0.15, ly, { variant: k });  // 竖招
+    put(id + '_col', 'aq_f_column', lx + 3.5, ly);
+    /* Site197 facade-detail：檐下斗拱点缀 */
+    put(id + '_dg', 'aq_f_dougong', lx + 1.8, ly, { variant: bay === 0 ? 'large' : 'bay' });
+    /* Site208：檐下再密一档斗拱色块（少改宏观布局） */
+    put(id + '_dg2', 'aq_f_dougong', lx + 4.6, ly, { variant: 'bay' });
+    put(id + '_dg3', 'aq_f_dougong', lx + 0.55, ly, { variant: bay % 2 ? 'large' : 'bay' });
+    put(id + '_lan', 'aq_lanterns', lx + 1.0, ly - 0.4);
+    put(id + '_lan2', 'aq_lanterns', lx + 5.6, ly - 0.35);           // 第二串灯笼
+    /* 门前点景：桌凳/花坛/招幌（街巷密实，非庭院） */
+    if (bay % 3 === 0) put(id + '_tbl', 'aq_table', lx + 2.2, ly - 1.1, { variant: (bay % 2 ? 'wine' : 'tea') });
+    if (bay % 2 === 0) put(id + '_pl', 'aq_planter', lx + 0.6, ly - 0.9, { variant: (['a', 'b', 'c'])[bay % 3] });
+    if (bay === 1 || bay === 3) put(id + '_bnf', 'aq_banner', lx + 7.2, ly - 0.6, { variant: (['tea', 'food', 'cloth', 'wine'])[bay] });
+  }
+  function shopRow(prefix, x0, y, n, step) {
+    for (let i = 0; i < n; i++) {
+      const k = SHOP_KINDS[i % SHOP_KINDS.length];
+      putShop(prefix + i, k, x0 + i * (step || 7.2), y);
+    }
+  }
+
+  /* —— 南广场：售票 + 闸机 + 石狮灯笼树（加密） —— */
+  put('ticket', 'aq_ticket', 92, -102, { name: '售票处（名称未经确认）' });
+  put('gate_a', 'aq_turnstile', 128, -78, { name: '检票闸机' });
+  put('gate_b', 'aq_turnstile', 138, -78, { name: '检票闸机' });
+  put('gate_c', 'aq_turnstile', 148, -78, { name: '检票闸机' });
+  put('lion_sl', 'aq_lion', 136, -90, { variant: 'm', name: '石狮' });
+  put('lion_sr', 'aq_lion', 164, -90, { variant: 'f', name: '石狮' });
+  put('lion_s2l', 'aq_lion', 120, -108, { variant: 'f' });
+  put('lion_s2r', 'aq_lion', 180, -108, { variant: 'm' });
+  put('lamp_s1', 'aq_lamppost', 110, -118);
+  put('lamp_s2', 'aq_lamppost', 190, -118);
+  put('lamp_s3', 'aq_lamppost', 130, -112);
+  put('lamp_s4', 'aq_lamppost', 170, -112);
+  put('huai_s1', 'aq_huai', 100, -128);
+  put('huai_s2', 'aq_huai', 200, -128);
+  put('huai_s3', 'aq_huai', 80, -110);
+  put('huai_s4', 'aq_huai', 220, -110);
+  put('lanterns_s1', 'aq_lanterns', 132, -96);
+  put('lanterns_s2', 'aq_lanterns', 148, -88);
+  put('stall_s1', 'aq_stall', 118, -96, { variant: 'fruit' });
+  put('stall_s2', 'aq_stall', 178, -96, { variant: 'toys' });
+  put('cart_s1', 'aq_cart', 155, -100);
+  /* Track C 氛围道具（收缩坐标系）：招幌/桌凳/花坛 */
+  put('bn_s1', 'aq_banner', 118, -100, { variant: 'food' });
+  put('bn_s2', 'aq_banner', 178, -100, { variant: 'tea' });
+  put('tbl_s1', 'aq_table', 150, -108, { variant: 'tea' });
+  put('tbl_s2', 'aq_table', 165, -112, { variant: 'wine' });
+  put('pl_s1', 'aq_planter', 125, -112, { variant: 'a' });
+  put('pl_s2', 'aq_planter', 175, -112, { variant: 'b' });
+  put('pl_s3', 'aq_planter', 145, -120, { variant: 'c' });
+
+  /* —— 南薰门 —— */
+  put('nanxun', 'aq_wall_gate', gatePut, -46, { name: '南薰门（名称未经确认）' });
+  put('lion_gl', 'aq_lion', gatePut + 6, -50, { variant: 'm' });
+  put('lion_gr', 'aq_lion', gatePut + 24, -50, { variant: 'f' });
+  put('lanterns_gate', 'aq_lanterns', gatePut + 8, -42);
+
+  /* —— 城墙段（视觉；碰撞已用 solids） —— */
+  for (let i = 0; i < 12; i++) {
+    const x = i * 24;
+    if (x + 24 <= gatePut + 13) put('ws_w' + i, 'aq_city_wall', x, -8, { variant: 'ew' });
+  }
+  for (let i = 0; i < 8; i++) {
+    const x = gatePut + 17 + i * 24;
+    if (x < CW) put('ws_e' + i, 'aq_city_wall', Math.min(x, CW - 24), -8, { variant: 'ew' });
+  }
+  for (let i = 0; i < 13; i++) put('wn' + i, 'aq_city_wall', i * 24, CN - 8, { variant: 'ew' });
+  for (let i = 0; i < 9; i++) {
+    put('ww' + i, 'aq_city_wall', 0, i * 24, { variant: 'ns' });
+    put('we' + i, 'aq_city_wall', CW - 28, i * 24, { variant: 'ns' });
+  }
+  put('ct_sw', 'aq_corner_tower', -1, -9);
+  put('ct_se', 'aq_corner_tower', CW - 29, -9);
+  put('ct_nw', 'aq_corner_tower', -1, CN - 9);
+  put('ct_ne', 'aq_corner_tower', CW - 29, CN - 9);
+
+  /* —— 东京梦华牌坊 + 御街闹市（加密店铺/摊/灯笼） —— */
+  put('paifang', 'aq_paifang', CX - 7, 6, { name: '东京梦华（名称未经确认）' });
+
+  /* 东西市：南向立面贴巷，满铺少空地（步距 6.9，多一间） */
+  shopRow('row_s_w', 16, 18, 6, 6.9);           // 西段南巷
+  shopRow('row_s_e', 162, 18, 6, 6.9);          // 东段
+  shopRow('row_a_w', 16, 34, 6, 6.9);           // 中市南排
+  shopRow('row_a_e', 162, 34, 6, 6.9);
+  shopRow('row_m_w', 16, 48, 6, 6.9);           // 中巷
+  shopRow('row_m_e', 162, 48, 6, 6.9);
+  shopRow('row_b_w', 16, 64, 5, 6.9);           // 中市北排
+  shopRow('row_b_e', 170, 64, 5, 6.9);
+  shopRow('row_n_w', 16, 78, 5, 6.9);           // 近汴河南岸
+  shopRow('row_n_e', 170, 78, 5, 6.9);
+  shopRow('row_r_w', 16, 88, 4, 6.9);           // 河市南岸
+  shopRow('row_r_e', 200, 88, 4, 6.9);  // 避开望川楼
+  /* Site197：街巷再加密一排 + 夹缝店 */
+  shopRow('row_x_w', 16, 41, 5, 6.9);
+  shopRow('row_x_e', 170, 41, 5, 6.9);
+  shopRow('row_y_w', 16, 56, 4, 6.9);
+  shopRow('row_y_e', 180, 56, 4, 6.9);
+
+  /* 御街两侧贴边小店（侧影仍撑满视线） */
+  const sideL = [
+    ['dangpu', CX - 22, 12], ['yaopu', CX - 22, 24], ['buzhuang', CX - 22, 36],
+    ['gaobing', CX - 22, 48], ['zahuo', CX - 22, 60], ['yaopu', CX - 22, 72],
+    ['buzhuang', CX - 22, 84],
+  ];
+  const sideR = [
+    ['yaopu', CX + 16, 12], ['gaobing', CX + 16, 24], ['zahuo', CX + 16, 36],
+    ['buzhuang', CX + 16, 48], ['dangpu', CX + 16, 60], ['gaobing', CX + 16, 72],
+    ['zahuo', CX + 16, 84],
+  ];
+  sideL.forEach(([k, x, y], i) => putShop('side_l' + i, k, x, y));
+  sideR.forEach(([k, x, y], i) => putShop('side_r' + i, k, x, y));
+
+  /* 街心：摊、车、灯柱、灯笼串、井 —— 拉满利用率 */
+  for (let y = 12; y <= 88; y += 8) {
+    put('lp_l' + y, 'aq_lamppost', CX - 10, y);
+    put('lp_r' + y, 'aq_lamppost', CX + 10, y);
+  }
+  for (let y = 16; y <= 84; y += 12) put('lanterns_y' + y, 'aq_lanterns', CX - 8, y);
+  const stalls = [
+    [CX - 2, 18, 'fruit'], [CX + 4, 24, 'noodle'], [CX - 3, 32, 'toys'],
+    [CX + 3, 40, 'fruit'], [CX - 2, 48, 'noodle'], [CX + 4, 56, 'toys'],
+    [CX - 3, 64, 'fruit'], [CX + 3, 72, 'noodle'], [CX - 2, 80, 'toys'],
+    [40, 34, 'fruit'], [60, 36, 'noodle'], [200, 34, 'toys'], [220, 38, 'fruit'],
+    [40, 64, 'toys'], [220, 64, 'noodle'], [100, 34, 'fruit'], [250, 50, 'toys'],
+  ];
+  stalls.forEach(([x, y, v], i) => put('stall_' + i, 'aq_stall', x, y, { variant: v }));
+  put('cart1', 'aq_cart', CX, 36);
+  put('cart2', 'aq_cart', CX + 2, 68);
+  put('horsecart1', 'aq_horsecart', 70, 34);
+  put('horsecart2', 'aq_horsecart', 210, 62);
+  put('sedan1', 'aq_sedan', CX - 4, 52);
+  put('well1', 'aq_well', 48, 56);
+  put('well2', 'aq_well', 240, 56);
+  put('huai_m1', 'aq_huai', 36, 40);
+  put('huai_m2', 'aq_huai', 256, 40);
+  put('huai_m3', 'aq_huai', 36, 70);
+  put('huai_m4', 'aq_huai', 256, 70);
+  /* Track C：御街招幌/桌凳/花坛（A 坐标系） */
+  const bannersL = [['tea', CX - 18, 20], ['med', CX - 18, 36], ['cloth', CX - 18, 52], ['food', CX - 18, 68], ['wine', CX - 18, 84]];
+  const bannersR = [['wine', CX + 18, 20], ['food', CX + 18, 36], ['tea', CX + 18, 52], ['cloth', CX + 18, 68], ['med', CX + 18, 84]];
+  bannersL.forEach(([v, x, y], i) => put('bn_l' + i, 'aq_banner', x, y, { variant: v }));
+  bannersR.forEach(([v, x, y], i) => put('bn_r' + i, 'aq_banner', x, y, { variant: v }));
+  put('tbl_a1', 'aq_table', CX - 4, 22, { variant: 'tea' });
+  put('tbl_a2', 'aq_table', CX + 4, 38, { variant: 'wine' });
+  put('tbl_a3', 'aq_table', CX - 4, 54, { variant: 'tea' });
+  put('tbl_a4', 'aq_table', CX + 4, 70, { variant: 'tea' });
+  put('pl_a1', 'aq_planter', CX - 12, 14, { variant: 'a' });
+  put('pl_a2', 'aq_planter', CX + 12, 14, { variant: 'b' });
+  put('pl_a3', 'aq_planter', CX - 12, 86, { variant: 'c' });
+  put('pl_a4', 'aq_planter', CX + 12, 86, { variant: 'a' });
+  put('pl_a5', 'aq_planter', 48, 50, { variant: 'b' });
+  put('pl_a6', 'aq_planter', 240, 50, { variant: 'c' });
+
+  /* Site202：御街两侧排水沟 + 路牙（少改布局，只贴边线） */
+  for (let y = 14; y <= 86; y += 8) {
+    put('dr_l' + y, 'aq_drain', CX - 12.5, y, { variant: 'ns' });
+    put('dr_r' + y, 'aq_drain', CX + 12.5, y, { variant: 'ns' });
+    put('cb_l' + y, 'aq_curb', CX - 13.4, y, { variant: 'ns' });
+    put('cb_r' + y, 'aq_curb', CX + 13.4, y, { variant: 'ns' });
+  }
+  /* 南广场边线排水沟 / 路牙 */
+  for (let x = 100; x <= 200; x += 12) {
+    put('dr_ps' + x, 'aq_drain', x, -118, { variant: 'ew' });
+    put('cb_ps' + x, 'aq_curb', x, -119.2, { variant: 'ew' });
+    put('dr_pn' + x, 'aq_drain', x, -74, { variant: 'ew' });
+    put('cb_pn' + x, 'aq_curb', x, -72.8, { variant: 'ew' });
+  }
+  for (let y = -112; y <= -80; y += 10) {
+    put('dr_pw' + y, 'aq_drain', 86, y, { variant: 'ns' });
+    put('cb_pw' + y, 'aq_curb', 84.8, y, { variant: 'ns' });
+    put('dr_pe' + y, 'aq_drain', 214, y, { variant: 'ns' });
+    put('cb_pe' + y, 'aq_curb', 215.2, y, { variant: 'ns' });
+  }
+
+  /* —— 汴河：望川楼、茶坊、虹桥、柳、船、码头 —— */
+  put('jiulou', 'aq_jiulou', CX + 18, 78, { name: '望川楼（名称未经确认）' });
+  /* Site208：望川楼檐下斗拱色块点缀（少改布局） */
+  put('jiulou_dg0', 'aq_f_dougong', CX + 20, 77.2, { variant: 'large' });
+  put('jiulou_dg1', 'aq_f_dougong', CX + 24, 77.2, { variant: 'bay' });
+  put('jiulou_dg2', 'aq_f_dougong', CX + 28, 77.2, { variant: 'bay' });
+  put('chafang', 'aq_chafang', 40, 82, { name: '清风茶坊（名称未经确认）' });
+  put('chafang_dg0', 'aq_f_dougong', 42, 81.2, { variant: 'bay' });
+  put('chafang_dg1', 'aq_f_dougong', 46, 81.2, { variant: 'large' });
+  /* Site195：虹桥改 ns 跨汴河——墩落南岸(~y89–93)/北岸(~y117–121)，桥面跨水，勿再 ew 横躺南岸泡水中 */
+  put('hongqiao', 'aq_hongqiao', CX - 4, 91, { variant: 'ns', name: '虹桥（名称未经确认）' });
+  put('zhou_deck', 'aq_dock', CX - 10, 108, { name: '州桥码头' });
+  put('dock_w', 'aq_dock', 40, 112);
+  put('dock_e', 'aq_dock', 240, 112);
+  put('boat1', 'aq_boat', 70, 104);
+  put('boat2', 'aq_boat', 200, 104);
+  put('boat3', 'aq_boat', 250, 106);
+  for (const [x, y] of [
+    [24, 118], [56, 120], [88, 118], [120, 122], [180, 120], [212, 118], [244, 122], [276, 118],
+    [30, 90], [270, 90], [100, 118], [160, 118],
+  ]) {
+    put('willow_' + x + '_' + y, 'aq_willow', x, y, { variant: (x + y) % 2 ? 'a' : 'b' });
+  }
+  put('lanterns_river1', 'aq_lanterns', CX - 8, 90);
+  put('lanterns_river2', 'aq_lanterns', 48, 90);
+  put('lanterns_river3', 'aq_lanterns', 220, 90);
+  put('stall_river1', 'aq_stall', CX - 6, 88, { variant: 'noodle' });
+  put('stall_river2', 'aq_stall', CX + 8, 88, { variant: 'fruit' });
+  put('tbl_r1', 'aq_table', CX + 12, 84, { variant: 'wine' });
+  put('tbl_r2', 'aq_table', 56, 92, { variant: 'tea' });
+  put('bn_river1', 'aq_banner', CX + 22, 82, { variant: 'wine' });
+  put('bn_river2', 'aq_banner', 48, 86, { variant: 'tea' });
+  put('pl_r1', 'aq_planter', 36, 94, { variant: 'a' });
+  put('pl_r2', 'aq_planter', 220, 94, { variant: 'b' });
+  put('pl_r3', 'aq_planter', CX, 92, { variant: 'c' });
+  /* Site194 写实水体：汴河/护城河岸芦苇与泥石岸（贴密实 footprint，不改建筑） */
+  const reedSpots = [
+    [24, 94], [48, 116], [90, 94], [120, 116], [180, 94], [200, 116],
+    [240, 94], [270, 116],
+    [8, -54], [60, -54], [120, -50], [200, -54], [260, -50],
+    [8, CN + 8], [80, CN + 8], [160, CN + 4], [240, CN + 8],
+    [-8, 40], [-8, 100], [-8, 160],
+    [CW + 8, 40], [CW + 8, 100], [CW + 8, 160],
+  ];
+  reedSpots.forEach(([x, y], i) => {
+    put('reed_' + i, 'aq_reed', x, y, { variant: (i % 5 === 0) ? 'iris' : 'reed' });
+  });
+  const bankSpots = [
+    [30, 96], [110, 114], [190, 96], [250, 114],
+    [40, -48], [180, -60], [260, -48],
+    [-10, 80], [-10, 160], [CW + 10, 100], [CW + 10, 160],
+  ];
+  bankSpots.forEach(([x, y], i) => {
+    put('bank_' + i, 'aq_bank', x, y, { variant: i % 2 ? 'stone' : 'mud' });
+  });
+
+  /* —— Site197 街巷再加密：横巷灯笼串 / 招幌 / 摊位 / 桌凳 / 花坛（不改府邸庭院 put） —— */
+  /* 东西市横巷灯笼串（比参照更密：约每 10–12 步一串） */
+  for (const y of [22, 30, 38, 46, 54, 62, 70, 76, 84]) {
+    for (let x = 28; x <= 130; x += 14) put('lan_sw_' + y + '_' + x, 'aq_lanterns', x, y);
+    for (let x = 170; x <= 270; x += 14) put('lan_se_' + y + '_' + x, 'aq_lanterns', x, y);
+  }
+  /* 横巷招幌（贴店铺外缘，茶药布酒食轮换） */
+  const alleyBanners = [
+    [24, 20, 'tea'], [48, 20, 'med'], [72, 20, 'cloth'], [96, 20, 'food'], [120, 20, 'wine'],
+    [174, 20, 'wine'], [198, 20, 'food'], [222, 20, 'tea'], [246, 20, 'cloth'], [268, 20, 'med'],
+    [24, 36, 'food'], [60, 36, 'wine'], [96, 36, 'tea'], [120, 36, 'cloth'],
+    [174, 36, 'med'], [210, 36, 'food'], [246, 36, 'wine'], [268, 36, 'tea'],
+    [24, 52, 'cloth'], [56, 52, 'food'], [88, 52, 'wine'], [120, 52, 'tea'],
+    [174, 52, 'tea'], [206, 52, 'cloth'], [238, 52, 'food'], [268, 52, 'wine'],
+    [24, 68, 'wine'], [64, 68, 'tea'], [104, 68, 'med'], [120, 68, 'food'],
+    [174, 68, 'cloth'], [214, 68, 'wine'], [248, 68, 'tea'], [268, 68, 'food'],
+    [28, 82, 'food'], [70, 82, 'cloth'], [110, 82, 'wine'],
+    [190, 82, 'tea'], [230, 82, 'med'], [266, 82, 'food'],
+  ];
+  alleyBanners.forEach(([x, y, v], i) => put('bn_al_' + i, 'aq_banner', x, y, { variant: v }));
+  /* 横巷摊位再塞一档（水果/面/玩具交错，不挡御街中线） */
+  const alleyStalls = [
+    [32, 26, 'fruit'], [52, 28, 'noodle'], [76, 26, 'toys'], [100, 28, 'fruit'], [124, 26, 'noodle'],
+    [178, 26, 'toys'], [202, 28, 'fruit'], [226, 26, 'noodle'], [250, 28, 'toys'], [266, 26, 'fruit'],
+    [36, 42, 'noodle'], [68, 44, 'toys'], [100, 42, 'fruit'], [124, 44, 'noodle'],
+    [182, 42, 'fruit'], [214, 44, 'toys'], [246, 42, 'noodle'], [266, 44, 'fruit'],
+    [40, 58, 'toys'], [72, 60, 'fruit'], [104, 58, 'noodle'], [126, 60, 'toys'],
+    [186, 58, 'noodle'], [218, 60, 'fruit'], [250, 58, 'toys'], [266, 60, 'noodle'],
+    [44, 74, 'fruit'], [80, 76, 'noodle'], [112, 74, 'toys'],
+    [194, 74, 'fruit'], [226, 76, 'noodle'], [258, 74, 'toys'],
+  ];
+  alleyStalls.forEach(([x, y, v], i) => put('stall_al_' + i, 'aq_stall', x, y, { variant: v }));
+  /* 横巷桌凳与花坛簇 */
+  for (const [x, y, v] of [
+    [44, 24, 'tea'], [88, 24, 'wine'], [200, 24, 'tea'], [244, 24, 'wine'],
+    [52, 40, 'tea'], [108, 40, 'wine'], [190, 40, 'tea'], [236, 40, 'wine'],
+    [60, 56, 'tea'], [116, 56, 'wine'], [198, 56, 'tea'], [252, 56, 'wine'],
+    [68, 72, 'tea'], [108, 72, 'wine'], [210, 72, 'tea'], [248, 72, 'wine'],
+  ]) put('tbl_al_' + x + '_' + y, 'aq_table', x, y, { variant: v });
+  for (const [x, y, v] of [
+    [30, 24, 'a'], [90, 28, 'b'], [126, 24, 'c'], [178, 28, 'a'], [230, 24, 'b'], [270, 28, 'c'],
+    [34, 40, 'b'], [94, 44, 'c'], [122, 40, 'a'], [186, 44, 'b'], [242, 40, 'c'], [270, 44, 'a'],
+    [38, 56, 'c'], [98, 60, 'a'], [128, 56, 'b'], [190, 60, 'c'], [246, 56, 'a'], [270, 60, 'b'],
+    [42, 72, 'a'], [102, 76, 'b'], [194, 72, 'c'], [254, 76, 'a'],
+  ]) put('pl_al_' + x + '_' + y, 'aq_planter', x, y, { variant: v });
+  /* 御街再密：中线两侧交错小摊与灯笼（填参照图偏疏的空） */
+  for (let y = 14; y <= 86; y += 6) {
+    put('lan_yj_l' + y, 'aq_lanterns', CX - 14, y);
+    put('lan_yj_r' + y, 'aq_lanterns', CX + 14, y);
+  }
+  for (const [dx, y, v] of [
+    [-6, 14, 'fruit'], [6, 20, 'noodle'], [-5, 28, 'toys'], [5, 36, 'fruit'],
+    [-6, 44, 'noodle'], [6, 52, 'toys'], [-5, 60, 'fruit'], [5, 68, 'noodle'],
+    [-6, 76, 'toys'], [6, 84, 'fruit'],
+  ]) put('stall_yj2_' + y, 'aq_stall', CX + dx, y, { variant: v });
+  /* 南广场再补招幌灯笼摊（入口热闹感） */
+  put('lanterns_s3', 'aq_lanterns', 140, -100);
+  put('lanterns_s4', 'aq_lanterns', 160, -92);
+  put('stall_s3', 'aq_stall', 108, -104, { variant: 'noodle' });
+  put('stall_s4', 'aq_stall', 188, -104, { variant: 'fruit' });
+  put('bn_s3', 'aq_banner', 108, -108, { variant: 'wine' });
+  put('bn_s4', 'aq_banner', 188, -108, { variant: 'cloth' });
+  put('tbl_s3', 'aq_table', 140, -114, { variant: 'tea' });
+  put('pl_s4', 'aq_planter', 155, -118, { variant: 'a' });
+  put('pl_s5', 'aq_planter', 115, -120, { variant: 'b' });
+  /* Site199：南薰门外南广场 / 瓮城口市集摊位再加密（参照 layout refs 更密；不改勾栏/宝相寺大布局） */
+  for (const [x, y, v] of [
+    /* 南广场外圈 */
+    [96, -112, 'fruit'], [128, -116, 'noodle'], [152, -116, 'toys'], [172, -112, 'fruit'],
+    [204, -112, 'noodle'], [88, -100, 'toys'], [210, -100, 'fruit'],
+    /* 南广场中带填缝 */
+    [102, -92, 'noodle'], [160, -98, 'fruit'], [192, -92, 'toys'], [136, -108, 'toys'],
+    /* 瓮城口两侧（闸机西/东翼，贴硬地不进护城河） */
+    [112, -84, 'fruit'], [122, -80, 'noodle'], [158, -80, 'toys'], [168, -84, 'fruit'],
+    [100, -76, 'toys'], [180, -76, 'noodle'], [190, -82, 'fruit'], [106, -88, 'fruit'],
+    [174, -88, 'noodle'], [146, -74, 'toys'],
+  ]) put('stall_s199_' + x + '_' + y, 'aq_stall', x, y, { variant: v });
+  for (const [x, y, v] of [
+    [96, -116, 'food'], [128, -120, 'tea'], [160, -120, 'wine'], [192, -116, 'cloth'],
+    [112, -88, 'food'], [168, -88, 'tea'], [100, -80, 'wine'], [180, -80, 'cloth'],
+    [146, -78, 'med'], [204, -108, 'food'],
+  ]) put('bn_s199_' + x + '_' + y, 'aq_banner', x, y, { variant: v });
+  for (const [x, y] of [
+    [104, -108], [120, -100], [156, -104], [184, -108], [200, -96],
+    [116, -76], [164, -76], [140, -84], [172, -80], [108, -96],
+  ]) put('lan_s199_' + x + '_' + y, 'aq_lanterns', x, y);
+  for (const [x, y, v] of [
+    [130, -120, 'tea'], [148, -118, 'wine'], [170, -118, 'tea'],
+    [118, -86, 'wine'], [162, -86, 'tea'], [154, -76, 'wine'],
+  ]) put('tbl_s199_' + x + '_' + y, 'aq_table', x, y, { variant: v });
+  for (const [x, y, v] of [
+    [90, -116, 'a'], [138, -122, 'b'], [182, -116, 'c'], [208, -108, 'a'],
+    [114, -78, 'b'], [176, -78, 'c'], [150, -82, 'a'],
+  ]) put('pl_s199_' + x + '_' + y, 'aq_planter', x, y, { variant: v });
+  put('cart_s199a', 'aq_cart', 142, -104);
+  put('cart_s199b', 'aq_cart', 186, -88);
+  put('cart_s199c', 'aq_cart', 110, -92);
+  put('lamp_s199a', 'aq_lamppost', 98, -86);
+  put('lamp_s199b', 'aq_lamppost', 202, -86);
+  put('lamp_s199c', 'aq_lamppost', 150, -122);
+  put('lion_s199l', 'aq_lion', 124, -74, { variant: 'm' });
+  put('lion_s199r', 'aq_lion', 176, -74, { variant: 'f' });
+  /* 汴河南岸河市摊幌再密（贴岸不挡虹桥步行带） */
+  for (const [x, y, v] of [
+    [28, 90, 'fruit'], [56, 88, 'noodle'], [84, 90, 'toys'], [112, 88, 'fruit'],
+    [168, 88, 'noodle'], [196, 90, 'toys'], [224, 88, 'fruit'], [252, 90, 'noodle'],
+  ]) put('stall_rs_' + x, 'aq_stall', x, y, { variant: v });
+  for (const [x, y, v] of [
+    [32, 86, 'tea'], [80, 86, 'food'], [200, 86, 'wine'], [248, 86, 'cloth'],
+  ]) put('bn_rs_' + x, 'aq_banner', x, y, { variant: v });
+  for (let x = 36; x <= 260; x += 20) put('lan_rs_' + x, 'aq_lanterns', x, 86);
+  /* 北市集外围招幌灯笼（围着市集，不改梦华府/四合院 put） */
+  for (const [x, y, v] of [
+    [114, 136, 'food'], [140, 136, 'tea'], [166, 136, 'wine'], [192, 136, 'cloth'], [218, 136, 'med'],
+  ]) put('bn_nm_' + x, 'aq_banner', x, y, { variant: v });
+  for (let x = 110; x <= 220; x += 12) put('lan_nm_' + x, 'aq_lanterns', x, 134);
+  for (const [x, y, v] of [
+    [126, 148, 'tea'], [154, 152, 'wine'], [182, 148, 'tea'], [206, 150, 'wine'],
+  ]) put('tbl_nm_' + x, 'aq_table', x, y, { variant: v });
+
+  /* Site197：植物/水系点景加密（松柳芦苇假山竹丛；岸线长条保留；小池已 paint） */
+  let _scenicCounts = null;
+  if (root.SongchengScenic && typeof root.SongchengScenic.place === 'function') {
+    _scenicCounts = root.SongchengScenic.place(put, { OX, OY, CX, CW, CN });
+  }
+  let _dockCounts = null;
+  if (root.SongchengDock && typeof root.SongchengDock.place === 'function') {
+    _dockCounts = root.SongchengDock.place(put, { OX, OY, CX, CW, CN });
+  }
+  let _streetPropCounts = null;
+  if (root.SongchengStreetProps && typeof root.SongchengStreetProps.place === 'function') {
+    _streetPropCounts = root.SongchengStreetProps.place(put, { OX, OY, CX, CW, CN });
+  }
+
+  /* —— 北部：梦华府、公堂、书塾、勾栏、宝相寺、市集 —— */
+  put('yamen', 'aq_yamen_gate', 70, 145, { name: '梦华府（名称未经确认）' });
+  put('drum', 'aq_drum', 66, 143);
+  put('gongtang', 'aq_gongtang', 66, 160, { name: '公堂' });
+  put('shushu', 'aq_shushu', 160, 148, { name: '明德书塾（名称未经确认）' });
+  put('goulan', 'aq_goulan', 20, 128, { name: '勾栏（名称未经确认）' });
+  put('siyuan', 'aq_siyuan', 230, 140, { name: '宝相寺（名称未经确认）' });
+  /* 北市集填满衙门与书塾之间 */
+  for (const [x, y, v] of [
+    [120, 140, 'fruit'], [132, 142, 'noodle'], [144, 140, 'toys'],
+    [120, 152, 'toys'], [136, 154, 'fruit'], [148, 150, 'noodle'],
+    [200, 138, 'fruit'], [212, 142, 'noodle'], [180, 148, 'toys'],
+    [190, 156, 'fruit'], [210, 152, 'noodle'],
+  ]) put('stall_n_' + x + '_' + y, 'aq_stall', x, y, { variant: v });
+  put('horsecart_n', 'aq_horsecart', 100, 148);
+  put('sedan_n', 'aq_sedan', 88, 140);
+  put('cart_n', 'aq_cart', 200, 148);
+  put('well_n', 'aq_well', 160, 138);
+  for (let x = 80; x <= 220; x += 16) put('lp_n' + x, 'aq_lamppost', x, 136);
+  for (let x = 90; x <= 210; x += 20) put('lanterns_n' + x, 'aq_lanterns', x, 144);
+  put('huai_n1', 'aq_huai', 88, 190);
+  put('huai_n2', 'aq_huai', 210, 175);
+  put('huai_n3', 'aq_huai', 100, 190);
+  put('lion_n1', 'aq_lion', 78, 142, { variant: 'm' });
+  put('lion_n2', 'aq_lion', 98, 142, { variant: 'f' });
+  put('tbl_n1', 'aq_table', 150, 146, { variant: 'tea' });
+  put('tbl_n2', 'aq_table', 170, 150, { variant: 'wine' });
+  put('bn_n1', 'aq_banner', 126, 138, { variant: 'food' });
+  put('bn_n2', 'aq_banner', 190, 138, { variant: 'wine' });
+  put('pl_n1', 'aq_planter', 84, 136, { variant: 'a' });
+  put('pl_n2', 'aq_planter', 108, 136, { variant: 'b' });
+  put('pl_n3', 'aq_planter', 160, 136, { variant: 'c' });
+  put('pl_n4', 'aq_planter', 90, 160, { variant: 'a' });
+  put('pl_n5', 'aq_planter', 220, 160, { variant: 'b' });
+  put('lion_n3', 'aq_lion', 168, 146, { variant: 'm' });
+  put('lion_n4', 'aq_lion', 188, 146, { variant: 'f' });
+
+  /* 西北/东北角：店 + 四合院填满边角空地（麻雀虽小五脏俱全） */
+  shopRow('corner_nw', 16, 120, 4, 6.9);
+  shopRow('corner_ne', 200, 120, 4, 6.9);
+  shopRow('corner_n2', 100, 128, 3, 6.9);
+  /* Site197：艮岳苑风景区（池塘·假山·柳·亭·廊）——西墙内、汴河北，避让衙门公堂 */
+  put('genyue_ting', 'aq_ting', 38, 172, { variant: 'sq', name: '艮岳苑亭（名称未经确认）' });
+  put('genyue_ting2', 'aq_ting', 68, 178, { variant: 'hex', name: '艮岳水榭（名称未经确认）' });
+  put('genyue_rock_a', 'aq_rockery', 22, 164, { variant: 'a' });
+  put('genyue_rock_b', 'aq_rockery', 52, 162, { variant: 'b' });
+  put('genyue_rock_c', 'aq_rockery', 54, 182, { variant: 'c' });
+  put('genyue_rock_d', 'aq_rockery', 28, 184, { variant: 'b' });
+  put('genyue_rock_e', 'aq_rockery', 74, 172, { variant: 'a' });
+  put('genyue_lang_s', 'aq_lang', 16, 154, { variant: 'ew' });
+  put('genyue_lang_e', 'aq_lang', 78, 160, { variant: 'ns' });
+  put('genyue_lang_n', 'aq_lang', 20, 188, { variant: 'ew' });
+  put('genyue_lang_c', 'aq_lang', 60, 184, { variant: 'corner' });
+  for (const [x, y] of [
+    [16, 162], [16, 176], [16, 188], [30, 156], [48, 156], [64, 158],
+    [80, 166], [80, 180], [44, 188], [60, 190], [34, 178], [50, 174],
+  ]) put('willow_gy_' + x + '_' + y, 'aq_willow', x, y, { variant: (x + y) % 2 ? 'a' : 'b' });
+  for (const [x, y, v] of [
+    [20, 170, 'a'], [44, 160, 'b'], [56, 188, 'c'], [74, 178, 'a'], [32, 190, 'b'],
+  ]) put('pl_gy_' + x, 'aq_planter', x, y, { variant: v });
+  put('bn_gy1', 'aq_banner', 42, 154, { variant: 'tea' });
+  put('lp_gy1', 'aq_lamppost', 24, 158);
+  put('lp_gy2', 'aq_lamppost', 70, 158);
+  put('lanterns_gy1', 'aq_lanterns', 36, 158);
+  put('lanterns_gy2', 'aq_lanterns', 66, 186);
+
+  /* Site197：豪宅院内唐宋庭院（小池·假山·花木·曲廊）×3 */
+  put('haozhai_ne', 'aq_haozhai', 242, 152, { name: '东北豪宅（名称未经确认）' });
+  put('hz_ne_rock', 'aq_rockery', 254, 166, { variant: 'c' });
+  put('hz_ne_lang', 'aq_lang', 248, 176, { variant: 'ew' });
+  put('hz_ne_ting', 'aq_ting', 258, 178, { variant: 'sq' });
+  put('hz_ne_willow', 'aq_willow', 250, 162, { variant: 'b' });
+  put('hz_ne_pl', 'aq_planter', 260, 170, { variant: 'a' });
+
+  put('haozhai_n', 'aq_haozhai', 126, 166, { name: '北宅府邸（名称未经确认）' });
+  put('hz_n_rock', 'aq_rockery', 138, 178, { variant: 'a' });
+  put('hz_n_lang', 'aq_lang', 132, 186, { variant: 'ew' });
+  put('hz_n_willow', 'aq_willow', 146, 180, { variant: 'a' });
+  put('hz_n_pl', 'aq_planter', 134, 174, { variant: 'c' });
+
+  put('haozhai_w', 'aq_haozhai', 88, 168, { name: '御街西宅（名称未经确认）' });
+  put('hz_w_rock', 'aq_rockery', 100, 180, { variant: 'b' });
+  put('hz_w_lang', 'aq_lang', 94, 188, { variant: 'ew' });
+  put('hz_w_willow', 'aq_willow', 108, 176, { variant: 'a' });
+  put('hz_w_pl', 'aq_planter', 96, 174, { variant: 'b' });
+
+  /* 保留一处普通四合院（东北角再塞） */
+  put('siheyuan_e2', 'aq_siheyuan', 268, 128, { name: '民居四合院（名称未经确认）' });
+  put('siheyuan_se', 'aq_siheyuan', 268, 70, { name: '民居四合院（名称未经确认）' });
+  /* 河市北岸再塞摊幌，消灭汴河北空带 */
+  for (const [x, y, v] of [
+    [50, 118, 'fruit'], [70, 120, 'noodle'], [90, 118, 'toys'],
+    [180, 118, 'fruit'], [210, 120, 'noodle'], [240, 118, 'toys'],
+  ]) put('stall_rb_' + x, 'aq_stall', x, y, { variant: v });
+  for (let x = 40; x <= 260; x += 18) put('lp_rb' + x, 'aq_lamppost', x, 116);
+  for (let x = 48; x <= 250; x += 24) put('lanterns_rb' + x, 'aq_lanterns', x, 122);
+  /* Site197：御街/巷再塞摊幌桌凳 */
+  for (const [x, y, v] of [
+    [28, 28, 'fruit'], [80, 42, 'noodle'], [110, 58, 'toys'],
+    [190, 28, 'fruit'], [230, 42, 'toys'], [260, 70, 'noodle'],
+    [55, 72, 'fruit'], [250, 80, 'toys'],
+  ]) put('stall_197_' + x + '_' + y, 'aq_stall', x, y, { variant: v });
+  put('tbl_197a', 'aq_table', CX - 6, 44, { variant: 'tea' });
+  put('tbl_197b', 'aq_table', CX + 6, 60, { variant: 'wine' });
+  put('cart_197', 'aq_cart', 90, 50);
+  put('bn_197a', 'aq_banner', 70, 40, { variant: 'cloth' });
+  put('bn_197b', 'aq_banner', 210, 40, { variant: 'med' });
+
+  root.SCENE_CHUNKS = root.SCENE_CHUNKS || {};
+  root.SCENE_CHUNKS.rqe_songcheng = { objects: list, colliders: [] };
+
+  const TAIL = (root.RONGQIAO_TAIL_CHUNKS = root.RONGQIAO_TAIL_CHUNKS || []);
+  if (!TAIL.some((c) => c.id === 'rqe_songcheng') && !(D.chunks || []).some((c) => c.id === 'rqe_songcheng')) {
+    TAIL.push({
+      id: 'rqe_songcheng',
+      name: '鹰山宋城',
+      rect: [BX0, BY0, BX1, BY1],
+      src: 'js/rongqiao_ancient_town.js',
+      load_m: 60,
+      unload_m: 120,
+    });
+  }
+
+  const spawn = W(CX, -95);
+  /* 虹桥步行带：ns 桥面 local X0–8 × Y−4–28 @ put(CX-4,91) */
+  const HONGQIAO_RECT = [OX + CX - 4, OY + 91 - 4, OX + CX + 4, OY + 91 + 28];
+  N.expansionSongcheng = Object.assign(N.expansionSongcheng || {}, {
+    unconfirmed: true,
+    teleport: true,
+    bridge: HONGQIAO_RECT.slice(),
+    names: {
+      district: '鹰山宋城',
+      gate: '南薰门',
+      street: '御街',
+      river: '汴河',
+      bridge: '虹桥',
+      jiulou: '望川楼',
+      chafang: '清风茶坊',
+      yamen: '梦华府',
+      shushu: '明德书塾',
+      paifang: '东京梦华',
+      goulan: '勾栏',
+      siyuan: '宝相寺',
+    },
+    district: [BX0, BY0, BX1, BY1],
+    spawn: [spawn[0], spawn[1], 'N'],
+    origin: [OX, OY],
+    site194: {
+      unconfirmed: true,
+      choice: 'dense_ornate',
+      footprint: [CW, CN],
+      buildings: list.filter((o) =>
+        /^aq_(wall_gate|jiulou|chafang|yamen|gongtang|shushu|shop_|paifang|ticket|hongqiao|siheyuan|corner|goulan|siyuan|haozhai|ting|lang|rockery)/.test(o.type)
+        || /aq_shop_/.test(o.type)).length,
+      props: list.length,
+      shops: list.filter((o) => /^aq_shop_/.test(o.type)).length,
+      stalls: list.filter((o) => o.type === 'aq_stall').length,
+      lanterns: list.filter((o) => o.type === 'aq_lanterns' || o.type === 'aq_lamppost').length,
+      facadeModules: list.filter((o) => /^aq_f_/.test(o.type)).length,
+      kitbash: true,
+      gate: true,
+      street: true,
+      river: true,
+      goulan: true,
+      siyuan: true,
+      siheyuan: true,
+      denserThan193: true,
+    },
+    site194TrackC: {
+      unconfirmed: true,
+      densify: true,
+      props: list.filter((o) => /aq_(lanterns|lamppost|stall|banner|table|planter|lion|willow|huai|cart|well)/.test(o.type)).length,
+      kinds: ['lanterns', 'banner', 'stall', 'table', 'lion', 'planter', 'trees'],
+    },
+    site197Street: {
+      unconfirmed: true,
+      densify: true,
+      focus: 'street_shop_props',
+      props: list.filter((o) => /aq_(lanterns|lamppost|stall|banner|table|planter|lion)/.test(o.type)).length,
+      facadeModules: list.filter((o) => /^aq_f_/.test(o.type)).length,
+      shops: list.filter((o) => /^aq_shop_/.test(o.type)).length,
+      stalls: list.filter((o) => o.type === 'aq_stall').length,
+      banners: list.filter((o) => o.type === 'aq_banner' || o.type === 'aq_f_banner' || o.type === 'aq_f_vsign').length,
+      lanterns: list.filter((o) => o.type === 'aq_lanterns' || o.type === 'aq_lamppost').length,
+      denserThan194: true,
+      kitbash: true,
+      avoidGenyueCore: true,
+    },
+    site197FacadeDetail: {
+      unconfirmed: true,
+      focus: 'facade_atlas_parts',
+      modules: ['win_wanzi_S', 'door_geshan_carved_S', 'door_ban_S', 'threshold_S', 'tile_ridge_S', 'dougong_large'],
+      facadeDougong: list.filter((o) => o.type === 'aq_f_dougong').length,
+      facadeDoors: list.filter((o) => o.type === 'aq_f_door').length,
+      facadeWindows: list.filter((o) => o.type === 'aq_f_window').length,
+      kitbash: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+    },
+    site197Plants: {
+      unconfirmed: true,
+      densify: true,
+      ponds: (_scenicPonds && _scenicPonds.waterRects && _scenicPonds.waterRects.length) || 0,
+      counts: _scenicCounts || null,
+      pines: list.filter((o) => o.type === 'aq_pine').length,
+      rocks: list.filter((o) => o.type === 'aq_rock').length,
+      bamboo: list.filter((o) => o.type === 'aq_bamboo').length,
+      willows: list.filter((o) => o.type === 'aq_willow').length,
+      reeds: list.filter((o) => o.type === 'aq_reed').length,
+      kinds: ['pine', 'willow', 'reed', 'rock', 'bamboo', 'planter', 'pond'],
+    },
+    site197: {
+      unconfirmed: true,
+      genyue: true,
+      courtyards: true,
+      dynamicPonds: true,
+      hongqiaoNs: true,
+      footprint: [CW, CN],
+      ting: list.filter((o) => o.type === 'aq_ting').length,
+      lang: list.filter((o) => o.type === 'aq_lang').length,
+      rockery: list.filter((o) => o.type === 'aq_rockery').length,
+      haozhai: list.filter((o) => o.type === 'aq_haozhai').length,
+      shops: list.filter((o) => /^aq_shop_/.test(o.type)).length,
+      props: list.length,
+      ponds: 5,
+    },
+    site197Dock: {
+      unconfirmed: true,
+      densify: true,
+      focus: 'bian_dock_boats_cargo',
+      counts: _dockCounts || null,
+      docks: list.filter((o) => o.type === 'aq_dock').length,
+      boats: list.filter((o) => o.type === 'aq_boat').length,
+      skiffs: list.filter((o) => o.type === 'aq_skiff').length,
+      cargos: list.filter((o) => o.type === 'aq_cargo').length,
+      carts: list.filter((o) => o.type === 'aq_cart').length,
+      denserThan194: true,
+      keepDynamicWater: true,
+      avoidGenyueCore: true,
+      kinds: ['dock', 'boat', 'skiff', 'cargo', 'cart'],
+    },
+    site198WallMerlon: {
+      unconfirmed: true,
+      focus: 'nanxun_wall_merlon_parapet_brick',
+      modules: ['city_brick_S', 'city_brick_W', 'city_stone_S', 'merlon_S', 'crenel_S', 'parapet_S', 'walk_top'],
+      walls: list.filter((o) => o.type === 'aq_city_wall').length,
+      gates: list.filter((o) => o.type === 'aq_wall_gate').length,
+      corners: list.filter((o) => o.type === 'aq_corner_tower').length,
+      kitbash: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanBaoxiangLayout: true,
+    },
+    site198Roof: {
+      unconfirmed: true,
+      focus: 'roof_ridge_wadang_chiwen_drip',
+      modules: ['tile_wadang_S', 'tile_drip_S', 'chiwen_S', 'chiwen_flip_S', 'tile_ridge_S', 'tile_eave_S'],
+      denseShopRoof: true,
+      densePublicRoof: true,
+      kitbash: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      shops: list.filter((o) => /^aq_shop_/.test(o.type)).length,
+      facadeRoofs: list.filter((o) => o.type === 'aq_f_roof').length,
+    },
+    site199NanxunPlaza: {
+      unconfirmed: true,
+      densify: true,
+      focus: 'nanxun_south_plaza_wengcheng_market',
+      plazaStalls: list.filter((o) => o.type === 'aq_stall'
+        && o.x >= OX + 80 && o.x <= OX + 220 && o.y >= OY - 122 && o.y <= OY - 70).length,
+      stalls: list.filter((o) => o.type === 'aq_stall').length,
+      banners: list.filter((o) => o.type === 'aq_banner'
+        && o.x >= OX + 80 && o.x <= OX + 220 && o.y >= OY - 122 && o.y <= OY - 70).length,
+      lanterns: list.filter((o) => (o.type === 'aq_lanterns' || o.type === 'aq_lamppost')
+        && o.x >= OX + 80 && o.x <= OX + 220 && o.y >= OY - 122 && o.y <= OY - 70).length,
+      tables: list.filter((o) => o.type === 'aq_table'
+        && o.x >= OX + 80 && o.x <= OX + 220 && o.y >= OY - 122 && o.y <= OY - 70).length,
+      planters: list.filter((o) => o.type === 'aq_planter'
+        && o.x >= OX + 80 && o.x <= OX + 220 && o.y >= OY - 122 && o.y <= OY - 70).length,
+      denserThan194: true,
+      keepDynamicWater: true,
+      keepDockDensify: true,
+      keepGenyue: true,
+      keepWallMerlon: true,
+      keepRoof: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanBaoxiangLayout: true,
+      kinds: ['stall', 'banner', 'lanterns', 'table', 'planter', 'cart', 'lion'],
+    },
+    site200LanternGlow: {
+      unconfirmed: true,
+      focus: 'lantern_banner_dusk_night_glow',
+      lanternGlow: true,
+      bannerGlow: true,
+      warmHalo: true,
+      groundWash: true,
+      duskGradeHook: true,
+      kitbash: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      lanterns: list.filter((o) => o.type === 'aq_lanterns' || o.type === 'aq_lamppost').length,
+      banners: list.filter((o) => o.type === 'aq_f_banner' || o.type === 'aq_banner').length,
+      awnings: list.filter((o) => o.type === 'aq_f_awning').length,
+      vsigns: list.filter((o) => o.type === 'aq_f_vsign').length,
+    },
+    site201RiverLamps: {
+      unconfirmed: true,
+      focus: 'bian_dock_boat_lamps_dusk_fishing_fires',
+      reuseLanternGlow: true,
+      boatLampGlow: true,
+      dockLampGlow: true,
+      waterReflect: true,
+      skiffLampGlow: true,
+      cargoLampGlow: true,
+      keepDockDensify: true,
+      keepDynamicWater: true,
+      duskGradeHook: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      docks: list.filter((o) => o.type === 'aq_dock').length,
+      boats: list.filter((o) => o.type === 'aq_boat').length,
+      skiffs: list.filter((o) => o.type === 'aq_skiff').length,
+      cargos: list.filter((o) => o.type === 'aq_cargo').length,
+    },
+    site201Signboards: {
+      unconfirmed: true,
+      focus: 'shop_signboard_plaque_banner_frame_refine',
+      plaqueWood: true,
+      vsignBoard: true,
+      bannerCream: true,
+      kitbash: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      plaques: list.filter((o) => o.type === 'aq_f_plaque').length,
+      banners: list.filter((o) => o.type === 'aq_f_banner' || o.type === 'aq_banner').length,
+      vsigns: list.filter((o) => o.type === 'aq_f_vsign').length,
+      shops: list.filter((o) => /^aq_shop_/.test(o.type)).length,
+    },
+    site202Paving: {
+      unconfirmed: true,
+      focus: 'yujie_plaza_paving_drain_curb',
+      fangzhuan: true,
+      tiaoshi: true,
+      xiewen: true,
+      drain: true,
+      curb: true,
+      kitbash: true,
+      groundRemap: true,
+      modules: ['pave_fangzhuan', 'pave_tiaoshi', 'pave_xiewen', 'drain_gutter', 'curb_stone'],
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      drains: list.filter((o) => o.type === 'aq_drain').length,
+      curbs: list.filter((o) => o.type === 'aq_curb').length,
+      legend: { S: 'aq_gpave:a', P: 'aq_gpave:b', R: 'aq_gpave:c' },
+    },
+    site203Lattice: {
+      unconfirmed: true,
+      focus: 'lattice_geshan_huachuang_door_geshan_sill_kanchuang',
+      modules: ['lattice_geshan_S', 'window_huachuang_S', 'door_geshan_bubujin_S', 'sill_kanchuang_S'],
+      latticeGeshan: true,
+      huachuang: true,
+      geshanBubujin: true,
+      kanchuang: true,
+      kitbash: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      keepPaving: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      facadeDoors: list.filter((o) => o.type === 'aq_f_door').length,
+      facadeWindows: list.filter((o) => o.type === 'aq_f_window').length,
+      facadeShops: list.filter((o) => o.type === 'aq_f_shop').length,
+      shops: list.filter((o) => /^aq_shop_/.test(o.type)).length,
+    },
+    site204StreetProps: {
+      unconfirmed: true,
+      densify: true,
+      focus: 'street_props_shideng_shiteng_huagang_lamp_pole',
+      kitbash: true,
+      atlasModules: ['prop_shideng', 'prop_shiteng', 'prop_huagang', 'prop_lamp_pole'],
+      mildGlowNoWater: true,
+      avoidDockFishingFireClash: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      keepSignboards: true,
+      keepPaving: true,
+      keepLattice: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      counts: _streetPropCounts || null,
+      shideng: list.filter((o) => o.type === 'aq_shideng').length,
+      shiteng: list.filter((o) => o.type === 'aq_shiteng').length,
+      huagang: list.filter((o) => o.type === 'aq_huagang').length,
+      lampPoles: list.filter((o) => o.type === 'aq_lamp_pole').length,
+      kinds: ['shideng', 'shiteng', 'huagang', 'lamp_pole'],
+    },
+    site205RoofTiles: {
+      unconfirmed: true,
+      focus: 'tile_wadang_dishui_walong_eave_yankou',
+      modules: ['tile_wadang', 'tile_dishui', 'tile_walong', 'eave_yankou'],
+      wadang: true,
+      dishui: true,
+      walong: true,
+      yankou: true,
+      kitbash: true,
+      denseShopRoof: true,
+      densePublicRoof: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      keepRoof198: true,
+      keepStreetProps: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      shops: list.filter((o) => /^aq_shop_/.test(o.type)).length,
+      facadeRoofs: list.filter((o) => o.type === 'aq_f_roof').length,
+      cornerTowers: list.filter((o) => o.type === 'aq_corner_tower').length,
+      wallGates: list.filter((o) => o.type === 'aq_wall_gate').length,
+    },
+    site206GableBrick: {
+      unconfirmed: true,
+      focus: 'wall_shangqiang_brick_qingshui_ornament_chitou_wall_cap',
+      modules: ['wall_shangqiang', 'brick_qingshui', 'ornament_chitou', 'wall_cap'],
+      shangqiang: true,
+      qingshui: true,
+      chitou: true,
+      wallCap: true,
+      kitbash: true,
+      densify: true,
+      stampSideWalls: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      keepRoofTiles: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      gables: list.filter((o) => o.type === 'aq_f_gable').length,
+      facadeWalls: list.filter((o) => o.type === 'aq_f_wall').length,
+      shops: list.filter((o) => /^aq_shop_/.test(o.type)).length,
+    },
+    site207RailQueti: {
+      unconfirmed: true,
+      focus: 'rail_xunzhang_ornament_queti_hanging_gualuo_baluster_xiaozhu',
+      modules: ['rail_xunzhang', 'ornament_queti', 'hanging_gualuo', 'baluster_xiaozhu'],
+      xunzhang: true,
+      queti: true,
+      gualuo: true,
+      xiaozhu: true,
+      kitbash: true,
+      densify: true,
+      stampCorridors: true,
+      stampFacades: true,
+      stampBridgeRail: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      avoidHongqiaoDockConflict: true,
+      langs: list.filter((o) => o.type === 'aq_lang').length,
+      hongqiao: list.filter((o) => o.type === 'aq_hongqiao').length,
+      doors: list.filter((o) => o.type === 'aq_f_door').length,
+      windows: list.filter((o) => o.type === 'aq_f_window').length,
+      shops: list.filter((o) => /^aq_shop_/.test(o.type) || o.type === 'aq_f_shop').length,
+    },
+    site208Caihua: {
+      unconfirmed: true,
+      focus: 'beam_efang_caihua_band_dougong_block_eave_board',
+      modules: ['beam_efang', 'caihua_band', 'dougong_block', 'eave_board'],
+      beamEfang: true,
+      caihuaBand: true,
+      dougongBlock: true,
+      eaveBoard: true,
+      kitbash: true,
+      densify: true,
+      stampEaves: true,
+      wangchuanLou: true,
+      chafang: true,
+      shopEaves: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      dougongFacades: list.filter((o) => o.type === 'aq_f_dougong').length,
+      shops: list.filter((o) => /^aq_shop_/.test(o.type)).length,
+      jiulou: list.filter((o) => o.type === 'aq_jiulou').length,
+      chafangCount: list.filter((o) => o.type === 'aq_chafang').length,
+    },
+    site209DoorHardware: {
+      unconfirmed: true,
+      focus: 'door_mending_knocker_pushou_sill_menkan_stone_baogu',
+      modules: ['door_mending', 'knocker_pushou', 'sill_menkan', 'stone_baogu'],
+      mending: true,
+      pushou: true,
+      menkan: true,
+      baogu: true,
+      kitbash: true,
+      densify: true,
+      stampNanxun: true,
+      stampYamen: true,
+      stampHaozhai: true,
+      stampFacades: true,
+      stampShops: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      wallGates: list.filter((o) => o.type === 'aq_wall_gate').length,
+      yamenGates: list.filter((o) => o.type === 'aq_yamen_gate').length,
+      haozhai: list.filter((o) => o.type === 'aq_haozhai').length,
+      doors: list.filter((o) => o.type === 'aq_f_door').length,
+      shops: list.filter((o) => /^aq_shop_/.test(o.type) || o.type === 'aq_f_shop').length,
+    },
+    site210Banners: {
+      unconfirmed: true,
+      focus: 'banner_qifan_curtain_weiman_tassel_liusu_hang_ornament',
+      modules: ['banner_qifan', 'curtain_weiman', 'tassel_liusu', 'hang_ornament'],
+      qifan: true,
+      weiman: true,
+      liusu: true,
+      hangOrnament: true,
+      kitbash: true,
+      densify: true,
+      stampEaves: true,
+      stampAwning: true,
+      stampJiulou: true,
+      stampChafang: true,
+      stampShopCorners: true,
+      complementSignboards: true,
+      avoidBannerStack: true,
+      wangchuanLou: true,
+      chafang: true,
+      yujie: true,
+      nanxunPlaza: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      awnings: list.filter((o) => o.type === 'aq_f_awning').length,
+      banners: list.filter((o) => o.type === 'aq_f_banner').length,
+      jiulou: list.filter((o) => o.type === 'aq_jiulou').length,
+      chafangCount: list.filter((o) => o.type === 'aq_chafang').length,
+      shops: list.filter((o) => /^aq_shop_/.test(o.type) || o.type === 'aq_f_shop').length,
+    },
+    site211Platform: {
+      unconfirmed: true,
+      focus: 'base_taiji_step_tiaotiao_ramp_chuidai_stair_taduo',
+      modules: ['base_taiji', 'step_tiaotiao', 'ramp_chuidai', 'stair_taduo'],
+      taiji: true,
+      tiaotiao: true,
+      chuidai: true,
+      taduo: true,
+      kitbash: true,
+      densify: true,
+      stampNanxun: true,
+      stampYamen: true,
+      stampJiulou: true,
+      stampGongtang: true,
+      stampHaozhai: true,
+      stampFacades: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      wallGates: list.filter((o) => o.type === 'aq_wall_gate').length,
+      yamenGates: list.filter((o) => o.type === 'aq_yamen_gate').length,
+      jiulou: list.filter((o) => o.type === 'aq_jiulou').length,
+      gongtang: list.filter((o) => o.type === 'aq_gongtang').length,
+      haozhai: list.filter((o) => o.type === 'aq_haozhai').length,
+      bases: list.filter((o) => o.type === 'aq_f_base').length,
+    },
+    /* Site212：影壁/照壁/砖雕花心 atlas 细化（南薰门内·府邸入口·巷口；不堵主路） */
+    site212Yingbi: {
+      unconfirmed: true,
+      focus: 'wall_yingbi_wall_zhaobi_brick_huaxin_screen_base',
+      modules: ['wall_yingbi', 'wall_zhaobi', 'brick_huaxin', 'screen_base'],
+      yingbi: true,
+      zhaobi: true,
+      huaxin: true,
+      screenBase: true,
+      kitbash: true,
+      densify: true,
+      stampNanxun: true,
+      stampYamen: true,
+      stampHaozhai: true,
+      stampSiheyuan: true,
+      alleyStamp: true,
+      noBlockMainRoad: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      wallGates: list.filter((o) => o.type === 'aq_wall_gate').length,
+      yamenGates: list.filter((o) => o.type === 'aq_yamen_gate').length,
+      haozhai: list.filter((o) => o.type === 'aq_haozhai').length,
+      siheyuan: list.filter((o) => o.type === 'aq_siheyuan').length,
+      yingbiPuts: list.filter((o) => o.type === 'aq_yingbi' || o.type === 'aq_zhaobi').length,
+    },
+    site213RidgeBeasts: {
+      unconfirmed: true,
+      focus: 'ridge_chiwen_beast_zoushou_ridge_ornament_hip_chuiji',
+      modules: ['ridge_chiwen', 'beast_zoushou', 'ridge_ornament', 'hip_chuiji'],
+      chiwen: true,
+      zoushou: true,
+      ornament: true,
+      chuiji: true,
+      kitbash: true,
+      densify: true,
+      stampNanxun: true,
+      stampJiulou: true,
+      stampHaozhai: true,
+      stampYamen: true,
+      stampFacades: true,
+      keepPlatform: true,
+      keepYingbi: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      wallGates: list.filter((o) => o.type === 'aq_wall_gate').length,
+      jiulou: list.filter((o) => o.type === 'aq_jiulou').length,
+      haozhai: list.filter((o) => o.type === 'aq_haozhai').length,
+      yamenGates: list.filter((o) => o.type === 'aq_yamen_gate').length,
+      gongtang: list.filter((o) => o.type === 'aq_gongtang').length,
+    },
+    site214Screens: {
+      unconfirmed: true,
+      focus: 'screen_luodizhao_partition_geshan_moon_yuedong_frame_menkuang',
+      modules: ['screen_luodizhao', 'partition_geshan', 'moon_yuedong', 'frame_menkuang'],
+      screens: true,
+      luodizhao: true,
+      partitionGeshan: true,
+      yuedong: true,
+      menkuang: true,
+      kitbash: true,
+      densify: true,
+      stampChafang: true,
+      stampJiulou: true,
+      stampHaozhai: true,
+      stampLang: true,
+      complementLattice: true,
+      keepHitching: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      chafang: list.filter((o) => o.type === 'aq_chafang').length,
+      jiulou: list.filter((o) => o.type === 'aq_jiulou').length,
+      haozhai: list.filter((o) => o.type === 'aq_haozhai').length,
+      lang: list.filter((o) => o.type === 'aq_lang').length,
+    },
+    site215Hitching: {
+      unconfirmed: true,
+      focus: 'post_shuanma_stone_shangma_stone_ganddang_curb_marker',
+      modules: ['post_shuanma', 'stone_shangma', 'stone_ganddang', 'curb_marker'],
+      shuanma: true,
+      shangma: true,
+      ganddang: true,
+      curbMarker: true,
+      kitbash: true,
+      densify: true,
+      stampYujie: true,
+      stampNanxun: true,
+      stampHaozhai: true,
+      stampYamen: true,
+      complementStreetProps: true,
+      complementPlatform: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      shuanmaPuts: list.filter((o) => o.type === 'aq_shuanma').length,
+      shangmaPuts: list.filter((o) => o.type === 'aq_shangma').length,
+      ganddangPuts: list.filter((o) => o.type === 'aq_ganddang').length,
+      curbMarkerPuts: list.filter((o) => o.type === 'aq_curb_marker').length,
+      counts: _streetPropCounts || null,
+    },
+    site216Louwindow: {
+      unconfirmed: true,
+      focus: 'window_lou_wall_huaziang_brick_toukong_lattice_wall',
+      modules: ['window_lou', 'wall_huaziang', 'brick_toukong', 'lattice_wall'],
+      windowLou: true,
+      wallHuaziang: true,
+      brickToukong: true,
+      latticeWall: true,
+      kitbash: true,
+      densify: true,
+      stampGenyue: true,
+      stampHaozhai: true,
+      stampAlley: true,
+      stampLang: true,
+      stampSiheyuan: true,
+      complementLattice: true,
+      complementYingbi: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      windowLouPuts: list.filter((o) => o.type === 'aq_window_lou').length,
+      wallHuaziangPuts: list.filter((o) => o.type === 'aq_wall_huaziang').length,
+      brickToukongPuts: list.filter((o) => o.type === 'aq_brick_toukong').length,
+      latticeWallPuts: list.filter((o) => o.type === 'aq_lattice_wall').length,
+      haozhai: list.filter((o) => o.type === 'aq_haozhai').length,
+      lang: list.filter((o) => o.type === 'aq_lang').length,
+      counts: _streetPropCounts || null,
+    },
+    site217Pavilions: {
+      unconfirmed: true,
+      focus: 'pavilion_jingting_pavilion_luting_gate_paifang_s_roof_ting',
+      modules: ['pavilion_jingting', 'pavilion_luting', 'gate_paifang_s', 'roof_ting'],
+      jingting: true,
+      luting: true,
+      paifangS: true,
+      roofTing: true,
+      kitbash: true,
+      densify: true,
+      stampYujieCross: true,
+      stampBianhe: true,
+      stampGenyueEntrance: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      jingtingPuts: list.filter((o) => o.type === 'aq_jingting').length,
+      lutingPuts: list.filter((o) => o.type === 'aq_luting').length,
+      paifangSPuts: list.filter((o) => o.type === 'aq_paifang_s').length,
+      counts: _streetPropCounts || null,
+    },
+    site218Chuihuamen: {
+      unconfirmed: true,
+      focus: 'gate_chuihua_gate_menlou_s_eave_menzhao_post_menzhu',
+      modules: ['gate_chuihua', 'gate_menlou_s', 'eave_menzhao', 'post_menzhu'],
+      chuihua: true,
+      menlouS: true,
+      menzhao: true,
+      menzhu: true,
+      kitbash: true,
+      densify: true,
+      stampHaozhaiGate: true,
+      stampSiheyuanGate: true,
+      stampAlleyMouth: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      chuihuaPuts: list.filter((o) => o.type === 'aq_chuihua').length,
+      menlouSPuts: list.filter((o) => o.type === 'aq_menlou_s').length,
+      menzhaoPuts: list.filter((o) => o.type === 'aq_menzhao').length,
+      menzhuPuts: list.filter((o) => o.type === 'aq_menzhu').length,
+      counts: _streetPropCounts || null,
+    },
+    site219Rockery: {
+      unconfirmed: true,
+      focus: 'rock_taihu_rock_dieshi_rock_peak_s_plant_rock_moss',
+      modules: ['rock_taihu', 'rock_dieshi', 'rock_peak_s', 'plant_rock_moss'],
+      rockTaihu: true,
+      rockDieshi: true,
+      rockPeakS: true,
+      plantRockMoss: true,
+      kitbash: true,
+      densify: true,
+      stampHaozhaiCourt: true,
+      stampGenyuePeriphery: true,
+      stampLangSide: true,
+      pointScenic: true,
+      noBlockYujie: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      rockTaihuPuts: list.filter((o) => o.type === 'aq_rock_taihu').length,
+      rockDieshiPuts: list.filter((o) => o.type === 'aq_rock_dieshi').length,
+      rockPeakSPuts: list.filter((o) => o.type === 'aq_rock_peak_s').length,
+      rockMossPuts: list.filter((o) => o.type === 'aq_rock_moss').length,
+      counts: _streetPropCounts || null,
+    },
+    site220Meirenkao: {
+      unconfirmed: true,
+      focus: 'seat_meirenkao_seat_feilaichi_rail_zuokan_bench_lang',
+      modules: ['seat_meirenkao', 'seat_feilaichi', 'rail_zuokan', 'bench_lang'],
+      meirenkao: true,
+      feilaichi: true,
+      zuokan: true,
+      benchLang: true,
+      kitbash: true,
+      densify: true,
+      stampLangSide: true,
+      stampPavilionSide: true,
+      stampBianheView: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepRockery: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      meirenkaoPuts: list.filter((o) => o.type === 'aq_meirenkao').length,
+      feilaichiPuts: list.filter((o) => o.type === 'aq_feilaichi').length,
+      zuokanPuts: list.filter((o) => o.type === 'aq_zuokan').length,
+      benchLangPuts: list.filter((o) => o.type === 'aq_bench_lang').length,
+      counts: _streetPropCounts || null,
+    },
+    site221Biane: {
+      unconfirmed: true,
+      focus: 'sign_biane_sign_duilian_sign_zhaopai_s_sign_hanging',
+      modules: ['sign_biane', 'sign_duilian', 'sign_zhaopai_s', 'sign_hanging'],
+      biane: true,
+      duilian: true,
+      zhaopaiS: true,
+      hanging: true,
+      kitbash: true,
+      densify: true,
+      stampShopLintel: true,
+      stampHouseDoor: true,
+      stampAlleyMouth: true,
+      stampPavilionSide: true,
+      complementSite201: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      bianePuts: list.filter((o) => o.type === 'aq_biane').length,
+      duilianPuts: list.filter((o) => o.type === 'aq_duilian').length,
+      zhaopaiSPuts: list.filter((o) => o.type === 'aq_zhaopai_s').length,
+      hangingSignPuts: list.filter((o) => o.type === 'aq_hanging_sign').length,
+      counts: _streetPropCounts || null,
+    },
+    site222Baogu: {
+      unconfirmed: true,
+      focus: 'stone_baogu_stone_mendun_stone_lu',
+      modules: ['stone_baogu', 'stone_mendun', 'stone_lu'],
+      baogu: true,
+      stoneBaogu: true,
+      stoneMendun: true,
+      stoneLu: true,
+      kitbash: true,
+      densify: true,
+      stampGateSide: true,
+      stampChuihuaFront: true,
+      stampAlleyMouth: true,
+      stampHaozhaiGate: true,
+      pointScenic: true,
+      noBlockYujie: true,
+      complementHitching: true,
+      complementRockery: true,
+      keepBiane: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      baoguPuts: list.filter((o) => o.type === 'aq_baogu').length,
+      mendunPuts: list.filter((o) => o.type === 'aq_mendun').length,
+      stoneLuPuts: list.filter((o) => o.type === 'aq_stone_lu').length,
+      counts: _streetPropCounts || null,
+    },
+    site223Penjing: {
+      unconfirmed: true,
+      focus: 'pot_penjing_bed_huatan_stone_shitai',
+      modules: ['pot_penjing', 'bed_huatan', 'stone_shitai'],
+      penjing: true,
+      huatan: true,
+      shitai: true,
+      potPenjing: true,
+      bedHuatan: true,
+      stoneShitai: true,
+      kitbash: true,
+      densify: true,
+      stampCourtyard: true,
+      stampAlleyMouth: true,
+      stampBridgeHead: true,
+      stampPavilionSide: true,
+      stampDoorFront: true,
+      complementPlants: true,
+      complementRockery: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepBiane: true,
+      keepBaogu: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepPlants: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      penjingPuts: list.filter((o) => o.type === 'aq_penjing').length,
+      huatanPuts: list.filter((o) => o.type === 'aq_huatan').length,
+      shitaiPuts: list.filter((o) => o.type === 'aq_shitai').length,
+      counts: _streetPropCounts || null,
+    },
+    site224Shishi: {
+      unconfirmed: true,
+      focus: 'stone_shishi_stone_shishi_s',
+      modules: ['stone_shishi', 'stone_shishi_s'],
+      shishi: true,
+      stoneShishi: true,
+      stoneShishiS: true,
+      kitbash: true,
+      densify: true,
+      stampGateSide: true,
+      stampBridgeHead: true,
+      stampPlazaEntrance: true,
+      stampYamenTempleFront: true,
+      pointScenic: true,
+      noBlockYujie: true,
+      gateBeastNotRidge: true,
+      complementBaogu: true,
+      complementRidgeBeasts: true,
+      keepBaogu: true,
+      keepPenjing: true,
+      keepBiane: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      shishiPuts: list.filter((o) => o.type === 'aq_shishi').length,
+      shishiSPuts: list.filter((o) => o.type === 'aq_shishi_s').length,
+      counts: _streetPropCounts || null,
+    },
+    site225Gongdeng: {
+      unconfirmed: true,
+      focus: 'lantern_gong_lantern_sha_lantern_stand',
+      modules: ['lantern_gong', 'lantern_sha', 'lantern_stand'],
+      gongdeng: true,
+      shadeng: true,
+      lideng: true,
+      lanternGong: true,
+      lanternSha: true,
+      lanternStand: true,
+      kitbash: true,
+      densify: true,
+      stampLintel: true,
+      stampPavilionCorner: true,
+      stampBridgeRail: true,
+      stampAlleyMouth: true,
+      stampHaozhaiCorridor: true,
+      complementLanterns: true,
+      complementLanternGlow: true,
+      complementRiverLamps: true,
+      noWaterEmit: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepPenjing: true,
+      keepShishi: true,
+      keepBaogu: true,
+      keepBiane: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepPlants: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      gongdengPuts: list.filter((o) => o.type === 'aq_gongdeng').length,
+      shadengPuts: list.filter((o) => o.type === 'aq_shadeng').length,
+      lidengPuts: list.filter((o) => o.type === 'aq_lideng').length,
+      counts: _streetPropCounts || null,
+    },
+    site226Zhuli: {
+      unconfirmed: true,
+      focus: 'fence_zhuli_fence_huali_gate_chaifei',
+      modules: ['fence_zhuli', 'fence_huali', 'gate_chaifei'],
+      zhuli: true,
+      huali: true,
+      chaifei: true,
+      fenceZhuli: true,
+      fenceHuali: true,
+      gateChaifei: true,
+      kitbash: true,
+      densify: true,
+      stampAlleyMouth: true,
+      stampHouseSide: true,
+      stampGardenEdge: true,
+      stampBridgePath: true,
+      complementLouwindow: true,
+      complementScreens: true,
+      complementPartition: true,
+      outdoorFenceGate: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepGongdeng: true,
+      keepPenjing: true,
+      keepShishi: true,
+      keepBaogu: true,
+      keepBiane: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepPlants: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      zhuliPuts: list.filter((o) => o.type === 'aq_zhuli').length,
+      hualiPuts: list.filter((o) => o.type === 'aq_huali').length,
+      chaifeiPuts: list.filter((o) => o.type === 'aq_chaifei').length,
+      counts: _streetPropCounts || null,
+    },
+    site227Huotan: {
+      unconfirmed: true,
+      focus: 'stall_huotan_rack_huojia_pole_liangshai',
+      modules: ['stall_huotan', 'rack_huojia', 'pole_liangshai'],
+      huotan: true,
+      huojia: true,
+      liangshai: true,
+      stallHuotan: true,
+      rackHuojia: true,
+      poleLiangshai: true,
+      kitbash: true,
+      densify: true,
+      stampMainStreet: true,
+      stampAlleyMouth: true,
+      stampBridgeHead: true,
+      stampHouseFront: true,
+      complementSignboards: true,
+      complementStreetProps: true,
+      noWaterEmit: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepZhuli: true,
+      keepGongdeng: true,
+      keepPenjing: true,
+      keepShishi: true,
+      keepBaogu: true,
+      keepBiane: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepPlants: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      noNewGoulan: true,
+      noNewSiyuan: true,
+      noNewBrt: true,
+      huotanPuts: list.filter((o) => o.type === 'aq_huotan').length,
+      huojiaPuts: list.filter((o) => o.type === 'aq_huojia').length,
+      liangshaiPuts: list.filter((o) => o.type === 'aq_liangshai').length,
+      counts: _streetPropCounts || null,
+    },
+    site228Shizhuo: {
+      unconfirmed: true,
+      focus: 'seat_shizhuo_seat_shideng_seat_qiping',
+      modules: ['seat_shizhuo', 'seat_shideng', 'seat_qiping'],
+      shizhuo: true,
+      shideng: true,
+      qiping: true,
+      seatShizhuo: true,
+      seatShideng: true,
+      seatQiping: true,
+      kitbash: true,
+      densify: true,
+      stampCourtyard: true,
+      stampAlleyCorner: true,
+      stampPavilionSide: true,
+      stampBridgeHead: true,
+      stampUnderTree: true,
+      complementMeirenkao: true,
+      complementStreetProps: true,
+      courtyardSitPlay: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepHuotan: true,
+      keepZhuli: true,
+      keepGongdeng: true,
+      keepPenjing: true,
+      keepShishi: true,
+      keepBaogu: true,
+      keepBiane: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepPlants: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      noNewGoulan: true,
+      noNewSiyuan: true,
+      noNewBrt: true,
+      shizhuoPuts: list.filter((o) => o.type === 'aq_shizhuo').length,
+      shidengPuts: list.filter((o) => o.type === 'aq_seat_shideng').length,
+      qipingPuts: list.filter((o) => o.type === 'aq_qiping').length,
+      counts: _streetPropCounts || null,
+    },
+    site229Shuigang: {
+      unconfirmed: true,
+      focus: 'prop_shuigang_prop_jinglan_prop_shuitong',
+      modules: ['prop_shuigang', 'prop_jinglan', 'prop_shuitong'],
+      shuigang: true,
+      jinglan: true,
+      shuitong: true,
+      propShuigang: true,
+      propJinglan: true,
+      propShuitong: true,
+      kitbash: true,
+      densify: true,
+      stampCourtyardCorner: true,
+      stampAlleyMouth: true,
+      stampWellSide: true,
+      stampKitchenBack: true,
+      stampBridgeHead: true,
+      complementJingting: true,
+      complementPavilions: true,
+      complementStreetProps: true,
+      waterFetchStore: true,
+      pointScenic: true,
+      noPavilionBuilding: true,
+      noBlockRoad: true,
+      keepHuotan: true,
+      keepShizhuo: true,
+      keepZhuli: true,
+      keepGongdeng: true,
+      keepPenjing: true,
+      keepShishi: true,
+      keepBaogu: true,
+      keepBiane: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepPlants: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      noNewGoulan: true,
+      noNewSiyuan: true,
+      noNewBrt: true,
+      shuigangPuts: list.filter((o) => o.type === 'aq_shuigang').length,
+      jinglanPuts: list.filter((o) => o.type === 'aq_jinglan').length,
+      shuitongPuts: list.filter((o) => o.type === 'aq_shuitong').length,
+      counts: _streetPropCounts || null,
+    },
+    site230Xianglu: {
+      unconfirmed: true,
+      focus: 'prop_xianglu_prop_zhutai_prop_gongan_s',
+      modules: ['prop_xianglu', 'prop_zhutai', 'prop_gongan_s'],
+      xianglu: true,
+      zhutai: true,
+      gonganS: true,
+      propXianglu: true,
+      propZhutai: true,
+      propGonganS: true,
+      kitbash: true,
+      densify: true,
+      stampYingbiFront: true,
+      stampHouseGateInner: true,
+      stampPavilionSide: true,
+      stampAlleyNiche: true,
+      stampCourtyardCorner: true,
+      complementYingbi: true,
+      complementBiane: true,
+      incenseAltarScenic: true,
+      pointScenic: true,
+      noTempleHallLayout: true,
+      noBlockRoad: true,
+      keepChaidui: true,
+      keepShuigang: true,
+      keepShizhuo: true,
+      keepHuotan: true,
+      keepZhuli: true,
+      keepGongdeng: true,
+      keepPenjing: true,
+      keepShishi: true,
+      keepBaogu: true,
+      keepBiane: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepPlants: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      noNewGoulan: true,
+      noNewSiyuan: true,
+      noNewBrt: true,
+      xiangluPuts: list.filter((o) => o.type === 'aq_xianglu').length,
+      zhutaiPuts: list.filter((o) => o.type === 'aq_zhutai').length,
+      gonganPuts: list.filter((o) => o.type === 'aq_gongan_s').length,
+      counts: _streetPropCounts || null,
+    },
+    site231Chaidui: {
+      unconfirmed: true,
+      focus: 'prop_chaidui_prop_caoduo_prop_liangdai',
+      modules: ['prop_chaidui', 'prop_caoduo', 'prop_liangdai'],
+      chaidui: true,
+      caoduo: true,
+      liangdai: true,
+      propChaidui: true,
+      propCaoduo: true,
+      propLiangdai: true,
+      kitbash: true,
+      densify: true,
+      stampHouseBack: true,
+      stampKitchenSide: true,
+      stampAlleyMouth: true,
+      stampDockSide: true,
+      stampStableSide: true,
+      complementHuotan: true,
+      complementShuigang: true,
+      complementStreetProps: true,
+      fuelFodderGrainStore: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepXianglu: true,
+      keepShuigang: true,
+      keepHuotan: true,
+      keepShizhuo: true,
+      keepZhuli: true,
+      keepGongdeng: true,
+      keepPenjing: true,
+      keepShishi: true,
+      keepBaogu: true,
+      keepBiane: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepPlants: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      noNewGoulan: true,
+      noNewSiyuan: true,
+      noNewBrt: true,
+      chaiduiPuts: list.filter((o) => o.type === 'aq_chaidui').length,
+      caoduoPuts: list.filter((o) => o.type === 'aq_caoduo').length,
+      liangdaiPuts: list.filter((o) => o.type === 'aq_liangdai').length,
+      counts: _streetPropCounts || null,
+    },
+    site232Jiutan: {
+      unconfirmed: true,
+      focus: 'prop_jiutan_prop_taoweng_prop_jiuqi',
+      modules: ['prop_jiutan', 'prop_taoweng', 'prop_jiuqi'],
+      jiutan: true,
+      taoweng: true,
+      jiuqi: true,
+      propJiutan: true,
+      propTaoweng: true,
+      propJiuqi: true,
+      kitbash: true,
+      densify: true,
+      stampTavernFront: true,
+      stampAlleyMouth: true,
+      stampDockSide: true,
+      stampKitchenOut: true,
+      stampCourtyardWall: true,
+      complementHuotan: true,
+      complementShuigang: true,
+      complementChaidui: true,
+      complementStreetProps: true,
+      wineJarUrnFlag: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepChaidui: true,
+      keepXianglu: true,
+      keepShuigang: true,
+      keepHuotan: true,
+      keepShizhuo: true,
+      keepZhuli: true,
+      keepGongdeng: true,
+      keepPenjing: true,
+      keepShishi: true,
+      keepBaogu: true,
+      keepBiane: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepPlants: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      noNewGoulan: true,
+      noNewSiyuan: true,
+      noNewBrt: true,
+      jiutanPuts: list.filter((o) => o.type === 'aq_jiutan').length,
+      taowengPuts: list.filter((o) => o.type === 'aq_taoweng').length,
+      jiuqiPuts: list.filter((o) => o.type === 'aq_jiuqi').length,
+      counts: _streetPropCounts || null,
+    },
+    site233Shima: {
+      unconfirmed: true,
+      focus: 'prop_shima_prop_nianpan_prop_shijiu',
+      modules: ['prop_shima', 'prop_nianpan', 'prop_shijiu'],
+      shima: true,
+      nianpan: true,
+      shijiu: true,
+      propShima: true,
+      propNianpan: true,
+      propShijiu: true,
+      kitbash: true,
+      densify: true,
+      stampKitchenSide: true,
+      stampHouseBack: true,
+      stampMillAlley: true,
+      stampGrainSackSide: true,
+      stampStableSide: true,
+      complementChaidui: true,
+      complementLiangdai: true,
+      complementStreetProps: true,
+      millGrindMortar: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepChaidui: true,
+      keepXianglu: true,
+      keepShuigang: true,
+      keepHuotan: true,
+      keepShizhuo: true,
+      keepZhuli: true,
+      keepGongdeng: true,
+      keepPenjing: true,
+      keepShishi: true,
+      keepBaogu: true,
+      keepBiane: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepPlants: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      noNewGoulan: true,
+      noNewSiyuan: true,
+      noNewBrt: true,
+      shimaPuts: list.filter((o) => o.type === 'aq_shima').length,
+      nianpanPuts: list.filter((o) => o.type === 'aq_nianpan').length,
+      shijiuPuts: list.filter((o) => o.type === 'aq_shijiu').length,
+      counts: _streetPropCounts || null,
+    },
+    site234Liangyi: {
+      unconfirmed: true,
+      focus: 'prop_liangyi_prop_yulou_prop_zhukuang',
+      modules: ['prop_liangyi', 'prop_yulou', 'prop_zhukuang'],
+      liangyi: true,
+      yulou: true,
+      zhukuang: true,
+      propLiangyi: true,
+      propYulou: true,
+      propZhukuang: true,
+      kitbash: true,
+      densify: true,
+      stampHouseBack: true,
+      stampKitchenSide: true,
+      stampAlleyMouth: true,
+      stampDockSide: true,
+      complementChaidui: true,
+      complementHuotanLiangshai: true,
+      complementStreetProps: true,
+      clothesBasketScenic: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepChaidui: true,
+      keepShima: true,
+      keepXianglu: true,
+      keepShuigang: true,
+      keepHuotan: true,
+      keepShizhuo: true,
+      keepZhuli: true,
+      keepGongdeng: true,
+      keepPenjing: true,
+      keepShishi: true,
+      keepBaogu: true,
+      keepBiane: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepPlants: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      noNewGoulan: true,
+      noNewSiyuan: true,
+      noNewBrt: true,
+      liangyiPuts: list.filter((o) => o.type === 'aq_liangyi').length,
+      yulouPuts: list.filter((o) => o.type === 'aq_yulou').length,
+      zhukuangPuts: list.filter((o) => o.type === 'aq_zhukuang').length,
+      counts: _streetPropCounts || null,
+    },
+    site235Jilong: {
+      unconfirmed: true,
+      focus: 'prop_jilong_prop_niaolong_prop_yashe',
+      modules: ['prop_jilong', 'prop_niaolong', 'prop_yashe'],
+      jilong: true,
+      niaolong: true,
+      yashe: true,
+      propJilong: true,
+      propNiaolong: true,
+      propYashe: true,
+      kitbash: true,
+      densify: true,
+      stampHouseBack: true,
+      stampKitchenSide: true,
+      stampAlleyMouth: true,
+      stampStableSide: true,
+      complementChaidui: true,
+      complementLiangyi: true,
+      complementShima: true,
+      complementStreetProps: true,
+      poultryScenic: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepChaidui: true,
+      keepShima: true,
+      keepLiangyi: true,
+      keepJiutan: true,
+      keepXianglu: true,
+      keepShuigang: true,
+      keepHuotan: true,
+      keepShizhuo: true,
+      keepZhuli: true,
+      keepGongdeng: true,
+      keepPenjing: true,
+      keepShishi: true,
+      keepBaogu: true,
+      keepBiane: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepPlants: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      noNewGoulan: true,
+      noNewSiyuan: true,
+      noNewBrt: true,
+      jilongPuts: list.filter((o) => o.type === 'aq_jilong').length,
+      niaolongPuts: list.filter((o) => o.type === 'aq_niaolong').length,
+      yashePuts: list.filter((o) => o.type === 'aq_yashe').length,
+      counts: _streetPropCounts || null,
+    },
+    site236Putuan: {
+      unconfirmed: true,
+      focus: 'prop_putuan_prop_chazao_prop_chaju',
+      modules: ['prop_putuan', 'prop_chazao', 'prop_chaju'],
+      putuan: true,
+      chazao: true,
+      chaju: true,
+      propPutuan: true,
+      propChazao: true,
+      propChaju: true,
+      kitbash: true,
+      densify: true,
+      stampCorridor: true,
+      stampStoneTableSide: true,
+      stampCourtyard: true,
+      stampTeaStallSide: true,
+      complementShizhuo: true,
+      complementHuotan: true,
+      complementJilong: true,
+      complementLiangyi: true,
+      complementStreetProps: true,
+      teaScenic: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepChaidui: true,
+      keepShima: true,
+      keepJiutan: true,
+      keepJilong: true,
+      keepLiangyi: true,
+      keepXianglu: true,
+      keepShuigang: true,
+      keepHuotan: true,
+      keepShizhuo: true,
+      keepZhuli: true,
+      keepGongdeng: true,
+      keepPenjing: true,
+      keepShishi: true,
+      keepBaogu: true,
+      keepBiane: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepPlants: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      noNewGoulan: true,
+      noNewSiyuan: true,
+      noNewBrt: true,
+      putuanPuts: list.filter((o) => o.type === 'aq_putuan').length,
+      chazaoPuts: list.filter((o) => o.type === 'aq_chazao').length,
+      chajuPuts: list.filter((o) => o.type === 'aq_chaju').length,
+      counts: _streetPropCounts || null,
+    },
+    site237Shuan: {
+      unconfirmed: true,
+      focus: 'prop_shuan_prop_qipan_prop_bijia',
+      modules: ['prop_shuan', 'prop_qipan', 'prop_bijia'],
+      shuan: true,
+      qipan: true,
+      bijia: true,
+      propShuan: true,
+      propQipan: true,
+      propBijia: true,
+      kitbash: true,
+      densify: true,
+      stampCorridor: true,
+      stampStoneTableSide: true,
+      stampStudyEave: true,
+      stampTeaSeatSide: true,
+      complementShizhuo: true,
+      complementPutuan: true,
+      complementQiping: true,
+      complementJilong: true,
+      complementLiangyi: true,
+      complementStreetProps: true,
+      studyScenic: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepPutuan: true,
+      keepJilong: true,
+      keepLiangyi: true,
+      keepChaidui: true,
+      keepShima: true,
+      keepJiutan: true,
+      keepXianglu: true,
+      keepShuigang: true,
+      keepHuotan: true,
+      keepShizhuo: true,
+      keepZhuli: true,
+      keepGongdeng: true,
+      keepPenjing: true,
+      keepShishi: true,
+      keepBaogu: true,
+      keepBiane: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepPlants: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      noNewGoulan: true,
+      noNewSiyuan: true,
+      noNewBrt: true,
+      shuanPuts: list.filter((o) => o.type === 'aq_shuan').length,
+      qipanPuts: list.filter((o) => o.type === 'aq_qipan').length,
+      bijiaPuts: list.filter((o) => o.type === 'aq_bijia').length,
+      counts: _streetPropCounts || null,
+    },
+    site238Huajia: {
+      unconfirmed: true,
+      focus: 'prop_huajia_prop_zhuji_prop_bogu',
+      modules: ['prop_huajia', 'prop_zhuji', 'prop_bogu'],
+      huajia: true,
+      zhuji: true,
+      bogu: true,
+      propHuajia: true,
+      propZhuji: true,
+      propBogu: true,
+      kitbash: true,
+      densify: true,
+      stampCourtyard: true,
+      stampCorridor: true,
+      stampHaozhaiSide: true,
+      stampTeaSeatSide: true,
+      complementPenjing: true,
+      complementPutuan: true,
+      complementShuan: true,
+      complementBaogu: true,
+      complementShizhuo: true,
+      complementStreetProps: true,
+      flowerScenic: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepShuan: true,
+      keepPutuan: true,
+      keepJilong: true,
+      keepLiangyi: true,
+      keepChaidui: true,
+      keepShima: true,
+      keepJiutan: true,
+      keepXianglu: true,
+      keepShuigang: true,
+      keepHuotan: true,
+      keepShizhuo: true,
+      keepZhuli: true,
+      keepGongdeng: true,
+      keepPenjing: true,
+      keepShishi: true,
+      keepBaogu: true,
+      keepBiane: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepPlants: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      noNewGoulan: true,
+      noNewSiyuan: true,
+      noNewBrt: true,
+      huajiaPuts: list.filter((o) => o.type === 'aq_huajia').length,
+      zhujiPuts: list.filter((o) => o.type === 'aq_zhuji').length,
+      boguPuts: list.filter((o) => o.type === 'aq_bogu').length,
+      counts: _streetPropCounts || null,
+    },
+    site239Huangzi: {
+      unconfirmed: true,
+      focus: 'prop_chuanleng_prop_huangzi_prop_zhaohuang',
+      modules: ['prop_chuanleng', 'prop_huangzi', 'prop_zhaohuang'],
+      chuanleng: true,
+      huangzi: true,
+      zhaohuang: true,
+      propChuanleng: true,
+      propHuangzi: true,
+      propZhaohuang: true,
+      kitbash: true,
+      densify: true,
+      stampShopDoor: true,
+      stampAlleyMouth: true,
+      stampTavernEave: true,
+      stampTeaStallEave: true,
+      complementGongdeng: true,
+      complementJiuqi: true,
+      complementSignboards: true,
+      complementStreetProps: true,
+      marketScenic: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepPutuan: true,
+      keepChaidui: true,
+      keepShima: true,
+      keepJiutan: true,
+      keepJilong: true,
+      keepLiangyi: true,
+      keepXianglu: true,
+      keepShuigang: true,
+      keepHuotan: true,
+      keepShizhuo: true,
+      keepZhuli: true,
+      keepGongdeng: true,
+      keepPenjing: true,
+      keepShishi: true,
+      keepBaogu: true,
+      keepBiane: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepPlants: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      keepShuanIfPresent: true,
+      keepHuajiaIfPresent: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      noNewGoulan: true,
+      noNewSiyuan: true,
+      noNewBrt: true,
+      chuanlengPuts: list.filter((o) => o.type === 'aq_chuanleng').length,
+      huangziPuts: list.filter((o) => o.type === 'aq_huangzi').length,
+      zhaohuangPuts: list.filter((o) => o.type === 'aq_zhaohuang').length,
+      counts: _streetPropCounts || null,
+    },
+    site240Tingdeng: {
+      unconfirmed: true,
+      focus: 'prop_tingdeng_prop_shuipen_prop_xishoubo',
+      modules: ['prop_tingdeng', 'prop_shuipen', 'prop_xishoubo'],
+      tingdeng: true,
+      shuipen: true,
+      xishoubo: true,
+      propTingdeng: true,
+      propShuipen: true,
+      propXishoubo: true,
+      kitbash: true,
+      densify: true,
+      stampCourtyard: true,
+      stampGateFront: true,
+      stampCorridor: true,
+      stampYingbiSide: true,
+      distinctFromShideng: true,
+      distinctFromShuigang: true,
+      distinctFromXianglu: true,
+      complementShideng: true,
+      complementShuigang: true,
+      complementXianglu: true,
+      complementGongdeng: true,
+      complementStreetProps: true,
+      courtyardScenic: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepShuigang: true,
+      keepXianglu: true,
+      keepShideng: true,
+      keepHuangzi: true,
+      keepHuajia: true,
+      keepShuan: true,
+      keepPutuan: true,
+      keepJilong: true,
+      keepLiangyi: true,
+      keepChaidui: true,
+      keepShima: true,
+      keepJiutan: true,
+      keepHuotan: true,
+      keepShizhuo: true,
+      keepZhuli: true,
+      keepGongdeng: true,
+      keepPenjing: true,
+      keepShishi: true,
+      keepBaogu: true,
+      keepBiane: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepPlants: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      noNewGoulan: true,
+      noNewSiyuan: true,
+      noNewBrt: true,
+      tingdengPuts: list.filter((o) => o.type === 'aq_tingdeng').length,
+      shuipenPuts: list.filter((o) => o.type === 'aq_shuipen').length,
+      xishouboPuts: list.filter((o) => o.type === 'aq_xishoubo').length,
+      counts: _streetPropCounts || null,
+    },
+    site241Suoyi: {
+      unconfirmed: true,
+      focus: 'prop_suoyi_prop_douli_prop_biandan',
+      modules: ['prop_suoyi', 'prop_douli', 'prop_biandan'],
+      suoyi: true,
+      douli: true,
+      biandan: true,
+      propSuoyi: true,
+      propDouli: true,
+      propBiandan: true,
+      kitbash: true,
+      densify: true,
+      stampHouseBack: true,
+      stampAlleyMouth: true,
+      stampDockSide: true,
+      stampKitchenSide: true,
+      complementLiangyi: true,
+      complementChaidui: true,
+      complementJilong: true,
+      complementStreetProps: true,
+      farmScenic: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepLiangyi: true,
+      keepChaidui: true,
+      keepJilong: true,
+      keepShuan: true,
+      keepPutuan: true,
+      keepShima: true,
+      keepJiutan: true,
+      keepXianglu: true,
+      keepShuigang: true,
+      keepHuotan: true,
+      keepShizhuo: true,
+      keepZhuli: true,
+      keepGongdeng: true,
+      keepPenjing: true,
+      keepShishi: true,
+      keepBaogu: true,
+      keepBiane: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepPlants: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      noNewGoulan: true,
+      noNewSiyuan: true,
+      noNewBrt: true,
+      suoyiPuts: list.filter((o) => o.type === 'aq_suoyi').length,
+      douliPuts: list.filter((o) => o.type === 'aq_douli').length,
+      biandanPuts: list.filter((o) => o.type === 'aq_biandan').length,
+      counts: _streetPropCounts || null,
+    },
+    site242Tongjing: {
+      unconfirmed: true,
+      focus: 'prop_tongjing_prop_shuzhuang_prop_yanzhi',
+      modules: ['prop_tongjing', 'prop_shuzhuang', 'prop_yanzhi'],
+      tongjing: true,
+      shuzhuang: true,
+      yanzhi: true,
+      propTongjing: true,
+      propShuzhuang: true,
+      propYanzhi: true,
+      kitbash: true,
+      densify: true,
+      stampBoudoirEave: true,
+      stampCorridorTable: true,
+      stampHaozhaiCourtyard: true,
+      complementHuajia: true,
+      complementShuan: true,
+      complementBogu: true,
+      complementPenjing: true,
+      complementPutuan: true,
+      complementShizhuo: true,
+      complementStreetProps: true,
+      vanityScenic: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepSuoyi: true,
+      keepTingdeng: true,
+      keepHuangzi: true,
+      keepHuajia: true,
+      keepShuan: true,
+      keepPutuan: true,
+      keepJilong: true,
+      keepLiangyi: true,
+      keepChaidui: true,
+      keepShima: true,
+      keepJiutan: true,
+      keepXianglu: true,
+      keepShuigang: true,
+      keepHuotan: true,
+      keepShizhuo: true,
+      keepZhuli: true,
+      keepGongdeng: true,
+      keepPenjing: true,
+      keepShishi: true,
+      keepBaogu: true,
+      keepBiane: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepPlants: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      noNewGoulan: true,
+      noNewSiyuan: true,
+      noNewBrt: true,
+      tongjingPuts: list.filter((o) => o.type === 'aq_tongjing').length,
+      shuzhuangPuts: list.filter((o) => o.type === 'aq_shuzhuang').length,
+      yanzhiPuts: list.filter((o) => o.type === 'aq_yanzhi').length,
+      counts: _streetPropCounts || null,
+    },
+    site243Yugang: {
+      unconfirmed: true,
+      focus: 'prop_yugang_prop_huapenjia_prop_yingwujia',
+      modules: ['prop_yugang', 'prop_huapenjia', 'prop_yingwujia'],
+      yugang: true,
+      huapenjia: true,
+      yingwujia: true,
+      propYugang: true,
+      propHuapenjia: true,
+      propYingwujia: true,
+      kitbash: true,
+      densify: true,
+      stampCourtyard: true,
+      stampCorridor: true,
+      stampHaozhaiSide: true,
+      complementPenjing: true,
+      complementHuajia: true,
+      complementShuigang: true,
+      complementJilong: true,
+      complementNiaolong: true,
+      keepPenjing: true,
+      fishScenic: true,
+      flowerScenic: true,
+      parrotScenic: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepHuajia: true,
+      keepShuan: true,
+      keepPutuan: true,
+      keepJilong: true,
+      keepLiangyi: true,
+      keepChaidui: true,
+      keepShima: true,
+      keepJiutan: true,
+      keepXianglu: true,
+      keepShuigang: true,
+      keepHuotan: true,
+      keepShizhuo: true,
+      keepZhuli: true,
+      keepGongdeng: true,
+      keepShishi: true,
+      keepBaogu: true,
+      keepBiane: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepPlants: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      noNewGoulan: true,
+      noNewSiyuan: true,
+      noNewBrt: true,
+      yugangPuts: list.filter((o) => o.type === 'aq_yugang').length,
+      huapenjiaPuts: list.filter((o) => o.type === 'aq_huapenjia').length,
+      yingwujiaPuts: list.filter((o) => o.type === 'aq_yingwujia').length,
+      counts: _streetPropCounts || null,
+    },
+    site244Fangche: {
+      unconfirmed: true,
+      focus: 'prop_fangche_prop_xiubeng_prop_xiankuang',
+      modules: ['prop_fangche', 'prop_xiubeng', 'prop_xiankuang'],
+      fangche: true,
+      xiubeng: true,
+      xiankuang: true,
+      propFangche: true,
+      propXiubeng: true,
+      propXiankuang: true,
+      kitbash: true,
+      densify: true,
+      stampCourtyard: true,
+      stampCorridor: true,
+      stampHaozhaiSide: true,
+      complementLiangyi: true,
+      complementZhukuang: true,
+      complementHuajia: true,
+      complementShuan: true,
+      complementShima: true,
+      complementTingdeng: true,
+      complementSuoyi: true,
+      textileScenic: true,
+      embroideryScenic: true,
+      yarnScenic: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepSuoyi: true,
+      keepTingdeng: true,
+      keepHuangzi: true,
+      keepHuajia: true,
+      keepShuan: true,
+      keepPutuan: true,
+      keepJilong: true,
+      keepLiangyi: true,
+      keepChaidui: true,
+      keepShima: true,
+      keepJiutan: true,
+      keepXianglu: true,
+      keepShuigang: true,
+      keepHuotan: true,
+      keepShizhuo: true,
+      keepZhuli: true,
+      keepGongdeng: true,
+      keepPenjing: true,
+      keepShishi: true,
+      keepBaogu: true,
+      keepBiane: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepPlants: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      noNewGoulan: true,
+      noNewSiyuan: true,
+      noNewBrt: true,
+      fangchePuts: list.filter((o) => o.type === 'aq_fangche').length,
+      xiubengPuts: list.filter((o) => o.type === 'aq_xiubeng').length,
+      xiankuangPuts: list.filter((o) => o.type === 'aq_xiankuang').length,
+      counts: _streetPropCounts || null,
+    },
+    site245Fengling: {
+      unconfirmed: true,
+      focus: 'prop_fengling_prop_zhulian_prop_shaman',
+      modules: ['prop_fengling', 'prop_zhulian', 'prop_shaman'],
+      fengling: true,
+      zhulian: true,
+      shaman: true,
+      propFengling: true,
+      propZhulian: true,
+      propShaman: true,
+      kitbash: true,
+      densify: true,
+      stampCourtyard: true,
+      stampCorridor: true,
+      stampHaozhaiSide: true,
+      stampEaveGate: true,
+      complementGongdeng: true,
+      complementHuangzi: true,
+      complementLiangyi: true,
+      complementTingdeng: true,
+      complementSuoyi: true,
+      complementTongjing: true,
+      complementFangche: true,
+      windchimeScenic: true,
+      bambooCurtainScenic: true,
+      gauzeScenic: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepFangche: true,
+      keepYugang: true,
+      keepTongjing: true,
+      keepSuoyi: true,
+      keepTingdeng: true,
+      keepHuangzi: true,
+      keepHuajia: true,
+      keepShuan: true,
+      keepPutuan: true,
+      keepJilong: true,
+      keepLiangyi: true,
+      keepChaidui: true,
+      keepShima: true,
+      keepJiutan: true,
+      keepXianglu: true,
+      keepShuigang: true,
+      keepHuotan: true,
+      keepShizhuo: true,
+      keepZhuli: true,
+      keepGongdeng: true,
+      keepPenjing: true,
+      keepShishi: true,
+      keepBaogu: true,
+      keepBiane: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepPlants: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      noNewGoulan: true,
+      noNewSiyuan: true,
+      noNewBrt: true,
+      fenglingPuts: list.filter((o) => o.type === 'aq_fengling').length,
+      zhulianPuts: list.filter((o) => o.type === 'aq_zhulian').length,
+      shamanPuts: list.filter((o) => o.type === 'aq_shaman').length,
+      counts: _streetPropCounts || null,
+    },
+
+    site246Chapan: {
+      unconfirmed: true,
+      focus: 'prop_chapan_prop_shihe_prop_guopan',
+      modules: ['prop_chapan', 'prop_shihe', 'prop_guopan'],
+      chapan: true,
+      shihe: true,
+      guopan: true,
+      propChapan: true,
+      propShihe: true,
+      propGuopan: true,
+      kitbash: true,
+      densify: true,
+      stampCourtyard: true,
+      stampCorridor: true,
+      stampShop: true,
+      stampHaozhai: true,
+      complementChaju: true,
+      complementHuotan: true,
+      complementShizhuo: true,
+      complementYugang: true,
+      complementPutuan: true,
+      teaTrayScenic: true,
+      foodBoxScenic: true,
+      fruitDishScenic: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      keepFengling: true,
+      keepFangche: true,
+      keepYugang: true,
+      keepTongjing: true,
+      keepSuoyi: true,
+      keepTingdeng: true,
+      keepHuangzi: true,
+      keepHuajia: true,
+      keepShuan: true,
+      keepPutuan: true,
+      keepJilong: true,
+      keepLiangyi: true,
+      keepChaidui: true,
+      keepShima: true,
+      keepJiutan: true,
+      keepXianglu: true,
+      keepShuigang: true,
+      keepHuotan: true,
+      keepShizhuo: true,
+      keepZhuli: true,
+      keepGongdeng: true,
+      keepPenjing: true,
+      keepShishi: true,
+      keepBaogu: true,
+      keepBiane: true,
+      keepMeirenkao: true,
+      keepRockery: true,
+      keepPlants: true,
+      keepChuihuamen: true,
+      keepPavilions: true,
+      keepLouwindow: true,
+      keepHitching: true,
+      keepScreens: true,
+      keepRidgeBeasts: true,
+      keepYingbi: true,
+      keepPlatform: true,
+      keepBanners: true,
+      keepDoorHardware: true,
+      keepCaihua: true,
+      keepRailQueti: true,
+      keepGableBrick: true,
+      keepRoofTiles: true,
+      keepStreetProps: true,
+      keepLattice: true,
+      keepPaving: true,
+      keepSignboards: true,
+      keepRiverLamps: true,
+      keepLanternGlow: true,
+      avoidGenyueCore: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      noNewGoulan: true,
+      noNewSiyuan: true,
+      noNewBrt: true,
+      chapanPuts: list.filter((o) => o.type === 'aq_chapan').length,
+      shihePuts: list.filter((o) => o.type === 'aq_shihe').length,
+      guopanPuts: list.filter((o) => o.type === 'aq_guopan').length,
+      counts: _streetPropCounts || null,
+    },
+    site247Shigandang: {
+      unconfirmed: true,
+      focus: 'prop_shigandang_prop_menshen_prop_nianhua',
+      modules: ['prop_shigandang', 'prop_menshen', 'prop_nianhua'],
+      shigandang: true,
+      menshen: true,
+      nianhua: true,
+      propShigandang: true,
+      propMenshen: true,
+      propNianhua: true,
+      kitbash: true,
+      densify: true,
+      stampGate: true,
+      stampAlley: true,
+      stampShop: true,
+      stampCourtyard: true,
+      complementGanddang: true,
+      complementBiane: true,
+      complementDoorHardware: true,
+      doorSideTablet: true,
+      doorGodScroll: true,
+      newYearPrint: true,
+      carvedCharm: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      noNewGoulan: true,
+      noNewSiyuan: true,
+      noNewBrt: true,
+      keepYugang: true,
+      keepTongjing: true,
+      keepSuoyi: true,
+      keepTingdeng: true,
+      keepHuangzi: true,
+      keepHuajia: true,
+      keepShuan: true,
+      keepPutuan: true,
+      keepLiangyi: true,
+      keepJilong: true,
+      keepHuotan: true,
+      keepShizhuo: true,
+      keepGongdeng: true,
+      keepHitching: true,
+      keepBiane: true,
+      keepBaogu: true,
+      keepShishi: true,
+      keepFangche: true,
+      shigandangPuts: list.filter((o) => o.type === 'aq_shigandang').length,
+      menshenPuts: list.filter((o) => o.type === 'aq_menshen').length,
+      nianhuaPuts: list.filter((o) => o.type === 'aq_nianhua').length,
+      counts: _streetPropCounts || null,
+    },
+    site248Tanghulu: {
+      unconfirmed: true,
+      focus: 'prop_tanghulu_prop_bolanggu_prop_fengzheng',
+      modules: ['prop_tanghulu', 'prop_bolanggu', 'prop_fengzheng'],
+      tanghulu: true,
+      bolanggu: true,
+      fengzheng: true,
+      propTanghulu: true,
+      propBolanggu: true,
+      propFengzheng: true,
+      kitbash: true,
+      densify: true,
+      stampShop: true,
+      stampAlley: true,
+      stampPlaza: true,
+      complementHuotan: true,
+      complementHuangzi: true,
+      complementGongdeng: true,
+      candiedHawSkewer: true,
+      rattleDrumToy: true,
+      standingKite: true,
+      pointScenic: true,
+      noBlockRoad: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      noNewGoulan: true,
+      noNewSiyuan: true,
+      noNewBrt: true,
+      keepFangche: true,
+      keepYugang: true,
+      keepTongjing: true,
+      keepSuoyi: true,
+      keepTingdeng: true,
+      keepHuangzi: true,
+      keepHuajia: true,
+      keepShuan: true,
+      keepPutuan: true,
+      keepLiangyi: true,
+      keepJilong: true,
+      keepHuotan: true,
+      keepShizhuo: true,
+      keepGongdeng: true,
+      keepHitching: true,
+      keepBiane: true,
+      keepBaogu: true,
+      keepShishi: true,
+      tanghuluPuts: list.filter((o) => o.type === 'aq_tanghulu').length,
+      bolangguPuts: list.filter((o) => o.type === 'aq_bolanggu').length,
+      fengzhengPuts: list.filter((o) => o.type === 'aq_fengzheng').length,
+      counts: _streetPropCounts || null,
+    },
+    site249Yaohulu: {
+      unconfirmed: true,
+      focus: 'prop_yaohulu_prop_yanbo_prop_yaogui',
+      modules: ['prop_yaohulu', 'prop_yanbo', 'prop_yaogui'],
+      yaohulu: true,
+      yanbo: true,
+      yaogui: true,
+      propYaohulu: true,
+      propYanbo: true,
+      propYaogui: true,
+      kitbash: true,
+      densify: true,
+      stampShop: true,
+      stampAlley: true,
+      stampCourtyard: true,
+      apothecary: true,
+      hangingGourd: true,
+      mortarPestle: true,
+      drawerCabinet: true,
+      complementShigandang: true,
+      complementChapan: true,
+      complementHuotan: true,
+      pointScenic: true,
+      noOverlapExisting: true,
+      noBlockRoad: true,
+      noSchoolVillageBank: true,
+      noGoulanSiyuanLayout: true,
+      noNewGoulan: true,
+      noNewSiyuan: true,
+      noNewBrt: true,
+      keepShigandang: true,
+      keepChapan: true,
+      keepFengling: true,
+      keepFangche: true,
+      keepYugang: true,
+      keepTongjing: true,
+      keepSuoyi: true,
+      keepTingdeng: true,
+      keepHuangzi: true,
+      keepHuotan: true,
+      yaohuluPuts: list.filter((o) => o.type === 'aq_yaohulu').length,
+      yanboPuts: list.filter((o) => o.type === 'aq_yanbo').length,
+      yaoguiPuts: list.filter((o) => o.type === 'aq_yaogui').length,
+      counts: _streetPropCounts || null,
+    },
+  });
+
+  N.expansionSongcheng.names.genyue = '艮岳苑';
+  /* 保留 site193 键：旧测试读 choice=quality；已被 194 加密版取代 */
+  N.expansionSongcheng.site193 = Object.assign({}, N.expansionSongcheng.site194, {
+    supersededBy: 194,
+    choice: 'quality',
+    denserThan193: false,
+  });
+  N.mapPois = (N.mapPois || []).concat([
+    { id: 'aq_nanxun', name: '南薰门（未经确认）', x: OX + CX, y: OY - 42, cat: 'landmark' },
+    { id: 'aq_yujie', name: '御街闹市（未经确认）', x: OX + CX, y: OY + 40, cat: 'shop' },
+    { id: 'aq_jiulou', name: '望川楼（未经确认）', x: OX + CX + 24, y: OY + 86, cat: 'landmark' },
+    { id: 'aq_yamen', name: '梦华府（未经确认）', x: OX + 80, y: OY + 155, cat: 'civic' },
+    { id: 'aq_goulan', name: '勾栏（未经确认）', x: OX + 28, y: OY + 134, cat: 'landmark' },
+    { id: 'aq_siyuan', name: '宝相寺（未经确认）', x: OX + 240, y: OY + 148, cat: 'landmark' },
+    { id: 'aq_genyue', name: '艮岳苑（未经确认）', x: OX + 40, y: OY + 172, cat: 'landmark' },
+    { id: 'aq_haozhai_ne', name: '东北豪宅庭院（未经确认）', x: OX + 252, y: OY + 162, cat: 'civic' },
+  ]);
+  N.mapLabels = (N.mapLabels || []).concat([
+    { name: '鹰山宋城（未经确认）', rect: [BX0, BY0, BX1, BY1] },
+  ]);
+
+  const P10 = N.expansionP10 || (N.expansionP10 = {});
+  P10.site194 = N.expansionSongcheng.site194;
+  P10.site193 = N.expansionSongcheng.site193;
+  P10.reasons = P10.reasons || {};
+  P10.reasons.site194 = 'Site194：鹰山宋城相对 Site193 收缩内城（约 300×210，原约 480×320），加密店铺/摊幌/灯笼/柳树/石狮/四合院，补勾栏与宝相寺小体量，少素土空地、更满更华丽宋代鼎盛感。店铺立面按井槐里管线用宋代主题 aq_f_* atlas 模块拼装（非整栋线条式），密度+贴图细节一起上。世界原点仍 1920,−160。入口区跳「鹰山宋城」传送南广场（不穿海）。不做 438 m 塔，不南扩南埠（−1540），不进学校/渔村老街/柳口居，不改 Site146 石驳岸。名称与尺寸未经确认。';
+  P10.reasons.site193 = P10.reasons.site194;
+  P10.site194TrackC = N.expansionSongcheng.site194TrackC;
+  P10.reasons.site194TrackC = 'Site194 Track C：氛围道具（灯笼串/招幌/摊位/桌凳/石狮/花木/花坛）贴图模块拼装已合入密实布局；不改城墙 footprint、不进学校/渔村老街/石驳岸。名称未经确认。';
+  P10.reasons.site194Water = 'Site194 水体写实：宋城专用 D/E/I→aq_gwater 浅/中/深分层 + 噪声碎岸 + 芦苇/泥石岸小品；不改月河 rq_gwater（U/V/W），不进学校/渔村/石驳岸。名称未经确认。';
+  P10.reasons.site195WaterWave = 'Site195：虹桥改 ns 跨汴河（墩落两岸）；宋城 aq_gwater 上加时间驱动动态波纹/流动高光（env.drawGround 叠层），岸线长条可保留；不改月河/学校/渔村/石驳岸。名称未经确认。';
+  P10.site197Street = N.expansionSongcheng.site197Street;
+  P10.reasons.site197Street = 'Site197 街巷密实：在 Site194 密实基线上再加密古城街巷 put 道具（横巷灯笼串/招幌/摊位/桌凳/花坛）、店铺门面（台基/竖招/双灯笼/门前点景）与 aq_f_* atlas kitbash；不改艮岳/府邸庭院核心 put，不进学校/渔村老街/石驳岸。名称未经确认。';
+  P10.site197FacadeDetail = N.expansionSongcheng.site197FacadeDetail;
+  P10.reasons.site197FacadeDetail = 'Site197 facade-detail：ancient_art_atlas/parts/facade 细化门窗隔扇斗拱屋脊瓦（万字窗/雕刻隔扇/板门/门槛/脊瓦/大斗拱），aq_f_dougong 模块；尽量少碰大布局；不改艮岳/府邸庭院核心，不进学校/渔村/石驳岸。名称未经确认。';
+  P10.site197Plants = N.expansionSongcheng.site197Plants;
+  P10.reasons.site197Plants = 'Site197 植物/水系点景加密：苍松·垂柳·芦苇·假山·竹丛 + 院外/风景口袋小池（D/E/I 接动态水）；岸线 aq_reed/aq_bank 长条保留；不改艮岳主体布局与街巷大批 put，不进学校/渔村/石驳岸。名称未经确认。';
+  P10.site197 = N.expansionSongcheng.site197;
+  P10.reasons.site197 = 'Site197：落地艮岳苑风景区（主/次池塘+假山+柳+亭+曲廊）与 3 处豪宅唐宋庭院（院内小池接动态波纹+假山花木曲廊）；保留 site197Street 街巷 densify 与 site197Plants 植物点景；虹桥 ns 保持；不改学校/渔村/石驳岸/月河。名称未经确认。';
+  P10.site197Dock = N.expansionSongcheng.site197Dock;
+  P10.reasons.site197Dock = 'Site197 汴河码头/船只/货箱点景加密：木栈码头·漕船·小舫·岸边货堆（木箱/粮袋）·独轮推车贴岸；参照 layout refs 更密一档；动态水面保留；不改艮岳主体布局，不进学校/渔村/石驳岸。名称未经确认。';
+  P10.site198WallMerlon = N.expansionSongcheng.site198WallMerlon;
+  P10.reasons.site198WallMerlon = 'Site198 wall-merlon：南薰门/城墙垛口·女墙·城砖 atlas kitbash（city_brick/merlon/crenel/parapet/walk_top）；细化 aq_city_wall / aq_wall_gate / aq_corner_tower 贴图拼装；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。';
+  P10.site198Roof = N.expansionSongcheng.site198Roof;
+  P10.reasons.site198Roof = 'Site198 屋脊/瓦当/鸱吻/屋檐滴水 atlas 细节增强：ancient_art_atlas 新模块 tile_wadang_S/tile_drip_S/chiwen_* + 更密脊瓦/瓦垄；店铺与公建屋顶 densify；少改 town 布局；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。';
+  P10.site199NanxunPlaza = N.expansionSongcheng.site199NanxunPlaza;
+  P10.reasons.site199NanxunPlaza = 'Site199：南薰门外南广场/瓮城口市集摊位再加密（摊位·招幌·灯笼·桌凳·花坛·推车·石狮）；参照 layout refs 更密一档；保留动态水面、码头 densify、艮岳、site198WallMerlon、site198Roof；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。';
+  P10.site200LanternGlow = N.expansionSongcheng.site200LanternGlow;
+  P10.reasons.site200LanternGlow = 'Site200 灯笼/幌子黄昏夜景光晕与暖色叠层：lanternGlow 多层暖晕+地面落光、bannerGlow 幌子布面柔光；披檐/竖招/灯笼串/宫灯 emit 增强；挂钩既有黄昏 grade 暖色径向叠层；少改 town 布局；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。';
+  P10.site201RiverLamps = N.expansionSongcheng.site201RiverLamps;
+  P10.reasons.site201RiverLamps = 'Site201 汴河码头黄昏渔火/船灯点光：复用 Site200 lanternGlow 管线给漕船/码头/小舫/货堆船灯，水面倒影（water）；保留码头 densify 与动态水面；少改 town 布局；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。';
+  P10.site201Signboards = N.expansionSongcheng.site201Signboards;
+  P10.reasons.site201Signboards = 'Site201 店招/牌匾/幌子文字与边框 atlas 细化：plaque_wood/vsign_board/banner_cream 金边如意·漆木匾·竖招板·奶油布织纹；aq_f_plaque/banner/vsign kitbash；保留 site201RiverLamps 与 site200LanternGlow；少改 town 布局；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。';
+  P10.site202Paving = N.expansionSongcheng.site202Paving;
+  P10.reasons.site202Paving = 'Site202 御街/广场铺地砖纹·排水沟·路牙：aq_gpave 方砖/条石/席纹替换现代 g_sidewalk；御街条石、南广场席纹装饰带；aq_drain/aq_curb 贴边线 atlas kitbash（pave_fangzhuan/tiaoshi/xiewen/drain_gutter/curb_stone）；保留 site201Signboards/site201RiverLamps/site200LanternGlow；少改 town 布局；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。';
+  P10.site203Lattice = N.expansionSongcheng.site203Lattice;
+  P10.reasons.site203Lattice = 'Site203 格扇门窗/花窗/隔扇/槛窗 atlas 细化：lattice_geshan_S/window_huachuang_S/door_geshan_bubujin_S/sill_kanchuang_S；aq_f_door/window/shop 门面 stamp 更密；保留 site201Signboards、site201RiverLamps、site200LanternGlow、site202Paving；少改 town 布局；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。';
+  P10.site204StreetProps = N.expansionSongcheng.site204StreetProps;
+  P10.reasons.site204StreetProps = 'Site204 街具点景：石灯笼/石凳/花缸/挂灯杆 atlas kitbash（prop_shideng/prop_shiteng/prop_huagang/prop_lamp_pole）；沿御街·南广场·汴河岸·巷口 densify；lanternGlow 温和暖晕且不开 water，避免与码头渔火倒影打架；保留 site20x meta（含 site203Lattice / site202Paving）；少改宏观布局；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。tip 含 #117 Site203 lattice 已合入；与 Site203 并行轨编号以 PR 开出时 tip 为准。';
+  P10.site205RoofTiles = N.expansionSongcheng.site205RoofTiles;
+  P10.reasons.site205RoofTiles = 'Site205 瓦当/滴水/瓦垄/檐口 atlas 细化：tile_wadang/tile_dishui/tile_walong/eave_yankou；在 Site198 屋脊基础上店铺/民居/城楼屋顶 densify；保留 site204StreetProps、site203Lattice、site202Paving、site201Signboards、site201RiverLamps、site200LanternGlow、site198Roof；少改 town 布局；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。';
+  P10.site206GableBrick = N.expansionSongcheng.site206GableBrick;
+  P10.reasons.site206GableBrick = 'Site206 山墙砖饰/墀头 atlas 细化：wall_shangqiang/brick_qingshui/ornament_chitou/wall_cap；stamp 到民居/店铺侧墙 aq_f_gable 与 aq_f_wall 裙砖；店铺双端山墙 densify；保留 site205RoofTiles、site204StreetProps、site203Lattice、site202Paving、site201Signboards、site201RiverLamps、site200LanternGlow；少改宏观布局；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。tip 含 #119 Site205 瓦当已合入。';
+  P10.site207RailQueti = N.expansionSongcheng.site207RailQueti;
+  P10.reasons.site207RailQueti = 'Site207 栏杆寻杖/雀替/挂落 atlas 细化：rail_xunzhang/ornament_queti/hanging_gualuo/baluster_xiaozhu；stamp 到曲廊·立面柱梁交角·虹桥栏杆 densify；少改宏观布局，注意与虹桥/码头不冲突；保留 site206GableBrick、site205RoofTiles、site204StreetProps、site203Lattice、site202Paving、site201Signboards、site201RiverLamps、site200LanternGlow；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。tip 含 #120 Site206 山墙已合入。';
+  P10.site208Caihua = N.expansionSongcheng.site208Caihua;
+  P10.reasons.site208Caihua = 'Site208 彩绘梁枋/额枋/斗拱色块 atlas 细化：beam_efang/caihua_band/dougong_block/eave_board；望川楼·茶坊·店铺檐下 densify；宋画青绿+朱红点缀、禁纯线稿；保留 site207RailQueti、site206GableBrick、site205RoofTiles、site204StreetProps、site203Lattice、site202Paving、site201Signboards、site201RiverLamps、site200LanternGlow；少改宏观布局；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。tip 含 #121 Site207 栏杆已合入。';
+  P10.site209DoorHardware = N.expansionSongcheng.site209DoorHardware;
+  P10.reasons.site209DoorHardware = 'Site209 门钉/铺首衔环/门槛/抱鼓石 atlas 细化：door_mending/knocker_pushou/sill_menkan/stone_baogu；stamp 到南薰门/衙署/豪宅/店铺大门 densify；少改宏观布局；保留 site208Caihua、site207RailQueti、site206GableBrick、site205RoofTiles、site204StreetProps、site203Lattice、site202Paving、site201Signboards、site201RiverLamps、site200LanternGlow；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。tip 含 #122 Site208 彩绘已合入。';
+  P10.site210Banners = N.expansionSongcheng.site210Banners;
+  P10.reasons.site210Banners = 'Site210 旗幡/帷幔/流苏/檐下挂饰 atlas 细化：banner_qifan/curtain_weiman/tassel_liusu/hang_ornament；沿御街·酒楼·茶坊·南广场披檐 densify；与 site201 招牌幌子互补、避免重复堆叠；禁纯线稿、色调克制；保留 site209DoorHardware、site208Caihua、site207RailQueti、site206GableBrick、site205RoofTiles、site204StreetProps、site203Lattice、site202Paving、site201Signboards、site201RiverLamps、site200LanternGlow；少改宏观布局；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。tip 含 #123 Site209 门钉已合入。';
+  P10.site211Platform = N.expansionSongcheng.site211Platform;
+  P10.reasons.site211Platform = 'Site211 台基/阶条石/垂带踏垛 atlas 细化：base_taiji/step_tiaotiao/ramp_chuidai/stair_taduo；stamp 到南薰门/望川楼/衙署/公堂/府邸基座 densify；注意与铺地 #116 衔接不打架；少改宏观布局；保留 site210Banners、site209DoorHardware、site208Caihua、site207RailQueti、site206GableBrick、site205RoofTiles、site204StreetProps、site203Lattice、site202Paving、site201Signboards、site201RiverLamps、site200LanternGlow；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。tip 含 #124 Site210 旗幡已合入。';
+  P10.site212Yingbi = N.expansionSongcheng.site212Yingbi;
+  P10.reasons.site212Yingbi = 'Site212 影壁/照壁/砖雕花心 atlas 细化：wall_yingbi/wall_zhaobi/brick_huaxin/screen_base；南薰门内两侧照壁、府邸/衙署/四合院入口影壁、巷口侧 stamp densify；不堵主路；禁纯线稿、atlas kitbash 密实；保留 site211Platform、site210Banners、site209DoorHardware、site208Caihua、site207RailQueti、site206GableBrick、site205RoofTiles、site204StreetProps、site203Lattice、site202Paving、site201Signboards、site201RiverLamps、site200LanternGlow；少改宏观布局；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。tip 含 #125 Site211 台基已合入。';
+  P10.site213RidgeBeasts = N.expansionSongcheng.site213RidgeBeasts;
+  P10.reasons.site213RidgeBeasts = 'Site213 屋脊鸱吻/垂脊走兽/正脊饰 atlas 细化：ridge_chiwen/beast_zoushou/ridge_ornament/hip_chuiji；stamp 到城楼/酒楼/府邸大屋顶 densify；与瓦当 #119 Site205 衔接；少改宏观布局；保留 site212Yingbi、site211Platform、site210Banners、site209DoorHardware、site208Caihua、site207RailQueti、site206GableBrick、site205RoofTiles、site204StreetProps、site203Lattice、site202Paving、site201Signboards、site201RiverLamps、site200LanternGlow；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。tip 含 #126 Site212 影壁已合入。';
+  P10.site214Screens = N.expansionSongcheng.site214Screens;
+  P10.reasons.site214Screens = 'Site214 落地罩/隔断屏/月洞门框 atlas 细化：screen_luodizhao/partition_geshan/moon_yuedong/frame_menkuang；茶坊·酒楼开敞门厅、豪宅门厅/廊口 stamp densify；与格扇 #117（site203Lattice）互补不重复；禁纯线稿、atlas kitbash 密实；保留 site215Hitching、site213RidgeBeasts、site212Yingbi、site211Platform、site210Banners、site209DoorHardware、site208Caihua、site207RailQueti、site206GableBrick、site205RoofTiles、site204StreetProps、site203Lattice、site202Paving、site201Signboards、site201RiverLamps、site200LanternGlow；少改宏观布局；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。tip 含 #128 Site215 拴马石已合入。';
+  P10.site215Hitching = N.expansionSongcheng.site215Hitching;
+  P10.reasons.site215Hitching = 'Site215 拴马桩/上马石/石敢当/路牙石标 atlas 细化：post_shuanma/stone_shangma/stone_ganddang/curb_marker；沿御街·南薰门外·府邸门前 stamp densify；与街具 #118 Site204、台基 #125 Site211 互补；禁纯线稿、atlas kitbash 密实；少改宏观布局；保留 site214Screens、site213RidgeBeasts、site212Yingbi、site211Platform、site210Banners、site209DoorHardware、site208Caihua、site207RailQueti、site206GableBrick、site205RoofTiles、site204StreetProps、site203Lattice、site202Paving、site201Signboards、site201RiverLamps、site200LanternGlow；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。tip 含 #128 Site215 拴马石已合入。';
+    P10.site216Louwindow = N.expansionSongcheng.site216Louwindow;
+  P10.reasons.site216Louwindow = 'Site216 漏窗/花墙/透空砖雕 atlas 细化：window_lou/wall_huaziang/brick_toukong/lattice_wall；艮岳苑·豪宅侧墙·巷墙 stamp densify；与格扇 #117 Site203、影壁 #126 Site212 互补；禁纯线稿、atlas kitbash 密实；少改宏观布局；保留 site215Hitching、site214Screens、site213RidgeBeasts、site212Yingbi、site211Platform、site210Banners、site209DoorHardware、site208Caihua、site207RailQueti、site206GableBrick、site205RoofTiles、site204StreetProps、site203Lattice、site202Paving、site201Signboards、site201RiverLamps、site200LanternGlow；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。tip 含 #129 Site214 隔断已合入。';
+P10.site217Pavilions = N.expansionSongcheng.site217Pavilions;
+  P10.reasons.site217Pavilions = 'Site217 井亭/路亭/小牌坊/亭顶 atlas 细化：pavilion_jingting/pavilion_luting/gate_paifang_s/roof_ting；御街交叉口·汴河岸·艮岳苑入口附近 stamp densify；点景小体量不堵路；禁纯线稿、atlas kitbash 密实；少改宏观布局；保留 site215Hitching、site214Screens、site213RidgeBeasts、site212Yingbi、site211Platform、site210Banners、site209DoorHardware、site208Caihua、site207RailQueti、site206GableBrick、site205RoofTiles、site204StreetProps、site203Lattice、site202Paving、site201Signboards、site201RiverLamps、site200LanternGlow；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。tip 含 #129 Site214 落地罩已合入。';
+  P10.site218Chuihuamen = N.expansionSongcheng.site218Chuihuamen;
+  P10.reasons.site218Chuihuamen = 'Site218 垂花门/小门楼/门罩/门柱石 atlas 细化：gate_chuihua/gate_menlou_s/eave_menzhao/post_menzhu；豪宅·四合院门前·横巷口 stamp densify；点景小体量不堵主路中线；禁纯线稿、atlas kitbash 密实；少改宏观布局；保留 site217Pavilions、site216Louwindow、site215Hitching、site214Screens、site213RidgeBeasts、site212Yingbi、site211Platform、site210Banners、site209DoorHardware、site208Caihua、site207RailQueti、site206GableBrick、site205RoofTiles、site204StreetProps、site203Lattice、site202Paving、site201Signboards、site201RiverLamps、site200LanternGlow；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。tip 含 #130 Site217 井亭、#131 Site216 漏窗已合入。';
+  P10.site219Rockery = N.expansionSongcheng.site219Rockery;
+  P10.reasons.site219Rockery = 'Site219 太湖石/叠石假山/庭院石组 atlas 细化：rock_taihu/rock_dieshi/rock_peak_s/plant_rock_moss；豪宅庭院池边·艮岳苑外围·曲廊侧 stamp densify；点景不堵御街中线；禁纯线稿、atlas kitbash 密实；少改宏观布局；保留 site218Chuihuamen、site217Pavilions、site216Louwindow、site215Hitching、site214Screens、site213RidgeBeasts、site212Yingbi、site211Platform、site210Banners、site209DoorHardware、site208Caihua、site207RailQueti、site206GableBrick、site205RoofTiles、site204StreetProps、site203Lattice、site202Paving、site201Signboards、site201RiverLamps、site200LanternGlow；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。tip 含 #132 Site218 垂花门、#130/#131。';
+
+  P10.site220Meirenkao = N.expansionSongcheng.site220Meirenkao;
+  P10.reasons.site220Meirenkao = 'Site220 美人靠/飞来椅/坐槛/廊凳 atlas 细化：seat_meirenkao/seat_feilaichi/rail_zuokan/bench_lang；曲廊侧·井亭/路亭旁·汴河岸观景点景 densify；点景小体量不堵路；禁纯线稿、atlas kitbash 密实；少改宏观布局；保留 site219Rockery、site218Chuihuamen、site217Pavilions、site216Louwindow、site215Hitching、site214Screens、site213RidgeBeasts、site212Yingbi、site211Platform、site210Banners、site209DoorHardware、site208Caihua、site207RailQueti、site206GableBrick、site205RoofTiles、site204StreetProps、site203Lattice、site202Paving、site201Signboards、site201RiverLamps、site200LanternGlow；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。tip 含 #132 Site218 垂花门、#133 Site219 太湖石假山。';
+  P10.site221Biane = N.expansionSongcheng.site221Biane;
+  P10.reasons.site221Biane = 'Site221 匾额/对联/小字牌/垂挂牌 atlas 细化：sign_biane/sign_duilian/sign_zhaopai_s/sign_hanging；店铺门楣·宅门·巷口·亭侧 stamp densify；与 site201 plaque/vsign/banner 互补而非粗糙克隆；点景不堵主路中线；禁纯线稿、atlas kitbash 密实；少改宏观布局；保留 site220Meirenkao、site219Rockery、site218Chuihuamen、site217Pavilions、site216Louwindow、site215Hitching、site214Screens、site213RidgeBeasts、site212Yingbi、site211Platform、site210Banners、site209DoorHardware、site208Caihua、site207RailQueti、site206GableBrick、site205RoofTiles、site204StreetProps、site203Lattice、site202Paving、site201Signboards、site201RiverLamps、site200LanternGlow；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。tip 含 #132+#133+#134。';
+  P10.site222Baogu = N.expansionSongcheng.site222Baogu;
+  P10.reasons.site222Baogu = 'Site222 抱鼓石/方门墩/小石炉 atlas 点景：stone_baogu/stone_mendun/stone_lu；宅门两侧·垂花门前·巷口·富户院门 densify；与拴马石#128、太湖石#133互补；点景不堵御街；禁纯线稿、atlas kitbash 密实如井槐里；少改宏观布局；保留 site221Biane、site220Meirenkao、site219Rockery、site218Chuihuamen、site217Pavilions、site216Louwindow、site215Hitching、site214Screens、site213RidgeBeasts、site212Yingbi、site211Platform、site210Banners、site209DoorHardware、site208Caihua、site207RailQueti、site206GableBrick、site205RoofTiles、site204StreetProps、site203Lattice、site202Paving、site201Signboards、site201RiverLamps、site200LanternGlow；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。tip 含 #132/#133/#134/#135（site88-phone-ui）。';
+  P10.site223Penjing = N.expansionSongcheng.site223Penjing;
+  P10.reasons.site223Penjing = 'Site223 盆景/砖花坛/石台 atlas 细化：pot_penjing/bed_huatan/stone_shitai；富户庭院·巷口·桥头·亭侧·门前 stamp densify；与 site197Plants 植物、site219Rockery 太湖石互补而非粗糙克隆；点景不堵主路中线；禁纯线稿、atlas kitbash 密实；少改宏观布局；保留 site222Baogu、site221Biane、site220Meirenkao、site219Rockery、site218Chuihuamen、site217Pavilions、site216Louwindow、site215Hitching、site214Screens、site213RidgeBeasts、site212Yingbi、site211Platform、site210Banners、site209DoorHardware、site208Caihua、site207RailQueti、site206GableBrick、site205RoofTiles、site204StreetProps、site203Lattice、site202Paving、site201Signboards、site201RiverLamps、site200LanternGlow、site197Plants；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。tip 含 #135 Site221 匾额、#136 Site222 抱鼓石已合入；保留 site222Baogu。';
+  P10.site224Shishi = N.expansionSongcheng.site224Shishi;
+  P10.reasons.site224Shishi = 'Site224 石狮/小蹲兽门兽 atlas 点景：stone_shishi/stone_shishi_s；宅门两侧·桥头·广场入口·衙署/庙前 densify；与抱鼓石#136、脊兽#127互补（门兽≠屋脊兽）；点景不堵御街/桥心；禁纯线稿、atlas kitbash 密实如井槐里；少改宏观布局；保留 site223Penjing、site222Baogu、site221Biane、site220Meirenkao、site219Rockery、site218Chuihuamen、site217Pavilions、site216Louwindow、site215Hitching、site214Screens、site213RidgeBeasts、site212Yingbi、site211Platform、site210Banners、site209DoorHardware、site208Caihua、site207RailQueti、site206GableBrick、site205RoofTiles、site204StreetProps、site203Lattice、site202Paving、site201Signboards、site201RiverLamps、site200LanternGlow；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。tip 含 #136/#137（site88-phone-ui）。';
+  P10.site225Gongdeng = N.expansionSongcheng.site225Gongdeng;
+  P10.reasons.site225Gongdeng = 'Site225 宫灯/纱灯/立灯 atlas 点景：lantern_gong/lantern_sha/lantern_stand；门楣下·亭角·桥栏·巷口·富户廊前 stamp densify；与灯笼#113 aq_lanterns/aq_lamp、site200LanternGlow、site201RiverLamps 渔火互补细化而非粗糙克隆；挂灯/立灯 emit 复用 lanternGlow 且不开 water，避免与码头渔火倒影打架；点景不堵主路中线；禁纯线稿、atlas kitbash 密实；少改宏观布局；保留 site223Penjing、site222Baogu、site221Biane、site220Meirenkao、site219Rockery、site218Chuihuamen、site217Pavilions、site216Louwindow、site215Hitching、site214Screens、site213RidgeBeasts、site212Yingbi、site211Platform、site210Banners、site209DoorHardware、site208Caihua、site207RailQueti、site206GableBrick、site205RoofTiles、site204StreetProps、site203Lattice、site202Paving、site201Signboards、site201RiverLamps、site200LanternGlow；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。tip 含 #137 Site223 盆景、#138 Site224 石狮已合入；保留 site224Shishi 与全部 site2xx meta。';
+  P10.site226Zhuli = N.expansionSongcheng.site226Zhuli;
+  P10.reasons.site226Zhuli = 'Site226 竹篱/花篱/柴扉 atlas 点景：fence_zhuli/fence_huali/gate_chaifei；巷口·宅侧·园边·桥头小径 stamp densify；与漏窗#131 site216Louwindow、隔断#129 site214Screens（partition_geshan）互补——室外篱门点景≠漏窗花墙/内隔断屏；点景不堵主路中线与桥心；禁纯线稿、atlas kitbash 密实；少改宏观布局；保留 site225Gongdeng、site224Shishi、site223Penjing、site222Baogu、site221Biane、site220Meirenkao、site219Rockery、site218Chuihuamen、site217Pavilions、site216Louwindow、site215Hitching、site214Screens、site213RidgeBeasts、site212Yingbi、site211Platform、site210Banners、site209DoorHardware、site208Caihua、site207RailQueti、site206GableBrick、site205RoofTiles、site204StreetProps、site203Lattice、site202Paving、site201Signboards、site201RiverLamps、site200LanternGlow；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。tip 含 #138 Site224 石狮、#139 Site225 宫灯已合入；保留全部 site2xx meta。';
+  P10.site227Huotan = N.expansionSongcheng.site227Huotan;
+  P10.reasons.site227Huotan = 'Site227 货摊/货架/晾晒 atlas 点景：stall_huotan/rack_huojia/pole_liangshai；主街两侧·巷口·桥头·宅前空地 stamp densify；与招牌#115、街具#118互补加密市井感；点景不改勾栏/宝相寺/BRT大布局；只古城、不进学校/渔村/石驳岸；保留 site226Zhuli、site225Gongdeng、site224Shishi 与全部 site2xx meta；名称与尺寸未经确认。';
+  P10.site227 = P10.site227Huotan;
+  P10.reasons.site227 = P10.reasons.site227Huotan;
+  P10.site230Xianglu = N.expansionSongcheng.site230Xianglu;
+  P10.reasons.site230Xianglu = 'Site230 香炉/烛台/小供案 atlas 点景：prop_xianglu/prop_zhutai/prop_gongan_s；影壁前·宅门内·亭侧·巷口小龛·庭院角 stamp densify；与影壁#126 site212Yingbi、匾额#135 site221Biane 互补——香火案几点景≠影壁本体/匾额；≠site222 stone_lu 门侧小石炉；点景非勾栏宝相寺大庙殿布局；禁纯线稿、atlas kitbash 密实；少改宏观布局；保留 site229Shuigang、site228Shizhuo、site227Huotan、site226Zhuli、site225Gongdeng、site224Shishi、site223Penjing、site222Baogu、site221Biane、site220Meirenkao、site219Rockery、site218Chuihuamen、site217Pavilions、site216Louwindow、site215Hitching、site214Screens、site213RidgeBeasts、site212Yingbi、site211Platform、site210Banners、site209DoorHardware、site208Caihua、site207RailQueti、site206GableBrick、site205RoofTiles、site204StreetProps、site203Lattice、site202Paving、site201Signboards、site201RiverLamps、site200LanternGlow；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。tip 含 #142 Site228 石桌、#143 Site229 水缸已合入；保留 site229Shuigang 与全部 site2xx meta。';
+  P10.site230 = P10.site230Xianglu;
+  P10.reasons.site230 = P10.reasons.site230Xianglu;
+  P10.site228Shizhuo = N.expansionSongcheng.site228Shizhuo;
+  P10.reasons.site228Shizhuo = 'Site228 石桌/石凳/棋枰 atlas 点景：seat_shizhuo/seat_shideng/seat_qiping；庭院·巷角·亭侧·桥头·树下 stamp densify；与美人靠#134 site220Meirenkao、街具#118 site204StreetProps（prop_shiteng）互补——庭院闲坐对弈≠廊边美人靠/简易街具石凳；点景不堵主路中线与桥心；禁纯线稿、atlas kitbash 密实；少改宏观布局；保留 site227Huotan、site226Zhuli、site225Gongdeng、site224Shishi、site223Penjing、site222Baogu、site221Biane、site220Meirenkao、site219Rockery、site218Chuihuamen、site217Pavilions、site216Louwindow、site215Hitching、site214Screens、site213RidgeBeasts、site212Yingbi、site211Platform、site210Banners、site209DoorHardware、site208Caihua、site207RailQueti、site206GableBrick、site205RoofTiles、site204StreetProps、site203Lattice、site202Paving、site201Signboards、site201RiverLamps、site200LanternGlow；不改勾栏/宝相寺大布局，不进学校/渔村/石驳岸。名称未经确认。tip 含 #140 Site226 竹篱、#141 Site227 货摊已合入；保留全部 site2xx meta。';
+  P10.site229Shuigang = N.expansionSongcheng.site229Shuigang;
+  P10.reasons.site229Shuigang = 'Site229 水缸/井栏/水桶 atlas 点景：prop_shuigang/prop_jinglan/prop_shuitong；宅院角·巷口·井边·厨后·桥头 stamp densify；与井亭#130 site217Pavilions（pavilion_jingting）互补——取水储水点景≠井亭建筑；点景不改勾栏/宝相寺/BRT大布局；只古城、不进学校/渔村/石驳岸；保留 site227Huotan、site226Zhuli、site225Gongdeng、site224Shishi 与全部 site2xx meta；名称与尺寸未经确认。';
+  P10.site229 = P10.site229Shuigang;
+  P10.reasons.site229 = P10.reasons.site229Shuigang;
+  P10.site231Chaidui = N.expansionSongcheng.site231Chaidui;
+  P10.reasons.site231Chaidui = 'Site231 柴堆/草垛/粮袋 atlas 点景：prop_chaidui/prop_caoduo/prop_liangdai；宅后·厨侧·巷口·码头边·厩旁 stamp densify；与货摊#141 site227Huotan、水缸#143 site229Shuigang 互补——柴草粮储点景≠货摊案台/水缸取水；点景不改勾栏/宝相寺/BRT大布局；只古城、不进学校/渔村/石驳岸；禁纯线稿、atlas kitbash 密实；保留 site229Shuigang、site228Shizhuo、site227Huotan、site226Zhuli、site225Gongdeng、site224Shishi 与全部 site2xx meta；香炉轨 site230 若并行 rebase 时 keep；名称与尺寸未经确认。';
+  P10.site231 = P10.site231Chaidui;
+  P10.reasons.site231 = P10.reasons.site231Chaidui;
+  P10.site232Jiutan = N.expansionSongcheng.site232Jiutan;
+  P10.reasons.site232Jiutan = 'Site232 酒坛/陶瓮/酒旗 atlas 点景：prop_jiutan/prop_taoweng/prop_jiuqi；酒肆门前·宅侧巷口·码头边·厨房外·小院墙根 stamp densify；与货摊#141 site227Huotan、水缸#143 site229Shuigang、柴堆#145 site231Chaidui 互补——酒坛陶瓮幌点景≠货摊案台/水缸取水/柴草粮储；点景不改勾栏/宝相寺/BRT大布局；只古城、不进学校/渔村/石驳岸；禁纯线稿、atlas kitbash 密实；保留 site231Chaidui、site230Xianglu、site229Shuigang、site228Shizhuo、site227Huotan 与全部 site2xx meta；名称与尺寸未经确认。';
+  P10.site232 = P10.site232Jiutan;
+  P10.reasons.site232 = P10.reasons.site232Jiutan;
+
+  P10.site233Shima = N.expansionSongcheng.site233Shima;
+  P10.reasons.site233Shima = 'Site233 石磨/碾盘/石臼 atlas 点景：prop_shima/prop_nianpan/prop_shijiu；厨侧·宅后·磨坊巷口·粮袋旁·厩侧 stamp densify；与柴堆#145 site231Chaidui、粮袋互补——磨碾舂点景≠柴草粮储；点景不改勾栏/宝相寺/BRT大布局；只古城、不进学校/渔村/石驳岸；禁纯线稿、atlas kitbash 密实；保留 site231Chaidui、site230Xianglu、site229Shuigang 与全部 site2xx meta；酒坛轨 site232 若并行 rebase 时 keep；名称与尺寸未经确认。';
+  P10.site233 = P10.site233Shima;
+  P10.reasons.site233 = P10.reasons.site233Shima;
+  P10.site234Liangyi = N.expansionSongcheng.site234Liangyi;
+  P10.reasons.site234Liangyi = 'Site234 晾衣杆/鱼篓/竹筐 atlas 点景：prop_liangyi/prop_yulou/prop_zhukuang；宅后晾衣·巷口筐篓·码头鱼篓·厨侧 stamp densify；与柴堆#145 site231Chaidui、货摊晾晒#141 site227Huotan（pole_liangshai）互补——宅后晾衣筐篓点景≠柴草粮储/货摊晾晒杆；点景不改勾栏/宝相寺/BRT大布局；只古城、不进学校/渔村/石驳岸；禁纯线稿、atlas kitbash 密实；保留 site233Shima、site231Chaidui、site230Xianglu、site229Shuigang 与全部 site2xx meta；酒坛轨 site232 若并行 rebase 时 keep；名称与尺寸未经确认。';
+  P10.site234 = P10.site234Liangyi;
+  P10.reasons.site234 = P10.reasons.site234Liangyi;
+  P10.site235Jilong = N.expansionSongcheng.site235Jilong;
+  P10.reasons.site235Jilong = 'Site235 鸡笼/鸟笼/鸭舍 atlas 点景：prop_jilong/prop_niaolong/prop_yashe；宅后·厩旁·巷口挂笼·厨侧 stamp densify；与柴堆#145 site231Chaidui、石磨#146 site233Shima、酒坛#147 site232Jiutan、晾衣#148 site234Liangyi 互补——禽笼鸭舍点景≠柴草粮储/磨碾舂/酒坛陶瓮/晾衣筐篓；点景不改勾栏/宝相寺/BRT大布局；只古城、不进学校/渔村/石驳岸；禁纯线稿、atlas kitbash 密实；保留 site234Liangyi、site233Shima、site232Jiutan、site231Chaidui、site230Xianglu 与全部 site2xx meta；名称与尺寸未经确认。';
+  P10.site235 = P10.site235Jilong;
+  P10.reasons.site235 = P10.reasons.site235Jilong;
+  P10.site236Putuan = N.expansionSongcheng.site236Putuan;
+  P10.reasons.site236Putuan = 'Site236 蒲团/茶灶/茶具 atlas 点景：prop_putuan/prop_chazao/prop_chaju；廊下·石桌旁·庭院·茶摊侧 stamp densify；与石桌#142 site228Shizhuo、货摊#141 site227Huotan、鸡笼#149 site235Jilong、晾衣#148 site234Liangyi 互补——蒲团茶灶茶具≠石桌石凳/货摊晾晒/禽笼鸭舍；点景不改勾栏/宝相寺/BRT大布局；只古城、不进学校/渔村/石驳岸；禁纯线稿、atlas kitbash 密实；保留 site235Jilong、site234Liangyi、site233Shima、site232Jiutan、site231Chaidui、site230Xianglu 与全部 site2xx meta；名称与尺寸未经确认。';
+  P10.site236 = P10.site236Putuan;
+  P10.reasons.site236 = P10.reasons.site236Putuan;
+  P10.site237Shuan = N.expansionSongcheng.site237Shuan;
+  P10.reasons.site237Shuan = 'Site237 书案/棋盘/笔架砚台 atlas 点景：prop_shuan/prop_qipan/prop_bijia；廊下·庭院石桌旁·书房外檐·茶席侧 stamp densify；与石桌#142 site228Shizhuo、蒲团#150 site236Putuan、棋枰 seat_qiping 互补——书案棋盘笔架≠石桌石凳棋枰/蒲团茶灶茶具；点景不改勾栏/宝相寺/BRT大布局；只古城、不进学校/渔村/石驳岸；禁纯线稿、atlas kitbash 密实；保留 site236Putuan、site235Jilong（若并行）、site234Liangyi、site233Shima、site232Jiutan 与全部 site2xx meta；putuan/jilong/liangyi rebase keep；名称与尺寸未经确认。';
+  P10.site237 = P10.site237Shuan;
+  P10.reasons.site237 = P10.reasons.site237Shuan;
+  P10.site238Huajia = N.expansionSongcheng.site238Huajia;
+  P10.reasons.site238Huajia = 'Site238 花架/竹几/小博古架 atlas 点景：prop_huajia/prop_zhuji/prop_bogu；庭院·廊下·豪宅侧院·茶席旁 stamp densify；与盆景#137 site223Penjing、蒲团#150 site236Putuan、书案#151 site237Shuan、抱鼓石#136 site222Baogu 互补——花架竹几博古架≠盆景花坛/蒲团茶灶茶具/书案棋盘笔架/门侧抱鼓石；点景不改勾栏/宝相寺/BRT大布局；只古城、不进学校/渔村/石驳岸；禁纯线稿、atlas kitbash 密实；保留 site237Shuan、site236Putuan、site235Jilong（若并行）、site234Liangyi 与全部 site2xx meta；shuan/putuan/jilong/liangyi rebase keep；名称与尺寸未经确认。';
+  P10.site238 = P10.site238Huajia;
+  P10.reasons.site238 = P10.reasons.site238Huajia;
+  P10.site239Huangzi = N.expansionSongcheng.site239Huangzi;
+  P10.reasons.site239Huangzi = 'Site239 市井串灯/布幌/招幌 atlas 点景：prop_chuanleng/prop_huangzi/prop_zhaohuang；店门·巷口·酒肆茶摊檐下 stamp densify；与宫灯#113 site225Gongdeng、酒旗#147 site232Jiutan、匾额招板#120 site201Signboards 互补——串灯布幌招幌≠宫灯纱灯立灯/酒旗杆/墙匾竖招；点景不改勾栏/宝相寺/BRT大布局；只古城、不进学校/渔村/石驳岸；禁纯线稿、atlas kitbash 密实；保留 site238Huajia、site237Shuan、site236Putuan、site235Jilong、site234Liangyi、site233Shima、site232Jiutan 与全部 site2xx meta；rebase keep site237Shuan/site238Huajia；名称与尺寸未经确认。';
+  P10.site239 = P10.site239Huangzi;
+  P10.reasons.site239 = P10.reasons.site239Huangzi;
+  P10.site240Tingdeng = N.expansionSongcheng.site240Tingdeng;
+  P10.reasons.site240Tingdeng = 'Site240 庭院石灯笼/水盆/洗手钵 atlas 点景：prop_tingdeng/prop_shuipen/prop_xishoubo；庭院·门前·廊下·影壁侧 stamp densify；≠街具 prop_shideng（Site204）、水缸 prop_shuigang（Site229）、香炉 prop_xianglu（Site230）——庭灯/浅盆/洗手钵为庭院点景；点景不改勾栏/宝相寺/BRT大布局；只古城、不进学校/渔村/石驳岸；禁纯线稿、atlas kitbash 密实；保留 site239Huangzi、site238Huajia、site237Shuan、site236Putuan 与全部 site2xx meta；huangzi/huajia/shuigang/xianglu/shideng rebase keep；名称与尺寸未经确认。';
+  P10.site240 = P10.site240Tingdeng;
+  P10.reasons.site240 = P10.reasons.site240Tingdeng;
+  P10.site241Suoyi = N.expansionSongcheng.site241Suoyi;
+  P10.reasons.site241Suoyi = 'Site241 蓑衣/斗笠/扁担 atlas 点景：prop_suoyi/prop_douli/prop_biandan；宅后·巷口·码头边·厨侧 stamp densify；与晾衣#148 site234Liangyi、柴堆#145 site231Chaidui、禽笼#149 site235Jilong 互补——蓑衣斗笠扁担点景≠晾衣筐篓/柴草粮储/禽笼鸭舍；点景不改勾栏/宝相寺/BRT大布局；只古城、不进学校/渔村/石驳岸；禁纯线稿、atlas kitbash 密实；保留 site240Tingdeng、site239Huangzi、site238Huajia、site237Shuan、site236Putuan、site235Jilong、site234Liangyi 与全部 site2xx meta；并行轨 keep；名称与尺寸未经确认。';
+  P10.site241 = P10.site241Suoyi;
+  P10.reasons.site241 = P10.reasons.site241Suoyi;
+  P10.site242Tongjing = N.expansionSongcheng.site242Tongjing;
+  P10.reasons.site242Tongjing = 'Site242 铜镜/梳妆匣/胭脂粉盒 atlas 点景：prop_tongjing/prop_shuzhuang/prop_yanzhi；闺房外檐·廊侧案几·豪宅内院 stamp densify；与花架#152 site238Huajia、书案#151 site237Shuan、博古架 prop_bogu、盆景#137 site223Penjing 互补——铜镜梳妆胭脂≠花架竹几博古/书案棋盘笔架/盆景花坛；点景不改勾栏/宝相寺/BRT大布局；只古城、不进学校/渔村/石驳岸；禁纯线稿、atlas kitbash 密实；保留 site241Suoyi、site240Tingdeng、site239Huangzi、site238Huajia、site237Shuan 与全部 site2xx meta；rebase keep；并行轨 #158/#159 未合；名称与尺寸未经确认。';
+  P10.site242 = P10.site242Tongjing;
+  P10.reasons.site242 = P10.reasons.site242Tongjing;
+  P10.site243Yugang = N.expansionSongcheng.site243Yugang;
+  P10.reasons.site243Yugang = 'Site243 金鱼缸/多层花盆架/鹦鹉栖架 atlas 点景：prop_yugang/prop_huapenjia/prop_yingwujia；庭院·廊下·豪宅侧院 stamp densify；与盆景#137 site223Penjing、花架#152 site238Huajia、水缸#143 site229Shuigang、鸡笼鸟笼#149 site235Jilong 互补——金鱼缸花盆架鹦鹉架≠盆景花坛/花架竹几博古/储水缸/禽笼吊笼；勿覆盖 prop_penjing；点景不改勾栏/宝相寺/BRT大布局；只古城、不进学校/渔村/石驳岸；禁纯线稿、atlas kitbash 密实；保留 site242Tongjing、site241Suoyi、site240Tingdeng、site239Huangzi、site238Huajia、site237Shuan、site236Putuan、site235Jilong、site223Penjing 与全部 site2xx meta；tongjing/suoyi/tingdeng/huangzi/huajia/penjing/jilong rebase keep；并行轨 #159 未合；名称与尺寸未经确认。';
+  P10.site243 = P10.site243Yugang;
+  P10.reasons.site243 = P10.reasons.site243Yugang;
+  P10.site244Fangche = N.expansionSongcheng.site244Fangche;
+  P10.reasons.site244Fangche = 'Site244 纺车/绣绷/线筐 atlas 点景：prop_fangche/prop_xiubeng/prop_xiankuang；庭院·廊下·豪宅侧院 stamp densify；与晾衣竹筐#148 site234Liangyi、花架#152 site238Huajia、书案#151 site237Shuan、石磨#146 site233Shima、庭灯#154 site240Tingdeng、蓑衣#155 site241Suoyi 互补——纺车绣绷线筐≠石磨/晾衣杆空竹筐/花架竹几博古/书案/庭灯水盆洗手钵/蓑衣斗笠扁担；点景不改勾栏/宝相寺/BRT大布局；只古城、不进学校/渔村/石驳岸；禁纯线稿、atlas kitbash 密实；保留 site243Yugang、site242Tongjing、site241Suoyi、site240Tingdeng、site239Huangzi、site238Huajia、site237Shuan、site236Putuan、site234Liangyi 与全部 site2xx meta；yugang/tongjing/suoyi/tingdeng/huangzi/huajia/liangyi rebase keep；并行轨 meta keep if present；名称与尺寸未经确认。';
+  P10.site244 = P10.site244Fangche;
+  P10.reasons.site244 = P10.reasons.site244Fangche;
+  P10.site245Fengling = N.expansionSongcheng.site245Fengling;
+  P10.reasons.site245Fengling = 'Site245 风铃/竹帘/纱幔 atlas 点景：prop_fengling/prop_zhulian/prop_shaman；庭院·廊下·豪宅侧院 stamp densify（风铃亦可檐下/门侧）；与宫灯#139 site225Gongdeng、串灯布幌招幌#153 site239Huangzi、晾衣#148 site234Liangyi、庭灯#154 site240Tingdeng、蓑衣#155 site241Suoyi、铜镜#156 site242Tongjing、纺车#159 site244Fangche 互补——风铃竹帘纱幔≠宫灯纱灯立灯/串灯布幌招幌/晾衣杆竹筐/庭灯水盆洗手钵/蓑衣斗笠扁担/铜镜梳妆胭脂/纺车绣绷线筐；点景不改勾栏/宝相寺/BRT大布局；只古城、不进学校/渔村/石驳岸；禁纯线稿、atlas kitbash 密实；保留 site244Fangche、site243Yugang、site242Tongjing、site241Suoyi、site240Tingdeng、site239Huangzi、site238Huajia、site237Shuan、site236Putuan、site234Liangyi 与全部 site2xx meta；fangche/yugang/tongjing/suoyi/tingdeng rebase keep；并行轨 meta keep if present；名称与尺寸未经确认。';
+  P10.site245 = P10.site245Fengling;
+  P10.reasons.site245 = P10.reasons.site245Fengling;
+  P10.site246Chapan = N.expansionSongcheng.site246Chapan;
+  P10.reasons.site246Chapan = 'Site246 茶盘/食盒/果盘 atlas 点景：prop_chapan/prop_shihe/prop_guopan；庭院·廊下·店前·豪宅 stamp densify；与茶具#150 site236Putuan prop_chaju、货摊#141 site227Huotan、石桌#142 site228Shizhuo、金鱼缸#158 site243Yugang 互补——茶盘食盒果盘≠茶盏托盘/货摊货架/石桌棋枰/金鱼缸花盆架；点景不改勾栏/宝相寺/BRT大布局；只古城、不进学校/渔村/石驳岸；禁纯线稿、atlas kitbash 密实；保留 site245Fengling、site244Fangche、site243Yugang、site242Tongjing、site241Suoyi、site240Tingdeng、site239Huangzi、site238Huajia、site237Shuan、site236Putuan 与全部 site2xx meta；fengling/fangche/yugang rebase keep；并行轨 meta keep if present；名称与尺寸未经确认。';
+  P10.site246 = P10.site246Chapan;
+  P10.reasons.site246 = P10.reasons.site246Chapan;
+  P10.site247Shigandang = N.expansionSongcheng.site247Shigandang;
+  P10.reasons.site247Shigandang = 'Site247 石敢当/门神画/年画 atlas 点景：prop_shigandang/prop_menshen/prop_nianhua；门侧·巷口·店前·庭院 stamp densify；与拴马石敢当#128 site215Hitching stone_ganddang、匾额对联#135 site221Biane、门硬件#123 site209DoorHardware、抱鼓#136 site222Baogu、石狮#138 site224Shishi 互补——门侧石碑刻字符≠路标尖顶石敢当/门神挂轴≠对联匾额挂牌/年画卷≠招牌幌子；点景不改勾栏/宝相寺/BRT大布局；只古城、不进学校/渔村/石驳岸；禁纯线稿、atlas kitbash 密实；保留 site246Chapan、site245Fengling、site244Fangche、site243Yugang、site242Tongjing、site241Suoyi、site240Tingdeng、site239Huangzi、site238Huajia、site215Hitching 与全部 site2xx meta；chapan/fengling/fangche/ganddang rebase keep；并行轨 meta keep if present；名称与尺寸未经确认。';
+  P10.site247 = P10.site247Shigandang;
+  P10.reasons.site247 = P10.reasons.site247Shigandang;
+  P10.site249Yaohulu = N.expansionSongcheng.site249Yaohulu;
+  P10.reasons.site249Yaohulu = 'Site249 药葫芦/研钵/药柜 atlas 点景：prop_yaohulu/prop_yanbo/prop_yaogui；药铺店前·巷口·庭院 stamp densify（各约18 puts，不覆盖已有 prop）；与石敢当#162 site247Shigandang、茶盘#161 site246Chapan、货摊#141 site227Huotan 互补——药葫芦≠酒坛/糖葫芦、研钵≠石臼/香炉、百子斗药柜≠货架/书箱；点景不改勾栏/宝相寺/BRT大布局；只古城、不进学校/渔村/石驳岸；禁纯线稿、atlas kitbash 密实对标井槐里旧街；保留 site247Shigandang、site246Chapan、site245Fengling、site244Fangche、site243Yugang 与全部 site2xx meta；并行轨 meta keep if present；名称与尺寸未经确认。';
+  P10.site249 = P10.site249Yaohulu;
+  P10.reasons.site249 = P10.reasons.site249Yaohulu;
+
+  P10.site248Tanghulu = N.expansionSongcheng.site248Tanghulu;
+  P10.reasons.site248Tanghulu = 'Site248 糖葫芦/拨浪鼓/风筝 atlas 点景：prop_tanghulu/prop_bolanggu/prop_fengzheng；店前·巷口·广场边缘 stamp densify；与货摊#141 site227Huotan、幌子串灯#153 site239Huangzi、宫灯#139 site225Gongdeng、茶盘果盘#161 site246Chapan 互补——竹签糖葫芦串≠果盘货摊货架/拨浪鼓手持小鼓≠货架玩具堆/立放风筝≠幌子纱幔风铃；点景不改勾栏/宝相寺/BRT大布局；只古城、不进学校/渔村/石驳岸；禁纯线稿、atlas kitbash 密实；保留 site244Fangche、site243Yugang、site242Tongjing、site241Suoyi、site240Tingdeng、site239Huangzi、site238Huajia、site237Shuan、site236Putuan、site227Huotan 与全部 site2xx meta；fangche/yugang/tongjing/suoyi/tingdeng/huotan rebase keep；并行轨 meta keep if present；名称与尺寸未经确认。';
+  P10.site248 = P10.site248Tanghulu;
+  P10.reasons.site248 = P10.reasons.site248Tanghulu;
+
+  /* 地面图例改完后重烘，保证 aq_gwater 立刻进 ground atlas */
+  try {
+    if (root.SP && root.SP.world && typeof root.SP.world.bakeGround === 'function') root.SP.world.bakeGround();
+  } catch (e) { /* boot race: main will bake later */ }
+
+})();
